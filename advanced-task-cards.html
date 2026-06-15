@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想气体内能的微观推导 · 进阶模块学习任务卡</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --module-advanced: #6C5CE7;
+    --module-advanced-light: rgba(108, 92, 231, 0.08);
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(108, 92, 231, 0.08);
+    --shadow-md: 0 4px 16px rgba(108, 92, 231, 0.12);
+    --shadow-lg: 0 8px 32px rgba(108, 92, 231, 0.16);
+    --shadow-glow: 0 0 20px rgba(108, 92, 231, 0.3);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .breadcrumb a {
+    color: var(--module-advanced);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumb .sep {
+    margin: 0 6px;
+    color: var(--border-color);
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #5A4BD1 0%, #6C5CE7 50%, #8B7CF0 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+  
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; 
+    animation: fadeInUp 0.8s ease-out;
+  }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.85; 
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  /* Card base */
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(108, 92, 231, 0.08);
+  
+    transition: var(--transition);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Module info table */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .info-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+  }
+  .info-table td:first-child {
+    font-weight: 600;
+    color: var(--primary-blue);
+    white-space: nowrap;
+    width: 130px;
+  }
+  .info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--module-advanced);
+  }
+
+  /* Learning objectives */
+  .objectives-list {
+    padding-left: 24px;
+    font-size: 0.92rem;
+  }
+  .objectives-list li {
+    margin-bottom: 8px;
+    line-height: 1.65;
+  }
+  .objectives-list li::marker {
+    color: var(--module-advanced);
+    font-weight: 700;
+  }
+
+  /* Symbol convention table */
+  .symbol-table-wrapper {
+    background: linear-gradient(135deg, rgba(108, 92, 231,0.04), rgba(108, 92, 231,0.08));
+    border: 1px solid rgba(108, 92, 231,0.2);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .symbol-table-wrapper .section-title {
+    margin-bottom: 14px;
+    font-size: 1.05rem;
+  }
+  .symbol-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .symbol-table th {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 9px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .symbol-table th:first-child {
+    border-radius: 8px 0 0 0;
+    width: 80px;
+    text-align: center;
+  }
+  .symbol-table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .symbol-table td {
+    padding: 8px 14px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .symbol-table td:first-child {
+    font-weight: 600;
+    color: var(--primary-blue);
+    text-align: center;
+    font-family: "SF Mono", "Fira Code", Menlo, Consolas, monospace;
+    font-size: 0.95rem;
+  }
+  .symbol-table tr:last-child td {
+    border-bottom: none;
+  }
+  .symbol-table tr:nth-child(even) {
+    background: rgba(108, 92, 231,0.03);
+  }
+
+  /* Task card */
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(108, 92, 231, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #5A4BD1 0%, #6C5CE7 50%, #8B7CF0 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+  .task-card-header:hover {
+    opacity: 0.92;
+  }
+  .task-card-number {
+    background: rgba(255,255,255,0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    letter-spacing: -0.5px;
+  }
+  .task-card-header h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    flex-grow: 1;
+  }
+  .task-card-chevron {
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+    opacity: 0.7;
+  }
+  .task-card-header.collapsed .task-card-chevron {
+    transform: rotate(-90deg);
+  }
+  .task-card-body {
+    padding: 20px;
+    transition: max-height 0.3s ease;
+  }
+  .task-card-body.collapsed {
+    display: none;
+  }
+
+  .task-objective {
+    background: rgba(108, 92, 231,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  /* Background block */
+  .background-block {
+    background: rgba(108, 92, 231,0.04);
+    border-left: 3px solid var(--module-advanced);
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .background-block strong {
+    color: var(--primary-blue);
+  }
+
+  /* Step */
+  .step {
+    margin-bottom: 20px;
+  }
+  .step:last-of-type {
+    margin-bottom: 16px;
+  }
+  .step-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .step-badge {
+    background: var(--module-advanced);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .step-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .step-content {
+    font-size: 0.9rem;
+    padding-left: 4px;
+  }
+  .step-content p {
+    margin-bottom: 8px;
+  }
+  .step-content ul,
+  .step-content ol {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-content li {
+    margin-bottom: 4px;
+  }
+
+  /* Quote / tip blocks */
+  .quote-block {
+    background: rgba(108, 92, 231,0.05);
+    border-left: 3px solid var(--module-advanced);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+
+  /* AI prompt block */
+  .ai-prompt {
+    background: #1e2a38;
+    color: #e8ecf1;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    margin: 10px 0;
+    position: relative;
+  }
+  .ai-prompt::before {
+    content: "AI Prompt";
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--module-advanced);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    opacity: 0.9;
+  }
+
+  /* Assumptions table */
+  .assumptions-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 12px 0;
+  }
+  .assumptions-table th {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .assumptions-table th:first-child {
+    border-radius: 8px 0 0 0;
+    width: 50px;
+    text-align: center;
+  }
+  .assumptions-table th:nth-child(2) {
+    width: 160px;
+  }
+  .assumptions-table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .assumptions-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .assumptions-table td:first-child {
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-align: center;
+    font-family: "SF Mono", "Fira Code", Menlo, Consolas, monospace;
+  }
+  .assumptions-table tr:last-child td {
+    border-bottom: none;
+  }
+  .assumptions-table tr:nth-child(even) {
+    background: rgba(108, 92, 231,0.03);
+  }
+
+  /* Key result block */
+  .key-result {
+    background: rgba(108, 92, 231,0.06);
+    border: 1px solid rgba(108, 92, 231,0.18);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .key-result .kr-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .key-result ul {
+    padding-left: 18px;
+    margin: 0;
+  }
+  .key-result li {
+    margin-bottom: 4px;
+  }
+
+  /* Derivation steps */
+  .derivation {
+    background: rgba(108, 92, 231,0.03);
+    border-left: 3px solid var(--module-advanced);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation ol {
+    padding-left: 20px;
+    margin: 0;
+  }
+  .derivation li {
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+
+  /* Checkpoint */
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-bottom: 10px;
+  }
+  .checkpoint label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+  .checkpoint label:last-child {
+    margin-bottom: 0;
+  }
+  .checkpoint input[type="checkbox"] {
+    margin-top: 4px;
+    flex-shrink: 0;
+    accent-color: var(--accent-green);
+    width: 16px;
+    height: 16px;
+  }
+  .checkpoint label.checked span {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+  }
+
+  /* Literacy tag */
+  .literacy-tag {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+  }
+
+  /* Output requirements table */
+  .output-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 12px;
+  }
+  .output-table th {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .output-table th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+  .output-table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .output-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .output-table tr:last-child td {
+    border-bottom: none;
+  }
+  .output-table tr:nth-child(even) {
+    background: rgba(108, 92, 231,0.03);
+  }
+
+  /* Bottom navigation */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+    color: var(--module-advanced);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px 16px 8px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .symbol-table-wrapper { padding: 14px; }
+    .symbol-table th,
+    .symbol-table td { padding: 6px 10px; }
+    .symbol-table td:first-child { font-size: 0.85rem; }
+    .assumptions-table th,
+    .assumptions-table td { padding: 7px 8px; }
+    .output-table { font-size: 0.78rem; }
+    .output-table th,
+    .output-table td { padding: 8px 8px; }
+    .ai-prompt { font-size: 0.78rem; padding: 12px 14px; }
+    .key-result { padding: 12px 14px; }
+    .derivation { padding: 12px 14px; }
+    .background-block { padding: 12px 14px; }
+  }
+
+  /* ── Hero Animations ── */
+  .hero-decoration {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    animation: float 6s ease-in-out infinite;
+  }
+  .hero-decoration:nth-child(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-child(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-child(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>进阶模块</span>
+    <span class="sep">&gt;</span>
+    <span>学习任务卡</span>
+  </nav>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="hero-decoration">
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none" style="position:absolute;bottom:0;left:0;width:100%;height:40px;"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+  </div><div class="hero-decoration"></div><div class="hero-decoration"></div>
+    <h1>理想气体内能的微观推导</h1>
+      </div>
+
+  <!-- Module info -->
+  <div class="card">
+    <table class="info-table">
+      <tr>
+        <td>模块名称</td>
+        <td>理想气体内能的微观推导（进阶模块 —— 从分子动理论 + PV = nRT 推出 \(U = \frac{3}{2}nRT\)）</td>
+      </tr>
+      <tr>
+        <td>前置要求</td>
+        <td>分子动理论（基础, 提供微观模型四大假设）+ 理想气体的状态方程（基础, 提供 PV = nRT）—— 两板块均完成基础检测后再来</td>
+      </tr>
+      <tr>
+        <td>预计学习时间</td>
+        <td>4&ndash;8 小时（按自己的节奏）</td>
+      </tr>
+      <tr>
+        <td>所需工具</td>
+        <td>AI 工具、纸笔（大量推导）、计算器</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Learning objectives -->
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>建立理想气体(Ideal Gas)的微观模型，并列举其全部关键假设</li>
+      <li>从牛顿第二定律(Newton's Second Law)出发，推导单个粒子对容器壁的压强</li>
+      <li>运用统计平均，从单粒子推广到 \(N\) 粒子，得到 \(3PV = Nm\overline{v^2}\)</li>
+      <li>联立 \(PV = nRT\)，推导出 \(U = \frac{3}{2}nRT\)</li>
+      <li>解释为什么理想气体的内能只与温度有关</li>
+      <li>识别推导每一步的假设，并讨论假设的适用边界</li>
+    </ol>
+  </div>
+
+  <!-- Symbol convention table -->
+  <div class="symbol-table-wrapper">
+    <h2 class="section-title">符号约定</h2>
+    <table class="symbol-table">
+      <thead>
+        <tr>
+          <th>符号</th>
+          <th>含义</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>\(N\)</td>
+          <td>容器中的粒子总数</td>
+        </tr>
+        <tr>
+          <td>\(m\)</td>
+          <td>单个粒子的质量</td>
+        </tr>
+        <tr>
+          <td>\(v\)</td>
+          <td>单个粒子的速度</td>
+        </tr>
+        <tr>
+          <td>\(\overline{v^2}\)</td>
+          <td>粒子速度平方的平均值（均方速度）</td>
+        </tr>
+        <tr>
+          <td>\(V\)</td>
+          <td>容器体积</td>
+        </tr>
+        <tr>
+          <td>\(x\)</td>
+          <td>立方体容器的边长（\(V = x^3\)）</td>
+        </tr>
+        <tr>
+          <td>\(P\)</td>
+          <td>压强</td>
+        </tr>
+        <tr>
+          <td>\(n\)</td>
+          <td>物质的量（mol）</td>
+        </tr>
+        <tr>
+          <td>\(R\)</td>
+          <td>理想气体常数（8.314 J/(mol&middot;K)）</td>
+        </tr>
+        <tr>
+          <td>\(T\)</td>
+          <td>温度（K）</td>
+        </tr>
+        <tr>
+          <td>\(U\)</td>
+          <td>内能</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== Task Card A1 ==================== -->
+  <div class="task-card" id="taskA1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">A1</div>
+      <h3>建立微观模型——假设审查</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解理想气体模型的全部假设，并讨论每个假设的物理意义
+      </div>
+
+      <div class="background-block">
+        <strong>背景</strong>：我们要做一件雄心勃勃的事：从一个个微观粒子的运动，推导出整个气体系统的宏观性质。想象一个边长为 \(x\) 的立方体容器，里面装了 \(N\) 个完全相同的气体粒子。
+        <svg viewBox="0 0 320 240" style="max-width:320px;width:100%;height:auto;display:block;margin:12px auto 4px;">
+          <!-- 立方体（等轴测视图） -->
+          <polygon points="80,60 220,60 220,180 80,180" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+          <!-- 右面 -->
+          <polygon points="220,60 270,35 270,155 220,180" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.5"/>
+          <!-- 顶面 -->
+          <polygon points="80,60 130,35 270,35 220,60" fill="#ddd6fe" stroke="#6366f1" stroke-width="1.5"/>
+          <!-- 边长标注 x -->
+          <text x="50" y="125" text-anchor="middle" font-size="14" font-style="italic" fill="#4f46e5">x</text>
+          <line x1="65" y1="65" x2="65" y2="175" stroke="#4f46e5" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="60" y1="65" x2="70" y2="65" stroke="#4f46e5" stroke-width="1.5"/>
+          <line x1="60" y1="175" x2="70" y2="175" stroke="#4f46e5" stroke-width="1.5"/>
+          <!-- 右壁面积标注 -->
+          <text x="280" y="100" font-size="12" fill="#4f46e5">A = x²</text>
+          <!-- 粒子及运动轨迹 -->
+          <circle cx="130" cy="120" r="5" fill="#ef4444"/>
+          <!-- 向右箭头 +vx -->
+          <line x1="140" y1="120" x2="200" y2="120" stroke="#ef4444" stroke-width="2"/>
+          <polygon points="200,120 192,115 192,125" fill="#ef4444"/>
+          <text x="170" y="112" text-anchor="middle" font-size="11" fill="#ef4444">+vₓ</text>
+          <!-- 向左箭头 -vx（反弹） -->
+          <line x1="200" y1="135" x2="140" y2="135" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,3"/>
+          <polygon points="140,135 148,130 148,140" fill="#3b82f6"/>
+          <text x="170" y="150" text-anchor="middle" font-size="11" fill="#3b82f6">−vₓ</text>
+          <!-- 碰壁位置标记 -->
+          <text x="218" y="128" text-anchor="start" font-size="10" fill="#6b7280">碰壁</text>
+        </svg>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">列举假设</span>
+        </div>
+        <div class="step-content">
+          <p>在纸上写下你认为"理想气体模型"需要哪些假设。然后问 AI：</p>
+          <div class="ai-prompt">"理想气体的微观模型有哪些关键假设？请列举所有关键假设并解释每一条的物理意义。"</div>
+          <p>对照你自己列的和 AI 给的，补充遗漏。</p>
+
+          <p style="margin-top: 14px;"><strong>你应该至少得到以下 4 条核心假设：</strong></p>
+          <table class="assumptions-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>假设</th>
+                <th>含义</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>H1</td>
+                <td>大量粒子</td>
+                <td>\(N\) 足够大，统计平均有意义</td>
+              </tr>
+              <tr>
+                <td>H2</td>
+                <td>粒子做随机运动</td>
+                <td>各方向等概率，无优先方向</td>
+              </tr>
+              <tr>
+                <td>H3</td>
+                <td>碰撞为完全弹性碰撞</td>
+                <td>粒子与壁碰撞不损失动能</td>
+              </tr>
+              <tr>
+                <td>H4</td>
+                <td>无分子间作用力</td>
+                <td>粒子之间除碰撞外无相互作用（无势能）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">质疑每个假设</span>
+        </div>
+        <div class="step-content">
+          <p>对每个假设，问 AI：</p>
+          <div class="ai-prompt">"如果去掉假设 [H1/H2/H3/H4]，推导会怎样？结论会有什么变化？"</div>
+          <p>把 AI 的回答记录下来，并用自己的话总结。</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">思考容器形状</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="ai-prompt">"为什么推导中用立方体容器？如果用球形容器，结论会不同吗？"</div>
+        </div>
+      </div>
+
+      <!-- Checkpoint -->
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="a1c1">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能列出至少 4 条理想气体模型的关键假设</span>
+        </label>
+        <label data-key="a1c2">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能用自己的话解释每条假设的物理意义</span>
+        </label>
+        <label data-key="a1c3">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我理解为什么"无分子间作用力"是使内能只依赖于温度的关键假设</span>
+        </label>
+        <label data-key="a1c4">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我知道容器形状不影响最终结论</span>
+        </label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：③思辨力（假设审查） · ⑤学习力 · ⑥审美力（模型的简洁性）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card A2 ==================== -->
+  <div class="task-card" id="taskA2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">A2</div>
+      <h3>从力到压强——单粒子碰壁分析</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：推导单个粒子碰壁产生的力和压强
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">自己推导（在纸上！）</span>
+        </div>
+        <div class="step-content">
+          <p>考虑一个粒子，质量 \(m\)，沿 \(x\) 方向以速度 \(v_x\) 运动，撞到容器右侧壁。</p>
+          <p>在纸上完成以下推导：</p>
+          <ol>
+            <li><strong>动量变化</strong>：粒子弹性碰壁，碰前动量 = \(mv_x\)，碰后动量 = \(-mv_x\)。动量变化 \(\Delta p\) = ?</li>
+            <li><strong>碰撞间隔</strong>：粒子从右壁反弹后，走到左壁再回来的时间 \(\Delta t\) = ?（提示：来回路程 = \(2x\)，速度 = \(v_x\)）</li>
+            <li><strong>平均力</strong>：由 \(F = \Delta p / \Delta t\)，求单个粒子对右壁的平均力。</li>
+            <li><strong>压强</strong>：右壁面积 \(A = x^2\)，所以单个粒子贡献的压强 \(P_1 = F/A\) = ?</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">与 AI 核对</span>
+        </div>
+        <div class="step-content">
+          <p>把你的推导过程拍照或打字发给 AI：</p>
+          <div class="ai-prompt">"请逐步检查我的推导，指出错误但不要直接给我正确结果。"</div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">确认关键结果</span>
+        </div>
+        <div class="step-content">
+          <p>你应该得到：</p>
+          <div class="key-result">
+            <div class="kr-title">关键结果</div>
+            <ul>
+              <li>\(\Delta p = 2mv_x\)</li>
+              <li>\(\Delta t = \frac{2x}{v_x}\)</li>
+              <li>\(F = \frac{mv_x^2}{x}\)</li>
+              <li>\(P_1 = \frac{mv_x^2}{x^3} = \frac{mv_x^2}{V}\)</li>
+            </ul>
+          </div>
+          <p>如果你的结果和这个不同，在 AI 的帮助下找出哪一步出了问题。</p>
+        </div>
+      </div>
+
+      <!-- Checkpoint -->
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="a2c1">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能独立推导出 \(\Delta p = 2mv_x\)</span>
+        </label>
+        <label data-key="a2c2">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能解释为什么碰撞间隔 \(\Delta t = \frac{2x}{v_x}\)</span>
+        </label>
+        <label data-key="a2c3">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我得到了单粒子压强 \(P_1 = \frac{mv_x^2}{V}\)</span>
+        </label>
+        <label data-key="a2c4">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我理解每一步用了哪个假设（弹性碰撞 → 动能不变；立方体 → 路径长度 \(2x\)）</span>
+        </label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：⑤学习力（独立推导） · ⑨问题解决 · ⑩协作与表达（向 AI 解释推导）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card A3 ==================== -->
+  <div class="task-card" id="taskA3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">A3</div>
+      <h3>统计平均与 N 粒子——从微观到宏观</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：用统计平均从单粒子推广到 \(N\) 粒子系统，得到 \(3PV = Nm\overline{v^2}\)
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">思考——为什么只有 1/3 的粒子沿 x 方向？</span>
+        </div>
+        <div class="step-content">
+          <p>先自己想：容器中有 \(N\) 个粒子，但不是所有粒子都沿 \(x\) 方向运动。粒子的运动方向是随机的，有 \(x\)、\(y\)、\(z\) 三个方向。</p>
+          <p>问 AI：</p>
+          <div class="ai-prompt">"在理想气体模型中，如何论证'等效于 1/3 的粒子沿 x 方向运动'？这个论证用了什么假设？"</div>
+
+          <div class="key-result" style="margin-top: 14px;">
+            <div class="kr-title">关键推导</div>
+            <p>对于随机运动的粒子，\(v^2 = v_x^2 + v_y^2 + v_z^2\)，由对称性 \(\overline{v_x^2} = \overline{v_y^2} = \overline{v_z^2}\)，所以 \(\overline{v_x^2} = \frac{\overline{v^2}}{3}\)。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">在纸上推导 N 粒子的总压强</span>
+        </div>
+        <div class="step-content">
+          <div class="derivation">
+            <ol>
+              <li>单个粒子（沿 \(x\) 方向运动时）对壁的压强：\(P_1 = \frac{mv_x^2}{V}\)</li>
+              <li>\(N\) 个粒子中，用统计平均 \(v_x^2 \to \overline{v_x^2} = \frac{\overline{v^2}}{3}\)</li>
+              <li>\(N\) 个粒子的总压强：\(P = \frac{N \cdot m \cdot \overline{v_x^2}}{V} = \frac{Nm \cdot \frac{\overline{v^2}}{3}}{V}\)</li>
+            </ol>
+            <p style="margin-top: 8px; font-weight: 600; color: var(--primary-blue); text-align: center; font-size: 1.05rem;">
+              因此：\(P = \frac{Nm\overline{v^2}}{3V}\) &nbsp;即&nbsp; \(3PV = Nm\overline{v^2}\)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">与 AI 核对</span>
+        </div>
+        <div class="step-content">
+          <p>把你的推导发给 AI 核对。特别注意问：</p>
+          <div class="ai-prompt">"在从单粒子到 N 粒子的过程中，我用到了哪些假设？统计平均为什么成立？"</div>
+        </div>
+      </div>
+
+      <!-- Checkpoint -->
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="a3c1">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能解释为什么 \(\overline{v_x^2} = \frac{\overline{v^2}}{3}\)（各向同性假设）</span>
+        </label>
+        <label data-key="a3c2">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能从 \(P_1 = \frac{mv_x^2}{V}\) 推导到 \(P = \frac{Nm\overline{v^2}}{3V}\)</span>
+        </label>
+        <label data-key="a3c3">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我得到了关键方程 \(3PV = Nm\overline{v^2}\)</span>
+        </label>
+        <label data-key="a3c4">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我知道这一步依赖"大量粒子"和"随机运动"两个假设</span>
+        </label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：③思辨力（统计论证） · ⑤学习力 · ⑥审美力（从微观到宏观的桥梁）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card A4 ==================== -->
+  <div class="task-card" id="taskA4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">A4</div>
+      <h3>推导 U = 3/2 nRT</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：联立微观方程与理想气体状态方程，得到内能的表达式
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">独立完成最后一步推导</span>
+        </div>
+        <div class="step-content">
+          <p>你已经有了两个方程：</p>
+          <div class="key-result">
+            <div class="kr-title">已有方程</div>
+            <ul>
+              <li>微观推导：\(3PV = Nm\overline{v^2}\)</li>
+              <li>理想气体状态方程：\(PV = nRT\)</li>
+            </ul>
+          </div>
+
+          <p style="margin-top: 14px;">在纸上完成：</p>
+          <div class="derivation">
+            <ol>
+              <li>从 \(3PV = Nm\overline{v^2}\) 出发，两边乘以 \(\frac{1}{2}\)：\(\frac{3}{2} \cdot PV = N \cdot \left(\frac{1}{2}m\overline{v^2}\right)\)</li>
+              <li>右边 \(\frac{1}{2}m\overline{v^2}\) 是什么的物理含义？（单个粒子的平均动能！）所以 \(N \cdot \left(\frac{1}{2}m\overline{v^2}\right)\) = 系统中所有粒子的总动能</li>
+              <li>对于单原子理想气体（假设 H4：无分子间作用力），粒子没有势能，总动能 = 内能 \(U\)。因此：\(U = \frac{3}{2}PV\)</li>
+              <li>代入 \(PV = nRT\)：\[\boxed{U = \frac{3}{2}nRT}\]</li>
+              <li>推论：\(\Delta U = \frac{3}{2}nR\Delta T\) —— 内能变化只与温度变化有关！</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">与 AI 核对并追问</span>
+        </div>
+        <div class="step-content">
+          <p>把你的推导发给 AI，然后问：</p>
+          <div class="ai-prompt">"为什么第 3 步需要'无分子间作用力'这个假设？如果粒子间有引力，U 还等于 3/2 PV 吗？"</div>
+          <div class="ai-prompt">"为什么说'内能只跟温度有关'？U = 3/2 nRT 里没有出现 V 或 P，这是巧合还是必然？"</div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">感受这个结论的意义</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="ai-prompt">"U = 3/2 nRT 这个公式的深刻含义是什么？它告诉我们关于微观世界和宏观世界的什么联系？"</div>
+          <p>记录下你的感悟。</p>
+          <div class="quote-block">
+            无数粒子的混乱运动 → 一个简洁优美的公式。这就是物理学的审美。
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkpoint -->
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="a4c1">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能在纸上完整推导从 \(3PV = Nm\overline{v^2}\) 到 \(U = \frac{3}{2}nRT\) 的每一步</span>
+        </label>
+        <label data-key="a4c2">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我理解 \(\frac{1}{2}m\overline{v^2}\) 代表单个粒子的平均动能</span>
+        </label>
+        <label data-key="a4c3">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我知道 \(U = \frac{3}{2}nRT\) 只对单原子理想气体严格成立</span>
+        </label>
+        <label data-key="a4c4">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我理解"无分子间作用力"如何导致"内能只与温度有关"</span>
+        </label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：⑤学习力 · ⑥审美力（公式的简洁之美） · ③思辨力（假设的作用）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card A5 ==================== -->
+  <div class="task-card" id="taskA5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">A5</div>
+      <h3>反思与拓展</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：审查推导的适用边界，并进行拓展思考
+      </div>
+
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">如果不是理想气体呢？</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="ai-prompt">"真实气体（如水蒸气）和理想气体有什么区别？U = 3/2 nRT 对真实气体还成立吗？为什么？"</div>
+          <div class="ai-prompt">"范德瓦尔斯方程(Van der Waals Equation)是怎么修正理想气体状态方程的？修正了哪些假设？"</div>
+          <p>在纸上写下：理想气体的哪些假设在真实气体中被打破了？</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">双原子分子的自由度</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="ai-prompt">"氮气 N₂ 是双原子分子。和氦气 He（单原子）相比，N₂ 的粒子除了平动还有什么运动方式？"</div>
+          <div class="ai-prompt">"双原子分子有几个自由度(Degrees of Freedom)？它的内能表达式是什么？为什么不是 3/2 nRT？"</div>
+          <div class="quote-block">
+            提示：双原子分子多了转动和振动的自由度，所以能储存更多能量。
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">提出你的原创追问</span>
+        </div>
+        <div class="step-content">
+          <p>回顾整个推导过程，提出一个你自己感兴趣的追问。这个问题应该是推导过程中你好奇但没有完全解决的。</p>
+          <p>示例：</p>
+          <ul>
+            <li>"如果容器不是刚性的（壁可以振动），推导会怎么变？"</li>
+            <li>"温度为 0 K 时，粒子真的完全不动吗？量子力学怎么说？"</li>
+            <li>"宇宙中有没有真正的理想气体？"</li>
+          </ul>
+          <p>把你的问题发给 AI，和 AI 展开讨论。</p>
+        </div>
+      </div>
+
+      <!-- Checkpoint -->
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="a5c1">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我能说出至少 2 点理想气体模型在真实气体中失效的原因</span>
+        </label>
+        <label data-key="a5c2">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我知道双原子分子的内能为什么大于 \(\frac{3}{2}nRT\)（自由度更多）</span>
+        </label>
+        <label data-key="a5c3">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span>我提出了一个原创追问，并和 AI 进行了有深度的讨论</span>
+        </label>
+        <label data-key="a5c4">
+          <input type="checkbox" onchange="saveCheckbox(this)">
+          <span><strong>终极检查</strong>：我能不看任何参考，在白纸上独立完成从微观模型到 \(U = \frac{3}{2}nRT\) 的完整推导</span>
+        </label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ③思辨力 · ②自我认知与主体性
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Output Requirements ==================== -->
+  <div class="card">
+    <h2 class="section-title">产出物要求</h2>
+    <table class="output-table">
+      <thead>
+        <tr>
+          <th>产出物</th>
+          <th>格式要求</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>推导手稿</td>
+          <td>手写拍照（可多页）</td>
+          <td>从微观模型出发，完整推导到 \(U = \frac{3}{2}nRT\)。每一步标注用到了哪个假设（H1&ndash;H4）。</td>
+        </tr>
+        <tr>
+          <td>原创追问</td>
+          <td>手写或打字，100&ndash;200 字</td>
+          <td>你自己提出的追问 + 你和 AI 讨论后的理解。</td>
+        </tr>
+        <tr>
+          <td>[可选] 讲解录音/视频</td>
+          <td>3&ndash;5 分钟</td>
+          <td>向 AI 或同学完整讲解推导过程。能清晰讲解 = 真正理解。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==================== Bottom Navigation (v0.1.14 进阶 2 链规范) ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="advanced-mock-check.html">📝 基础检测</a>
+    <a href="advanced-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+  </div>
+
+</div>
+
+<script>
+// ===== KaTeX Auto-Render =====
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+
+  // Restore checkbox states
+  restoreCheckboxes();
+});
+
+// ===== Task Card Collapse/Expand =====
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+
+// ===== Checkbox Persistence =====
+var STORAGE_KEY = 'task-cards-advanced-checkpoints';
+
+function getCheckboxState() {
+  try {
+    var data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {
+    // localStorage unavailable
+  }
+
+  // Toggle strikethrough style
+  if (checkbox.checked) {
+    label.classList.add('checked');
+  } else {
+    label.classList.remove('checked');
+  }
+}
+
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) {
+        cb.checked = true;
+        label.classList.add('checked');
+      }
+    }
+  });
+}
+</script>
+</body>
+</html>

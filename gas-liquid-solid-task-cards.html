@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想气体的状态方程 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>气体液体固体 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>理想气体的状态方程</h1>
+    <div class="subtitle">三态各自的关键性质 · 从理想气体方程到表面张力到晶体结构</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>理想气体的状态方程（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>3.5-4 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>分子动理论</strong>（必读 —— 本板块全部论证都用到分子动理论的核心结论：分子大小数量级、阿伏伽德罗常数、分子数密度公式、温度 ∝ 平均动能、F-r 曲线）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；阿伏伽德罗常数 \(N_A = 6.02 \times 10^{23}\) /mol、普适气体常数 \(R = 8.314\) J/(mol·K) 速查</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能陈述并应用<strong>气体三定律</strong>: 玻意耳 \(PV = \) const（T 不变）/ 查理 \(P/T = \) const（V 不变）/ 盖-吕萨克 \(V/T = \) const（P 不变）</li>
+      <li>会用综合的<strong>理想气体状态方程 \(PV = nRT\)</strong> 分析任意 P-V-T 关系并解具体问题（含数值代入 + 单位换算）</li>
+      <li>能用<strong>等效定质量法</strong>处理充气 / 放气 / 抽气 / 灌装等"变质量"问题 —— 重选研究对象，把变质量化为定质量（方法卡 M）</li>
+      <li>能用分子动理论解释三定律的<strong>微观机制</strong>（如 V↓ → 分子数密度↑ → 撞壁频率↑ → P↑）</li>
+      <li>能用分子间作用力（F-r 曲线）解释液体<strong>表面张力</strong>的微观本质 —— 表面分子周围邻居比内部分子少，势能更高</li>
+      <li>能区分<strong>浸润 / 不浸润</strong>现象，用"液-固分子作用力 vs 液-液分子作用力"的比较解释，并解释毛细现象</li>
+      <li>能区分<strong>晶体 vs 非晶体</strong>: 微观结构（规则点阵 vs 无规则排列）+ 宏观性质（固定熔点 vs 渐变软化）</li>
+      <li>能解释<strong>单晶各向异性 vs 多晶 / 非晶各向同性</strong>的微观原因</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>三个看似无关的现象 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li>一团气体的 \(P, V, T\) 三个量之间有什么<strong>定量约束</strong>？任意改变一个，其他两个会怎么变？</li>
+      <li>一滴水<strong>在叶子上是圆球</strong>，<strong>在玻璃上铺开成薄膜</strong> —— 这两件事的<strong>微观区别</strong>在哪里？液体表面有什么"特别"？</li>
+      <li>食盐和玻璃看似都"硬"，但加热它们时：食盐有<strong>固定熔点</strong>（801°C 瞬间变液体），玻璃却是<strong>渐变软化</strong>（先变软再流动）—— 是什么<strong>本质不同</strong>？</li>
+    </ul>
+    <p style="margin-top: 6px;">本板块的任务，是把<strong>分子动理论</strong>建立的微观图像，应用到<strong>气体 / 液体 / 固体</strong>三态各自的关键性质上：气体的 \(PV = nRT\) / 液体的表面张力 / 固体的晶体结构。每件事都有清晰的<strong>分子层面解释</strong>。</p>
+    <p class="hint">（提示：本板块没有新的"基本原理"，只是把分子动理论应用到具体的三态现象。\(PV = nRT\) 也不是新原理，而是三定律 + 阿伏伽德罗定律的综合。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>理想气体状态方程 \(PV = nRT\)</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解"理想气体"模型 + 2 个核心假设 + 为什么物理学要这样抽象 → 陈述气体三定律 → 用分子动理论解释微观机制 → 把三定律统一为 \(PV = nRT\) → 用 \(PV = nRT\) 算具体问题<br>
+        <strong>建议时长</strong>：75-90 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>一支注射器封住针口，活塞往里压一半（V 减半），针管里气体的压强会怎么变？翻倍？减半？不变？凭直觉先猜。</li>
+            <li>一只密闭气罐拿去加热（V 不变，T 升），罐内气压会升高还是不变？</li>
+            <li>一团气体被压在活塞下方（外压 \(p\) 是固定的大气压），加热气体（T 升，P 不变），气体会膨胀还是不动？</li>
+            <li>这三件事都是"改两个量，看第三个量怎么变"。它们之间应该有一个<strong>统一的定量关系</strong>。猜一猜它的形式。</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>先回顾（核心理论根基）</strong>：本板块全部用到 <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> 的几个关键结论 ——<br>
+            · 温度 \(T\) 正比于<strong>分子平均动能</strong> \(\bar{\varepsilon}\) ⭐⭐<br>
+            · 分子数密度 \(n_\text{数} = N/V = \rho N_A / M\)<br>
+            · 阿伏伽德罗常数 \(N_A = 6.02 \times 10^{23}\) /mol<br>
+            如果不熟，先翻回去复习 5 分钟再回来 —— 这三条是解释三定律微观机制的全部工具。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">理想气体模型 — 2 个核心假设 + 为什么物理学要这样抽象？</span></div>
+        <div class="step-content">
+          <p>在写下任何"定量关系"之前，我们要先想清楚：<strong>"理想气体"到底是什么？为什么物理学家要把真实气体抽象成"理想"模型？</strong></p>
+
+          <p><strong>真实气体的"麻烦"</strong>：真实气体（空气 / CO₂ / 水蒸气）的分子<strong>有体积</strong>、<strong>有相互作用力</strong>（van der Waals 力 / 静电吸引 / 偶极矩等），它们的 \(P, V, T\) 关系<strong>非常复杂</strong>。想用一个简单的统一公式描述所有情况，几乎不可能。</p>
+
+          <p><strong>"理想化"的策略</strong>：物理学家想了一个办法 —— <strong>先抽象出一个简化模型</strong>，用 2 个假设把所有"复杂相互作用"全部去掉，得到一个干净的"参考体系"，然后真实气体作为它的"修正"。</p>
+
+          <div class="quote-block" style="font-size: 0.95rem; padding: 14px;">
+            <strong>理想气体的 2 个核心假设 ⭐⭐</strong><br>
+            <br>
+            ① <strong>分子本身的体积可以忽略</strong>（相对于容器体积 —— 分子是"点粒子"）<br>
+            ② <strong>分子之间没有相互作用力</strong>（除了瞬间碰撞 —— 没有 van der Waals 引力 / 静电吸引等）
+          </div>
+
+          <p><strong>为什么这 2 个假设很关键</strong>：</p>
+          <ul>
+            <li>假设 ① 让我们可以用<strong>分子数密度 \(N/V\)</strong> 直接描述气体，不用考虑分子占体积带来的修正</li>
+            <li>假设 ② 让分子<strong>势能 = 0</strong>，内能只剩动能 → 内能只与温度有关（严格证明留给进阶 <a href="advanced-task-cards.html">理想气体内能的微观推导</a>）</li>
+            <li>两个假设一起，让气体的行为变得<strong>极其简洁</strong> —— 一个统一定量方程 \(PV = nRT\) 就够描述所有 \(P, V, T\) 关系</li>
+          </ul>
+
+          <p><strong>哪些气体接近"理想"？哪些不接近？</strong></p>
+          <table class="compare-table">
+            <tr><th>条件</th><th>气体行为</th><th>原因</th></tr>
+            <tr><td><strong>常温常压</strong></td><td>稀薄气体（空气, He, Ne, H₂ 等）接近理想 ✓</td><td>分子间距远大于分子尺寸 → 两假设近似成立</td></tr>
+            <tr><td><strong>高压</strong></td><td>偏离理想 ✗</td><td>分子被挤压，间距缩小，分子体积不再可忽略</td></tr>
+            <tr><td><strong>低温</strong></td><td>偏离理想 ✗</td><td>分子动能小，分子间吸引力相对显著</td></tr>
+          </table>
+
+          <p>对偏离理想的气体（高压 / 低温下的真实气体），物理学有更精细的 <strong>van der Waals 方程</strong>修正（本板块不深入，留给大学物理化学）。</p>
+
+          <div class="quote-block">
+            <strong>核心收获 ⭐</strong>：<br>
+            "理想气体"不是某种特殊的"理想化学物质"，它是一种<strong>抽象的简化模型</strong>。<br>
+            使用这个模型"性价比极高"：2 个假设换 1 个统一方程 \(PV = nRT\)，在常温常压下精度足够。<br>
+            <strong>"理想化抽象"是物理学和化学的标准套路</strong> —— 先用简化模型抓住主要矛盾，再处理修正项，这是处理复杂问题的核心思维。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 · 为什么物理学家选择"分子体积可忽略 + 无相互作用力"这两条作为假设，而不是别的？</div>
+            <div class="tp-pause">这两条假设是<strong>选出来的</strong>，不是从天而降。请想想：① 物理学家为什么挑这两条？② 它们之间有什么内在联系？③ 如果只取一条（比如只忽略体积、不忽略相互作用力），会怎样？</div>
+            <div class="tp-ask">两条假设的<strong>共同特征</strong>：都把"分子<strong>之间</strong>的相互影响"消除了 ——<br>
+              · ① 消除"几何相互影响"（分子占体积会"挤"其他分子的可用空间）<br>
+              · ② 消除"力学相互影响"（分子间引力 / 斥力会让分子彼此牵制）<br>
+              <br>
+              消除这两类"相互影响"后，分子的行为变成<strong>纯粹的独立随机运动</strong>（除了瞬间碰撞）。这正是统计力学最擅长处理的"独立粒子系统"。<br>
+              <br>
+              <strong>如果只取一条</strong>：<br>
+              · 只忽略体积、保留相互作用力 → 分子间还有引力让它们"团聚"，气体倾向于液化，不再"自由扩散"<br>
+              · 只忽略相互作用力、保留体积 → 分子像"硬球"还会互相挤占空间，公式变复杂（实际接近高密度气体）<br>
+              <br>
+              <strong>核心收获</strong>：物理学的"模型简化"不是任意挑两条，而是<strong>有目的地</strong>去除让数学变复杂的相互影响，让粒子可以独立处理。</div>
+            <div class="tp-write">在纸上：① 写"为什么物理学家挑这两条假设"；② 用一句话总结"理想气体 = 独立粒子的统计行为"；③ 列举 1-2 个生活中"在工程中合理使用理想气体模型"的例子（如：常温常压计算气体瓶里 N₂ 的质量、烟花爆炸放出气体的体积等）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">气体三定律 — 每一条都是"变两个、固定一个"</span></div>
+        <div class="step-content">
+          <p>对一定量（\(n\) 摩尔）的<strong>理想气体</strong>，三定律分别固定 \(T, V, P\) 三个量中的一个，研究剩下两个的关系：</p>
+
+          <table class="compare-table">
+            <tr><th>定律</th><th>固定量</th><th>关系</th><th>形式</th></tr>
+            <tr><td><strong>玻意耳定律</strong></td><td>\(T\) 不变</td><td>\(P \cdot V = \) const</td><td>P 与 V 成反比</td></tr>
+            <tr><td><strong>查理定律</strong></td><td>\(V\) 不变</td><td>\(P / T = \) const</td><td>P 与 T 成正比（T 为开尔文）</td></tr>
+            <tr><td><strong>盖-吕萨克定律</strong></td><td>\(P\) 不变</td><td>\(V / T = \) const</td><td>V 与 T 成正比（T 为开尔文）</td></tr>
+          </table>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-3law" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"></path></marker>
+              </defs>
+              <text x="300" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">三定律图谱（各定律在自己的坐标系中）</text>
+              <!-- 子图 1: 玻意耳 P-V (T 不变) -->
+              <text x="100" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">玻意耳：T 不变</text>
+              <line x1="35" y1="220" x2="180" y2="220" stroke="#1d1d1f" stroke-width="1.2" marker-end="url(#arrow-3law)"></line>
+              <line x1="50" y1="240" x2="50" y2="65" stroke="#1d1d1f" stroke-width="1.2" marker-end="url(#arrow-3law)"></line>
+              <text x="185" y="225" font-size="10" font-weight="700" fill="#1d1d1f">V</text>
+              <text x="40" y="60" font-size="10" font-weight="700" fill="#1d1d1f">P</text>
+              <text x="40" y="235" font-size="9" fill="#6e6e73">O</text>
+              <!-- 双曲线 PV = const -->
+              <path d="M 60,85 Q 80,110 100,145 Q 130,180 175,205" fill="none" stroke="#c0392b" stroke-width="2"></path>
+              <text x="110" y="125" font-size="9" fill="#c0392b">PV = const</text>
+              <!-- 子图 2: 查理 P-T (V 不变) -->
+              <text x="300" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#0055B8">查理：V 不变</text>
+              <line x1="235" y1="220" x2="380" y2="220" stroke="#1d1d1f" stroke-width="1.2" marker-end="url(#arrow-3law)"></line>
+              <line x1="250" y1="240" x2="250" y2="65" stroke="#1d1d1f" stroke-width="1.2" marker-end="url(#arrow-3law)"></line>
+              <text x="385" y="225" font-size="10" font-weight="700" fill="#1d1d1f">T</text>
+              <text x="240" y="60" font-size="10" font-weight="700" fill="#1d1d1f">P</text>
+              <text x="240" y="235" font-size="9" fill="#6e6e73">O</text>
+              <!-- 直线 P = (nR/V)T 过原点 -->
+              <line x1="250" y1="220" x2="370" y2="80" stroke="#0055B8" stroke-width="2"></line>
+              <text x="265" y="100" font-size="9" fill="#0055B8">P/T = const</text>
+              <text x="265" y="113" font-size="8" fill="#0055B8">（过原点）</text>
+              <!-- 子图 3: 盖-吕萨克 V-T (P 不变) -->
+              <text x="500" y="46" text-anchor="middle" font-size="11" font-weight="700" fill="#27ae60">盖-吕萨克：P 不变</text>
+              <line x1="435" y1="220" x2="575" y2="220" stroke="#1d1d1f" stroke-width="1.2" marker-end="url(#arrow-3law)"></line>
+              <line x1="450" y1="240" x2="450" y2="65" stroke="#1d1d1f" stroke-width="1.2" marker-end="url(#arrow-3law)"></line>
+              <text x="578" y="225" font-size="10" font-weight="700" fill="#1d1d1f">T</text>
+              <text x="440" y="60" font-size="10" font-weight="700" fill="#1d1d1f">V</text>
+              <text x="440" y="235" font-size="9" fill="#6e6e73">O</text>
+              <!-- 直线 V = (nR/P)T 过原点 -->
+              <line x1="450" y1="220" x2="570" y2="80" stroke="#27ae60" stroke-width="2"></line>
+              <text x="465" y="100" font-size="9" fill="#27ae60">V/T = const</text>
+              <text x="465" y="113" font-size="8" fill="#27ae60">（过原点）</text>
+            </svg>
+            <div class="diagram-caption">图 1 · 三定律图谱（每条定律画在自己的坐标系中）。左图（玻意耳）：横轴 V、纵轴 P，T 不变时 P 与 V 呈反比，曲线是双曲线。中图（查理）：横轴 T（开尔文）、纵轴 P，V 不变时 P 与 T 成正比，直线过原点。右图（盖-吕萨克）：横轴 T（开尔文）、纵轴 V，P 不变时 V 与 T 成正比，直线过原点。注意中图与右图都强调"过原点"—— 这是温度用<strong>开尔文（绝对温度）</strong>而非摄氏度时的特征。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>关于温度的开尔文 vs 摄氏度</strong>: 查理和盖-吕萨克定律的"过原点"特性<strong>只在开尔文标度下成立</strong>。开尔文与摄氏度的换算: \(T_{\text{开尔文}} = t_{\text{摄氏度}} + 273.15\)。<br>
+            历史上正是因为玻意耳-查理在摄氏度下做实验得到 \(P \propto (t + 273.15)\)，外推到 \(t = -273.15°C\) 时 \(P = 0\)（不可能更负），于是定义这个外推零点为<strong>绝对零度</strong> \(T = 0\) K —— 与分子动理论中"分子平均动能 = 0"对应。这种由实验外推出来的"理论极限"是物理学常见的方法。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 玻意耳定律的微观解释</div>
+            <div class="tp-pause">把活塞往里压一半（V 减半），气体压强会怎么变？凭分子动理论解释，<strong>不要</strong>背公式。</div>
+            <div class="tp-ask">V 减半 → 分子数密度 \(n_\text{数} = N/V\) <strong>翻倍</strong>。T 不变 → 每个分子的平均动能<strong>不变</strong> → 单次撞壁的"力"不变 → 但撞壁的<strong>频率</strong>翻倍（密度翻倍）。所以单位时间、单位面积的总动量传递（即压强 P）<strong>翻倍</strong>。这就是 \(PV = \) const 的微观机制 ⭐ —— 压强 P 与分子数密度成正比、与平均动能成正比；T 不变时只剩 n<sub>数</sub> ∝ 1/V，所以 P ∝ 1/V。</div>
+            <div class="tp-write">在纸上：① 写"V 减半 → \(n_\text{数}\) 翻倍 → 撞壁频率翻倍 → P 翻倍"的论证链；② 一句话总结"为什么 \(PV = \) const"的微观原因。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 查理定律的微观解释</div>
+            <div class="tp-pause">密闭气罐拿去加热（V 不变），罐内气压会怎么变？</div>
+            <div class="tp-ask">V 不变 → \(n_\text{数}\) 不变。T 升 → 分子平均动能 \(\bar{\varepsilon}\) 升 → 撞壁的<strong>力</strong>（单次撞击动量传递）+ 撞壁的<strong>频率</strong>（速度更快、更快回头撞下一次）<strong>都</strong>升。两个效应叠加 → P 升。在低温到中温的常温区间（理想气体行为），实验和理论都给出 \(P \propto T\) （开尔文）。这就是 \(P/T = \) const 的微观机制 ⭐。</div>
+            <div class="tp-write">在纸上：① 写 "T 升 → 撞壁力 + 频率都升 → P 升"；② 解释为什么"过原点"对应"绝对零度"（T → 0 时分子热运动停止 → 完全不撞壁 → P → 0）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">三定律的综合 — 理想气体状态方程 \(PV = nRT\)</span></div>
+        <div class="step-content">
+          <p>三定律各自只固定一个量。如果<strong>三个量都变</strong>，能用一个统一方程描述吗？</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">三定律联立 → \(PV = nRT\)</div>
+            <div class="step-line"><strong>玻意耳</strong>: \(PV = \) const（T 不变）。换个写法: 比例式 \(PV = f(T)\)，其中 \(f(T)\) 是只依赖 T 的函数。</div>
+            <div class="step-line"><strong>查理</strong>: \(P/T = \) const（V 不变）→ P 与 T 成正比，比例系数依赖 V。等价于 \(P = g(V) \cdot T\)，其中 \(g(V)\) 只依赖 V。</div>
+            <div class="step-line"><strong>盖-吕萨克</strong>: \(V/T = \) const（P 不变）→ V 与 T 成正比，比例系数依赖 P。</div>
+            <div class="step-line"><strong>合起来</strong>: \(\dfrac{PV}{T} = \) const（对一定量气体）—— 把三个量和三个常数项整合后，剩下"PV / T"这个组合是不变量。</div>
+            <div class="step-line"><strong>引入摩尔数 n</strong>（阿伏伽德罗定律：等温等压下气体体积与 n 成正比 \(V \propto n\)）: 把常数项设为 \(nR\)（R 是普适气体常数），得到 <strong>\(\boxed{\,PV = nRT\,}\)</strong> ⭐⭐ —— <strong>理想气体状态方程</strong>。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>普适气体常数</strong> \(R = 8.314\) J/(mol·K)（普适指对所有理想气体值相同）。R 的物理含义留给进阶<a href="advanced-task-cards.html">微观推导</a>板块（从分子动理论严格推导 \(PV = NkT\)，\(R = N_A \cdot k\)，k 为玻尔兹曼常数）。本板块用 R 这个数值即可。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 用 \(PV = nRT\) 算一个例子</div>
+            <div class="tp-pause">一容器装有 1 mol 氧气，温度 27°C（即 300 K），体积 24.6 L。算气压 P 是多少？用 \(PV = nRT\) 代入。</div>
+            <div class="tp-ask">单位换算: V = 24.6 L = 24.6 × 10⁻³ m³。代 \(P = nRT/V\) = (1 × 8.314 × 300) / (24.6 × 10⁻³) ≈ 101350 Pa ≈ <strong>1 标准大气压</strong>。这个数值很有名 —— 标准状况（STP）下 1 mol 气体体积 \(\approx\) 22.4 L（0°C, 273 K），常温（25°C, 298 K）下约 24.5 L。本题数据基本对应常温 1 atm 的标准例。</div>
+            <div class="tp-write">在纸上：① 单位换算 L → m³（除以 1000）；② 代 \(P = nRT/V\)；③ 检查得到 \(\approx 10^5\) Pa = 1 atm 的合理量级。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 综合 P-V-T 变换</div>
+            <div class="tp-pause">一团气体从初态 \((P_1, V_1, T_1)\) 变到末态 \((P_2, V_2, T_2)\)，<strong>三个量都变</strong>。它们之间满足什么定量关系？</div>
+            <div class="tp-ask">对一定量气体（\(n\) 不变），\(PV/T = nR\) 是常数，所以 \(\dfrac{P_1 V_1}{T_1} = \dfrac{P_2 V_2}{T_2}\)。这是"<strong>结合方程</strong>"，第一定律 4 过程分析时常用。例：从初态 \((1 atm, 24.6 L, 300 K)\) 加热并加压到 \((2 atm, 20 L, T_2)\)，求 \(T_2\)？代入: \(T_2 = T_1 \cdot \dfrac{P_2 V_2}{P_1 V_1} = 300 \cdot \dfrac{2 \cdot 20}{1 \cdot 24.6} \approx 488\) K。</div>
+            <div class="tp-write">在纸上：① 推出 \(P_1 V_1 / T_1 = P_2 V_2 / T_2\)；② 代实例算 \(T_2\)；③ 用一句话总结"什么是结合方程，它和 \(PV = nRT\) 是什么关系"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">批判性审查 + 边界</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>"理想气体"是什么？</strong> 理想气体的 2 大假设: ① 分子本身大小可忽略（分子点状）；② 分子间无相互作用（除碰撞瞬间）。常温常压下空气 / 氢 / 氮 / 氧 等基本满足，但<strong>高压低温</strong>时偏离（分子体积不可忽略、分子间引力显著）→ 需用<strong>实际气体方程</strong>（范德瓦尔斯方程等，大学物化内容）</li>
+            <li><strong>本板块不推 \(PV = nRT\) 的严格形式</strong>: 从分子碰壁严格推出 \(P = (1/3) n_\text{数} m \bar{v^2}\) → 联立 \(\bar{\varepsilon} = (3/2)kT\) → \(PV = NkT = nRT\) —— 这个完整推导留给进阶<a href="advanced-task-cards.html">微观推导</a>板块。本板块用 \(PV = nRT\) 这一形式（来自三定律的实验综合 + 阿伏伽德罗定律）</li>
+            <li><strong>下游连接</strong>: 第一定律 4 过程分析（特别是等温 \(PV = \) const 和绝热 \(PV^\gamma = \) const）都建立在本板块的 \(PV = nRT\) 上</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="gls-c1-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立陈述并写出三定律（玻意耳 PV = const / 查理 P/T = const / 盖-吕萨克 V/T = const）+ 强调"开尔文" 的角色</span></label>
+        <label data-key="gls-c1-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用分子动理论解释玻意耳定律和查理定律的微观机制（数密度 / 撞壁频率 / 撞壁力的变化）</span></label>
+        <label data-key="gls-c1-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立推出 PV = nRT 是三定律的综合，并说出 R = 8.314 J/(mol·K) 这个数值</span></label>
+        <label data-key="gls-c1-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 PV = nRT 算具体问题（如 1 mol 气体在 300 K、24.6 L 下的压强 ≈ 1 atm）</span></label>
+        <label data-key="gls-c1-5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用结合方程 P₁V₁/T₁ = P₂V₂/T₂ 处理 P-V-T 三量都变化的问题</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：定量分析 · 微观-宏观桥接 · 物理建模 · 数据处理</div>
+    </div>
+  </div>
+
+  <!-- ==================== 方法卡 M · 变质量问题（2026-06-12 回填） ==================== -->
+  <div class="task-card" id="taskM">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">M</div>
+      <h3>方法卡 · 变质量问题（等效定质量法）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：识别充气 / 放气 / 抽气 / 灌装 4 种"变质量"场景 → 掌握"重选研究对象，把变质量化为定质量"的等效方法 → 能处理"变质量段 + 定质量段"复合的综合问题<br>
+        <strong>建议时长</strong>：35-45 分钟（方法卡 —— 在 Card 1 之后、Card 2 之前完成；它是 Card 1 三定律的"用法补丁"，不引入任何新原理）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>冬天给自行车轮胎打气：胎的容积 \(V_0\) 基本不变，每打一下，就有一小份气体被压进胎里。</p>
+          <ul>
+            <li>Card 1 的三定律和 \(PV = nRT\) 都有一个共同前提 —— 研究"<strong>一定量</strong>（n 不变）的气体"。可是打气过程中，胎内气体的量一直在<strong>增加</strong>，这个前提被破坏了。</li>
+            <li>那么：是定律<strong>失效</strong>了？还是<strong>我们用错了</strong>？如果是用错了，错在哪一步？</li>
+          </ul>
+          <p>不查资料，先给自己一个回答，再进入 STEP 2。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">核心方法 — 定律没错，是研究对象选错了</span></div>
+        <div class="step-content">
+          <p>关键转念：定律要求"一定量气体"，那就<strong>重新挑一团"量不变"的气体来研究</strong>。把"胎内原有气体 + 即将打进去的全部气体"<strong>打包</strong>成一个大的研究对象 —— 对这个整体来说，打气只是把它从"分散各处"压到"全在胎内"，<strong>质量从头到尾没有变</strong>，定律照常使用。</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-vm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"></path></marker>
+              </defs>
+              <text x="300" y="31" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">充气场景的"打包"：变质量 → 定质量</text>
+              <text x="130" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">初态 · 打包成一个研究对象</text>
+              <rect x="28" y="62" width="204" height="124" rx="10" fill="none" stroke="#c0392b" stroke-width="1.5" stroke-dasharray="6,4"></rect>
+              <rect x="40" y="72" width="120" height="104" rx="8" fill="#eaf2fb" stroke="#0055B8" stroke-width="2"></rect>
+              <text x="100" y="118" text-anchor="middle" font-size="12" fill="#1d1d1f">胎内 V₀</text>
+              <text x="100" y="138" text-anchor="middle" font-size="11" fill="#6e6e73">压强 P₀</text>
+              <rect x="176" y="74" width="42" height="28" rx="5" fill="#fdf2e3" stroke="#e67e22" stroke-width="1.5"></rect>
+              <rect x="176" y="110" width="42" height="28" rx="5" fill="#fdf2e3" stroke="#e67e22" stroke-width="1.5"></rect>
+              <rect x="176" y="146" width="42" height="28" rx="5" fill="#fdf2e3" stroke="#e67e22" stroke-width="1.5"></rect>
+              <text x="130" y="206" text-anchor="middle" font-size="11" fill="#e67e22">待充入 n 份 ΔV（同压 P₀、同温）</text>
+              <line x1="248" y1="124" x2="334" y2="124" stroke="#1d1d1f" stroke-width="1.6" marker-end="url(#arrow-vm)"></line>
+              <text x="294" y="108" text-anchor="middle" font-size="11" fill="#1d1d1f">全部压入</text>
+              <text x="412" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#27ae60">末态 · 还是同一团气体</text>
+              <rect x="352" y="72" width="120" height="104" rx="8" fill="#eafaf1" stroke="#27ae60" stroke-width="2"></rect>
+              <text x="412" y="118" text-anchor="middle" font-size="12" fill="#1d1d1f">胎内 V₀</text>
+              <text x="412" y="138" text-anchor="middle" font-size="11" fill="#6e6e73">压强升为 P</text>
+              <text x="300" y="234" text-anchor="middle" font-size="12" font-weight="700" fill="#00409A">等温 → 玻意耳：P₀ ( V₀ + nΔV ) = P · V₀</text>
+            </svg>
+            <div class="diagram-caption">图 M · 充气场景的等效打包。左侧红色虚线框是初态的打包研究对象：胎内气体（体积 V₀、压强 P₀）加上待充入的 n 份气体（每份 ΔV，与胎内同压同温），它们分散在各处；右侧是末态：同一团气体全部被压入胎内（体积 V₀，压强升为 P）。整个过程这团气体没有增减，等温时直接用玻意耳定律 P₀(V₀ + nΔV) = P·V₀。</div>
+          </div>
+
+          <p>4 种典型场景，打包思路各有讲究：</p>
+          <table class="compare-table">
+            <tr><th>场景</th><th>打包思路</th><th>等温关系式</th></tr>
+            <tr><td><strong>充气</strong></td><td><strong>初态打包</strong>：容器内原有气体 + 待充入的 n 份气体</td><td>\(P_0 (V_0 + n\Delta V) = P \cdot V_0\)</td></tr>
+            <tr><td><strong>放气</strong></td><td><strong>末态合并</strong>：容器内剩余气体 + 已漏出的气体（漏出部分按终压算体积）</td><td>\(P_1 V_0 = P_2 (V_0 + V_\text{漏})\)</td></tr>
+            <tr><td><strong>抽气</strong></td><td><strong>逐次等效</strong>：每抽 1 次 = 容器内气体（定质量）等温膨胀进抽气室，再排掉抽气室那份</td><td>\(P_k = P_1 \left( \dfrac{V_0}{V_0 + V_\text{抽}} \right)^{k}\)</td></tr>
+            <tr><td><strong>灌装</strong></td><td><strong>总量打包</strong>：大瓶气体 = 留在大瓶的 + 分到 n 个小瓶的</td><td>\(P_1 V_\text{大} = P_\text{剩} V_\text{大} + n \, P_\text{小} V_\text{小}\)</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 M1 · 打包之后，为什么玻意耳定律就能用了？</div>
+            <div class="tp-pause">充气问题里我们对"打包后的整体"写了 \(P_0(V_0 + n\Delta V) = P \cdot V_0\)。检查一下：玻意耳定律的两个前提（n 不变、T 不变），打包后各是怎么满足的？</div>
+            <div class="tp-ask">① <strong>n 不变</strong>：打包后的整体从头到尾没有气体进出 —— 这正是"打包"这个动作的全部目的，把"对容器而言的变质量"变成"对研究对象而言的定质量"；② <strong>T 不变</strong>：题目通常设定充气缓慢、与环境同温。两个前提都满足，玻意耳照用。如果题目里温度<strong>也</strong>变（比如充完气再升温），就把变温段<strong>拆出来</strong>，按定质量的结合方程 \(P_1V_1/T_1 = P_2V_2/T_2\) 单独处理 —— 见 STEP 3。</div>
+            <div class="tp-write">在纸上：① 用一句话写出"打包为什么让 n 不变"；② 默写充气场景的玻意耳等式，标注每个符号的含义。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">实战 — "变质量段 + 定质量段"复合的综合问题</span></div>
+        <div class="step-content">
+          <p><strong>例</strong>：篮球容积 \(V_0 = 6.0\) L（视为不变），球内气体压强 \(1.0 \times 10^5\) Pa、温度 300 K。打气筒每次充入压强 \(1.0 \times 10^5\) Pa、温度 300 K、体积 \(\Delta V = 0.5\) L 的空气，充气过程球内温度保持 300 K。</p>
+          <ol>
+            <li>要使球内压强达到 \(1.5 \times 10^5\) Pa，需要充气几次？</li>
+            <li>比赛中球内气体温度升到 330 K（容积仍不变），此时球内压强多大？</li>
+          </ol>
+          <p><strong>解法骨架</strong>（先自己算，再对照）：</p>
+          <ul>
+            <li>第 (1) 问是<strong>变质量段</strong> → 初态打包：\(1.0 \times 10^5 \times (6.0 + 0.5n) = 1.5 \times 10^5 \times 6.0\) → \(6.0 + 0.5n = 9.0\) → \(n = 6\) 次。</li>
+            <li>第 (2) 问<strong>充气已结束，质量锁定</strong> → 普通的定质量等容升温（查理定律）：\(P' = 1.5 \times 10^5 \times \dfrac{330}{300} = 1.65 \times 10^5\) Pa。</li>
+            <li><strong>分水岭意识</strong>：动笔前先把过程分段，逐段问"这一段质量变不变？" —— 变质量段用打包，定质量段用常规定律。混着用是这类综合题最常见的丢分方式。</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 M2 · 抽气场景自己列一遍</div>
+            <div class="tp-pause">瓶子容积 \(V_0 = 1.0\) L，初压 \(1.0 \times 10^5\) Pa；抽气机气室容积 \(V_\text{抽} = 0.25\) L，等温。抽 1 次后瓶内压强是多少？抽 2 次后呢？为什么抽气<strong>不能</strong>像充气那样一次性打包？</div>
+            <div class="tp-ask">每抽 1 次：瓶内气体（这一次内是<strong>定质量</strong>）等温膨胀充满"瓶 + 气室"，\(1.0 \times 10^5 \times 1.0 = P_1' \times 1.25\) → \(P_1' = 0.8 \times 10^5\) Pa；然后气室那份被排掉。抽 2 次 = 再来一轮：\(P_2' = 0.8 \times 10^5 \times \dfrac{1.0}{1.25} = 0.64 \times 10^5\) Pa。一般地 \(P_k = P_0 \times (V_0/(V_0+V_\text{抽}))^k\)。<strong>不能一次性打包</strong>的原因：每次排掉的是"膨胀<strong>之后</strong>"的气体，第 2 次抽的对象已经不含第 1 次排掉的那部分 —— 对象逐次在换，所以只能逐次等效。</div>
+            <div class="tp-write">在纸上完整写出抽 k 次的递推式和通项 \(P_k\)，并代入 k = 2 验证 0.64 × 10⁵ Pa。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 + 边界</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>这张卡没有新物理</strong>：等效定质量法不是新定律，而是一次<strong>物理建模</strong>训练 —— 系统的边界由你来画。"变质量"只是对容器而言的；对恰当打包的研究对象而言，质量从未变过。背后是<strong>守恒思想</strong>：气体分子不会凭空产生或消失。</li>
+            <li><strong>分水岭习惯</strong>：综合大题常把"变质量段"与"定质量段"叠在一道题里（先充气、后升温）。先分段、再逐段选方法，是这类题的通用入口。</li>
+            <li><strong>边界声明</strong>：真正的"开放系统"热力学（物质流携带能量、化学势等）是大学内容；本阶段遇到的所有变质量气体问题，都能用打包化为定质量来解决。</li>
+            <li><strong>下游连接</strong>：融合模块『热力学应用 · 物理』例题 5（救援充气筏气瓶）与熟练度检测的综合大题，用的正是本卡方法。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ 方法卡 M 检查点</div>
+        <label data-key="gls-cm-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出核心转念：变质量问题里定律没有失效，是研究对象要重新选（打包成定质量整体）</span></label>
+        <label data-key="gls-cm-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>充气 / 放气 / 抽气 / 灌装 4 种场景，我都能画出"打包对象初态在哪里、末态在哪里"的示意图并列出等温关系式</span></label>
+        <label data-key="gls-cm-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立完成 STEP 3 的两段式例题，并指出哪一段变质量（打包）、哪一段定质量（常规定律）</span></label>
+        <label data-key="gls-cm-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释抽气为什么要"逐次等效"而不能一次性打包（每次排掉的是膨胀之后的气体）</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：物理建模 · 守恒思想 · 定量分析 · 过程分段</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>液体的表面张力 + 浸润现象</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从分子间作用力 F-r 曲线出发，解释液体表面有"收缩"的倾向（表面张力的本质）→ 解释浸润 / 不浸润的判据 → 解释毛细现象<br>
+        <strong>建议时长</strong>：35-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">现象观察（5 分钟）</span></div>
+        <div class="step-content">
+          <p>三个生活观察，凭直觉答 ——</p>
+          <ul>
+            <li>水滴落在<strong>荷叶</strong>上，会变成接近圆球的小水珠（不平铺）。同样一滴水落在<strong>洁净玻璃</strong>上，会铺开成薄膜。为什么？</li>
+            <li>小水蜘蛛能在水面上"<strong>走</strong>"，水面像有一层"皮"。这层"皮"是什么？</li>
+            <li>把一根细玻璃管插入水中，水会在管内<strong>上升</strong>。换成水银（水银管），水银<strong>下降</strong>。这是什么效应？</li>
+          </ul>
+          <p>给一个核心猜测：<strong>液体表面比液体内部"特殊" —— 表面分子的状态和内部分子不同</strong>。Card 2 就要把这个"特殊"用 F-r 曲线讲清。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">表面张力的微观本质</span></div>
+        <div class="step-content">
+          <p>用 <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> Card 3 的 F-r 曲线分析<strong>液体内部分子</strong>和<strong>液体表面分子</strong>的处境差异 ——</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">表面分子 vs 内部分子（受力对比）</text>
+              <!-- 液体区域 -->
+              <rect x="60" y="80" width="420" height="190" fill="#e6f3fa" stroke="#3498db" stroke-width="1.2"></rect>
+              <text x="75" y="98" font-size="10" fill="#2980b9">液体</text>
+              <!-- 表面线 (top edge of rect) - just a line above with "空气" -->
+              <text x="270" y="70" text-anchor="middle" font-size="10" fill="#6e6e73">空气（无液体分子）</text>
+              <line x1="60" y1="80" x2="480" y2="80" stroke="#1d1d1f" stroke-width="1.5"></line>
+              <text x="490" y="84" font-size="10" font-weight="700" fill="#1d1d1f">表面</text>
+              <!-- 表面分子 (位于表面线上) -->
+              <circle cx="160" cy="80" r="11" fill="#c0392b" stroke="#fff" stroke-width="1.5"></circle>
+              <text x="135" y="55" text-anchor="middle" font-size="10" font-weight="700" fill="#c0392b">表面分子</text>
+              <!-- 表面分子的相邻分子 (只有下方 / 左右) -->
+              <circle cx="130" cy="105" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="190" cy="105" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="155" cy="135" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="175" cy="130" r="6" fill="#3498db" opacity="0.6"></circle>
+              <!-- 表面分子的引力线 (向下方 / 侧方, 上方没有) -->
+              <line x1="160" y1="90" x2="135" y2="100" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="160" y1="90" x2="185" y2="100" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="160" y1="90" x2="155" y2="128" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="160" y1="90" x2="175" y2="123" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <!-- 表面分子合力箭头 (向下) -->
+              <line x1="160" y1="100" x2="160" y2="155" stroke="#c0392b" stroke-width="2.5" marker-end="url(#arrow-st)"></line>
+              <text x="180" y="130" font-size="10" font-weight="700" fill="#c0392b">净力向内</text>
+              <!-- 内部分子 -->
+              <circle cx="390" cy="180" r="11" fill="#0055B8" stroke="#fff" stroke-width="1.5"></circle>
+              <text x="430" y="125" text-anchor="middle" font-size="10" font-weight="700" fill="#0055B8">内部分子</text>
+              <!-- 内部分子的相邻分子 (四面八方都有) -->
+              <circle cx="360" cy="155" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="420" cy="155" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="360" cy="205" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="420" cy="205" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="380" cy="135" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="400" cy="135" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="380" cy="225" r="6" fill="#3498db" opacity="0.6"></circle>
+              <circle cx="400" cy="225" r="6" fill="#3498db" opacity="0.6"></circle>
+              <!-- 内部分子的引力线 (各方向都有) -->
+              <line x1="390" y1="170" x2="365" y2="160" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="390" y1="170" x2="415" y2="160" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="390" y1="190" x2="365" y2="200" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="390" y1="190" x2="415" y2="200" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="380" y1="180" x2="370" y2="180" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <line x1="400" y1="180" x2="410" y2="180" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"></line>
+              <!-- 内部分子合力标注 -->
+              <text x="425" y="175" font-size="10" font-weight="700" fill="#0055B8">合力 = 0</text>
+              <text x="425" y="190" font-size="9" fill="#0055B8">（四面平均）</text>
+              <!-- 中间注释区 -->
+              <text x="270" y="278" text-anchor="middle" font-size="10" fill="#34495e">表面分子上方无邻居 → 净力指向液体内部 → 表面"想"缩小</text>
+              <text x="270" y="293" text-anchor="middle" font-size="10" fill="#34495e">内部分子四面均有邻居 → 平均合力 = 0 → 内部分子"自在"</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 表面分子与内部分子的受力对比。左侧的红色大圆代表表面分子，紧贴蓝色的液体表面线；它的邻居（小蓝圆）只分布在<strong>下方和两侧</strong>，上方是空气（没有液体分子）。所以表面分子受到的引力合力<strong>指向液体内部</strong>（红色向下箭头）。右侧的深蓝色大圆代表内部分子，被四面八方的邻居（小蓝圆）均匀环绕，引力<strong>互相抵消</strong>（合力 = 0）。这个不对称是表面张力的微观根源。</div>
+          </div>
+
+          <p><strong>从受力差异到"表面张力"</strong>:</p>
+          <ul>
+            <li>表面分子的"邻居更少" → 与邻居的引力相互作用<strong>更少</strong> → 势能<strong>比内部分子高</strong>（被吸引得不够，能量更高）</li>
+            <li>系统总能量 = 内部分子能量 + 表面分子能量 + ... → 表面分子越多，系统总能量越高</li>
+            <li>系统倾向<strong>最小化总能量</strong> → 倾向<strong>最小化表面积</strong>（让表面分子少一些）→ 表面表现得像一层"弹性膜"，努力收缩 —— 这就是<strong>表面张力</strong> ⭐</li>
+            <li>"最小化表面积"的极限形状是<strong>球形</strong>（同体积下表面积最小）→ 解释为什么自由的水滴呈球形（如荷叶上的水珠 / 太空里的水）</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 用 F-r 曲线"重新"理解表面张力</div>
+            <div class="tp-pause">用 <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> Card 3 的 F-r 曲线，<strong>更具体</strong>地解释表面分子势能为什么比内部分子高。</div>
+            <div class="tp-ask">液体中分子间距 \(r \approx r_0\)（平衡距离），从 F-r 曲线看每对相邻分子之间都<strong>互相吸引</strong>（合力 \(\approx 0\) 但<strong>每对相互作用都在贡献"束缚"</strong>）。内部分子四面 8 方都有邻居 → 各方向引力<strong>互相抵消（合力 = 0）</strong>但<strong>每对相互作用都把它"拽住"</strong> → 整体能量较低（束缚强 = 稳定）。表面分子上方<strong>没有</strong> r ≈ r₀ 的邻居 → 少了一组引力对它的"束缚" → 它的能量比内部"略高"（束缚少 = 不那么稳定）。要把一个内部分子<strong>搬到表面</strong>（即增加表面积），就需要<strong>对抗这些"少了的引力"做功</strong> → 这部分功就储存为表面分子的额外能量 → 表面分子额外能量 ∝ 表面积 → 系统"想"最小化表面积来降低总能量。这就是表面张力的本质。</div>
+            <div class="tp-write">在纸上：① 画液体内部和表面分子的"邻居分布"对比图；② 用 F-r 曲线的势能极小值在 r ≈ r₀ 解释为什么少了邻居 = 势能升高；③ 一句话总结"表面张力 = 系统'不喜欢'有表面"。</div>
+            <div class="tp-hint">表面张力的定量形式 \(\gamma\)（每单位长度的力 / 每单位面积的能量）留给大学物理化学。本板块只需定性掌握"为什么有表面张力"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">浸润 / 不浸润 + 毛细现象</span></div>
+        <div class="step-content">
+          <p>水在荷叶上是圆球（不浸润），在玻璃上铺开（浸润）—— 同样一滴水，为什么差这么大？</p>
+
+          <div class="quote-block">
+            <strong>浸润判据 ⭐</strong>：液-固分子间的引力 vs 液-液分子间的引力 ——<br>
+            · 液-固引力 <strong>&gt;</strong> 液-液引力 → 液体倾向铺开到固体表面（液体"喜欢"贴住固体）→ <strong>浸润</strong>（如水 + 玻璃）<br>
+            · 液-固引力 <strong>&lt;</strong> 液-液引力 → 液体倾向收缩成球（液体"不愿意"接触固体）→ <strong>不浸润</strong>（如水 + 荷叶 / 水银 + 玻璃）<br>
+            · 注意"浸润"是<strong>液体 + 固体</strong>的<strong>组合</strong>属性，不是液体或固体单独的属性。同一液体（水）对不同固体（玻璃 / 荷叶 / 蜡）表现完全不同。
+          </div>
+
+          <p><strong>毛细现象</strong>: 当细玻璃管插入液体时 ——</p>
+          <ul>
+            <li><strong>浸润液体</strong>（水 + 玻璃管）: 液-固引力强 → 水沿管壁<strong>上升</strong>（液面凹形）；管越细，水上升越高（毛细管现象，植物根部吸水的微观机制之一）</li>
+            <li><strong>不浸润液体</strong>（水银 + 玻璃管）: 液-固引力弱 → 水银在管内<strong>下降</strong>（液面凸形）</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 6 · 你身边的浸润例子</div>
+            <div class="tp-pause">下面 4 个例子分别属于浸润还是不浸润？① 雨衣的水珠滚下来；② 钢笔吸墨水到笔尖；③ 油在水面上铺开；④ 水银温度计里水银柱顶面是凸的。</div>
+            <div class="tp-ask">① 雨衣的水珠滚下来 —— <strong>不浸润</strong>（雨衣材料表面经特殊处理，液-固引力 &lt; 液-液引力，水汇成球落下）。② 钢笔吸墨水到笔尖 —— <strong>浸润</strong>（墨水浸润金属笔尖 + 毛细作用让墨水沿细缝输送）。③ 油在水面上铺开 —— 油 + 水分层，但油可<strong>浸润</strong>水面（油-水的界面作用比油-油大）。④ 水银温度计里凸面 —— <strong>不浸润</strong>（水银 + 玻璃，水银不浸润玻璃，所以液面是凸形的）。</div>
+            <div class="tp-write">在纸上：① 4 个例子的"浸润 / 不浸润"判断；② 一句话总结浸润判据"看液-固和液-液哪个引力大"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 — 液体性质都源于"分子间相互作用"</span></div>
+        <div class="step-content">
+          <ul>
+            <li>液体的<strong>表面张力</strong> + <strong>浸润 / 不浸润</strong> + <strong>毛细现象</strong> —— 三个看似无关的现象，本质都源于<strong>分子间作用力（F-r 曲线）</strong>，特别是相邻分子的引力</li>
+            <li>这又一次体现了分子动理论的<strong>"基础工具"</strong>地位 —— 一个 F-r 曲线，能解释固液气三态的大量性质</li>
+            <li>本板块对液体的处理是<strong>定性</strong>的（没引入 \(\gamma\) 表面张力系数等定量参数）—— 严格的液体物理（黏度 / 粘性 / 流变学）留给大学物理化学</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="gls-c2-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立画"表面分子 vs 内部分子"邻居分布对比图，并用 F-r 曲线解释为什么表面分子势能更高</span></label>
+        <label data-key="gls-c2-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"表面张力 = 系统倾向最小化表面积（因为表面分子势能更高）"，并解释自由水滴呈球形的原因</span></label>
+        <label data-key="gls-c2-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"液-固引力 vs 液-液引力"的对比判断浸润 / 不浸润，并意识到浸润是<strong>液 + 固组合</strong>属性</span></label>
+        <label data-key="gls-c2-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释毛细现象（浸润液体在细管中上升 / 不浸润液体下降），并知道它的微观机制</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：F-r 曲线应用 · 微观-宏观桥接 · 现象分类</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>固体 — 晶体 vs 非晶体</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：固体根据微观结构分两大类 —— 晶体（分子规则排列）和非晶体（无规则排列）。用这个区分理解：固定熔点 vs 渐变软化 / 单晶各向异性 vs 多晶（含非晶）各向同性<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">两类"看起来都硬"的固体（5 分钟）</span></div>
+        <div class="step-content">
+          <p>食盐和玻璃 —— 都是固体，都很硬，都不流动。但加热它们会发现：</p>
+          <ul>
+            <li><strong>食盐</strong>: 加热到 801°C <strong>瞬间</strong>变成液体（固定熔点）</li>
+            <li><strong>玻璃</strong>: 加热到几百度先变软（像很稠的糖浆），再变软（像蜂蜜），再流动 —— 没有"瞬间熔化"的明确点（渐变软化）</li>
+          </ul>
+          <p>另一个差异 ——</p>
+          <ul>
+            <li><strong>食盐</strong>大颗粒（单晶）从不同方向砸 / 切的<strong>难易程度不一样</strong>（各向异性）。沿特定方向劈开（"解理"）会得到光滑的平面</li>
+            <li><strong>玻璃</strong>从任何方向砸 / 切的<strong>难易程度一样</strong>（各向同性）。碎玻璃的断面是不规则的</li>
+          </ul>
+          <p>本卡要回答的核心问题：<strong>这两个差异（熔点 / 各向异性）背后的微观原因是什么？</strong></p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">晶体 vs 非晶体 — 微观结构差异</span></div>
+        <div class="step-content">
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">晶体 vs 非晶体（微观结构）</text>
+              <!-- 左半: 晶体 (规则点阵) -->
+              <text x="135" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">晶体（如食盐 NaCl）</text>
+              <rect x="40" y="60" width="190" height="190" fill="none" stroke="#c0392b" stroke-width="1.2"></rect>
+              <!-- 规则点阵: 5x5 方格 (交替红蓝代表 Na+ Cl-) -->
+              <g>
+                <!-- row 1 -->
+                <circle cx="75" cy="95" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="105" cy="95" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="135" cy="95" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="165" cy="95" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="195" cy="95" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <!-- row 2 -->
+                <circle cx="75" cy="125" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="105" cy="125" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="135" cy="125" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="165" cy="125" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="195" cy="125" r="9" fill="#3498db" opacity="0.8"></circle>
+                <!-- row 3 -->
+                <circle cx="75" cy="155" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="105" cy="155" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="135" cy="155" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="165" cy="155" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="195" cy="155" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <!-- row 4 -->
+                <circle cx="75" cy="185" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="105" cy="185" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="135" cy="185" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="165" cy="185" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="195" cy="185" r="9" fill="#3498db" opacity="0.8"></circle>
+                <!-- row 5 -->
+                <circle cx="75" cy="215" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="105" cy="215" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="135" cy="215" r="9" fill="#c0392b" opacity="0.8"></circle>
+                <circle cx="165" cy="215" r="9" fill="#3498db" opacity="0.8"></circle>
+                <circle cx="195" cy="215" r="9" fill="#c0392b" opacity="0.8"></circle>
+              </g>
+              <text x="135" y="270" text-anchor="middle" font-size="10" fill="#c0392b">规则点阵 · 严格周期</text>
+              <!-- 右半: 非晶体 (无规则) -->
+              <text x="405" y="48" text-anchor="middle" font-size="12" font-weight="700" fill="#0055B8">非晶体（如玻璃 SiO₂）</text>
+              <rect x="310" y="60" width="190" height="190" fill="none" stroke="#0055B8" stroke-width="1.2"></rect>
+              <!-- 无规则散点 -->
+              <g>
+                <circle cx="340" cy="88" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="378" cy="100" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="408" cy="80" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="455" cy="92" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="485" cy="105" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="325" cy="130" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="365" cy="138" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="400" cy="125" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="438" cy="140" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="475" cy="148" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="345" cy="172" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="385" cy="170" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="418" cy="180" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="460" cy="175" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="490" cy="190" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="330" cy="210" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="368" cy="205" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="402" cy="218" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="445" cy="208" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="480" cy="225" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="345" cy="235" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="395" cy="240" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+                <circle cx="425" cy="242" r="8" fill="#34495e" opacity="0.7"></circle>
+                <circle cx="465" cy="238" r="8" fill="#7f8c8d" opacity="0.7"></circle>
+              </g>
+              <text x="405" y="270" text-anchor="middle" font-size="10" fill="#0055B8">无规则排列 · 无周期</text>
+            </svg>
+            <div class="diagram-caption">图 3 · 晶体（左）与非晶体（右）的微观结构对比。左图：红蓝相间的圆代表食盐 NaCl 中的钠离子和氯离子，整齐排成行列（规则点阵）—— 每个离子周围的邻居数和方向都<strong>严格周期重复</strong>。右图：灰色圆代表玻璃 SiO₂ 中的原子团，散乱分布<strong>无规则、无周期</strong>—— 每个原子的邻居数和方向都各不相同。这个微观差异决定了二者宏观性质（熔点 / 各向异性）的不同。</div>
+          </div>
+
+          <p><strong>核心区别（微观 → 宏观）</strong>:</p>
+          <table class="compare-table">
+            <tr><th>方面</th><th>晶体（如食盐 / 金刚石 / 石英）</th><th>非晶体（如玻璃 / 沥青 / 蜡）</th></tr>
+            <tr><td><strong>微观结构</strong></td><td>分子 / 离子按<strong>规则点阵</strong>排列（严格周期）</td><td>分子排列<strong>无规则</strong>（无周期）</td></tr>
+            <tr><td><strong>熔点</strong></td><td><strong>固定</strong>（如食盐 801°C 瞬间熔化）⭐</td><td><strong>没有固定熔点</strong>（渐变软化）</td></tr>
+            <tr><td><strong>解理性</strong></td><td>沿特定平面易劈开（如方解石）</td><td>断面不规则（如碎玻璃）</td></tr>
+            <tr><td><strong>对称性</strong></td><td>单晶有<strong>各向异性</strong>（不同方向性质不同）</td><td><strong>各向同性</strong>（不同方向性质相同）</td></tr>
+            <tr><td><strong>"凝固"过程</strong></td><td>液体冷却到熔点突变成固体</td><td>液体冷却时黏度逐渐增大，"逐渐"成固体（可视为"过冷液体"或<strong>亚稳态</strong>）</td></tr>
+          </table>
+
+          <div class="quote-block">
+            <strong>关于"非晶体 = 凝固的液体"的类比</strong>: 非晶体的微观结构与液体相似（都是无规则排列），所以常被类比为"凝固的液体"。这个类比<strong>有助理解</strong>，但<strong>不严格</strong>: 玻璃的分子位置基本不动（不像液体那样自由流动），只是<strong>排列方式</strong>无规则。严格说玻璃是<strong>亚稳态</strong>（理论上极慢的时间尺度下排列可能继续调整），但在<strong>人类可观察的时间尺度上</strong>玻璃完全是固体（注意：网络上常见的"中世纪教堂玻璃底部更厚 = 几百年流动证据"是<strong>常见误解</strong>—— 实际是手工吹制工艺造成的厚度不均，不是流动）。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 7 · 食盐 vs 玻璃 熔点对比</div>
+            <div class="tp-pause">为什么食盐有<strong>固定</strong>熔点（801°C 瞬间），玻璃却没有（渐变软化）？用微观结构差异解释。</div>
+            <div class="tp-ask">食盐的离子排在严格的规则点阵中 → <strong>所有离子</strong>的"束缚程度"（势能位置）是<strong>同样</strong>的 → 加热到某个温度时，所有离子的热运动动能<strong>同时</strong>足够冲破规则约束 → <strong>瞬间</strong>熔化。<br>玻璃的分子无规则排列 → 不同分子的"邻居数 + 邻居距离"都<strong>不一样</strong> → 束缚程度<strong>各不相同</strong> → 加热时，弱束缚的分子先开始"流动"，强束缚的还固定 → 整体表现为<strong>渐变软化</strong>（先黏度大，再变小，再变液）。<br>这个区别本质上是"规则 vs 无规则"在微观能量分布上的反映 ⭐。</div>
+            <div class="tp-write">在纸上：① 用"束缚程度均一 vs 不均一"解释固定熔点 vs 渐变软化；② 一句话总结"为什么规则点阵 → 固定熔点"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">各向异性 vs 各向同性 + 单晶 / 多晶</span></div>
+        <div class="step-content">
+          <p><strong>各向异性</strong>: 同一物体在<strong>不同方向</strong>测的性质<strong>不同</strong>（如沿不同方向的导电性 / 折射率 / 硬度 / 解理）<br>
+            <strong>各向同性</strong>: 在不同方向测的性质<strong>相同</strong></p>
+
+          <p>这两个性质都源于微观结构 ——</p>
+          <ul>
+            <li><strong>单晶</strong>（整块都是同一个规则点阵）: 不同方向上分子排列不同 → <strong>各向异性</strong>。例：天然石英 / 大颗食盐 / 半导体硅晶圆</li>
+            <li><strong>多晶</strong>（许多小晶粒, 每个晶粒内部规则 + 晶粒之间随机取向）: 单个晶粒各向异性, 但大量晶粒"平均"后宏观上<strong>各向同性</strong>。例: 大多数金属（钢铁 / 铜 / 铝）/ 一般食盐颗粒</li>
+            <li><strong>非晶体</strong>（无规则结构）: 微观就没有"方向", 直接<strong>各向同性</strong>。例: 玻璃 / 塑料 / 大多数高分子材料</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 8 · 为什么钢铁是各向同性的（即使它"看起来"是金属晶体）？</div>
+            <div class="tp-pause">钢铁是金属晶体的代表，按"晶体各向异性"应该是各向异性的 —— 但实际生活中钢铁明显各向同性（你切钢铁的难度不分方向）。为什么？</div>
+            <div class="tp-ask">关键: 钢铁是<strong>多晶</strong>而不是<strong>单晶</strong> —— 它由<strong>大量微小的晶粒</strong>构成，每个晶粒内部是规则金属晶格，但<strong>晶粒之间</strong>的取向<strong>随机</strong>。从宏观尺度看，不同方向上"平均"了所有晶粒的方向 → 宏观各向同性。<br>如果是<strong>单晶硅</strong>（半导体工业用），就明显各向异性 —— 切硅晶圆要严格沿特定晶面方向。<br>结论: <strong>单晶 vs 多晶</strong>的区分比"晶体 vs 非晶体"更细，决定了宏观各向异性 / 各向同性 ⭐。</div>
+            <div class="tp-write">在纸上：① 解释"为什么钢铁各向同性"用"多晶随机取向"；② 一句话总结"单晶 / 多晶 / 非晶 → 各向异性 / 各向同性"的对应。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 + 边界</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>本板块对固体的处理</strong>: 用"规则 vs 无规则"两个微观结构概念，定性解释固定熔点 vs 渐变软化、各向异性 vs 各向同性</li>
+            <li><strong>不涉及</strong>: 具体晶系（立方 / 六方 / 三斜 等 7 大晶系）/ 化学键类型（离子晶体 / 共价晶体 / 金属晶体 / 分子晶体 4 种）/ 缺陷理论 —— 这些是大学化学（结构化学）或材料科学的内容</li>
+            <li><strong>不涉及</strong>: 固体的导电性 / 能带理论 / 超导 / 磁性 —— 这些是大学固态物理的内容</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游连接</strong>: 本板块的"晶体 vs 非晶体 + 各向异性 / 各向同性"是<strong>材料科学的入门</strong>。化学板块（有机分子的认识 / 同分异构 / 命名）虽然不直接用本板块，但"分子排列差异决定性质差异"这一核心思想贯穿化学与材料。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="gls-c3-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分晶体（规则点阵）vs 非晶体（无规则排列），并独立画微观结构对比图</span></label>
+        <label data-key="gls-c3-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"束缚程度均一 vs 不均一"解释固定熔点 vs 渐变软化的微观原因</span></label>
+        <label data-key="gls-c3-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分单晶 / 多晶 / 非晶, 并解释三者各向异性 / 各向同性的对应关系</span></label>
+        <label data-key="gls-c3-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么钢铁宏观上各向同性（多晶随机取向）但单晶硅各向异性</span></label>
+        <label data-key="gls-c3-5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出本板块的边界 —— 不涉及晶系分类 / 化学键类型 / 能带理论，这些留给后续学科</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：结构-性质关联 · 微观-宏观桥接 · 物理化学融合视角</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 4 件事：(1) Card 1 思考点 1 + 2：玻意耳定律 + 查理定律的微观机制完整论证链（用分子动理论的"数密度 / 撞壁频率 / 撞壁力"概念）；(2) Card 1 思考点 4：综合 \(P_1 V_1 / T_1 = P_2 V_2 / T_2\) 的推导 + 一个具体数值例子；(3) 方法卡 M 思考点 M2：抽气场景的逐次等效列式（抽 k 次后瓶内压强的通项 + 数值验证）；(4) Card 2 思考点 5：用 F-r 曲线解释表面张力微观本质的论证。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答：① 本板块的"气体 + 液体 + 固体"看似无关，但其实<strong>都建立在分子动理论的同一套工具上</strong>（F-r 曲线 + 分子数密度 + 温度 ∝ 平均动能）—— 这种"<strong>同一套基础工具解释大量不同现象</strong>"的体验对你的物理思维有什么启发？② "理想气体方程 \(PV = nRT\) 不是新原理而是三定律的综合"的认识，是怎么改变你对"物理方程的来源"的看法的？</td></tr>
+      <tr><td>自评清单</td><td>3 张卡 + 方法卡 M 的 checkpoint 都勾完。重点确认 Card 1（\(PV = nRT\) 应用）—— 这是第一定律强依赖的关键 export。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15 分钟口试，准备用 <strong>3 分钟</strong> 清晰说出"为什么一套分子动理论就足以解释三态的核心性质"。</td></tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：本板块特别强调<strong>同一套微观工具解释三态</strong>的统一性。\(PV = nRT\) 是后续<a href="basic-task-cards.html">热力学第一定律</a> 4 过程分析的强依赖, 必须熟记并能熟练应用。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="gas-liquid-solid-mock-check.html">📝 基础检测</a>
+    <a href="gas-liquid-solid-fluency-test.html">📈 熟练度检测</a>
+    <a href="gas-liquid-solid-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 气体液体固体（基础模块 · 2026-06-09 新立）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-gas-liquid-solid-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

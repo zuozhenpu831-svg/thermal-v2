@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盖斯定律 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .deepening-recommendation {
+    background: linear-gradient(135deg, rgba(142, 68, 173, 0.06), rgba(142, 68, 173, 0.10));
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .deepening-recommendation .dr-title { font-size: 1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .deepening-recommendation .dr-title::before { content: '🔭'; font-size: 1.1rem; }
+  .deepening-recommendation strong { color: var(--accent-purple); }
+  .deepening-recommendation a { color: var(--accent-purple); text-decoration: underline; font-weight: 600; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  /* 前置回顾块：v0.1.7 起的标准配色（浅蓝灰底 + 深蓝左边框） */
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .preview-card {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.04), rgba(142,68,173,0.06));
+    border: 1px solid rgba(142,68,173,0.15);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+  }
+  .preview-card .preview-title { font-size: 1.05rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; }
+  .preview-card p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.7; }
+  .preview-card p:last-child { margin-bottom: 0; }
+  .preview-card .formula-highlight { text-align: center; font-size: 1.2rem; margin: 16px 0; color: var(--primary-blue); font-weight: 600; }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>盖斯定律 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>盖斯定律</h1>
+    <div class="subtitle">路径无关的化学版本 · 用 \(\Delta H_f^\circ\) 表算任何反应的 \(\Delta H\)</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>盖斯定律（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>3.5-4 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>热力学第一定律</strong>（必读 —— 内能 U 是状态量是本板块论证 H 状态量性质的基础）<br><strong>气体液体固体</strong>（必读 —— P、V 是状态量来自此板块）<br><strong>第二定律 · 基础</strong>（推荐 —— 状态量 vs 过程量的概念在此板块进一步明确）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；常用的标准生成焓 ΔHf° 数据表（NIST WebBook 或常见数据手册）；对 \(\Delta U = Q - W\) 和"状态量 vs 过程量"区分的熟练度</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能用一句话解释为什么"焓是状态函数"<strong>直接</strong>蕴含了"反应焓变可以绕路算"</li>
+      <li>能写出盖斯定律的等式形式：\(\Delta H_{\text{直接}} = \sum \Delta H_{\text{各段}}\)（任意拆分路径下成立）</li>
+      <li>能解释"为什么稳定单质的 \(\Delta H_f^\circ\) 取作 0"，并用"零点参考"的类比说出这个约定的工程价值</li>
+      <li>能从盖斯定律 + \(\Delta H_f^\circ\) 表自己推出反应焓变公式：\(\Delta H_{\text{反应}} = \sum \nu \cdot \Delta H_f^\circ(\text{产物}) - \sum \nu \cdot \Delta H_f^\circ(\text{反应物})\)</li>
+      <li>能熟练做方程式的四种代数操作（加 / 减 / 反向 / 乘系数）并写出对应的 \(\Delta H\) 怎么变</li>
+      <li>能完成一个真实案例的"反清案"：用两个已知反应的 \(\Delta H\) 组合算出一个无法直接测的反应的 \(\Delta H\)（如 \(\mathrm{C}(s) + \tfrac{1}{2}\mathrm{O_2}(g) \to \mathrm{CO}(g)\)）</li>
+      <li>能用双重方法（"代数组合法" + "\(\Delta H_f^\circ\) 直接代入法"）独立验证同一个反应的 \(\Delta H\)，并解释为什么两个方法答案必然一致</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p><strong>有些反应你根本没法直接做实验测它的焓变 ——</strong></p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li>把 C 和 \(\tfrac{1}{2}\)O₂ 放一起点燃，得到的不是 CO 而是 CO₂（碳一定会被烧到底）。<strong>那 C + ½O₂ → CO 的 \(\Delta H\) 怎么测？</strong></li>
+      <li>石墨直接变成金刚石需要超高压、几乎不可控的实验条件 —— 这个 \(\Delta H\) 怎么测？</li>
+    </ul>
+    <p>但实验室里我们能<strong>直接</strong>测的反应却有成千上万个。问题变成：</p>
+    <p style="margin-top: 6px;"><strong>能不能用"一堆能测的反应"，去算"一个不能测的反应"的 \(\Delta H\)？</strong></p>
+    <div class="prereq-recap" style="margin-top: 12px;">
+      <strong>本板块的核心思想</strong>：定义焓 H ≡ U + PV。由于 U（来自<a href="basic-task-cards.html">热力学第一定律</a>）、P 和 V（来自<a href="gas-liquid-solid-task-cards.html">气体液体固体</a>）都是<strong>状态量</strong>，它们的组合 H = U + PV 也只依赖系统当前状态 → <strong>H 是状态量</strong> → ΔH = H<sub>末</sub> − H<sub>初</sub> 只依赖始末态、与路径无关 → 用"绕路算"反应焓变是合法的。本板块就是把这个"路径无关"性质打磨成一套可操作的代数规则 + 工程化方法。
+    </div>
+    <p class="hint">（提示：先想"H 是状态量"意味着什么 —— 然后这件事用在"反应"这个场景下，会自然推出一种"绕路算"的方法。）</p>
+  </div>
+
+  <div class="deepening-recommendation">
+    <div class="dr-title">本板块的"深化路径"推荐 — 学有余力的学生</div>
+    <p>本板块用"H = U + PV → H 是状态量"作为最小核心。如果你已掌握以下 <strong>3 个进阶板块</strong>（它们之间存在前置链 ——<strong>卡诺循环 → 状态函数 → 焓与焓变</strong>），<strong>建议按顺序学完再回来读本板块</strong>，你会从"基础推论"层升到"系统形式"层：</p>
+    <ol style="margin-left: 20px; margin-top: 4px;">
+      <li><a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a> —— 第二定律的数学化起点。严格推导卡诺效率 η = 1 − T₂/T₁，并由此引出"存在一个新的状态量"的隐含线索（即熵）</li>
+      <li><a href="state-functions-task-cards.html">状态函数与非状态函数（进阶）</a> —— 前置：卡诺循环。严格定义"状态函数"概念，论证"组合状态量得到的量也是状态量"（这是本板块"H = U + PV 是状态量"的形式化版本）</li>
+      <li><a href="enthalpy-meaning-task-cards.html">焓与焓变的意义（进阶）</a> —— 前置：状态函数。严格推导 H = U + PV 的引入动机（为什么"内能加 PV"是合适的物理量），并给出标准生成焓 ΔHf° 的完整定义体系</li>
+    </ol>
+    <p style="margin-top: 6px;"><strong>没学进阶也完全可以学懂本板块</strong>（本板块自成体系，所有需要的概念在 Card 1 自己讲清）。深化是"扩展理解"，不是"必读前置"。</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>测不到怎么办 —— 路径无关的化学版本</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从"测不到的反应"切入，<strong>自包含论证 H = U + PV 是状态量</strong> → 把"路径无关"翻译到化学反应的语境 → 给"绕路算 \(\Delta H\)"找到合法性根据<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不翻笔记，先回答 ——</p>
+          <ul>
+            <li>"状态量"是 <a href="basic-task-cards.html">热力学第一定律</a> 已建立的概念（内能 U 是状态量）。用你自己的话说一遍"状态量"意味着什么 —— 这是本板块全部论证的起点。</li>
+            <li>如果某个反应 R → P 的 \(\Delta H\) 你测了 100 次，每次走的"实验路径"略有不同（不同的温度路径、不同的中间产物、不同的反应顺序），\(\Delta H\) 的值会一样吗？为什么？</li>
+            <li>如果某反应根本没法直接做实验（比如必须 100% 控制 C 燃烧只到 CO 不到 CO₂，工程上做不到），还能算出它的 \(\Delta H\) 吗？凭什么？</li>
+          </ul>
+
+          <div class="derivation-block">
+            <div class="derivation-title">本板块核心根基 — H 是状态量的自包含论证</div>
+            <div class="step-line"><strong>定义</strong>：焓 H ≡ U + PV（一个组合物理量，意在把"内能"和"压强乘体积"合在一起方便等压条件下的计算）。</div>
+            <div class="step-line"><strong>U 是状态量</strong>：来自 <a href="basic-task-cards.html">热力学第一定律</a> ——内能 U 只依赖系统当前的 N、T、V、三态等状态，与到达这个状态的路径无关。</div>
+            <div class="step-line"><strong>P、V 是状态量</strong>：来自 <a href="gas-liquid-solid-task-cards.html">气体液体固体</a> —— 压强 P 和体积 V 都是描述系统当前状态的量。</div>
+            <div class="step-line"><strong>结论</strong>：U、P、V 都是状态量 → 它们的组合 H = U + PV 也只依赖系统当前状态 → <strong>H 是状态量</strong> → <strong>ΔH = H<sub>末</sub> − H<sub>初</sub> 只依赖始末态，与路径无关</strong>。</div>
+          </div>
+          <div class="prereq-recap">
+            <strong>关键性质（本板块全部论证的唯一根基 ⭐）</strong>：<strong>ΔH 只依赖始末态，与从始态到末态走的"路径"无关</strong>。<br>
+            这就允许我们用"绕路算"任意反应的 ΔH —— 哪怕直接反应没法在实验室做。后面的所有 Card 都是把这个性质打磨成可操作的代数规则 + 工程方法。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">"测不到"的反应有哪些 —— 引子</span></div>
+        <div class="step-content">
+          <p>看看下面三个反应，问自己"实验室直接做有什么困难"：</p>
+
+          <table class="compare-table">
+            <tr><th>反应</th><th>困难</th></tr>
+            <tr><td>\(\mathrm{C}(s) + \tfrac{1}{2}\mathrm{O_2}(g) \to \mathrm{CO}(g)\)</td><td>实际燃烧 C 一定会到 CO₂，无法"恰好停在 CO"</td></tr>
+            <tr><td>\(\mathrm{C}(\text{石墨}) \to \mathrm{C}(\text{金刚石})\)</td><td>常温常压下根本不发生；要超高压超高温</td></tr>
+          </table>
+
+          <div class="prereq-recap">
+            <strong>提醒（自包含说明）</strong>：在<strong>恒压</strong>条件下（化学反应常在大气压下进行 → 恒压），可以证明 <strong>ΔH = Q<sub>p</sub></strong>（系统恒压下吸收的热量恰好等于焓变）。这个结果由第一定律 ΔU = Q − W 在等压下 W = pΔV 代入得到 ΔU = Q<sub>p</sub> − pΔV → Q<sub>p</sub> = ΔU + pΔV = ΔH ✓。所以"测 ΔH"在实验室里就等价于"恒压条件下用量热计测吸放热"。<br>
+            上面三个反应共同的困难是 —— <strong>你根本没法让反应"恰好按这个方程进行"</strong>，所以连 Q<sub>p</sub> 都测不到。<br>
+            （ΔH = Q<sub>p</sub> 的严格推导留给 <a href="enthalpy-meaning-task-cards.html">焓与焓变的意义（进阶）</a> 板块。）
+          </div>
+
+          <p>但我们知道一件事：<strong>实验室直接能测的反应有成千上万个</strong>。比如 ——</p>
+          <ul>
+            <li>C 完全燃烧到 CO₂：可以直接测，\(\Delta H = -393.5\) kJ/mol</li>
+            <li>CO 完全燃烧到 CO₂：可以直接测，\(\Delta H = -283.0\) kJ/mol</li>
+          </ul>
+          <p>那 C → CO 这个测不到的反应，<strong>能不能用上面两个能测的反应"凑"出来</strong>？</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 焓是状态函数 → 绕路是合法的？</div>
+            <div class="tp-pause">如果我从始态 A 走到末态 B，焓的变化 \(\Delta H = H_B - H_A\) 只看 A 和 B 本身。那么 ——
+              <ul style="margin-top: 4px;">
+                <li>(a) 我"直接"从 A 走到 B 算出来的 \(\Delta H\)，和我"先绕去某个中间态 I 再到 B"算出来的<strong>总</strong> \(\Delta H\)，应该是什么关系？</li>
+                <li>(b) 这件事对"用能测的反应组合得到不能测的反应"意味着什么？</li>
+              </ul>
+              先把 (a) 和 (b) 两个问题在心里想清楚再继续 —— 不要看下面的 tp-write，自己用"状态函数"四个字回答。
+            </div>
+            <div class="tp-ask">"我对'焓是状态函数 → 绕路也成立'的理解可能不到位。请反问引导我从'状态函数的定义'本身推出'绕路和直接算结果一定相同'，<strong>不要直接告诉我答案</strong>。"</div>
+            <div class="tp-write">用自己的话写两句话：<br>
+              (a) "ΔH 只看始末态 → 不管走直接路径还是绕到 I 再去 B，只要始态和末态一样，总的 ΔH 必然相等。"<br>
+              (b) "所以我可以把'测不到的反应 R → P'<strong>拆成几段'能测的反应'</strong>，把各段 ΔH 加起来就是目标 ΔH。"
+            </div>
+            <div class="tp-hint">提示：可以类比"爬山高度差"。从山脚 A 到山顶 B 的<strong>高度差</strong>不依赖你走哪条路（直登 vs 绕山腰再登顶）。"高度"是位置的属性（状态量），不是"路径"的属性。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">命名：把上面这件事叫"盖斯定律"</span></div>
+        <div class="step-content">
+          <p>1840 年俄裔瑞士化学家 G. H. Hess 用<strong>实验</strong>反复验证了下面这件事（当时还没有"焓"这个概念，他纯粹从实验观察）：</p>
+
+          <div class="quote-block">
+            "任意一个化学反应，无论是<strong>一步</strong>完成还是<strong>分多步</strong>完成，其总的热效应相同。"
+          </div>
+
+          <p>这就是<strong>盖斯定律</strong>。它<strong>不</strong>是一个新的物理原理 —— 它是"H 是状态量"在化学反应场景下的<strong>直接推论</strong>。从今天的视角看，盖斯做了一件"实验先于理论"的工作：他在不知道焓的情况下，凭实验验证了焓的路径无关性。</p>
+
+          <div class="quote-block" style="background: rgba(230, 126, 34, 0.06); border-color: var(--accent-orange);">
+            <strong>历史小注</strong>：盖斯本人没有用"焓"这两个字。当时焓的概念还没建立。盖斯定律的现代理解（"H 是状态量 → ΔH 路径无关"）是后人用焓重新解释的。这是物理学/化学史中"实验先于理论概念"的典型案例 —— 类似经验热力学先于统计力学。
+          </div>
+
+          <p>下一张卡（Card 2）我们会把这件事写成一个可操作的等式。</p>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用自己的话说出"焓是状态函数"为什么直接蕴含"绕路算 \(\Delta H\) 是合法的"</span></label>
+        <label data-key="h1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能至少举一个"实验室直接测不到 \(\Delta H\)"的反应，并解释为什么测不到</span></label>
+        <label data-key="h1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"盖斯定律"和"焓是状态函数"是同一件事的两个面（盖斯定律 = 焓状态函数性质在化学反应中的应用）</span></label>
+        <label data-key="h1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我自己手写过 Card 1 的 tp-write 段落，没有直接抄</span></label>
+      </div>
+
+      <div class="literacy-tag">对应素养 · 思辨力 · 学习力（前置知识的迁移）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>盖斯定律：两条路径，等量焓变</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把 Card 1 的口语化论证写成一个具体的代数等式；用一个最小例子（三态能量阶梯）落地<br>
+        <strong>建议时长</strong>：45-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不看下文，先回答 ——</p>
+          <ul>
+            <li>如果你要把"路径无关"写成一个等式（含 \(\Delta H_{\text{直接}}\) 和 \(\Delta H_{\text{各段}}\)），它应该长什么样？</li>
+            <li>这个等式里的加号、减号是怎么来的？哪一步会涉及"放热 vs 吸热"的符号？</li>
+          </ul>
+
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.06); border-color: var(--secondary-blue);">
+            <strong>符号约定（本板块统一）</strong>：<br>
+            • \(\Delta H = H_{\text{末}} - H_{\text{初}}\)（始终是"末减初"）<br>
+            • \(\Delta H &lt; 0\) ↔ 放热（产物焓低于反应物） · \(\Delta H &gt; 0\) ↔ 吸热（产物焓高于反应物）<br>
+            • 化学方程式末尾的"\(+ Q\) kJ"（环境视角，放出的热）与"\(\Delta H = -Q\) kJ"（系统视角）<strong>符号相反、物理相同</strong>。<br>
+            <span style="color: var(--text-secondary); font-size: 0.82rem;">这与 <a href="basic-task-cards.html">热力学第一定律</a> 的"系统视角 / 吸热为正"约定一致 —— ΔH 是 H 的系统视角变化。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">从"路径无关"到具体等式</span></div>
+        <div class="step-content">
+
+          <p>设想最简单的两条路径：</p>
+          <ul>
+            <li><strong>路径 ①（直接）</strong>：A → B，得到 \(\Delta H_{\text{直接}}\)</li>
+            <li><strong>路径 ②（绕路）</strong>：A → I → B（先到中间态 I，再到 B），得到两段焓变 \(\Delta H_1\)（A→I）和 \(\Delta H_2\)（I→B）</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 把"路径无关"翻译成代数等式</div>
+            <div class="tp-pause">已知前置：\(\Delta H = H_{\text{末}} - H_{\text{初}}\)，且 H 是状态函数。请写出 \(\Delta H_{\text{直接}}\)、\(\Delta H_1\)、\(\Delta H_2\) 三者的代数关系。
+              <br><br>提示思路：用 \(H_A, H_I, H_B\) 把三个量先各自展开成"末减初"，然后看 \(\Delta H_1 + \Delta H_2\) 会化简成什么。
+              <br><br><strong>不要看 tp-write</strong>。先自己在纸上推一遍。
+            </div>
+            <div class="tp-ask">"我用 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 把三段焓变都展开了。请反问引导我把 \(\Delta H_1 + \Delta H_2\) 化简，<strong>不要直接给我结果</strong>。"</div>
+            <div class="tp-write">推导链：<br>
+              • \(\Delta H_{\text{直接}} = H_B - H_A\)<br>
+              • \(\Delta H_1 = H_I - H_A\)<br>
+              • \(\Delta H_2 = H_B - H_I\)<br>
+              • \(\Delta H_1 + \Delta H_2 = (H_I - H_A) + (H_B - H_I) = H_B - H_A\)<br>
+              • <strong>所以 \(\Delta H_{\text{直接}} = \Delta H_1 + \Delta H_2\)</strong>
+            </div>
+            <div class="tp-hint">提示：\(H_I\) 在加和里出现了一次"+"和一次"-"，恰好抵消 —— 这就是"绕到任何中间态都没影响"的代数本质。</div>
+          </div>
+
+          <p>把这条推理推广到"绕路 N 段"，结论同样成立：</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">盖斯定律的等式形式</div>
+            <div class="step-line">
+              \[\Delta H_{\text{总反应}} = \sum_{i=1}^{N} \Delta H_i\]
+              <br>其中 \(\Delta H_i\) 是把"总反应"拆成 N 个分步反应中每一步的焓变。<strong>这个加和与拆法无关</strong>（前提是首尾相接、始态/末态对齐）。
+            </div>
+          </div>
+
+          <p>这就是<strong>盖斯定律</strong>的可操作形式。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">能量阶梯图 · 看见"绕路 = 直接"</span></div>
+        <div class="step-content">
+
+          <p>用能量阶梯图把"两条路径，等量焓变"画出来：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+              <!-- v0.1.11 重生成 · 按 design-principles.md 4.7 OBB 算法验证 (0 违规) + 4.8 (12 主体元素) -->
+              <defs>
+                <marker id="arr-down-red" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,0 L5,10 z" fill="#c0392b"/></marker>
+                <marker id="arr-down-blue" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,0 L5,10 z" fill="#0055B8"/></marker>
+              </defs>
+
+              <!-- Y axis (不计入主体元素) -->
+              <line x1="60" y1="320" x2="60" y2="40" stroke="#333" stroke-width="1.5"/>
+              <text x="20" y="46" font-size="13" fill="#333">焓 H</text>
+              <text x="15" y="60" font-size="11" fill="#666">（能量）</text>
+
+              <!-- 主体元素 1 · line-A 反应物能级 -->
+              <line x1="80" y1="90" x2="220" y2="90" stroke="#00409A" stroke-width="3"/>
+              <!-- 主体元素 7 · label-A -->
+              <text x="100" y="78" font-size="14" font-weight="bold" fill="#00409A">A（反应物）</text>
+
+              <!-- 主体元素 2 · line-I 中间态能级 (y 从 180 下移到 200，给 path-direct 让出顶部空间) -->
+              <line x1="240" y1="200" x2="360" y2="200" stroke="#8e44ad" stroke-width="3"/>
+              <!-- 主体元素 8 · label-I 放 line-I 左端上方 anchor=end -->
+              <text x="220" y="188" text-anchor="end" font-size="14" font-weight="bold" fill="#8e44ad">I（中间态）</text>
+
+              <!-- 主体元素 3 · line-B 产物能级 -->
+              <line x1="380" y1="290" x2="500" y2="290" stroke="#27ae60" stroke-width="3"/>
+              <!-- 主体元素 9 · label-B 放 line-B 下方 (避开 path-2 / path-direct 终点) -->
+              <text x="400" y="318" font-size="14" font-weight="bold" fill="#27ae60">B（产物）</text>
+
+              <!-- 主体元素 4 · path-1 A→I 蓝实线 (起点 x=180，与 path-direct 起点 x=220 错开 40px) -->
+              <line x1="180" y1="96" x2="280" y2="194" stroke="#0055B8" stroke-width="2.5" marker-end="url(#arr-down-blue)"/>
+
+              <!-- 主体元素 5 · path-2 I→B 蓝实线 (终点 x=440，与 path-direct 终点 x=420 错开 20px) -->
+              <line x1="340" y1="206" x2="440" y2="284" stroke="#0055B8" stroke-width="2.5" marker-end="url(#arr-down-blue)"/>
+
+              <!-- 主体元素 6 · path-direct A→B 红虚线 (穿越 line-I 中段 x=300 处 y=192，避开 label-I 在 x=142-220 区) -->
+              <line x1="220" y1="96" x2="420" y2="284" stroke="#c0392b" stroke-width="2.2" stroke-dasharray="6,4" marker-end="url(#arr-down-red)"/>
+
+              <!-- 主体元素 10 · label-direct 顶部 caption 槽 + 引线指向 path-direct 中点 (距 label baseline 6px) -->
+              <text x="110" y="32" font-size="12" font-weight="bold" fill="#922222">直接路径 ΔH<tspan font-size="9" dy="3">直接</tspan><tspan dy="-3"></tspan></text>
+              <line x1="180" y1="40" x2="318" y2="186" stroke="#922222" stroke-width="1" stroke-dasharray="3,2"/>
+
+              <!-- 主体元素 11 · 右侧 brackets + ΔH 合并标签 (装饰性 brackets 不算主体) -->
+              <line x1="490" y1="96" x2="490" y2="284" stroke="#e67e22" stroke-width="1.5"/>
+              <line x1="485" y1="96" x2="495" y2="96" stroke="#e67e22" stroke-width="1.5"/>
+              <line x1="485" y1="284" x2="495" y2="284" stroke="#e67e22" stroke-width="1.5"/>
+              <text x="480" y="186" text-anchor="end" font-size="13" font-weight="bold" fill="#e67e22">ΔH<tspan font-size="9" dy="3">直接</tspan><tspan dy="-3"></tspan></text>
+              <text x="480" y="202" text-anchor="end" font-size="11" fill="#e67e22">= ΔH₁ + ΔH₂</text>
+
+              <!-- 主体元素 12 · 底部说明 -->
+              <text x="100" y="345" font-size="13" font-weight="bold" fill="#00409A">两条路径，始末态相同  →  总焓变必然相等</text>
+            </svg>
+            <div class="diagram-caption">能量阶梯图：直接路径（红虚线）和"绕到中间态 I"的两段路径（蓝实线）总焓变必然相等。这就是盖斯定律的可视化形式。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 这个例子里 \(\Delta H_1, \Delta H_2, \Delta H_{\text{直接}}\) 的正负号</div>
+            <div class="tp-pause">观察上图：A 在最高位置、I 在中间、B 在最低位置（B 比 A 还低）。
+              <br>用 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 来判断每段的正负号：
+              <br>(a) ΔH₁（A→I）的符号？
+              <br>(b) ΔH₂（I→B）的符号？
+              <br>(c) ΔH<sub>直接</sub>（A→B）的符号？
+              <br>(d) 这意味着 ①、②、直接路径都是放热还是吸热？
+              <br>把答案先在纸上写出来 —— 不要看 tp-write。
+            </div>
+            <div class="tp-ask">"请引导我用 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) + 图上 H 值大小关系，判断每段焓变的正负号。<strong>不要直接告诉我谁正谁负</strong>。"</div>
+            <div class="tp-write">(a) \(H_I &lt; H_A\) → ΔH₁ &lt; 0（放热）<br>
+              (b) \(H_B &lt; H_I\) → ΔH₂ &lt; 0（放热）<br>
+              (c) \(H_B &lt; H_A\) → ΔH<sub>直接</sub> &lt; 0（放热）<br>
+              (d) 三段都是放热<br>
+              <br>验证：ΔH<sub>直接</sub> = ΔH₁ + ΔH₂，三个都是负数，左右都是负数 ✓
+            </div>
+            <div class="tp-hint">提示：图上"位置低 = 焓小"。这是热力学统一的视觉约定（能量轴的正方向通常向上）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 · 盖斯定律真的是"新东西"吗？</span></div>
+        <div class="step-content">
+          <p>停一下，回头看：</p>
+          <ul>
+            <li>本卡引入的<strong>唯一</strong>新名字是"盖斯定律"。</li>
+            <li>本卡引入的<strong>唯一</strong>新公式是 \(\Delta H_{\text{总}} = \sum \Delta H_i\)。</li>
+            <li>但这个公式不需要任何新的物理假设 —— 它是"\(\Delta H\) = 末减初" + "H 是状态函数"两个前置事实的直接代数推论（思考点 1 用 5 行代数推出来了）。</li>
+          </ul>
+
+          <div class="quote-block">
+            盖斯定律的"内涵"早就在焓的状态函数性质里了 —— 我们只是把它写成了一个<strong>可操作的等式</strong>，方便接下来 Card 3-5 用它做<strong>查表 + 算实际反应</strong>。
+          </div>
+
+          <p>Card 3 会回答："如果每次都要靠'两条路径凑'来算焓变会不会太麻烦？" —— 化学家想出了用 \(\Delta H_f^\circ\) 表把这件事彻底工程化。</p>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>独立</strong>用 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 推出 \(\Delta H_{\text{直接}} = \Delta H_1 + \Delta H_2\)（不看本卡）</span></label>
+        <label data-key="h2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能画出能量阶梯图，标出三个状态 A、I、B 和三段 ΔH 的箭头方向</span></label>
+        <label data-key="h2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"为什么图里 \(H_I\) 在 ΔH₁+ΔH₂ 的加和里恰好抵消"</span></label>
+        <label data-key="h2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出盖斯定律和"焓是状态函数"是同一件事 —— 不是新原理</span></label>
+      </div>
+
+      <div class="literacy-tag">对应素养 · 思辨力（理论 / 现象的区分） · 创造力（把抽象性质翻译成可操作等式）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>\(\Delta H_f^\circ\) 表 —— 从"测一次"到"测无数次"</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解"用稳定单质做零点参考"的工程化思路；从盖斯定律 + \(\Delta H_f^\circ\) 表推出反应焓变的查表公式<br>
+        <strong>建议时长</strong>：40-50 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不看下文，回答 ——</p>
+          <ul>
+            <li>"标准生成焓 \(\Delta H_f^\circ\)" 是什么？凭直觉先猜一下它的定义。</li>
+            <li>为什么<strong>稳定单质</strong>的 \(\Delta H_f^\circ\) 取作 0？这是物理事实还是人为约定？</li>
+            <li>如果你想算 \(\mathrm{CH_4} + 2\mathrm{O_2} \to \mathrm{CO_2} + 2\mathrm{H_2O}\) 的 \(\Delta H\)，但实验室没条件直接测，怎么用一张 \(\Delta H_f^\circ\) 表算出它？</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>本板块自包含定义 ⭐</strong>：<br>
+            • <strong>标准生成焓</strong> \(\Delta H_f^\circ\) = 在<strong>标准条件</strong>（25°C、1 atm）下，<strong>由稳定单质合成 1 mol 化合物</strong>的反应焓变。下标 f = formation（生成）；上标 ° = 标准。<br>
+            • 例：\(\mathrm{C}(\text{石墨}) + \mathrm{O_2}(g) \to \mathrm{CO_2}(g)\) 的 \(\Delta H_f^\circ(\mathrm{CO_2}) = -393.5\) kJ/mol —— 表示由 1 mol 石墨 + 1 mol O₂ 生成 1 mol CO₂ 放出 393.5 kJ 热量。<br>
+            • <strong>焓可表格化</strong>：每个化合物都可以查到一个 \(\Delta H_f^\circ\) 值，存在化学数据手册或 NIST WebBook 里。<br>
+            本板块对 \(\Delta H_f^\circ\) 只用"由稳定单质生成 1 mol 化合物的焓变"这个工作定义。\(\Delta H_f^\circ\) 概念的严格历史 + 与温度 / 压强的关系推导留给 <a href="enthalpy-meaning-task-cards.html">焓与焓变的意义（进阶）</a> 板块。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">"零点参考"的工程价值</span></div>
+        <div class="step-content">
+
+          <div class="prereq-recap">
+            <strong>关键约定 ⭐</strong>：稳定单质（如 \(\mathrm{O_2}(g)\)、\(\mathrm{C}(\text{石墨})\)、\(\mathrm{H_2}(g)\)）按约定 \(\Delta H_f^\circ = 0\) kJ/mol。这是<strong>人为约定的零点</strong>，类比"海平面"作为高度的零点 —— 选定后所有化合物的"焓高度"都可以用 \(\Delta H_f^\circ\) 表示。<br>
+            <strong>为什么选稳定单质</strong>：因为"由元素拆出化合物"是化学家最常做的操作，把稳定单质设为零让所有反应的 \(\Delta H_f^\circ\) 直接可加减。
+          </div>
+
+          <p>用一张"零点参考图"看清这件事：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- v0.1.11 重生成 · 11 主体元素 ≤ 12 · 0 违规 (parent 豁免 ≥ 6px, 其他 ≥ 12px) -->
+              <defs>
+                <marker id="arr-d-r2" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,0 L5,10 z" fill="#c0392b"/></marker>
+                <marker id="arr-u-b2" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,10 L10,10 L5,0 z" fill="#0055B8"/></marker>
+              </defs>
+
+              <!-- 零点 line (dashed horizontal) · 主体元素 1 -->
+              <line x1="40" y1="170" x2="500" y2="170" stroke="#666" stroke-width="1.5" stroke-dasharray="6,4"/>
+              <!-- 零点标注 · 主体元素 7 · y=158 距 line 12px ✓ -->
+              <text x="140" y="158" font-size="11" font-style="italic" fill="#666">零点（稳定单质）ΔH<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan>° = 0</text>
+
+              <!-- Y axis (不计入主体) -->
+              <line x1="60" y1="30" x2="60" y2="300" stroke="#333" stroke-width="1.2"/>
+              <text x="20" y="36" font-size="12" fill="#333">ΔH<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan>°</text>
+              <text x="15" y="50" font-size="10" fill="#666">kJ/mol</text>
+
+              <!-- O₂ 能级 · 主体元素 2 + 8 (parent 距 12px) -->
+              <line x1="90" y1="170" x2="135" y2="170" stroke="#27ae60" stroke-width="4"/>
+              <text x="92" y="193" font-size="11" fill="#27ae60">O₂(g)</text>
+
+              <!-- H₂ 能级 · 主体元素 3 + 9 -->
+              <line x1="155" y1="170" x2="200" y2="170" stroke="#27ae60" stroke-width="4"/>
+              <text x="157" y="193" font-size="11" fill="#27ae60">H₂(g)</text>
+
+              <!-- C(石墨) 能级 · 主体元素 4 + 10 -->
+              <line x1="220" y1="170" x2="275" y2="170" stroke="#27ae60" stroke-width="4"/>
+              <text x="222" y="193" font-size="11" fill="#27ae60">C(石墨)</text>
+
+              <!-- CH₄ 能级 + 数值 · 主体元素 5 + 11 -->
+              <line x1="305" y1="230" x2="365" y2="230" stroke="#c0392b" stroke-width="4"/>
+              <text x="307" y="218" font-size="11" font-weight="bold" fill="#c0392b">CH₄(g)</text>
+              <text x="307" y="254" font-size="10" fill="#c0392b">-74.8</text>
+              <line x1="295" y1="174" x2="295" y2="226" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arr-d-r2)"/>
+
+              <!-- CO₂ 能级 + 数值 · 主体元素 6 + 12 -->
+              <line x1="385" y1="280" x2="445" y2="280" stroke="#c0392b" stroke-width="4"/>
+              <text x="387" y="268" font-size="11" font-weight="bold" fill="#c0392b">CO₂(g)</text>
+              <text x="387" y="304" font-size="10" fill="#c0392b">-393.5</text>
+              <line x1="375" y1="174" x2="375" y2="276" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arr-d-r2)"/>
+
+              <!-- O 原子能级 + 数值 (装饰说明，不严格计主体) -->
+              <line x1="455" y1="80" x2="500" y2="80" stroke="#0055B8" stroke-width="4"/>
+              <text x="455" y="68" font-size="11" font-weight="bold" fill="#0055B8">O(g)</text>
+              <text x="455" y="52" font-size="10" fill="#0055B8">+249</text>
+              <line x1="468" y1="166" x2="468" y2="84" stroke="#0055B8" stroke-width="1.5" marker-end="url(#arr-u-b2)"/>
+
+              <!-- 底部说明 · 简化文字避免与 line 元素拥挤 -->
+              <text x="100" y="280" font-size="11" fill="#555">红 = 放热生成 / 蓝 = 吸热生成</text>
+            </svg>
+            <div class="diagram-caption">零点参考图：稳定单质（绿）位于"海平面"；化合物 ΔH<sub>f</sub>° &lt; 0 在下方，ΔH<sub>f</sub>° &gt; 0 在上方。所有反应都能在这张"焓地图"上拼出来。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 为什么"稳定单质"做零点最好用？</div>
+            <div class="tp-pause">焓的"零点"本质是任意的（因为我们只关心差 ΔH）。可以选氢原子做零点、可以选 CH₄ 做零点、也可以选真空做零点 —— 都不影响最终算出来的 ΔH。
+              <br><br>但实际上选了"稳定单质"。为什么？
+              <br>提示一个角度：任何化学反应里的反应物和产物，都可以由<strong>什么</strong>"拆出来"或"拼出来"？这是不是和"零点该选谁"有什么关系？
+              <br><br><strong>不要看 tp-write</strong>，自己想。
+            </div>
+            <div class="tp-ask">"我隐约觉得'稳定单质做零点'和'方便查表'有关。请引导我从'反应物 + 产物都由元素组成'这个事实，反推为什么选稳定单质做零点最方便。"</div>
+            <div class="tp-write">"任意反应物 / 产物都可由<strong>稳定单质合成</strong> → 反应过程可以拆成两步：(1) 反应物 → 稳定单质，(2) 稳定单质 → 产物 → 每一步的焓变都能用 \(\Delta H_f^\circ\) 表直接查到（或用 \(-\Delta H_f^\circ\) 查到反向） → 整个反应的 ΔH 就<strong>必然能</strong>用一张表算出来。<br>选稳定单质做零点 = 让"所有反应"都有共同中介可以拆。"</div>
+            <div class="tp-hint">提示：如果你选"水"做零点 —— 那一个不含 H 和 O 的反应（如 \(\mathrm{N_2}\) → 2N）就完全没法用水做中介，必须重新建一套数据。选稳定单质 = 选了"宇宙最小公约数"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">用盖斯定律推出反应焓变公式</span></div>
+        <div class="step-content">
+
+          <p>把思考点 1 的"反应物 → 稳定单质 → 产物"两步法画成路径图，再用盖斯定律（Card 2 的 \(\Delta H_{\text{总}} = \sum \Delta H_i\)）就能立即推出可操作公式。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 从两步法推出 ΔH<sub>反应</sub> 公式</div>
+            <div class="tp-pause">考虑反应 \(\mathrm{R} \to \mathrm{P}\)（化学计量数为 \(\nu\)）。把它拆成两步：
+              <br>　步骤 ①：\(\mathrm{R} \to \text{稳定单质}\)（反应物先拆解到单质）
+              <br>　步骤 ②：\(\text{稳定单质} \to \mathrm{P}\)（再由单质合成产物）
+              <br><br>请回答：
+              <br>(a) 步骤 ① 的焓变能直接用 \(\Delta H_f^\circ(\mathrm{R})\) 表示吗？（注意方向 —— "反应物 → 单质"是"单质 → 反应物"的逆过程，符号怎么变？）
+              <br>(b) 步骤 ② 的焓变能直接用 \(\Delta H_f^\circ(\mathrm{P})\) 表示吗？
+              <br>(c) 把 ① + ② 用盖斯定律加起来 → 整个反应的 \(\Delta H_{\text{反应}}\) 公式是什么？
+              <br><br><strong>不要看 tp-write</strong>。
+            </div>
+            <div class="tp-ask">"我大致明白要从'反应物→单质→产物'两步法 + 盖斯定律推 ΔH<sub>反应</sub> 公式。请引导我处理'反向反应 ΔH 取反'这一步（步骤 ① 是反过来），<strong>不要直接给我公式</strong>。"</div>
+            <div class="tp-write">(a) "反应物 → 单质" 是 "单质 → 反应物" 的<strong>逆</strong>反应（\(\Delta H_f^\circ(\mathrm{R})\) 描述的是后者）。逆反应 ΔH 取反 → 步骤 ① 的焓变 = \(-\Delta H_f^\circ(\mathrm{R})\)<br>
+              (b) 步骤 ② 直接是 \(\Delta H_f^\circ(\mathrm{P})\)<br>
+              (c) 用盖斯定律：<br>
+              \[\Delta H_{\text{反应}} = -\Delta H_f^\circ(\mathrm{R}) + \Delta H_f^\circ(\mathrm{P}) = \Delta H_f^\circ(\mathrm{P}) - \Delta H_f^\circ(\mathrm{R})\]<br>
+              带化学计量数推广：<br>
+              \[\boxed{\Delta H_{\text{反应}} = \sum \nu \cdot \Delta H_f^\circ(\text{产物}) - \sum \nu \cdot \Delta H_f^\circ(\text{反应物})}\]
+            </div>
+            <div class="tp-hint">提示："逆反应 \(\Delta H\) 取反" 的自包含证明：逆反应 = 始末态互换，所以 \(\Delta H_\text{逆} = H_\text{反}-H_\text{产} = -(H_\text{产}-H_\text{反}) = -\Delta H_\text{正}\)。这是 H 状态量性质的直接推论。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>关键观察</strong>：这个公式不需要任何新的物理假设 —— 它是"盖斯定律" + "\(\Delta H_f^\circ\) 的定义" + "逆反应 \(\Delta H\) 取反"三件事的直接组合。从"H 是状态量"到"反应焓变可查表算"，没有额外公理。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">第一次练习 · CH₄ 燃烧</span></div>
+        <div class="step-content">
+
+          <p>反应：\(\mathrm{CH_4}(g) + 2\mathrm{O_2}(g) \to \mathrm{CO_2}(g) + 2\mathrm{H_2O}(l)\)</p>
+
+          <p>查表数据（标准生成焓，kJ/mol）：</p>
+          <table class="compare-table">
+            <tr><th>物质</th><th>\(\Delta H_f^\circ\) (kJ/mol)</th></tr>
+            <tr><td>CH₄(g)</td><td>−74.8</td></tr>
+            <tr><td>O₂(g)</td><td>0（稳定单质）</td></tr>
+            <tr><td>CO₂(g)</td><td>−393.5</td></tr>
+            <tr><td>H₂O(l)</td><td>−285.8</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 代入公式</div>
+            <div class="tp-pause">用 STEP 3 推出的公式 \(\Delta H_{\text{反应}} = \sum \nu \cdot \Delta H_f^\circ(\text{产物}) - \sum \nu \cdot \Delta H_f^\circ(\text{反应物})\) 代入。
+              <br>注意：
+              <br>　• CO₂ 的化学计量数 ν = 1
+              <br>　• H₂O 的 ν = 2
+              <br>　• CH₄ 的 ν = 1
+              <br>　• O₂ 的 ν = 2，但 \(\Delta H_f^\circ = 0\)，这一项是 0
+              <br><br>先把代入式写出来再代数字 —— 不要心算。
+            </div>
+            <div class="tp-ask">"我已经把公式代入式写好了。请引导我<strong>检查</strong>有没有：① 漏掉化学计量数、② O₂ 那一项被算成非零、③ 单位错了？"</div>
+            <div class="tp-write">代入式：<br>
+              \[\Delta H = \big[1 \cdot (-393.5) + 2 \cdot (-285.8)\big] - \big[1 \cdot (-74.8) + 2 \cdot 0\big]\]
+              <br>
+              \[= (-393.5 - 571.6) - (-74.8) = -965.1 + 74.8 = -890.3 \text{ kJ}\]
+              <br>结论：CH₄ 完全燃烧 \(\Delta H = -890.3\) kJ/mol（放热）。
+            </div>
+            <div class="tp-hint">提示：每代一项，检查"是产物还是反应物（决定加减号）"+"化学计量数"+"物态（H₂O 液态和气态的 \(\Delta H_f^\circ\) 不同）"。这是查表最容易出错的三个地方。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"零点参考"类比解释"为什么稳定单质 \(\Delta H_f^\circ = 0\)"是约定不是测量值</span></label>
+        <label data-key="h3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>独立</strong>用盖斯定律 + 两步法推出 \(\Delta H_{\text{反应}} = \sum \nu \cdot \Delta H_f^\circ(\text{产物}) - \sum \nu \cdot \Delta H_f^\circ(\text{反应物})\)（不看本卡）</span></label>
+        <label data-key="h3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立完成 CH₄ 燃烧的查表计算，正确处理化学计量数 + 物态 + 单质项归零</span></label>
+        <label data-key="h3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释 H₂O(l) 和 H₂O(g) 的 ΔHf° 不同 —— 因为 H 是状态量，不同物态对应不同状态，所以对应不同 ΔHf°</span></label>
+      </div>
+
+      <div class="literacy-tag">对应素养 · 学习力（前置工具的查表使用） · 思辨力（区分约定与事实）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 4 ==================== -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>方程式代数 —— 加、减、反向、乘系数</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：掌握化学方程式的 4 种代数操作 + 对应 \(\Delta H\) 怎么变；统一根据是"\(\Delta H\) 是状态函数的差"<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>想象有一组已知反应（含各自 \(\Delta H\)）—— 如何用它们"代数运算"得到一个目标反应？4 个操作分别是：</p>
+          <ul>
+            <li><strong>加</strong>：把两个反应"接起来"（① 的产物正好是 ② 的反应物）</li>
+            <li><strong>减</strong>：把一个反应从另一个减掉（消去两边相同物质）</li>
+            <li><strong>反向</strong>：方程左右翻过来写（产物变反应物，反应物变产物）</li>
+            <li><strong>乘系数</strong>：方程整体放大或缩小 k 倍</li>
+          </ul>
+          <p>问自己 —— 这 4 种操作分别让目标反应的 \(\Delta H\) 怎么变？</p>
+
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.06); border-color: var(--secondary-blue);">
+            <strong>提醒（符号约定）</strong>：化学方程式末尾可能写"<strong>+ Q kJ</strong>"（环境视角，放出的热）或"<strong>\(\Delta H = -Q\) kJ/mol</strong>"（系统视角）—— <strong>符号相反、物理相同</strong>。本卡全部用"\(\Delta H\) 表达式"，不用"+ Q"末尾形式，避免反向时弄混。这与本系列 <a href="basic-task-cards.html">热力学第一定律</a> 的"系统视角"约定一致。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">四种操作对应 ΔH 的变化</span></div>
+        <div class="step-content">
+
+          <table class="compare-table">
+            <tr><th>方程操作</th><th>对应 \(\Delta H\) 的变化</th><th>根据</th></tr>
+            <tr>
+              <td><strong>① + ②</strong>（接起来）</td>
+              <td>\(\Delta H_{\text{总}} = \Delta H_1 + \Delta H_2\)</td>
+              <td>盖斯定律（Card 2）</td>
+            </tr>
+            <tr>
+              <td><strong>① − ②</strong>（① 减掉 ②）</td>
+              <td>\(\Delta H_{\text{差}} = \Delta H_1 - \Delta H_2\)</td>
+              <td>① − ② = ① + (−②) = ① + 反向②</td>
+            </tr>
+            <tr>
+              <td><strong>反向 ①</strong>（左右翻）</td>
+              <td>\(\Delta H_{\text{反向}} = -\Delta H_1\)</td>
+              <td>始末态调换 → \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 整体取反</td>
+            </tr>
+            <tr>
+              <td><strong>k × ①</strong>（乘 k 倍）</td>
+              <td>\(\Delta H_{k \cdot 1} = k \cdot \Delta H_1\)</td>
+              <td>化学计量数 × k 倍，每一摩尔贡献不变 → 总焓变 × k 倍</td>
+            </tr>
+          </table>
+
+          <div class="prereq-recap">
+            <strong>关键事实（自包含证明）</strong>：<strong>\(\Delta H_{\text{逆}} = -\Delta H_{\text{正}}\)</strong>（逆反应焓变取反）—— 证明：逆反应 = 始末态互换 → \(\Delta H_{\text{逆}} = H_{\text{反}} - H_{\text{产}} = -(H_{\text{产}} - H_{\text{反}}) = -\Delta H_{\text{正}}\)。这是 Card 1 derivation-block "H 是状态量"性质的直接代数推论。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 4 种操作的统一根据是什么？</div>
+            <div class="tp-pause">这 4 个规则看起来很不同（一个是相加、一个是取反、一个是乘倍数……）。但它们其实<strong>来自同一个事实</strong>。
+              <br>提示一个角度：每个操作都涉及 \(\Delta H\) 如何随"始态、末态、化学计量数"变化。\(\Delta H\) 本身的定义里有哪一个关键字眼，决定了这 4 个变化规则？
+              <br><br>先在纸上回答，<strong>不要看 tp-write</strong>。
+            </div>
+            <div class="tp-ask">"4 个规则看起来零散，但我觉得它们的根本根据其实是一件事。请反问引导我用 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 把 4 个规则各自推一遍，<strong>不要直接告诉我答案</strong>。"</div>
+            <div class="tp-write">4 个规则都来自 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 这个"差"的代数结构 —— 而"差"能成立是因为 H 是状态函数（始态、末态都是"系统当前状态"决定的）。<br>
+              换句话说：方程代数 4 规则 ⇐ \(\Delta H\) 是状态函数的差 ⇐ <strong>H 是状态函数</strong>。<br>
+              一切都从"焓是状态函数"出来。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">系数法练习 · 凑出目标反应</span></div>
+        <div class="step-content">
+
+          <p>已知三个反应及其焓变：</p>
+          <div class="quote-block">
+            ① \(\mathrm{C}(s) + \mathrm{O_2}(g) \to \mathrm{CO_2}(g)\) , \(\Delta H_1 = -393.5\) kJ<br>
+            ② \(\mathrm{H_2}(g) + \tfrac{1}{2}\mathrm{O_2}(g) \to \mathrm{H_2O}(l)\) , \(\Delta H_2 = -285.8\) kJ<br>
+            ③ \(\mathrm{CH_4}(g) + 2\mathrm{O_2}(g) \to \mathrm{CO_2}(g) + 2\mathrm{H_2O}(l)\) , \(\Delta H_3 = -890.3\) kJ
+          </div>
+
+          <p>目标：求"由稳定单质 C(s) 和 H₂(g) 合成 CH₄"的焓变（即 CH₄ 的标准生成焓 \(\Delta H_f^\circ(\mathrm{CH_4})\)）：</p>
+          <p style="text-align: center; font-size: 0.92rem;">目标 ④：\(\mathrm{C}(s) + 2\mathrm{H_2}(g) \to \mathrm{CH_4}(g)\)，\(\Delta H_4 = ?\)</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 找系数</div>
+            <div class="tp-pause">要凑出 ④，需要找系数 a, b, c 使得：
+              <br>　a × ① + b × ② + c × ③ = ④
+              <br><br><strong>用"净计量数"统一处理</strong>：对每个物质 X，定义"净计量数 ν_净(X) = 右边系数 − 左边系数"（在该方程里）。
+              <br>左右等式两侧每个物质的 ν_净 必须相等。
+              <br><br>先把 6 个物质（C、H₂、CH₄、O₂、CO₂、H₂O）在 ①②③ 和 ④ 中的净计量数表都列出来，再解 a, b, c。<strong>不要看 tp-write</strong>。
+            </div>
+            <div class="tp-ask">"我打算用净计量数法解。请引导我列净计量数表，并从 CH₄ 这种'只出现在一个方程里'的物质先确定 c，<strong>不要直接给我答案</strong>。"</div>
+            <div class="tp-write">第一步：列净计量数表（"右减左"）<br>
+              <br>
+              <table class="compare-table" style="margin: 6px 0;">
+                <tr><th>物质</th><th>① (C+O₂→CO₂)</th><th>② (H₂+½O₂→H₂O)</th><th>③ (CH₄+2O₂→CO₂+2H₂O)</th><th>目标 ④ (C+2H₂→CH₄)</th></tr>
+                <tr><td>C(s)</td><td>−1</td><td>0</td><td>0</td><td>−1</td></tr>
+                <tr><td>H₂(g)</td><td>0</td><td>−1</td><td>0</td><td>−2</td></tr>
+                <tr><td>CH₄(g)</td><td>0</td><td>0</td><td>−1</td><td>+1</td></tr>
+                <tr><td>O₂(g)</td><td>−1</td><td>−½</td><td>−2</td><td>0</td></tr>
+                <tr><td>CO₂(g)</td><td>+1</td><td>0</td><td>+1</td><td>0</td></tr>
+                <tr><td>H₂O(l)</td><td>0</td><td>+1</td><td>+2</td><td>0</td></tr>
+              </table>
+              第二步：列方程 a·(①列) + b·(②列) + c·(③列) = (④列)，对每个物质：<br>
+              • C：−a + 0 + 0 = −1 → <strong>a = 1</strong><br>
+              • H₂：0 − b + 0 = −2 → <strong>b = 2</strong><br>
+              • CH₄：0 + 0 − c = +1 → <strong>c = −1</strong><br>
+              <br>第三步：用剩下三个物质<strong>验证</strong>（必须都 = 0）：<br>
+              • O₂：(1)(−1) + (2)(−½) + (−1)(−2) = −1 − 1 + 2 = 0 ✓<br>
+              • CO₂：(1)(+1) + 0 + (−1)(+1) = 1 − 1 = 0 ✓<br>
+              • H₂O：0 + (2)(+1) + (−1)(+2) = 2 − 2 = 0 ✓<br>
+              <br>组合：④ = ① + 2 × ② − ③，于是<br>
+              \(\Delta H_4 = \Delta H_1 + 2\Delta H_2 - \Delta H_3 = -393.5 + 2(-285.8) - (-890.3) = -393.5 - 571.6 + 890.3 = -74.8\) kJ/mol<br>
+              这与教材里 \(\Delta H_f^\circ(\mathrm{CH_4}) = -74.8\) kJ/mol 一致 ✓
+            </div>
+            <div class="tp-hint">提示：净计量数法的优点 —— "只出现在一个已知方程里"的物质（如 CH₄ 只在 ③、C 只在 ①、H₂ 只在 ②）能<strong>直接确定</strong>对应系数；剩下的物质用来验证。如果验证不通过，说明无法用线性组合拼出目标，要换方程组。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>反思</strong>：这道题用"代数组合 ①②③ → ④"算出了 \(\Delta H_f^\circ(\mathrm{CH_4}) = -74.8\) kJ/mol。如果你直接查表也会得到 -74.8 kJ/mol。<strong>两个值必然一致</strong> —— 这就是盖斯定律保证的（Card 5 会做一次更完整的双重验证）。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h4c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能写出方程式 4 种操作对应的 \(\Delta H\) 变化（加 / 减 / 反向 / 乘系数）</span></label>
+        <label data-key="h4c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"\(\Delta H\) 是状态函数的差"统一推出 4 种操作的根据</span></label>
+        <label data-key="h4c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立用系数法（不查表）从 ①②③ 凑出 ④ 并算出 \(\Delta H_f^\circ(\mathrm{CH_4})\)</span></label>
+        <label data-key="h4c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"代数组合算出的 \(\Delta H\)"和"查表算出的 \(\Delta H\)"为什么必然一致</span></label>
+      </div>
+
+      <div class="literacy-tag">对应素养 · 思辨力（系统性代数操作） · 创造力（凑出目标方程的策略性思维）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 5 ==================== -->
+  <div class="task-card" id="task5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">5</div>
+      <h3>真实应用 —— C → CO 反清案</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：回到驱动问题里那个测不到的反应（C + ½O₂ → CO），用代数组合法和查表法独立算出 \(\Delta H\)，双重验证盖斯定律<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>回到驱动问题里那个无法直接测的反应：</p>
+          <p style="text-align: center; font-size: 0.95rem; margin: 12px 0;">目标 ③：\(\mathrm{C}(s) + \tfrac{1}{2}\mathrm{O_2}(g) \to \mathrm{CO}(g)\)，\(\Delta H_3 = ?\)</p>
+
+          <p>问自己 —— 手头有哪些"能测的反应"可以借？提示：考虑 C 和 CO 燃烧到底（CO₂）的反应。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">列出能测的反应</span></div>
+        <div class="step-content">
+
+          <p>两个可以直接在实验室测的反应（C 和 CO 充分燃烧到 CO₂，可控）：</p>
+          <div class="quote-block">
+            ① \(\mathrm{C}(s) + \mathrm{O_2}(g) \to \mathrm{CO_2}(g)\) , \(\Delta H_1 = -393.5\) kJ/mol<br>
+            ② \(\mathrm{CO}(g) + \tfrac{1}{2}\mathrm{O_2}(g) \to \mathrm{CO_2}(g)\) , \(\Delta H_2 = -283.0\) kJ/mol
+          </div>
+
+          <div class="diagram-block">
+            <!-- v0.1.11 拆图 (规则 4.8 触发，原 13 元素 → 子图 3a 直接 + 子图 3b 绕道) -->
+            <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+              <!-- 子图 3a · 直接路径 (8 主体元素, 0 违规) -->
+              <defs>
+                <marker id="arr-r-c-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+              </defs>
+              <line x1="60" y1="300" x2="60" y2="40" stroke="#333" stroke-width="1.2"/>
+              <text x="20" y="46" font-size="12" fill="#333">焓 H</text>
+              <!-- line-A (C+O₂) -->
+              <line x1="60" y1="80" x2="240" y2="80" stroke="#00409A" stroke-width="3"/>
+              <text x="82" y="72" font-size="12" font-weight="bold" fill="#00409A">C(s) + O₂(g)</text>
+              <!-- line-B (CO₂) -->
+              <line x1="280" y1="290" x2="460" y2="290" stroke="#27ae60" stroke-width="3"/>
+              <text x="300" y="312" font-size="12" font-weight="bold" fill="#27ae60">CO₂(g)</text>
+              <!-- path-① 直接红实线 -->
+              <line x1="140" y1="86" x2="380" y2="284" stroke="#c0392b" stroke-width="2.5" marker-end="url(#arr-r-c-a)"/>
+              <!-- ΔH₁ 标签放右上空白区，避开 path-① -->
+              <text x="280" y="130" font-size="12" font-weight="bold" fill="#c0392b">ΔH₁ = -393.5 kJ/mol</text>
+              <!-- caption -->
+              <text x="80" y="270" font-size="12" font-weight="bold" fill="#00409A">① 直接路径：C 烧到 CO₂</text>
+            </svg>
+            <div class="diagram-caption">子图 3a · 直接路径：C + O₂ → CO₂ 一步到位（ΔH₁ 实验可测 = -393.5 kJ/mol）</div>
+          </div>
+          <div class="svg-container" style="margin-top: 20px;">
+            <svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+              <!-- 子图 3b · 绕道路径 (10 主体元素, 0 违规) -->
+              <defs>
+                <marker id="arr-r-b-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"/></marker>
+                <marker id="arr-r-o-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e67e22"/></marker>
+              </defs>
+              <line x1="60" y1="340" x2="60" y2="40" stroke="#333" stroke-width="1.2"/>
+              <text x="20" y="46" font-size="12" fill="#333">焓 H</text>
+              <!-- line-A (C+O₂) -->
+              <line x1="60" y1="80" x2="240" y2="80" stroke="#00409A" stroke-width="3"/>
+              <text x="82" y="72" font-size="12" font-weight="bold" fill="#00409A">C(s) + O₂(g)</text>
+              <!-- line-I (CO+½O₂ 中间态) -->
+              <line x1="240" y1="200" x2="380" y2="200" stroke="#8e44ad" stroke-width="3"/>
+              <text x="220" y="188" text-anchor="end" font-size="12" font-weight="bold" fill="#8e44ad">CO(g) + ½O₂(g)</text>
+              <!-- line-B (CO₂) -->
+              <line x1="240" y1="290" x2="420" y2="290" stroke="#27ae60" stroke-width="3"/>
+              <text x="280" y="312" font-size="12" font-weight="bold" fill="#27ae60">CO₂(g)</text>
+              <!-- path-③ A→I 橙虚线 -->
+              <line x1="170" y1="86" x2="280" y2="194" stroke="#e67e22" stroke-width="2.5" stroke-dasharray="6,4" marker-end="url(#arr-r-o-b)"/>
+              <text x="85" y="145" font-size="12" font-weight="bold" fill="#e67e22">③ ΔH₃ = ?</text>
+              <text x="85" y="162" font-size="11" font-style="italic" fill="#e67e22">(目标 · 测不到)</text>
+              <!-- path-② I→B 蓝实线 -->
+              <line x1="340" y1="206" x2="400" y2="284" stroke="#0055B8" stroke-width="2.5" marker-end="url(#arr-r-b-b)"/>
+              <text x="400" y="222" font-size="12" font-weight="bold" fill="#0055B8">② ΔH₂ = -283.0</text>
+              <!-- caption -->
+              <text x="80" y="345" font-size="12" font-weight="bold" fill="#00409A">③ + ② = 绕道路径 (经过 CO)</text>
+            </svg>
+            <div class="diagram-caption">子图 3b · 绕道路径：C + O₂ → CO + ½O₂ → CO₂。③ 目标焓变（测不到）+ ② 完全燃烧（已测）。由盖斯 ΔH<sub>直接</sub> = ΔH₃ + ΔH₂ ⟹ ΔH₃ = ΔH₁ − ΔH₂ = −393.5 − (−283.0) = −110.5 kJ/mol</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 凑出目标 ③</div>
+            <div class="tp-pause">观察图：从 C + O₂ 到 CO₂ 有两条路径 ——
+              <br>　路径 ①（直接）：C + O₂ <strong>→</strong> CO₂，焓变 \(\Delta H_1\)
+              <br>　路径 (③ 然后 ②)：C + O₂ <strong>→</strong> CO + ½O₂ <strong>→</strong> CO₂，焓变 \(\Delta H_3 + \Delta H_2\)
+              <br><br>请用盖斯定律写出这两条路径的关系，然后<strong>解出</strong> \(\Delta H_3\)。
+              <br>不要看 tp-write —— 自己用 5 行代数推出来。
+            </div>
+            <div class="tp-ask">"我用盖斯定律列了 \(\Delta H_1 = \Delta H_3 + \Delta H_2\)。请引导我把 \(\Delta H_3\) 单独解出来，<strong>不要直接给我数值</strong>。"</div>
+            <div class="tp-write">由盖斯定律（两条路径焓变相等）：<br>
+              \[\Delta H_1 = \Delta H_3 + \Delta H_2\]<br>
+              解 \(\Delta H_3\)：<br>
+              \[\Delta H_3 = \Delta H_1 - \Delta H_2 = -393.5 - (-283.0) = -393.5 + 283.0 = -110.5 \text{ kJ/mol}\]
+              <br>结论：C(s) + ½O₂(g) → CO(g) 的焓变 = \(-110.5\) kJ/mol（放热）。<br>
+              <br><strong>用 Card 4 的语言</strong>：目标 ③ = ① − ②，所以 \(\Delta H_3 = \Delta H_1 - \Delta H_2\)。两种表述等价。
+            </div>
+            <div class="tp-hint">提示：方程层面 ③ = ① − ② 一定要先手动验证（把 ②反向后加到 ① 上，看是否得到 ③）—— 这是避免符号错的最稳办法。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">双重验证 · 用 \(\Delta H_f^\circ\) 表对照</span></div>
+        <div class="step-content">
+
+          <p>查表数据：</p>
+          <table class="compare-table">
+            <tr><th>物质</th><th>\(\Delta H_f^\circ\) (kJ/mol)</th></tr>
+            <tr><td>C(s, 石墨)</td><td>0（稳定单质）</td></tr>
+            <tr><td>O₂(g)</td><td>0（稳定单质）</td></tr>
+            <tr><td>CO(g)</td><td>−110.5</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 用查表公式独立算一次</div>
+            <div class="tp-pause">用 Card 3 推出的公式：<br>
+              \(\Delta H_{\text{反应}} = \sum \nu \cdot \Delta H_f^\circ(\text{产物}) - \sum \nu \cdot \Delta H_f^\circ(\text{反应物})\)<br>
+              代入 ③：C(s) + ½O₂(g) → CO(g)。
+              <br>先把代入式写出来再代数字。
+            </div>
+            <div class="tp-ask">"我把代入式列出来了。请引导我检查：稳定单质项是不是写成 0、化学计量数是不是没漏。"</div>
+            <div class="tp-write">代入：<br>
+              \[\Delta H_3 = 1 \cdot \Delta H_f^\circ(\mathrm{CO}) - \big[1 \cdot \Delta H_f^\circ(\mathrm{C}) + \tfrac{1}{2} \cdot \Delta H_f^\circ(\mathrm{O_2})\big]\]<br>
+              \[= 1 \cdot (-110.5) - [1 \cdot 0 + \tfrac{1}{2} \cdot 0] = -110.5 \text{ kJ/mol}\]
+              <br>结论：与 STEP 2 的代数组合法<strong>完全一致</strong> ✓
+            </div>
+          </div>
+
+          <div class="quote-block">
+            <strong>为什么两种方法必然一致</strong>？因为两种方法<strong>都</strong>建立在"焓是状态函数"上 —— 代数组合法直接用盖斯定律加加减减，查表法把"反应物 → 单质 → 产物"两步法编码进了公式。两条路径终归只有一个 \(\Delta H_3\)，所以两个数必须相等。这就是<strong>盖斯定律在工程实践中的核心保障</strong>：无论你怎么算，只要不出代数错，答案唯一。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 · 我们解决了什么、留下了什么</span></div>
+        <div class="step-content">
+          <p>盘点本板块 ——</p>
+          <ul>
+            <li><strong>解决了</strong>：任何反应的 \(\Delta H\) 都能算（用 \(\Delta H_f^\circ\) 表 + 加减乘除）。包括<strong>实验室直接测不到</strong>的反应（如 C → CO、石墨 → 金刚石、光合作用）。</li>
+            <li><strong>核心机制</strong>：焓是状态函数 → 盖斯定律 → 路径无关 → 用"反应物 → 单质 → 产物"做中介，所有反应都可拆。</li>
+            <li><strong>边界</strong>：我们算的是 \(\Delta H\) —— 一个反应"会放/吸多少热"。但 \(\Delta H\) 算出来是负的（放热）并不代表这个反应<strong>一定会自发发生</strong>。一个干净的反例：金刚石 → 石墨的 \(\Delta H \approx -1.9\) kJ/mol（放热，石墨比金刚石焓更低、能量更稳定），但常温常压下金刚石可以稳定存在数百万年 —— 你的钻戒不会变成一堆黑色粉末。</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>稳定性是相对的</strong>：CH₄ 比"C + 2H₂"焓低（更稳定），但比"CO₂ + 2H₂O"焓高（不那么稳定）。"稳定 vs 不稳定" 取决于和谁比 —— 这件事会在<strong>吉布斯自由能</strong>板块和"自发性"一起重新审视。
+          </div>
+
+          <div class="quote-block" style="margin-top: 14px;">
+            <strong>本板块在 ΔH 算法体系中的位置</strong>: 盖斯定律 = "算法 / 路径无关代数"层。它需要<strong>输入数据</strong>(ΔHf° / 燃烧热 / 键能等)才能算出具体反应的 ΔH。这些数据来自<strong>已建的姊妹基础板块</strong>:<br>
+            <br>
+            <strong>ΔH 数据 + 算法的三方法体系</strong>(三者互补不替代):<br>
+            <ul style="margin-top: 4px; margin-left: 18px;">
+              <li><strong>① 实验直接测量</strong> → <a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热（基础）</a>: 弹式量热计测燃烧 ΔH + 简易量热计测中和 ΔH(精度 ±1%)</li>
+              <li><strong>② 算法(本板块) + ΔHf° 表查询</strong>: ΔH = Σν·ΔHf°(产物) − Σν·ΔHf°(反应物)(精度 ±1%, 通用)</li>
+              <li><strong>③ 键能算法</strong> → <a href="bond-energy-reaction-enthalpy-task-cards.html">键能与反应焓变（基础）</a>: ΔH ≈ Σ(反应物键能) − Σ(产物键能)(精度 ±5-10%, 适用全气态共价反应)</li>
+            </ul>
+            <br>
+            <strong>下游应用</strong> — 算出的 ΔH 用在哪里:<br>
+            <ul style="margin-top: 4px; margin-left: 18px;">
+              <li><a href="gibbs-free-energy-basic-task-cards.html">吉布斯自由能 · 基础</a>: ΔG = ΔH − TΔS, 本板块的 ΔH 是判断反应自发性的关键输入(回答了上面"稳定性 vs 自发性"的进一步问题)</li>
+              <li><strong>化学反应速率与化学平衡</strong>(后续大主题): 反应热数据用于范特霍夫方程(K 随温度变化)</li>
+              <li><strong>有机化学反应能量</strong>(后续板块): 用本板块的代数法 + 键能数据预判加成 / 消除 / 取代反应的 ΔH</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h5c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立用代数组合法算出 C → CO 的 \(\Delta H = -110.5\) kJ/mol</span></label>
+        <label data-key="h5c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立用查表法 (\(\Delta H_f^\circ\)) 算出同一个反应的 \(\Delta H = -110.5\) kJ/mol</span></label>
+        <label data-key="h5c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"两种方法结果一致"的根据 —— 都源于"焓是状态函数"</span></label>
+        <label data-key="h5c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"\(\Delta H\) 不能单独决定反应方向"，能各举一个反例 —— \(\Delta H&lt;0\) 但不自发：如金刚石 → 石墨（放热却稳定数百万年）；\(\Delta H&gt;0\) 但自发：如冰融化 / KCl 溶解</span></label>
+      </div>
+
+      <div class="literacy-tag">对应素养 · 学习力（双重验证习惯） · 思辨力（边界识别 · 焓变 ≠ 自发性）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成两件事：(1) Card 2 思考点 1 用 \(\Delta H = H_{\text{末}} - H_{\text{初}}\) 推出 \(\Delta H_{\text{直接}} = \Delta H_1 + \Delta H_2\) 的完整推导；(2) Card 3 思考点 2 从"两步法"推出 \(\Delta H_{\text{反应}} = \sum \nu \Delta H_f^\circ(\text{产物}) - \sum \nu \Delta H_f^\circ(\text{反应物})\) 的完整推导。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。"本板块没有任何新的物理 —— 全部建立在'焓是状态函数'上。这个'用同一个根基算无数反应'的体验给我带来了什么样的视角变化？我哪里有过卡壳 / 困惑？"</td></tr>
+      <tr><td>自评清单</td><td>所有 5 张卡的 checkpoint 都勾完。重点确认 Card 3 的查表公式和 Card 5 的双重验证是<strong>自己</strong>独立推过的。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约定 15-20 分钟口试，准备用<strong>3 分钟</strong>清晰说出"为什么盖斯定律不是新原理，而是焓状态函数性质的直接推论"。</td></tr>
+    </table>
+
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：本板块的关键产出是<strong>手写推导稿</strong>（盖斯定律等式 + 查表公式两个推导）。这两个推导必须<strong>自己写一遍</strong>，不能让 AI 代写 —— 因为本板块没有新物理，自己推一遍是确认你真的把"焓是状态函数 → 这么多结果"看作一件事的唯一办法。
+    </div>
+  </div>
+
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="hess-law-mock-check.html">📝 基础检测</a>
+    <a href="hess-law-fluency-test.html">📈 熟练度检测</a>
+    <a href="hess-law-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 盖斯定律（基础模块）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-hess-law-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吉布斯自由能(基础) · 基础检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.diagram { background: #f3e7fb; color: #6a1b9a; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .q-figure { margin: 14px 0; text-align: center; }
+  .q-figure svg { max-width: 100%; height: auto; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-blank { border: none; border-bottom: 2px solid #0055B8; background: transparent; padding: 2px 8px; margin: 0 4px; font-size: 15px; min-width: 80px; text-align: center; font-family: inherit; }
+  .q-blank:focus { outline: none; border-bottom-color: #006AD6; background: #f0f4f8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 吉布斯自由能(基础) &raquo;
+  <strong>吉布斯自由能(基础) · 基础检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习工具</strong> · 此处自动判分仅供反馈,真正的基础检测由教师组织<strong>纸笔形式 + 批改 + 签字</strong>。本练习的『通过 70 分』≈ 已具备纸笔检测的基础水平,可继续练习;『荣誉 90 分』≈ 掌握充分。学分由教师组织的真实检测决定,不在此处。
+</div>
+
+<header class="page-header">
+  <h1>吉布斯自由能(基础) · 基础检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(28 题池, 每次随机抽 7 题) · 100 分 · 约 30-35 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>7</strong> 道题(每个考点 T1-T7 各随机抽 1 道, 共 28 题池)</li>
+    <li>分值: T1=12 / T2=14 / T3=14 / T4=14 / T5=14 / T6=16 / T7=16 = <strong>100</strong></li>
+    <li>通过 ≥ 70 分(已具备纸笔检测基础水平);荣誉 ≥ 90 分(掌握充分)</li>
+    <li>建议 30-35 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分);填空自动忽略空格与全角半角差异</li>
+    <li>简答按关键词命中率判分(全部命中=满分, 命中过半=半分), 提交后请自行对照解析自评</li>
+    <li>提交后展示标准答案 + 三段式解析(原理 / 逻辑 / 知识系统位置)+ 常见误区 + 扩展 + 锚回学习任务卡</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong>;可使用计算器</li>
+    <li>可点"重新抽题"再做, 抽到不同变体训练(防止背答案)</li>
+  </ul>
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 7</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-mock-check-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-mock-check-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="gibbs-free-energy-basic-task-cards.html">📖 返回学习任务卡</a>
+  <span>熟练度模拟(待开放)</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 吉布斯自由能(基础) · 基础检测 · mock-check Skill v0.1.5(题库版 + 三段式 + 锚结论中文化)</footer>
+
+</div>
+
+<script>
+const EXPORT_NAMES = {
+  'GIBBS-EQUATION':                  '吉布斯自由能 \\(\\Delta G = \\Delta H - T\\Delta S\\)',
+  'GIBBS-IS-STATE-FUNCTION':         'G 是状态函数(由状态量组合而成)',
+  'SPONTANEITY-CRITERION':           '自发判据(\\(\\Delta G < 0\\) 自发 / \\(> 0\\) 不自发)',
+  'EQUILIBRIUM-CONDITION-G':         '\\(\\Delta G = 0\\) 即平衡状态',
+  'GIBBS-PHYSICAL-MEANING':          'ΔG 的物理意义(等温等压下的方向判据)',
+  'COMBINATION-A':                   '组合 (a) ΔH<0 + ΔS>0 → 任何温度自发',
+  'COMBINATION-B':                   '组合 (b) ΔH<0 + ΔS<0 → 低温自发',
+  'COMBINATION-C':                   '组合 (c) ΔH>0 + ΔS>0 → 高温自发',
+  'COMBINATION-D':                   '组合 (d) ΔH>0 + ΔS<0 → 任何温度不自发',
+  'TRANSITION-TEMPERATURE':          '转变温度 \\(T_{转} = \\Delta H / \\Delta S\\)',
+  'ICE-WATER-TRANSITION':            '冰水转变案例(T_转 = 273.2 K = 0°C)',
+  'WATER-EVAPORATION-100C':          '水蒸发案例(T_转 = 373.4 K ≈ 100°C)',
+  'CaCO3-DECOMPOSITION-839C':        'CaCO₃ 分解案例(T_转 = 1112 K ≈ 839°C)',
+  'NH4NO3-DISSOLUTION-SPONTANEOUS':  'NH₄NO₃ 溶解案例(吸热也能自发)',
+  'AMMONIA-SYNTHESIS-INDUSTRY':      '合成氨案例(低温自发 vs 工业高温的拉锯)',
+  'DIAMOND-TO-GRAPHITE':             '金刚石→石墨案例(自发但极慢)',
+  'THREE-LAWS-COMPLETE':             '热力学判据体系的完整图景',
+  'THERMODYNAMIC-VS-KINETIC':        '热力学倾向 vs 动力学速率',
+  'MELT-BOIL-POINTS-ARE-T-TRANS':    '熔点 / 沸点的本质是转变温度',
+  'INDUSTRY-TRADEOFF':               '工业条件 = 热力学 + 动力学 + 成本的妥协'
+};
+
+const QUADRANT_SVG = `<div class="q-figure"><svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ΔH-ΔS 四象限组合图">
+  <rect x="60" y="50" width="230" height="120" fill="#fdecea"/>
+  <rect x="290" y="50" width="230" height="120" fill="#fff3e0"/>
+  <rect x="60" y="170" width="230" height="120" fill="#e8f0fe"/>
+  <rect x="290" y="170" width="230" height="120" fill="#e8f5e9"/>
+  <line x1="60" y1="170" x2="535" y2="170" stroke="#2c3e50" stroke-width="2"/>
+  <line x1="290" y1="40" x2="290" y2="290" stroke="#2c3e50" stroke-width="2"/>
+  <text x="508" y="190" font-size="12" fill="#2c3e50">ΔS</text>
+  <text x="298" y="36" font-size="12" fill="#2c3e50">ΔH</text>
+  <text x="172" y="112" font-size="12" fill="#c0392b" text-anchor="middle">(d) ΔH＞0 ΔS＜0</text>
+  <text x="406" y="112" font-size="12" fill="#b66100" text-anchor="middle">(c) ΔH＞0 ΔS＞0</text>
+  <text x="172" y="232" font-size="12" fill="#00409A" text-anchor="middle">(b) ΔH＜0 ΔS＜0</text>
+  <text x="406" y="232" font-size="12" fill="#2e7d32" text-anchor="middle">(a) ΔH＜0 ΔS＞0</text>
+</svg></div>`;
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["GIBBS-EQUATION","GIBBS-PHYSICAL-MEANING"],
+      stem:"关于吉布斯自由能变化 \\(\\Delta G = \\Delta H - T\\Delta S\\), 下列说法 <strong>正确</strong> 的是:",
+      options:{A:"\\(\\Delta G\\) 把焓变与熵变综合成一个判据, 在等温等压下判断过程方向",B:"\\(\\Delta G\\) 就是反应放出的热量",C:"公式中的 \\(T\\) 是环境的摄氏温度",D:"\\(\\Delta S\\) 越大, \\(\\Delta G\\) 一定越大"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>ΔG = ΔH − TΔS</strong> 是把两个"半截判据"——能量倾向(ΔH, 倾向放热)与混乱度倾向(ΔS, 倾向增熵)——加权综合成的<strong>单一方向判据</strong>。权重正是温度 T: 温度越高, 熵的话语权越大。它只在<strong>等温等压</strong>条件下作判据使用。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 这正是 ΔG 的设计目的 — 单看 ΔH(放热不一定自发)或单看 ΔS(熵减也可能自发)都会失灵, ΔG 综合二者;<br>· <strong>B「放出的热量」</strong>: 错 — 放热对应的是 ΔH, 不是 ΔG;<br>· <strong>C「摄氏温度」</strong>: 错 — T 必须用开尔文(绝对温度), 否则 −TΔS 项在 0°C 附近会出现荒谬的 0 或负权重;<br>· <strong>D</strong>: 错 — ΔS 越大, −TΔS 越负, ΔG 反而<strong>越小</strong>。',
+        connection:'<strong>上游</strong>: ΔH 来自第一定律(等压热效应), ΔS 来自第二定律(混乱度判据); ΔG 是两大定律在化学方向问题上的合流。<br><strong>下游</strong>: ① 4 种 ΔH/ΔS 组合分析与转变温度 \\(T_{转} = \\Delta H/\\Delta S\\); ② 进阶 吉布斯板块的 ΔG = ΔG° + RT ln Q 修正; ③ 化学平衡(待建)中 ΔG = 0 与平衡常数 K 的关系。'
+      },
+      mistakes:'· 把 ΔG 与 ΔH 混为一谈(ΔG 是"方向判据", ΔH 是"热效应");<br>· 忘了"等温等压"前提条件;<br>· 把 T 代入摄氏度。',
+      extension:'为什么偏偏是 ΔH − TΔS 这种组合形式? 严格推导(从 ΔS_总 = ΔS_系 + ΔS_环 出发)留给进阶 吉布斯板块; 本板块先把它当作"被实验和应用反复验证的综合判据"使用。',
+      cardAnchor:"Card 1 STEP 2" },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["GIBBS-EQUATION"],
+      stem:"某反应在 25°C 下 \\(\\Delta H = -100\\) kJ/mol, \\(\\Delta S = -200\\) J/(mol·K)。该温度下 \\(\\Delta G\\) 为:",
+      options:{A:"\\(-100 - 25 \\times (-200) = +4900\\) kJ/mol",B:"\\(-100 - 298 \\times (-200) = +59500\\) kJ/mol",C:"\\(-100 - 298 \\times (-0.200) = -40.4\\) kJ/mol",D:"\\(-100 - 0.298 \\times (-200) = -40.4\\) J/mol"},
+      answer:"C",
+      explanation:{
+        principle:'代入 \\(\\Delta G = \\Delta H - T\\Delta S\\) 时有两个换算关卡: ① <strong>温度必须用开尔文</strong>(25°C = 298 K); ② <strong>ΔH 与 ΔS 单位必须统一</strong> — 习惯上 ΔH 用 kJ/mol、ΔS 用 J/(mol·K), 相差 1000 倍, 必须先把 ΔS 换成 kJ/(mol·K)(即 −200 J/(mol·K) = −0.200 kJ/(mol·K))再相乘。',
+        logic:'正确计算: \\(\\Delta G = -100 - 298 \\times (-0.200) = -100 + 59.6 = -40.4\\) kJ/mol。<br>各选项分析:<br>· <strong>A</strong>: 错两处 — T 用了摄氏度 25, 且单位未统一;<br>· <strong>B</strong>: T 对了但单位未统一, 结果荒谬地大(+59500 kJ/mol 比任何化学键能都大几个数量级 — 这是自查信号);<br>· <strong>C 正确</strong>;<br>· <strong>D</strong>: 把换算做反了(去改 T 而不是改 ΔS), 数值碰巧一样但单位错了。',
+        connection:'<strong>单位统一</strong>是所有 ΔG / T_转 计算的第一关卡: 算转变温度 \\(T_{转} = \\Delta H/\\Delta S\\) 时同样要先统一单位(6.01 kJ ÷ 22.0 J 必须先化成 6010 J ÷ 22.0 J)。<strong>下游</strong>: 4 种组合分析、转变温度计算、工业条件评估全部踩在这一步上。'
+      },
+      mistakes:'· T 代摄氏度;<br>· ΔH(kJ)与 ΔS(J)直接相乘不换算;<br>· 算完不检查数量级(化学反应 ΔG 通常在几十到几百 kJ/mol)。',
+      extension:'快速自查法: −TΔS 项在常温(298 K)下对每 100 J/(mol·K) 的熵变贡献约 30 kJ/mol。本题 ΔS = −200 → 贡献约 +60 kJ/mol, 与 −100 相加约 −40, 与精确值一致。',
+      cardAnchor:"Card 1 STEP 2" },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["GIBBS-EQUATION","GIBBS-IS-STATE-FUNCTION"],
+      stem:"G(吉布斯自由能)是<strong>状态函数</strong>。关于这一点, 下列理解 <strong>正确</strong> 的是:",
+      options:{A:"反应的 \\(\\Delta G\\) 与反应经历的路径有关, 路径越长 \\(\\Delta G\\) 越大",B:"G 由状态量 H、T、S 组合而成(G = H − TS), 组合状态量仍是状态量, 故 \\(\\Delta G\\) 只取决于初末态",C:"G 是状态函数意味着 \\(\\Delta G\\) 永远不变",D:"只有理想气体才有吉布斯自由能"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>状态函数的组合性质</strong>: H、T、S 都是状态量(只取决于系统当前状态), 由它们四则组合出的 G = H − TS 也必然是状态量。因此 \\(\\Delta G = G_{末} - G_{初}\\) <strong>只取决于初末态, 与路径无关</strong>。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 与路径无关恰是状态函数的核心特征;<br>· <strong>B 正确</strong>: "组合状态量仍是状态量"这一论证与焓 H = U + PV 的合法性论证完全同构;<br>· <strong>C</strong>: 错 — "状态函数"说的是<strong>与路径无关</strong>, 不是"数值恒定"; 初末态变了 ΔG 自然变(且 ΔG 本身随温度变);<br>· <strong>D</strong>: 错 — 任何系统都有 G, 没有"理想气体专属"限制。',
+        connection:'<strong>上游</strong>: 这与焓 H = U + PV 是状态量的论证同构(第一定律板块); 严格的"状态函数"定义与论证在进阶 状态函数与非状态函数板块。<br><strong>下游</strong>: 正因为 ΔG 与路径无关, 才能像盖斯定律操作 ΔH 那样对 ΔG 做代数组合 — 这是进阶 吉布斯板块和化学平衡的运算基础。'
+      },
+      mistakes:'· 把"状态函数"误解为"数值永远不变";<br>· 把"与路径无关"误解为"与温度无关"(ΔG 显含 T, 温度变 ΔG 就变);<br>· 不会用"组合状态量仍是状态量"这个论证套路。',
+      extension:'对比记忆: Q(热)和 W(功)<strong>不是</strong>状态函数 — 同样初末态, 不同路径 Q、W 各不相同, 只有组合 Q − W = ΔU 才与路径无关。"组合出状态量"是热力学反复使用的造概念手法: U → H → S → G。',
+      cardAnchor:"Card 1 STEP 2" },
+    { id:"T1-4", type:"choice", score:12, difficulty:"基础", exportIds:["GIBBS-EQUATION"],
+      stem:"用 \\(\\Delta G = \\Delta H - T\\Delta S\\) 做计算时, 关于温度 \\(T\\), 下列说法 <strong>正确</strong> 的是:",
+      options:{A:"T 用摄氏度, 因为日常温度计读数就是摄氏度",B:"T 用开尔文(绝对温度), 25°C 应代入 298 K",C:"T 用开尔文还是摄氏度都行, 结果只差一个常数",D:"T 只能取 298 K, 因为热力学数据都是 25°C 测的"},
+      answer:"B",
+      explanation:{
+        principle:'公式中的 \\(T\\) 是<strong>绝对温度(开尔文)</strong>: \\(T_{\\text{K}} = t_{\\text{°C}} + 273.15\\)。因为 −TΔS 项的物理含义是"温度给熵的权重", 这个权重必须从绝对零度起算 — 摄氏度的零点(冰点)只是人为约定, 用它会让 0°C 附近的权重荒谬地变成 0 甚至负数。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 日常方便不等于物理正确;<br>· <strong>B 正确</strong>: 25°C = 25 + 273.15 ≈ 298 K;<br>· <strong>C</strong>: 错 — T 是<strong>乘在 ΔS 上</strong>的因子, 不是加减项, 差 273.15 会让结果完全不同;<br>· <strong>D</strong>: 错 — 公式对任何温度都成立(本板块近似认为 ΔH、ΔS 不随温度变), 算转变温度时 T 正是未知数。',
+        connection:'<strong>上游</strong>: 开尔文标度的物理意义(绝对零度 = 分子平均动能为零的外推点)来自气体定律与分子动理论。<br><strong>下游</strong>: ① 转变温度 \\(T_{转} = \\Delta H/\\Delta S\\) 算出的直接就是开尔文值, 报告时常需换算回摄氏度(如 CaCO₃ 的 1112 K ≈ 839°C); ② 卡诺效率 η = 1 − T₂/T₁ 同样强制开尔文(进阶)。'
+      },
+      mistakes:'· 25°C 直接代 25;<br>· 算出 T_转(开尔文)后忘了减 273 就当摄氏度报出;<br>· 误以为"热力学数据 = 只在 298 K 可用"。',
+      extension:'本板块的近似: 把 ΔH、ΔS 当作不随温度变的常数(在几百 K 范围内误差通常只有百分之几), 这使 ΔG(T) 成为 T 的线性函数 — 4 种组合分析和 T_转 公式都建立在这条近似上。',
+      cardAnchor:"Card 1 STEP 2" }
+  ],
+  T2: [
+    { id:"T2-1", type:"fill", score:14, difficulty:"基础", exportIds:["TRANSITION-TEMPERATURE","GIBBS-EQUATION","ICE-WATER-TRANSITION","MELT-BOIL-POINTS-ARE-T-TRANS"],
+      stem:"冰融化为水: \\(\\Delta H = +6.01\\) kJ/mol, \\(\\Delta S = +22.0\\) J/(mol·K)。该过程的转变温度 \\(T_{转} = \\)<strong>第 1 空</strong> ___ K(保留 1 位小数或取整数均可); 温度高于 \\(T_{转}\\) 时, 融化过程<strong>第 2 空</strong> ___ (填「自发」或「不自发」)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数值, 不带单位; 注意 ΔH 与 ΔS 的单位相差 1000 倍, 须先统一。</em>",
+      blanks:[{ answers:["273.2","273","273.1","273.18","273.2K","273K"], score:7 },{ answers:["自发"], score:7 }],
+      explanation:{
+        principle:'<strong>转变温度</strong>: 令 \\(\\Delta G = \\Delta H - T\\Delta S = 0\\), 解出 \\(T_{转} = \\Delta H/\\Delta S\\) — 它是自发与不自发的分界温度。计算前先统一单位: ΔH 化成 J/mol。',
+        logic:'\\(T_{转} = \\dfrac{6010 \\text{ J/mol}}{22.0 \\text{ J/(mol·K)}} = 273.2\\) K(第 1 空 ✓)。这是 ΔH&gt;0、ΔS&gt;0 的「高温自发」组合: T &gt; T_转 时 −TΔS 项占上风, ΔG &lt; 0, 融化<strong>自发</strong>(第 2 空 ✓); T &lt; T_转 时 ΔG &gt; 0, 反过来结冰自发。',
+        connection:'273.2 K = 0°C — 冰的熔点<strong>不是任意约定, 而是热力学按 \\(T_{转} = \\Delta H/\\Delta S\\) 算出来的</strong>。这是「熔点 / 沸点的本质是转变温度」的最经典案例; 同样的算法适用于 CaCO₃ 分解(1112 K)、水蒸发(373.4 K)等一切相变与反应。'
+      },
+      mistakes:'· 不统一单位, 算成 6.01/22.0 = 0.27 K;<br>· 把「高于 T_转 自发」答反(对 ΔS&gt;0 的过程, 高温才让 −TΔS 占上风);<br>· 第 2 空写一长串而不是按要求填「自发 / 不自发」。',
+      extension:'在恰好 T = 273.2 K 处 ΔG = 0 — 冰与水<strong>平衡共存</strong>, 既不全融也不全冻。这就是 0°C 冰水混合物能长期共存的热力学解释。',
+      cardAnchor:"Card 2 STEP 2 + 思考点 3" },
+    { id:"T2-2", type:"fill", score:14, difficulty:"中等", exportIds:["TRANSITION-TEMPERATURE","GIBBS-EQUATION","CaCO3-DECOMPOSITION-839C"],
+      stem:"碳酸钙分解 \\(\\mathrm{CaCO_3(s) \\to CaO(s) + CO_2(g)}\\): \\(\\Delta H = +178.5\\) kJ/mol, \\(\\Delta S = +160.5\\) J/(mol·K)。转变温度 \\(T_{转} = \\)<strong>第 1 空</strong> ___ K(取整数); 温度高于 \\(T_{转}\\) 时, 分解反应<strong>第 2 空</strong> ___ (填「自发」或「不自发」)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数值, 不带单位; 注意先统一 ΔH 与 ΔS 的单位。</em>",
+      blanks:[{ answers:["1112","1112.1","1113","1112K"], score:7 },{ answers:["自发"], score:7 }],
+      explanation:{
+        principle:'令 \\(\\Delta G = 0\\) 得 \\(T_{转} = \\Delta H/\\Delta S\\)。ΔH&gt;0(吸热)、ΔS&gt;0(固体放出气体, 熵大增) — 这是「高温自发」组合, T_转 是自发的<strong>下限温度</strong>。',
+        logic:'\\(T_{转} = \\dfrac{178500}{160.5} = 1112\\) K(第 1 空 ✓), 约 839°C。T &gt; 1112 K 时 −TΔS 压过 +178.5 kJ/mol 的吸热, ΔG &lt; 0, 分解<strong>自发</strong>(第 2 空 ✓)。',
+        connection:'这正是<strong>石灰窑为什么要烧到 900°C 上下</strong>的热力学依据 — 不是经验凑出来的, 是 \\(T_{转} = \\Delta H/\\Delta S\\) 算出来的。同一算法覆盖冰水(273.2 K)、水蒸发(373.4 K)、合成氨(467 K, 但方向相反 — 那是低温自发组合的上限)。'
+      },
+      mistakes:'· 单位不统一(178.5/160.5 = 1.1 K);<br>· 把「高温自发」的 T_转 当成上限(对 ΔS&gt;0 组合它是下限; 上限对应 ΔS&lt;0 组合);<br>· 开尔文当摄氏度报(1112 K ≈ 839°C, 差 273)。',
+      extension:'工业石灰窑实际温度比 1112 K 略高(900-1000°C 量级): 高出的部分买的是<strong>速率</strong>(动力学), 不是方向(热力学)。「热力学给门槛, 动力学定快慢」— 这对区分会在 T6 类题专门考。',
+      cardAnchor:"Card 2 STEP 2 + 思考点 4" },
+    { id:"T2-3", type:"fill", score:14, difficulty:"中等", exportIds:["TRANSITION-TEMPERATURE","GIBBS-EQUATION","NH4NO3-DISSOLUTION-SPONTANEOUS"],
+      stem:"硝酸铵溶解(冰袋的工作原理): \\(\\Delta H = +25.7\\) kJ/mol(吸热), \\(\\Delta S = +108\\) J/(mol·K)。转变温度 \\(T_{转} = \\)<strong>第 1 空</strong> ___ K(取整数); 室温 298 K 下, 该溶解过程<strong>第 2 空</strong> ___ (填「自发」或「不自发」)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数值, 不带单位; 注意先统一 ΔH 与 ΔS 的单位。</em>",
+      blanks:[{ answers:["238","237","237.96","237.9","238K"], score:7 },{ answers:["自发"], score:7 }],
+      explanation:{
+        principle:'\\(T_{转} = \\Delta H/\\Delta S\\)(先统一单位)。ΔH&gt;0、ΔS&gt;0 → 高温自发组合, T &gt; T_转 即自发。',
+        logic:'\\(T_{转} = \\dfrac{25700}{108} = 238\\) K(第 1 空 ✓, 约 −35°C)。室温 298 K <strong>高于</strong> 238 K → ΔG &lt; 0 → 溶解<strong>自发</strong>(第 2 空 ✓)。所以撕开冰袋轻轻一捏, NH₄NO₃ 就持续溶解、持续吸热降温。',
+        connection:'这是「<strong>吸热也能自发</strong>」的标志性案例 — 单看 ΔH(吸热, 能量升高)会预言它不该发生, 但 +108 J/(mol·K) 的熵增在室温下贡献 −TΔS ≈ −32 kJ/mol, 净 ΔG ≈ −6.5 kJ/mol &lt; 0。它宣判了「放热才自发」这个直觉判据的死刑, 正是 ΔG 综合判据存在的理由。'
+      },
+      mistakes:'· 看到吸热就答「不自发」(被 ΔH 单判据带偏);<br>· 单位不统一;<br>· 比较方向搞反(高温自发组合是 T 越高越自发, 238 K 是门槛不是天花板)。',
+      extension:'医用速冷冰袋正是利用这个反应: 吸热量 25.7 kJ/mol 全部来自周围(你的扭伤脚踝), 几分钟内可降到 0°C 附近。热力学不只解释世界, 还能用来设计产品。',
+      cardAnchor:"Card 2 STEP 2" },
+    { id:"T2-4", type:"fill", score:14, difficulty:"较难", exportIds:["TRANSITION-TEMPERATURE","GIBBS-EQUATION","WATER-EVAPORATION-100C","MELT-BOIL-POINTS-ARE-T-TRANS"],
+      stem:"水蒸发 \\(\\mathrm{H_2O(l) \\to H_2O(g)}\\): \\(\\Delta H = +40.7\\) kJ/mol, \\(\\Delta S = +109\\) J/(mol·K)。转变温度 \\(T_{转} = \\)<strong>第 1 空</strong> ___ K(保留 1 位小数或取整数均可); 这个温度对应水的<strong>第 2 空</strong> ___ (填「熔点」「沸点」或「凝固点」)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数值, 不带单位; 注意先统一 ΔH 与 ΔS 的单位。</em>",
+      blanks:[{ answers:["373.4","373","373.3","373.39","373.4K","373K"], score:7 },{ answers:["沸点"], score:7 }],
+      explanation:{
+        principle:'\\(T_{转} = \\Delta H/\\Delta S\\)(统一单位后)。液→气是 ΔH&gt;0、ΔS&gt;0 的高温自发组合, T_转 是「液气拉锯」的分界。',
+        logic:'\\(T_{转} = \\dfrac{40700}{109} = 373.4\\) K(第 1 空 ✓), 约 100°C — 正是水在标准大气压下的<strong>沸点</strong>(第 2 空 ✓)。高于它整体汽化自发, 低于它整体液化自发, 恰好在它处 ΔG = 0 液气平衡。',
+        connection:'与冰水案例(273.2 K = 熔点)合在一起, 给出一个深刻结论: <strong>沸点和熔点都不是孤立常数, 而是 \\(T_{转} = \\Delta H/\\Delta S\\) 的输出</strong> — 物性表里的每个熔沸点背后都站着一对 (ΔH, ΔS)。这是「一个公式统一解释相变温度」的思维成就。'
+      },
+      mistakes:'· 单位不统一;<br>· 第 2 空答「熔点」(熔点对应固↔液, 本题是液↔气);<br>· 误以为低于 100°C 水就完全不能变气(局部蒸发仍发生 — 本板块的 ΔG 判据针对标准状态下的整体转变, 敞口容器的分压效应留给进阶)。',
+      extension:'高山上气压低, 水不到 100°C 就沸腾 — 因为压强变了, ΔS(更准确说是气相的熵)随之变, T_转 跟着移动。压强对 ΔG 的定量修正(ΔG = ΔG° + RT ln Q)留给进阶 吉布斯板块。',
+      cardAnchor:"Card 2 STEP 2 + Card 3 STEP 2" }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:14, difficulty:"基础", exportIds:["SPONTANEITY-CRITERION","EQUILIBRIUM-CONDITION-G"],
+      stem:"等温等压下, 关于 \\(\\Delta G\\) 判据, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"\\(\\Delta G < 0\\): 正向过程自发",B:"\\(\\Delta G = 0\\): 系统处于平衡状态",C:"\\(\\Delta G > 0\\): 正向不自发, 但其逆过程自发",D:"\\(\\Delta G < 0\\) 的反应一定进行得很快",E:"\\(\\Delta G > 0\\) 的反应绝对无法发生, 加任何外界条件都不行"},
+      answer:["A","B","C"],
+      explanation:{
+        principle:'<strong>ΔG 三档判据</strong>(等温等压): ΔG &lt; 0 正向自发 / ΔG = 0 平衡 / ΔG &gt; 0 正向不自发(逆向 ΔG 变号为负, 故逆向自发)。判据只回答「方向」, 不回答「速率」。',
+        logic:'各选项分析:<br>· <strong>A、B、C 正确</strong>: 三档判据的标准表述; C 的要点是逆过程的 ΔG 恰好变号;<br>· <strong>D</strong>: 错 — ΔG 是热力学量, 与速率无关(金刚石→石墨 ΔG &lt; 0 却要 10⁵⁰ 年);<br>· <strong>E</strong>: 错 — 「不自发」指<strong>不能自动发生</strong>, 持续输入外界能量(如电解水)可以强行推动 ΔG &gt; 0 的过程。',
+        connection:'<strong>上游</strong>: 这套判据是第二定律 ΔS_总 ≥ 0 在等温等压下的等价改写(严格推导留给进阶)。<br><strong>下游</strong>: ① ΔG = 0 是化学平衡理论的起点(为平衡常数 K 铺路); ② 「不自发 ≠ 不可能」是电解、光合作用等供能过程的理论空间; ③ 「自发 ≠ 快」展开为热力学 vs 动力学之辨。'
+      },
+      mistakes:'· 把「自发」理解成「马上发生 / 剧烈发生」;<br>· 把「不自发」理解成「绝对禁止」;<br>· 漏选 C(忘了逆过程 ΔG 变号)。',
+      extension:'电解水: ΔG = +237 kJ/mol &gt; 0, 不自发 — 但接上电源持续供能就能进行, 且 237 kJ/mol 恰好给出所需电能的下限。ΔG 与电池电动势的定量关系(ΔG = −nFE)留给进阶。',
+      cardAnchor:"Card 1 STEP 3" },
+    { id:"T3-2", type:"multi", score:14, difficulty:"中等", exportIds:["SPONTANEITY-CRITERION","EQUILIBRIUM-CONDITION-G"],
+      stem:"关于 \\(\\Delta G = 0\\)(等温等压), 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"系统处于平衡状态, 宏观上不再变化",B:"微观上正逆过程仍在进行, 只是速率相等(动态平衡)",C:"\\(\\Delta G = 0\\) 意味着 \\(\\Delta H\\) 与 \\(T\\Delta S\\) 恰好相等",D:"\\(\\Delta G = 0\\) 时反应彻底停止, 分子不再运动",E:"冰水混合物在 0°C 长期共存是 \\(\\Delta G = 0\\) 的实例"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>ΔG = 0 即平衡</strong>: 正逆两个方向的「驱动力」恰好打平 — 代数上就是 \\(\\Delta H = T\\Delta S\\)(两种倾向的贡献严格抵消)。平衡是<strong>宏观静止、微观活跃</strong>的动态状态。',
+        logic:'各选项分析:<br>· <strong>A、B 正确</strong>: 宏观不变 + 微观动态是平衡的一体两面;<br>· <strong>C 正确</strong>: ΔH − TΔS = 0 移项即得;<br>· <strong>D</strong>: 错 — 「停止」只是宏观表象, 分子热运动与正逆转化从未停止;<br>· <strong>E 正确</strong>: 0°C = 273.2 K 恰是冰水转变的 T_转, 该温度下融化与结冰的 ΔG 同为 0, 两相共存。',
+        connection:'<strong>上游</strong>: 「动态平衡」图景源自分子动理论;「ΔS_总 = 0 的可逆极限」是第二定律视角的同一件事。<br><strong>下游</strong>: ΔG = 0 ⟺ T = T_转 是转变温度公式的来历; 化学平衡(待建大主题)将把 ΔG = 0 与平衡常数 K、浓度商 Q 联系起来。'
+      },
+      mistakes:'· 把平衡理解为「一切静止」;<br>· 不会把 ΔG = 0 翻译成 ΔH = TΔS(这是解 T_转 的代数入口);<br>· 没把 0°C 冰水共存与 ΔG = 0 挂钩(案例与原理脱节)。',
+      extension:'恰在 T_转 处, 系统对外界扰动极其敏感: 多给一点热就整体向吸热方向移动, 抽走一点热就反向 — 这正是后续「平衡移动」(勒夏特列原理方向)的萌芽形态。',
+      cardAnchor:"Card 1 STEP 3 + 思考点 2" },
+    { id:"T3-3", type:"multi", score:14, difficulty:"中等", exportIds:["SPONTANEITY-CRITERION","EQUILIBRIUM-CONDITION-G","THREE-LAWS-COMPLETE"],
+      stem:"对「自发过程」一词的理解, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"自发指热力学上不需要持续外界做功即可发生的倾向",B:"需要点燃才能开始的反应(如燃烧)一定不是自发反应",C:"自发反应未必快, 不自发反应也未必绝对不能被外界强行推动",D:"单独用 \\(\\Delta H < 0\\)(放热)作为自发判据, 会被吸热也自发的案例推翻",E:"单独用 \\(\\Delta S > 0\\)(熵增)作为系统判据, 会被熵减也自发的案例推翻"},
+      answer:["A","C","D","E"],
+      explanation:{
+        principle:'「自发」是<strong>热力学倾向</strong>: 过程不需要持续的外界推动就有发生的方向性。它不承诺速率, 也不排斥「点火 / 引发」这类一次性触发 — 触发只是帮系统越过动力学门槛, 不是持续供能。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 关键词「持续」 — 区别于电解那种持续供能;<br>· <strong>B</strong>: 错 — 燃烧 ΔG ≪ 0 是典型自发反应, 点燃只是引发(之后火焰自己维持), 不改变热力学属性;<br>· <strong>C 正确</strong>: 「自发 ≠ 快」与「不自发 ≠ 禁止」两条边界;<br>· <strong>D 正确</strong>: NH₄NO₃ 溶解 / 冰在室温融化都是吸热却自发;<br>· <strong>E 正确</strong>: 水在 −10°C 结冰是系统熵减却自发(环境熵增补偿)。',
+        connection:'D、E 两条「单判据失灵」正是引入 ΔG 的动机: <strong>ΔH 判据管能量、ΔS 判据管混乱度, 各自都有反例, ΔG = ΔH − TΔS 把两者按温度加权后才得到完整判据</strong> — 这是本板块知识结构的主线逻辑。'
+      },
+      mistakes:'· 把「点燃 / 引发」当成「不自发」的证据;<br>· 把「自发」当成「立刻发生」;<br>· 记不住两个单判据的反例(吸热自发: NH₄NO₃; 熵减自发: 低温结冰)。',
+      extension:'为什么熵减的结冰能自发? 因为第二定律管的是<strong>总熵</strong>(系统 + 环境): 结冰放热给环境, 环境熵增超过系统熵减。ΔG 正是把「环境熵变」折算进系统量的记账技巧 — 严格推导见进阶 吉布斯板块。',
+      cardAnchor:"Card 1 STEP 3 + 反思" },
+    { id:"T3-4", type:"multi", score:14, difficulty:"较难", exportIds:["SPONTANEITY-CRITERION","EQUILIBRIUM-CONDITION-G","GIBBS-EQUATION"],
+      stem:"某反应 \\(\\Delta H > 0\\) 且 \\(\\Delta S > 0\\)(均近似不随温度变)。关于它在不同温度下的行为, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"温度足够高时 \\(\\Delta G < 0\\), 反应自发",B:"温度足够低时 \\(\\Delta G > 0\\), 反应不自发",C:"存在某温度 \\(T_{转} = \\Delta H/\\Delta S\\), 该处 \\(\\Delta G = 0\\)",D:"无论什么温度该反应都不可能自发, 因为它吸热",E:"温度升高时, \\(-T\\Delta S\\) 项变得更负, 是推动 \\(\\Delta G\\) 转负的原因"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'对 ΔH&gt;0、ΔS&gt;0 组合: \\(\\Delta G(T) = \\Delta H - T\\Delta S\\) 是 T 的<strong>递减线性函数</strong> — 低温时 +ΔH 占优(不自发), 高温时 −TΔS 占优(自发), 中间必经过一个零点 \\(T_{转} = \\Delta H/\\Delta S\\)。',
+        logic:'各选项分析:<br>· <strong>A、B、C 正确</strong>: 高温自发组合的完整行为三段论;<br>· <strong>D</strong>: 错 — 「吸热就不自发」是单判据谬误, 恰是本组合要破除的(CaCO₃ 分解、冰融化都属此类);<br>· <strong>E 正确</strong>: 机制归因 — T 增大放大了熵项权重。',
+        connection:'这是 4 种组合中「(c) 高温自发」的代数细节。把 ΔS 换成负号就得到镜像的「(b) 低温自发」(合成氨); 两个符号同向时才有 T_转, 符号相反时 ΔG 恒正或恒负(组合 a / d), 不存在转变温度 — 四种情形合成完整的判定地图。'
+      },
+      mistakes:'· 选 D(吸热单判据);<br>· 忘记 T_转 只在 ΔH 与 ΔS <strong>同号</strong>时存在;<br>· 说不清「为什么高温有利」的机制(E 的归因)。',
+      extension:'画 ΔG-T 图像: 纵截距 = ΔH, 斜率 = −ΔS。四种组合对应四条不同走向的直线, 与横轴的交点(若有)就是 T_转 — 一张图把全部组合分析收进去, 不需要死背。',
+      cardAnchor:"Card 2 STEP 1 + STEP 2" }
+  ],
+  T4: [
+    { id:"T4-1", type:"multi", score:14, difficulty:"基础", hasDiagram:true, exportIds:["COMBINATION-A","COMBINATION-B","COMBINATION-C","COMBINATION-D"],
+      figureSvg:QUADRANT_SVG,
+      stem:"上图为 ΔH-ΔS 四象限组合图(横轴 ΔS, 纵轴 ΔH, 图中只标出各象限的符号组合)。结合你对 4 种组合自发性结论的掌握, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"放热且熵增(ΔH<0, ΔS>0)的过程, 任何温度下都自发",B:"吸热且熵减(ΔH>0, ΔS<0)的过程, 任何温度下都不自发",C:"放热且熵减(ΔH<0, ΔS<0)的过程, 只在足够低的温度下自发",D:"吸热且熵增(ΔH>0, ΔS>0)的过程, 只在足够低的温度下自发",E:"凡是放热反应, 任何温度下都自发"},
+      answer:["A","B","C"],
+      explanation:{
+        principle:'4 种组合的速查逻辑: 看 ΔH 与 −TΔS 两项「是否同向帮忙」。<strong>(a) −,+</strong>: 两项都把 ΔG 往负拉 → 恒自发; <strong>(d) +,−</strong>: 两项都往正推 → 恒不自发; <strong>(b) −,−</strong> 与 <strong>(c) +,+</strong>: 两项打架, 谁赢由温度定 — 低温 ΔH 话语权大(b 胜在低温), 高温 TΔS 话语权大(c 胜在高温)。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>(组合 a); <strong>B 正确</strong>(组合 d); <strong>C 正确</strong>(组合 b — 低温让有利的放热项主导);<br>· <strong>D</strong>: 错 — (+,+) 是组合 c, 靠熵增取胜, 需要<strong>高温</strong>放大熵项;<br>· <strong>E</strong>: 错 — 放热但熵减(组合 b)在高温下不自发, 「放热 = 自发」是被本板块明确推翻的单判据。',
+        connection:'四象限图是把 \\(\\Delta G = \\Delta H - T\\Delta S\\) 的代数讨论<strong>几何化</strong>: 上下分 ΔH 正负, 左右分 ΔS 正负, 对角线两格(a、d)结论无条件, 另一对角线两格(b、c)结论带温度条件且各有一个 T_转。后续判断任何具体反应, 第一步都是先落座到某一格。'
+      },
+      mistakes:'· 把 (b) 与 (c) 的温度条件互换;<br>· 误以为放热就万事大吉(E 选项);<br>· 看图时把横纵轴搞混(本图横轴 ΔS、纵轴 ΔH)。',
+      extension:'两个「打架」组合的胜负分界都是 \\(T_{转} = \\Delta H/\\Delta S\\)(注意此时 ΔH、ΔS 同号, T_转 为正, 物理上有意义) — 这正是 T2 类计算题的来历。',
+      cardAnchor:"Card 2 STEP 1" },
+    { id:"T4-2", type:"multi", score:14, difficulty:"中等", hasDiagram:true, exportIds:["COMBINATION-A","COMBINATION-B","COMBINATION-C","COMBINATION-D"],
+      figureSvg:QUADRANT_SVG,
+      stem:"参照上图的 4 种组合, 对下列具体过程的判断 <strong>正确</strong> 的有(多选):",
+      options:{A:"\\(\\mathrm{2H_2O_2(l) \\to 2H_2O(l) + O_2(g)}\\)(放热、产生气体熵增): 任何温度自发",B:"\\(\\mathrm{N_2 + 3H_2 \\to 2NH_3}\\)(放热、气体分子数减少熵减): 低温自发、高温不自发",C:"\\(\\mathrm{CaCO_3(s) \\to CaO(s) + CO_2(g)}\\)(吸热、放出气体熵增): 高温自发",D:"\\(\\mathrm{CO(g) \\to C(s) + \\tfrac{1}{2}O_2(g)}\\)(吸热、气体分子数减少熵减): 升高温度即可自发",E:"水在 −10°C 结冰(放热、熵减): 属于低温自发的组合"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'套用四象限: 先由「放热 / 吸热」定 ΔH 符号, 由「气体分子数增减 / 有序化程度」估 ΔS 符号, 再落座到对应组合读结论。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: (−,+) = 组合 a, 恒自发(双氧水放久了自己分解);<br>· <strong>B 正确</strong>: (−,−) = 组合 b, 低温自发(T_转 约 467 K);<br>· <strong>C 正确</strong>: (+,+) = 组合 c, 高温自发(T_转 = 1112 K);<br>· <strong>D</strong>: 错 — (+,−) = 组合 d, <strong>任何温度都不自发</strong>, 升温救不了它(这就是 CO 分解无法自发、一氧化碳中毒危险持久的热力学原因);<br>· <strong>E 正确</strong>: (−,−) = 组合 b, −10°C(263 K)低于 T_转 273.2 K, 结冰自发。',
+        connection:'「由反应特征估 ΔS 符号」的拇指法则 — <strong>气体分子数增加 → 熵增; 减少 → 熵减; 固液之间变化较小</strong> — 来自第二定律板块的定性熵概念, 是把四象限用于真实反应的桥梁。'
+      },
+      mistakes:'· 对组合 d 抱有「升温总能行」的幻想(温度只能在 b、c 两格起裁判作用);<br>· 估 ΔS 符号时忽略气体分子数变化这个主导因素;<br>· 忘了结冰这种日常过程也服从同一套判据。',
+      extension:'组合 d 的过程并非绝对无法实现 — 持续输入外界能量(如电解、光照)可以强行驱动, 但那已经不叫「自发」。工业上用 CO 做还原剂而不是费力分解它, 正是顺着热力学的势走。',
+      cardAnchor:"Card 2 STEP 1 + Card 3 STEP 1" },
+    { id:"T4-3", type:"multi", score:14, difficulty:"中等", hasDiagram:true, exportIds:["COMBINATION-A","COMBINATION-B","COMBINATION-C","COMBINATION-D","TRANSITION-TEMPERATURE"],
+      figureSvg:QUADRANT_SVG,
+      stem:"关于上图 4 种组合与转变温度 \\(T_{转}\\) 的关系, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"只有 ΔH 与 ΔS <strong>同号</strong>的组合(b 和 c)才存在有物理意义的 \\(T_{转}\\)",B:"组合 (a)(ΔH<0, ΔS>0)的 \\(\\Delta G\\) 在任何温度下恒为负, 无转变温度",C:"组合 (d)(ΔH>0, ΔS<0)的 \\(\\Delta G\\) 在任何温度下恒为正, 无转变温度",D:"任何反应都存在一个转变温度, 高于它行为必然反转",E:"对组合 (b)(低温自发), \\(T_{转}\\) 是自发的<strong>上限</strong>温度; 对组合 (c)(高温自发), \\(T_{转}\\) 是<strong>下限</strong>温度"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'\\(T_{转} = \\Delta H/\\Delta S\\) 要是正数才有物理意义(温度无负值)。ΔH、ΔS <strong>同号</strong>时商为正 → 存在 T_转; <strong>异号</strong>时两项永远同向, ΔG 不变号 → 无转变温度。',
+        logic:'各选项分析:<br>· <strong>A、B、C 正确</strong>: 同号才打架, 打架才需要裁判(温度);异号组合 a 恒负、d 恒正;<br>· <strong>D</strong>: 错 — 把 b、c 的特性错误推广到全部 4 种组合;<br>· <strong>E 正确</strong>: 方向感 — b 靠放热赢, 温度越低越稳(T_转 是天花板); c 靠熵增赢, 温度越高越好(T_转 是门槛)。',
+        connection:'「上限 vs 下限」的方向感在工业上直接变成操作窗口: 合成氨(组合 b)理论上要 <strong>T &lt; 467 K</strong>(上限), 石灰窑(组合 c)要 <strong>T &gt; 1112 K</strong>(下限)。把 T_转 的角色搞反, 工艺设计就会南辕北辙。'
+      },
+      mistakes:'· 以为所有反应都有 T_转(D);<br>· 算出 T_转 后不区分它是上限还是下限;<br>· 对异号组合硬算 T_转 得到负温度还往下用。',
+      extension:'在 ΔG-T 图上看: 4 种组合是 4 条直线(截距 ΔH, 斜率 −ΔS), 只有截距与斜率同号的直线才与正半轴相交 — 交点即 T_转。一图统揽, 无需逐条背诵。',
+      cardAnchor:"Card 2 STEP 1 + STEP 2" },
+    { id:"T4-4", type:"multi", score:14, difficulty:"较难", hasDiagram:true, exportIds:["COMBINATION-A","COMBINATION-B","COMBINATION-C","COMBINATION-D","DIAMOND-TO-GRAPHITE","AMMONIA-SYNTHESIS-INDUSTRY"],
+      figureSvg:QUADRANT_SVG,
+      stem:"结合上图与具体数据, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"金刚石→石墨(\\(\\Delta H = -1.9\\) kJ/mol, \\(\\Delta S = +3.4\\) J/(mol·K))属于组合 (a), 任何温度下热力学自发",B:"合成氨(\\(\\Delta H = -92.4\\) kJ/mol, \\(\\Delta S = -198\\) J/(mol·K))在标准态下高于约 467 K 便不再自发",C:"水蒸发(\\(\\Delta H = +40.7\\) kJ/mol, \\(\\Delta S = +109\\) J/(mol·K))属于组合 (c), 高温自发",D:"金刚石饰品多年不变, 说明金刚石→石墨的 \\(\\Delta G > 0\\)",E:"由 A 和 D 的矛盾可知: 热力学自发性与实际反应速率是两回事"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'先落座组合、再用数据算边界、最后区分「热力学允许」与「动力学可行」 — 这是组合分析的完整三步。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: (−,+) 恒自发, 金刚石在热力学上是亚稳态;<br>· <strong>B 正确</strong>: 组合 b 的 T_转 = 92400/198 ≈ 467 K, 是自发上限;<br>· <strong>C 正确</strong>: (+,+) 高温自发, T_转 = 373.4 K 即沸点;<br>· <strong>D</strong>: 错 — 「没看到发生」不能反推 ΔG &gt; 0; 金刚石不变是因为<strong>速率近乎零</strong>(动力学屏障), ΔG 依然 &lt; 0;<br>· <strong>E 正确</strong>: 这正是热力学(方向)与动力学(速率)的分界 — ΔG 只管「能不能」, 不管「快不快」。',
+        connection:'D→E 的辨析是本板块通往「化学反应速率与化学平衡」大主题的接口: ΔG 给出方向与限度, 速率方程给出快慢, 两者合在一起才是完整的反应图景。'
+      },
+      mistakes:'· 用「观察不到」反推「不自发」(D 的陷阱);<br>· 算 T_转 忘统一单位;<br>· 不能从矛盾现象中提炼出「两套理论各管一段」的结构(E)。',
+      extension:'金刚石→石墨在室温下估计要 10⁵⁰ 年量级 — 宇宙年龄才 10¹⁰ 年。所以「钻石恒久远」在人类尺度上完全成立, 而热力学的判词「金刚石是亚稳态」在地质 / 宇宙尺度上同样成立, 两句话并不矛盾。',
+      cardAnchor:"Card 2 STEP 1 + Card 3 STEP 1" }
+  ],
+  T5: [
+    { id:"T5-1", type:"choice", score:14, difficulty:"基础", exportIds:["SPONTANEITY-CRITERION","COMBINATION-B","AMMONIA-SYNTHESIS-INDUSTRY"],
+      stem:"合成氨 \\(\\mathrm{N_2(g) + 3H_2(g) \\to 2NH_3(g)}\\): \\(\\Delta H = -92.4\\) kJ/mol, \\(\\Delta S = -198\\) J/(mol·K)。关于其自发性(标准态), 判断 <strong>正确</strong> 的是:",
+      options:{A:"放热反应, 任何温度都自发",B:"属于 ΔH<0、ΔS<0 组合: 低温(T < 约 467 K)自发, 高温不自发",C:"熵减反应, 任何温度都不自发",D:"吸热反应, 高温自发"},
+      answer:"B",
+      explanation:{
+        principle:'ΔH &lt; 0(放热, 有利)与 ΔS &lt; 0(气体 4 mol → 2 mol, 熵减, 不利)<strong>打架</strong> → 组合 (b), 温度裁判: 低温放热项主导(自发), 高温熵项主导(不自发), 分界 \\(T_{转} = 92400/198 ≈ 467\\) K。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 「放热 = 恒自发」只对 (−,+) 组合成立, 本反应熵减;<br>· <strong>B 正确</strong>: 组合 (b) 的标准结论 + T_转 数值;<br>· <strong>C</strong>: 错 — 「熵减 = 恒不自发」同样是单判据谬误, 低温下放热可以补偿熵减;<br>· <strong>D</strong>: 错 — 本反应是放热的。',
+        connection:'最有讽刺意味的工业事实: 热力学说「越低温越好」, 实际工厂却开在约 700 K — 因为低温下<strong>速率</strong>慢到无法接受。「热力学要低温、动力学要高温、最后用高压和催化剂打圆场」 — 合成氨是热力学 + 动力学 + 工程三方妥协的教科书案例。'
+      },
+      mistakes:'· 看到放热直接选 A;<br>· 看到熵减直接选 C;<br>· 不会用气体分子数变化(4 → 2)判断 ΔS 符号。',
+      extension:'为什么高压能帮忙? 增压让 ΔG 在非标准态下进一步下移(气体分子数减少的反应受高压青睐), 把「不再自发」的温度上限往上推 — 定量修正 ΔG = ΔG° + RT ln Q 留给进阶 吉布斯板块。',
+      cardAnchor:"Card 3 STEP 1 + 思考点 5" },
+    { id:"T5-2", type:"choice", score:14, difficulty:"中等", exportIds:["SPONTANEITY-CRITERION","COMBINATION-C","CaCO3-DECOMPOSITION-839C"],
+      stem:"碳酸钙分解 \\(\\mathrm{CaCO_3(s) \\to CaO(s) + CO_2(g)}\\): \\(\\Delta H = +178.5\\) kJ/mol, \\(\\Delta S = +160.5\\) J/(mol·K)。判断 <strong>正确</strong> 的是:",
+      options:{A:"吸热反应, 任何温度都不自发, 石灰窑里靠催化剂强行驱动",B:"属于 ΔH>0、ΔS>0 组合: 高于约 1112 K(839°C)时自发 — 石灰窑高温的热力学依据",C:"任何温度都自发, 石灰石常温下就会自己分解",D:"低温自发, 高温反而不自发"},
+      answer:"B",
+      explanation:{
+        principle:'ΔH &gt; 0(吸热, 不利)与 ΔS &gt; 0(固体放出气体, 熵大增, 有利)打架 → 组合 (c): 高温让 −TΔS 占上风, \\(T_{转} = 178500/160.5 = 1112\\) K 是自发<strong>下限</strong>。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错两处 — 高温下它自发; 且催化剂不能改变 ΔG, 救不了不自发的反应;<br>· <strong>B 正确</strong>: 组合 (c) + T_转 数值 + 工业对应;<br>· <strong>C</strong>: 错 — 常温(298 K)远低于 1112 K, ΔG ≈ +131 kJ/mol, 不自发(所以大理石建筑能屹立千年);<br>· <strong>D</strong>: 把组合 (b) 与 (c) 的结论弄反了。',
+        connection:'同一块碳酸钙, 室温下是耐久建材、窑温下是生产生石灰的原料 — 自发性<strong>随温度切换</strong>是组合 (c) 的本性。石灰窑约 900-1000°C 的工况 = T_转(方向门槛) + 富余温度(买速率)。'
+      },
+      mistakes:'· 以为催化剂能把不自发变自发(它只改速率不改 ΔG);<br>· 把 1112 K 直接当摄氏度;<br>· 不能把「大理石耐久」与「窑里分解」统一到同一组数据上。',
+      extension:'反方向看: 低于 1112 K 时逆反应 CaO + CO₂ → CaCO₃ 自发 — 这正是生石灰暴露空气中会慢慢「返碱」结壳、以及 CO₂ 矿化封存技术的热力学基础。',
+      cardAnchor:"Card 2 思考点 4 + Card 3 STEP 1" },
+    { id:"T5-3", type:"choice", score:14, difficulty:"中等", exportIds:["SPONTANEITY-CRITERION","COMBINATION-C","NH4NO3-DISSOLUTION-SPONTANEOUS"],
+      stem:"硝酸铵溶解吸热(\\(\\Delta H = +25.7\\) kJ/mol, \\(\\Delta S = +108\\) J/(mol·K)), 但把 NH₄NO₃ 固体投入室温的水中, 它<strong>立刻持续溶解</strong>并使水温明显下降。对这一现象的解释, <strong>正确</strong> 的是:",
+      options:{A:"吸热过程不可能自发, 所以溶解其实是水「推动」的非自发过程",B:"T_转 = 25700/108 ≈ 238 K, 室温 298 K > 238 K, 故 ΔG < 0, 溶解自发 — 熵增在室温下足以压过吸热",C:"该过程违反热力学, 是判据的例外",D:"因为溶解很快, 所以它一定放热"},
+      answer:"B",
+      explanation:{
+        principle:'吸热(ΔH &gt; 0, 不利)+ 熵大增(离子从晶格束缚中解放、分散到整杯水, ΔS &gt; 0, 有利)= 组合 (c)。室温已在 T_转(238 K ≈ −35°C)之上, 熵项胜出, ΔG ≈ 25.7 − 298 × 0.108 ≈ −6.5 kJ/mol &lt; 0。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 「吸热不能自发」是 ΔH 单判据, 本案例正是它的著名反例;<br>· <strong>B 正确</strong>: 完整的组合 + T_转 + 数值核算;<br>· <strong>C</strong>: 错 — 不是例外, 是判据的正常运作(综合判据本来就允许吸热自发);<br>· <strong>D</strong>: 错 — 「快」是动力学性质, 与放热与否无关, 且实测它明确吸热(水温下降即证据)。',
+        connection:'本案例与「低温结冰(熵减自发)」一起构成一对<strong>对称反例</strong>: 一个杀死 ΔH 单判据, 一个杀死 ΔS 单判据 — 两案并陈, ΔG = ΔH − TΔS 的「综合」二字才算真正立住。'
+      },
+      mistakes:'· 把水温下降误读为「不自发的信号」(它只说明吸热);<br>· 把溶解快误当放热证据;<br>· 算 ΔG 时单位不统一。',
+      extension:'T_转 ≈ 238 K(−35°C)意味着: 只有在 −35°C 以下, NH₄NO₃ 溶解才不自发 — 而那时水早结冰了。所以在液态水存在的整个温度区间内, 这个吸热溶解都是自发的。',
+      cardAnchor:"Card 3 STEP 1" },
+    { id:"T5-4", type:"choice", score:14, difficulty:"较难", exportIds:["SPONTANEITY-CRITERION","COMBINATION-A","DIAMOND-TO-GRAPHITE","THERMODYNAMIC-VS-KINETIC"],
+      stem:"金刚石→石墨: \\(\\Delta H = -1.9\\) kJ/mol, \\(\\Delta S = +3.4\\) J/(mol·K), 故任何温度下 \\(\\Delta G < 0\\)。但钻石饰品历经数百年毫无变化。对此 <strong>正确</strong> 的理解是:",
+      options:{A:"数据有误 — 既然没变, 真实的 ΔG 必定大于 0",B:"ΔG < 0 只给出热力学方向(石墨更稳定), 而转变速率由动力学决定 — 室温下势垒极高, 速率近乎零",C:"金刚石→石墨需要持续输入能量, 属于非自发过程",D:"钻石中的杂质阻止了转变, 纯金刚石会很快变成石墨"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>热力学管方向, 动力学管速率</strong>: ΔG &lt; 0 宣布「石墨是更稳定的归宿」, 但没有承诺多快到达。碳原子要重排成石墨结构需挣脱极强的共价键网络 — 室温下这一步慢到 10⁵⁰ 年量级。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 「未观察到」不构成对 ΔG 符号的反驳, 这是混淆两套理论的典型推理错误;<br>· <strong>B 正确</strong>: 方向(热力学)与速率(动力学)分账;<br>· <strong>C</strong>: 错 — 它是自发过程, 只是极慢; 「需要高温引发」不等于「需要持续供能」;<br>· <strong>D</strong>: 错 — 纯金刚石同样稳定, 障碍是键重排势垒, 不是杂质。',
+        connection:'「金刚石是<strong>亚稳态</strong>」 — 热力学上想走、动力学上走不动的状态。同一框架还解释: H₂ 与 O₂ 混合气常温共存(ΔG ≪ 0 但无火花不反应)、汽油不点不着、铁生锈很慢。<strong>下游</strong>: 反应速率与活化能的定量理论在「化学反应速率与化学平衡」大主题展开。'
+      },
+      mistakes:'· 用现象反推热力学量(A 式错误);<br>· 把「引发」与「持续供能」混为一谈;<br>· 以为自发过程都肉眼可见地进行。',
+      extension:'工业造金刚石走的是逆路: 石墨→金刚石 ΔG &gt; 0, 靠超高压(约 5 GPa 以上)改变热力学格局让金刚石相反超 — 压强也能重排「谁更稳定」的座次, 这是进阶 吉布斯板块的话题。',
+      cardAnchor:"Card 3 STEP 1" }
+  ],
+  T6: [
+    { id:"T6-1", type:"short", score:16, difficulty:"中等", exportIds:["THERMODYNAMIC-VS-KINETIC","DIAMOND-TO-GRAPHITE","SPONTANEITY-CRITERION"],
+      stem:"常温常压下金刚石→石墨的 \\(\\Delta G ≈ -2.9\\) kJ/mol \\(< 0\\)。请解释: 为什么钻石饰品可以传世数百年而不变成石墨? 你的回答需要说清 \\(\\Delta G < 0\\) 到底承诺了什么、没承诺什么。",
+      keywords:["向","动力学","速率"],
+      explanation:{
+        principle:'ΔG &lt; 0 承诺的只有<strong>方向与倾向</strong>: 热力学上石墨更稳定, 转变「被允许」。它<strong>没有承诺速率</strong> — 多快发生由动力学(势垒高低)决定, 是另一套理论的管辖范围。',
+        logic:'组织答案的三步: ① ΔG &lt; 0 → 转变在热力学上有自发<strong>倾向</strong>; ② 但碳原子重排需越过极高的键重排势垒, <strong>动力学</strong>上室温速率近乎零(10⁵⁰ 年量级); ③ 所以「热力学允许 + 动力学冻结」= 亚稳态, 钻石在人类时间尺度上稳定。',
+        connection:'这是「热力学 vs 动力学」分界的标志性案例。同一逻辑覆盖: H₂ + O₂ 常温共存、汽油不点不着、铁生锈缓慢。<strong>下游</strong>: 速率的定量理论(速率方程、温度对速率的影响)属于「化学反应速率与化学平衡」大主题, ΔG 在那里继续担任方向裁判。'
+      },
+      mistakes:'· 答成「因为 ΔG 其实大于 0」(用现象反推热力学量);<br>· 只说「反应很慢」而不点明「慢」是动力学属性、与 ΔG 无关;<br>· 把「自发」写成「马上发生」。',
+      extension:'「亚稳态」是材料世界的常态: 玻璃(相对晶体)、过冷水、淬火钢都是热力学想走而动力学走不动的状态 — 材料科学大量工作正是在「冻结」或「解冻」这些转变。',
+      cardAnchor:"Card 3 STEP 1" },
+    { id:"T6-2", type:"short", score:16, difficulty:"中等", exportIds:["THERMODYNAMIC-VS-KINETIC","SPONTANEITY-CRITERION"],
+      stem:"\\(\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(l)}\\) 的 \\(\\Delta G ≈ -474\\) kJ(标准态)。但氢氧混合气在常温下可以安静共存多年, 一粒火花却能让它瞬间爆炸。请解释这「安静共存」与「一点就爆」各自对应什么理论, 二者为何不矛盾。",
+      keywords:["热力学","动力学","速率"],
+      explanation:{
+        principle:'ΔG ≪ 0 表示反应在热力学上<strong>被允许</strong>且驱动力巨大 — 但热力学不管「门槛」。常温下分子碰撞能量不足以引发反应(动力学门槛高), 速率近乎零; 火花提供局部高温<strong>引发</strong>后, 放出的热又引发更多反应, 链式自持 → 爆炸。',
+        logic:'答案骨架: ① 安静共存 = <strong>动力学</strong>现象(速率≈0), 不说明 ΔG ≥ 0; ② 一点就爆 = 热力学驱动力(−474 kJ)被引发后全力释放; ③ 不矛盾, 因为两套理论各管一段: 热力学管「能不能、放多少」, 动力学管「快不快、要不要引发」。',
+        connection:'「引发 ≠ 持续供能」是关键细节: 引发只是帮系统跨过门槛一次, 之后反应自己维持 — 所以燃烧仍是<strong>自发反应</strong>。对照组: 电解水必须持续通电(ΔG &gt; 0, 真正的非自发), 断电立停。两相对照, 「自发」的定义边界就清晰了。'
+      },
+      mistakes:'· 把「需要点燃」当成「不自发」的证据;<br>· 把共存解释成「ΔG 接近零」;<br>· 漏掉「引发后自持」这一环, 说不清爆炸为何停不下来。',
+      extension:'氢能安全工程正建立在这对矛盾上: 热力学上氢气是高能燃料(这是价值), 动力学上常温稳定(这是安全余量), 而工程要防的就是意外火源 — 一个 ΔG 与一个势垒, 写尽了氢能的机遇与风险。',
+      cardAnchor:"Card 3 STEP 1" },
+    { id:"T6-3", type:"short", score:16, difficulty:"中等", exportIds:["THERMODYNAMIC-VS-KINETIC","AMMONIA-SYNTHESIS-INDUSTRY","INDUSTRY-TRADEOFF"],
+      stem:"合成氨工业使用铁基催化剂。有同学说:「催化剂让反应更容易发生, 所以它降低了反应的 \\(\\Delta G\\)。」这句话对吗? 请指出催化剂究竟改变了什么、没改变什么。",
+      keywords:["速率","动力学","方向"],
+      explanation:{
+        principle:'<strong>催化剂不改变任何热力学量</strong>: ΔH、ΔS、ΔG 都由初末态决定(状态函数!), 而催化剂不改变初末态, 只是给反应开了一条势垒更低的新路径 — 它改变的是<strong>动力学(速率)</strong>。',
+        logic:'答案骨架: ① 这句话<strong>错</strong>; ② 催化剂<strong>不改变</strong> ΔG / ΔH / ΔS(初末态没变, 状态函数差值不变), 也不能把不自发的反应变自发; ③ 它改变的是<strong>速率</strong>: 降低动力学门槛, 让本来「允许但太慢」的反应快起来; ④ 合成氨正是「热力学允许(低温侧)+ 动力学太慢」的局面, 催化剂是打开产能的钥匙。',
+        connection:'这道题把三块知识焊在一起: <strong>状态函数</strong>(ΔG 与路径无关 → 催化剂改路径不改 ΔG)、<strong>自发判据</strong>(方向已由 ΔG 定死)、<strong>动力学</strong>(催化剂的真正舞台)。「催化剂不改变平衡位置、只加速到达」 — 这句话将在化学平衡大主题中再次出现。'
+      },
+      mistakes:'· 以为催化剂「降低 ΔG」或「提供能量」;<br>· 以为催化剂能让 ΔG &gt; 0 的反应发生;<br>· 答「催化剂改变路径」却没接上「ΔG 是状态函数所以不受路径影响」这半句。',
+      extension:'哈伯与博施因合成氨工艺获诺贝尔奖(1918 / 1931) — 热力学告诉他们窗口在哪(低温高压), 催化剂科学告诉他们怎么把窗口真正打开。今天约一半人口的口粮依赖这套「热力学 + 动力学」的合谋。',
+      cardAnchor:"Card 3 思考点 5" },
+    { id:"T6-4", type:"short", score:16, difficulty:"较难", exportIds:["THERMODYNAMIC-VS-KINETIC","SPONTANEITY-CRITERION"],
+      stem:"铁生锈(\\(\\mathrm{4Fe + 3O_2 \\to 2Fe_2O_3}\\))的 \\(\\Delta G ≪ 0\\), 但一辆自行车通常要好几年才锈穿。另一边, 镁条在空气中一点就剧烈燃烧, 其 \\(\\Delta G\\) 也远小于零。请用热力学与动力学的分工解释: 为什么同样「\\(\\Delta G\\) 很负」的两个反应, 表现差别如此之大?",
+      keywords:["向","动力学","速率"],
+      explanation:{
+        principle:'<strong>ΔG 的负值大小只衡量驱动力(倾向强弱), 不决定速率</strong>。两个反应的热力学结论相同(都强烈自发), 表现差异完全来自<strong>动力学</strong>: 势垒高低、接触面积、产物层是否阻隔等速率因素。',
+        logic:'答案骨架: ① 两者 ΔG ≪ 0 → 热力学<strong>倾向</strong>都强, 这一层没有差别; ② 差别在<strong>动力学</strong>: 铁锈反应室温势垒较高且锈层疏松缓慢推进, 整体<strong>速率</strong>慢(年尺度); 镁燃烧一经引发, 高温下速率极快且放热自持; ③ 结论: ΔG 排不出快慢座次 — 「多想走」和「走多快」是两个独立问题。',
+        connection:'这道题补上 T6 家族的最后一块拼图: 前面的案例(钻石、氢氧混合气)是「热力学想走、动力学冻结」, 本题进一步指出<strong>即使都解冻, 速率也各不相同且与 ΔG 大小无关</strong> — 为速率理论(浓度、温度、表面积、催化剂四因素)留好接口。'
+      },
+      mistakes:'· 以为 ΔG 越负反应越快(把驱动力当速度);<br>· 把铁生锈慢归因于「ΔG 不够负」;<br>· 忽略「引发后自持」对镁燃烧剧烈性的贡献。',
+      extension:'防锈工程全是动力学手段: 刷漆 / 镀锌 / 缓蚀剂都没有改变 ΔG(热力学上铁始终「想」生锈), 只是把速率压到工程可接受的水平 — 与人造金刚石「动力学冻结热力学」异曲同工。',
+      cardAnchor:"Card 3 STEP 1" }
+  ],
+  T7: [
+    { id:"T7-1", type:"short", score:16, difficulty:"较难", exportIds:["GIBBS-EQUATION","TRANSITION-TEMPERATURE","SPONTANEITY-CRITERION","AMMONIA-SYNTHESIS-INDUSTRY","INDUSTRY-TRADEOFF"],
+      stem:"合成氨 \\(\\mathrm{N_2 + 3H_2 \\to 2NH_3}\\): \\(\\Delta H = -92.4\\) kJ/mol, \\(\\Delta S = -198\\) J/(mol·K)。请完成三步: ① 判断它属于哪种 ΔH/ΔS 组合、什么温度区间自发; ② 计算转变温度 \\(T_{转}\\)(单位 K, 四舍五入取整数); ③ 实际工业操作温度约 700 K, 高于你算出的 \\(T_{转}\\) — 解释工业为什么「明知故犯」。",
+      keywords:["46","低温","速率"],
+      explanation:{
+        principle:'三步链: <strong>组合定性 → T_转 定量 → 工程权衡</strong>。① (−,−) = 组合 (b), <strong>低温</strong>自发; ② \\(T_{转} = \\Delta H/\\Delta S = 92400/198 = 466.7 ≈ 467\\) K(自发上限); ③ 热力学上限与动力学需求冲突时, 工业用其他手段(高压、催化剂)换取空间。',
+        logic:'③ 的完整逻辑: 467 K 以下虽然自发, 但<strong>速率</strong>慢得没有工业价值; 升到 700 K 买到了可用的速率, 代价是标准态下 ΔG 转正 — 于是用<strong>高压</strong>(气体分子数减少的反应受高压有利)把 ΔG 重新压负, 再用<strong>催化剂</strong>进一步提速。三件套缺一不可。',
+        connection:'这是本板块所有主干知识的总装题: ΔG 公式(单位统一)→ 四组合 → T_转 → 自发判据 → 热力学 vs 动力学 → 工业妥协。同一分析框架适用于任何「热力学与动力学打架」的工艺: 石灰煅烧、炼铁、合成甲醇。'
+      },
+      mistakes:'· 单位不统一(92.4/198 ≈ 0.47 K);<br>· 把 T_转 当下限(组合 b 它是上限);<br>· ③ 只答「为了快」而不接「高压 / 催化剂如何补回热力学损失」。',
+      extension:'近年的「绿氨」研究尝试电化学常温合成氨 — 思路是绕开热式工艺的动力学困境, 用电势直接驱动(ΔG 与电动势的关系留给进阶)。热力学地图不变, 走法可以创新。',
+      cardAnchor:"Card 2 STEP 2 + Card 3 思考点 5" },
+    { id:"T7-2", type:"short", score:16, difficulty:"较难", exportIds:["GIBBS-EQUATION","TRANSITION-TEMPERATURE","SPONTANEITY-CRITERION","CaCO3-DECOMPOSITION-839C"],
+      stem:"石灰窑烧制生石灰: \\(\\mathrm{CaCO_3(s) \\to CaO(s) + CO_2(g)}\\), \\(\\Delta H = +178.5\\) kJ/mol, \\(\\Delta S = +160.5\\) J/(mol·K)。请完成三步: ① 判断组合类型与自发温度区间; ② 计算 \\(T_{转}\\)(单位 K, 取整数), 并换算成摄氏度(取整数); ③ 用结果说明石灰窑的工作温度为何设在 900°C 上下。",
+      keywords:["1112","839","高温"],
+      explanation:{
+        principle:'① (+,+) = 组合 (c), <strong>高温</strong>自发(T_转 是下限); ② \\(T_{转} = 178500/160.5 = 1112\\) K, 换算 1112 − 273 = <strong>839</strong>°C; ③ 窑温必须越过 839°C 这道热力学门槛, 再留出富余买速率。',
+        logic:'③ 的展开: 低于 839°C 时 ΔG &gt; 0, 烧多久都不分解(白费燃料); 恰好 839°C 时 ΔG = 0, 处于平衡、净产出为零; 900°C 上下则 ΔG 明确为负且速率可观 — 这就是窑温的设计逻辑: <strong>门槛之上、再加速率余量</strong>。',
+        connection:'与合成氨(T7 另一变体)成镜像对照: 合成氨的 T_转 是<strong>上限</strong>(组合 b), 石灰窑的 T_转 是<strong>下限</strong>(组合 c) — 同一个公式, 方向感完全相反。判断「上限还是下限」的口诀: 看哪一项是友军 — 靠放热赢的怕高温, 靠熵增赢的怕低温。',
+      },
+      mistakes:'· 单位不统一;<br>· 忘了换算摄氏度或直接把 1112 当°C;<br>· ③ 只答「高温分解快」, 漏掉「839°C 以下根本不自发」这层热力学门槛。',
+      extension:'窑里持续排出 CO₂ 还会把分解平衡进一步向右拉(降低 CO₂ 分压 = 改变 Q) — 这一手在 ΔG = ΔG° + RT ln Q 的框架下才能定量说清, 留给进阶 吉布斯与化学平衡。',
+      cardAnchor:"Card 2 思考点 4 + Card 3 STEP 1" },
+    { id:"T7-3", type:"short", score:16, difficulty:"较难", exportIds:["GIBBS-EQUATION","TRANSITION-TEMPERATURE","SPONTANEITY-CRITERION","ICE-WATER-TRANSITION","MELT-BOIL-POINTS-ARE-T-TRANS"],
+      stem:"冰融化 \\(\\mathrm{H_2O(s) \\to H_2O(l)}\\): \\(\\Delta H = +6.01\\) kJ/mol, \\(\\Delta S = +22.0\\) J/(mol·K)。请完成三步: ① 判断组合类型与自发温度区间; ② 计算 \\(T_{转}\\)(单位 K, 保留 1 位小数或取整均可); ③ 解释「冰的熔点是 0°C」这件事为什么不是人为规定, 而是热力学的计算结果 — 并说明恰好处于 \\(T_{转}\\) 时系统处于什么状态。",
+      keywords:["273","高温","平衡"],
+      explanation:{
+        principle:'① (+,+) = 组合 (c), <strong>高温</strong>侧(高于 T_转)融化自发; ② \\(T_{转} = 6010/22.0 = 273.2\\) K = 0°C; ③ 熔点不是约定 — 它是 (ΔH, ΔS) 两个物性数据通过 \\(T_{转} = \\Delta H/\\Delta S\\) 算出的输出; 恰在 T_转 处 ΔG = 0, 冰与水<strong>平衡</strong>共存。',
+        logic:'③ 的展开: 高于 273.2 K 时 −TΔS 压过 +6.01 kJ → 融化自发; 低于时反向(结冰)自发; 恰好 273.2 K 时两个方向的 ΔG 都为 0 → 动态<strong>平衡</strong>, 冰水混合物长期共存(这正是它被选作温标定点的原因 — 状态极其稳定可复现)。',
+        connection:'「熔点 = T_转」推广开就是「<strong>一切熔沸点都是转变温度</strong>」: 水的沸点 373.4 K、CaCO₃ 的分解温度 1112 K, 全部出自同一个公式。物性表里的常数从此不再是孤立数字, 而是 (ΔH, ΔS) 的投影 — 这是本板块最有统一感的认识成就。'
+      },
+      mistakes:'· 单位不统一(6.01/22.0 = 0.27 K);<br>· ③ 只答「算出来恰好 273 K」而漏掉「ΔG = 0 即平衡」的状态描述;<br>· 把「高于 T_转 融化自发」与「低于 T_转 结冰自发」的方向写反。',
+      extension:'盐为什么能化冰? 撒盐改变了液相的熵(溶液比纯水熵更大), 把 T_转 往下压 — 于是 −5°C 的冰面上「融化」也变成自发。冬天撒融雪剂, 本质是给 \\(T_{转} = \\Delta H/\\Delta S\\) 的分母做手脚。',
+      cardAnchor:"Card 2 思考点 3 + Card 3 STEP 2" },
+    { id:"T7-4", type:"short", score:16, difficulty:"较难", exportIds:["GIBBS-EQUATION","TRANSITION-TEMPERATURE","SPONTANEITY-CRITERION","WATER-EVAPORATION-100C","MELT-BOIL-POINTS-ARE-T-TRANS"],
+      stem:"水的汽化 \\(\\mathrm{H_2O(l) \\to H_2O(g)}\\): \\(\\Delta H = +40.7\\) kJ/mol, \\(\\Delta S = +109\\) J/(mol·K)。请完成三步: ① 判断组合类型与自发温度区间; ② 计算 \\(T_{转}\\)(单位 K, 保留 1 位小数或取整均可); ③ 说明这个温度对应水的哪个物性常数, 并解释恰好处于该温度时液面上方「沸腾平稳进行」对应的热力学状态。",
+      keywords:["373","高温","平衡"],
+      explanation:{
+        principle:'① (+,+) = 组合 (c), 高于 T_转 时整体汽化自发; ② \\(T_{转} = 40700/109 = 373.4\\) K ≈ 100°C; ③ 它就是标准大气压下水的<strong>沸点</strong> — 沸腾时液气两相共存、温度恒定, 正是 ΔG = 0 的<strong>平衡</strong>状态(吸收的热全部用于相变而不升温)。',
+        logic:'③ 的展开: 沸腾中持续加热水温却停在 100°C — 因为系统处在液⇌气的平衡线上, 每一份输入的热都被 +40.7 kJ/mol 的相变焓「吃掉」, 用于把分子从液相束缚中解放(熵增 +109 J/(mol·K)), 而不是提高温度。这是 ΔG = 0 状态最直观的宏观表现。',
+        connection:'与冰水案例(273.2 K = 熔点)合并: <strong>熔点与沸点都是 \\(T_{转} = \\Delta H/\\Delta S\\) 的输出</strong>。汽化的 ΔH、ΔS 都比熔化大一个量级(40.7 vs 6.01; 109 vs 22.0) — 因为「挣脱液体」比「松动晶格」需要打断更多分子间吸引、释放更多混乱度, 微观图景与分子动理论严丝合缝。'
+      },
+      mistakes:'· 单位不统一;<br>· 把 373.4 K 答成熔点;<br>· ③ 漏掉「温度恒定 ⟺ 平衡 ⟺ ΔG = 0」的链条, 只报一句「是沸点」。',
+      extension:'高原上约 90°C 就沸腾: 气压降低使气相一侧「更容易站住」, T_转 下移 — 定性方向可以从「低压偏爱气体」直觉把握, 定量计算(克劳修斯-克拉佩龙关系)属于大学物理化学。',
+      cardAnchor:"Card 2 STEP 2 + Card 3 STEP 2" }
+  ]
+};
+const SLUG = "gibbs-free-energy-basic";
+const KEY_STATE = `mockcheck_${SLUG}_state`;
+let studentName = "student";
+let selectedQuestions = [];
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE)) || {}; } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+
+// 同案例互斥对: 防止同卷出现「一题题面 / 选项泄露另一题答案」或同一计算考两遍
+const EXCLUDE_PAIRS = [
+  ["T5-1","T7-1"],["T4-4","T7-1"],
+  ["T5-2","T2-2"],["T5-2","T7-2"],["T2-2","T7-2"],
+  ["T5-3","T2-3"],
+  ["T2-1","T7-3"],["T2-4","T7-4"]
+];
+function conflictsWithPicked(id, pickedIds) {
+  return EXCLUDE_PAIRS.some(p =>
+    (p[0] === id && pickedIds.includes(p[1])) || (p[1] === id && pickedIds.includes(p[0])));
+}
+function pickQuestions() {
+  selectedQuestions = [];
+  const pickedIds = [];
+  ["T1","T2","T3","T4","T5","T6","T7"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    const allowed = pool.filter(q => !conflictsWithPicked(q.id, pickedIds));
+    const pickPool = allowed.length ? allowed : pool;
+    const q = pickPool[Math.floor(Math.random() * pickPool.length)];
+    selectedQuestions.push(q);
+    pickedIds.push(q.id);
+  });
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: "instant" });
+  setTimeout(renderMath, 100);
+}
+
+function renderQuestions() {
+  const root = document.getElementById("question-list");
+  let html = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const diagTag = q.hasDiagram ? '<span class="q-meta diagram">📊 配图</span>' : '';
+    const typeLabel = q.type === "choice" ? "单选" : q.type === "multi" ? "多选" : q.type === "fill" ? "填空" : "简答";
+    html += `<div class="question" data-q-id="q${n}" data-q-type="${q.type}" data-q-original="${q.id}">
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeLabel}</span>
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        ${diagTag}
+        <span class="q-meta" style="background:#f8e7cf;color:#a35511;">${q.id}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      ${q.figureSvg || ""}
+      <div class="q-prompt">${q.stem}</div>
+      ${renderBody(q, n)}
+      <div class="q-feedback" hidden></div>
+    </div>`;
+  });
+  root.innerHTML = html;
+  attachListeners();
+}
+
+function renderBody(q, n) {
+  if (q.type === "choice") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "multi") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "fill") return `<div style="margin-top:10px;">${q.blanks.map((b, i) => `<span style="margin-right:18px;display:inline-block;">第 ${i+1} 空: <input type="text" class="q-blank" data-q-id="q${n}" data-blank-id="${i+1}" placeholder="数字或文字"></span>`).join("")}</div>`;
+  if (q.type === "short") return `<textarea class="q-short-input" rows="6" data-q-id="q${n}" placeholder="请分点作答(建议 80-180 字, 含必要的计算过程)"></textarea>`;
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "fill") document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`).forEach(el => el.addEventListener("input", updateAnsweredCount));
+    if (q.type === "short") { const el = document.querySelector(`textarea[data-q-id="${qid}"]`); if (el) el.addEventListener("input", updateAnsweredCount); }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "fill") return Array.from(document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x && x.length > 0)) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function normalizeFillin(s) {
+  return (s || "")
+    .replace(/[\s　]+/g, "")
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0))
+    .replace(/[₀-₉]/g, c => "0123456789"[c.charCodeAt(0) - 0x2080])
+    .replace(/[⁰-⁹]/g, c => "0123456789"[c.charCodeAt(0) - 0x2070])
+    .replace(/[−–—]/g, "-")
+    .toLowerCase();
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "fill") {
+    let total = 0;
+    q.blanks.forEach((blank, i) => {
+      const uv = normalizeFillin(ua?.[i]);
+      const ok = blank.answers.some(a => normalizeFillin(a) === uv);
+      if (ok) total += blank.score;
+    });
+    return { score: total, isCorrect: total === q.score };
+  }
+  if (q.type === "short") {
+    // E6: 比对前两侧都做空格归一化, 防止输入空格漏判
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 1.0) score = q.score;
+    else if (ratio >= 0.5) score = q.score * 0.5;
+    return { score, isCorrect: ratio >= 1.0, hits };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x)) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 6) { if (!confirm(`已答 ${answered} / 7 题(< 85%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 掌握充分(90%+) — 推荐进入教师组织的真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔检测基础水平(70%+) — 可继续练习或申请真实检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回学习任务卡复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    const exportCounts = {};
+    wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
+    const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `<span class="q-export-label">${EXPORT_NAMES[id] || id}</span>(${n}题)`).join(" / ")}</small>` : "";
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
+  }
+
+  document.querySelectorAll(".question input, .question textarea").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const fbEl = document.querySelector(`[data-q-id="q${r.idx+1}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "fill") stdAns = q.blanks.map((b,i) => `第${i+1}空: ${b.answers[0]}`).join(" · ");
+  else if (q.type === "short") stdAns = `关键词: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})· 请对照解析自评`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-principle"><strong>🔬 涉及的核心原理</strong><div>${q.explanation.principle}</div></div>` +
+      `<div class="q-fb-row q-fb-logic"><strong>🧩 逻辑分析</strong><div>${q.explanation.logic}</div></div>` +
+      `<div class="q-fb-row q-fb-connection"><strong>🌐 知识系统中的位置</strong><div>${q.explanation.connection}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  fbEl.innerHTML = `
+    <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : (r.score > 0 ? '✗ 部分正确' : '✗ 答错')} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="./gibbs-free-energy-basic-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
+  `;
+  fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
+  fbEl.hidden = false;
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空, 通过记录保留(本练习不影响真实检测)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "gibbs-free-energy-basic";
+  const MODULE_NAME = "吉布斯自由能 · 基础";
+  const PRODUCT_TYPE = "mock-check";
+  const PRODUCT_LABEL = "基础检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitMock_checkApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitMock_checkAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

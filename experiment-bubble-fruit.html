@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学第一定律 · 气泡水果跨学科探究实验</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-orange: #E8923A;
+    --secondary-orange: #F0A85C;
+    --bright-orange: #F5C283;
+    --light-orange: #FFF6ED;
+    /* Keep blue references for compatibility */
+    --primary-blue: #E8923A;
+    --secondary-blue: #F0A85C;
+    --bright-blue: #F5C283;
+    --light-blue: #FFF6ED;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(232, 146, 58, 0.08);
+    --shadow-md: 0 4px 16px rgba(232, 146, 58, 0.12);
+    --shadow-lg: 0 8px 32px rgba(232, 146, 58, 0.16);
+    --shadow-glow: 0 0 20px rgba(232, 146, 58, 0.3);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+  }
+
+  /* Breadcrumb */
+  .breadcrumb {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+  .breadcrumb a {
+    color: var(--secondary-blue);
+    text-decoration: none;
+  }
+  .breadcrumb a:hover {
+    text-decoration: underline;
+  }
+  .breadcrumb .sep {
+    margin: 0 6px;
+    color: var(--border-color);
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #E8923A 0%, #F0A85C 50%, #F5C283 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+    animation: fadeInUp 0.8s ease-out;
+  }
+  .header .subtitle {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+
+  /* Hero decorations */
+  .hero-decoration {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    animation: float 6s ease-in-out infinite;
+  }
+  .hero-decoration:nth-child(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-child(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-child(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Card base */
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(232, 146, 58, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Module info table */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+  .info-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+  }
+  .info-table td:first-child {
+    font-weight: 600;
+    color: var(--primary-blue);
+    white-space: nowrap;
+    width: 130px;
+  }
+  .info-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--secondary-blue);
+  }
+
+  /* Driving question */
+  .driving-question {
+    background: linear-gradient(135deg, rgba(232, 146, 58, 0.06), rgba(232, 146, 58, 0.06));
+    border-left: 4px solid var(--secondary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
+  }
+  .driving-question p {
+    font-size: 0.92rem;
+    margin-bottom: 8px;
+    line-height: 1.7;
+  }
+  .driving-question p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Task card */
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(232, 146, 58, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #E8923A 0%, #F0A85C 50%, #F5C283 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+  .task-card-header:hover {
+    opacity: 0.92;
+  }
+  .task-card-number {
+    background: rgba(255,255,255,0.2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .task-card-header h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    flex-grow: 1;
+  }
+  .task-card-chevron {
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+    opacity: 0.7;
+  }
+  .task-card-header.collapsed .task-card-chevron {
+    transform: rotate(-90deg);
+  }
+  .task-card-body {
+    padding: 20px;
+    transition: max-height 0.3s ease;
+  }
+  .task-card-body.collapsed {
+    display: none;
+  }
+
+  .task-objective {
+    background: rgba(232, 146, 58, 0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  /* Step */
+  .step {
+    margin-bottom: 20px;
+  }
+  .step:last-of-type {
+    margin-bottom: 16px;
+  }
+  .step-header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .step-badge {
+    background: var(--secondary-blue);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+  .step-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .step-content {
+    font-size: 0.9rem;
+    padding-left: 4px;
+  }
+  .step-content p {
+    margin-bottom: 8px;
+  }
+  .step-content ul,
+  .step-content ol {
+    padding-left: 20px;
+    margin-bottom: 8px;
+  }
+  .step-content li {
+    margin-bottom: 4px;
+  }
+
+  /* Quote / tip blocks */
+  .quote-block {
+    background: rgba(232, 146, 58, 0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+
+  /* Code block */
+  .code-block {
+    background: #1e2a38;
+    color: #e8ecf1;
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-family: "SF Mono", "Fira Code", "Cascadia Code", Menlo, Consolas, monospace;
+    font-size: 0.82rem;
+    line-height: 1.7;
+    overflow-x: auto;
+    margin: 10px 0;
+    white-space: pre;
+  }
+
+  /* Output requirements table */
+  .output-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-top: 12px;
+  }
+  .output-table th {
+    background: var(--primary-blue);
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+  }
+  .output-table th:first-child {
+    border-radius: 8px 0 0 0;
+  }
+  .output-table th:last-child {
+    border-radius: 0 8px 0 0;
+  }
+  .output-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .output-table tr:last-child td {
+    border-bottom: none;
+  }
+  .output-table tr:nth-child(even) {
+    background: rgba(232, 146, 58, 0.03);
+  }
+
+  /* Safety card */
+  .safety-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(232, 146, 58, 0.08);
+    border: 2px solid #e74c3c;
+    transition: var(--transition);
+  }
+  .safety-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .safety-card .section-title {
+    color: #e74c3c;
+    border-bottom-color: #e74c3c;
+  }
+  .safety-card .safety-warning {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #c0392b;
+    margin-bottom: 12px;
+  }
+  .safety-card ol {
+    padding-left: 20px;
+    font-size: 0.9rem;
+  }
+  .safety-card ol li {
+    margin-bottom: 10px;
+    line-height: 1.65;
+  }
+
+  /* Timeline section */
+  .timeline-section {
+    margin-bottom: 16px;
+  }
+  .timeline-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    padding: 4px 12px;
+    background: var(--light-blue);
+    border-radius: 6px;
+  }
+  .timeline-label.night {
+    background: rgba(108, 92, 231, 0.1);
+    color: #6C5CE7;
+  }
+  .timeline-label.day2 {
+    background: rgba(0, 184, 148, 0.1);
+    color: #00896a;
+  }
+  .timeline-note {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    margin: 8px 0 16px;
+    padding-left: 4px;
+  }
+
+  /* Literacy tag */
+  .literacy-tag {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+  }
+
+  /* Bottom navigation */
+  .bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+  }
+  .bottom-nav a {
+    color: var(--secondary-blue);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .bottom-nav a:hover {
+    background: rgba(232, 146, 58, 0.08);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 24px 16px 8px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+  }
+
+  /* Table wrapper for responsive scrolling */
+  .table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .safety-card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .code-block { font-size: 0.72rem; padding: 12px 14px; }
+    .output-table { font-size: 0.78rem; }
+    .output-table th,
+    .output-table td { padding: 8px 8px; }
+    .bottom-nav { flex-direction: column; align-items: stretch; text-align: center; }
+    .driving-question { padding: 16px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>跨学科探究</span>
+    <span class="sep">&gt;</span>
+    <span>气泡水果实验</span>
+  </nav>
+
+  <!-- Header (Hero) -->
+  <div class="header">
+    <div class="hero-decoration"></div><div class="hero-decoration"></div><div class="hero-decoration"></div>
+    <h1>气泡水果跨学科探究实验</h1>
+    <div class="subtitle">物理学科 × 化学学科</div>
+  </div>
+
+  <!-- 3.1 实验信息卡 -->
+  <div class="card">
+    <table class="info-table">
+      <tr>
+        <td>实验名称</td>
+        <td>气泡水果——干冰碳酸化跨学科探究</td>
+      </tr>
+      <tr>
+        <td>前置要求</td>
+        <td>完成基础模块全部四张任务卡</td>
+      </tr>
+      <tr>
+        <td>面向学生</td>
+        <td>全体 6 人</td>
+      </tr>
+      <tr>
+        <td>实验时长</td>
+        <td>Day 1：40&ndash;50 分钟；夜间等待约 12 小时；Day 2：80&ndash;100 分钟</td>
+      </tr>
+      <tr>
+        <td>跨学科</td>
+        <td>物理（热力学第一定律、理想气体状态方程） + 化学（亨利定律、化学平衡）</td>
+      </tr>
+      <tr>
+        <td>所需工具</td>
+        <td>泡沫箱、干冰、水果、保鲜膜、毛巾、泡沫板、电子秤（0.1 g）、pH 试纸或 pH 计、卷尺、厚手套、AI 工具、纸笔</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 3.2 驱动问题卡 -->
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p><strong>水果能变成汽水吗？</strong></p>
+    <p>把水果和干冰关在同一个箱子里过一夜，第二天咬一口——嘴里竟然有气泡！</p>
+    <p>这些气泡从哪来？CO₂ 是怎么穿过完整的果皮、溶进果肉里的？</p>
+    <p>干冰升华时能量发生了什么变化？箱子里的压强有多高？理论算出来的值和实际一样吗？</p>
+    <p>你将用物理和化学两门学科的工具来回答这些问题——然后亲口验证。</p>
+  </div>
+
+  <!-- 3.3 实验原理卡 -->
+  <div class="card">
+    <h2 class="section-title">实验原理</h2>
+    <p style="font-size:0.9rem; margin-bottom:12px;">在密封泡沫箱中，干冰（固态 CO₂）升华产生大量 CO₂ 气体，箱内压强升高。根据<strong>亨利定律（Henry's Law）</strong>：</p>
+    <p style="text-align:center; font-size:1.1rem; margin:16px 0; color:var(--primary-blue); font-weight:600;">
+      \[C = k_H \cdot P_{\text{CO}_2}\]
+    </p>
+    <p style="font-size:0.9rem; margin-bottom:12px;">气体在液体中的溶解度 \(C\) 与该气体的分压 \(P\) 成正比。箱内 CO₂ 分压越高，溶入水果水分中的 CO₂ 就越多。</p>
+    <p style="font-size:0.9rem; margin-bottom:16px;">开箱后压强骤降回大气压，溶解的 CO₂ 从果肉水分中释放为气泡——水果就变成了天然的"气泡水果"。</p>
+
+    <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin-bottom:10px;">主要机制 vs 次要机制（这个区分很重要！）</h3>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th></th><th>主要机制</th><th>次要机制</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>原理</strong></td><td>亨利定律——CO₂ 物理溶解在水中</td><td>化学平衡——CO₂ + H₂O ⇌ H₂CO₃</td></tr>
+          <tr><td><strong>占比</strong></td><td>溶解 CO₂ 的约 <strong>99.7%</strong> 保持分子形态</td><td>仅约 <strong>0.3%</strong> 转化为碳酸 H₂CO₃</td></tr>
+          <tr><td><strong>贡献</strong></td><td>气泡感（物理释放）</td><td>微弱的酸味（化学酸化）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="quote-block" style="margin-top:14px;">
+      这就解释了一个你会在实验中观察到的现象：<strong>气泡感很强，但 pH 变化却很小</strong>——因为碳酸化 ≠ 酸化。气泡感来自物理溶解的 CO₂ 释放，而不是 H₂CO₃ 浓度。
+    </div>
+  </div>
+
+  <!-- 3.4 安全规范卡 -->
+  <div class="safety-card">
+    <h2 class="section-title">⚠️ 干冰安全操作规范</h2>
+    <p class="safety-warning">以下规则必须在操作前全员确认，没有例外。</p>
+    <ol>
+      <li><strong>绝对不能裸手触碰干冰</strong>——干冰温度约 −78.5°C，接触皮肤会造成冻伤。全程佩戴<strong>厚手套</strong>操作。</li>
+      <li><strong>不可将干冰放入密封刚性容器</strong>（如玻璃瓶、金属罐）——升华产生的气体会导致容器爆炸。泡沫箱+保鲜膜的组合是安全的，因为保鲜膜会在压力过大时自行鼓起释放。</li>
+      <li><strong>在通风环境中开箱</strong>——高浓度 CO₂ 会导致头晕。开箱时确保窗户打开或在室外操作。</li>
+      <li><strong>干冰不可食用</strong>——水果取出后确认干冰已完全升华，果盘中无残留固体。</li>
+      <li><strong>存放干冰的泡沫箱远离人脸</strong>——开箱瞬间可能有大量冷雾涌出。</li>
+    </ol>
+  </div>
+
+  <!-- 3.5 实验分组卡 -->
+  <div class="card">
+    <h2 class="section-title">实验分组</h2>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>箱号</th><th>干冰用量</th><th>水果</th><th>操作负责</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>①</td><td>100 g</td><td>荔枝（统一数量，整果）</td><td>第一组（3 人）</td></tr>
+          <tr><td>②</td><td>200 g</td><td>荔枝（同上）</td><td>第一组</td></tr>
+          <tr><td>③</td><td>300 g</td><td>荔枝（同上）</td><td>第一组</td></tr>
+          <tr><td>④</td><td>200 g</td><td>哈密瓜、橙子、苹果等（整果）</td><td>第二组（3 人）</td></tr>
+          <tr><td>对照</td><td>无</td><td>与上述相同的水果，不做任何处理</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="margin-top:16px; font-size:0.9rem;">
+      <p style="margin-bottom:6px;"><strong>变量控制说明</strong>：</p>
+      <ul style="padding-left:20px;">
+        <li>箱 ①②③ 控制变量为<strong>干冰用量</strong>（100/200/300 g），水果种类和数量相同</li>
+        <li>箱 ④ 与箱 ② 干冰用量相同（200 g），变量为<strong>水果种类</strong></li>
+        <li>对照组水果不放入箱中，作为基线参照</li>
+      </ul>
+    </div>
+    <div class="quote-block" style="margin-top:12px;">
+      <strong>注意</strong>：两组仅在操作上分工，所有探究任务和理论分析 <strong>6 人全部完成</strong>。
+    </div>
+  </div>
+
+  <!-- 3.6 箱内结构图卡 -->
+  <div class="card">
+    <h2 class="section-title">箱内结构（关键操作要点）</h2>
+    <div class="code-block">┌─────────────────────────┐
+│  ≋ 保鲜膜密封 ≋≋≋≋≋≋≋≋  │
+│                         │
+│   🍒 🍒 🍒 水果层       │  ← CO₂ 气体充满此空间
+│                         │
+│ ┄┄ 泡沫板（隔热搁板）┄┄ │  ← 搁在箱壁上
+│ ┄┄ 毛巾（隔热层）┄┄┄┄  │     泡沫板有微孔透气性
+│                         │     也可戳洞辅助 CO₂ 通过
+│   🧊🧊 干冰 🧊🧊        │  ← 箱底
+└─────────────────────────┘</div>
+    <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin:16px 0 10px;">三个必须做到的操作要点</h3>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>要点</th><th>为什么</th><th>怎么做</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>隔热必须充分</strong></td>
+            <td>干冰升华使箱底温度极低（约 −78.5°C），水果会被冻住</td>
+            <td>毛巾铺在干冰上方 → 泡沫板搁在毛巾上方 → 水果放在泡沫板上方，确保水果与干冰有足够的隔热距离</td>
+          </tr>
+          <tr>
+            <td><strong>透气必须保证</strong></td>
+            <td>CO₂ 气体需要从箱底上升到水果层</td>
+            <td>泡沫板本身有微孔透气性；也可以额外在泡沫板上<strong>戳几个小洞</strong>（直径 5–10 mm），确保 CO₂ 顺利通过</td>
+          </tr>
+          <tr>
+            <td><strong>密封适度</strong></td>
+            <td>需要保持一定压强，但不能完全密封（避免压力过大）</td>
+            <td>用保鲜膜封住箱口，不需要做到完全气密——保鲜膜会随压力鼓起，这是正常的</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3.7 测量方案卡 -->
+  <div class="card">
+    <h2 class="section-title">测量方案</h2>
+
+    <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin-bottom:10px;">Day 1 装箱前测量</h3>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>测量项目</th><th>工具</th><th>精度要求</th><th>记录位置</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>每颗水果编号、称重</td><td>电子秤</td><td>精确到 0.1 g</td><td>数据记录表</td></tr>
+          <tr><td>取少量果汁测 pH（对照基线）</td><td>pH 试纸或 pH 计</td><td>—</td><td>数据记录表</td></tr>
+          <tr><td>箱内尺寸（长×宽×高）</td><td>卷尺</td><td>精确到 1 cm</td><td>数据记录表</td></tr>
+          <tr><td>干冰用量</td><td>电子秤</td><td>精确到 1 g</td><td>数据记录表</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin:20px 0 10px;">Day 2 开箱后测量</h3>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>测量项目</th><th>工具</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>水果称重</td><td>电子秤（0.1 g）</td><td>对比装箱前质量变化</td></tr>
+          <tr><td>取果汁测 pH</td><td>pH 试纸或 pH 计</td><td>对比装箱前 pH 变化</td></tr>
+          <tr><td>盲测品尝打分</td><td>评分表</td><td>多人打分取平均，使用下方评分标准</td></tr>
+          <tr><td>观察记录</td><td>肉眼</td><td>保鲜膜是否鼓起、箱内温度感受、有无冰霜等</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin:20px 0 10px;">品尝评分标准</h3>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>分数</th><th>描述</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>无气泡感，和普通水果完全一样</td></tr>
+          <tr><td>1</td><td>微弱气泡感，仔细感受才能察觉</td></tr>
+          <tr><td>2</td><td>明显气泡感，舌头上有刺麻感</td></tr>
+          <tr><td>3</td><td>强烈气泡感，类似汽水</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="quote-block" style="margin-top:12px;">
+      <strong>盲测要求</strong>：品尝时不告知水果来自哪个箱号，避免心理暗示影响打分。
+    </div>
+  </div>
+
+  <!-- 3.8 实验流程卡 -->
+  <div class="card">
+    <h2 class="section-title">实验流程</h2>
+
+    <!-- Day 1 -->
+    <div class="timeline-section">
+      <div class="timeline-label">📅 Day 1（40&ndash;50 分钟）</div>
+      <div class="table-wrapper">
+        <table class="output-table">
+          <thead>
+            <tr><th>步骤</th><th>时间</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>5 min</td><td><strong>安全培训</strong>：全员阅读上方安全规范，确认理解后签字</td></tr>
+            <tr><td>2</td><td>15 min</td><td><strong>基线测量</strong>：水果编号、逐一称重、取汁测 pH、测量箱内尺寸</td></tr>
+            <tr><td>3</td><td>15 min</td><td><strong>装箱</strong>：箱底放干冰 → 铺毛巾 → 搁泡沫板（确认透气）→ 放水果 → 保鲜膜密封</td></tr>
+            <tr><td>4</td><td>5 min</td><td><strong>记录存档</strong>：记录装箱时间，拍照留档（每个箱子拍一张结构照）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="timeline-note">装箱完成后，箱子静置于阴凉处。</p>
+    </div>
+
+    <!-- Night -->
+    <div class="timeline-section">
+      <div class="timeline-label night">🌙 夜间等待（约 12 小时）</div>
+      <p class="timeline-note">干冰升华，CO₂ 在箱内建立高压环境，溶入水果水分中。</p>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="timeline-section">
+      <div class="timeline-label day2">📅 Day 2（80&ndash;100 分钟）</div>
+      <div class="table-wrapper">
+        <table class="output-table">
+          <thead>
+            <tr><th>步骤</th><th>时间</th><th>内容</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>5 min</td><td><strong>开箱前观察</strong>：保鲜膜是否鼓起？触摸箱壁感受温度。记录观察结果</td></tr>
+            <tr><td>2</td><td>15 min</td><td><strong>开箱后测量</strong>：取出水果，逐一称重、取汁测 pH</td></tr>
+            <tr><td>3</td><td>10 min</td><td><strong>盲测品尝打分</strong>：每人对每个箱号的水果独立打分（0&ndash;3 分）</td></tr>
+            <tr><td>4</td><td>15 min</td><td><strong>数据整理</strong>：汇总数据，制作图表（见下方）</td></tr>
+            <tr><td>5</td><td>30&ndash;40 min</td><td><strong>理论分析任务</strong>：完成四个探究任务（可借助 AI）</td></tr>
+            <tr><td>6</td><td>15 min</td><td><strong>小组讨论与总结</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin:12px 0 10px;">数据图表建议</h3>
+    <p style="font-size:0.9rem; margin-bottom:8px;">用你的数据制作以下图表（手绘或电脑绘制均可）：</p>
+    <ol style="font-size:0.9rem; padding-left:20px;">
+      <li style="margin-bottom:4px;"><strong>干冰用量 vs 品尝得分</strong>（箱 ①②③，柱状图或折线图）</li>
+      <li style="margin-bottom:4px;"><strong>干冰用量 vs pH 变化量</strong>（箱 ①②③）</li>
+      <li style="margin-bottom:4px;"><strong>干冰用量 vs 质量变化量</strong>（箱 ①②③）</li>
+      <li style="margin-bottom:4px;"><strong>不同水果种类的品尝得分对比</strong>（箱 ④ 内各水果，柱状图）</li>
+    </ol>
+  </div>
+
+  <!-- 3.9 理论探究任务 -->
+  <div class="card" style="padding:24px 20px 12px;">
+    <h2 class="section-title">理论探究任务（6 人全部完成）</h2>
+    <p style="font-size:0.9rem; margin-bottom:8px;">以下四个任务覆盖物理和化学两个学科。你可以借助 AI 来学习新概念（如亨利定律），但分析过程必须是你自己完成的。</p>
+  </div>
+
+  <!-- 4.1 任务 1：热力学第一定律分析 -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header collapsed" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>用热力学第一定律分析干冰升华过程</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body collapsed">
+      <div class="task-objective">
+        <strong>对应知识</strong>：基础模块任务卡 2（\(\Delta U = Q + W\)）
+      </div>
+      <p style="font-size:0.9rem; margin-bottom:16px;">以"箱内的 CO₂ 气体"为系统，分析干冰升华过程中的能量变化。</p>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">先自己想</span>
+        </div>
+        <div class="step-content">
+          <p>干冰升华是吸热过程（升华热 ≈ 571 kJ/kg）。在纸上写下：</p>
+          <ul>
+            <li>这些热量 \(Q\) 从哪里来？（提示：想想箱子打开后里面为什么特别冷。）</li>
+            <li>干冰升华后变成气体，体积增大——气体在膨胀过程中是否对外做功 \(W\)？</li>
+            <li>\(W\) 的方向是什么？（外界对系统？还是系统对外？）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">写出第一定律分析</span>
+        </div>
+        <div class="step-content">
+          <p style="text-align:center; font-size:1.05rem; margin:12px 0; color:var(--primary-blue); font-weight:600;">
+            \[\Delta U = Q + W\]
+          </p>
+          <ul>
+            <li>判断 \(Q\) 的正负号（系统吸热还是放热？）</li>
+            <li>判断 \(W\) 的正负号（使用我们课程中的约定：\(W\) 是外界对系统做的功）</li>
+            <li>计算 \(\Delta U\) 的正负号，解释它的物理含义</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">与 AI 讨论</span>
+        </div>
+        <div class="step-content">
+          <p>把你的分析发给 AI，问：</p>
+          <div class="quote-block">
+            "请检查我用热力学第一定律分析干冰升华过程的推理是否正确。如果有错误，给我提示但不要直接给答案。"
+          </div>
+          <p style="margin-top:10px;"><strong>追问</strong>：这个分析解释了一个你能直接感受到的现象——箱子打开后里面特别冷。能量被干冰升华"抽走"了。这和你在基础模块中学到的哪个概念直接相关？</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.2 任务 2：理想气体状态方程 -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header collapsed" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>用理想气体状态方程估算箱内理论压强</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body collapsed">
+      <div class="task-objective">
+        <strong>对应知识</strong>：本任务引入一个新公式 \(PV = nRT\)（理想气体状态方程）
+      </div>
+
+      <h3 style="font-size:0.95rem; font-weight:700; color:var(--primary-blue); margin-bottom:12px;">先认识这个公式</h3>
+      <p style="font-size:0.9rem; margin-bottom:10px;"><strong>PV = nRT</strong> 是描述理想气体行为的基本方程：</p>
+      <div class="table-wrapper">
+        <table class="output-table">
+          <thead>
+            <tr><th>符号</th><th>含义</th><th>单位</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>\(P\)</td><td>压强</td><td>Pa（帕斯卡）</td></tr>
+            <tr><td>\(V\)</td><td>体积</td><td>m³</td></tr>
+            <tr><td>\(n\)</td><td>物质的量</td><td>mol</td></tr>
+            <tr><td>\(R\)</td><td>理想气体常数</td><td>8.314 J/(mol·K)</td></tr>
+            <tr><td>\(T\)</td><td>温度</td><td>K（开尔文）</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:0.9rem; margin:12px 0;">这个方程的含义：<strong>气体的压强、体积、物质的量和温度之间存在确定的关系</strong>。知道其中三个量，就能算出第四个。</p>
+      <p style="font-size:0.9rem; margin-bottom:16px;">如果你在进阶模块中学过推导过程，你会知道这个方程和 \(U = \frac{3}{2}nRT\) 有密切关系——它们来自同一个微观模型。</p>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">代入你的实验数据</span>
+        </div>
+        <div class="step-content">
+          <p>以你操作的某个箱子为例（比如箱 ②，200 g 干冰）：</p>
+          <ol>
+            <li>计算 CO₂ 的物质的量：\(n = m / M = 200 / 44 \approx\) ? mol</li>
+            <li>读取你测量的箱内体积 \(V\)（单位换算为 m³）</li>
+            <li>估计箱内温度 \(T\)——这里需要讨论：取室温（约 293 K）合理吗？还是应该取更低的值？为什么？</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">计算理论压强</span>
+        </div>
+        <div class="step-content">
+          <p style="text-align:center; font-size:1.05rem; margin:12px 0; color:var(--primary-blue); font-weight:600;">
+            \[P = \frac{nRT}{V}\]
+          </p>
+          <p>把数值代入，算出理论压强（单位：Pa）。换算成大气压（1 atm ≈ 101325 Pa），看看这个数值有多大。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">关键讨论——为什么实际压强远低于计算值？</span>
+        </div>
+        <div class="step-content">
+          <p>你会发现理论值高得离谱（可能是几十甚至上百个大气压）。但显然，你的泡沫箱没有爆炸，保鲜膜也没有被炸飞。</p>
+          <p>这说明实际压强远低于理论预测。至少有两个原因：</p>
+          <ol>
+            <li><strong>保鲜膜不是完美密封</strong>——大量 CO₂ 从缝隙中泄漏了（你可能观察到保鲜膜鼓起后又缓慢回落）</li>
+            <li><strong>部分 CO₂ 溶入了水果中的水分</strong>——这正是我们实验的目的！根据亨利定律，CO₂ 在高压下溶入了水果</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 4</span>
+          <span class="step-title">反思</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="quote-block">
+            "理想气体状态方程在这个实验场景中给出了和实际差很远的预测。这说明了什么？物理模型的假设和现实有什么差距？这种'算不准'意味着模型没用吗？"
+          </div>
+          <div class="quote-block" style="margin-top:8px;">
+            提示：一个模型即使"算不准"也可以很有用——它帮你识别了哪些因素（漏气、溶解）在起作用。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.3 任务 3：亨利定律 -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header collapsed" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>用亨利定律解释碳酸化机制（跨化学学科）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body collapsed">
+      <div class="task-objective">
+        <strong>对应知识</strong>：化学——亨利定律、化学平衡（可用 AI 辅助学习）
+      </div>
+      <p style="font-size:0.9rem; margin-bottom:16px;">这个任务涉及你在化学课中可能学过（也可能还没学过）的知识。如果遇到不懂的概念，<strong>主动向 AI 提问</strong>——这本身就是一种重要的学习能力。</p>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">学习亨利定律</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="quote-block">
+            "请用高中生能理解的语言解释亨利定律（Henry's Law）。它描述的是什么现象？公式 \(C = k_H \cdot P\) 中各符号代表什么？"
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">用亨利定律解释实验现象</span>
+        </div>
+        <div class="step-content">
+          <p>回答以下问题（先自己想，再和 AI 讨论）：</p>
+          <ol>
+            <li>为什么干冰用量越多（箱 ① < ② < ③），碳酸化效果越强？
+              <br><span style="color:var(--text-secondary); font-size:0.85rem;">提示：干冰越多 → CO₂ 分压 \(P\) 越高 → 根据 \(C = k_H \cdot P\) → ？</span>
+            </li>
+            <li>为什么低温环境反而有利于碳酸化？
+              <br><span style="color:var(--text-secondary); font-size:0.85rem;">提示：亨利定律中的 \(k_H\) 会随温度变化。查一查：温度降低时 \(k_H\) 变大还是变小？</span>
+              <br><span style="color:var(--text-secondary); font-size:0.85rem;">追问：你打开一瓶冷的汽水和一瓶热的汽水，哪个气泡更多？这和亨利定律的预测一致吗？</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">区分物理溶解与化学反应</span>
+        </div>
+        <div class="step-content">
+          <p>CO₂ 溶入水中后，会发生一个化学平衡：</p>
+          <p style="text-align:center; font-size:1.05rem; margin:12px 0; color:var(--primary-blue); font-weight:600;">
+            \[\text{CO}_2(\text{g}) + \text{H}_2\text{O}(\text{l}) \rightleftharpoons \text{H}_2\text{CO}_3(\text{aq})\]
+          </p>
+          <p>问 AI：</p>
+          <div class="quote-block">
+            "CO₂ 溶于水后，溶解的 CO₂ 中大约有多大比例转化为碳酸 H₂CO₃？如果我用勒夏特列原理（Le Chatelier's Principle）分析，增大 CO₂ 浓度，平衡会怎么移动？"
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 4</span>
+          <span class="step-title">解释一个关键观察</span>
+        </div>
+        <div class="step-content">
+          <p>结合你的实验数据，讨论：</p>
+          <p style="font-weight:600; margin:8px 0;"><strong>为什么气泡感很强，但 pH 变化很小？</strong></p>
+          <p style="color:var(--text-secondary); font-size:0.88rem;">提示：气泡感来自 ____（物理溶解的 CO₂ 释放），而 pH 取决于 ____（H₂CO₃ 浓度）。由于仅约 0.3% 的溶解 CO₂ 转化为 H₂CO₃，所以 ____。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4.4 任务 4：CO₂ 穿透果皮 -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header collapsed" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>CO₂ 如何穿透完整果皮？（开放讨论）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body collapsed">
+      <div class="task-objective">
+        <strong>对应知识</strong>：基础模块任务卡 3（微观粒子模型）
+      </div>
+      <p style="font-size:0.9rem; margin-bottom:16px;">水果没有切开，CO₂ 是怎么进去的？</p>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 1</span>
+          <span class="step-title">回忆微观模型</span>
+        </div>
+        <div class="step-content">
+          <p>在基础模块中，你学过热传导的微观解释——高温侧粒子碰撞墙壁，把能量传递给低温侧。宏观看起来"不动"的墙壁，在分子尺度上充满了粒子碰撞。</p>
+          <p>类似地：宏观看起来"密封"的果皮，在分子尺度上是什么样的？</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 2</span>
+          <span class="step-title">与 AI 讨论</span>
+        </div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <div class="quote-block">
+            "水果的果皮在宏观上看起来是完整密封的，但 CO₂ 分子能穿透果皮进入果肉。从微观角度，果皮的结构是怎样的？CO₂ 分子是通过什么途径进入的？"
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header">
+          <span class="step-badge">STEP 3</span>
+          <span class="step-title">对比不同水果（第二组数据）</span>
+        </div>
+        <div class="step-content">
+          <p>如果第二组的数据（箱 ④）已经出来，讨论：</p>
+          <ul>
+            <li>哈密瓜、橙子、苹果的碳酸化效果一样吗？</li>
+            <li>果皮厚度、质地、结构差异如何影响 CO₂ 的渗透？</li>
+            <li>哪种水果的效果最好？你能从果皮结构上解释吗？</li>
+          </ul>
+          <div class="quote-block" style="margin-top:10px;">
+            这是一个开放问题，没有标准答案。大胆提出你的假设，用数据支持你的推理。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3.10 提交产出物卡 -->
+  <div class="card">
+    <h2 class="section-title">你需要提交的产出物</h2>
+    <p style="font-size:0.9rem; margin-bottom:10px;">每人提交以下三项：</p>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>产出物</th><th>格式要求</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>实验数据记录表</strong></td>
+            <td>手写或打印，含图表</td>
+            <td>包含所有测量数据（质量、pH、品尝评分）和至少 2 张图表</td>
+          </tr>
+          <tr>
+            <td><strong>理论分析报告</strong></td>
+            <td>手写或打字，800&ndash;1200 字</td>
+            <td>四个探究任务的分析过程和结论。要求写出推理过程，不能只写结论</td>
+          </tr>
+          <tr>
+            <td><strong>学习反思</strong></td>
+            <td>手写或打字，200&ndash;300 字</td>
+            <td>回答以下问题：这个实验中你最意外的发现是什么？理论预测和实验结果有什么偏差？这些偏差让你对"物理模型"有什么新的认识？</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="quote-block" style="margin-top:14px;">
+      提示：学习反思必须是<strong>你自己的思考</strong>，这是唯一不能让 AI 代写的东西。
+    </div>
+  </div>
+
+  <!-- 3.11 实验材料清单卡 -->
+  <div class="card">
+    <h2 class="section-title">实验材料清单</h2>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>材料</th><th>数量</th><th>说明</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>泡沫保温箱</td><td>4 个</td><td>带盖，尺寸相近</td></tr>
+          <tr><td>干冰（固态 CO₂）</td><td>约 1 kg（100+200+300+200 g）</td><td>实验当天取用，提前联系供应商</td></tr>
+          <tr><td>荔枝</td><td>若干（4 份等量）</td><td>3 份入箱 ①②③ + 1 份对照</td></tr>
+          <tr><td>哈密瓜、橙子、苹果等</td><td>各若干</td><td>入箱 ④ + 对照各留一份</td></tr>
+          <tr><td>保鲜膜</td><td>1 卷</td><td>密封箱口</td></tr>
+          <tr><td>毛巾</td><td>4 条</td><td>隔热层</td></tr>
+          <tr><td>泡沫板</td><td>4 块</td><td>裁切为略小于箱内尺寸，搁在箱壁上作隔热搁板</td></tr>
+          <tr><td>厚手套（隔热手套）</td><td>2&ndash;3 副</td><td>操作干冰专用</td></tr>
+          <tr><td>电子秤（精度 0.1 g）</td><td>1 台</td><td>称量水果和干冰</td></tr>
+          <tr><td>pH 试纸或 pH 计</td><td>1 套</td><td>测量果汁酸碱度</td></tr>
+          <tr><td>卷尺</td><td>1 把</td><td>测量箱内尺寸</td></tr>
+          <tr><td>记号笔 / 标签贴</td><td>若干</td><td>水果编号</td></tr>
+          <tr><td>品尝评分表</td><td>6 份</td><td>见测量方案中的评分标准</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3.12 素养标注卡 -->
+  <div class="card">
+    <h2 class="section-title">素养标注</h2>
+    <div class="table-wrapper">
+      <table class="output-table">
+        <thead>
+          <tr><th>素养</th><th>在本实验中的体现</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>①好奇心</td><td>"水果真的能变成汽水？"——天然的探究驱动力，从日常经验出发</td></tr>
+          <tr><td>②自我认知与主体性</td><td>学习反思中识别自己的预期与实际结果的差距，反思对"物理模型"的认识变化</td></tr>
+          <tr><td>③思辨力</td><td>理论预测 vs 实际偏差的分析；物理溶解 vs 化学反应的区分；模型假设与现实差距的讨论</td></tr>
+          <tr><td>⑤学习力</td><td>自主学习亨利定律和理想气体状态方程——AI 辅助学习课程中未教授过的新知识</td></tr>
+          <tr><td>⑨问题解决与决策</td><td>实验设计中的变量控制（分组设计）、数据采集、图表制作、定量分析</td></tr>
+          <tr><td>⑩协作与表达</td><td>两组分工合作、数据共享、盲测评分、小组讨论交流</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 3.13 底部导航 -->
+  <div class="bottom-nav">
+    <a href="index.html">&larr; 返回主页</a>
+  </div>
+
+  <!-- 3.14 Footer -->
+  <div class="footer">
+    蓝色诺瓦学院 物理学科 · 热力学第一定律 AI 自主学习课程
+  </div>
+
+</div>
+
+<script>
+// ===== KaTeX Auto-Render =====
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+});
+
+// ===== Task Card Collapse/Expand =====
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  var chevron = header.querySelector('.task-card-chevron');
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+</script>
+</body>
+</html>

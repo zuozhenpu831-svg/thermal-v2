@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>熵的物理意义 · 学习任务卡（进阶模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #4B2C8C 0%, #00409A 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .header .level-tag { display: inline-block; margin-top: 10px; padding: 3px 12px; background: rgba(255,255,255,0.2); border-radius: 12px; font-size: 0.78rem; letter-spacing: 1px; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(142,68,173,0.06));
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #4B2C8C 0%, #00409A 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(142, 68, 173, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .preview-card {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.04), rgba(142,68,173,0.06));
+    border: 1px solid rgba(142,68,173,0.15);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+  }
+  .preview-card .preview-title { font-size: 1.05rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; }
+  .preview-card p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.7; }
+  .preview-card p:last-child { margin-bottom: 0; }
+  .preview-card .formula-highlight { text-align: center; font-size: 1.2rem; margin: 16px 0; color: var(--primary-blue); font-weight: 600; }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>熵的物理意义 · 学习任务卡（进阶）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>熵的物理意义</h1>
+    <div class="subtitle">从"操作定义"到"微观本质" · 玻尔兹曼公式与第二定律</div>
+    <div class="level-tag">⚡ 进阶模块</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>熵的物理意义（进阶模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>5–6 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td>状态函数与非状态函数（进阶, 含熵的定义）；卡诺循环（进阶）；热力学第一定律（基础）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔；上一板块的熵定义推导稿；对数 \(\ln\) 与组合数学（\(X^N\)）的基本概念</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>理解 \(\Delta S = Q_{rev}/T\) 是熵的"<strong>操作定义</strong>"（告诉你怎么算），而不是"<strong>本质定义</strong>"（告诉你这是什么）</li>
+      <li>能用"<strong>系统的微观状态数 \(\Omega\)</strong>"这个新视角描述熵</li>
+      <li>能从<strong>两条完全不同的推导路径</strong>（微观数状态 / 宏观等温可逆）得到同一个 \(\Delta S = Nk\ln 2\)</li>
+      <li>能写出并解释玻尔兹曼公式 \(S = k\ln\Omega\) —— 为什么用 \(\ln\)，\(k\) 是什么</li>
+      <li>能从 \(\Delta S = Q/T\) 自己推出热从高温自发流向低温的方向性</li>
+      <li>能解释为什么"\(cold \to colder\)、\(hot \to hotter\)"的过程不被允许（不是因为能量守恒，而是因为熵会减少）</li>
+      <li>能用含摩擦的循环说明环境熵 \(\geq 0\) —— 真实不可逆过程让宇宙总熵增加</li>
+      <li>理解"时间之矢"和熵增的关系 —— 宏观时间的方向其实是熵的方向</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p><strong>上一板块我们定义了熵 \(\Delta S = Q_{rev}/T\)，证明了它是状态函数。但这个定义有一个奇怪的地方 —— 它只告诉你"怎么算"，没告诉你"是什么"。</strong></p>
+    <p>就像有人告诉你"动能 = \(\tfrac{1}{2}mv^2\)"却没告诉你它是"物体运动的能量"。算法是有了，可它<strong>到底是什么东西</strong>？</p>
+    <p>更让人困惑的是这些日常观察：</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li>热咖啡自己变凉，凉咖啡不会自己变热</li>
+      <li>墨水滴入水中扩散，不会自己聚回来</li>
+      <li>玻璃杯摔碎了，不会自己拼回去</li>
+    </ul>
+    <p style="margin-top: 8px;">为什么自然过程<strong>总朝某个方向</strong>走？时间为什么"有方向"？这些问题，\(\Delta S = Q/T\) 这个"工程定义"答不上来 —— 我们需要换一个完全不同的视角看熵。</p>
+    <p class="hint">（提示：试一下从"系统能有多少种微观排列方式"这个角度想想看。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>熵的"操作定义" vs "本质定义" —— 为什么要换视角</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解 \(\Delta S = Q_{rev}/T\) 是熵的"算法/操作"层定义而非"本质"层定义；明白为什么需要换一个视角<br>
+        <strong>建议时长</strong>：25-35 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不许翻笔记，闭上眼睛回答 ——</p>
+          <ul>
+            <li>请用<strong>一句话</strong>讲清"熵 \(S\) 是什么"。</li>
+            <li>上一板块给了 \(\Delta S = Q_{rev}/T\) 这个公式 —— 这个公式告诉你"熵的什么"？</li>
+            <li>如果一个外星人不懂"温度"和"热"的概念，能从 \(\Delta S = Q_{rev}/T\) 推出熵是什么"东西"吗？</li>
+          </ul>
+          <div class="quote-block">
+            如果你卡在"我只能说算法、说不出本质"—— 那很正常。这正是 Card 1 想让你看到的现象。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 两种定义</span></div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <ol>
+            <li>"物理学上有两类定义：'<strong>操作定义</strong>'（如何测量 / 如何计算）和'<strong>本质定义</strong>'（这是什么东西 / 它代表什么）。请反问引导我，让我自己判断 \(\Delta S = Q_{rev}/T\) 属于哪一类。"</li>
+            <li>"再举几个其他物理量的'操作定义 vs 本质定义'对比，比如：力 \(F=ma\) 是哪种？动能 \(\tfrac{1}{2}mv^2\) 是哪种？温度的'用温度计读出来' vs '粒子平均动能' 是哪种？"</li>
+            <li>"如果我们想知道熵的<strong>本质定义</strong>，应该从哪个方向去找？"</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键洞察</strong>：\(\Delta S = Q_{rev}/T\) 告诉你"在一个具体过程中、用温度计和热量计可以测出 \(\Delta S\) 是多少"—— 这是<strong>操作层</strong>的定义。但它没有回答"\(S\) 这个量本身代表的是什么物理实在"。要回答后者，得换一个视角。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">类比：动能的两层定义</span></div>
+        <div class="step-content">
+          <p>看这个类比来理解为什么"两层定义"很关键：</p>
+          <table class="compare-table">
+            <tr><th></th><th>动能 \(E_k\)</th><th>熵 \(S\)</th></tr>
+            <tr>
+              <td><strong>操作定义</strong><br>(怎么算)</td>
+              <td>\(E_k = \tfrac{1}{2}mv^2\)<br><span style="font-size: 0.78rem; color: #777;">已知 \(m\) 和 \(v\)，能算出值</span></td>
+              <td>\(\Delta S = \dfrac{Q_{rev}}{T}\)<br><span style="font-size: 0.78rem; color: #777;">已知 \(Q_{rev}\) 和 \(T\)，能算出值</span></td>
+            </tr>
+            <tr>
+              <td><strong>本质定义</strong><br>(是什么)</td>
+              <td>物体由于<strong>运动</strong>而具有的能量</td>
+              <td>？（这正是本板块要回答的）</td>
+            </tr>
+          </table>
+          <p>没有"本质定义"的物理量是不完整的 —— 我们没法跟它建立直觉、没法用它解释现象、没法预测它在新场景下的行为。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">提出探索方向</span></div>
+        <div class="step-content">
+          <p>我们要尝试一个完全不同的视角 —— <strong>微观视角</strong>。</p>
+          <p>想象一个理想气体在盒子里 —— 不要把它当成"一团有 \(P\)、\(V\)、\(T\) 的整体"，而是把它当成<strong>一堆粒子</strong>，关注一下"这一堆粒子总共能有多少种不同的排列方式"。</p>
+          <div class="quote-block">
+            <strong>预告</strong>：Card 2 会让你自己算这个"排列方式"的数；Card 3 会用一个具体实验（自由膨胀）验证这个微观视角和上一板块的宏观视角<strong>给出完全一样的结果</strong>。这是物理学历史上极少见的"两条完全不同的路通向同一座山"的案例。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="e1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"操作定义"和"本质定义"</span></label>
+        <label data-key="e1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能至少举出 2 个其他物理量同时拥有这两种定义的例子（动能 / 温度 / 力等）</span></label>
+        <label data-key="e1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么 \(\Delta S = Q_{rev}/T\) 是熵的"操作定义"而不是"本质定义"</span></label>
+        <label data-key="e1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我对"用微观视角看熵"产生了具体的好奇</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ③思辨力（区分定义层次） · ④创造力（提出新视角）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>微观视角：什么是"系统的状态数 Ω"</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：自己推出 \(\Omega = X^N\) 这个状态数公式；建立"状态数多 = 系统更散 = 熵更大"的直觉<br>
+        <strong>建议时长</strong>：40-55 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（10 分钟）</span></div>
+        <div class="step-content">
+          <p>想象下面这个简化场景 —— 这不是真实分子物理，是一个<strong>方便我们数数的玩具模型</strong>：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
+              <rect x="40" y="40" width="240" height="160" fill="#fff" stroke="#00409A" stroke-width="2.5" rx="4"/>
+              <line x1="100" y1="40" x2="100" y2="200" stroke="#bbb" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="160" y1="40" x2="160" y2="200" stroke="#bbb" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="220" y1="40" x2="220" y2="200" stroke="#bbb" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="40" y1="93" x2="280" y2="93" stroke="#bbb" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="40" y1="146" x2="280" y2="146" stroke="#bbb" stroke-width="1" stroke-dasharray="3 3"/>
+              <circle cx="70" cy="70" r="6" fill="#0055B8"/>
+              <circle cx="180" cy="118" r="6" fill="#0055B8"/>
+              <circle cx="130" cy="175" r="6" fill="#0055B8"/>
+              <circle cx="245" cy="65" r="6" fill="#0055B8"/>
+              <circle cx="75" cy="170" r="6" fill="#0055B8"/>
+              <text x="160" y="225" text-anchor="middle" font-size="13" fill="#333">盒子被划成 X 个格子，里面有 N 个粒子</text>
+              <g transform="translate(330, 60)">
+                <text x="0" y="0" font-size="13" font-weight="bold" fill="#00409A">玩具模型</text>
+                <text x="0" y="22" font-size="11" fill="#555">• N = 粒子数</text>
+                <text x="0" y="40" font-size="11" fill="#555">• X = 盒子被划成的格子数</text>
+                <text x="0" y="58" font-size="11" fill="#555">• 每个粒子可以独立位于</text>
+                <text x="10" y="74" font-size="11" fill="#555">任意一个格子</text>
+                <text x="0" y="96" font-size="11" fill="#c0392b">问题：N 个粒子总共</text>
+                <text x="0" y="112" font-size="11" fill="#c0392b">有多少种"放法"？</text>
+              </g>
+            </svg>
+            <div class="diagram-caption">玩具模型：盒子分成 \(X\) 个格子、装 \(N\) 个粒子。每个粒子独立选格子</div>
+          </div>
+
+          <p>先不用对数、不用公式，先用最朴素的"枚举"试试：</p>
+          <ul>
+            <li>如果 \(N=1\)（只有 1 个粒子）、\(X=3\)（3 个格子），总共多少种放法？</li>
+            <li>\(N=2\)、\(X=3\) 呢？（提示：第 1 个粒子有 3 选，第 2 个粒子也有 3 选，独立的）</li>
+            <li>\(N=3\)、\(X=3\) 呢？</li>
+            <li>看出规律了吗？写出一般的 \(N\)、\(X\) 时的状态总数。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 / 推导 —— 状态数公式</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 自己推 \(\Omega = X^N\)</div>
+            <div class="tp-pause">先在草稿纸上枚举 \(N=2, X=3\) 的所有 9 种放法（建议直接画出来），确认自己的"乘法直觉"。然后再推广到 \(N=3, X=3\)（应该有 27 种）。</div>
+            <div class="tp-ask">"我想从 \(N=2\) 的具体枚举推出一般的 \(\Omega = X^N\)，请<strong>反问引导我</strong>而不是直接给公式 —— 比如让我说出'每加一个粒子，状态数怎么变'。"</div>
+            <div class="tp-write">在纸上写出：每个粒子独立有 \(X\) 个位置可选 \(\Rightarrow\) 总状态数 = \(X \cdot X \cdot X \cdots X = X^N\)。理解这是<strong>乘法原理</strong>（独立选择）。</div>
+            <div class="tp-hint">提示：这和"3 件上衣 × 2 条裤子 = 6 种穿法"是同一个数学结构。</div>
+          </div>
+
+          <p>引入符号：</p>
+          <div class="quote-block" style="text-align: center; background: rgba(142, 68, 173, 0.06); border-color: var(--accent-purple);">
+            用希腊字母 \(\Omega\)（读作 omega）专门表示"系统的<strong>微观状态数</strong>"。<br>
+            对于刚才的玩具模型：\(\boxed{\Omega = X^N}\)
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">"状态数多" 和 "熵大" 的直觉</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 状态数多 ↔ 熵大</div>
+            <div class="tp-pause">想象两个场景 —— 场景 A：粒子只能呆在盒子<strong>左半边</strong>的 1 个格子里（\(\Omega = 1^N = 1\)）；场景 B：粒子可以在<strong>整个</strong>盒子的 \(X\) 个格子里随便选（\(\Omega = X^N\)）。哪个场景"更乱、更散"？哪个对应"更高的熵"？</div>
+            <div class="tp-ask">"为什么直觉告诉我'状态数多 = 熵大'？请帮我把这个直觉<strong>用日常语言</strong>讲清楚，不要直接给公式。"</div>
+            <div class="tp-write">用自己的话写一句：<br>"如果系统能处的微观状态<strong>越多</strong>，那它'实际是哪一种状态'就<strong>越不确定</strong> —— 熵就<strong>越大</strong>。"</div>
+          </div>
+
+          <p>把这个直觉记下来 —— 它是接下来 Card 3 的核心：</p>
+          <div class="quote-block">
+            <strong>初步猜想（Card 3 会验证）</strong>：熵 \(S\) 应该和 \(\Omega\)（系统可能的微观状态数）<strong>有关</strong>。但具体关系是什么 —— 是 \(S \propto \Omega\)？还是 \(S \propto \ln\Omega\)？还是其他？这要靠 Card 3 的实验验证。
+          </div>
+
+          <p>提前给你一个"伏笔"。先承认一个关键事实 ——</p>
+          <div class="quote-block" style="background: rgba(230, 126, 34, 0.06); border-color: var(--accent-orange);">
+            <strong>熵的可加性（广延量）</strong>：把两份完全相同的系统拼到一起，<strong>总熵 = 2 × 单份的熵</strong>。这不是从 \(\Delta S = Q_{rev}/T\) 推出来的额外结论，而是熵作为"<strong>广延量</strong>"（extensive quantity）的天然性质 —— 和体积、质量、能量同类（拼起来就翻倍），而不像温度、压强（"强度量"，拼起来不翻倍）。<br>
+            日常直觉验证：两杯一模一样的热水"乱"的程度是一杯的两倍，对吗？
+          </div>
+          <p>现在用这个"可加性"来推一个矛盾：</p>
+          <ul>
+            <li>两个独立的子系统 A、B，状态数分别 \(\Omega_A\) 和 \(\Omega_B\) —— 合在一起的"总状态数" \(\Omega_{AB} = \Omega_A \cdot \Omega_B\)（独立组合的乘法原理）</li>
+            <li>但它们的熵<strong>相加</strong>：\(S_{AB} = S_A + S_B\)（广延量可加）</li>
+            <li>所以 \(S\) 和 \(\Omega\) 之间必须是一个能把"<strong>相乘变成相加</strong>"的函数。你能猜到这是什么函数吗？（Card 3 会确认。）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="e2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用具体例子（\(N=2, X=3\)）枚举出 9 种状态</span></label>
+        <label data-key="e2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能推出一般公式 \(\Omega = X^N\) 并用乘法原理解释</span></label>
+        <label data-key="e2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用自己的话解释"状态数多 = 熵大"的直觉</span></label>
+        <label data-key="e2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我注意到"独立子系统状态数相乘"和"熵相加"之间可能的矛盾（埋下 \(\ln\) 的伏笔）</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②思辨力（数学化抽象） · ④创造力（提出可数化的玩具模型） · ⑤学习力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>自由膨胀实验 · 两条路径推同一个 ΔS</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：用<strong>微观数状态</strong>和<strong>宏观 \(\Delta S = Q_{rev}/T\)</strong> 两种完全不同的方法，得到同一个结果 \(\Delta S = Nk\ln 2\)，从而推出玻尔兹曼公式 \(S = k\ln\Omega\)<br>
+        <strong>建议时长</strong>：60-90 分钟（本卡为核心，请充分时间）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">实验先行 —— 理想气体的自由膨胀</span></div>
+        <div class="step-content">
+          <p>这是 19 世纪物理学家焦耳做过的一个经典实验 ——</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8e44ad"/></marker>
+              </defs>
+              <rect x="30" y="50" width="200" height="120" fill="#fff" stroke="#00409A" stroke-width="2.5" rx="4"/>
+              <line x1="130" y1="50" x2="130" y2="170" stroke="#c0392b" stroke-width="3"/>
+              <circle cx="60" cy="80" r="4" fill="#0055B8"/>
+              <circle cx="85" cy="115" r="4" fill="#0055B8"/>
+              <circle cx="105" cy="145" r="4" fill="#0055B8"/>
+              <circle cx="115" cy="65" r="4" fill="#0055B8"/>
+              <circle cx="70" cy="140" r="4" fill="#0055B8"/>
+              <circle cx="100" cy="95" r="4" fill="#0055B8"/>
+              <text x="80" y="185" text-anchor="middle" font-size="11" fill="#0055B8" font-weight="bold">气体 V₁, T</text>
+              <text x="180" y="185" text-anchor="middle" font-size="11" fill="#888">真空</text>
+              <text x="130" y="42" text-anchor="middle" font-size="10" fill="#c0392b">隔板</text>
+              <line x1="240" y1="110" x2="290" y2="110" stroke="#8e44ad" stroke-width="2" marker-end="url(#ar-purple)"/>
+              <text x="265" y="100" text-anchor="middle" font-size="11" fill="#8e44ad">撤掉隔板</text>
+              <rect x="300" y="50" width="200" height="120" fill="#fff" stroke="#00409A" stroke-width="2.5" rx="4"/>
+              <circle cx="330" cy="80" r="4" fill="#0055B8"/>
+              <circle cx="360" cy="115" r="4" fill="#0055B8"/>
+              <circle cx="420" cy="145" r="4" fill="#0055B8"/>
+              <circle cx="465" cy="65" r="4" fill="#0055B8"/>
+              <circle cx="395" cy="140" r="4" fill="#0055B8"/>
+              <circle cx="450" cy="95" r="4" fill="#0055B8"/>
+              <text x="400" y="185" text-anchor="middle" font-size="11" fill="#0055B8" font-weight="bold">气体 2V₁, T （T 不变）</text>
+            </svg>
+            <div class="diagram-caption">焦耳的自由膨胀：气体瞬间扩散到两倍体积，过程<strong>不可逆</strong></div>
+          </div>
+
+          <p>这个过程的几个关键事实（请先自己确认每一条）：</p>
+          <ul>
+            <li><strong>对外不做功</strong>：撤掉隔板的瞬间气体冲入真空，没有外界<strong>抗力</strong>，所以 \(W = 0\)</li>
+            <li><strong>不吸热</strong>：整个装置绝热（焦耳实验中浸在水浴里测温），\(Q = 0\)</li>
+            <li><strong>内能不变</strong>：第一定律 \(\Delta U = Q - W = 0\)</li>
+            <li><strong>温度不变</strong>：理想气体 \(U\) 只依赖于 \(T\)（来自上一板块的 \(U = \tfrac{3}{2}nRT\)），所以 \(\Delta U = 0 \Rightarrow \Delta T = 0\)</li>
+            <li><strong>但这是不可逆过程</strong>：气体不会自己挤回左半边</li>
+          </ul>
+
+          <p>核心问题：</p>
+          <div class="quote-block" style="border-color: var(--accent-orange); background: rgba(230, 126, 34, 0.05);">
+            <strong>这个过程的 \(\Delta S\) 是多少？</strong><br>
+            注意 —— 实际过程是不可逆的，\(Q=0\) 但显然 \(\Delta S \neq 0\)（气体散得更开了）。所以不能直接代 \(\Delta S = Q/T\)。怎么算？
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">路径 A · 微观数状态法</span></div>
+        <div class="step-content">
+          <p>用 Card 2 的玩具模型：把盒子划成 \(X\) 个格子，体积变成两倍后划成 \(2X\) 个格子（格子大小不变，只是空间多了一倍）。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 体积加倍 → 状态数怎么变？</div>
+            <div class="tp-pause">每个粒子原本可以选 \(X\) 个位置；体积加倍后每个粒子可以选 \(2X\) 个位置。\(N\) 个粒子的<strong>总状态数</strong>从 \(\Omega_i = X^N\) 变成多少？</div>
+            <div class="tp-ask">"我已经知道 \(\Omega = (\text{每个粒子可选位置数})^N\)。体积加倍后请反问引导我推出 \(\Omega_f\)。"</div>
+            <div class="tp-write">写出：\(\Omega_i = X^N\)；\(\Omega_f = (2X)^N = 2^N \cdot X^N\)</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 状态数的"比值" 是多少</div>
+            <div class="tp-pause">熵似乎和"状态数有多少"有关。一个自然的猜想是：膨胀前后熵的差应该和 <strong>\(\Omega_f / \Omega_i\)</strong> 这个比值有关。</div>
+            <div class="tp-ask">"请引导我算 \(\Omega_f / \Omega_i\)。然后让我说说这个比值的'物理含义'。"</div>
+            <div class="tp-write">写出：\(\dfrac{\Omega_f}{\Omega_i} = \dfrac{2^N \cdot X^N}{X^N} = 2^N\)<br>含义：体积加倍后，系统可处的微观状态数变为<strong>原来的 \(2^N\) 倍</strong>。</div>
+          </div>
+
+          <p>暂时把这个结果先记下来 —— 我们还没说"熵到底等于什么"。继续走路径 B。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">路径 B · 宏观热力学法</span></div>
+        <div class="step-content">
+          <p>用上一板块的核心结论 —— <strong>熵是状态函数</strong>，所以 \(\Delta S\) 只取决于初末状态、与具体路径无关。</p>
+          <p>自由膨胀过程本身不可逆，但起点和终点都是<strong>同温度</strong>的平衡态。我们可以找一条<strong>可逆等温膨胀</strong>路径连接同样的两个状态，沿这条假想路径算 \(\Delta S\) 即可（这正是上一板块强调的"path-independent"力量）。</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"/></marker>
+              </defs>
+              <line x1="60" y1="200" x2="450" y2="200" stroke="#333" stroke-width="1.5" marker-end="url(#ar-b)"/>
+              <line x1="60" y1="200" x2="60" y2="40" stroke="#333" stroke-width="1.5" marker-end="url(#ar-b)"/>
+              <text x="455" y="218" font-size="13" fill="#333">V</text>
+              <text x="45" y="35" font-size="13" fill="#333">P</text>
+              <path d="M 110,80 Q 180,90 230,120 Q 290,160 360,180" stroke="#0055B8" stroke-width="2.5" fill="none"/>
+              <circle cx="110" cy="80" r="5" fill="#c0392b"/>
+              <text x="95" y="73" font-size="13" font-weight="bold" fill="#c0392b">A</text>
+              <text x="92" y="93" font-size="10" fill="#555">V₁, T</text>
+              <circle cx="360" cy="180" r="5" fill="#c0392b"/>
+              <text x="368" y="178" font-size="13" font-weight="bold" fill="#c0392b">B</text>
+              <text x="368" y="195" font-size="10" fill="#555">2V₁, T</text>
+              <path d="M 110,80 L 110,200 L 360,200 L 360,180" stroke="#27ae60" stroke-width="1" fill="rgba(39,174,96,0.18)" stroke-dasharray="3 3"/>
+              <text x="220" y="60" font-size="12" fill="#0055B8" font-weight="bold">等温线 (PV = nRT, T 不变)</text>
+              <text x="220" y="155" font-size="11" fill="#27ae60" font-style="italic">W = ∫P dV</text>
+            </svg>
+            <div class="diagram-caption">想象的<strong>可逆等温膨胀</strong>路径：从 A(V₁, T) 沿等温线到 B(2V₁, T)。这条路径不需要"真发生"，只需要数学上能连接同两个状态</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 沿等温可逆路径算 W</div>
+            <div class="tp-pause">在等温可逆膨胀中，气体对外做的功 \(W = \int_{V_1}^{2V_1} P \, dV\)。代入理想气体状态方程 \(P = nRT/V\)，积分一下。</div>
+            <div class="tp-ask">"请反问引导我推出 \(W = nRT\ln 2\) —— 这一步和上一板块卡诺循环里的等温功推导是同一个公式。"</div>
+            <div class="tp-write">在纸上完整推一遍：<br>
+              \(W = \int_{V_1}^{2V_1} \dfrac{nRT}{V} dV = nRT \int_{V_1}^{2V_1} \dfrac{1}{V} dV = nRT \ln\dfrac{2V_1}{V_1} = nRT\ln 2\)
+            </div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 等温 → ΔU=0 → Q=W</div>
+            <div class="tp-pause">等温过程中 \(\Delta U = 0\)，所以由第一定律 \(\Delta U = Q - W\) 可知 \(Q = W\)。但注意：这个 \(Q\) 是<strong>可逆等温路径上</strong>所吸的热（实际自由膨胀过程没有这个热的转移，这只是想象路径）。</div>
+            <div class="tp-ask">"请确认我理解了 —— 我用的 \(Q_{rev}\) 是想象的可逆路径的 \(Q\)，不是实际自由膨胀的 \(Q\)（后者 \(=0\)）。这正是 path-independent 的力量？"</div>
+            <div class="tp-write">写出：在想象的可逆等温路径上，\(Q_{rev} = W = nRT\ln 2\)</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 算 ΔS 并换成"粒子数"语言</div>
+            <div class="tp-pause">既然有了 \(Q_{rev}\) 和 \(T\)，直接代 \(\Delta S = Q_{rev}/T\)。然后想：怎么把摩尔数 \(n\) 换成粒子数 \(N\)（这样能跟路径 A 的 \(N^{...}\) 对比）？</div>
+            <div class="tp-ask">"请引导我把 \(n\)（摩尔数）换成 \(N\)（粒子数）。提示：\(n = N/N_A\)，\(R = N_A \cdot k\)，其中 \(k\) 是玻尔兹曼常数，\(N_A\) 是阿伏伽德罗常数。"</div>
+            <div class="tp-write">完整写出（在纸上）：<br>
+              \(\Delta S = \dfrac{Q_{rev}}{T} = \dfrac{nRT\ln 2}{T} = nR\ln 2\)<br>
+              代入 \(n = N/N_A\) 和 \(R = N_A k\)：<br>
+              \(\Delta S = \dfrac{N}{N_A} \cdot N_A k \cdot \ln 2 = Nk\ln 2\)<br>
+              <strong>\(\Rightarrow \Delta S = Nk\ln 2\)</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">两路径对比 → 玻尔兹曼公式</span></div>
+        <div class="step-content">
+          <p>把路径 A 和路径 B 的结果摆在一起：</p>
+
+          <table class="compare-table">
+            <tr><th>路径</th><th>关键量</th><th>结果</th></tr>
+            <tr>
+              <td><strong>A · 微观数状态</strong></td>
+              <td>状态数比值 \(\Omega_f/\Omega_i\)</td>
+              <td>\(2^N\)</td>
+            </tr>
+            <tr>
+              <td><strong>B · 宏观热力学</strong></td>
+              <td>熵变 \(\Delta S\)</td>
+              <td>\(Nk\ln 2\)</td>
+            </tr>
+          </table>
+
+          <p>请你比较这两行 —— 是不是有点眼熟？把路径 A 的结果<strong>取对数</strong>看看：</p>
+          <p>\(\ln(\Omega_f/\Omega_i) = \ln(2^N) = N\ln 2\)</p>
+
+          <p>把它和路径 B 的 \(Nk\ln 2\) 比，差<strong>恰好就是常数 \(k\)</strong>！</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 6a · 把 \(\ln\) 拆开</div>
+            <div class="tp-pause">你已经推出 \(\Delta S = k \cdot \ln\dfrac{\Omega_f}{\Omega_i}\)。现在用对数的基本性质 \(\ln(a/b) = \ln a - \ln b\)，把这个表达式拆成两项之差。</div>
+            <div class="tp-ask">"请提示我用对数性质拆 \(\ln(\Omega_f/\Omega_i)\)，但不要直接给结果。"</div>
+            <div class="tp-write">在纸上写：\(\Delta S = k\ln\Omega_f - k\ln\Omega_i\)</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 6b · 从"差"读出"单状态熵"</div>
+            <div class="tp-pause">现在你有 \(\Delta S = S_f - S_i = k\ln\Omega_f - k\ln\Omega_i\)。两端逐项对照，能"读出"单个状态本身的熵 \(S\) 应该长什么样吗？</div>
+            <div class="tp-ask">"请反问引导我从'差的形式'读出单个状态的熵表达式，而不要直接给我玻尔兹曼公式。"</div>
+            <div class="tp-write">写出：\(\boxed{S = k\ln\Omega}\)<br>这就是<strong>玻尔兹曼公式</strong>（1877 年）。</div>
+            <div class="tp-hint">提示：差的两端结构相同 —— 末态项 \(k\ln\Omega_f\) 对应 \(S_f\)，初态项 \(k\ln\Omega_i\) 对应 \(S_i\)。所以单个状态的熵就是 \(S = k\ln\Omega\)（数学上可能差一个无关紧要的加性常数，物理上无意义）。</div>
+          </div>
+
+          <p>这个公式深刻在哪里？</p>
+          <ul>
+            <li><strong>连接两个世界</strong>：左边 \(S\) 是<strong>宏观</strong>可测量（用温度计、热量计），右边 \(\Omega\) 是<strong>微观</strong>状态数（必须数粒子）—— 同一个量、两种身份</li>
+            <li><strong>解释了为什么是 \(\ln\)</strong>：两个独立子系统的状态数<strong>相乘</strong>（\(\Omega_{AB} = \Omega_A \cdot \Omega_B\)），它们的熵<strong>相加</strong>（\(S_{AB} = S_A + S_B\）—— 只有对数能把"相乘"变成"相加"</li>
+            <li><strong>解释了 \(k\) 的存在</strong>：\(k = R/N_A \approx 1.38 \times 10^{-23}\) J/K，这个微小常数就是"宏观和微观的换算因子"</li>
+          </ul>
+
+          <div class="quote-block" style="background: rgba(142, 68, 173, 0.06); border-color: var(--accent-purple);">
+            <strong>历史时刻</strong>：1877 年，玻尔兹曼把这个公式刻进了热力学的核心。他自己 1906 年去世后，他的墓碑上刻的就是 \(S = k\log W\)（\(W\) 是 \(\Omega\) 的德文写法 Wahrscheinlichkeit "概率"的首字母）。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="e3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么自由膨胀 \(Q=W=0\) 但 \(\Delta S \neq 0\)（不是直接代 \(\Delta S = Q/T\) 算的）</span></label>
+        <label data-key="e3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用微观状态数推出 \(\Omega_f/\Omega_i = 2^N\)</span></label>
+        <label data-key="e3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能完整推一遍宏观路径 \(\Delta S = Nk\ln 2\)（含 \(n=N/N_A\)、\(R=N_A k\) 的换算）</span></label>
+        <label data-key="e3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从两条路径的对比写出玻尔兹曼公式 \(S = k\ln\Omega\)</span></label>
+        <label data-key="e3c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么是 \(\ln\)（独立子系统状态数相乘 → 熵相加）</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ②思辨力（双视角验证） · ③创造力（path-independent 巧用） · ⑤学习力（综合上一板块的状态函数 + 卡诺等温功 + 阿伏伽德罗换算）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 4 ==================== -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>熵增定律 · 从 ΔS = Q/T 推出热的方向</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：用 \(\Delta S = Q/T\) 自己推出"热从高温自发流向低温"；理解为什么反方向不允许；用含摩擦的循环说明环境熵 \(\geq 0\)<br>
+        <strong>建议时长</strong>：50-70 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>列举 3-5 个你日常观察到的<strong>"自发只朝一个方向"</strong>的过程：</p>
+          <ul>
+            <li>热咖啡变凉（热从咖啡流向空气）</li>
+            <li>墨水滴入水中扩散</li>
+            <li>...（你自己再举几个）</li>
+          </ul>
+          <p>问题：这些"单向过程"有什么共同点？为什么物理学里没有一条"能量守恒定律"能禁止它们反过来发生？</p>
+          <div class="quote-block">
+            提示：第一定律（能量守恒）<strong>不能</strong>禁止逆过程。比如：你的咖啡自发变热同时空气变冷 —— 总能量仍然守恒！但显然不会发生。一定有<strong>另一条定律</strong>在管这事。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">用 ΔS = Q/T 推热的方向</span></div>
+        <div class="step-content">
+          <p>设想最简单的情境：两个热库（\(T_1 > T_2\)），中间通过一根金属棒接触，让热量 \(Q\) 从热库 1 流到热库 2。<strong>用第一原理（\(\Delta S = Q/T\)）推这个过程的总熵变。</strong></p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-r2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+              </defs>
+              <rect x="40" y="50" width="120" height="100" fill="#fde2e2" stroke="#c0392b" stroke-width="2" rx="6"/>
+              <text x="100" y="85" text-anchor="middle" font-size="14" font-weight="bold" fill="#c0392b">热库 1</text>
+              <text x="100" y="108" text-anchor="middle" font-size="13" fill="#c0392b">T₁ (高温)</text>
+              <text x="100" y="135" text-anchor="middle" font-size="11" fill="#555">ΔS₁ = -Q/T₁</text>
+              <rect x="360" y="50" width="120" height="100" fill="#dce8f5" stroke="#0055B8" stroke-width="2" rx="6"/>
+              <text x="420" y="85" text-anchor="middle" font-size="14" font-weight="bold" fill="#0055B8">热库 2</text>
+              <text x="420" y="108" text-anchor="middle" font-size="13" fill="#0055B8">T₂ (低温)</text>
+              <text x="420" y="135" text-anchor="middle" font-size="11" fill="#555">ΔS₂ = +Q/T₂</text>
+              <line x1="165" y1="100" x2="355" y2="100" stroke="#c0392b" stroke-width="3" marker-end="url(#ar-r2)"/>
+              <text x="260" y="92" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">热量 Q</text>
+              <text x="260" y="180" text-anchor="middle" font-size="12" fill="#333">T₁ > T₂ —— 热从高温自发流向低温</text>
+            </svg>
+            <div class="diagram-caption">两热库之间的热传递。热库 1 失去热量 → \(\Delta S_1\) 为负；热库 2 得到热量 → \(\Delta S_2\) 为正</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 写出两个热库各自的 ΔS</div>
+            <div class="tp-pause">符号约定：\(Q\) 取正值（表示流出热量的多少）。热库 1 失去 \(Q\)，所以它的熵变是<strong>负</strong>的；热库 2 得到 \(Q\)，它的熵变是<strong>正</strong>的。</div>
+            <div class="tp-ask">"请引导我用 \(\Delta S = Q_{rev}/T\) 写出两个热库各自的熵变（注意符号）。"</div>
+            <div class="tp-write">写出：<br>
+              \(\Delta S_1 = -\dfrac{Q}{T_1}\)（热库 1 放热，熵减少）<br>
+              \(\Delta S_2 = +\dfrac{Q}{T_2}\)（热库 2 吸热，熵增加）
+            </div>
+            <div class="tp-hint">为什么热库吸 \(Q\)、放 \(Q\) 也能直接用 \(\Delta S = Q_{rev}/T\)？因为<strong>热库本身假定无限大</strong>，温度恒定，对它而言这个过程就是"可逆吸热"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 算总熵变 + 判断符号</div>
+            <div class="tp-pause">把两个熵变加起来，然后用条件 \(T_1 > T_2\) 判断总熵是正还是负。</div>
+            <div class="tp-ask">"请引导我推 \(\Delta S_{total}\)，并用 \(T_1 > T_2\) 比较 \(1/T_1\) 和 \(1/T_2\) 的大小。"</div>
+            <div class="tp-write">推导：<br>
+              \(\Delta S_{total} = \Delta S_1 + \Delta S_2 = -\dfrac{Q}{T_1} + \dfrac{Q}{T_2} = Q\left(\dfrac{1}{T_2} - \dfrac{1}{T_1}\right)\)<br>
+              因为 \(T_1 > T_2 \Rightarrow \dfrac{1}{T_2} > \dfrac{1}{T_1}\)，所以 \(\Delta S_{total} > 0\) ✓<br>
+              <strong>结论：热从高温自发流向低温 → 宇宙总熵增加。</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">反方向呢？(cold → colder, hot → hotter)</span></div>
+        <div class="step-content">
+          <p>现在设想一个"违反直觉"的过程 —— 假设热量 \(Q\) 从冷库流向热库（\(T_2 \to T_1\)，已知 \(T_1 > T_2\)）。能量守恒并没被破坏（\(Q\) 流出冷库的同时流入热库，总能量不变）。那为什么这事不会发生？</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 反方向的 ΔS<sub>total</sub></div>
+            <div class="tp-pause">沿用思考点 1 的<strong>符号约定</strong> —— \(Q\) 恒取正值，表示热量"流动的量"；流入流出的方向通过 \(+\)/\(-\) 体现。现在场景反过来：冷库 2 失去 \(Q\)（贡献 \(-Q/T_2\)），热库 1 得到 \(Q\)（贡献 \(+Q/T_1\)）。算总熵变。</div>
+            <div class="tp-ask">"请引导我写出反方向的总熵变，并判断符号。"</div>
+            <div class="tp-write">写出：<br>
+              \(\Delta S_{total} = -\dfrac{Q}{T_2} + \dfrac{Q}{T_1} = Q\left(\dfrac{1}{T_1} - \dfrac{1}{T_2}\right)\)<br>
+              因为 \(T_1 > T_2 \Rightarrow \dfrac{1}{T_1} < \dfrac{1}{T_2}\)，所以 \(\Delta S_{total} < 0\) ✗
+            </div>
+          </div>
+
+          <div class="quote-block" style="background: rgba(192, 57, 43, 0.06); border-color: #c0392b;">
+            <strong>关键结论</strong>：cold → colder（让冷的更冷）、hot → hotter（让热的更热）这种过程<strong>不被允许</strong> —— 不是因为能量守恒被破坏（能量完全守恒），而是因为它会让<strong>宇宙总熵减少</strong>。
+          </div>
+
+          <p>这就是<strong>第二定律</strong>在管的事：自然过程总朝<strong>总熵不减少</strong>的方向走。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">不可逆循环（含摩擦） · 环境熵增</span></div>
+        <div class="step-content">
+          <p>上一板块（Card 4）我们看到：有摩擦的卡诺循环 \(\sum \Delta S_{cycle}\) 偏大。现在用本卡的工具把这件事说清楚。</p>
+
+          <p>把"系统"和"环境"分开看：</p>
+          <ul>
+            <li>系统（热机工质）经过一个完整循环回到初态 → \(\Delta S_{system} = 0\)（状态函数嘛！）</li>
+            <li>环境（高温热库 + 低温热库 + 摩擦释放的热）的总熵变是关键</li>
+          </ul>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-r3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+                <marker id="ar-o" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e67e22"/></marker>
+              </defs>
+              <rect x="200" y="90" width="120" height="60" fill="#fff" stroke="#00409A" stroke-width="2" rx="6"/>
+              <text x="260" y="116" text-anchor="middle" font-size="13" font-weight="bold" fill="#00409A">热机</text>
+              <text x="260" y="137" text-anchor="middle" font-size="10" fill="#555">含摩擦</text>
+              <rect x="40" y="90" width="100" height="60" fill="#fde2e2" stroke="#c0392b" stroke-width="2" rx="6"/>
+              <text x="90" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">高温库 T₁</text>
+              <rect x="380" y="90" width="100" height="60" fill="#dce8f5" stroke="#0055B8" stroke-width="2" rx="6"/>
+              <text x="430" y="118" text-anchor="middle" font-size="12" font-weight="bold" fill="#0055B8">低温库 T₂</text>
+              <line x1="145" y1="110" x2="198" y2="110" stroke="#c0392b" stroke-width="2" marker-end="url(#ar-r3)"/>
+              <text x="172" y="102" text-anchor="middle" font-size="11" fill="#c0392b">Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan></text>
+              <line x1="322" y1="125" x2="378" y2="125" stroke="#0055B8" stroke-width="2" marker-end="url(#ar-b)"/>
+              <text x="350" y="118" text-anchor="middle" font-size="11" fill="#0055B8">Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+              <line x1="290" y1="155" x2="380" y2="190" stroke="#e67e22" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-o)"/>
+              <text x="395" y="195" text-anchor="start" font-size="11" font-weight="bold" fill="#e67e22">Q<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan> 摩擦热</text>
+              <text x="260" y="170" text-anchor="middle" font-size="11" fill="#27ae60">→ W 净功输出</text>
+              <text x="260" y="215" text-anchor="middle" font-size="11" fill="#333">摩擦热 Q<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan> 进入低温库（也可以是其他环境）</text>
+            </svg>
+            <div class="diagram-caption">含摩擦的热机：除了正常的 \(Q_h, Q_c\) 流动外，摩擦还<strong>额外</strong>放出 \(Q_f\) 进入冷端</div>
+          </div>
+
+          <div class="quote-block" style="background: rgba(230, 126, 34, 0.06); border-color: var(--accent-orange);">
+            <strong>先回顾</strong>：本思考点会用到卡诺循环的一个核心关系 ——
+            <div style="margin: 6px 0 4px 0; text-align: center;">
+              \[\dfrac{Q_c}{T_2} = \dfrac{Q_h}{T_1} \quad (\text{可逆卡诺循环})\]
+            </div>
+            它来自卡诺效率公式 \(\eta = 1 - T_c/T_h\) 的等价变形（即 \(Q_c/Q_h = T_c/T_h\)）。<br>
+            如果记不清这是怎么来的，请翻回 <a href="carnot-cycle-task-cards.html" style="color: var(--secondary-blue);">卡诺循环任务卡 · Card 4</a> 复习 5 分钟再回来。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 把摩擦的环境熵加起来</div>
+            <div class="tp-pause">写出三个部分的熵变 —— 高温库放热 \(Q_h\)（贡献 \(-Q_h/T_1\)）、低温库吸热 \(Q_c\)（贡献 \(+Q_c/T_2\)）、低温库再额外吸摩擦热 \(Q_f\)（贡献 \(+Q_f/T_2\)）。把它们加起来，然后用上面回顾的卡诺关系化简。</div>
+            <div class="tp-ask">"请引导我推 \(\Delta S_{env}\)，提示我用 \(Q_c/T_2 = Q_h/T_1\) 来抵消前两项。"</div>
+            <div class="tp-write">写出：<br>
+              \(\Delta S_{env} = -\dfrac{Q_h}{T_1} + \dfrac{Q_c}{T_2} + \dfrac{Q_f}{T_2}\)<br>
+              代入卡诺关系 \(\dfrac{Q_c}{T_2} = \dfrac{Q_h}{T_1}\)，前两项<strong>相互抵消</strong>。<br>
+              剩下：\(\Delta S_{env} = \dfrac{Q_f}{T_2} \geq 0\) ✓<br>
+              加上系统 \(\Delta S_{sys} = 0\)（状态函数循环归零）：<br>
+              <strong>\(\Delta S_{universe} = \Delta S_{sys} + \Delta S_{env} = \dfrac{Q_f}{T_2} \geq 0\)</strong>
+            </div>
+            <div class="tp-hint">摩擦"创造"了熵 —— 它把本可以做功的能量不可逆地变成热散到冷端，给宇宙总熵增了 \(Q_f/T_2\)。理想（无摩擦）卡诺循环 \(Q_f = 0\)，\(\Delta S_{universe} = 0\)；真实有摩擦 \(Q_f > 0\)，\(\Delta S_{universe} > 0\)。
+            </div>
+          </div>
+
+          <p>把刚才的三个推导合在一起，就是<strong>第二定律</strong>的核心：</p>
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.08); border-color: var(--primary-blue); text-align: center;">
+            <strong style="font-size: 1.1rem;">\[\boxed{\Delta S_{universe} \geq 0}\]</strong><br>
+            <span style="font-size: 0.85rem;">对于<strong>可逆过程</strong>取等号；对于<strong>不可逆过程</strong>严格大于零。</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">第二定律的三种等价表述</span></div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <ol>
+            <li>"第二定律历史上有三种表述：<strong>克劳修斯</strong>（热不能自发从冷流向热）、<strong>开尔文-普朗克</strong>（不能将单一热源的热全部变为功）、<strong>熵</strong>（\(\Delta S_{universe} \geq 0\)）。请反问引导我说明这三种表述<strong>等价</strong>的核心逻辑（不直接给推导）。"</li>
+            <li>"我学了第一定律说'能量守恒'，第二定律说'熵不减'。这两者在物理上是<strong>独立</strong>的还是有联系？"</li>
+            <li>"日常哪些观察其实都是第二定律在'管'？请帮我列 5 个并解释为什么。"</li>
+          </ol>
+          <div class="quote-block">
+            提示：第一定律告诉你"过程中什么不变"（能量），第二定律告诉你"过程的<strong>方向</strong>"（熵不减）。前者是<strong>守恒律</strong>，后者是<strong>方向律</strong>。两者完全独立 —— 一个量守恒不等于过程可逆。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="e4c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从 \(\Delta S = Q/T\) 自己推出"热从高温自发流向低温" \(\Delta S_{total} > 0\)</span></label>
+        <label data-key="e4c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么 "cold → colder" 不被允许（不是能量守恒被破坏，而是熵会减少）</span></label>
+        <label data-key="e4c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用含摩擦循环说明 \(\Delta S_{universe} = Q_f/T_2 \geq 0\)</span></label>
+        <label data-key="e4c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出第二定律的三种表述，并知道它们是等价的</span></label>
+        <label data-key="e4c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"守恒律"（第一定律）和"方向律"（第二定律）的不同角色</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②思辨力（区分守恒律 vs 方向律） · ③创造力（从一个简单的 \(\Delta S = Q/T\) 推出宇宙级的方向性）· ⑤学习力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 5 ==================== -->
+  <div class="task-card" id="task5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">5</div>
+      <h3>时间之矢 · 玻尔兹曼公式的深意 · 历史</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把熵增和"时间方向"联系起来；理解 \(S = k\ln\Omega\) 在物理学史上的意义；接触玻尔兹曼之争与现代延伸<br>
+        <strong>建议时长</strong>：30-40 分钟（本卡偏哲学/历史，不强推公式）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想 —— 时间有方向吗？</span></div>
+        <div class="step-content">
+          <p>两个思想实验：</p>
+          <ol>
+            <li><strong>视频 A</strong>：一杯热咖啡放在桌上，慢慢冒着白汽变凉。如果我把这段视频<strong>倒放</strong> —— 凉咖啡自己变热、白汽飘回水中 —— 你能一眼看出"这视频在倒放"吗？</li>
+            <li><strong>视频 B</strong>：两个台球做完美的弹性碰撞（无摩擦）。如果倒放这段视频，你能看出来吗？</li>
+          </ol>
+          <p>问题：</p>
+          <ul>
+            <li>为什么视频 A 一眼能看出来倒放，视频 B 几乎看不出来？</li>
+            <li>这两个场景在物理上有什么本质区别？</li>
+            <li>"时间有方向" 这件事 —— 是物理定律决定的，还是别的什么决定的？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 时间之矢</span></div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <ol>
+            <li>"什么是'<strong>时间之矢</strong>'（arrow of time）？我们看到的宏观世界明显有时间方向（咖啡变凉、人变老），但牛顿方程和麦克斯韦方程在数学上是<strong>时间反演不变的</strong>（把 \(t \to -t\) 方程不变）。这两个事实怎么调和？请反问引导我自己想。"</li>
+            <li>"用上一卡的语言：热从高温流向低温 → 宇宙总熵增加。这和'时间向前流' 有什么关系？"</li>
+            <li>"如果某天你看到一杯凉咖啡自己变热 —— 这是不可能的吗？或者只是<strong>概率极低</strong>？"（这是玻尔兹曼当年最关键的洞见）</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键洞察（玻尔兹曼）</strong>：第二定律不是<strong>绝对禁止</strong>违反它的过程，而是这些过程的<strong>概率小到可以忽略</strong>。对一杯咖啡（\(N \sim 10^{23}\)），熵自发减少的概率约为 \(e^{-10^{23}}\) —— 在宇宙年龄内永远不会发生一次。这就是为什么宏观世界的时间方向看起来是"绝对的"。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">玻尔兹曼公式的深意 + 历史</span></div>
+        <div class="step-content">
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+              <rect x="60" y="40" width="180" height="160" fill="#f8f4ee" stroke="#5d4e3a" stroke-width="2.5" rx="4"/>
+              <text x="150" y="80" text-anchor="middle" font-size="13" fill="#5d4e3a">Ludwig Boltzmann</text>
+              <text x="150" y="98" text-anchor="middle" font-size="11" fill="#5d4e3a">1844 – 1906</text>
+              <text x="150" y="135" text-anchor="middle" font-size="20" font-weight="bold" fill="#5d4e3a">S = k log W</text>
+              <text x="150" y="170" text-anchor="middle" font-size="10" fill="#5d4e3a">Wien Zentralfriedhof</text>
+              <text x="150" y="185" text-anchor="middle" font-size="10" fill="#5d4e3a">(维也纳中央公墓)</text>
+
+              <g transform="translate(280, 50)">
+                <text x="0" y="0" font-size="13" font-weight="bold" fill="#00409A">公式连接了 ——</text>
+                <text x="0" y="24" font-size="11" fill="#555">• 宏观: 熵 S（温度计能读）</text>
+                <text x="0" y="42" font-size="11" fill="#555">• 微观: Ω（数粒子排布）</text>
+                <text x="0" y="64" font-size="13" font-weight="bold" fill="#c0392b" style="margin-top: 8px;">两个世界的桥梁</text>
+                <text x="0" y="88" font-size="11" fill="#666">从此热力学和统计</text>
+                <text x="0" y="103" font-size="11" fill="#666">力学融为一体</text>
+                <text x="0" y="125" font-size="11" font-style="italic" fill="#888">— 1877 年提出</text>
+                <text x="0" y="140" font-size="11" font-style="italic" fill="#888">— 1906 年自杀</text>
+                <text x="0" y="155" font-size="11" font-style="italic" fill="#888">— 1906 年爱因斯坦</text>
+                <text x="0" y="170" font-size="11" font-style="italic" fill="#888">  布朗运动论文证实原子</text>
+              </g>
+            </svg>
+            <div class="diagram-caption">玻尔兹曼墓碑上的公式 \(S = k\log W\)（\(W = \Omega\)，德文 Wahrscheinlichkeit"概率"的首字母）</div>
+          </div>
+
+          <p>问 AI 了解玻尔兹曼的故事：</p>
+          <ol>
+            <li>"玻尔兹曼 1877 年提出 \(S = k\ln\Omega\) 时，物理学界主流认为'原子'根本不存在 —— 这件事对玻尔兹曼意味着什么？"</li>
+            <li>"玻尔兹曼之争（Boltzmann's controversy）是怎么回事？玻尔兹曼为什么 1906 年自杀？"</li>
+            <li>"为什么爱因斯坦 1905 年的布朗运动论文是给玻尔兹曼平反的'最后一击'？"</li>
+          </ol>
+          <div class="quote-block">
+            玻尔兹曼用统计语言重新解释了整个热力学，但他生前未被完全接受 —— 这是物理学史上最悲剧的故事之一。他<strong>生前</strong>把这个公式钉在统计力学的核心；他<strong>死后</strong>，整个 20 世纪物理学（量子力学、信息论、生物物理）都建立在这个公式之上。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">熵的延伸 —— 信息熵</span></div>
+        <div class="step-content">
+          <p>1948 年，香农 (Shannon) 定义了"信息熵"：</p>
+          <div class="quote-block" style="text-align: center;">
+            \[H = -\sum_i p_i \ln p_i\]
+          </div>
+          <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: -4px;">⚠️ <strong>符号提醒</strong>：这里的 \(H\) 是<strong>信息熵</strong>，与下一板块"焓 \(H\)"<strong>同字母但完全不同含义</strong>（焓 \(H = U + PV\) 是能量量纲，信息熵 \(H\) 是无量纲的信息量度）。两者只是历史上不幸用了同一个字母。</p>
+          <p>注意：同样是 \(\ln\)、同样的可加性、同样"多 = 不确定 = 高"。</p>
+
+          <p>问 AI：</p>
+          <ol>
+            <li>"信息熵和热力学熵在数学结构上是<strong>同一个量</strong>吗？还是只是巧合？"</li>
+            <li>"如果数学上一样，那物理意义是什么？信息和熵真的有内在联系吗？"</li>
+            <li>"麦克斯韦妖（Maxwell's demon）这个思想实验为什么把信息和熵直接联系起来了？"</li>
+          </ol>
+          <div class="quote-block" style="background: rgba(142, 68, 173, 0.06); border-color: var(--accent-purple);">
+            <strong>玻尔兹曼公式 \(S = k\ln\Omega\) 是 19 世纪的物理</strong>，但它的<strong>数学结构</strong>在 20 世纪被发现也适用于信息、生物、宇宙学、黑洞（霍金的黑洞熵 \(S = \tfrac{k c^3 A}{4 \hbar G}\)）。它是少数几个真正<strong>跨学科</strong>的物理公式之一。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">批判性反思</span></div>
+        <div class="step-content">
+          <p>最后一组开放问题，挑 2-3 个深入想：</p>
+          <ol>
+            <li>玻尔兹曼说"第二定律不是绝对，只是概率"—— 你能接受这个观点吗？这和你对"物理定律"的理解一致吗？</li>
+            <li>如果熵增定义了时间方向，那"时间"本身是不是一个<strong>独立</strong>的物理量？还是只是熵的"影子"？</li>
+            <li>宇宙总熵会一直增加吗？还是有上限（"热寂"）？现代宇宙学（暗能量、宇宙膨胀）怎么看待这个问题？</li>
+            <li>生物体（细胞、人）局部"看起来"在减熵（变得有序）—— 这违反第二定律吗？为什么？</li>
+            <li>玻尔兹曼把熵从"宏观量"变成"微观可数的量"。这种"换视角"是物理学进步的关键动作吗？你能想到其他类似的例子吗？（牛顿引力 → 广义相对论的几何视角；经典力学 → 量子力学的算符视角……）</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="e5c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"宏观时间方向 = 熵增方向"解释为什么咖啡变凉的视频一眼能看出倒放</span></label>
+        <label data-key="e5c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"第二定律不是绝对禁止逆过程，只是概率小到忽略"的玻尔兹曼观点</span></label>
+        <label data-key="e5c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道 \(S = k\ln W\) 刻在玻尔兹曼墓碑上，并了解他的生平故事</span></label>
+        <label data-key="e5c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我对信息熵 / 黑洞熵 / 生物体的"减熵" 等延伸话题产生了好奇</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ②思辨力（概率 vs 绝对禁止） · ⑥人文素养（科学史、玻尔兹曼之争、跨学科延伸）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table" style="font-size: 0.88rem;">
+      <tr>
+        <td>① 手写推导稿</td>
+        <td>A4 纸手写，<strong>完整推导自由膨胀的 \(\Delta S = Nk\ln 2\)，两条路径都要写</strong>（微观状态数法 + 宏观等温可逆法），并写出两者如何拼出玻尔兹曼公式 \(S = k\ln\Omega\)</td>
+      </tr>
+      <tr>
+        <td>② 学习反思日志</td>
+        <td>200-300 字，主题：<strong>"这次我对熵的理解有什么变化？哪一步让我意外？哪一步让我卡住？"</strong></td>
+      </tr>
+      <tr>
+        <td>③ 自评清单</td>
+        <td>所有 5 张任务卡的 checkpoint 都勾完</td>
+      </tr>
+      <tr>
+        <td>④ 深度口试预约</td>
+        <td>与学科导师约 20-25 分钟（本板块为进阶模块，口试时间略长）。口试核心问题：<br>• 为什么玻尔兹曼公式用 \(\ln\) 而不是其他函数？<br>• 自由膨胀的两条推导路径分别在算什么？为什么殊途同归？<br>• 第二定律的三种表述如何统一？</td>
+      </tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：手写推导稿是这一进阶模块的关键产出 —— 自由膨胀的"两条路径殊途同归"必须<strong>自己手推一遍</strong>，不能让 AI 代写。反思日志要写出<strong>你自己的</strong>变化和困惑。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="entropy-meaning-mock-check.html">📝 基础检测</a>
+    <a href="entropy-meaning-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 熵的物理意义（进阶模块）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-entropy-meaning-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

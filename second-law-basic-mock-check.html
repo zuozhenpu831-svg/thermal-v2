@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二定律 · 基础 · 基础检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 第二定律 · 基础 &raquo;
+  <strong>第二定律 · 基础 · 基础检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的基础检测由教师组织<strong>纸笔形式 + 批改 + 签字</strong>。本练习的『通过 70 分』≈ 已具备纸笔检测的基础水平,可继续备考;『荣誉 90 分』≈ 备考充分。学分由教师组织的真实检测决定,不在此处。
+</div>
+
+<header class="page-header">
+  <h1>第二定律 · 基础 · 基础检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(28 题池, 每次随机抽 7 题) · 100 分 · 约 30-35 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>7</strong> 道题(每个考点 T1-T7 各随机抽 1 道, 共 28 题池)</li>
+    <li>分值: T1=14 / T2=14 / T3=14 / T4=14 / T5=16 / T6=14 / T7=14 = <strong>100</strong></li>
+    <li>通过 ≥ 70 分(已具备纸笔检测基础水平);荣誉 ≥ 90 分(备考充分)</li>
+    <li>建议 30-35 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>提交后展示标准答案 + 解析(三段式 · 含常见误区 + 扩展)+ 锚回 task-cards Card N</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+    <li>可点『重新抽题』再做, 抽到不同变体训练(防止背答案)</li>
+  </ul>
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 7</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-mock-check-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-mock-check-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="second-law-basic-task-cards.html">📖 返回学习任务卡</a>
+  <span>熟练度模拟(待开放)</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 第二定律 · 基础 · 基础检测 · mock-check Skill v0.1.4</footer>
+
+</div>
+
+<script>
+const EXPORT_NAMES = {
+  'CLAUSIUS-STATEMENT':              '克劳修斯陈述(热不能自发从低温到高温)',
+  'KELVIN-STATEMENT':                '开尔文陈述(不能从单一热源吸热完全做功)',
+  'TWO-STATEMENTS-EQUIVALENT':       '两种陈述逻辑等价',
+  'SPONTANEITY-DEFINITION':          '『自发』定义(不引起其他变化)',
+  'SPONTANEOUS-DIRECTION':           '自发方向(自然过程单向性)',
+  'IRREVERSIBLE-PROCESS':            '不可逆性(反向不自发)',
+  'SPONTANEITY-DISORDER-CRITERION':  '自发判据(熵增 = 无序度增加)',
+  '2ND-PERPETUAL-MOTION-IMPOSSIBLE': '第二类永动机不可能',
+  '1ST-VS-2ND-PERPETUAL':            '第一类 vs 第二类永动机',
+  'HEAT-ENGINE-ENERGY-FLOW':         '热机能量流向 \\(Q_h = W + Q_c\\)',
+  'HEAT-ENGINE-EFFICIENCY-LIMIT':    '热机效率 \\(\\eta < 1\\)(必有废热)',
+  'TEMP-DIFFERENCE-REQUIRED':        '热机必须有温差',
+  'ENTROPY-QUALITATIVE':             '熵的定性定义(无序度)',
+  'ENTROPY-INCREASE-PRINCIPLE':      '熵增原理(孤立系统 \\(\\Delta S \\geq 0\\))',
+  'LOCAL-VS-TOTAL-ENTROPY':          '局部熵减 vs 整体熵增',
+  'ENTROPY-VS-INTERNAL-ENERGY':      '熵 S 与内能 U 独立',
+  '2ND-LAW-VS-1ST-LAW':              '第一定律管数量 / 第二定律管方向',
+  'BOUNDARY-NO-CARNOT-FORMULA':      '边界:不推卡诺效率严格形式',
+  'BOUNDARY-NO-ENTROPY-FORMULA':     '边界:不引 \\(dS = dQ_\\text{可逆}/T\\)',
+  'BOUNDARY-NO-BOLTZMANN':           '边界:不引玻尔兹曼公式 \\(S = k_B \\ln \\Omega\\)'
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:14, difficulty:"基础", exportIds:["CLAUSIUS-STATEMENT"],
+      stem:"<strong>克劳修斯陈述</strong>的正确表述是:",
+      options:{A:"热可以从低温物体自发传到高温物体",B:"不可能把热量从低温物体传到高温物体<strong>而不引起其他变化</strong>",C:"热传导效率随温差减小",D:"两个物体接触后温度永远相等"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>克劳修斯陈述(CLAUSIUS-STATEMENT)</strong>:不可能把热量从低温物体传到高温物体<strong>而不引起其他变化</strong>。等价于『热不能<strong>自发</strong>从低温流向高温』。<br>注意修饰词『<strong>而不引起其他变化</strong>』 — 制冷机 / 冰箱 / 空调可以让热从低温流向高温, 但消耗了外部电能(引起了其他变化), 故不违反此陈述。',
+        logic:'各选项分析:<br>· <strong>A</strong> 错 — 与第二定律相反, 自发传热只能从高温到低温;<br>· <strong>B 正确</strong>:精确表述, 含『而不引起其他变化』关键修饰;<br>· <strong>C「效率随温差减小」</strong>错 — 这是传热速率的描述, 不是第二定律内容;<br>· <strong>D「温度永远相等」</strong>错 — 这与第二定律不直接相关(达到热平衡才相等, 不是『永远』)。',
+        connection:'<strong>『自发』的关键限定</strong>:不引起其他变化, 不借助外力。<br>· 制冷机让热从低温到高温, 但消耗电能 → <strong>不算自发</strong>;<br>· 冰箱让食物保持低温, 但压缩机做功 → <strong>不算自发</strong>。<br><strong>下游</strong>:① <strong>开尔文陈述</strong>(本板块 T2)与克劳修斯陈述<strong>逻辑等价</strong>;② <strong>进阶 · 卡诺循环</strong>用克劳修斯陈述论证热机效率上限;③ <strong>化学反应自发性</strong>分析的物理基础。'
+      },
+      mistakes:'· 漏掉『而不引起其他变化』关键修饰;<br>· 把『不能自发』误读为『不能发生』(实际可发生但需外力)。',
+      extension:'克劳修斯陈述是 1850 年代<strong>克劳修斯(Clausius)</strong>提出的, 比开尔文陈述(1851)略早。克劳修斯之后还引入了<strong>熵 \\(S\\)</strong>这一关键概念, 把第二定律从『陈述』提升到『定量』。',
+      cardAnchor:"Card 1 STEP 2" },
+    { id:"T1-2", type:"choice", score:14, difficulty:"中等", exportIds:["SPONTANEITY-DEFINITION","CLAUSIUS-STATEMENT"],
+      stem:"<strong>空调将室内热量排到室外</strong>(把热从低温的室内传到高温的室外), 这与<strong>克劳修斯陈述</strong>是否矛盾?",
+      options:{A:"矛盾, 因为热从低温流到了高温",B:"不矛盾, 因为空调消耗了电能, <strong>引起了其他变化</strong>(不算『自发』)",C:"矛盾, 但实际可以违反第二定律",D:"不矛盾, 因为空调利用了温差"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>『自发』的定义(SPONTANEITY-DEFINITION)</strong>:不引起其他变化 / 不借助外力。空调 / 冰箱让热从低温流向高温<strong>消耗了电能</strong>, 引起了电网 / 发电厂的『其他变化』, 故<strong>不算自发</strong>, 不违反克劳修斯陈述。',
+        logic:'各选项分析:<br>· <strong>A「矛盾」</strong>错 — 表面看是『低 → 高』, 但<strong>消耗了电能</strong>不是自发;<br>· <strong>B 正确</strong>:消耗电能 → 引起其他变化 → 不算自发;<br>· <strong>C「实际可违反第二定律」</strong>错 — 第二定律是严格定律, 不可违反;<br>· <strong>D「利用温差」</strong>错 — 空调本质上是反方向(把低温的热搬到高温), 与温差利用(热机)正相反。',
+        connection:'<strong>『自发』vs『非自发』</strong>的区分是第二定律理解的关键:<br>· <strong>自发</strong>:不需外力, 系统自动发生 — 如热从高温到低温 / 气体扩散;<br>· <strong>非自发</strong>:需外力推动 — 如冰箱制冷 / 空调降温 / 水从下到上的泵送。<br>非自发过程<strong>可以发生</strong>, 但需要『其他变化』作为代价。这就是热力学第二定律的精神 — 不禁止任何过程, 但规定了<strong>方向 + 代价</strong>。<br><strong>下游</strong>:① <strong>开尔文陈述</strong>同样用『自发』限定;② <strong>化学反应</strong>的自发性分析(由吉布斯自由能 ΔG 判定)。'
+      },
+      mistakes:'· 误以为空调违反第二定律;<br>· 不能区分『自发』vs『可发生』。',
+      extension:'<strong>冰箱 / 空调 / 热泵 = 反向热机</strong>:消耗电能或机械功 \\(W\\), 把低温的热 \\(Q_c\\) 输送到高温, 总排出 \\(Q_h = W + Q_c\\)。这是<strong>热机能量流向</strong>的反向应用。',
+      cardAnchor:"Card 1 STEP 2 思考点 1" },
+    { id:"T1-3", type:"choice", score:14, difficulty:"中等", exportIds:["CLAUSIUS-STATEMENT","SPONTANEOUS-DIRECTION"],
+      stem:"以下哪种现象是<strong>自发过程</strong>(符合第二定律的自发方向)?",
+      options:{A:"两杯不同温度的水放一起, 高温水温度上升 / 低温水温度下降",B:"两杯不同温度的水放一起, 温度均化(高温降低 / 低温升高)",C:"空气中的氮气和氧气自发分开(N₂ 一边 / O₂ 一边)",D:"散开的气体自发聚回容器一角"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>自发方向(SPONTANEOUS-DIRECTION)</strong>:自然过程都有<strong>单向性</strong>。常见自发方向:<br>· 热从高温到低温;<br>· 气体从高密度区域扩散到低密度区域;<br>· 油墨入水扩散均匀;<br>· 摩擦消耗机械能变成热。<br>这些过程的反向<strong>不会自发发生</strong>。',
+        logic:'各选项分析:<br>· <strong>A「热从低温到高温」</strong>错 — 反方向, 违反克劳修斯陈述;<br>· <strong>B 正确</strong>:热从高温到低温, 温度均化 — 自发方向;<br>· <strong>C「气体自发分离」</strong>错 — 气体自发<strong>混合</strong>不<strong>分离</strong>;<br>· <strong>D「散开气体聚回」</strong>错 — 反方向, 不自发。',
+        connection:'<strong>『自发方向』的统一规律</strong>:都是<strong>从有序到无序</strong>(熵增):<br>· 温度均化:能量从『集中』到『分散』 = 熵增;<br>· 气体扩散:粒子从『一边』到『均匀』 = 熵增;<br>· 摩擦发热:机械能从『有序』到『无序』 = 熵增。<br><strong>下游</strong>:① <strong>本板块 T5 自发判据</strong> = 熵增;② <strong>进阶 · 熵的物理意义</strong>给出统计本质;③ <strong>化学反应自发性</strong> 由 \\(\\Delta G = \\Delta H - T\\Delta S < 0\\) 判定。'
+      },
+      mistakes:'· 混淆自发方向(从高到低 / 从有序到无序);<br>· 误以为气体可以自发分离(实际只能扩散混合)。',
+      extension:'<strong>「时间方向」</strong>:自发方向 = 熵增方向 = 时间向前的方向。这是物理学中『时间方向性』的本源 — <strong>从无序到有序</strong>需要外力或耗能。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T1-4", type:"multi", score:14, difficulty:"较难", exportIds:["CLAUSIUS-STATEMENT","SPONTANEITY-DEFINITION","SPONTANEOUS-DIRECTION"],
+      stem:"关于<strong>克劳修斯陈述 + 自发性</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"克劳修斯陈述:热不能<strong>自发</strong>从低温到高温",B:"『自发』= 不引起其他变化 / 不借助外力",C:"冰箱让热从低温到高温, 不违反第二定律(消耗电能)",D:"室温的杯子可以自发变热(违反第二定律但常见)",E:"两个物体接触, 热从高温到低温是自发方向"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>克劳修斯陈述 + 自发性的综合判断</strong>:第二定律核心 + 关键修饰。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>;<br>· <strong>B 正确</strong>:『自发』的定义;<br>· <strong>C 正确</strong>:消耗电能 → 不自发, 不违反第二定律;<br>· <strong>D 错</strong> — 室温杯子不会自发变热, 也不会违反第二定律;<br>· <strong>E 正确</strong>:自发方向。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>本板块的核心叙事</strong>:第二定律不禁止任何过程发生, 但规定了<strong>方向 + 代价</strong>。<br><strong>下游</strong>:① 开尔文陈述 / 第二类永动机 / 熵增原理都建立在『自发 vs 非自发』区分上;② <strong>化学反应</strong>自发性分析 = 第二定律的化学应用。'
+      },
+      mistakes:'· 选 D(室温杯子不违反, 也不会自发变热);<br>· 漏选 C(空调 / 冰箱与第二定律的关系)。',
+      extension:'<strong>『自发』vs『不自发』</strong>的辨识是第二定律考点的核心。掌握『不引起其他变化』这一关键修饰即可不出错。',
+      cardAnchor:"Card 1 STEP 2-4" }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:14, difficulty:"基础", exportIds:["KELVIN-STATEMENT"],
+      stem:"<strong>开尔文陈述</strong>的正确表述是:",
+      options:{A:"不可能从单一热源吸取热量, <strong>全部用来做功而不引起其他变化</strong>",B:"任何热机的效率必然 100%",C:"热可以全部转化为功, 但功不能全部转化为热",D:"温度无法降到绝对零度"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>开尔文陈述(KELVIN-STATEMENT)</strong>:不可能从<strong>单一热源</strong>吸取热量全部用来做功<strong>而不引起其他变化</strong>。等价于『不可能有 100% 效率的热机』 / 『不可能有第二类永动机』。<br>注意:从单一热源吸热部分变功(同时部分变废热放给低温热源)是可能的, 关键是『全部』。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:精确表述, 含『单一热源』和『全部』关键修饰;<br>· <strong>B「100% 效率」</strong>错 — 与开尔文陈述相反;<br>· <strong>C「热可全部变功 / 功不能全部变热」</strong>错 — 反了, 功可以全部变热(摩擦 / 焦耳实验), 热不能全部变功;<br>· <strong>D「温度无法到零」</strong>错 — 这是热力学第三定律的内容。',
+        connection:'<strong>开尔文陈述与第二类永动机的关系</strong>:第二类永动机 = 从单一热源吸热完全变功 = <strong>违反开尔文陈述</strong>。<br>注意区分:<br>· <strong>第一类永动机</strong>:不消耗能量却做功 → 违反第一定律(能量守恒);<br>· <strong>第二类永动机</strong>:从单一热源吸热完全变功 → 违反第二定律(开尔文陈述)。<br><strong>下游</strong>:① <strong>热机效率上限</strong>(本板块 T4);② <strong>进阶 · 卡诺循环</strong>给出严格效率 \\(\\eta = 1 - T_c/T_h\\);③ <strong>克劳修斯陈述</strong>与开尔文陈述<strong>逻辑等价</strong>。'
+      },
+      mistakes:'· 漏掉『单一热源』和『全部』关键修饰;<br>· 把第二定律与第三定律(绝对零度不可达)混淆。',
+      extension:'<strong>开尔文(Kelvin)</strong>= 威廉·汤姆生 1851 年提出此陈述, 与克劳修斯陈述(1850)几乎同期。两位科学家从不同角度独立陈述了第二定律。',
+      cardAnchor:"Card 1 STEP 3" },
+    { id:"T2-2", type:"choice", score:14, difficulty:"中等", exportIds:["2ND-PERPETUAL-MOTION-IMPOSSIBLE","KELVIN-STATEMENT"],
+      stem:"<strong>第二类永动机</strong>(从单一热源吸热完全转化为功)<strong>不可能</strong>的原因是:",
+      options:{A:"违反热力学第一定律(能量守恒)",B:"违反热力学第二定律(开尔文陈述)",C:"违反牛顿运动定律",D:"机械损失太大"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>第二类永动机的不可能性</strong>:从单一热源吸热全部变功 = <strong>违反开尔文陈述</strong>。<br>但注意:第二类永动机<strong>满足第一定律</strong>(能量守恒) — 吸入热量 Q 完全转化为功 W, 数量守恒。它的<strong>不可能性源于第二定律</strong>, 不源于第一定律。',
+        logic:'各选项分析:<br>· <strong>A「违反第一定律」</strong>错 — 第二类永动机<strong>满足</strong>第一定律(能量守恒);<br>· <strong>B 正确</strong>:违反第二定律(开尔文陈述);<br>· <strong>C「牛顿定律」</strong>错 — 与牛顿定律无关;<br>· <strong>D「机械损失」</strong>错 — 是工程上的损失, 不是原则上的不可能。',
+        connection:'<strong>两类永动机的区分</strong>是热力学两定律必要性的关键体现:<br>· <strong>第一类</strong>:违反第一定律(能量守恒) → 不可能;<br>· <strong>第二类</strong>:满足第一定律, 但违反第二定律(方向) → <strong>仍</strong>不可能;<br>· 两个定律<strong>独立而互补</strong>, 缺一不可。<br><strong>下游</strong>:① <strong>本板块 T7</strong>第二定律 vs 第一定律的对比;② <strong>进阶 · 卡诺循环</strong>给出实际热机的效率上限 \\(\\eta < 1\\);③ <strong>热泵 / 制冷机</strong>是反向热机, 不是永动机。'
+      },
+      mistakes:'· 把第一类与第二类永动机混淆;<br>· 误以为第二类永动机违反能量守恒。',
+      extension:'<strong>『从海水吸热推船』</strong>是常见的第二类永动机方案:海水有几乎无限的热能, 如果能完全转化为推力, 船就不需要燃料。但这违反开尔文陈述, 故不可能 — 必须有一个比海水温度低的『冷源』, 才能让海水的热部分转化为功。',
+      cardAnchor:"Card 2 STEP 1" },
+    { id:"T2-3", type:"choice", score:14, difficulty:"中等", exportIds:["1ST-VS-2ND-PERPETUAL"],
+      stem:"关于<strong>两类永动机的区分</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"第一类违反第一定律, 第二类违反第二定律",B:"两类都违反第一定律",C:"两类都违反第二定律",D:"两类区分无意义, 实际上等同"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>两类永动机的根本区分(1ST-VS-2ND-PERPETUAL)</strong>:<br>· <strong>第一类</strong>:不消耗能量却做功 → 违反<strong>第一定律</strong>(能量守恒);<br>· <strong>第二类</strong>:从单一热源吸热全部变功 → 违反<strong>第二定律</strong>(开尔文陈述)。<br>两类<strong>同时不可能</strong>, 但<strong>违反不同定律</strong>, 体现了两个定律的<strong>独立性</strong>。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:精确区分;<br>· <strong>B「都违反第一定律」</strong>错 — 第二类满足第一定律;<br>· <strong>C「都违反第二定律」</strong>错 — 第一类违反第一定律不是第二定律;<br>· <strong>D「实际等同」</strong>错 — 物理本质截然不同。',
+        connection:'<strong>『两个定律独立且必要』</strong>的辨证关系:<br>· 第一定律:能量守恒(<strong>必要条件</strong>);<br>· 第二定律:方向性 / 不可逆性(<strong>必要条件</strong>);<br>· 两个独立但都必要 — 缺一不可。<br><strong>下游</strong>:① <strong>本板块 T7</strong>两定律对比;② <strong>进阶 · 状态函数</strong>把『熵 \\(S\\) 是状态量』作为第二定律的状态量化体现;③ <strong>化学反应</strong>分析时, 焓 / 熵 / 吉布斯都涉及两定律的整合。'
+      },
+      mistakes:'· 误以为两类永动机违反同一定律;<br>· 不能体会到两定律的独立性。',
+      extension:'<strong>『必要 + 充分』的辨证</strong>:第一定律是<strong>必要</strong>(不守恒不可能) 但<strong>不充分</strong>(守恒不一定可能)。第二定律补充方向性, 与第一定律共同构成『充分必要』。这是物理学方法论的精彩示例。',
+      cardAnchor:"Card 2 STEP 1" },
+    { id:"T2-4", type:"multi", score:14, difficulty:"较难", exportIds:["KELVIN-STATEMENT","2ND-PERPETUAL-MOTION-IMPOSSIBLE","1ST-VS-2ND-PERPETUAL"],
+      stem:"关于<strong>开尔文陈述 + 两类永动机</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"开尔文陈述:不能从单一热源吸热完全做功",B:"第二类永动机违反开尔文陈述, 故不可能",C:"第一类永动机违反第一定律(不消耗能量却做功)",D:"两类永动机都违反热力学第二定律",E:"第二定律和第一定律共同保证了热机效率 < 100%"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>开尔文陈述 + 两类永动机的综合判断</strong>:第二定律的核心内容 + 两类的区分。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>;<br>· <strong>B 正确</strong>;<br>· <strong>C 正确</strong>;<br>· <strong>D 错</strong> — 第一类违反第一定律, 不违反第二定律;<br>· <strong>E 正确</strong>:第一定律保证不可能凭空做功; 第二定律保证必须有废热(\\(\\eta < 100\\%\\))。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>『两定律共同保证 η < 100%』</strong>:<br>· 第一定律: 输入能量 = 输出能量 + 内能变化, 故 \\(Q_h = W + Q_c\\);<br>· 第二定律: \\(Q_c > 0\\)(必有废热), 故 \\(W < Q_h\\) → \\(\\eta = W/Q_h < 1\\)。<br>两个定律联合给出热机效率上限。<br><strong>下游</strong>:① <strong>本板块 T4</strong>热机能量流向;② <strong>进阶 · 卡诺循环</strong>给出严格 \\(\\eta_\\text{卡诺} = 1 - T_c/T_h\\)。'
+      },
+      mistakes:'· 选 D(第一类违反第一定律, 不是第二定律);<br>· 漏选 E(两定律联合给出效率上限)。',
+      extension:'<strong>『两定律的对偶』</strong>:① 第一定律 → 能量守恒, 数量上不可能凭空;② 第二定律 → 方向性, 不可能凭空。两个定律对热力学过程提供独立的<strong>禁戒</strong>, 都不可违反。',
+      cardAnchor:"Card 2 STEP 1" }
+  ],
+  T3: [
+    { id:"T3-1", type:"choice", score:14, difficulty:"基础", exportIds:["SPONTANEOUS-DIRECTION"],
+      stem:"以下<strong>不是</strong>自发过程方向的是:",
+      options:{A:"热从高温物体流向低温物体",B:"气体从高压区域扩散到低压区域",C:"摩擦消耗机械能变成热",D:"散开的气体自发聚回容器一角"},
+      answer:"D",
+      explanation:{
+        principle:'<strong>自发过程的方向</strong>:都是从<strong>有序到无序</strong>(熵增方向):<br>· 热从高温到低温;<br>· 气体扩散;<br>· 摩擦发热;<br>· 油墨入水扩散。<br>这些过程的反向不会自发发生。',
+        logic:'各选项分析:<br>· <strong>A 正确(是自发方向)</strong>:热传导自发方向;<br>· <strong>B 正确(是自发方向)</strong>:气体扩散自发方向;<br>· <strong>C 正确(是自发方向)</strong>:机械能 → 热的不可逆性;<br>· <strong>D 错</strong>(<strong>不是自发方向</strong>):反方向, 散开的气体不会自发聚回 — 这要求<strong>极低概率</strong>的微观状态对齐(熵减), 不会自发发生;<br>故选 <strong>D</strong>。',
+        connection:'<strong>『散开气体聚回』的不可能性</strong>是<strong>熵增原理</strong>(本板块 T5)的具体示例:<br>· 散开的气体: 微观状态数极多 → 熵大;<br>· 聚回一角的气体: 微观状态数少 → 熵小;<br>· 熵从大到小不自发 → 散开的气体不会自发聚回。<br><strong>下游</strong>:① <strong>本板块 T5</strong>熵增原理;② <strong>进阶 · 熵的物理意义</strong>给出统计本质 \\(S = k_B \\ln \\Omega\\)。'
+      },
+      mistakes:'· 把<strong>能可以发生</strong>(非自发但可能, 需外力)与<strong>不能发生</strong>混淆 — 散开的气体并非完全不可能聚回(概率极小但不为零), 只是<strong>不会自发</strong>。',
+      extension:'<strong>『微观可逆 vs 宏观不可逆』</strong>:微观角度看, 每个分子的运动是可逆的(牛顿定律是时间对称的); 但宏观角度看, 自发过程不可逆 — 这一矛盾在<strong>熵的统计本质</strong>中得到解决(进阶板块讨论)。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T3-2", type:"choice", score:14, difficulty:"中等", exportIds:["IRREVERSIBLE-PROCESS"],
+      stem:"<strong>不可逆性</strong>的精确含义是:",
+      options:{A:"过程不能反向(完全禁止)",B:"过程的反向<strong>不会自发发生</strong>; 走反向需付出代价(消耗外功 / 引起其他变化)",C:"过程的能量不能保持",D:"过程不能在数学上描述"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>不可逆性(IRREVERSIBLE-PROCESS)</strong>:<br>· <strong>不</strong>意味着反向<strong>完全禁止</strong>(可以通过外力实现);<br>· <strong>意味着</strong>反向<strong>不自发</strong> — 即没有外力推动时不会发生;<br>· 走反向需<strong>付出代价</strong> — 消耗外功 / 引起其他变化。<br>例:气体扩散后<strong>可以</strong>用活塞压回, 但需消耗机械功。',
+        logic:'各选项分析:<br>· <strong>A「完全禁止」</strong>错 — 可以通过外力反向, 不是完全禁止;<br>· <strong>B 正确</strong>:反向不自发 + 需代价;<br>· <strong>C「能量不能保持」</strong>错 — 能量守恒不受不可逆性影响;<br>· <strong>D「不能数学描述」</strong>错 — 不可逆过程也可数学描述。',
+        connection:'<strong>『不可逆 vs 不可能』</strong>的区分:<br>· <strong>不可能</strong>:违反物理定律, 任何方式都不能发生(如第一类永动机);<br>· <strong>不可逆</strong>:可以发生但需要外力 / 代价;<br>· 大多数自然过程是『不可逆的』, 但不是『不可能的』。<br><strong>下游</strong>:① <strong>本板块 T5</strong>熵增原理( \\(\\Delta S \\geq 0\\) 自发, 反向 < 0 不自发);② <strong>进阶 · 状态函数</strong>引入<strong>可逆过程</strong>(理想化过程, \\(\\Delta S = 0\\))作为参考标准;③ <strong>化学反应</strong>分析时常用『可逆 vs 不可逆』判定方向。'
+      },
+      mistakes:'· 误把不可逆性当作完全禁止反向;<br>· 不能区分『不可逆』与『不可能』。',
+      extension:'<strong>『可逆过程』是理想化模型</strong>:在<strong>无摩擦 / 准静态 / 无限慢</strong>的极限下, 过程可以完全反向不留痕迹。实际过程都是不可逆的, 但<strong>可逆过程</strong>是热力学计算的有用参考。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T3-3", type:"choice", score:14, difficulty:"中等", exportIds:["SPONTANEOUS-DIRECTION","IRREVERSIBLE-PROCESS"],
+      stem:"以下哪个例子<strong>正确</strong>体现了『不可逆但可以反向(消耗外功)』?",
+      options:{A:"散开的气体可以用活塞压回容器一角(消耗机械功)",B:"摩擦消耗的机械能可以自动变回机械能",C:"冰融化后水可以自动结冰",D:"打碎的玻璃杯可以自动恢复"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>不可逆过程的反向</strong>:可以通过<strong>外力推动</strong>实现, 但需要消耗外功 / 引起其他变化。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:气体扩散是不可逆过程, 反向可以(用活塞压回), 但需消耗机械功;<br>· <strong>B「自动变回」</strong>错 — 摩擦消耗的机械能不能<strong>自动</strong>反向(违反第二定律);<br>· <strong>C「自动结冰」</strong>错 — 冰融化后不会<strong>自动</strong>结冰(室温下不行, 必须降温);<br>· <strong>D「玻璃自动恢复」</strong>错 — 不会自动恢复, 需手工修复。',
+        connection:'<strong>『反向需代价』的物理意义</strong>:<br>· 气体压回:活塞做功, 外界损失机械能 → 引起『其他变化』(外界的能量代价);<br>· 冰结回:需要降温(冰箱消耗电能);<br>· 玻璃修复:人工劳动(消耗能量)。<br>这都符合<strong>第二定律</strong>的精神:任何<strong>非自发</strong>过程都需要<strong>外界代价</strong>。<br><strong>下游</strong>:① <strong>化学反应</strong>分析: 非自发反应可以通过偶联或外能推动;② <strong>生命系统</strong>: 局部熵减(生物体内有序化)需要消耗外部能量(食物)。'
+      },
+      mistakes:'· 把『可以反向(需外力)』与『自动反向』混淆;<br>· 不能识别非自发过程的『外界代价』。',
+      extension:'<strong>『生命的熵减』</strong>:生物体内部不断维持有序化(局部熵减), 但这需要不断消耗外部能量(食物)。<strong>『整体 + 环境』</strong>的孤立系统熵必定增加(本板块 T6 局部 vs 整体熵)。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T3-4", type:"multi", score:14, difficulty:"较难", exportIds:["SPONTANEOUS-DIRECTION","IRREVERSIBLE-PROCESS","SPONTANEITY-DISORDER-CRITERION"],
+      stem:"关于<strong>自发方向 + 不可逆性</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"自发方向 = 从有序到无序",B:"不可逆性 = 反向不自发(但可借外力实现)",C:"反向过程绝对不可能发生",D:"自发过程都是熵增过程",E:"摩擦发热是不可逆过程"},
+      answer:["A","B","D","E"],
+      explanation:{
+        principle:'<strong>自发方向 + 不可逆性 + 熵增的综合理解</strong>。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:自发方向 = 熵增 = 从有序到无序;<br>· <strong>B 正确</strong>:不可逆性的精确含义;<br>· <strong>C「绝对不可能」</strong>错 — 反向可通过外力实现, 不是绝对不可能;<br>· <strong>D 正确</strong>:孤立系统中自发过程都满足 \\(\\Delta S \\geq 0\\);<br>· <strong>E 正确</strong>:摩擦发热不可逆(机械能 → 热不能自动反向)。<br>故选 <strong>A、B、D、E</strong>。',
+        connection:'<strong>本板块的核心叙事链</strong>:<br>· 自发方向(经验观察)→ 不可逆性(过程性质)→ 熵增原理(定量判据)。<br>这三个层次构成了第二定律的逻辑链条。<br><strong>下游</strong>:① <strong>本板块 T5</strong>熵的定性 + 熵增原理;② <strong>进阶 · 熵的物理意义</strong>统计本质;③ <strong>化学反应</strong>的自发性分析。'
+      },
+      mistakes:'· 选 C(把不可逆误为完全禁止);<br>· 漏选 D(自发过程都是熵增)。',
+      extension:'<strong>『不可逆 = 熵增』</strong>:从微观角度看, 不可逆过程对应宏观状态数的<strong>急剧增加</strong>(熵的统计本质, 进阶板块讨论)。这就是熵增原理的统计根源。',
+      cardAnchor:"Card 1 STEP 4" }
+  ],
+  T4: [
+    { id:"T4-1", type:"choice", score:14, difficulty:"基础", exportIds:["HEAT-ENGINE-ENERGY-FLOW"],
+      stem:"<strong>热机的能量流向</strong>遵循 \\(Q_h = W + Q_c\\), 其中各量含义:",
+      options:{A:"\\(Q_h\\) = 从高温热源吸热; \\(W\\) = 对外做功; \\(Q_c\\) = 向低温热源放废热",B:"\\(Q_h\\) = 高温热源温度; \\(W\\) = 功; \\(Q_c\\) = 低温热源温度",C:"\\(Q_h\\) = 总能量; \\(W\\) = 损失; \\(Q_c\\) = 内能",D:"三者都是常数"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>热机的能量流向(HEAT-ENGINE-ENERGY-FLOW)</strong>:<br>· <strong>\\(Q_h\\)</strong>:从高温热源(锅炉)吸入的热量;<br>· <strong>\\(W\\)</strong>:热机对外做的功;<br>· <strong>\\(Q_c\\)</strong>:向低温热源(大气 / 冷却液)放出的废热。<br>能量守恒: \\(Q_h = W + Q_c\\)(<strong>第一定律</strong>)。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:三个量的物理意义;<br>· <strong>B「温度」</strong>错 — \\(Q_h\\) 和 \\(Q_c\\) 是热量, 不是温度;<br>· <strong>C「内能」</strong>错 — \\(Q_c\\) 是排出的废热, 不是内能;<br>· <strong>D「都是常数」</strong>错 — 它们随热机操作条件变化。',
+        connection:'<strong>热机能量流向是第一定律的具体应用</strong>:循环过程 \\(\\Delta U_循 = 0\\) → 输入热 = 输出功 + 输出废热。<br><strong>下游</strong>:① <strong>热机效率</strong> \\(\\eta = W/Q_h = 1 - Q_c/Q_h\\)(本板块 T4-2);② <strong>进阶 · 卡诺循环</strong>给出 \\(\\eta\\) 的上限;③ <strong>冰箱 / 热泵</strong>是反向热机, 同样的方程但方向相反。'
+      },
+      mistakes:'· 把 \\(Q_h\\) 和 \\(Q_c\\) 当作温度 / 内能;<br>· 不能区分『输入热』(吸收)与『输出热』(排出)。',
+      extension:'<strong>实际热机</strong>:汽车发动机 / 蒸汽机 / 燃气轮机 / 核电站汽轮机, 都遵循此能量流向。<strong>『为何必须排废热』</strong>是第二定律的核心问题, 答案 = 必须有温差 → 必有 \\(Q_c > 0\\)。',
+      cardAnchor:"Card 2 STEP 2" },
+    { id:"T4-2", type:"choice", score:14, difficulty:"中等", exportIds:["HEAT-ENGINE-EFFICIENCY-LIMIT"],
+      stem:"<strong>热机效率</strong> \\(\\eta\\) 的定义是 \\(W/Q_h\\)。第二定律保证 \\(\\eta\\) 的范围是:",
+      options:{A:"\\(\\eta = 1\\)(100% 效率, 完美转化)",B:"\\(\\eta < 1\\)(必有废热 \\(Q_c > 0\\))",C:"\\(\\eta > 1\\)(可放大能量)",D:"\\(\\eta\\) 与热机种类无关"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>热机效率上限(HEAT-ENGINE-EFFICIENCY-LIMIT)</strong>:由第二定律(开尔文陈述), 任何热机<strong>必须</strong>向低温热源排废热 \\(Q_c > 0\\), 故 \\(W = Q_h - Q_c < Q_h\\) → <strong>\\(\\eta = W/Q_h < 1\\)</strong>。<br>这是第二定律给出的<strong>热机效率上限</strong>, 不依赖于热机的具体设计。',
+        logic:'各选项分析:<br>· <strong>A「\\(\\eta = 1\\)」</strong>错 — 100% 效率违反开尔文陈述(第二类永动机);<br>· <strong>B 正确</strong>:第二定律给出的上限;<br>· <strong>C「\\(\\eta > 1\\)」</strong>错 — 违反能量守恒(第一定律), 不可能;<br>· <strong>D「与热机种类无关」</strong>错 — 不同种类(燃气 / 汽油 / 柴油 / 卡诺)效率不同, 但<strong>都 < 1</strong>。',
+        connection:'<strong>『\\(\\eta < 1\\) 的物理含义』</strong>:并不是工程缺陷, 而是<strong>第二定律的根本限制</strong>。即使理想的卡诺热机 \\(\\eta_\\text{卡诺} = 1 - T_c/T_h\\), 也 < 1(\\(T_c > 0\\))。<br><strong>下游</strong>:① <strong>进阶 · 卡诺循环</strong>给出严格 \\(\\eta_\\text{卡诺}\\);② <strong>能源工程</strong>:提高发电效率 = 提高 \\(T_h\\) 或降低 \\(T_c\\);③ <strong>火电站效率</strong>典型 \\(35-45\\%\\);<strong>柴油机</strong> \\(35-45\\%\\);<strong>汽油机</strong> \\(25-30\\%\\) — 都远低于 100%。'
+      },
+      mistakes:'· 误以为可以通过工程改进达到 100% 效率;<br>· 把 \\(\\eta < 1\\) 当作工程缺陷而非根本物理限制。',
+      extension:'<strong>『效率上限』的两层含义</strong>:① 任何热机 \\(\\eta < 1\\)(第二定律);② 卡诺热机 \\(\\eta = 1 - T_c/T_h\\) 是给定温差下的<strong>理论上限</strong>(留进阶)。',
+      cardAnchor:"Card 2 STEP 2" },
+    { id:"T4-3", type:"choice", score:14, difficulty:"中等", exportIds:["TEMP-DIFFERENCE-REQUIRED"],
+      stem:"<strong>热机必须有温差</strong>(高温 \\(T_h\\) > 低温 \\(T_c\\))才能工作。如果只有一个恒温热源, 热机不能工作的原因是:",
+      options:{A:"违反第一定律(能量守恒)",B:"违反第二定律(开尔文陈述: 从单一热源吸热不能完全做功)",C:"摩擦力太大",D:"热传导效率不够"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>热机必须有温差(TEMP-DIFFERENCE-REQUIRED)</strong>:若只有一个恒温热源, 从中吸热完全变功 = 第二类永动机 = <strong>违反开尔文陈述</strong>。故热机必须有<strong>高温热源</strong>(吸热)+ <strong>低温热源</strong>(排废热)。',
+        logic:'各选项分析:<br>· <strong>A「违反第一定律」</strong>错 — 单热源不违反能量守恒;<br>· <strong>B 正确</strong>:开尔文陈述直接给出此约束;<br>· <strong>C「摩擦力」</strong>错 — 工程问题, 不是原则限制;<br>· <strong>D「热传导效率」</strong>错 — 不相关。',
+        connection:'<strong>『温差 = 热机的能量源』</strong>:<br>· 温差大 → 卡诺效率 \\(\\eta = 1 - T_c/T_h\\) 大 → 输出功大;<br>· 温差小 → 效率小 → 输出功小;<br>· 无温差(\\(T_h = T_c\\)) → \\(\\eta = 0\\) → 不能工作。<br><strong>下游</strong>:① <strong>燃煤电厂</strong>: 燃料燃烧 \\(T_h \\sim 600\\)°C, 大气 \\(T_c \\sim 20\\)°C, \\(\\eta \\sim 60\\%\\) 理论上限;② <strong>地热能 / 海洋温差能</strong>: 温差小, 效率低;③ <strong>制冷机</strong>(反向热机): 利用电能强行从低温抽热到高温, 不违反第二定律(消耗电能)。'
+      },
+      mistakes:'· 误以为单一热源可以工作;<br>· 不能体会到温差是热机能量源的本质。',
+      extension:'<strong>『海洋温差发电』</strong>(OTEC, Ocean Thermal Energy Conversion):利用海洋表层 \\(\\sim 25\\)°C 和深层 \\(\\sim 5\\)°C 的温差发电, 理论效率仅 \\(\\sim 7\\%\\)(温差太小)。',
+      cardAnchor:"Card 2 STEP 1 思考点 3" },
+    { id:"T4-4", type:"multi", score:14, difficulty:"较难", exportIds:["HEAT-ENGINE-ENERGY-FLOW","HEAT-ENGINE-EFFICIENCY-LIMIT","TEMP-DIFFERENCE-REQUIRED"],
+      stem:"关于<strong>热机</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"热机能量流向: \\(Q_h = W + Q_c\\)(第一定律)",B:"热机效率 \\(\\eta = W/Q_h = 1 - Q_c/Q_h\\)",C:"第二定律保证 \\(\\eta < 1\\), 必有废热",D:"通过工程改进可以使 \\(\\eta = 100\\%\\)",E:"热机必须有温差(\\(T_h > T_c\\))才能工作"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>热机的综合特性</strong>:能量流向 + 效率 + 温差要求。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:第一定律给出能量守恒;<br>· <strong>B 正确</strong>:效率定义 + 推导;<br>· <strong>C 正确</strong>:第二定律给出上限;<br>· <strong>D 错</strong> — 工程改进不能突破 \\(\\eta = 100\\%\\), 这是根本物理限制;<br>· <strong>E 正确</strong>:无温差不能工作。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>『两定律联合给出热机框架』</strong>:<br>· 第一定律 → 能量守恒 \\(Q_h = W + Q_c\\);<br>· 第二定律 → \\(Q_c > 0\\) 必有废热 → \\(\\eta < 1\\) → 必有温差;<br>两者联合构成了热机理论的根本框架。<br><strong>下游</strong>:① <strong>进阶 · 卡诺循环</strong>给出严格 \\(\\eta_\\text{卡诺} = 1 - T_c/T_h\\);② <strong>制冷机</strong>(反向): \\(COP = Q_c/W\\) 可以 > 1。'
+      },
+      mistakes:'· 选 D(误以为工程可以突破);<br>· 漏选 E(热机必须有温差)。',
+      extension:'<strong>『卡诺定理』</strong>(留进阶): 所有工作在同样两个温度热源之间的热机, 卡诺热机效率最高。',
+      cardAnchor:"Card 2 STEP 1-2" }
+  ],
+  T5: [
+    { id:"T5-1", type:"choice", score:16, difficulty:"基础", exportIds:["ENTROPY-QUALITATIVE"],
+      stem:"<strong>熵 \\(S\\)</strong> 在本板块的定性定义是:",
+      options:{A:"系统的总能量",B:"系统『无序度』的度量;无序度越大, 熵越大",C:"系统的温度",D:"系统的体积"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>熵的定性定义(ENTROPY-QUALITATIVE)</strong>:熵 \\(S\\) 是系统<strong>无序度的度量</strong>。无序度越大 → 熵越大。<br>本板块<strong>不</strong>引入严格定义 \\(dS = dQ_\\text{可逆}/T\\) 或玻尔兹曼公式 \\(S = k_B \\ln \\Omega\\)(留<strong>进阶板块</strong>)。',
+        logic:'各选项分析:<br>· <strong>A「总能量」</strong>错 — 总能量是 \\(U\\)(内能), 不是 \\(S\\);<br>· <strong>B 正确</strong>:熵的定性定义;<br>· <strong>C「温度」</strong>错 — 温度是 \\(T\\);<br>· <strong>D「体积」</strong>错 — 体积是 \\(V\\)。',
+        connection:'<strong>『无序度 → 熵』</strong>的关键例子:<br>· 气体扩散: 集中 → 均匀 = 无序度增加 = 熵增;<br>· 冰融化为水: 晶格规则 → 液体无序 = 熵增;<br>· 油墨入水: 集中 → 均匀 = 熵增。<br><strong>下游</strong>:① <strong>本板块 T5-2</strong>熵增原理;② <strong>进阶 · 熵的物理意义</strong>引入玻尔兹曼公式 \\(S = k_B \\ln \\Omega\\) 给出统计本质;③ <strong>化学反应</strong>讨论时常用熵增 / 熵减判定反应方向。'
+      },
+      mistakes:'· 把熵与温度 / 内能 / 体积混淆;<br>· 误以为本板块已引入严格定义。',
+      extension:'<strong>『熵的命名由来』</strong>:克劳修斯 1865 年命名 entropy, 源于希腊语 『transformation』(变化), 暗示熵反映系统的<strong>可变化潜力</strong>。',
+      cardAnchor:"Card 3 STEP 2" },
+    { id:"T5-2", type:"choice", score:16, difficulty:"基础", exportIds:["ENTROPY-INCREASE-PRINCIPLE"],
+      stem:"<strong>熵增原理</strong>(定性形式)的正确表述是:",
+      options:{A:"所有系统的熵都增加",B:"<strong>孤立系统</strong>的熵满足 \\(\\Delta S \\geq 0\\) — 可逆 = 0, 自发 > 0, 不可能 < 0",C:"系统的熵随时间减少",D:"熵的总量是常数"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>熵增原理(ENTROPY-INCREASE-PRINCIPLE)</strong>:<strong>孤立系统</strong>的熵满足 \\(\\Delta S \\geq 0\\):<br>· \\(\\Delta S = 0\\): 可逆过程(理想化);<br>· \\(\\Delta S > 0\\): 自发过程;<br>· \\(\\Delta S < 0\\): 不可能(违反第二定律)。<br>注意限定<strong>孤立系统</strong> — 非孤立系统的熵可以减少(本板块 T6 局部 vs 整体熵)。',
+        logic:'各选项分析:<br>· <strong>A「所有系统」</strong>错 — 只有孤立系统, 局部系统可以熵减;<br>· <strong>B 正确</strong>:精确表述, 含『孤立系统』关键限定;<br>· <strong>C「随时间减少」</strong>错 — 反方向;<br>· <strong>D「总量是常数」</strong>错 — 熵是变化的, 不是守恒量(与能量不同)。',
+        connection:'<strong>『熵 vs 内能』的区别</strong>:<br>· <strong>内能 \\(U\\)</strong>:由第一定律管, <strong>守恒量</strong>(孤立系统不变);<br>· <strong>熵 \\(S\\)</strong>:由第二定律管, <strong>非守恒量</strong>(孤立系统不减少, 自发过程必增);<br>两者互补。<br><strong>下游</strong>:① <strong>本板块 T6</strong>局部 vs 整体熵 + U vs S 独立;② <strong>进阶 · 状态函数</strong>把熵与其他状态量整合;③ <strong>吉布斯自由能 \\(G = H - TS\\)</strong>用熵作为反应自发性判据。'
+      },
+      mistakes:'· 漏掉『孤立系统』关键限定;<br>· 把熵与守恒量混淆。',
+      extension:'<strong>『时间方向 = 熵增方向』</strong>:第二定律给出物理学中『时间方向性』的本源 — 微观物理定律时间对称, 但宏观熵增不可逆 → 这正是『时间向前』的物理意义。',
+      cardAnchor:"Card 3 STEP 2" },
+    { id:"T5-3", type:"choice", score:16, difficulty:"中等", exportIds:["SPONTANEITY-DISORDER-CRITERION"],
+      stem:"<strong>自发判据(定性)</strong>: 一个过程<strong>是否自发</strong>可以通过<strong>系统熵的变化</strong>定性判断:",
+      options:{A:"系统熵减少 → 自发",B:"<strong>孤立系统</strong>熵增加 → 自发 (即无序度增加)",C:"系统温度升高 → 自发",D:"系统体积减小 → 自发"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>自发判据(SPONTANEITY-DISORDER-CRITERION)</strong>:<strong>孤立系统</strong>(或宇宙)的自发过程 = 熵增 = 无序度增加。<br>· 自发: \\(\\Delta S > 0\\) → 无序度增加;<br>· 不自发: \\(\\Delta S < 0\\) → 无序度减少(不可能);<br>· 临界: \\(\\Delta S = 0\\) → 可逆过程(理想)。',
+        logic:'各选项分析:<br>· <strong>A「熵减少 → 自发」</strong>错 — 反方向, 熵减少不自发;<br>· <strong>B 正确</strong>:孤立系统熵增 → 自发;<br>· <strong>C「温度升高 → 自发」</strong>错 — 温度变化与自发性没有直接关系;<br>· <strong>D「体积减小 → 自发」</strong>错 — 体积变化与自发性没有直接关系。',
+        connection:'<strong>『熵增 = 自发』的物理本质</strong>:<br>· 微观: 熵增对应宏观状态数 \\(\\Omega\\) 增加;<br>· 概率: 自发方向 = 大概率方向(熵增方向的微观状态数远大于熵减方向);<br>· 第二定律 = 统计性原理(留进阶 · 熵的物理意义)。<br><strong>下游</strong>:① <strong>化学反应自发性</strong>: \\(\\Delta G = \\Delta H - T\\Delta S < 0\\)(吉布斯自由能), 含熵项;② <strong>进阶 · 焓与焓变 + 吉布斯自由能</strong>:综合判据。'
+      },
+      mistakes:'· 把熵减误为自发;<br>· 把熵与温度 / 体积混淆。',
+      extension:'<strong>『熵增 ≠ 直觉上的无序』</strong>:看似无序的过程实际可能是熵减(如细胞自组装);看似有序的过程可能是熵增(如气体扩散)。判断熵的变化要用<strong>微观状态数</strong>(进阶板块讨论)。',
+      cardAnchor:"Card 1 STEP 4 思考点 2" },
+    { id:"T5-4", type:"multi", score:16, difficulty:"较难", exportIds:["ENTROPY-QUALITATIVE","ENTROPY-INCREASE-PRINCIPLE","SPONTANEITY-DISORDER-CRITERION"],
+      stem:"关于<strong>熵 + 熵增原理 + 自发判据</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"熵是系统无序度的度量",B:"孤立系统的熵满足 \\(\\Delta S \\geq 0\\)",C:"自发过程 = 孤立系统熵增过程",D:"局部系统的熵可以减少(如水结冰), 不违反第二定律",E:"本板块给出 \\(dS = dQ_\\text{可逆}/T\\) 的严格定义"},
+      answer:["A","B","C","D"],
+      explanation:{
+        principle:'<strong>熵 + 熵增原理 + 自发判据 + 局部熵减的综合判断</strong>。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:熵的定性定义;<br>· <strong>B 正确</strong>:熵增原理;<br>· <strong>C 正确</strong>:自发判据;<br>· <strong>D 正确</strong>:局部熵减不违反(详见本板块 T6);<br>· <strong>E 错</strong> — 本板块<strong>不</strong>引入 \\(dS = dQ_\\text{可逆}/T\\) 严格定义, 留<strong>进阶 · 状态函数</strong>板块。<br>故选 <strong>A、B、C、D</strong>。',
+        connection:'<strong>本板块的『熵』叙事</strong>:从经验观察(自发方向)→ 定性引入(无序度)→ 熵增原理(孤立系统) → 局部 vs 整体(关键区分)。<strong>留进阶板块</strong>:严格定义 \\(dS = dQ_\\text{可逆}/T\\) + 玻尔兹曼公式 \\(S = k_B \\ln \\Omega\\) + 熵的统计本质。'
+      },
+      mistakes:'· 选 E(本板块边界声明);<br>· 漏选 D(局部熵减不违反)。',
+      extension:'<strong>『熵的两种定义』</strong>:<br>· <strong>克劳修斯(宏观)</strong>: \\(dS = dQ_\\text{可逆}/T\\)(进阶 · 状态函数);<br>· <strong>玻尔兹曼(微观)</strong>: \\(S = k_B \\ln \\Omega\\)(进阶 · 熵的物理意义);<br>· 两者数学上等价 → 显示熵是宏观与微观连接的桥梁。',
+      cardAnchor:"Card 3 STEP 2" }
+  ],
+  T6: [
+    { id:"T6-1", type:"choice", score:14, difficulty:"基础", exportIds:["LOCAL-VS-TOTAL-ENTROPY"],
+      stem:"<strong>水结冰</strong>(从液态变成固态)的过程<strong>系统熵减少</strong>(液态无序 → 固态有序)。这<strong>是否违反熵增原理</strong>?",
+      options:{A:"违反, 因为熵减少了",B:"不违反, 因为<strong>水 + 环境</strong>组成的孤立系统总熵仍增加(冷凝释放的热让环境熵增加更多)",C:"违反, 因为低温下熵不能减少",D:"不违反, 因为水是液体"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>局部熵减 vs 整体熵增(LOCAL-VS-TOTAL-ENTROPY)</strong>:熵增原理只对<strong>孤立系统</strong>成立。局部系统(水)的熵可以减少, 但需要外界环境的『接受』:<br>· 水结冰: 水放热 \\(Q\\) 给环境 → 水熵减 \\(\\Delta S_\\text{水} < 0\\);<br>· 环境(冰箱 / 室外冷空气)吸热 \\(Q\\) → 环境熵增 \\(\\Delta S_\\text{环境} > 0\\);<br>· 总 \\(\\Delta S_\\text{总} = \\Delta S_\\text{水} + \\Delta S_\\text{环境} > 0\\) → <strong>满足</strong>熵增原理(『水 + 环境』孤立系统)。',
+        logic:'各选项分析:<br>· <strong>A「违反」</strong>错 — 局部熵减不违反熵增原理;<br>· <strong>B 正确</strong>:整体熵增, 局部可减;<br>· <strong>C「低温下熵不能减少」</strong>错 — 熵的变化与温度无直接关系;<br>· <strong>D「因为是液体」</strong>错 — 与相态无关。',
+        connection:'<strong>『局部熵减需外界代价』</strong>:<br>· 水结冰需要冰箱消耗电能 → 冰箱排放的废热让外界熵增更多;<br>· <strong>生命系统</strong>(细胞 / 生物体)持续维持有序化(局部熵减), 但需消耗食物的化学能 → 生物 + 环境总熵增加;<br>· <strong>所有自然界的『有序化』都需要外界代价</strong>(熵流入环境)。<br><strong>下游</strong>:① <strong>生命有机</strong>:细胞自组织 / 蛋白质合成 / DNA 复制都是局部熵减, 靠 ATP 等能量代价驱动;② <strong>化学反应</strong>:某些反应(如沉淀)系统熵减, 但需放热让环境熵增更多 → 总仍熵增。'
+      },
+      mistakes:'· 把熵增原理误推广到<strong>所有</strong>系统(实际只对孤立系统);<br>· 不能体会到『局部 vs 整体』的关键区分。',
+      extension:'<strong>『生命与第二定律』</strong>:奥地利物理学家薛定谔 1944 年在《生命是什么》中提出『生命依赖于负熵流』 — 生物维持低熵(有序)状态, 靠不断吸收外界的<strong>低熵能量</strong>(食物 / 阳光)+ 排放高熵废物 — 总系统(生物 + 环境)熵增加。',
+      cardAnchor:"Card 3 STEP 2 思考点 5" },
+    { id:"T6-2", type:"choice", score:14, difficulty:"中等", exportIds:["ENTROPY-VS-INTERNAL-ENERGY"],
+      stem:"<strong>熵 \\(S\\)</strong> 与<strong>内能 \\(U\\)</strong> 的关系是:",
+      options:{A:"\\(S\\) 和 \\(U\\) 是同一个量",B:"\\(S\\) 和 \\(U\\) 独立, 由<strong>两个不同的定律</strong>管 — 第一定律管 \\(U\\)(数量), 第二定律管 \\(S\\)(方向)",C:"\\(S\\) 决定 \\(U\\) 的变化方向",D:"\\(U\\) 决定 \\(S\\) 的变化方向"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>熵 \\(S\\) 与内能 \\(U\\) 独立(ENTROPY-VS-INTERNAL-ENERGY)</strong>:<br>· <strong>第一定律</strong>管 \\(U\\)(能量数量是否守恒);<br>· <strong>第二定律</strong>管 \\(S\\)(过程方向 / 可逆性);<br>两者<strong>独立</strong>且<strong>互补</strong>, 不能替代。<br>U↑+S↑ / U 不变+S↑ / U↓+S↑ 三种组合在自然界都存在 — 显示两个量的独立性。',
+        logic:'各选项分析:<br>· <strong>A「同一个量」</strong>错 — 截然不同;<br>· <strong>B 正确</strong>:独立 + 两定律分别管;<br>· <strong>C「S 决定 U 方向」</strong>错 — 无因果关系;<br>· <strong>D「U 决定 S 方向」</strong>错 — 无因果关系。',
+        connection:'<strong>『两定律的独立性』</strong>是热力学的根本结构:<br>· 第一定律: 数量(能量守恒);<br>· 第二定律: 方向(熵增 / 自发性);<br>两者独立 → 缺一不可。<br><strong>下游</strong>:① <strong>化学反应分析</strong>需要同时考虑焓变 \\(\\Delta H\\)(数量)和熵变 \\(\\Delta S\\)(方向);② <strong>吉布斯自由能 \\(G = H - TS\\)</strong>整合两定律;③ <strong>进阶 · 状态函数</strong>系统讨论 \\(U, H, S, G\\) 四个状态函数。'
+      },
+      mistakes:'· 把熵与内能混为一谈;<br>· 误以为两者有因果关系。',
+      extension:'<strong>『状态量大家族』</strong>(留进阶讨论):\\(U, H, S, G, A, F, T, P, V, \\mu\\) 等都是状态量, 各自管不同的物理性质。\\(U\\) 管能量数量, \\(S\\) 管熵, \\(G\\) 管反应方向(等温等压条件下), \\(H\\) 管反应焓变 — 状态量是热力学的『工具箱』。',
+      cardAnchor:"Card 3 STEP 3 思考点 6" },
+    { id:"T6-3", type:"choice", score:14, difficulty:"中等", exportIds:["LOCAL-VS-TOTAL-ENTROPY"],
+      stem:"<strong>生命系统</strong>(细胞 / 生物体)持续维持<strong>有序化</strong>(局部熵减), 这与第二定律的关系是:",
+      options:{A:"违反第二定律, 生命是『反熵』奇迹",B:"不违反第二定律 — 生命消耗外界<strong>低熵能量</strong>(食物 / 阳光), 排放<strong>高熵废物</strong>, 生物 + 环境总熵增加",C:"生命体内不遵守第二定律",D:"生命系统的熵不能定义"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>生命与第二定律的辨证关系</strong>:生命系统局部熵减(有序化), 但需<strong>外界代价</strong>:<br>· 输入: 低熵能量(食物 / 阳光 / 氧气);<br>· 排出: 高熵废物(CO₂ / 热 / 尿素);<br>· <strong>总系统</strong>(生物 + 环境)熵<strong>增加</strong>;<br>· 故不违反第二定律。',
+        logic:'各选项分析:<br>· <strong>A「违反第二定律」</strong>错 — 生命局部熵减不违反, 总熵仍增;<br>· <strong>B 正确</strong>:精确描述生命与第二定律的辨证;<br>· <strong>C「生命体内不遵守」</strong>错 — 第二定律对所有系统都适用;<br>· <strong>D「不能定义」</strong>错 — 生命系统的熵可以定义和测量。',
+        connection:'<strong>『负熵流 = 生命的能量代价』</strong>:<br>· <strong>植物</strong>: 利用阳光(低熵)→ 光合作用合成糖(局部熵减)→ 释放 O₂ + 热 → 总熵增;<br>· <strong>动物</strong>: 吃植物(获取糖的化学能)→ 维持身体有序 → 排出 CO₂ + 尿 + 热 → 总熵增。<br><strong>下游</strong>:① <strong>生命有机化学</strong>: ATP / 葡萄糖 / 氨基酸代谢都涉及局部熵减 + 外能驱动;② <strong>化学反应</strong>: 有些反应系统熵减但放热多 → 环境熵增多 → 总熵增, 仍可自发(吉布斯自由能判据)。'
+      },
+      mistakes:'· 把生命与第二定律对立(实际上生命依赖第二定律的代价机制);<br>· 不能体会到『低熵能量』的物理含义。',
+      extension:'<strong>『熵流』概念</strong>(物理生物学):生命系统持续维持<strong>稳态</strong>需要持续的能量流和熵流。流入低熵, 流出高熵。这是<strong>开放系统</strong>(非孤立)的根本特征。',
+      cardAnchor:"Card 3 STEP 3 思考点 6" },
+    { id:"T6-4", type:"multi", score:14, difficulty:"较难", exportIds:["LOCAL-VS-TOTAL-ENTROPY","ENTROPY-VS-INTERNAL-ENERGY"],
+      stem:"关于<strong>局部熵减 + 熵与内能的关系</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"局部系统的熵可以减少(如水结冰), 不违反熵增原理",B:"熵增原理只对<strong>孤立系统</strong>成立",C:"熵 S 和内能 U 由两个不同的定律(二 vs 一)管, 独立",D:"生命系统局部熵减需要外界<strong>低熵能量</strong>代价",E:"任何系统的熵都必然随时间增加"},
+      answer:["A","B","C","D"],
+      explanation:{
+        principle:'<strong>局部 vs 整体 + 熵 vs 内能的综合判断</strong>。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>;<br>· <strong>B 正确</strong>:熵增原理的关键限定;<br>· <strong>C 正确</strong>:两定律独立;<br>· <strong>D 正确</strong>:生命的负熵流;<br>· <strong>E 错</strong> — 只对孤立系统成立, 局部系统可以熵减。<br>故选 <strong>A、B、C、D</strong>。',
+        connection:'<strong>本板块的核心叙事</strong>:第二定律不只是『熵增』那么简单, 而是<strong>『孤立系统熵增 + 局部可减 + 需外界代价』</strong>的精细叙事。<br><strong>下游</strong>:① <strong>化学反应</strong>: 吉布斯自由能 \\(\\Delta G\\) 整合<strong>系统 + 环境</strong>的总熵变;② <strong>进阶 · 焓与焓变 + 吉布斯</strong>:正式给出反应自发判据。'
+      },
+      mistakes:'· 选 E(只对孤立系统);<br>· 漏选 D(生命的负熵流)。',
+      extension:'<strong>『有序化的代价』</strong>是<strong>普遍原理</strong>:任何有序化(信息处理 / 结构构建 / 生命维持)都需要能量代价 = 局部熵减 + 环境熵增。这是<strong>信息论 / 热力学</strong>的交叉点(留大学讨论)。',
+      cardAnchor:"Card 3 STEP 2-3" }
+  ],
+  T7: [
+    { id:"T7-1", type:"choice", score:14, difficulty:"基础", exportIds:["2ND-LAW-VS-1ST-LAW"],
+      stem:"<strong>第二定律</strong>和<strong>第一定律</strong>的根本区分是:",
+      options:{A:"第一定律对气体, 第二定律对液体",B:"<strong>第一定律管能量数量(能否守恒), 第二定律管过程方向(会否发生)</strong>",C:"第一定律是经验, 第二定律是定理",D:"两个定律实际上等同"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>两定律的根本区分(2ND-LAW-VS-1ST-LAW)</strong>:<br>· <strong>第一定律</strong>管<strong>数量</strong>(能量是否守恒);<br>· <strong>第二定律</strong>管<strong>方向</strong>(过程是否自发);<br>两者<strong>独立而互补</strong>, 缺一不可。',
+        logic:'各选项分析:<br>· <strong>A「气体 vs 液体」</strong>错 — 两定律对所有相态都适用;<br>· <strong>B 正确</strong>:数量 vs 方向的关键区分;<br>· <strong>C「经验 vs 定理」</strong>错 — 两个都是经验综合, 不是『定理』;<br>· <strong>D「等同」</strong>错 — 完全独立。',
+        connection:'<strong>『数量 + 方向』完整框架</strong>:<br>· 第一定律允许的过程不一定发生(需第二定律允许);<br>· 第二定律允许的过程不一定守恒(需第一定律允许);<br>· 两个独立约束共同决定物理过程的可能性。<br><strong>下游</strong>:① <strong>所有热力学分析</strong>都需考虑两定律;② <strong>化学反应</strong>: \\(\\Delta H\\)(数量, 第一定律)+ \\(\\Delta S\\)(方向, 第二定律)+ \\(\\Delta G\\)(综合判据);③ <strong>进阶 · 状态函数</strong>整合两定律。'
+      },
+      mistakes:'· 不能体会到两定律的根本独立性;<br>· 误以为只有一个定律就够。',
+      extension:'<strong>『独立而必要』的方法论</strong>:物理学中多个独立定律共同约束物理现象 — 牛顿三定律 / 麦克斯韦四方程 / 热力学三定律(本板块覆盖前两个) 都是这种结构的典范。',
+      cardAnchor:"Card 1 STEP 4 + 学习目标 第 6 条" },
+    { id:"T7-2", type:"choice", score:14, difficulty:"中等", exportIds:["TWO-STATEMENTS-EQUIVALENT"],
+      stem:"<strong>克劳修斯陈述</strong>和<strong>开尔文陈述</strong>是<strong>逻辑等价</strong>的。这意味着:",
+      options:{A:"两个陈述完全相同",B:"任一陈述可以推出另一陈述; 若违反其中一个则另一个也违反",C:"两个陈述都是错的",D:"两个陈述无关"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>两陈述等价(TWO-STATEMENTS-EQUIVALENT)</strong>:克劳修斯陈述(热不能自发从低到高)和开尔文陈述(从单一热源吸热不能完全做功)<strong>逻辑等价</strong>:<br>· 任一可推出另一;<br>· 若违反其中一个 → 另一个也违反。<br>严格证明留<strong>进阶 · 卡诺循环</strong>板块(用热机和制冷机的耦合证明)。',
+        logic:'各选项分析:<br>· <strong>A「完全相同」</strong>错 — 表述不同, 但逻辑等价;<br>· <strong>B 正确</strong>:等价的精确含义;<br>· <strong>C「都是错的」</strong>错 — 严格定律, 不可违反;<br>· <strong>D「无关」</strong>错 — 等价意味着深层联系。',
+        connection:'<strong>『等价但不同表述』的物理意义</strong>:两个陈述从不同角度描述<strong>同一</strong>第二定律:<br>· 克劳修斯陈述: 从『传热方向』角度;<br>· 开尔文陈述: 从『热机效率』角度;<br>· 都指向: <strong>热力学过程有方向性</strong>。<br>这种<strong>多角度等价表述</strong>是物理定律深刻性的体现。<br><strong>下游</strong>:① <strong>进阶 · 卡诺循环</strong>用两陈述论证热机效率上限;② <strong>熵增原理</strong>是两陈述的<strong>状态量化</strong>形式(进阶板块讨论)。'
+      },
+      mistakes:'· 把『等价』误为『相同』;<br>· 不能体会到两个表述的不同视角。',
+      extension:'<strong>『同一原理的多种表述』</strong>是物理学的常见模式:<br>· 牛顿运动定律的拉格朗日 / 哈密顿等价形式;<br>· 麦克斯韦方程的微分 / 积分形式;<br>· 等价表述揭示原理的不同侧面, 加深理解。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T7-3", type:"choice", score:14, difficulty:"较难", exportIds:["BOUNDARY-NO-CARNOT-FORMULA","BOUNDARY-NO-ENTROPY-FORMULA","BOUNDARY-NO-BOLTZMANN"],
+      stem:"<strong>本板块不覆盖</strong>(留给后续板块)的内容是:",
+      options:{A:"克劳修斯陈述 + 开尔文陈述",B:"自发方向 + 不可逆性",C:"<strong>卡诺效率严格公式 \\(\\eta = 1 - T_c/T_h\\) + 熵的严格定义 + 玻尔兹曼公式 \\(S = k_B \\ln \\Omega\\)</strong>",D:"热机能量流向"},
+      answer:"C",
+      explanation:{
+        principle:'<strong>本板块的边界声明</strong>:<br>· <strong>不</strong>引入卡诺效率严格公式 \\(\\eta = 1 - T_c/T_h\\)(留<strong>进阶 · 卡诺循环</strong>);<br>· <strong>不</strong>引入 \\(dS = dQ_\\text{可逆}/T\\) 严格定义(留<strong>进阶 · 状态函数</strong>);<br>· <strong>不</strong>引入玻尔兹曼公式 \\(S = k_B \\ln \\Omega\\)(留<strong>进阶 · 熵的物理意义</strong>);<br>· <strong>不</strong>引入吉布斯自由能 \\(G = H - TS\\)(留<strong>进阶 · 焓与焓变 + 吉布斯</strong>);<br>· <strong>不</strong>引入热力学第三定律(留大学)。',
+        logic:'各选项分析:<br>· <strong>A、B、D</strong> 都是本板块核心内容;<br>· <strong>C 正确</strong>:三个进阶板块的内容。',
+        connection:'<strong>边界声明的方法论意义</strong>:本板块给出第二定律的<strong>定性</strong>框架, 严格<strong>定量</strong>留进阶。学完本板块后, 学生应清晰知道:<br>· 学了什么:两陈述 + 自发方向 + 熵的定性 + 自发判据 + 局部 vs 整体;<br>· 留给后续: 严格定量 + 统计本质 + 综合判据。<br><strong>下游路径</strong>:① <strong>进阶 · 卡诺循环</strong>:严格效率公式;② <strong>进阶 · 状态函数</strong>:熵作为状态函数 + 严格定义;③ <strong>进阶 · 熵的物理意义</strong>:统计本质 + 玻尔兹曼公式;④ <strong>进阶 · 焓 + 吉布斯</strong>:反应自发性综合判据。'
+      },
+      mistakes:'· 把本板块的边界误以为本板块的内容;<br>· 不能体会到分层渐进的教学思想。',
+      extension:'<strong>『深化路径』推荐</strong>:本板块的<strong>driving question</strong>段含<strong>紫色推荐块</strong>, 显著推荐学有余力的学生先学进阶 卡诺 / 状态函数 / 熵的物理意义, 再回看本板块, 从『定性』升到『定量』 — 这是『分层渐进』的实践。',
+      cardAnchor:"学习反思日志 + 边界声明" },
+    { id:"T7-4", type:"multi", score:14, difficulty:"较难", exportIds:["2ND-LAW-VS-1ST-LAW","TWO-STATEMENTS-EQUIVALENT","BOUNDARY-NO-CARNOT-FORMULA","BOUNDARY-NO-ENTROPY-FORMULA"],
+      stem:"<strong>综合判断</strong>:关于本板块的核心叙事 + 边界, 下列说法<strong>正确</strong>的是:",
+      options:{A:"第一定律管数量 / 第二定律管方向, 两者独立",B:"克劳修斯陈述和开尔文陈述逻辑等价",C:"自发方向 = 熵增方向 = 时间方向",D:"本板块给出严格的熵公式 \\(dS = dQ_\\text{可逆}/T\\)",E:"本板块的『深化路径』推荐学进阶 卡诺 / 状态函数 / 熵的物理意义"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>本板块的核心叙事的综合检验</strong>:两定律对比 + 两陈述等价 + 自发方向 + 边界声明 + 深化路径。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:两定律对比;<br>· <strong>B 正确</strong>:两陈述等价;<br>· <strong>C 正确</strong>:自发方向 = 熵增方向 = 时间方向;<br>· <strong>D 错</strong> — 严格公式留进阶 · 状态函数板块;<br>· <strong>E 正确</strong>:本板块的特殊设计『深化路径推荐』。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>本板块的核心成就</strong>:<br>① 引入第二定律的两种等价陈述;<br>② 引入自发性 + 不可逆性 + 熵增原理的定性框架;<br>③ 引入热机能量流向 + 效率上限;<br>④ 引入局部 vs 整体熵的精细辨识;<br>⑤ 引入两定律的对比框架(数量 vs 方向);<br>⑥ 明确边界声明 + 深化路径。<br>这一框架为<strong>整个热力学大主题进阶链</strong>(卡诺 / 状态函数 / 熵 / 焓 / 吉布斯)埋下种子。'
+      },
+      mistakes:'· 选 D(本板块边界声明);<br>· 漏选 E(本板块的特殊推荐设计)。',
+      extension:'<strong>『时间方向 = 熵增方向 = 自发方向』</strong>是第二定律最深刻的哲学含义。微观物理学时间对称(逆时间运行同样合理), 但宏观熵增不可逆 → 这就是<strong>时间向前</strong>的物理意义。',
+      cardAnchor:"Card 1 STEP 4 + Card 3 STEP 2-3 + 学习反思日志" }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "second-law-basic";
+const KEY_STATE = `mockcheck_${SLUG}_state`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5","T6","T7"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选" }[q.type];
+    const inputHtml = renderInput(q, n);
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+      el.addEventListener("change", () => {
+        document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+        updateAnsweredCount();
+      });
+    });
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+  });
+  if (answered < 6) { if (!confirm(`已答 ${answered} / 7 题(< 85%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 备考充分(90%+) — 推荐进入教师组织的真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔检测基础水平(70%+) — 可继续备考或申请真实检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    const exportCounts = {};
+    wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
+    const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `${EXPORT_NAMES[id] ? '<span class="q-export-label">'+EXPORT_NAMES[id]+'</span>' : '<code>'+id+'</code>'}(${n}题)`).join(" / ")}</small>` : "";
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
+  }
+
+  document.querySelectorAll(".question input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const fbEl = document.querySelector(`[data-q-id="q${r.idx+1}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-principle"><strong>🔬 涉及的核心原理</strong><div>${q.explanation.principle}</div></div>` +
+      `<div class="q-fb-row q-fb-logic"><strong>🧩 逻辑分析</strong><div>${q.explanation.logic}</div></div>` +
+      `<div class="q-fb-row q-fb-connection"><strong>🌐 知识系统中的位置</strong><div>${q.explanation.connection}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  fbEl.innerHTML = `
+    <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : '✗ 答错'} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="second-law-basic-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
+  `;
+  fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
+  fbEl.hidden = false;
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空, 通过记录保留。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "second-law-basic";
+  const MODULE_NAME = "第二定律 · 基础";
+  const PRODUCT_TYPE = "mock-check";
+  const PRODUCT_LABEL = "基础检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitMock_checkApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitMock_checkAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

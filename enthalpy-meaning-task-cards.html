@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>焓与焓变的意义 · 学习任务卡（进阶模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #4B2C8C 0%, #00409A 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .header .level-tag { display: inline-block; margin-top: 10px; padding: 3px 12px; background: rgba(255,255,255,0.2); border-radius: 12px; font-size: 0.78rem; letter-spacing: 1px; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(142,68,173,0.06));
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #4B2C8C 0%, #00409A 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  /* 前置回顾块：v0.1.7 起的标准配色（浅蓝灰底 + 深蓝左边框） */
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(142, 68, 173, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .preview-card {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.04), rgba(142,68,173,0.06));
+    border: 1px solid rgba(142,68,173,0.15);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+  }
+  .preview-card .preview-title { font-size: 1.05rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; }
+  .preview-card p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.7; }
+  .preview-card p:last-child { margin-bottom: 0; }
+  .preview-card .formula-highlight { text-align: center; font-size: 1.2rem; margin: 16px 0; color: var(--primary-blue); font-weight: 600; }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>焓与焓变的意义 · 学习任务卡（进阶）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>焓与焓变的意义</h1>
+    <div class="subtitle">为热"造"一个状态函数 · 从 H = U + PV 到生成焓 ΔHf°</div>
+    <div class="level-tag">⚡ 进阶模块</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>焓与焓变的意义（进阶模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>4–5 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td>理想气体内能的微观推导；卡诺循环；状态函数与非状态函数（含熵的定义）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔；上一板块"状态函数"的笔记；对 \(\Delta U = Q - W\) 与 \(W = P\Delta V\) 的熟练度</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能用一个循环过程的"假想累计量 HC" 论证 <strong>热量 \(Q\) 本身不是状态函数</strong>，从而看到"为热造一个状态函数"的必要性</li>
+      <li>能写出焓的定义 \(H = U + PV\) 并解释为什么这个特定组合是状态函数</li>
+      <li>能从 \(\Delta U = Q - W\) 和 \(W = P\Delta V\) 自己推出 <strong>恒压下 \(\Delta H = Q_p\)</strong>，并说清"恒压"在哪一步用到</li>
+      <li>能区分 \(\Delta H\) 的正负号与系统吸放热的对应关系（\(\Delta H < 0\) 放热、\(\Delta H > 0\) 吸热）</li>
+      <li>能用"能量阶梯图" 解释为什么放热反应的产物比反应物"能量更低"</li>
+      <li>能定义标准生成焓 \(\Delta H_f^\circ\)，并说出为什么"稳定单质"的 \(\Delta H_f^\circ\) 取作 0</li>
+      <li>能从 \(\Delta H_f^\circ(\mathrm{CH_4}) = -74\) kJ/mol 和 \(\Delta H_f^\circ(\mathrm{O}) = +249\) kJ/mol 两个例子说明"焓可以表格化"对化学计算意味着什么</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p><strong>上一板块我们证明：热量 \(Q\) 和功 \(W\) 都不是状态函数 —— 它们的值取决于走了哪条路径。</strong></p>
+    <p>但在化学反应、相变、蒸汽机分析这些场景里，我们最关心的恰恰就是"<strong>这个过程一共放出 / 吸收了多少热</strong>"。</p>
+    <p>如果热量本身没法当作系统的属性，那 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li>能不能"造"一个状态函数，让它的变化量在某种条件下<strong>恰好等于</strong>系统吸收的热？</li>
+      <li>如果能造，它应该长什么样？为什么偏偏是 \(H = U + PV\)，不是 \(U + V\)、\(U + 2PV\)、其他？</li>
+      <li>化学方程式末尾的"+ 74 kJ"到底是什么量？它和我们造出来的这个新函数有什么关系？</li>
+    </ul>
+    <p class="hint">（提示：先思考"在什么条件下，热 \(Q\) 可能恰好等于某个状态函数的差"。这条路通向焓。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>为什么"热量"不能作为系统的属性</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：通过一个循环过程的"假想累计量"看到 \(Q\) 不是状态函数；理解"我们需要为热造一个新的状态函数"的动机<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不翻笔记，先回答 ——</p>
+          <ul>
+            <li>"状态函数"是什么意思？它和"过程量"的区别是什么？（上一板块的核心概念）</li>
+            <li>一个气体系统沿循环路径走一圈回到初态，请说出哪些量必为 0、哪些可以不为 0。</li>
+            <li>如果有人想定义一个量叫"系统的热含量"（heat content），用 "累计吸收的热量" 来度量它 —— 这个定义合理吗？什么情形下会出问题？</li>
+          </ul>
+          <div class="quote-block">
+            如果你卡在最后一问"好像合理但又总觉得哪里不对"—— 那很正常。Card 1 接下来用一个反例把这个"不对"显式化。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">反例：循环过程里的"假想热含量 HC"</span></div>
+        <div class="step-content">
+          <p>设想一个简单的循环过程 ——</p>
+
+          <div class="prereq-recap">
+            <strong>先回顾（前置板块结论）</strong>：在 PV 图上，一个循环的<strong>闭环面积</strong>等于"系统对外做的净功 \(W_{out}^{net}\)"。这件事在 <a href="carnot-cycle-task-cards.html">卡诺循环任务卡</a>里推过。如果不熟，先翻回去复习 5 分钟再回来。
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+                <marker id="ar-b1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"/></marker>
+                <marker id="ar-g1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"/></marker>
+              </defs>
+              <line x1="50" y1="280" x2="280" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#ar-g1)"/>
+              <line x1="50" y1="280" x2="50" y2="40" stroke="#333" stroke-width="1.5" marker-end="url(#ar-g1)"/>
+              <text x="285" y="298" font-size="13" fill="#333">V</text>
+              <text x="36" y="36" font-size="13" fill="#333">P</text>
+              <path d="M 100,90 Q 130,140 170,180 Q 210,220 250,250" stroke="#c0392b" stroke-width="2.5" fill="none"/>
+              <path d="M 100,90 Q 160,110 210,150 Q 240,180 250,250" stroke="#0055B8" stroke-width="2.5" fill="none"/>
+              <path d="M 100,90 Q 130,140 170,180 Q 210,220 250,250 Q 240,180 210,150 Q 160,110 100,90 Z" fill="rgba(39,174,96,0.18)" stroke="none"/>
+              <circle cx="100" cy="90" r="6" fill="#00409A"/>
+              <text x="84" y="82" font-size="14" font-weight="bold" fill="#00409A">A</text>
+              <circle cx="250" cy="250" r="6" fill="#00409A"/>
+              <text x="258" y="260" font-size="14" font-weight="bold" fill="#00409A">B</text>
+              <text x="60" y="22" font-size="11" fill="#c0392b" font-style="italic">A→B 路径 (吸热 Q<tspan font-size="9" dy="3">in</tspan><tspan dy="-3"></tspan>)</text>
+              <text x="155" y="80" font-size="11" fill="#0055B8" font-style="italic">B→A 路径 (放热 Q<tspan font-size="9" dy="3">out</tspan><tspan dy="-3"></tspan>)</text>
+              <text x="190" y="200" font-size="11" font-weight="bold" fill="#27ae60">净功 = 阴影面积</text>
+              <g transform="translate(320, 50)">
+                <text x="0" y="0" font-size="12" font-weight="bold" fill="#00409A">每走 1 圈循环：</text>
+                <text x="0" y="22" font-size="11" fill="#555">• 吸热 Q<tspan font-size="9" dy="3">in</tspan><tspan dy="-3"></tspan>（A→B 段）</text>
+                <text x="0" y="40" font-size="11" fill="#555">• 放热 Q<tspan font-size="9" dy="3">out</tspan><tspan dy="-3"></tspan>（B→A 段）</text>
+                <text x="0" y="58" font-size="11" fill="#555">• 对外做净功 = 闭环面积</text>
+                <text x="0" y="76" font-size="11" fill="#555">• 内能 ΔU = 0（回原态）</text>
+                <text x="0" y="100" font-size="12" font-weight="bold" fill="#c0392b">假定每圈净 Q = 2 个单位</text>
+                <text x="0" y="120" font-size="11" fill="#c0392b">（即 Q<tspan font-size="9" dy="3">in</tspan><tspan dy="-3"></tspan> − Q<tspan font-size="9" dy="3">out</tspan><tspan dy="-3"></tspan> = 2）</text>
+              </g>
+            </svg>
+            <div class="diagram-caption">一个 PV 图上的循环过程：A→B 沿上路径吸热，B→A 沿下路径放热，净功 = 闭环面积</div>
+          </div>
+
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.06); border-color: var(--secondary-blue);">
+            <strong>符号约定（本板块全程沿用）</strong>：<br>
+            • \(Q_{in}\)：系统<strong>吸收</strong>的热（环境 → 系统）—— 取正值<br>
+            • \(Q_{out}\)：系统<strong>放出</strong>的热（系统 → 环境）—— 取正值<br>
+            • \(W_{in}\)：环境<strong>对系统</strong>做的功（环境 → 系统）—— 取正值<br>
+            • \(W_{out}\)：系统<strong>对外</strong>做的功（系统 → 环境）—— 取正值<br>
+            <span style="color: var(--text-secondary); font-size: 0.82rem;">四个量都<strong>取正值</strong>，方向已经通过下标 in/out 体现 —— 不要再额外加负号。</span>
+          </div>
+
+          <p>现在我们造一个新量，叫"<strong>系统的热含量</strong> HC"（heat content） —— 让它<strong>初值取作 5</strong>（一个任意起点，不影响后面的论证），并且规定：</p>
+          <div class="quote-block">
+            "每当系统吸收 1 单位热，HC 就 +1；每当系统放出 1 单位热，HC 就 -1。"
+          </div>
+          <p>换句话说，我们用<strong>累计吸放热</strong>来定义这个新量。看起来挺合理 —— 类似于"账户余额随收支变化"。</p>
+
+          <p>现在让系统沿上面的循环走 0 圈、1 圈、2 圈，分别记录 HC：</p>
+
+          <table class="compare-table">
+            <tr><th>走完循环数</th><th>系统状态 (P, V, T)</th><th>HC 值</th></tr>
+            <tr><td>0 圈（初态 A）</td><td>(P<sub>A</sub>, V<sub>A</sub>, T<sub>A</sub>)</td><td><strong>5</strong></td></tr>
+            <tr><td>1 圈后 (又回到 A)</td><td><strong>完全一样</strong> (P<sub>A</sub>, V<sub>A</sub>, T<sub>A</sub>)</td><td><strong>5 + 2 = 7</strong></td></tr>
+            <tr><td>2 圈后 (还是回到 A)</td><td><strong>完全一样</strong> (P<sub>A</sub>, V<sub>A</sub>, T<sub>A</sub>)</td><td><strong>5 + 4 = 9</strong></td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 这张表暴露出什么矛盾？</div>
+            <div class="tp-pause">系统的状态 (P, V, T) 完全相同 —— 但 HC 不同。如果 HC 真是"系统的某个属性"，它应该完全由系统的状态决定，对吗？</div>
+            <div class="tp-ask">"我看到这个表格 —— 系统在 0 圈 / 1 圈 / 2 圈后状态完全一样，HC 却变了。请反问引导我说出这意味着什么，不要直接告诉我答案。"</div>
+            <div class="tp-write">用自己的话写一句：<br>"HC 不是<strong>系统</strong>的属性 —— 它依赖系统<strong>走过的路径</strong>。所以 HC 不是状态函数。"</div>
+            <div class="tp-hint">提示：可以类比"里程表 vs 位置" —— 你绕街区走 3 圈再回家，"位置"没变，但"里程表"读数变了。位置是状态量，里程不是。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">用第一定律确认：循环里 \(Q_{in} = W_{out}\)</span></div>
+        <div class="step-content">
+          <p>把 Card 1 的反例从直觉升级到定理 ——</p>
+
+          <div class="prereq-recap">
+            <strong>先回顾（前置板块结论）</strong>：对循环过程，因为系统回到初态，状态函数 \(U\) 不变：\(\Delta U = 0\)。<br>
+            代入第一定律 \(\Delta U = Q_{in} - W_{out} = 0\) 得到 \(Q_{in} = W_{out}\)。<br>
+            如果忘了第一定律的推导，请翻回 <a href="advanced-task-cards.html">理想气体内能的微观推导</a> 复习 5 分钟。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 为什么 ΔQ 不可能是状态函数</div>
+            <div class="tp-pause">既然循环里 \(Q_{in} = W_{out}\) 但 \(W_{out}\) 不为 0（闭环面积大于 0），那"每圈的净 \(Q\) " 就不为 0。再叠加 N 圈，"累计吸热"就一直涨 —— 系统状态却完全没变。</div>
+            <div class="tp-ask">"请引导我从 \(Q_{in} = W_{out}\) 和循环里 \(\Delta U = 0\) 这两件事，论证'\(Q\) 这个量不可能是某个状态函数的差'。"</div>
+            <div class="tp-write">写出推理链：<br>
+              • 循环：\(\Delta U = 0\)（状态函数归零）<br>
+              • 第一定律：\(Q_{in} - W_{out} = 0\)<br>
+              • 闭环面积 \(> 0\) → \(W_{out} > 0\) → \(Q_{in} > 0\)<br>
+              • 累计 N 圈："系统吸热"持续涨，但状态完全没变<br>
+              • <strong>结论</strong>：\(\Delta HC = \Delta Q\) <strong>不可能</strong>是状态函数。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">提出方向：能不能"造"一个描述热的状态函数？</span></div>
+        <div class="step-content">
+          <p>到这里我们看到了一个矛盾 ——</p>
+
+          <table class="compare-table">
+            <tr><th>需求</th><th>困难</th></tr>
+            <tr><td>化学反应、相变、蒸汽机分析<strong>最关心</strong>的就是"放/吸了多少热"</td><td>但 \(Q\) 本身不是状态函数 —— 它依赖路径，没法当作系统的属性</td></tr>
+          </table>
+
+          <p>解决方向有两条：</p>
+          <ol>
+            <li>放弃 —— 承认"热"永远只能作为"过程量"来谈，不能制成属性</li>
+            <li>变通 —— <strong>找一组特定的实验条件</strong>，让 \(Q\) 在这个条件下<strong>恰好等于某个状态函数的差</strong>。这样虽然 \(Q\) 本身仍是过程量，但在这个条件下我们可以"借"状态函数来度量它</li>
+          </ol>
+
+          <p>科学家选了第二条路。Card 2 将告诉你他们造出来的新状态函数叫什么、长什么样、为什么是那个特定形式。</p>
+
+          <div class="quote-block">
+            <strong>预告</strong>：Card 2 会让你<strong>反向推理</strong> —— 假设我们想让"某个量在恒压下恰好等于 \(Q\)"，从这个要求倒推出这个量的<strong>唯一</strong>定义。这是物理学非常典型的"为需求造工具"的思维。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 HC 的反例说出"\(Q\) 不是状态函数"的具体证据（每圈状态没变但 HC 变了）</span></label>
+        <label data-key="h1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从 \(\Delta U = 0\)（循环）和第一定律推出 \(Q_{in} = W_{out}\) 并理解这与"状态量"的冲突</span></label>
+        <label data-key="h1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么"热"在化学反应里我们仍想用某种"系统属性"来度量</span></label>
+        <label data-key="h1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我对"能不能造一个状态函数 = 热"这个方向产生了具体的好奇</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ②思辨力（状态量 vs 过程量的辨识） · ⑤学习力（链接前置板块的循环过程）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>造一个状态函数：H = U + PV</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从"想让某个量在恒压下等于 \(Q\)"这个需求出发，反向推出焓 \(H = U + PV\) 的定义；理解它为什么是状态函数<br>
+        <strong>建议时长</strong>：40-55 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（8-10 分钟）</span></div>
+        <div class="step-content">
+          <p>不翻笔记，自己琢磨 ——</p>
+          <ul>
+            <li>上一板块证明过：\(U\) 是状态函数；\(P\)、\(V\)、\(T\) 都是状态变量。如果我把 \(U\) 和 \(P\)、\(V\) 做组合，比如 \(U + V\)、\(U + PV\)、\(U + 2PV\) ——<strong>这些组合还是状态函数吗</strong>？为什么？</li>
+            <li>"恒压" 是什么意思？什么样的物理场景下系统是恒压的？（提示：日常化学反应、相变、敞口烧杯）</li>
+            <li>第一定律 \(\Delta U = Q - W\) 中，膨胀功 \(W\) 等于什么？（提示：<a href="carnot-cycle-task-cards.html" style="color: var(--secondary-blue);">卡诺循环板块</a>推过 \(W = \int P\, dV\)）。在"\(P\) 不变"的条件下，这个积分能化简成什么？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">论证：U + PV 是状态函数</span></div>
+        <div class="step-content">
+          <p>关键事实 —— "状态函数 + 状态函数 = 状态函数"（任意算术组合都还是状态函数）。这是因为：</p>
+
+          <div class="prereq-recap">
+            <strong>先回顾（前置板块结论）</strong>：状态函数的定义是"取值<strong>只依赖系统当前状态</strong>"。<br>
+            如果 \(A(P, V, T)\) 和 \(B(P, V, T)\) 都只依赖状态，那 \(A + B\)、\(A \cdot B\)、\(A/B\) 等任意函数组合也只依赖状态 —— 因为对每个状态我们都能<strong>唯一</strong>算出值。<br>
+            细节如有疑惑，请翻回 <a href="state-functions-task-cards.html">状态函数与非状态函数 · Card 1</a> 复习 5 分钟。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 为什么 U + PV 必是状态函数？</div>
+            <div class="tp-pause">已知 \(U\) 是状态函数，\(P\)、\(V\) 都是状态变量。问：组合 \(U + PV\) 还不还是状态函数？想一下"状态函数"的定义和"只依赖当前状态"这个属性。</div>
+            <div class="tp-ask">"请反问引导我说出'\(U + PV\) 还是状态函数' 的论证 —— 不要直接给结论。"</div>
+            <div class="tp-write">写一句：<br>"\(U\)、\(P\)、\(V\) 都只依赖系统当前状态 \(\Rightarrow\) \(U + PV\) 也只依赖系统当前状态 \(\Rightarrow\) \(U + PV\) 是状态函数。"</div>
+            <div class="tp-hint">同样的论证也适用于 \(U + V\)、\(U + 2PV\)、\(U - PV\) 等任意组合。"是不是状态函数"很容易判断；难的是"<strong>哪个组合最有用</strong>"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">反向推理：什么样的组合恰好等于 \(Q_p\)？</span></div>
+        <div class="step-content">
+          <p>"是状态函数"很多组合都满足。真正的问题是 —— 我们要的不是<strong>任一</strong>状态函数，而是<strong>在恒压条件下其差恰好等于系统吸收的热</strong>的那个状态函数。这一步要反着推。</p>
+
+          <p>从第一定律出发：</p>
+          <div class="derivation-block">
+            <div class="derivation-title">反向推理（用力理解每一步的动机）</div>
+            <div class="step-line"><strong>① 第一定律</strong>：\(\Delta U = Q_{in} - W_{out}\)（上一板块、理想气体内能的微观推导）</div>
+            <div class="step-line"><strong>② 膨胀功</strong>：\(W_{out} = \int P\, dV\)（系统对外做功 = 压力沿位移积分）</div>
+            <div class="step-line"><strong>③ 移项</strong>：\(Q_{in} = \Delta U + \int P\, dV\)</div>
+            <div class="step-line"><strong>④ 目标</strong>：能不能让右边等于某个状态函数的差 \(\Delta(\text{某物})\)？</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 在恒压下，\(\int P\, dV\) 等于什么？</div>
+            <div class="tp-pause">回想积分的基本性质 —— 如果被积函数中有<strong>常数</strong>，可以怎么处理？现在"\(P\) 不变"恰好把 \(P\) 变成了常数。</div>
+            <div class="tp-ask">"请引导我把恒压下的 \(\int P\, dV\) 化简，不要直接告诉我答案。"</div>
+            <div class="tp-write">写出：恒压时 \(W_{out} = \int P\, dV = P\int dV = P\Delta V\)（其中 \(\Delta V = V_f - V_i\)）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 在恒压下，\(P\Delta V\) 和 \(\Delta(PV)\) 是同一个东西吗？</div>
+            <div class="tp-pause">先把 \(\Delta(PV)\) 写开（用 \(\Delta\text{某物} = 某物_f - 某物_i\) 的定义）。然后比较它和 \(P\Delta V = P(V_f - V_i)\) —— 在<strong>什么条件下</strong>这两个会相等？P 变化时这等式还成立吗？</div>
+            <div class="tp-ask">"请引导我验证'恒压时 \(\Delta(PV) = P\Delta V\)' 这一等式，并明确说出在 \(P\) 变化时它<strong>不</strong>成立。"</div>
+            <div class="tp-write">写出：<br>
+              \(\Delta(PV) = P_f V_f - P_i V_i\)<br>
+              恒压（\(P_f = P_i = P\)）\(\Rightarrow \Delta(PV) = P(V_f - V_i) = P\Delta V\) ✓<br>
+              注意：当 \(P_f \neq P_i\)（P 变化）时，\(\Delta(PV) \neq P\Delta V\)。这是关键条件。
+            </div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 把③式凑成"两个状态函数之差"</div>
+            <div class="tp-pause">回到 \(Q_{in} = \Delta U + W_{out}\)。前面两个思考点告诉我们恒压下 \(W_{out} = P\Delta V = \Delta(PV)\)。代入后，右边能不能写成"<strong>某一个量</strong>的变化"？</div>
+            <div class="tp-ask">"请引导我从 \(Q_p = \Delta U + \Delta(PV)\) 一步看到'右边是 \(U + PV\) 这个组合的差' —— 不要直接告诉我焓的定义。"</div>
+            <div class="tp-write">完整写出：<br>
+              \(Q_p = \Delta U + \Delta(PV) = \Delta(U + PV)\)<br>
+              定义 \(\boxed{H \equiv U + PV}\)<br>
+              则 \(\boxed{\Delta H = Q_p \quad (\text{恒压})}\)
+            </div>
+          </div>
+
+          <div class="quote-block" style="background: rgba(142, 68, 173, 0.06); border-color: var(--accent-purple);">
+            <strong>反向推理的力量</strong>：焓的定义不是"凭空想出来"的 —— 它是被"恒压下 \(Q\) 应该等于哪个状态函数的差"这一<strong>需求</strong>逼出来的。\(U + PV\) 这个特定组合是<strong>唯一</strong>满足该需求的（最简）形式。你现在应该不再觉得 \(H = U + PV\) "奇怪" 了。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">符号约定与"恒压"条件的位置</span></div>
+        <div class="step-content">
+          <p>现在把符号和条件都明确写一遍 ——</p>
+
+          <table class="compare-table">
+            <tr><th>记号</th><th>含义</th></tr>
+            <tr><td>\(H = U + PV\)</td><td><strong>焓的定义</strong>。任意状态下都成立（U、P、V 都是状态量）。\(H\) 是状态函数</td></tr>
+            <tr><td>\(\Delta H = H_f - H_i\)</td><td>焓变 = 末态焓 - 初态焓。<strong>只依赖始末态</strong>（状态函数的差）</td></tr>
+            <tr><td>\(Q_p\)</td><td>下标 \(p\) 表示<strong>恒压条件</strong>下系统吸收的热（\(Q_p > 0\) 系统吸热，\(Q_p < 0\) 系统放热）</td></tr>
+            <tr><td>\(\Delta H = Q_p\)</td><td><strong>只在恒压下</strong>成立。一般情形下 \(\Delta H = \Delta U + \Delta(PV) \neq Q\)</td></tr>
+          </table>
+
+          <div class="quote-block" style="background: rgba(192, 57, 43, 0.05); border-color: var(--danger);">
+            <strong>容易踩的坑</strong>：很多初学者会把 \(\Delta H = Q_p\) 误以为是"焓变 = 任何热量"。错。这个等式<strong>严格要求恒压</strong>。比如恒容反应（爆炸密闭容器）就该用 \(\Delta U = Q_V\) 而不是 \(\Delta H = Q_p\)。
+          </div>
+
+          <p>问 AI（如有时间）：</p>
+          <ol>
+            <li>"如果我把同一个反应分别放在<strong>恒压</strong>容器和<strong>恒容</strong>容器中进行，两者放出的热量 \(Q\) 一样吗？这两个热量分别对应哪个状态函数的变化？"</li>
+            <li>"日常化学反应（敞口烧杯、试管）为什么默认是恒压的？大气压在哪一步起到'恒压'的作用？"</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能写出焓的定义 \(H = U + PV\) 并解释它为什么是状态函数</span></label>
+        <label data-key="h2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用反向推理论证为什么是 \(U + PV\) 而不是别的组合</span></label>
+        <label data-key="h2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"恒压"条件在推导中的<strong>具体位置</strong>（思考点 3 那一步）</span></label>
+        <label data-key="h2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分 \(\Delta H\)（任意状态下定义）和 \(Q_p\)（只在恒压下等于 \(\Delta H\)）</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②思辨力（反向推理） · ④创造力（为需求造工具） · ⑤学习力（链接 \(\Delta U = Q-W\) 与 \(W = P\Delta V\)）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>核心推导：恒压下 ΔH = Q<sub>p</sub>（再走一遍 + 物理图景）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把 Card 2 的反向推理改写成一段"正向"的完整推导稿；用气缸图景理解"为什么是恒压"<br>
+        <strong>建议时长</strong>：35-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>关上书，先在纸上独立尝试：</p>
+          <ul>
+            <li>用一段连贯的代数推导，从 \(\Delta U = Q_{in} - W_{out}\) 和 \(W_{out} = P\Delta V\) 出发，<strong>正向</strong>推出 \(\Delta H = Q_p\)（恒压）。</li>
+            <li>圈出推导中<strong>"用到 P 不变"</strong> 的那一步。</li>
+            <li>用一句话解释"为什么必须是恒压" —— 不许说"因为公式要求"，要说出<strong>代数上</strong>哪一步会断。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">正向完整推导（与 AI 互对）</span></div>
+        <div class="step-content">
+          <p>把你独立尝试的稿子和下面的"参考推导"逐行对比 ——</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">正向推导 · 恒压下 ΔH = Q<sub>p</sub></div>
+            <div class="step-line"><strong>① 焓的定义</strong>：\(H = U + PV\) → 两端取微分（或差）：\(\Delta H = \Delta U + \Delta(PV)\)</div>
+            <div class="step-line"><strong>② 第一定律</strong>：\(\Delta U = Q_{in} - W_{out}\)</div>
+            <div class="step-line"><strong>③ 膨胀功</strong>：\(W_{out} = \int P\, dV\)；<strong>恒压条件 \(\Rightarrow\)</strong> \(W_{out} = P\Delta V\)</div>
+            <div class="step-line"><strong>④ 恒压条件 \(\Rightarrow\)</strong> \(\Delta(PV) = P\Delta V\)（这一步是恒压的关键）</div>
+            <div class="step-line"><strong>⑤ 代入</strong>：\(\Delta H = (Q_{in} - P\Delta V) + P\Delta V = Q_{in}\)</div>
+            <div class="step-line"><strong>⑥ 结论</strong>：\(\boxed{\Delta H = Q_p}\)（下标 \(p\) 提醒读者：恒压条件）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 如果 P 不恒定，断在哪一步？</div>
+            <div class="tp-pause">把推导的 6 步过一遍 —— 假设 P 不恒定，哪一步的等式会不成立？这一步的"恒压"条件具体是为了让哪个等式成立？</div>
+            <div class="tp-ask">"请反问引导我说出'P 不恒定时哪一步断裂' —— 不要直接写答案，让我自己说。"</div>
+            <div class="tp-write">用自己的话写：<br>"恒压保证了 ④式 \(\Delta(PV) = P\Delta V\) —— 一旦 P 变化（\(P_f \neq P_i\)），\(\Delta(PV) = P_f V_f - P_i V_i \neq P\Delta V\)。这样 ⑤ 式中第一定律的'膨胀功'和焓定义中的'\(\Delta(PV)\)'就<strong>不再恰好抵消</strong>，最后 \(\Delta H \neq Q\)。"</div>
+          </div>
+
+          <p>问 AI（检验你的理解）：</p>
+          <ol>
+            <li>"我把推导步骤写在纸上了。请<strong>反问引导我</strong>验证每一步 —— 特别是第 ④ 步'恒压下 \(\Delta(PV) = P\Delta V\)'，请让我自己说出为什么 \(P\) 变化时这等式失效。"</li>
+            <li>"在恒容情况下，类似的推导能得到什么？（提示：\(W = P\Delta V = 0\) 因为 \(\Delta V = 0\)，所以 \(\Delta U = Q_V\)。注意这时<strong>用的是 \(U\) 不是 \(H\)</strong>。）"</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">物理图景：恒压膨胀的气缸</span></div>
+        <div class="step-content">
+          <p>用一个简单图景把代数推导落地 ——</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-r3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+                <marker id="ar-o3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e67e22"/></marker>
+              </defs>
+              <!-- 气缸初态 -->
+              <rect x="60" y="120" width="120" height="120" fill="#fff" stroke="#00409A" stroke-width="2.5"/>
+              <rect x="60" y="110" width="120" height="14" fill="#999" stroke="#666" stroke-width="1"/>
+              <text x="120" y="119" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">活塞 (可滑动)</text>
+              <circle cx="85" cy="160" r="4" fill="#0055B8"/>
+              <circle cx="125" cy="180" r="4" fill="#0055B8"/>
+              <circle cx="155" cy="155" r="4" fill="#0055B8"/>
+              <circle cx="95" cy="220" r="4" fill="#0055B8"/>
+              <circle cx="145" cy="210" r="4" fill="#0055B8"/>
+              <text x="120" y="138" text-anchor="middle" font-size="11" fill="#0055B8" font-weight="bold">初态: V<tspan font-size="9" dy="3">i</tspan><tspan dy="-3"></tspan>, T<tspan font-size="9" dy="3">i</tspan><tspan dy="-3"></tspan>, P</text>
+              <!-- 加热箭头 · v0.1.10 标签上移到气缸内顶部，箭头位置不变 -->
+              <line x1="120" y1="255" x2="120" y2="270" stroke="#c0392b" stroke-width="2" marker-end="url(#ar-r3)"/>
+              <text x="135" y="265" font-size="11" fill="#c0392b">Q<tspan font-size="9" dy="3">in</tspan><tspan dy="-3"></tspan> 流入</text>
+              <!-- 大气压箭头 -->
+              <line x1="120" y1="80" x2="120" y2="105" stroke="#666" stroke-width="2" marker-end="url(#ar-r3)" opacity="0.5"/>
+              <text x="120" y="72" text-anchor="middle" font-size="11" fill="#666">大气压 P (恒定)</text>
+              <!-- 中间箭头 -->
+              <line x1="200" y1="180" x2="260" y2="180" stroke="#e67e22" stroke-width="2.5" marker-end="url(#ar-o3)"/>
+              <text x="230" y="172" text-anchor="middle" font-size="11" fill="#e67e22" font-weight="bold">膨胀</text>
+              <!-- 气缸末态 -->
+              <rect x="280" y="80" width="120" height="160" fill="#fff" stroke="#00409A" stroke-width="2.5"/>
+              <rect x="280" y="70" width="120" height="14" fill="#999" stroke="#666" stroke-width="1"/>
+              <text x="340" y="79" text-anchor="middle" font-size="10" fill="#fff" font-weight="bold">活塞 (升高了 Δh)</text>
+              <circle cx="305" cy="120" r="4" fill="#0055B8"/>
+              <circle cx="345" cy="170" r="4" fill="#0055B8"/>
+              <circle cx="375" cy="115" r="4" fill="#0055B8"/>
+              <circle cx="315" cy="220" r="4" fill="#0055B8"/>
+              <circle cx="365" cy="200" r="4" fill="#0055B8"/>
+              <circle cx="385" cy="155" r="4" fill="#0055B8"/>
+              <text x="340" y="98" text-anchor="middle" font-size="11" fill="#0055B8" font-weight="bold">末态: V<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan>, T<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan>, P</text>
+              <line x1="340" y1="40" x2="340" y2="65" stroke="#666" stroke-width="2" marker-end="url(#ar-r3)" opacity="0.5"/>
+              <text x="340" y="32" text-anchor="middle" font-size="11" fill="#666">大气压 P (仍恒定)</text>
+              <!-- 右侧注释 -->
+              <g transform="translate(415, 90)">
+                <text x="0" y="0" font-size="11" font-weight="bold" fill="#e67e22">恒压意味着：</text>
+                <text x="0" y="20" font-size="10" fill="#555">• 大气始终压住活塞</text>
+                <text x="0" y="36" font-size="10" fill="#555">• 系统膨胀时</text>
+                <text x="0" y="50" font-size="10" fill="#555">  P 始终不变</text>
+                <text x="0" y="70" font-size="10" fill="#c0392b">• W = P·ΔV</text>
+                <text x="0" y="84" font-size="10" fill="#c0392b">  (P 可提出积分)</text>
+              </g>
+            </svg>
+            <div class="diagram-caption">恒压膨胀：大气压 \(P\) 把活塞压住，系统受热膨胀后 \(P\) <strong>仍是大气压</strong>。所以 \(W = P\Delta V\) 中 \(P\) 可视为常量</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 把 Q<sub>in</sub>、ΔU、W<sub>out</sub> 在这张图里"看到"</div>
+            <div class="tp-pause">系统吸收热量 \(Q_{in}\)；其中一部分变成内能升高 \(\Delta U\)；另一部分"花在" 把活塞顶起来对外做功 \(W_{out} = P\Delta V\)。</div>
+            <div class="tp-ask">"请帮我用这个气缸图景，用日常语言描述 \(Q_{in}\)、\(\Delta U\)、\(W_{out}\) 各对应什么。然后说说在<strong>恒压</strong>下为什么 \(Q_{in}\) 'just so happens' 等于 \(\Delta(U + PV)\)。"</div>
+            <div class="tp-write">用自己的话写一段：<br>
+              "系统吸收的热 \(Q_{in}\) 在恒压下被两件事'吃掉'：升高内能 \(\Delta U\)，把活塞顶起来做功 \(P\Delta V\)。<br>
+              而焓的变化 \(\Delta H = \Delta U + \Delta(PV)\) 恰好等于'内能升高 + 体积膨胀对应的 \(PV\) 变化'。<br>
+              在恒压下 \(\Delta(PV) = P\Delta V\)，所以 \(\Delta H\) 刚好打包了'升内能 + 顶活塞'两件事 = \(Q_{in}\)。"
+            </div>
+          </div>
+
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.06); border-color: var(--secondary-blue);">
+            <strong>为什么化学家偏爱焓</strong>：日常化学反应几乎都在<strong>敞口容器</strong>里进行（试管、烧杯、烧瓶），大气压自动保证恒压。所以化学反应释放/吸收的热<strong>直接就等于</strong> \(\Delta H\) —— 没有比这更方便的"反应热度量"了。这就是为什么化学课本里"反应热"和"焓变"几乎是同义词。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能在纸上独立、连贯地正向推出 \(\Delta H = Q_p\)（不看笔记）</span></label>
+        <label data-key="h3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>圈出</strong>推导中"用到 \(P\) 不变"的那一步并说出为什么 P 变化时它会断</span></label>
+        <label data-key="h3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用气缸图景用日常语言解释 \(Q_{in}\)、\(\Delta U\)、\(W_{out}\) 各对应什么物理动作</span></label>
+        <label data-key="h3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"为什么化学家偏爱焓"的物理原因（敞口容器 → 恒压）</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②思辨力（找到推导中"恒压"用在哪一步） · ⑤学习力（代数 + 图景双轨理解）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 4 ==================== -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>ΔH 的正负号 · 能量阶梯图 · 吸放热</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把 \(\Delta H\) 的正负号和系统吸/放热严格挂钩；用"能量阶梯图"建立"放热反应产物更稳定"的物理直觉<br>
+        <strong>建议时长</strong>：25-35 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>不翻笔记：</p>
+          <ul>
+            <li>"放热反应"的日常例子：燃烧、人体代谢、爆炸……这些过程中"系统" 是吸热还是放热？环境呢？</li>
+            <li>"吸热反应"的日常例子：冰融化、热敷冷敷的反向（如硝酸铵溶解）、植物光合作用……</li>
+            <li>如果用 \(\Delta H = Q_p\) 这个等式来判断符号，<strong>放热反应</strong>的 \(\Delta H\) 应该是正还是负？理由是什么？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">符号约定（严格写一次）</span></div>
+        <div class="step-content">
+          <p>正负号是化学/物理初学者最容易踩坑的地方 —— 我们用一张表把它钉死：</p>
+
+          <table class="compare-table">
+            <tr><th></th><th>系统吸热（环境给系统热）</th><th>系统放热（系统给环境热）</th></tr>
+            <tr><td><strong>\(Q_p\) 的符号</strong></td><td>\(Q_p > 0\)（按"流入系统为正"约定）</td><td>\(Q_p < 0\)</td></tr>
+            <tr><td><strong>\(\Delta H\) 的符号</strong></td><td>\(\Delta H = Q_p > 0\)（焓增加）</td><td>\(\Delta H = Q_p < 0\)（焓减少）</td></tr>
+            <tr><td><strong>命名</strong></td><td><strong>吸热反应</strong>（endothermic）</td><td><strong>放热反应</strong>（exothermic）</td></tr>
+            <tr><td><strong>日常例子</strong></td><td>冰融化、硝酸铵溶水、光合作用</td><td>燃烧、中和反应、人体代谢</td></tr>
+          </table>
+
+          <div class="quote-block" style="background: rgba(192, 57, 43, 0.05); border-color: var(--danger);">
+            <strong>容易踩的坑</strong>：方程式末尾写 "+ 74 kJ" 的写法（如 \(\mathrm{C + 2H_2 \rightarrow CH_4 + 74\,kJ}\)）和写 "\(\Delta H = -74\) kJ/mol" 的写法<strong>符号相反但物理意义相同</strong>：<br>
+            • "+74 kJ" 是从<strong>环境角度</strong>看 —— 环境得到了 74 kJ 热<br>
+            • "\(\Delta H = -74\) kJ/mol" 是从<strong>系统角度</strong>看 —— 系统的焓减少了 74 kJ/mol（因为放出了）<br>
+            这两种写法都是合法的，只是<strong>视角不同</strong>。化学界更常用后者（\(\Delta H\) 写在反应式后面）。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">能量阶梯图：放热 vs 吸热</span></div>
+        <div class="step-content">
+          <p>把"系统焓变 = \(H_f - H_i\)" 画成图，物理直觉就立刻浮上来了 ——</p>
+
+          <p style="font-size: 0.85rem; color: var(--text-secondary); font-style: italic;">（下图选了 CH₄ 和 O 原子两个具体反应做示意 —— 这两个例子 Card 5 会展开。此处只用它们的数字感受"阶梯"的形状，不需要先理解化学方程式。）</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-rdown" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+                <marker id="ar-bup" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"/></marker>
+              </defs>
+              <!-- 左图：放热 -->
+              <text x="125" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#c0392b">放热反应 (ΔH < 0)</text>
+              <line x1="40" y1="240" x2="40" y2="50" stroke="#333" stroke-width="1.5"/>
+              <line x1="40" y1="240" x2="220" y2="240" stroke="#333" stroke-width="1.5"/>
+              <text x="30" y="48" font-size="11" fill="#333">H</text>
+              <text x="218" y="258" font-size="11" fill="#333">反应进度</text>
+              <line x1="60" y1="80" x2="115" y2="80" stroke="#c0392b" stroke-width="3"/>
+              <text x="50" y="85" text-anchor="end" font-size="11" fill="#c0392b" font-weight="bold">H<tspan font-size="9" dy="3">i</tspan><tspan dy="-3"></tspan></text>
+              <text x="87" y="73" text-anchor="middle" font-size="10" fill="#555">反应物 (C + 2H₂)</text>
+              <line x1="140" y1="190" x2="200" y2="190" stroke="#c0392b" stroke-width="3"/>
+              <text x="207" y="195" font-size="11" fill="#c0392b" font-weight="bold">H<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan></text>
+              <text x="170" y="208" text-anchor="middle" font-size="10" fill="#555">产物 (CH₄)</text>
+              <line x1="125" y1="80" x2="125" y2="186" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-rdown)"/>
+              <text x="135" y="135" font-size="12" font-weight="bold" fill="#c0392b">ΔH = -74 kJ/mol</text>
+              <text x="135" y="150" font-size="10" font-style="italic" fill="#c0392b">(系统放热 74 kJ)</text>
+              <!-- 分割线 -->
+              <line x1="260" y1="40" x2="260" y2="260" stroke="#ccc" stroke-width="1" stroke-dasharray="3 3"/>
+              <!-- 右图：吸热 -->
+              <text x="385" y="25" text-anchor="middle" font-size="13" font-weight="bold" fill="#0055B8">吸热反应 (ΔH > 0)</text>
+              <line x1="300" y1="240" x2="300" y2="50" stroke="#333" stroke-width="1.5"/>
+              <line x1="300" y1="240" x2="480" y2="240" stroke="#333" stroke-width="1.5"/>
+              <text x="290" y="48" font-size="11" fill="#333">H</text>
+              <text x="478" y="258" font-size="11" fill="#333">反应进度</text>
+              <line x1="320" y1="200" x2="375" y2="200" stroke="#0055B8" stroke-width="3"/>
+              <text x="312" y="205" text-anchor="end" font-size="11" fill="#0055B8" font-weight="bold">H<tspan font-size="9" dy="3">i</tspan><tspan dy="-3"></tspan></text>
+              <text x="347" y="218" text-anchor="middle" font-size="10" fill="#555">反应物 (½O₂)</text>
+              <line x1="400" y1="80" x2="460" y2="80" stroke="#0055B8" stroke-width="3"/>
+              <text x="467" y="85" font-size="11" fill="#0055B8" font-weight="bold">H<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan></text>
+              <text x="430" y="73" text-anchor="middle" font-size="10" fill="#555">产物 (O 原子)</text>
+              <line x1="385" y1="200" x2="385" y2="86" stroke="#0055B8" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-bup)"/>
+              <text x="395" y="150" font-size="12" font-weight="bold" fill="#0055B8">ΔH = +249 kJ/mol</text>
+              <text x="395" y="165" font-size="10" font-style="italic" fill="#0055B8">(系统吸热 249 kJ)</text>
+            </svg>
+            <div class="diagram-caption">能量阶梯图：放热反应产物焓低（下台阶），吸热反应产物焓高（上台阶）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 为什么"放热反应的产物更稳定"？</div>
+            <div class="tp-pause">在重力场里，一个球总是自发往<strong>低处</strong>滚（势能减少）。在化学反应里，产物的焓<strong>低于</strong>反应物（\(\Delta H < 0\)），意味着什么？为什么这种反应"更容易自发"？</div>
+            <div class="tp-ask">"请帮我把'放热 = 产物焓低 = 产物更稳定' 这条逻辑链<strong>用日常类比</strong>讲清楚。但<strong>不要</strong>直接把'自发性'当成结论 —— 只需要说'能量更低的状态在能量层面是更稳定的'。"</div>
+            <div class="tp-write">写一句：<br>"放热反应的产物处在<strong>更低</strong>的焓位置 —— 类似于球滚到山谷里。从纯能量角度看，能量低的状态比能量高的状态更稳定。所以放热反应的产物在能量上比反应物更'安稳'。"</div>
+            <div class="tp-hint">⚠️ 注意"是否自发"不只看能量 —— 还涉及其他因素（这是后续板块的话题）。本卡只强调"放热 → 产物能量更低 → 能量层面更稳定"，<strong>不展开"自发性"完整判据</strong>。
+            </div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 用阶梯图理解"逆反应"</div>
+            <div class="tp-pause">如果 \(\mathrm{C + 2H_2 \rightarrow CH_4}\) 是 \(\Delta H = -74\) kJ/mol（放热），那它的逆反应 \(\mathrm{CH_4 \rightarrow C + 2H_2}\) 的 \(\Delta H\) 应该是多少？</div>
+            <div class="tp-ask">"请引导我用能量阶梯图说明：逆反应等价于'从 \(H_f\) 反过来到 \(H_i\)'，所以 \(\Delta H_{逆}\) 在数值上和正反应相反。"</div>
+            <div class="tp-write">写出：\(\Delta H_{逆} = H_i - H_f = -(H_f - H_i) = -\Delta H_{正} = +74\) kJ/mol（逆反应吸热 74 kJ/mol）。这也是<strong>"焓是状态函数"</strong>的一个直接结果 —— 始末态颠倒 \(\Rightarrow \Delta H\) 反号。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h4c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能严格说出 \(\Delta H < 0\) ↔ 放热、\(\Delta H > 0\) ↔ 吸热的对应关系</span></label>
+        <label data-key="h4c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"方程式末尾 +74 kJ" 和 "\(\Delta H = -74\) kJ/mol" 两种写法（视角不同、物理相同）</span></label>
+        <label data-key="h4c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用能量阶梯图解释"放热反应产物在能量上更稳定"</span></label>
+        <label data-key="h4c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从"焓是状态函数"立刻推出"逆反应 \(\Delta H\) 反号"</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②思辨力（符号约定的严格性） · ④创造力（用阶梯图建立物理直觉）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 5 ==================== -->
+  <div class="task-card" id="task5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">5</div>
+      <h3>标准生成焓 ΔHf° —— 把焓做成可查表的数</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：定义标准生成焓 \(\Delta H_f^\circ\)；理解它如何把"焓"从抽象状态函数变成<strong>可查表、可计算</strong>的工程量；用 CH₄ 和 O 原子两例感受"稳定性"<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>不翻笔记：</p>
+          <ul>
+            <li>焓 \(H\) 这个量有个"问题" —— 它本身的<strong>绝对值</strong>不太能算出来（你怎么测一杯水"绝对的焓" 是多少 kJ？）。我们能算的只有 \(\Delta H\)。这件事会不会让"查表" 变得困难？</li>
+            <li>怎么定义一个<strong>参考零点</strong>，让所有物质都能围绕这个零点报"焓值"？（类比：测高度时总要先选个海平面）</li>
+            <li>什么样的"零点"选择最自然？（提示：化学家选的是"<strong>稳定单质</strong>"）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">定义 ΔHf° 与"零点"约定</span></div>
+        <div class="step-content">
+          <p>化学家的"零点"约定 ——</p>
+
+          <div class="quote-block" style="background: rgba(142, 68, 173, 0.06); border-color: var(--accent-purple);">
+            <strong>标准生成焓 \(\Delta H_f^\circ\) 的定义</strong>：<br>
+            在<strong>标准条件</strong>（通常 25°C、1 atm 或 100 kPa）下，由<strong>稳定单质</strong>合成 <strong>1 mol</strong> 化合物时的焓变。<br>
+            • 下标 \(f\) = formation（生成）<br>
+            • 上标 \(\circ\) = 标准条件<br>
+            • 单位：kJ/mol（注意是"每 mol 产物"）
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 为什么"稳定单质"的 \(\Delta H_f^\circ\) 取作 0？</div>
+            <div class="tp-pause">想想"由稳定单质合成稳定单质" —— 比如"由 \(\mathrm{H_2(g)}\) 合成 \(\mathrm{H_2(g)}\)"。始末态完全一样，状态没变，焓变多少？</div>
+            <div class="tp-ask">"请反问引导我说出'稳定单质 \(\Delta H_f^\circ = 0\)' 的原因 —— 这是一个<strong>定义上的自洽</strong>，不是经验数据。"</div>
+            <div class="tp-write">写一句：<br>"稳定单质的'生成反应' = 它自己变成它自己 —— 状态没变，所以 \(\Delta H = 0\)。这是<strong>定义的自洽要求</strong>，让所有化合物的 \(\Delta H_f^\circ\) 能从'共同零点'起算。"</div>
+            <div class="tp-hint">类比：测高度时把"海平面"定为 0 m —— 这不是说海平面"没高度"，而是<strong>选个参考</strong>方便互相比较。化学里把"稳定单质" 选作焓的海平面。
+            </div>
+          </div>
+
+          <p>常见"稳定单质" 例子（标态下）：</p>
+          <ul>
+            <li>\(\mathrm{H_2(g)}\)、\(\mathrm{O_2(g)}\)、\(\mathrm{N_2(g)}\)、\(\mathrm{Cl_2(g)}\)（气态双原子分子）</li>
+            <li>\(\mathrm{C(石墨)}\)（注意：金刚石不是 —— 金刚石不是 C 的稳定单质形式）</li>
+            <li>\(\mathrm{Na(s)}\)、\(\mathrm{Fe(s)}\)、\(\mathrm{Cu(s)}\)（金属固体）</li>
+            <li>\(\mathrm{Hg(l)}\)、\(\mathrm{Br_2(l)}\)（标态下液态）</li>
+          </ul>
+          <p>它们全部 \(\Delta H_f^\circ = 0\) <strong>按定义</strong>。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">两个例子 · CH₄ vs O 原子</span></div>
+        <div class="step-content">
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-rdown2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+                <marker id="ar-bup2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"/></marker>
+              </defs>
+              <!-- 共同的零点线 -->
+              <line x1="40" y1="160" x2="480" y2="160" stroke="#888" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <text x="490" y="164" font-size="11" fill="#888">零点</text>
+              <text x="490" y="178" font-size="9" fill="#888">(稳定单质)</text>
+              <!-- 左：CH4 -->
+              <text x="125" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">CH₄ (放热生成)</text>
+              <line x1="55" y1="160" x2="190" y2="160" stroke="#5d4e3a" stroke-width="3"/>
+              <text x="125" y="155" text-anchor="middle" font-size="10" fill="#5d4e3a">C(石墨) + 2H₂(g) · ΔHf°=0</text>
+              <line x1="80" y1="230" x2="170" y2="230" stroke="#c0392b" stroke-width="3"/>
+              <text x="125" y="248" text-anchor="middle" font-size="10" fill="#c0392b" font-weight="bold">CH₄(g) · ΔHf°=-74 kJ/mol</text>
+              <line x1="125" y1="160" x2="125" y2="226" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-rdown2)"/>
+              <text x="135" y="195" font-size="10" font-weight="bold" fill="#c0392b">-74 kJ/mol</text>
+              <text x="125" y="48" text-anchor="middle" font-size="9" fill="#c0392b" font-style="italic">CH₄ 能量更低 → 比 C + 2H₂ 更稳定</text>
+              <!-- 中间分割 -->
+              <line x1="240" y1="20" x2="240" y2="265" stroke="#ccc" stroke-width="1" stroke-dasharray="3 3"/>
+              <!-- 右：O atom -->
+              <text x="365" y="22" text-anchor="middle" font-size="12" font-weight="bold" fill="#0055B8">O 原子 (吸热生成)</text>
+              <line x1="295" y1="160" x2="430" y2="160" stroke="#5d4e3a" stroke-width="3"/>
+              <text x="365" y="155" text-anchor="middle" font-size="10" fill="#5d4e3a">½O₂(g) · ΔHf°=0</text>
+              <line x1="310" y1="70" x2="420" y2="70" stroke="#0055B8" stroke-width="3"/>
+              <text x="365" y="63" text-anchor="middle" font-size="10" fill="#0055B8" font-weight="bold">O(g) · ΔHf°=+249 kJ/mol</text>
+              <line x1="365" y1="160" x2="365" y2="76" stroke="#0055B8" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar-bup2)"/>
+              <text x="375" y="125" font-size="10" font-weight="bold" fill="#0055B8">+249 kJ/mol</text>
+              <text x="365" y="265" text-anchor="middle" font-size="9" fill="#0055B8" font-style="italic">O 原子能量更高 → 比 ½O₂ 更不稳定</text>
+            </svg>
+            <div class="diagram-caption">两个 \(\Delta H_f^\circ\) 例子：CH₄ 在零点下方（放热生成 → 更稳定）；O 原子在零点上方（吸热生成 → 更不稳定）</div>
+          </div>
+
+          <p><strong>例 1 · CH₄ 的生成</strong>：</p>
+          <div class="quote-block" style="text-align: center;">
+            \[\mathrm{C(石墨) + 2H_2(g) \longrightarrow CH_4(g)} \qquad \Delta H_f^\circ(\mathrm{CH_4}) = -74 \text{ kJ/mol}\]
+          </div>
+          <ul>
+            <li>负号 → 放热 → 系统放出 74 kJ 热量到环境（每生成 1 mol CH₄）</li>
+            <li>能量层面：CH₄ 比 "C(石墨) + 2H₂(g)" 这堆原料的总焓<strong>低</strong> 74 kJ/mol</li>
+            <li>意味着：CH₄ 在能量层面比它的稳定单质组合更<strong>稳定</strong>（处在更低的"焓位置"）</li>
+          </ul>
+
+          <p><strong>例 2 · O 原子的生成</strong>：</p>
+          <div class="quote-block" style="text-align: center;">
+            \[\mathrm{\tfrac{1}{2}O_2(g) \longrightarrow O(g)} \qquad \Delta H_f^\circ(\mathrm{O}) = +249 \text{ kJ/mol}\]
+          </div>
+          <ul>
+            <li>正号 → 吸热 → 必须给系统输入 249 kJ 热量才能"撕开"\(\tfrac{1}{2}\) mol \(\mathrm{O_2}\) 得到 1 mol O 原子</li>
+            <li>物理图景：\(\mathrm{O_2}\) 双原子分子有共价键，要把它<strong>拆成</strong>独立 O 原子需要克服键能 —— 所以是<strong>吸热</strong>过程</li>
+            <li>能量层面：原子态 O 比 \(\tfrac{1}{2}\mathrm{O_2}\) 焓<strong>高</strong> 249 kJ/mol → 原子 O 非常<strong>不稳定</strong>（一遇到机会就会重新结合）</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · "稳定性" 的相对性</div>
+            <div class="tp-pause">CH₄ 的 \(\Delta H_f^\circ\) 是负的，所以 CH₄ "比稳定单质更稳定"。但 CH₄ 在空气中会燃烧（被氧气氧化成 CO₂ 和 H₂O）—— 这说明 CH₄ 在"<strong>另一个意义上</strong>"不稳定。怎么理解？</div>
+            <div class="tp-ask">"请反问引导我说出：稳定性其实是<strong>相对的</strong>。CH₄ '比它的合成原料 C + 2H₂ 更稳定'，但和它的氧化产物 CO₂ + H₂O 相比就<strong>不</strong>稳定。"</div>
+            <div class="tp-write">写一句：<br>"稳定性总是<strong>相对于某个参考态</strong>。\(\Delta H_f^\circ < 0\) 只说明产物比'稳定单质起点'稳定，没说明它对<strong>其他参考态</strong>（如氧化产物）也稳定。"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">为什么"可查表"是革命性的</span></div>
+        <div class="step-content">
+          <p>把 \(\Delta H_f^\circ\) 做成表格意味着 ——</p>
+
+          <ul>
+            <li>化学家不需要每次都做量热计实验测某反应的反应热</li>
+            <li>只要查到反应物和产物各自的 \(\Delta H_f^\circ\)，就能<strong>算</strong>出整个反应的 \(\Delta H\)（具体怎么算 = 下一板块）</li>
+            <li>这把"反应热"从<strong>实验量</strong>变成了<strong>查表量</strong> —— 化学计算从此可以"在纸上预测" 一个反应放/吸多少热</li>
+          </ul>
+
+          <p>问 AI（开放讨论）：</p>
+          <ol>
+            <li>"\(\Delta H_f^\circ\) 表是怎么来的？化学家是怎么<strong>测</strong>第一批 \(\Delta H_f^\circ\) 的？（提示：弹式量热计、可逆反应、能量守恒。）"</li>
+            <li>"为什么<strong>同位素</strong>之间不区分 \(\Delta H_f^\circ\)？（比如 H₂ 和 D₂ 用同一个 \(\Delta H_f^\circ = 0\)？）"</li>
+            <li>"金刚石的 \(\Delta H_f^\circ = +1.9\) kJ/mol —— 这个'正号' 意味着什么？为什么金刚石不是 C 的'稳定单质'？"</li>
+          </ol>
+
+          <div class="quote-block" style="background: rgba(142, 68, 173, 0.06); border-color: var(--accent-purple);">
+            <strong>这一卡的深意</strong>：从 Card 1 看到"\(Q\) 不是状态函数" → 到 Card 2 造出 \(H\) → Card 3 推出 \(\Delta H = Q_p\) → 到本卡把它做成<strong>可查表的数</strong>。这条链是<strong>"从理论到工程"</strong> 的完整路径 —— 物理学造一个工具，化学家把它工程化、表格化、可重复使用。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="h5c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用自己的话定义 \(\Delta H_f^\circ\)（标准条件 + 稳定单质 + 1 mol 产物）</span></label>
+        <label data-key="h5c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么"稳定单质"的 \(\Delta H_f^\circ\) 按定义取 0（自洽要求）</span></label>
+        <label data-key="h5c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从 \(\Delta H_f^\circ(\mathrm{CH_4}) = -74\) 和 \(\Delta H_f^\circ(\mathrm{O}) = +249\) 直接读出"放热/吸热" 和"产物相对稳定性"</span></label>
+        <label data-key="h5c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"稳定性是相对的" —— CH₄ 比 C+2H₂ 稳定，但比 CO₂+H₂O 不稳定</span></label>
+        <label data-key="h5c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"焓可查表" 为什么是化学工程上革命性的进展</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②思辨力（"相对稳定性" 概念） · ④创造力（"零点参考"的工程思路） · ⑤学习力（把抽象状态函数化为查表量）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table" style="font-size: 0.88rem;">
+      <tr>
+        <td>① 手写推导稿</td>
+        <td>A4 纸手写，<strong>完整正向推出 \(\Delta H = Q_p\)（恒压）</strong>。要明确圈出"哪一步用到 \(P\) 不变"，并附一段（200 字以内）解释 \(P\) 变化时该步会怎么断裂</td>
+      </tr>
+      <tr>
+        <td>② 学习反思日志</td>
+        <td>200-300 字，主题：<strong>"为什么科学家要'造'一个状态函数 H？这件事让我对'物理学的概念是怎么来的' 有什么新的理解？"</strong></td>
+      </tr>
+      <tr>
+        <td>③ 自评清单</td>
+        <td>所有 5 张任务卡的 checkpoint 都勾完</td>
+      </tr>
+      <tr>
+        <td>④ 深度口试预约</td>
+        <td>与学科导师约 15-20 分钟口试。口试核心问题：<br>• HC 反例如何论证 \(Q\) 不是状态函数？<br>• 焓为什么是 \(U + PV\) 这个特定组合，不能是别的？<br>• \(\Delta H = Q_p\) 推导中"恒压" 用在哪一步？\(P\) 变化时会怎样？<br>• 为什么稳定单质的 \(\Delta H_f^\circ\) 取作 0？</td>
+      </tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：手写推导稿是本进阶模块的关键产出 —— \(\Delta H = Q_p\) 的正向推导必须<strong>自己写一遍</strong>，不能让 AI 代写。反思日志要写<strong>你自己的</strong>"换视角时刻"和困惑。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="enthalpy-meaning-mock-check.html">📝 基础检测</a>
+    <a href="enthalpy-meaning-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 焓与焓变的意义（进阶模块）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-enthalpy-meaning-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

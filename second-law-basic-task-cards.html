@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二定律 · 基础 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .deepening-recommendation {
+    background: linear-gradient(135deg, rgba(142, 68, 173, 0.06), rgba(142, 68, 173, 0.10));
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .deepening-recommendation .dr-title { font-size: 1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .deepening-recommendation .dr-title::before { content: '🔭'; font-size: 1.1rem; }
+  .deepening-recommendation strong { color: var(--accent-purple); }
+  .deepening-recommendation a { color: var(--accent-purple); text-decoration: underline; font-weight: 600; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>第二定律 · 基础 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>热力学第二定律 · 基础</h1>
+    <div class="subtitle">自然过程为什么是单向的 · 从能量"数量"到能量"方向"的关键飞跃</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>热力学第二定律 · 基础（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>2-2.5 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>热力学第一定律</strong>（必读 —— 第二定律对第一定律的"补充"是本板块的核心叙事; \(\Delta U = Q - W\) 在本板块需要熟练）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔；对第一定律"能量守恒"与"\(Q, W\) 过程量"的熟练度</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能陈述第二定律的两种等价形式: <strong>克劳修斯陈述</strong>（热不能自发从低温物体流向高温物体）+ <strong>开尔文陈述</strong>（不可能从单一热源吸热使之全部转化为有用的功）</li>
+      <li>能用第二定律解释<strong>第二类永动机不可能</strong>（与第一定律对比：第二类不违反能量守恒，但违反"方向"）</li>
+      <li>能用"<strong>自发方向</strong>"描述自然过程：热从高 → 低 / 气体扩散 / 摩擦消耗机械能 / 油墨入水 等都是<strong>单向的</strong></li>
+      <li>能定性论证<strong>热机效率 \(\eta < 1\)</strong> 永远不可达 100% —— 任何热机都必须向低温源排放部分热量</li>
+      <li>能用"<strong>无序度</strong>"定性介绍熵 \(S\) —— 自发过程熵增加（本板块<strong>不引入</strong> \(dS = dQ/T\) 公式 / 玻尔兹曼公式）</li>
+      <li>能解释第二定律是<strong>独立于第一定律的新原理</strong> —— 第一定律管"数量"（能不能守恒），第二定律管"方向"（会不会发生）。两者独立而互补</li>
+      <li>知道本板块到定性陈述为止：严格推导 + 数学形式 + 微观统计解释全部留给进阶板块的卡诺循环 / 状态函数 / 熵的物理意义</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>三个让"第一定律"也答不上来的问题 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li>一杯热水放在桌上，一会儿凉了。<strong>第一定律完全允许它反向发生</strong>（室温水自发把环境的能量吸进来再变热）—— 但实际从未观察到。为什么自然过程是<strong>单向</strong>的？</li>
+      <li>摩擦生热可以发生（功 → 热）。那"<strong>反过来</strong>"呢 —— 桌上一块铁突然变冷，释放出的热量推动桌子向前滑动？第一定律完全允许（能量守恒）。为什么从未发生？</li>
+      <li>燃料烧的总能量都满足能量守恒，那为什么<strong>热机的效率不能 100%</strong>？为什么必须有"废热"排出？</li>
+    </ul>
+    <p style="margin-top: 6px;">这三个问题的共同点：<strong>第一定律完全允许，自然却从不发生</strong>。这告诉我们 —— 第一定律<strong>不够</strong>了。需要一个<strong>新的独立原理</strong>，专门管"方向" —— 这就是<strong>热力学第二定律</strong>。</p>
+    <p class="hint">（提示：第一定律 = 能量"<strong>数量</strong>"判据（能不能守恒）。第二定律 = 能量"<strong>方向</strong>"判据（会不会自发发生）。两个判据缺一不可。）</p>
+  </div>
+
+  <div class="deepening-recommendation">
+    <div class="dr-title">本板块的"深化路径"推荐 — 学有余力的学生</div>
+    <p>本板块只到<strong>定性陈述</strong>为止。如果你已掌握以下 <strong>3 个进阶板块</strong>（它们之间存在前置链 ——<strong>卡诺循环 → 状态函数 → 熵的物理意义</strong>），<strong>建议按顺序学完再回来读本板块</strong>，你会从"宏观陈述"层升到"微观原理"层：</p>
+    <ol style="margin-left: 20px; margin-top: 4px;">
+      <li><a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a> —— 严格推导热机效率上限 η_卡诺 = 1 − T₂/T₁，理解为什么效率<strong>有</strong>定量上限</li>
+      <li><a href="state-functions-task-cards.html">状态函数与非状态函数（进阶）</a> —— 前置：卡诺循环。严格引入熵 S 的定义 dS = dQ<sub>可逆</sub>/T，理解熵为什么是状态量</li>
+      <li><a href="entropy-meaning-task-cards.html">熵的物理意义（进阶）</a> —— 前置：状态函数。玻尔兹曼公式 S = k<sub>B</sub> ln Ω 和熵增定律的严格论证，理解"<strong>无序度</strong>"的统计本质</li>
+    </ol>
+    <p style="margin-top: 6px;"><strong>没学进阶也完全可以学懂本板块</strong>（本板块自成体系，不强 require 任何进阶前置）。本板块的目标是<strong>建立第二定律的核心思想</strong>，深入的数学和微观解释留给进阶。</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>第二定律的两种陈述 + 自发方向</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从"反向过程从不发生"的现象切入 → 引出第二定律的两种历史陈述（克劳修斯 + 开尔文）→ 抽象出"自发方向 / 不可逆性"的概念 → 明确第二定律是<strong>独立于第一定律</strong>的新原理<br>
+        <strong>建议时长</strong>：50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>列举几个"<strong>反向过程从不发生</strong>"的例子 ——</p>
+          <ul>
+            <li>热水放凉了。从未看到室温水自发变热 —— 即使第一定律允许（吸收环境的能量）</li>
+            <li>一滴墨水滴入清水，慢慢均匀染色。从未看到均匀染色的水自发把墨水重新汇聚成一滴</li>
+            <li>气体进入抽真空的容器，会均匀充满。从未看到均匀分布的气体自发挤回原来那一角</li>
+            <li>用力推一辆小车（做功）→ 摩擦让小车减速并发热。从未看到桌面自发变冷、把热量"还给"小车让它再次加速</li>
+          </ul>
+          <p>这些都是 <strong>"第一定律允许、但实际从不发生"</strong> 的现象。请自己想：</p>
+          <ul>
+            <li>这些现象有什么<strong>共同点</strong>？</li>
+            <li>能不能用<strong>一个统一的判据</strong>描述"什么过程能自发发生 / 什么不能"？</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>先回顾</strong>：<a href="basic-task-cards.html">热力学第一定律</a> 板块讲过 \(\Delta U = Q - W\)，以及 Card 1 思考点 2 留了一个引子 —— "第二类永动机不违反第一定律但仍不可能"。本板块就要把这个引子展开，给出第二定律的完整陈述。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">克劳修斯陈述（1850 年）</span></div>
+        <div class="step-content">
+          <p>1850 年，德国物理学家克劳修斯（Rudolf Clausius）研究热机和制冷机的工作过程后，提出 ——</p>
+
+          <div class="quote-block" style="font-size: 1rem; padding: 16px;">
+            <strong>克劳修斯陈述 ⭐</strong>: 不可能把热量从低温物体传到高温物体而<strong>不引起其他变化</strong>。<br>
+            <br>
+            等价说法：<strong>热不能自发地从低温流向高温</strong>。<br>
+            <br>
+            （"自发"= 不借助外力、不引起其他变化）
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-clausius" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker>
+                <marker id="arrow-blocked" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#7f8c8d"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">克劳修斯陈述 — 自发方向</text>
+              <!-- 高温源 -->
+              <rect x="60" y="100" width="130" height="100" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="8"></rect>
+              <text x="125" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">高温物体</text>
+              <text x="125" y="158" text-anchor="middle" font-size="11" fill="#c0392b">T<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan></text>
+              <text x="125" y="180" text-anchor="middle" font-size="10" fill="#34495e">（如：燃烧的火）</text>
+              <!-- 低温源 -->
+              <rect x="350" y="100" width="130" height="100" fill="#eaf2fb" stroke="#0055B8" stroke-width="2" rx="8"></rect>
+              <text x="415" y="135" text-anchor="middle" font-size="13" font-weight="700" fill="#0055B8">低温物体</text>
+              <text x="415" y="158" text-anchor="middle" font-size="11" fill="#0055B8">T<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+              <text x="415" y="180" text-anchor="middle" font-size="10" fill="#34495e">（如：常温空气）</text>
+              <!-- 自发方向: 高 → 低 (红色箭头) -->
+              <line x1="195" y1="135" x2="345" y2="135" stroke="#c0392b" stroke-width="3" marker-end="url(#arrow-clausius)"></line>
+              <text x="270" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">✓ 自发</text>
+              <text x="270" y="118" text-anchor="middle" font-size="9" fill="#c0392b">（自动发生）</text>
+              <!-- 非自发: 低 → 高 (灰色虚线箭头, 表示该方向不自发) -->
+              <line x1="345" y1="170" x2="195" y2="170" stroke="#7f8c8d" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arrow-blocked)"></line>
+              <text x="270" y="225" text-anchor="middle" font-size="11" font-weight="700" fill="#7f8c8d">✗ 非自发</text>
+              <text x="270" y="238" text-anchor="middle" font-size="9" fill="#7f8c8d">（需要外力 / 制冷机做功）</text>
+              <!-- 底部注释 -->
+              <text x="270" y="244" text-anchor="middle" font-size="11" fill="#34495e">热不能"自发"从低温流向高温</text>
+              <text x="270" y="260" text-anchor="middle" font-size="10" fill="#34495e">（制冷机 / 空调可以做到这一点，但要消耗电能，不"自发"）</text>
+            </svg>
+            <div class="diagram-caption">图 1 · 克劳修斯陈述示意。红色方框为高温物体（温度 T<sub>h</sub>），蓝色方框为低温物体（温度 T<sub>c</sub>）。从高温物体到低温物体的<strong>红色实线箭头</strong>表示<strong>自发方向</strong>（自动发生 / 不需外力 / 标注 "✓ 自发"）。从低温物体到高温物体的<strong>灰色虚线箭头</strong>表示<strong>不自发方向</strong>（标注 "✗ 非自发"；要发生需要消耗外功，如制冷机 / 空调，但那已经"引起了其他变化"）。两条箭头共用同一对热源，方向相反，对比鲜明。</div>
+          </div>
+
+          <p><strong>关键澄清</strong>：</p>
+          <ul>
+            <li>"<strong>自发</strong>"的严格意义 = <strong>不引起其他变化</strong>。空调 / 冰箱能把热从低温流到高温，但<strong>消耗了电能</strong>并改变了电网状态 → 不算"自发"</li>
+            <li>这里说的"自发"<strong>不</strong>意味着"必然能在短时间内完成" — 把"会自然发生"和"何时发生"是两件事</li>
+            <li>克劳修斯陈述<strong>不</strong>否认"低温向高温的热流" — 它只说这种过程<strong>不会自发发生</strong>，需要"<strong>付出代价</strong>"（外功 / 其他变化）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">开尔文陈述（1851 年）</span></div>
+        <div class="step-content">
+          <p>同年，开尔文勋爵（William Thomson, Lord Kelvin）从研究热机效率的角度给出另一种陈述 ——</p>
+
+          <div class="quote-block" style="font-size: 1rem; padding: 16px;">
+            <strong>开尔文陈述 ⭐</strong>: 不可能从<strong>单一热源</strong>吸取热量，<strong>全部</strong>用来做功而<strong>不引起其他变化</strong>。<br>
+            <br>
+            等价说法：<strong>不能制造"只从一个热源吸热、全部转化为有用功"的循环热机</strong>。
+          </div>
+
+          <p>开尔文陈述说的是<strong>"完美热机"的不可能</strong> ——</p>
+          <ul>
+            <li>第一定律允许 \(Q = W\)（吸的热量全部变成功）—— 这<strong>满足能量守恒</strong></li>
+            <li>但开尔文说：这种"100% 转化"的热机<strong>不可能存在</strong> —— 必须有一部分热量"<strong>浪费</strong>" 给低温物体（变成废热）</li>
+            <li>这就是"<strong>第二类永动机不可能</strong>"的物理含义（Card 2 详细分析）</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 第一定律允许的为什么实际不发生？</div>
+            <div class="tp-pause">驱动问题里的三个"反向过程"（热水自发变热 / 桌子自发被热推动 / 100% 效率热机）都满足第一定律的能量守恒。为什么不发生？用第二定律的两种陈述<strong>逐一</strong>分析。</div>
+            <div class="tp-ask">① <strong>热水自发变热</strong> = 低温环境自发把热流到高温热水 → 直接违反<strong>克劳修斯陈述</strong>（热不能自发从低温流向高温）。<br>② <strong>桌面自发变冷推桌子</strong> = 单一热源（桌面）吸热全部变功（推桌子的机械能） → 直接违反<strong>开尔文陈述</strong>（不能单一热源全部转功）。<br>③ <strong>100% 效率热机</strong> = 单一高温热源吸热全部变功，无废热 → 直接违反<strong>开尔文陈述</strong>。<br>所以这三个"第一定律允许的反向过程"都被第二定律"挡住"了 —— 这正是为什么第二定律是<strong>必需的、独立的</strong>。</div>
+            <div class="tp-write">在纸上：① 写每个反向过程违反<strong>哪一条</strong>陈述；② 一句话总结"第一定律不够 + 第二定律补上"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">两陈述等价 + 自发方向 + 不可逆性</span></div>
+        <div class="step-content">
+          <p>两种陈述看似无关（一个讲"热流向"，一个讲"热机效率"），实际上<strong>逻辑等价</strong> —— 由任意一条可以推出另一条（严格证明留给进阶 卡诺循环 板块）。</p>
+
+          <p>从两种陈述抽象出更深的核心概念 ——</p>
+
+          <div class="quote-block">
+            <strong>自发方向 ⭐</strong>: 自然界的过程都有<strong>单向性</strong>。有些方向"自动发生"（自发），反方向"不自动发生"（非自发）。<br>
+            举例: 热从高 → 低 / 气体从高密度 → 均匀分布 / 油墨从一滴 → 均匀染色 / 机械能 → 内能（摩擦生热）。所有这些反向过程都<strong>不自发</strong>。
+          </div>
+
+          <div class="quote-block">
+            <strong>不可逆性 ⭐</strong>: 一个自发过程的"<strong>反向</strong>"不会自发发生 —— 这个过程是<strong>不可逆的</strong>。<br>
+            "不可逆"不是说"绝对做不到反向"，而是说"反向<strong>不会自发发生</strong>"。要走反向必须付出代价（消耗外功 / 引起其他变化）。
+          </div>
+
+          <p><strong>不可逆性的常见例子</strong> ——</p>
+          <table class="compare-table">
+            <tr><th>自发过程</th><th>反向（不自发）</th></tr>
+            <tr><td>热水放凉（热 → 低温环境）</td><td>凉水自发变热</td></tr>
+            <tr><td>气体扩散均匀</td><td>气体自发聚回一角</td></tr>
+            <tr><td>油墨入水均匀染色</td><td>染色水自发汇聚墨水</td></tr>
+            <tr><td>摩擦消耗机械能 → 热</td><td>热自发推动物体加速</td></tr>
+            <tr><td>鸡蛋摔碎</td><td>碎片自发重组为完整鸡蛋</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 自发方向的判据（定性）</div>
+            <div class="tp-pause">能不能从上述例子里"抽象出"一个<strong>统一</strong>的判据 —— 看一个过程，能不能立刻判断它是"自发"还是"非自发"？</div>
+            <div class="tp-ask">观察上面的例子，自发方向都对应<strong>系统从"有序" → "无序"</strong>:<br>· 热从高 → 低 = 温度差变小（从"有差别" → "更均匀"）<br>· 气体扩散 = 分子分布从"聚集" → "均匀"<br>· 油墨入水 = 分子分布从"集中一滴" → "均匀分散"<br>· 摩擦生热 = 机械能（有序的整体动能）→ 内能（无序的分子热运动）<br>· 鸡蛋摔碎 = "有序结构" → "无序碎片"<br>这个"无序度"的概念，物理上正式名字叫<strong>熵 \(S\)</strong>（Card 3 详细讲）。<br><strong>自发判据（定性）⭐</strong>: 自发过程总是让系统"<strong>无序度增加</strong>"（孤立系统熵增）。这就是第二定律的"<strong>统一判据</strong>"，统一了克劳修斯陈述、开尔文陈述、以及所有的不可逆性观察。</div>
+            <div class="tp-write">在纸上：① 把 5 个例子各自标注"从 _ 到 _"，看看是不是都对应"有序 → 无序"；② 写下"自发判据 = 无序度增加 = 熵增"；③ 一句话总结"为什么第二定律的核心是'方向'问题"。</div>
+            <div class="tp-hint">熵增原理的严格形式留给进阶<a href="entropy-meaning-task-cards.html">熵的物理意义</a>板块。本板块定性掌握"自发 = 无序度增加"足以解释所有第二定律现象。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="sl-c1-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立陈述克劳修斯陈述（热不自发从低温流向高温）和开尔文陈述（不可能从单一热源吸热全部变功）</span></label>
+        <label data-key="sl-c1-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用两种陈述<strong>各自</strong>分析驱动问题里"反向过程不发生"的具体原因</span></label>
+        <label data-key="sl-c1-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"自发方向 / 不可逆性"概念，并举 3-5 个例子</span></label>
+        <label data-key="sl-c1-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能定性说出"自发方向 = 无序度增加（熵增）" 的判据</span></label>
+        <label data-key="sl-c1-5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释第二定律为什么是<strong>独立于第一定律的新原理</strong>（第一定律管"数量"，第二定律管"方向"）</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：物理判据 · 概念抽象 · 自然观（单向性与时间箭头）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>第二类永动机不可能 + 热机效率定性</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：用开尔文陈述论证"第二类永动机不可能" → 分析实际热机的能量流向 → 定性论证 \(\eta < 1\) 的不可避免性<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">第二类永动机 — 第一定律允许、第二定律否决</span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            <strong>第一类 vs 第二类永动机</strong>:<br>
+            · <strong>第一类</strong>: "不消耗任何能量却能持续对外做功" → 违反<strong>能量守恒</strong>（第一定律）<br>
+            · <strong>第二类</strong>: 从<strong>单一热源</strong>吸取热量，<strong>全部</strong>转化为功 → <strong>满足</strong>能量守恒（\(Q = W\)）<br>
+            两类永动机<strong>都不可能</strong>，但理由不同：
+            <ul style="margin-top: 6px;">
+              <li>第一类违反第一定律</li>
+              <li>第二类不违反第一定律，但<strong>违反开尔文陈述</strong>（第二定律）</li>
+            </ul>
+            这两类永动机的不可能<strong>同时</strong>展示了第一定律和第二定律的<strong>独立</strong>作用。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 第二类永动机的"诱惑"</div>
+            <div class="tp-pause">第二类永动机听起来非常美好：海洋里有<strong>无穷</strong>的热量，按理只要"<strong>吸海水的热全部变功</strong>"，就能解决人类能源问题。第一定律不反对（能量守恒满足）。但实际不行 —— 为什么？</div>
+            <div class="tp-ask">关键在"<strong>全部</strong>"两个字。开尔文陈述明确说：不能<strong>"全部"</strong>。任何热机都必须有一部分热量<strong>"漏"</strong> 给低温热源（即<strong>废热</strong>）。<br>
+              如果你"只用海洋这一个热源"工作：你的热机吸海水的热 \(Q\)，必须排放 \(Q_c\) 给低温源（如大气 / 深海）才能继续运行，自身做的功只是 \(W = Q - Q_c < Q\)，<strong>不可能 100%</strong>。<br>
+              "排废热"不是工程局限，是<strong>物理原则上</strong>不可避免的（开尔文陈述的直接结论）。所以"海洋发电厂"这种想法在物理原理上就不成立 — 这是为什么我们要找"<strong>温差</strong>"（如海洋温差发电、地热）而不是"<strong>单一恒温</strong>热源"。</div>
+            <div class="tp-write">在纸上：① 写"第二类永动机违反开尔文陈述"的逻辑；② 解释为什么"温差发电"行而"恒温源发电"不行；③ 一句话总结"热机必须有温差"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">实际热机的能量流向</span></div>
+        <div class="step-content">
+          <p>所有实际工作的热机（蒸汽机 / 内燃机 / 燃气轮机 / 火力发电厂）都遵循同一个能量流向 ——</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-engine" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"></path></marker>
+                <marker id="arrow-qh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker>
+                <marker id="arrow-qc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"></path></marker>
+                <marker id="arrow-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">热机能量流向（Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan> → W + Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan>）</text>
+              <!-- 高温源（顶部） -->
+              <rect x="180" y="55" width="180" height="55" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="6"></rect>
+              <text x="270" y="80" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">高温热源 T<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan></text>
+              <text x="270" y="99" text-anchor="middle" font-size="10" fill="#c0392b">（燃烧 / 锅炉）</text>
+              <!-- 热机（中间） -->
+              <circle cx="270" cy="180" r="40" fill="#fafbff" stroke="#00409A" stroke-width="2.5"></circle>
+              <text x="270" y="178" text-anchor="middle" font-size="12" font-weight="700" fill="#00409A">热机</text>
+              <text x="270" y="195" text-anchor="middle" font-size="10" fill="#34495e">工作物质</text>
+              <!-- 低温源（底部） -->
+              <rect x="180" y="245" width="180" height="55" fill="#eaf2fb" stroke="#0055B8" stroke-width="2" rx="6"></rect>
+              <text x="270" y="270" text-anchor="middle" font-size="12" font-weight="700" fill="#0055B8">低温热源 T<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+              <text x="270" y="289" text-anchor="middle" font-size="10" fill="#0055B8">（大气 / 冷却水）</text>
+              <!-- Q_h 箭头（高温源 → 热机） -->
+              <line x1="270" y1="115" x2="270" y2="135" stroke="#c0392b" stroke-width="3" marker-end="url(#arrow-qh)"></line>
+              <text x="170" y="125" text-anchor="end" font-size="11" font-weight="700" fill="#c0392b">吸热 Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan></text>
+              <text x="170" y="138" text-anchor="end" font-size="9" fill="#c0392b">（来自燃料燃烧）</text>
+              <!-- Q_c 箭头（热机 → 低温源） -->
+              <line x1="270" y1="225" x2="270" y2="240" stroke="#0055B8" stroke-width="3" marker-end="url(#arrow-qc)"></line>
+              <text x="170" y="232" text-anchor="end" font-size="11" font-weight="700" fill="#0055B8">放热 Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+              <text x="170" y="245" text-anchor="end" font-size="9" fill="#0055B8">（废热 / 必须排放）</text>
+              <!-- W 箭头（热机 → 右侧 = 输出有用功） -->
+              <line x1="315" y1="180" x2="450" y2="180" stroke="#27ae60" stroke-width="3" marker-end="url(#arrow-w)"></line>
+              <text x="455" y="178" font-size="11" font-weight="700" fill="#27ae60">输出 W</text>
+              <text x="455" y="192" font-size="9" fill="#27ae60">（有用功）</text>
+              <!-- 关系式 -->
+              <text x="270" y="42" text-anchor="middle" font-size="11" font-weight="700" fill="#00409A">Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan> = W + Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan> · η = W/Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan> &lt; 1</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 热机能量流向。红色高温热源（T<sub>h</sub>）将热量 Q<sub>h</sub>（红色向下箭头）传给中间的"热机"（蓝色圆）；热机将其中一部分 W（绿色向右箭头）作为<strong>有用功</strong>输出（如推动汽车 / 发电），其余部分 Q<sub>c</sub>（蓝色向下箭头）作为<strong>废热</strong>排放给低温热源（T<sub>c</sub>）。能量守恒（第一定律）：Q<sub>h</sub> = W + Q<sub>c</sub>。<strong>效率 η = W / Q<sub>h</sub> = 1 − Q<sub>c</sub> / Q<sub>h</sub></strong>。开尔文陈述要求 Q<sub>c</sub> &gt; 0（必须有废热）→ <strong>η &lt; 1</strong>（不可达 100%）。</div>
+          </div>
+
+          <p><strong>关键论证（开尔文陈述 → η &lt; 1）</strong>:</p>
+          <ul>
+            <li>能量守恒（第一定律）: \(Q_h = W + Q_c\)，所以 \(W = Q_h - Q_c\)</li>
+            <li>效率定义: \(\eta = W / Q_h = (Q_h - Q_c) / Q_h = 1 - Q_c / Q_h\)</li>
+            <li>开尔文陈述: 不能有 \(Q_c = 0\)（否则就是"从单一热源吸热全部转功"）</li>
+            <li>所以 \(Q_c > 0\) → \(\eta < 1\) ⭐ —— <strong>任何热机的效率都不可能达到 100%</strong></li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 实际热机效率示例</div>
+            <div class="tp-pause">为什么实际热机的效率都很低？查一下：① 蒸汽机大约多少；② 内燃机大约多少；③ 火力发电厂大约多少。这些值<strong>都远低于</strong> 100% —— 不只是工程局限，更是物理原则上的限制。</div>
+            <div class="tp-ask">① 蒸汽机 ~ 10-20%（早期）/ ~ 30% （现代）。② 汽油内燃机 ~ 25-30%，柴油 ~ 35-45%。③ 火力发电 ~ 40-50%。<br>
+              这些远低于 100% 的<strong>第一原因</strong>是物理原则上的限制：开尔文陈述 → 必须有废热。<br>
+              <strong>第二原因</strong>是工程局限：摩擦、漏热、不可逆等。<br>
+              对应的卡诺定理给出一个<strong>定量上限</strong>: \(\eta_\text{卡诺} = 1 - T_c / T_h\)（仅依赖两个热源温度，不依赖工质 / 工程细节）—— 严格推导留给<a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a>。本板块只需<strong>定性</strong>知道"\(\eta < 1\) 是物理原则上的"。</div>
+            <div class="tp-write">在纸上：① 查 3 类热机的典型效率；② 用 \(Q_h = W + Q_c\) 和 \(\eta = W/Q_h < 1\) 解释为什么不能 100%；③ 一句话总结"热机效率有<strong>物理上限</strong>，不只是工程局限"。</div>
+            <div class="tp-hint">温差越大（T<sub>h</sub> - T<sub>c</sub> 越大）热机效率上限越高 —— 这是为什么火力发电要"<strong>高压高温</strong>"蒸汽（提高 T<sub>h</sub>）+ "<strong>低温冷却</strong>"（降低 T<sub>c</sub>）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="sl-c2-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分第一类（违反能量守恒）和第二类（违反开尔文陈述）永动机</span></label>
+        <label data-key="sl-c2-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立画热机能量流向图（高温源 → 热机 → 低温源 + 输出 W）+ 写出能量守恒关系 Q<sub>h</sub> = W + Q<sub>c</sub></span></label>
+        <label data-key="sl-c2-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从开尔文陈述<strong>定性</strong>论证热机效率 η < 1（必须有废热 Q<sub>c</sub> > 0）</span></label>
+        <label data-key="sl-c2-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"温差发电"行而"恒温源发电"不行的物理原因</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：物理建模 · 工程实例 · 物理原则 vs 工程局限</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>熵的定性概念 + 边界</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：用"无序度"定性介绍熵 \(S\) → 陈述熵增原理（孤立系统 \(\Delta S \geq 0\)）→ 明确本板块的边界（不引 \(dS = dQ/T\) / 不引玻尔兹曼公式）<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">"无序"的现象（5 分钟）</span></div>
+        <div class="step-content">
+          <p>Card 1 思考点 2 已经发现一个统一线索 —— 自发过程都对应"<strong>从有序到无序</strong>"。本卡把"无序度"这个概念形式化为<strong>熵</strong>。</p>
+
+          <p>不查资料，列举几个"<strong>无序度变化明显</strong>"的过程 ——</p>
+          <ul>
+            <li>气体扩散：分子从"集中一角"（有序）→ "均匀分布"（无序）</li>
+            <li>油墨入水：分子从"集中一滴"（有序）→ "均匀染色"（无序）</li>
+            <li>冰融化：水分子从"规则点阵"（有序）→ "无规则液态"（无序）</li>
+            <li>水蒸发：水分子从"液态束缚"（半有序）→ "气态自由"（更无序）</li>
+            <li>鸡蛋摔碎：分子从"有结构的蛋"（有序）→ "无结构的碎片"（无序）</li>
+          </ul>
+
+          <p>这些过程都是"<strong>无序度增加</strong>"。在物理上，这个"无序度"叫<strong>熵</strong> \(S\)。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">熵 — 系统"无序度"的度量</span></div>
+        <div class="step-content">
+
+          <div class="quote-block">
+            <strong>熵的定性定义 ⭐</strong>: 熵 \(S\) 是<strong>系统"无序度"的度量</strong>。无序度越大 → 熵 \(S\) 越大。<br>
+            · 注意：本板块只到"定性"——<strong>不引入</strong> \(S\) 的计算公式（\(dS = dQ_\text{可逆}/T\)）<br>
+            · <strong>不引入</strong>玻尔兹曼公式 \(S = k_B \ln \Omega\)（用微观态数定义熵的统计形式）<br>
+            · 这些数学形式留给<a href="state-functions-task-cards.html">状态函数（进阶）</a>和<a href="entropy-meaning-task-cards.html">熵的物理意义（进阶）</a>板块。
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-entropy" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">熵增示意 — 气体扩散</text>
+              <!-- 初态: 左盒, 分子集中在左半 -->
+              <rect x="40" y="70" width="170" height="130" fill="#fafbff" stroke="#34495e" stroke-width="1.5"></rect>
+              <line x1="125" y1="70" x2="125" y2="200" stroke="#34495e" stroke-width="0.8" stroke-dasharray="3,3"></line>
+              <!-- 左半盒红气分子（密集） -->
+              <circle cx="60" cy="90" r="4" fill="#c0392b"></circle>
+              <circle cx="80" cy="100" r="4" fill="#c0392b"></circle>
+              <circle cx="100" cy="92" r="4" fill="#c0392b"></circle>
+              <circle cx="70" cy="115" r="4" fill="#c0392b"></circle>
+              <circle cx="90" cy="125" r="4" fill="#c0392b"></circle>
+              <circle cx="110" cy="115" r="4" fill="#c0392b"></circle>
+              <circle cx="65" cy="140" r="4" fill="#c0392b"></circle>
+              <circle cx="95" cy="148" r="4" fill="#c0392b"></circle>
+              <circle cx="115" cy="135" r="4" fill="#c0392b"></circle>
+              <circle cx="80" cy="160" r="4" fill="#c0392b"></circle>
+              <circle cx="105" cy="170" r="4" fill="#c0392b"></circle>
+              <circle cx="70" cy="180" r="4" fill="#c0392b"></circle>
+              <!-- 右半盒空 -->
+              <text x="167" y="135" text-anchor="middle" font-size="10" fill="#7f8c8d">（真空）</text>
+              <text x="125" y="220" text-anchor="middle" font-size="11" font-weight="700" fill="#34495e">初态</text>
+              <text x="125" y="235" text-anchor="middle" font-size="10" fill="#c0392b">气体集中在左半 · "有序"</text>
+              <text x="125" y="250" text-anchor="middle" font-size="10" font-weight="700" fill="#34495e">S 小</text>
+              <!-- 中间箭头 + 标注 -->
+              <line x1="230" y1="135" x2="320" y2="135" stroke="#1d1d1f" stroke-width="2.5" marker-end="url(#arrow-entropy)"></line>
+              <text x="275" y="125" text-anchor="middle" font-size="11" font-weight="700" fill="#34495e">自发</text>
+              <text x="275" y="155" text-anchor="middle" font-size="9" fill="#34495e">（扩散）</text>
+              <!-- 末态: 右盒, 分子均匀分布 -->
+              <rect x="340" y="70" width="170" height="130" fill="#fafbff" stroke="#34495e" stroke-width="1.5"></rect>
+              <!-- 右盒红气均匀分布 -->
+              <circle cx="360" cy="90" r="4" fill="#c0392b"></circle>
+              <circle cx="395" cy="100" r="4" fill="#c0392b"></circle>
+              <circle cx="430" cy="92" r="4" fill="#c0392b"></circle>
+              <circle cx="465" cy="95" r="4" fill="#c0392b"></circle>
+              <circle cx="495" cy="105" r="4" fill="#c0392b"></circle>
+              <circle cx="375" cy="120" r="4" fill="#c0392b"></circle>
+              <circle cx="410" cy="130" r="4" fill="#c0392b"></circle>
+              <circle cx="445" cy="125" r="4" fill="#c0392b"></circle>
+              <circle cx="480" cy="135" r="4" fill="#c0392b"></circle>
+              <circle cx="355" cy="150" r="4" fill="#c0392b"></circle>
+              <circle cx="390" cy="160" r="4" fill="#c0392b"></circle>
+              <circle cx="425" cy="155" r="4" fill="#c0392b"></circle>
+              <circle cx="460" cy="170" r="4" fill="#c0392b"></circle>
+              <circle cx="495" cy="180" r="4" fill="#c0392b"></circle>
+              <circle cx="370" cy="185" r="4" fill="#c0392b"></circle>
+              <circle cx="405" cy="190" r="4" fill="#c0392b"></circle>
+              <text x="425" y="220" text-anchor="middle" font-size="11" font-weight="700" fill="#34495e">末态</text>
+              <text x="425" y="235" text-anchor="middle" font-size="10" fill="#c0392b">气体均匀填充全盒 · "无序"</text>
+              <text x="425" y="250" text-anchor="middle" font-size="10" font-weight="700" fill="#34495e">S 大</text>
+            </svg>
+            <div class="diagram-caption">图 3 · 熵增示意：气体扩散。左侧"初态"中红色小圆代表气体分子全部集中在左半盒（虚线为分隔），右半盒空（真空）—— 这是"有序"分布，熵 \(S\) 小。中间黑色箭头表示这是<strong>自发</strong>方向（自动发生 / 不需外力）。右侧"末态"中红色小圆均匀填充整个盒子 —— 这是"无序"分布，熵 \(S\) 大。反向（自发把均匀分布的气体挤回左半）<strong>不发生</strong>。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>熵增原理（定性形式）⭐</strong>: 对一个<strong>孤立系统</strong>（不与外界交换能量 / 物质），熵不会自发减少 ——<br>
+            · 自发过程: \(\Delta S > 0\)（熵增加，对应不可逆）<br>
+            · 可逆过程: \(\Delta S = 0\)（熵不变，理想化的极限）<br>
+            · 不可能: \(\Delta S < 0\)（孤立系统熵自发减少 → 违反第二定律）<br>
+            <br>
+            注意"<strong>孤立</strong>"是关键 —— 局部系统熵可以减少（如冰箱里水结冰，水的熵减），但<strong>需要外界做功</strong>，整个"水 + 冰箱 + 电网"的孤立系统熵<strong>必定增加</strong>。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 哪些日常过程是熵增？</div>
+            <div class="tp-pause">列举 5 个日常过程，分析每个是熵增（自发）还是熵减（非自发或需外力）。</div>
+            <div class="tp-ask">举例: ① <strong>冰融化</strong>(熵增 · 规则点阵 → 液态无序). ② <strong>水蒸发</strong>(熵增 · 液态 → 气态更无序). ③ <strong>气体被压缩</strong>(熵<strong>减</strong> · 分子更密集 → 但需要做功, 是"非自发" — 外界做功强迫). ④ <strong>水自然结冰</strong>(熵<strong>减</strong> · 液态 → 规则点阵 — 但要在 0°C 以下才发生, 因为环境吸收水的热, 环境熵增 &gt; 水熵减, 总熵增). ⑤ <strong>鸡蛋摔碎</strong>(熵增 · 有结构 → 无结构). 关键观察: 局部熵减<strong>不</strong>违反第二定律, 只要"局部 + 环境"总系统熵增就行。</div>
+            <div class="tp-write">在纸上：① 5 个例子的熵变方向；② 解释"为什么冰可以结冰"（局部熵减但总熵增）；③ 一句话总结"判定熵增看孤立系统 / 总系统，不看局部"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">熵 vs 内能 — 完全独立的两个概念</span></div>
+        <div class="step-content">
+          <p>到本板块为止，热力学有了两个核心状态量 ——</p>
+          <table class="compare-table">
+            <tr><th>概念</th><th>内能 \(U\)</th><th>熵 \(S\)</th></tr>
+            <tr><td>来自哪个定律</td><td>第一定律</td><td>第二定律</td></tr>
+            <tr><td>度量什么</td><td>系统总能量</td><td>系统无序度</td></tr>
+            <tr><td>变化规则</td><td>\(\Delta U = Q - W\)（守恒律）</td><td>孤立系统 \(\Delta S \geq 0\)（不减律）</td></tr>
+            <tr><td>状态量?</td><td>是</td><td>是</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 6 · 熵和内能的关系</div>
+            <div class="tp-pause">同一个系统能不能<strong>同时</strong>内能增加 + 熵增加？内能不变 + 熵增加？内能减少 + 熵减少？分类别想想，并体会"U 和 S 是独立变化的"。</div>
+            <div class="tp-ask">① <strong>U ↑ + S ↑</strong>: 加热气体（U 升, 同时分子运动更剧烈 / 速率分布更宽 → S 升）。最常见情形。<br>
+              ② <strong>U 不变 + S ↑</strong>: 理想气体<strong>绝热自由膨胀</strong>（Joule 实验）—— 绝热 Q=0 + 自由膨胀对外不做功 W=0 → ΔU = Q−W = 0 → U 不变（对理想气体 T 也不变）；但气体从"集中一边" → "均匀分布全盒" → S 升。<br>
+              ③ <strong>U ↓ + S ↓</strong>: 水在 0°C 以下结冰（系统视角）—— 水放热给冰箱 / 寒冷环境 → U 降；水分子从无规则液态 → 规则点阵冰 → S 降。但这<strong>不违反第二定律</strong>: 局部水 ΔS&lt;0, 但环境吸热 ΔS<sub>环境</sub>&gt;0, "水+环境" 总系统 ΔS<sub>总</sub>&gt;0 才能让结冰自发。<br>
+              <strong>第四种组合 U ↑ + S ↓</strong> 在自然界中<strong>很难找简单例子</strong>—— 加热使分子运动更剧烈, 通常导致 S↑而不是 S↓。这反映了物理世界的一种"对应趋势"（温度变化与无序度变化常同方向）。<br>
+              <strong>关键</strong>: U 和 S 是<strong>独立</strong>变化的两个量。第一定律单独不能预测 S 的变化, 第二定律单独不能预测 U 的变化。两者<strong>互补</strong>而不替代。</div>
+            <div class="tp-write">在纸上：① 3 个能找到例子的组合各画一个具体例子；② 解释为什么"U↑+S↓" 难找例子（温度升通常伴随无序度升）；③ 一句话总结"U 和 S 是独立的，需要两个独立定律分别管它们"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界 — 本板块到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: 熵的计算公式 \(dS = dQ_\text{可逆}/T\) —— 留给<a href="state-functions-task-cards.html">状态函数（进阶）</a>板块严格定义</li>
+            <li><strong>不引入</strong>: 玻尔兹曼公式 \(S = k_B \ln \Omega\)（用微观态数定义熵的统计形式）—— 留给<a href="entropy-meaning-task-cards.html">熵的物理意义（进阶）</a>板块</li>
+            <li><strong>不引入</strong>: 卡诺效率上限 \(\eta_\text{卡诺} = 1 - T_c/T_h\) 的严格推导 —— 留给<a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a>板块</li>
+            <li><strong>不引入</strong>: 热力学第三定律 / 绝对熵 —— 大学物化内容</li>
+            <li><strong>本板块完成的</strong>: 建立第二定律的<strong>核心思想</strong>（自发方向 / 不可逆性 / 熵增原理定性）。这些定性认识足以解释绝大部分热力学不可逆现象</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游连接</strong>: 第二定律的定性核心思想是后续<strong>所有进阶热力学板块</strong>的逻辑出发点 ——
+            <ul style="margin-top: 6px;">
+              <li><a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a>: 用第二定律推 \(\eta \leq \eta_\text{卡诺} = 1 - T_c/T_h\)</li>
+              <li><a href="state-functions-task-cards.html">状态函数（进阶）</a>: 用第二定律严格定义熵 \(S\) 为状态量</li>
+              <li><a href="entropy-meaning-task-cards.html">熵的物理意义（进阶）</a>: 玻尔兹曼公式 + 熵增定律的微观统计解释</li>
+              <li><a href="enthalpy-meaning-task-cards.html">焓与焓变（进阶）</a>: 在等压条件下用熵 + 焓判断反应自发性 → 吉布斯自由能 \(G = H - TS\)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="sl-c3-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"无序度"<strong>定性</strong>定义熵 S，并列举 5 个熵增的日常例子</span></label>
+        <label data-key="sl-c3-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能陈述熵增原理（定性）：孤立系统 ΔS ≥ 0（可逆 = 0，自发 &gt; 0）</span></label>
+        <label data-key="sl-c3-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"局部熵减"与"总熵增"，并解释为什么冰能结冰、冰箱能制冷</span></label>
+        <label data-key="sl-c3-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分内能 U 和熵 S —— 二者是独立的状态量，分别由第一和第二定律管</span></label>
+        <label data-key="sl-c3-5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出本板块的<strong>边界</strong> —— 不引入熵的微分公式（dS = dQ/T） / 玻尔兹曼公式 / 卡诺效率严格推导，这些留给进阶板块</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：物理状态量 · 不可逆性 · 自然观（无序度 / 时间箭头）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 3 件事：(1) Card 1 思考点 1：用克劳修斯陈述和开尔文陈述<strong>逐一</strong>论证驱动问题里 3 个反向过程为何不发生；(2) Card 2：从 \(Q_h = W + Q_c\) 和开尔文陈述（\(Q_c > 0\)）<strong>定性</strong>论证 \(\eta < 1\)；(3) Card 3 思考点 6：3 个 "U-S 独立变化" 组合的具体例子（含气体绝热自由膨胀的论证）。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答：① 第一定律 + 第二定律的"<strong>能量数量 + 能量方向</strong>"双判据视角，怎么改变了你对"物理基本原理"的看法？② "<strong>自发方向 = 熵增方向 = 无序度增加方向</strong>"这个统一视角，给你的"时间箭头"理解带来什么启发？（为什么我们能"记住过去而不能记住未来"？为什么"时间"似乎有方向？）</td></tr>
+      <tr><td>自评清单</td><td>所有 3 张卡的 checkpoint 都勾完。重点确认 Card 1（两种陈述 + 自发方向判据）—— 这是后续所有进阶板块的逻辑出发点。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15-20 分钟口试，准备用 <strong>3 分钟</strong> 清晰说出"第二定律为什么是<strong>独立于第一定律</strong>的新原理，以及它的核心思想是什么"。</td></tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：本板块的核心是<strong>定性陈述</strong>。手写推导稿应该聚焦"逻辑链"而不是"数学推导" —— 用文字 + 物理图像把克劳修斯 → 开尔文 → \(\eta &lt; 1\) → 熵增的<strong>逻辑流</strong>讲清楚。这是后续<a href="carnot-cycle-task-cards.html">卡诺循环</a>、<a href="state-functions-task-cards.html">状态函数</a>、<a href="entropy-meaning-task-cards.html">熵的物理意义</a> 三个进阶板块<strong>共同的逻辑起点</strong>。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="second-law-basic-mock-check.html">📝 基础检测</a>
+    <a href="second-law-basic-fluency-test.html">📈 熟练度检测</a>
+    <a href="second-law-basic-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 热力学第二定律 · 基础（基础模块 · 2026-06-09 新立）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-second-law-basic-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

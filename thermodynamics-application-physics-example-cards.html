@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学应用 · 物理 · 例题讲解集 · 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f3f8; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #6a1b9a; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  header.page-header { background: linear-gradient(135deg, #6a1b9a, #8e24aa, #ab47bc); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(106,27,154,0.18); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; line-height: 1.7; }
+  .intro-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #6a1b9a; }
+  .intro-card h2 { color: #4a148c; font-size: 18px; margin-bottom: 12px; }
+  .intro-card p { color: #5a6c7d; font-size: 14px; margin-bottom: 10px; line-height: 1.8; }
+  .intro-card .learning-path { background: linear-gradient(135deg, rgba(106,27,154,0.06), rgba(171,71,188,0.10)); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .intro-card .learning-path strong { color: #6a1b9a; }
+  .toc-card { background: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .toc-card h3 { color: #6a1b9a; font-size: 16px; margin-bottom: 12px; }
+  .toc-card ol { padding-left: 24px; font-size: 14px; }
+  .toc-card ol li { margin: 6px 0; color: #5a6c7d; }
+  .toc-card ol li a { color: #6a1b9a; text-decoration: none; font-weight: 500; }
+  .toc-card ol li a:hover { text-decoration: underline; }
+  .toc-card .type-tag { background: #f3e7fb; color: #6a1b9a; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; }
+  .toc-card .diff-tag { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 4px; }
+  .toc-card .diff-tag.中等 { background: #fff3e0; color: #e67e22; }
+  .toc-card .diff-tag.较难 { background: #fce4ec; color: #c0392b; }
+  .toc-card .diff-tag.综合压轴 { background: #ede7f6; color: #4527a0; }
+
+  .prereq-card { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #0055B8; }
+  .prereq-card h3 { color: #0055B8; font-size: 17px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .prereq-card h4 { color: #b66100; font-size: 14px; margin: 18px 0 8px 0; display: flex; align-items: center; gap: 8px; }
+  .prereq-card h4.recommend { color: #6a1b9a; }
+  .prereq-card p { font-size: 13px; color: #5a6c7d; margin-bottom: 10px; line-height: 1.8; }
+  .prereq-card .prereq-list { list-style: none; padding: 0; margin: 10px 0; }
+  .prereq-card .prereq-list li { background: #f5f9ff; border-radius: 8px; padding: 12px 16px; margin: 8px 0; border-left: 3px solid #0055B8; font-size: 14px; line-height: 1.8; }
+  .prereq-card .prereq-list li a { color: #0055B8; font-weight: 600; text-decoration: none; }
+  .prereq-card .prereq-list li a:hover { text-decoration: underline; }
+  .prereq-card .prereq-list li .usage { color: #5a6c7d; font-size: 13px; margin-left: 4px; }
+  .prereq-card .recommend-list { padding-left: 22px; margin: 6px 0; font-size: 13px; }
+  .prereq-card .recommend-list li { margin: 6px 0; color: #5a6c7d; }
+  .prereq-card .recommend-list li a { color: #6a1b9a; text-decoration: none; font-weight: 500; }
+
+  .example-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; border-left: 5px solid #6a1b9a; box-shadow: 0 2px 12px rgba(106,27,154,0.08); }
+  .example-card-header { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed #e8e0f4; flex-wrap: wrap; }
+  .example-card-no { background: linear-gradient(135deg, #6a1b9a, #ab47bc); color: white; width: 38px; height: 38px; border-radius: 50%; text-align: center; line-height: 38px; font-weight: 700; font-size: 17px; flex-shrink: 0; }
+  .example-card-title { font-size: 17px; font-weight: 700; color: #4a148c; flex: 1; min-width: 200px; }
+  .example-card-type { background: #f3e7fb; color: #6a1b9a; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .example-card-diff { background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .example-card-diff.中等 { background: #fff3e0; color: #e67e22; }
+  .example-card-diff.较难 { background: #fce4ec; color: #c0392b; }
+  .example-card-diff.综合压轴 { background: #ede7f6; color: #4527a0; }
+
+  .q-stem { background: #fafafe; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; font-size: 15px; line-height: 1.85; border-left: 3px solid #6a1b9a; }
+  .q-stem .stem-label { display: inline-block; background: #6a1b9a; color: white; padding: 2px 10px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+
+  .four-sec { background: white; border-radius: 8px; padding: 16px 20px; margin: 14px 0; border-left: 4px solid; line-height: 1.85; font-size: 14.5px; }
+  .four-sec.knowledge { background: #e8f0fe; border-left-color: #0055B8; }
+  .four-sec.approach  { background: #f3e7fb; border-left-color: #6a1b9a; }
+  .four-sec.solution  { background: #f1f8f4; border-left-color: #2e7d32; }
+  .four-sec.mistakes  { background: #fdeaea; border-left-color: #c0392b; }
+  .four-sec-title { font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 15px; }
+  .four-sec.knowledge .four-sec-title { color: #0055B8; }
+  .four-sec.approach  .four-sec-title { color: #6a1b9a; }
+  .four-sec.solution  .four-sec-title { color: #2e7d32; }
+  .four-sec.mistakes  .four-sec-title { color: #c0392b; }
+  .four-sec-body { line-height: 1.9; }
+  .four-sec-body ul { padding-left: 22px; margin: 4px 0; }
+  .four-sec-body ul li { margin: 4px 0; }
+  .four-sec-body .step { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px 14px; margin: 10px 0; border-left: 3px solid #2e7d32; }
+  .four-sec-body .step .step-no { display: inline-block; background: #2e7d32; color: white; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .four-sec-body .step .step-rule { font-size: 12px; color: #5a6c7d; font-style: italic; margin-top: 4px; }
+  .four-sec-body .mistake-item { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px 14px; margin: 10px 0; }
+  .four-sec-body .mistake-item .mistake-no { font-weight: 600; color: #c0392b; }
+  .four-sec-body .mistake-item .wrong { color: #c0392b; font-weight: 500; }
+  .four-sec-body .mistake-item .right { color: #2e7d32; font-weight: 500; }
+  .four-sec-body code.formula { background: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 4px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px; color: #4a148c; }
+  .four-sec-body .answer-box { background: rgba(46,125,50,0.10); border: 1px dashed #2e7d32; border-radius: 6px; padding: 10px 14px; margin: 12px 0; font-weight: 600; color: #1b5e20; }
+
+  .verify-box { background: linear-gradient(90deg, #e8f5e9, #f1f8f4); border-left: 4px solid #2e7d32; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #1b5e20; }
+  .verify-box strong { color: #2e7d32; }
+
+  .anchor-link { font-size: 13px; color: #5a6c7d; padding: 8px 12px; background: #f5f3f8; border-radius: 4px; margin: 8px 0; border-left: 3px solid #6a1b9a; }
+  .anchor-link a { color: #6a1b9a; }
+
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f3f8; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #f3e7fb; color: #6a1b9a; }
+  .bottom-nav a:hover { background: #ede7f6; }
+  .bottom-nav span { color: #bdc3c7; }
+
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+  sub, sup { font-size: 0.78em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学大主题 &raquo;
+  <strong>热力学应用 · 物理 · 例题讲解集</strong>
+</nav>
+
+<header class="page-header">
+  <h1>热力学应用 · 物理 · 例题讲解集</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 融合模块 · 跨板块综合应用 · 6 道典型题型例题 (题型骨架对接高考物理热学综合题) · 每题 4 段(知识 / 思路 / 步骤 / 易错)</div>
+</header>
+
+<div class="intro-card">
+  <h2>📌 关于本例题集</h2>
+  <p>本融合模块是『<strong>热力学大主题</strong>』的<strong>跨板块综合应用</strong>单元 (物理侧), 整合<strong>分子动理论 / 气体液体固体 / 热力学第一定律</strong> 3 个基础板块的核心定理 (第二定律基础仅以辨析选项形式出现), 应对物理热学综合题型.</p>
+  <p>6 道例题骨架对接<strong>状态图像互判 + 微观解释</strong> / <strong>第一定律单过程辨析</strong> / <strong>循环逐段分析</strong> / <strong>装置计算</strong> / <strong>变质量问题</strong> / <strong>ΔU = CΔT 综合大题</strong>等综合题型. 解综合大题的<strong>三步链</strong>: 受力平衡定压强 → 气体状态方程 → ΔU = Q − W.</p>
+  <div class="learning-path">
+    <strong>建议学习路径</strong>:
+    <strong>① 例题讲解集</strong>(本文件 · 学方法)
+    → <strong>② 熟练度检测</strong> fluency-test(模仿题独立做)
+    → <strong>③ 深度口试</strong> oral-exam(选 1-2 题向老师讲解)
+  </div>
+</div>
+
+<div class="prereq-card">
+  <h3>📚 前置板块清单</h3>
+  <p>本融合模块预设学生<strong>已完成以下 4 个基础板块</strong>(若未学完, 建议先回去学单板块再来). 受力平衡等经典力学内容是热力学大主题的默认前置能力, 不单列.</p>
+
+  <ul class="prereq-list">
+    <li>
+      <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> ·
+      <a href="molecular-kinetic-theory-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="molecular-kinetic-theory-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>微观三量</strong>(分子数密度 / 分子平均动能 / 单位时间单位面积碰撞) 与宏观 p, T 的桥接 — 例题 1 核心</div>
+    </li>
+    <li>
+      <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> ·
+      <a href="gas-liquid-solid-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="gas-liquid-solid-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>三大气体实验定律 + 理想气体状态方程</strong> + <strong>p-V / p-T / V-T 图像判别</strong>(过原点直线铁律) + <strong>受力平衡定压强</strong> — 例题 1/3/4/5 核心</div>
+    </li>
+    <li>
+      <a href="basic-task-cards.html">热力学第一定律</a> ·
+      <a href="basic-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="basic-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>ΔU = Q − W</strong>(本文统一约定 <strong>W 为气体对外界做的功</strong>) + <strong>四种特例过程</strong>(等温 ΔU=0 / 等容 W=0 / 等压 W=pΔV / 绝热 Q=0) — 例题 2/3/6 核心</div>
+    </li>
+    <li>
+      <a href="second-law-basic-task-cards.html">热力学第二定律 · 基础</a> ·
+      <a href="second-law-basic-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="second-law-basic-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>热传导的方向性</strong> + "绝热"作为过程条件 — 仅出现在例题 2/3 的个别辨析选项中, 不单独成题</div>
+    </li>
+  </ul>
+
+  <h4 class="recommend">🔭 推荐深化(进阶板块 · 学有余力可选)</h4>
+  <p style="font-size:13px;">学完本融合模块后, 想从更深角度理解 ΔU / 循环 / 不可逆性, 推荐:</p>
+  <ul class="recommend-list">
+    <li><a href="advanced-task-cards.html">理想气体内能的微观推导(进阶)</a> — 看 U 只由 T 决定的微观根据(ΔU = CΔT 中 C 为常数的来源)</li>
+    <li><a href="carnot-cycle-task-cards.html">卡诺循环</a> — 看热机循环效率 η = 1 − T<sub>2</sub>/T<sub>1</sub> 的数学推导(例题 3 循环分析的深化)</li>
+    <li><a href="state-functions-task-cards.html">状态函数(进阶)</a> — 看『循环一周 ΔU = 0』的严格根据</li>
+    <li><a href="entropy-meaning-task-cards.html">熵的物理意义</a> — 看玻尔兹曼公式 S = k ln Ω 与方向性的微观本质</li>
+  </ul>
+</div>
+
+<div class="toc-card">
+  <h3>📋 6 道例题</h3>
+  <ol>
+    <li><a href="#example-1">状态图像互判 + 微观解释</a><span class="type-tag">题型 P5</span><span class="diff-tag">基础</span></li>
+    <li><a href="#example-2">第一定律单过程辨析</a><span class="type-tag">题型 P1.1</span><span class="diff-tag">基础</span></li>
+    <li><a href="#example-3">热机循环逐段分析</a><span class="type-tag">题型 P1.3</span><span class="diff-tag 中等">中等</span></li>
+    <li><a href="#example-4">卡销活塞装置计算</a><span class="type-tag">题型 P2+P3</span><span class="diff-tag 较难">较难</span></li>
+    <li><a href="#example-5">变质量问题 · 等效定质量法</a><span class="type-tag">题型 P4</span><span class="diff-tag 较难">较难</span></li>
+    <li><a href="#example-6">ΔU = CΔT 第一定律综合大题</a><span class="type-tag">题型 P1.4</span><span class="diff-tag 综合压轴">综合压轴</span></li>
+  </ol>
+</div>
+
+<!-- =================== 例题 1 · P5 · 图像互判 + 微观解释 =================== -->
+<div class="example-card" id="example-1">
+  <div class="example-card-header">
+    <div class="example-card-no">1</div>
+    <div class="example-card-title">状态图像互判 + 微观解释 · 刚性储气瓶昼夜温差</div>
+    <div class="example-card-type">P5</div>
+    <div class="example-card-diff">基础</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      高原科考站的一只<strong>刚性金属储气瓶</strong>内封有一定质量的理想气体. 从凌晨到正午, 瓶内气体由状态 A 变为状态 B. 在 p-T 图像上, A、B 两点位于<strong>同一条延长线过原点的直线</strong>上, 且 T<sub>B</sub> &gt; T<sub>A</sub>. 下列说法正确的是 (    )<br><br>
+      A. 该过程中气体体积增大<br>
+      B. 该过程中气体分子数密度减小<br>
+      C. 该过程中气体分子的平均动能增大<br>
+      D. 单位时间内撞击单位面积瓶壁的分子数增多, 但每次碰撞的平均冲力不变
+    </div>
+    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+      <svg viewBox="0 0 720 230" style="width:100%;max-width:720px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <!-- (a) p-T 图 等容线（本题用） -->
+        <g transform="translate(20, 20)">
+          <text x="100" y="-4" text-anchor="middle" font-size="13" font-weight="600" fill="#0055B8">(a) p-T 图 · 过原点直线 = 等容线 ⭐ 本题</text>
+          <line x1="0" y1="180" x2="200" y2="180" stroke="#333" stroke-width="1.5"/>
+          <line x1="0" y1="0" x2="0" y2="180" stroke="#333" stroke-width="1.5"/>
+          <text x="195" y="195" font-size="11" fill="#333">T</text>
+          <text x="-12" y="6" font-size="11" fill="#333">p</text>
+          <text x="-8" y="195" font-size="10" fill="#888">O</text>
+          <!-- 等容线（过原点直线）-->
+          <line x1="0" y1="180" x2="180" y2="20" stroke="#c0392b" stroke-width="2"/>
+          <!-- A 点 -->
+          <circle cx="70" cy="118" r="4" fill="#0055B8"/>
+          <text x="58" y="115" font-size="12" font-weight="600" fill="#0055B8">A</text>
+          <line x1="70" y1="118" x2="70" y2="180" stroke="#0055B8" stroke-dasharray="2,2" stroke-width="0.8"/>
+          <line x1="0" y1="118" x2="70" y2="118" stroke="#0055B8" stroke-dasharray="2,2" stroke-width="0.8"/>
+          <text x="68" y="195" font-size="9" fill="#0055B8">T_A</text>
+          <text x="-25" y="121" font-size="9" fill="#0055B8">p_A</text>
+          <!-- B 点 -->
+          <circle cx="140" cy="56" r="4" fill="#0055B8"/>
+          <text x="146" y="55" font-size="12" font-weight="600" fill="#0055B8">B</text>
+          <line x1="140" y1="56" x2="140" y2="180" stroke="#0055B8" stroke-dasharray="2,2" stroke-width="0.8"/>
+          <line x1="0" y1="56" x2="140" y2="56" stroke="#0055B8" stroke-dasharray="2,2" stroke-width="0.8"/>
+          <text x="138" y="195" font-size="9" fill="#0055B8">T_B</text>
+          <text x="-25" y="59" font-size="9" fill="#0055B8">p_B</text>
+          <text x="100" y="165" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="600">V = 常数</text>
+        </g>
+        <!-- (b) V-T 图 等压线（对照） -->
+        <g transform="translate(260, 20)">
+          <text x="100" y="-4" text-anchor="middle" font-size="13" font-weight="600" fill="#0055B8">(b) V-T 图 · 过原点直线 = 等压线</text>
+          <line x1="0" y1="180" x2="200" y2="180" stroke="#333" stroke-width="1.5"/>
+          <line x1="0" y1="0" x2="0" y2="180" stroke="#333" stroke-width="1.5"/>
+          <text x="195" y="195" font-size="11" fill="#333">T</text>
+          <text x="-12" y="6" font-size="11" fill="#333">V</text>
+          <text x="-8" y="195" font-size="10" fill="#888">O</text>
+          <line x1="0" y1="180" x2="180" y2="20" stroke="#27ae60" stroke-width="2"/>
+          <text x="100" y="100" text-anchor="middle" font-size="11" fill="#27ae60" font-weight="600">p = 常数</text>
+          <text x="100" y="118" text-anchor="middle" font-size="10" fill="#7f8c8d">(对照用 · 本题不是此情形)</text>
+        </g>
+        <!-- (c) p-V 图 等温线（对照） -->
+        <g transform="translate(500, 20)">
+          <text x="100" y="-4" text-anchor="middle" font-size="13" font-weight="600" fill="#0055B8">(c) p-V 图 · 双曲线 = 等温线</text>
+          <line x1="0" y1="180" x2="200" y2="180" stroke="#333" stroke-width="1.5"/>
+          <line x1="0" y1="0" x2="0" y2="180" stroke="#333" stroke-width="1.5"/>
+          <text x="195" y="195" font-size="11" fill="#333">V</text>
+          <text x="-12" y="6" font-size="11" fill="#333">p</text>
+          <text x="-8" y="195" font-size="10" fill="#888">O</text>
+          <!-- 双曲线 p = c/V -->
+          <path d="M 20,30 Q 40,55 60,80 Q 90,110 130,140 Q 160,160 190,170" fill="none" stroke="#9b59b6" stroke-width="2"/>
+          <text x="100" y="50" text-anchor="middle" font-size="11" fill="#9b59b6" font-weight="600">T = 常数</text>
+          <text x="100" y="68" text-anchor="middle" font-size="10" fill="#7f8c8d">(对照用 · 不过原点)</text>
+        </g>
+      </svg>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">📊 状态图像三对照 · 题中"p-T 图过原点直线"= (a) 等容线 ⇒ V 不变. (b)(c) 仅作对照</p>
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>图像判别铁律</strong> (锚: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a>): p-T 图上<strong>过原点的直线 = 等容线</strong> (p/T = 常数 ⇔ V 不变); 同理 V-T 图过原点直线 = 等压线</li>
+        <li><strong>微观三量桥接</strong> (锚: <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a>):
+          <ul>
+            <li>分子数密度 n = N/V — 由<strong>体积</strong>决定 (质量一定时)</li>
+            <li>分子平均动能 — 只由<strong>温度 T</strong> 决定 (T 是平均动能的标志)</li>
+            <li>宏观压强 p ∝ 碰撞频率 × 每次碰撞平均冲力 — 两个微观因素共同决定</li>
+          </ul>
+        </li>
+        <li>跨板块综合: 先用<strong>气体图像</strong>判过程类型, 再翻译成<strong>分子动理论微观语言</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = p-T 图过原点直线段 A→B (升温) + "刚性瓶"; 求 = 宏观/微观各量变化判断</li>
+        <li><strong>选路径</strong>: 三步翻译法 — ① 图像定过程(等容) → ② 宏观三量 p, V, T 定变化 → ③ 微观三量逐项翻译</li>
+        <li><strong>双重印证</strong>: 题面"刚性金属瓶"与图像"过原点直线"互相印证等容, 任一信息即可锁定</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 判过程: p-T 图上 A、B 在同一条<strong>过原点直线</strong>上 → p/T = 常数 → <strong>等容过程</strong> (与"刚性瓶"一致). T 升 → p 升, V 不变.
+        <div class="step-rule">规则: p-T 图过原点直线 = 等容线</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 查 A: 等容过程 V 不变 → "体积增大" ❌
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 查 B: 质量一定 + V 不变 → 分子数密度 n = N/V <strong>不变</strong> → "减小" ❌
+      </div>
+      <div class="step">
+        <span class="step-no">4</span> 查 C: T 升高 → 分子<strong>平均动能增大</strong> (T 是分子平均动能的标志) → ✓
+      </div>
+      <div class="step">
+        <span class="step-no">5</span> 查 D: T 升 → 分子平均速率增大 → 单位时间撞壁次数增多 ✓, 但<strong>每次碰撞的平均冲力也增大</strong>(分子动量更大) → "平均冲力不变" ❌. 正是"次数增多 + 冲力增大"两因素共同使 p 升高.
+      </div>
+
+      <div class="answer-box">最终答案: <strong>C</strong></div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 等容升温下 p 升高的微观机制 = 碰撞更频繁 × 每次冲力更大, 与宏观查理定律 p/T 恒定自洽. 仅 C 正确.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 把 p-T 过原点直线当成<strong>等压线</strong>
+        <br><span class="wrong">❌ 错答</span>: 看到"直线"就以为是等压过程, 判体积增大
+        <br><span class="right">✓ 正答</span>: p-T 图过原点直线是<strong>等容线</strong>; 等压线在 <strong>V-T 图</strong>上才是过原点直线. 先看坐标轴是什么再下判断
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 认为 p 升高<strong>只因</strong>碰撞次数增多
+        <br><span class="wrong">❌ 错答</span>: 选 D, 觉得"次数多了压强自然大"
+        <br><span class="right">✓ 正答</span>: p 由<strong>两个微观因素</strong>共同决定 — 升温后分子更快, <strong>撞得更频繁且每次撞得更重</strong>, 两者都增大
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 把分子平均动能与压强混为一谈
+        <br><span class="wrong">❌ 错答</span>: "p 增大所以平均动能增大"——方向碰对但逻辑错
+        <br><span class="right">✓ 正答</span>: 平均动能<strong>只看 T</strong>. 等温压缩时 p 增大而平均动能不变, 可见 p 与平均动能没有必然的同向关系
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体 task-cards</a> (图像判别) · <a href="molecular-kinetic-theory-task-cards.html">分子动理论 task-cards</a> (微观三量)</div>
+</div>
+
+<!-- =================== 例题 2 · P1.1 · 第一定律单过程辨析 =================== -->
+<div class="example-card" id="example-2">
+  <div class="example-card-header">
+    <div class="example-card-no">2</div>
+    <div class="example-card-title">第一定律单过程辨析 · 恒温水池中上升的气泡</div>
+    <div class="example-card-type">P1.1</div>
+    <div class="example-card-diff">基础</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      某恒温养殖水池水温处处相同且保持不变. 池底增氧管释放出一个小气泡, 气泡<strong>缓慢上升</strong>, 上升过程中泡内气体温度始终与水温相同, 泡内气体可视为一定质量的理想气体. 对气泡从池底升到水面的过程, 下列说法正确的是 (    )<br><br>
+      A. 泡内气体内能增大<br>
+      B. 泡内气体放出热量<br>
+      C. 泡内气体吸收的热量等于它对外界做的功<br>
+      D. 水的热量自发地从低温处传向高温处, 维持气泡温度不变
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>第一定律</strong> (锚: <a href="basic-task-cards.html">热力学第一定律</a>): ΔU = Q − W, 约定<strong>吸热 Q 为正, 气体对外做功 W 为正</strong></li>
+        <li><strong>等温特例</strong>: 理想气体内能只由 T 决定 → 等温过程 <strong>ΔU = 0</strong> → Q = W (吸热全部用于对外做功)</li>
+        <li><strong>液下压强</strong> (锚: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a>): 越靠近水面, 水深越浅, 气泡内压强越小 → 玻意耳定律 pV 恒定 → V 增大</li>
+        <li><strong>方向性辨析</strong> (锚: <a href="second-law-basic-task-cards.html">第二定律 · 基础</a>): 热量<strong>不会自发</strong>从低温物体传向高温物体 — 用于排除干扰选项</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 恒温(等温过程) + 上升(p 减小); 求 = ΔU / Q / W 的判断</li>
+        <li><strong>选路径</strong>: 单过程判断三步 — ① 定过程类型(等温) → ② 定 W 的正负(V 增大 → 对外做功 W &gt; 0) → ③ 用 ΔU = Q − W 推出 Q</li>
+        <li><strong>关键意识</strong>: "恒温"是题眼, 等温过程 ΔU = 0 把三个量的关系锁死为 Q = W</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 定过程: 水温处处相同且不变 → 泡内气体温度不变 → <strong>等温过程</strong> → ΔU = 0 → A "内能增大" ❌
+        <div class="step-rule">规则: 理想气体 ΔU 只由 T 决定</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 定 W: 上升 → 水深变浅 → 泡内压强 p 减小 → 由玻意耳定律 pV 恒定 → <strong>V 增大</strong> → 气泡对外界做功, W &gt; 0
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 推 Q: ΔU = Q − W → 0 = Q − W → <strong>Q = W &gt; 0</strong>, 气体<strong>吸热</strong>且吸收的热量恰好等于对外做的功 → B ❌, C ✓
+      </div>
+      <div class="step">
+        <span class="step-no">4</span> 查 D: 气泡与水温度相同(或气泡因膨胀略微吸热时温度趋于略低), 热量从水传向气泡是<strong>从不低于气泡温度的一方传来</strong>, 不存在"自发地从低温传向高温" → 表述违反热传导方向性 → ❌
+      </div>
+
+      <div class="answer-box">最终答案: <strong>C</strong></div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 等温膨胀链条 — ΔU = 0, W &gt; 0, Q = W &gt; 0 — 三量自洽; 能量账目: 吸进多少热, 就对外做多少功, 内能分文不动.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 看到"膨胀"就以为<strong>内能减小</strong>或"升温"
+        <br><span class="wrong">❌ 错答</span>: 气泡变大 → 觉得气体"变活跃"了 → 内能增大(或做功消耗内能 → 减小)
+        <br><span class="right">✓ 正答</span>: 理想气体内能<strong>只看 T</strong>. 等温过程无论 V 怎么变, ΔU = 0; 对外做功消耗的能量由<strong>吸热补上</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: W 的<strong>符号约定</strong>混乱
+        <br><span class="wrong">❌ 错答</span>: 把"气体对外做功"代成负值后又用 Q = ΔU − W, 正负号绕晕
+        <br><span class="right">✓ 正答</span>: 先写明约定再代入. 本文统一 ΔU = Q − W (W = 气体对外做功). 膨胀 → W &gt; 0; 被压缩 → W &lt; 0
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 误以为"温度不变 → 不吸热也不放热"
+        <br><span class="wrong">❌ 错答</span>: ΔU = 0 → Q = 0
+        <br><span class="right">✓ 正答</span>: ΔU = 0 只能推出 <strong>Q = W</strong>. 等温膨胀必须<strong>边吸热边做功</strong>才能保持温度不变 — "温度不变"不等于"无热交换"
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="basic-task-cards.html">热力学第一定律 task-cards</a> (等温特例) · <a href="gas-liquid-solid-task-cards.html">气体、液体与固体 task-cards</a> (玻意耳定律) · <a href="second-law-basic-task-cards.html">第二定律 · 基础</a> (方向性)</div>
+</div>
+
+<!-- =================== 例题 3 · P1.3 · 循环逐段分析 =================== -->
+<div class="example-card" id="example-3">
+  <div class="example-card-header">
+    <div class="example-card-no">3</div>
+    <div class="example-card-title">热机循环逐段分析 · 太阳能空气热机演示装置</div>
+    <div class="example-card-type">P1.3</div>
+    <div class="example-card-diff 中等">中等</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      科技社团的太阳能空气热机演示装置中, 一定质量的理想气体经历如下循环 (p-V 图上为闭合回路 A→B→C→A):<br>
+      · A→B: <strong>等容加热</strong>, 压强由 p<sub>0</sub> 升为 2p<sub>0</sub> (体积保持 V<sub>0</sub>);<br>
+      · B→C: <strong>等温膨胀</strong>, 体积由 V<sub>0</sub> 增大到 2V<sub>0</sub>;<br>
+      · C→A: <strong>等压压缩</strong>, 体积由 2V<sub>0</sub> 回到 V<sub>0</sub>, 回到初态 A.<br><br>
+      已知初态 A 的温度为 T<sub>0</sub>. 下列说法正确的是 (多选) (    )<br><br>
+      A. 状态 B 与状态 C 的温度均为 2T<sub>0</sub><br>
+      B. A→B 过程气体吸热, 且吸收的热量全部用于增加内能<br>
+      C. B→C 过程气体不吸热也不放热<br>
+      D. C→A 过程气体放出的热量大于外界对气体做的功<br>
+      E. 整个循环一周, 气体内能变化为零
+    </div>
+    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+      <svg viewBox="0 0 360 290" style="width:100%;max-width:360px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <!-- 坐标轴 -->
+        <line x1="50" y1="240" x2="320" y2="240" stroke="#333" stroke-width="1.5"/>
+        <line x1="50" y1="20" x2="50" y2="240" stroke="#333" stroke-width="1.5"/>
+        <text x="325" y="245" font-size="12" fill="#333">V</text>
+        <text x="38" y="20" font-size="12" fill="#333">p</text>
+        <text x="42" y="252" font-size="10" fill="#888">O</text>
+        <!-- 网格 -->
+        <line x1="50" y1="80" x2="320" y2="80" stroke="#ecf0f1" stroke-dasharray="2,2" stroke-width="0.5"/>
+        <line x1="50" y1="180" x2="320" y2="180" stroke="#ecf0f1" stroke-dasharray="2,2" stroke-width="0.5"/>
+        <line x1="110" y1="20" x2="110" y2="240" stroke="#ecf0f1" stroke-dasharray="2,2" stroke-width="0.5"/>
+        <line x1="230" y1="20" x2="230" y2="240" stroke="#ecf0f1" stroke-dasharray="2,2" stroke-width="0.5"/>
+        <!-- A→B 等容（垂直向上） -->
+        <line x1="110" y1="180" x2="110" y2="80" stroke="#c0392b" stroke-width="2.5" marker-end="url(#arrAB)"/>
+        <!-- B→C 等温双曲线 -->
+        <path d="M 110,80 Q 140,103 170,135 Q 200,165 230,180" fill="none" stroke="#27ae60" stroke-width="2.5" marker-end="url(#arrBC)"/>
+        <!-- C→A 等压水平向左 -->
+        <line x1="230" y1="180" x2="110" y2="180" stroke="#0055B8" stroke-width="2.5" marker-end="url(#arrCA)"/>
+        <!-- 箭头 marker -->
+        <defs>
+          <marker id="arrAB" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#c0392b"/></marker>
+          <marker id="arrBC" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#27ae60"/></marker>
+          <marker id="arrCA" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto"><polygon points="0 0, 10 5, 0 10" fill="#0055B8"/></marker>
+        </defs>
+        <!-- 三点 -->
+        <circle cx="110" cy="180" r="5" fill="#2c3e50"/>
+        <text x="84" y="184" font-size="13" font-weight="600" fill="#2c3e50">A</text>
+        <circle cx="110" cy="80" r="5" fill="#2c3e50"/>
+        <text x="84" y="84" font-size="13" font-weight="600" fill="#2c3e50">B</text>
+        <circle cx="230" cy="180" r="5" fill="#2c3e50"/>
+        <text x="237" y="184" font-size="13" font-weight="600" fill="#2c3e50">C</text>
+        <!-- 坐标标注 -->
+        <text x="105" y="252" font-size="10" fill="#5a6c7d">V₀</text>
+        <text x="220" y="252" font-size="10" fill="#5a6c7d">2V₀</text>
+        <text x="30" y="184" font-size="10" fill="#5a6c7d">p₀</text>
+        <text x="22" y="84" font-size="10" fill="#5a6c7d">2p₀</text>
+        <!-- 过程标注 -->
+        <text x="118" y="135" font-size="11" font-weight="600" fill="#c0392b">A→B 等容加热</text>
+        <text x="118" y="148" font-size="10" fill="#c0392b">(W=0, Q=ΔU)</text>
+        <text x="165" y="100" font-size="11" font-weight="600" fill="#27ae60">B→C 等温膨胀</text>
+        <text x="165" y="113" font-size="10" fill="#27ae60">(ΔU=0, Q=W&gt;0)</text>
+        <text x="135" y="200" font-size="11" font-weight="600" fill="#0055B8">C→A 等压压缩</text>
+        <text x="135" y="213" font-size="10" fill="#0055B8">(W&lt;0, Q&lt;0)</text>
+      </svg>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">📊 p-V 闭合循环 · A→B 等容(垂直) · B→C 等温(双曲线) · C→A 等压(水平). 一周 ΔU = 0</p>
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>状态方程定各态温度</strong> (锚: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a>): pV/T = 常数, 先把 A、B、C 三态的 (p, V, T) 全部定出再谈能量</li>
+        <li><strong>四特例过程的能量特征</strong> (锚: <a href="basic-task-cards.html">热力学第一定律</a>):
+          <ul>
+            <li>等容: W = 0 → Q = ΔU (吸热全变内能)</li>
+            <li>等温: ΔU = 0 → Q = W (吸热全做功, 但<strong>不是不换热</strong>)</li>
+            <li>等压: W = pΔV, Q = ΔU + W 两项都有</li>
+          </ul>
+        </li>
+        <li><strong>循环铁律</strong>: 内能是状态量 → 循环一周回到初态, <strong>ΔU(一周) = 0</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 三段过程类型 + 初态 T<sub>0</sub>; 求 = 各态温度 + 各段吸放热判断</li>
+        <li><strong>选路径</strong>: 循环题两轮扫描 — <strong>第一轮</strong>用状态方程把 A(p<sub>0</sub>, V<sub>0</sub>, T<sub>0</sub>) / B / C 三态参量填满; <strong>第二轮</strong>逐段套 ΔU = Q − W 判能量</li>
+        <li><strong>判 ΔU 的捷径</strong>: 比较两端温度即可 — T 升则 ΔU &gt; 0, T 降则 ΔU &lt; 0, T 不变则 ΔU = 0</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 第一轮定状态:
+        <br>· A: (p<sub>0</sub>, V<sub>0</sub>, T<sub>0</sub>)
+        <br>· A→B 等容: p<sub>0</sub>/T<sub>0</sub> = 2p<sub>0</sub>/T<sub>B</sub> → <strong>T<sub>B</sub> = 2T<sub>0</sub></strong> → B: (2p<sub>0</sub>, V<sub>0</sub>, 2T<sub>0</sub>)
+        <br>· B→C 等温: T<sub>C</sub> = T<sub>B</sub> = 2T<sub>0</sub>; pV 恒定 → p<sub>C</sub> = 2p<sub>0</sub>·V<sub>0</sub>/2V<sub>0</sub> = p<sub>0</sub> → C: (p<sub>0</sub>, 2V<sub>0</sub>, 2T<sub>0</sub>)
+        <br>· 核对 C→A 等压: p<sub>C</sub> = p<sub>A</sub> = p<sub>0</sub> ✓, 2V<sub>0</sub>/2T<sub>0</sub> = V<sub>0</sub>/T<sub>0</sub> ✓ → <strong>A 正确</strong>
+        <div class="step-rule">规则: 先填满状态参量表, 再谈能量 — 循环题第一铁律</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> A→B 等容升温: W = 0, T 升 → ΔU &gt; 0 → Q = ΔU &gt; 0, 吸热且<strong>全部用于增加内能</strong> → <strong>B 正确</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> B→C 等温膨胀: ΔU = 0, V 增大 → 对外做功 W &gt; 0 → Q = W &gt; 0, <strong>必须吸热</strong> → C "不吸热也不放热" ❌
+      </div>
+      <div class="step">
+        <span class="step-no">4</span> C→A 等压压缩: T 由 2T<sub>0</sub> 降到 T<sub>0</sub> → ΔU &lt; 0; 体积减小 → 外界对气体做功 (W &lt; 0). ΔU = Q − W → Q = ΔU + W &lt; 0 放热, 且 |Q| = |ΔU| + |W| <strong>大于</strong>外界做的功 |W| → <strong>D 正确</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">5</span> 循环一周回到 A: 内能是状态量 → <strong>ΔU(一周) = 0</strong> → <strong>E 正确</strong>
+      </div>
+
+      <div class="answer-box">最终答案: <strong>ABDE</strong></div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 能量总账 — 一周 ΔU = 0 → Q(净) = W(净); p-V 图上闭合回路沿顺时针 (A→B→C→A 包围面积为正), 气体对外净做功, 对应净吸热, 是一台"吸热做功"的热机, 与"演示热机"情境自洽.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 把"等温"当成"<strong>绝热</strong>"
+        <br><span class="wrong">❌ 错答</span>: 选 C — "温度不变所以不换热"
+        <br><span class="right">✓ 正答</span>: 等温是 <strong>ΔU = 0</strong>, 绝热才是 <strong>Q = 0</strong>. 等温膨胀必须持续吸热来补偿对外做功, 两个概念是循环题最常考的偷换
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 等压段只算一头账
+        <br><span class="wrong">❌ 错答</span>: C→A 放热 |Q| 与 |W| 比大小时, 忘了 ΔU 也在减小, 答"放热等于外界做的功"
+        <br><span class="right">✓ 正答</span>: 等压过程 <strong>Q 与 ΔU、W 三项并存</strong>: 放出的热 = 内能减少量 + 外界做功量, 必然大于其中任何一项
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 不先定状态就直接判能量
+        <br><span class="wrong">❌ 错答</span>: 跳过第一轮, 凭感觉判 B→C "温度升高"
+        <br><span class="right">✓ 正答</span>: 循环题先用 pV/T 把<strong>每个状态点的三个参量填满</strong>, 能量判断全部以参量表为准, 不凭感觉
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="basic-task-cards.html">热力学第一定律 task-cards</a> (四特例 + 循环) · <a href="gas-liquid-solid-task-cards.html">气体、液体与固体 task-cards</a> (状态方程) · <a href="carnot-cycle-task-cards.html">卡诺循环 (进阶)</a> (循环效率深化)</div>
+</div>
+
+<!-- =================== 例题 4 · P2+P3 · 卡销活塞装置计算 =================== -->
+<div class="example-card" id="example-4">
+  <div class="example-card-header">
+    <div class="example-card-no">4</div>
+    <div class="example-card-title">装置计算 · 卡销限位活塞加热台</div>
+    <div class="example-card-type">P2+P3</div>
+    <div class="example-card-diff 较难">较难</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      某标本恒温加热台的核心部件是一只<strong>竖直放置、开口向上</strong>的汽缸: 缸内封有一定质量的理想气体, 上方活塞质量 m = 2 kg、横截面积 S = 1×10<sup>-3</sup> m<sup>2</sup>, 可沿缸壁无摩擦滑动且不漏气. 缸壁上装有一对<strong>卡销</strong>, 初始时活塞被卡销托住, 缸内气柱长 L<sub>1</sub> = 20 cm, 气体压强 p<sub>1</sub> = 1.0×10<sup>5</sup> Pa, 温度 T<sub>1</sub> = 300 K. 大气压强 p<sub>0</sub> = 1.0×10<sup>5</sup> Pa, g 取 10 m/s<sup>2</sup>.<br><br>
+      (1) 求初始时<strong>卡销对活塞的支持力</strong>;<br>
+      (2) 缓慢加热气体, 求活塞<strong>恰好离开卡销</strong>时的温度 T<sub>2</sub>;<br>
+      (3) 继续缓慢加热, 使气柱长度变为 L<sub>3</sub> = 25 cm, 求此时温度 T<sub>3</sub>.
+    </div>
+    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+      <svg viewBox="0 0 320 380" style="width:100%;max-width:280px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <!-- 大气箭头 -->
+        <text x="160" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#7f8c8d">大气 p₀ = 1.0×10⁵ Pa</text>
+        <line x1="130" y1="22" x2="130" y2="48" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrDown)"/>
+        <line x1="160" y1="22" x2="160" y2="48" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrDown)"/>
+        <line x1="190" y1="22" x2="190" y2="48" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrDown)"/>
+        <defs>
+          <marker id="arrDown" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto"><polygon points="0 0, 10 0, 5 10" fill="#7f8c8d"/></marker>
+          <marker id="arrUp" markerWidth="10" markerHeight="10" refX="5" refY="1" orient="auto"><polygon points="0 10, 10 10, 5 0" fill="#27ae60"/></marker>
+          <marker id="arrGrav" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto"><polygon points="0 0, 10 0, 5 10" fill="#c0392b"/></marker>
+        </defs>
+
+        <!-- 气缸壁（竖直双线，开口向上）-->
+        <rect x="100" y="60" width="6" height="280" fill="#5a6c7d"/>
+        <rect x="214" y="60" width="6" height="280" fill="#5a6c7d"/>
+        <rect x="100" y="334" width="120" height="6" fill="#5a6c7d"/>
+
+        <!-- 气体（活塞下方）-->
+        <rect x="106" y="190" width="108" height="144" fill="#e8f0fe" stroke="#0055B8" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="160" y="270" text-anchor="middle" font-size="11" font-weight="600" fill="#0055B8">气体</text>
+        <text x="160" y="285" text-anchor="middle" font-size="10" fill="#0055B8">p₁ = 1.0×10⁵ Pa</text>
+        <text x="160" y="298" text-anchor="middle" font-size="10" fill="#0055B8">T₁ = 300 K</text>
+        <text x="160" y="311" text-anchor="middle" font-size="10" fill="#0055B8">L₁ = 20 cm</text>
+
+        <!-- 气体压强向上 -->
+        <line x1="130" y1="200" x2="130" y2="180" stroke="#0055B8" stroke-width="1.5" marker-end="url(#arrUp2)"/>
+        <line x1="160" y1="200" x2="160" y2="180" stroke="#0055B8" stroke-width="1.5" marker-end="url(#arrUp2)"/>
+        <line x1="190" y1="200" x2="190" y2="180" stroke="#0055B8" stroke-width="1.5" marker-end="url(#arrUp2)"/>
+        <defs>
+          <marker id="arrUp2" markerWidth="10" markerHeight="10" refX="5" refY="1" orient="auto"><polygon points="0 10, 10 10, 5 0" fill="#0055B8"/></marker>
+        </defs>
+
+        <!-- 活塞 -->
+        <rect x="106" y="170" width="108" height="20" fill="#34495e" stroke="#2c3e50" stroke-width="1"/>
+        <text x="160" y="184" text-anchor="middle" font-size="11" font-weight="600" fill="white">活塞</text>
+
+        <!-- 卡销（两侧水平凸出，托住活塞底部）-->
+        <rect x="90" y="186" width="16" height="8" fill="#c0392b" stroke="#900" stroke-width="0.5"/>
+        <rect x="214" y="186" width="16" height="8" fill="#c0392b" stroke="#900" stroke-width="0.5"/>
+        <line x1="50" y1="190" x2="88" y2="190" stroke="#c0392b" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="48" y="194" text-anchor="end" font-size="11" font-weight="600" fill="#c0392b">卡销 N ↑</text>
+        <line x1="232" y1="190" x2="280" y2="190" stroke="#c0392b" stroke-width="1" stroke-dasharray="2,2"/>
+        <text x="282" y="194" text-anchor="start" font-size="11" font-weight="600" fill="#c0392b">卡销 N ↑</text>
+
+        <!-- 活塞重力 -->
+        <line x1="160" y1="155" x2="160" y2="135" stroke="#c0392b" stroke-width="1.8" marker-end="url(#arrGrav2)"/>
+        <text x="167" y="148" font-size="11" font-weight="600" fill="#c0392b">mg ↓</text>
+        <text x="167" y="160" font-size="10" fill="#c0392b">m=2 kg</text>
+        <defs>
+          <marker id="arrGrav2" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto"><polygon points="0 0, 10 0, 5 10" fill="#c0392b"/></marker>
+        </defs>
+
+        <!-- 大气压向下作用于活塞 -->
+        <text x="55" y="120" font-size="10" fill="#7f8c8d">p₀·S ↓</text>
+
+        <!-- 活塞参数 -->
+        <text x="282" y="178" text-anchor="start" font-size="10" fill="#5a6c7d">S = 1×10⁻³ m²</text>
+
+        <!-- 标尺标注气柱长 -->
+        <line x1="240" y1="190" x2="240" y2="334" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="236" y1="190" x2="244" y2="190" stroke="#0055B8" stroke-width="1"/>
+        <line x1="236" y1="334" x2="244" y2="334" stroke="#0055B8" stroke-width="1"/>
+        <text x="247" y="265" font-size="10" fill="#0055B8">L₁</text>
+
+        <!-- 开口标记 -->
+        <text x="160" y="56" text-anchor="middle" font-size="9" fill="#888">(开口)</text>
+      </svg>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">🔧 卡销活塞装置剖面 · 加热气体 → 卡销支持力减为 0 时活塞恰好离开 → 之后等压上升</p>
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>活塞受力平衡定压强</strong> (锚: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a>): 对活塞列平衡方程, 把"看不见的"气体压强用"看得见的"重力 / 大气压 / 卡销力表达出来</li>
+        <li><strong>卡销的角色</strong>: 卡销存在时活塞位置被锁定 → <strong>等容过程</strong>; "恰好离开卡销" = 卡销支持力<strong>减为零</strong>的临界时刻; 离开后活塞自由 → 受力平衡压强恒定 → <strong>等压过程</strong></li>
+        <li><strong>分段选定律</strong>: 等容段用查理定律 (p/T 恒定); 等压段用盖-吕萨克定律 (V/T 恒定)</li>
+        <li>缓慢加热 = 准静态过程, 每一刻都可视为平衡态</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 装置 = 竖直缸 + 活塞 + 卡销; 过程 = 等容升压(卡销托住) → 临界点(卡销力归零) → 等压升温(活塞上移)</li>
+        <li><strong>选路径</strong>: 三步链 — ① 受力平衡定各阶段压强 → ② 找临界条件 → ③ 分段套气体定律</li>
+        <li><strong>临界条件翻译</strong>: "恰好离开卡销" ⇔ N = 0 ⇔ 气体压强恰好能独立托起活塞 ⇔ p<sub>2</sub> = p<sub>0</sub> + mg/S</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 初始对活塞受力分析 (设卡销支持力 N 竖直向上):
+        <br>向上: 气体压力 p<sub>1</sub>S + 卡销 N; 向下: 重力 mg + 大气压力 p<sub>0</sub>S
+        <br>平衡: N = mg + p<sub>0</sub>S − p<sub>1</sub>S = 2×10 + (1.0×10<sup>5</sup> − 1.0×10<sup>5</sup>)×1×10<sup>-3</sup> = <strong>20 N</strong>
+        <div class="step-rule">规则: 受力平衡定压强 — 三步链第一步</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 临界压强: 活塞恰好离开卡销时 N = 0, 活塞自身平衡:
+        <br>p<sub>2</sub>S = p<sub>0</sub>S + mg → p<sub>2</sub> = p<sub>0</sub> + mg/S = 1.0×10<sup>5</sup> + 20/(1×10<sup>-3</sup>) = <strong>1.2×10<sup>5</sup> Pa</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 第一阶段 (卡销托住 → 恰好离开): 活塞不动 → <strong>等容</strong>, 用查理定律:
+        <br>p<sub>1</sub>/T<sub>1</sub> = p<sub>2</sub>/T<sub>2</sub> → T<sub>2</sub> = T<sub>1</sub>·p<sub>2</sub>/p<sub>1</sub> = 300 × 1.2/1.0 = <strong>360 K</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">4</span> 第二阶段 (活塞离开卡销后): 活塞自由且平衡 → 压强恒为 p<sub>2</sub> → <strong>等压</strong>, 用盖-吕萨克定律 (同一缸, V ∝ L):
+        <br>L<sub>1</sub>/T<sub>2</sub> = L<sub>3</sub>/T<sub>3</sub> → T<sub>3</sub> = T<sub>2</sub>·L<sub>3</sub>/L<sub>1</sub> = 360 × 25/20 = <strong>450 K</strong>
+      </div>
+
+      <div class="answer-box">最终答案: (1) N = 20 N; (2) T<sub>2</sub> = 360 K; (3) T<sub>3</sub> = 450 K</div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 全程也可一步核对 — p<sub>1</sub>V<sub>1</sub>/T<sub>1</sub> = p<sub>3</sub>V<sub>3</sub>/T<sub>3</sub>: (1.0×20)/300 = (1.2×25)/450 → 0.0667 = 0.0667 ✓. 分段结果与总状态方程自洽.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 漏掉<strong>大气压力</strong>这股力
+        <br><span class="wrong">❌ 错答</span>: N = mg − p<sub>1</sub>S, 算出负值后强行取绝对值
+        <br><span class="right">✓ 正答</span>: 开口向上的活塞上表面受大气向下压. 受力四件套: <strong>重力 + 大气压力 (向下) / 气体压力 + 卡销力 (向上)</strong>, 一件不能少
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 全程套一个定律
+        <br><span class="wrong">❌ 错答</span>: 从 300 K 直接用等压 (或等容) 算到 L = 25 cm 的状态
+        <br><span class="right">✓ 正答</span>: 卡销离开前后过程性质<strong>突变</strong>(等容 → 等压), 必须以"恰好离开"为分界<strong>分段处理</strong>, 各段各选各的定律
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 临界条件写错
+        <br><span class="wrong">❌ 错答</span>: 把"恰好离开卡销"当成 p<sub>2</sub> = p<sub>0</sub> (忘了活塞重力)
+        <br><span class="right">✓ 正答</span>: 临界 = <strong>N = 0 且活塞平衡</strong> → p<sub>2</sub> = p<sub>0</sub> + mg/S. 凡"恰好"二字, 先翻译成某个力恰好为零, 再列平衡式
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: 温度用摄氏度代入气体定律
+        <br><span class="wrong">❌ 错答</span>: 若题给 27 ℃, 直接用 27 代入比例式
+        <br><span class="right">✓ 正答</span>: 气体定律一律用<strong>热力学温度 K</strong> (T = t + 273), 摄氏温度只在升温差值 ΔT 上与 K 等价
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体 task-cards</a> (查理 / 盖-吕萨克 / 受力平衡定压强)</div>
+</div>
+
+<!-- =================== 例题 5 · P4 · 变质量 · 等效定质量法 =================== -->
+<div class="example-card" id="example-5">
+  <div class="example-card-header">
+    <div class="example-card-no">5</div>
+    <div class="example-card-title">变质量问题 · 救援充气筏气瓶 (等效定质量法)</div>
+    <div class="example-card-type">P4</div>
+    <div class="example-card-diff 较难">较难</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      水上救援队为容积 V = 10 L 的刚性储气瓶充气, 用于快速充开救生筏. 充气筒每打一次, 可将<strong>压强 1.0×10<sup>5</sup> Pa、体积 2 L</strong> 的空气压入瓶内. 瓶内初始有压强 p<sub>1</sub> = 1.0×10<sup>5</sup> Pa 的空气, 充气过程温度保持 27 ℃ 不变, 空气视为理想气体.<br><br>
+      (1) 要使瓶内压强达到 p<sub>2</sub> = 3.0×10<sup>5</sup> Pa, 需要打气<strong>多少次</strong>?<br>
+      (2) 充好气的瓶子从 27 ℃ 的库房移到 −3 ℃ 的户外救援现场 (瓶内气体质量不再变化), 求瓶内气体压强 p<sub>3</sub>.
+    </div>
+    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+      <svg viewBox="0 0 480 260" style="width:100%;max-width:480px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <text x="240" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="#6a1b9a">等效定质量法 · 充气筒 + 气瓶</text>
+
+        <!-- 充气筒（左）-->
+        <g transform="translate(20, 50)">
+          <text x="55" y="-4" text-anchor="middle" font-size="11" font-weight="600" fill="#0055B8">充气筒（每次打 1 下）</text>
+          <!-- 筒壁 -->
+          <rect x="20" y="20" width="80" height="120" fill="none" stroke="#5a6c7d" stroke-width="2"/>
+          <!-- 活塞（可下推） -->
+          <rect x="22" y="20" width="76" height="14" fill="#34495e" stroke="#2c3e50" stroke-width="1"/>
+          <text x="60" y="31" text-anchor="middle" font-size="10" fill="white">活塞</text>
+          <!-- 推杆 -->
+          <line x1="60" y1="20" x2="60" y2="5" stroke="#2c3e50" stroke-width="3"/>
+          <line x1="50" y1="0" x2="70" y2="0" stroke="#2c3e50" stroke-width="3"/>
+          <!-- 筒内气体 -->
+          <rect x="22" y="34" width="76" height="104" fill="#e8f0fe" stroke="#0055B8" stroke-width="0.5" stroke-dasharray="2,2"/>
+          <text x="60" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#0055B8">ΔV = 2 L</text>
+          <text x="60" y="96" text-anchor="middle" font-size="10" fill="#0055B8">p = 1.0×10⁵ Pa</text>
+          <text x="60" y="112" text-anchor="middle" font-size="10" fill="#0055B8">每次打入</text>
+          <!-- 推动箭头 -->
+          <line x1="115" y1="60" x2="115" y2="100" stroke="#c0392b" stroke-width="2" marker-end="url(#arrPush)"/>
+          <text x="120" y="85" font-size="11" font-weight="600" fill="#c0392b">推</text>
+          <defs>
+            <marker id="arrPush" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto"><polygon points="0 0, 10 0, 5 10" fill="#c0392b"/></marker>
+          </defs>
+        </g>
+
+        <!-- 连接管 + 单向阀 -->
+        <g transform="translate(160, 120)">
+          <line x1="0" y1="0" x2="80" y2="0" stroke="#5a6c7d" stroke-width="6"/>
+          <line x1="0" y1="0" x2="80" y2="0" stroke="white" stroke-width="2"/>
+          <polygon points="50,-8 50,8 60,0" fill="#27ae60"/>
+          <text x="40" y="-14" font-size="10" fill="#27ae60">单向阀</text>
+          <line x1="20" y1="-15" x2="60" y2="-15" stroke="#27ae60" stroke-width="1.5" marker-end="url(#arrFlow)"/>
+          <text x="40" y="22" text-anchor="middle" font-size="10" fill="#7f8c8d">气流方向</text>
+          <defs>
+            <marker id="arrFlow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><polygon points="0 0, 8 4, 0 8" fill="#27ae60"/></marker>
+          </defs>
+        </g>
+
+        <!-- 气瓶（右）-->
+        <g transform="translate(290, 50)">
+          <text x="80" y="-4" text-anchor="middle" font-size="11" font-weight="600" fill="#0055B8">刚性储气瓶（V = 10 L 不变）</text>
+          <!-- 瓶壁 -->
+          <rect x="20" y="20" width="160" height="140" rx="14" fill="none" stroke="#5a6c7d" stroke-width="2.5"/>
+          <!-- 瓶内气体 -->
+          <rect x="24" y="24" width="152" height="132" rx="11" fill="#fadbd8" stroke="none"/>
+          <!-- 标注 -->
+          <text x="100" y="60" text-anchor="middle" font-size="13" font-weight="600" fill="#c0392b">气瓶内</text>
+          <text x="100" y="82" text-anchor="middle" font-size="11" fill="#7d2820">初态 p₁ = 1.0×10⁵ Pa</text>
+          <text x="100" y="98" text-anchor="middle" font-size="11" fill="#c0392b">↓ 打 n 次</text>
+          <text x="100" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#c0392b">末态 p₂ = 3.0×10⁵ Pa</text>
+          <text x="100" y="134" text-anchor="middle" font-size="10" fill="#7d2820">T 保持 27 ℃</text>
+          <!-- 瓶口 -->
+          <rect x="0" y="68" width="20" height="20" fill="#5a6c7d"/>
+        </g>
+
+        <!-- 底部说明 -->
+        <text x="240" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#6a1b9a">等效定质量打包：原瓶气体 + n 次充入气体 → 末态全部在瓶内</text>
+        <text x="240" y="254" text-anchor="middle" font-size="10" fill="#7f8c8d">p₁·V + n·p·ΔV = p₂·V（同温下打包等温）</text>
+      </svg>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">🔧 变质量充气示意 · 关键: 把"瓶内原有 + n 次充入"打包成定质量, 在共同 (p₁ = 1×10⁵ Pa) 下总体积 V + n·ΔV → 末态全挤进 V</p>
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>等效定质量法 (本题核心方法, 先吃透)</strong>: 气体定律只对<strong>一定质量</strong>的气体成立. 充气 / 放气时瓶内气体质量在变, 不能直接套定律. 化解办法 — <strong>重新圈定研究对象</strong>:
+          <ul>
+            <li><strong>充气</strong>: 把"瓶内原有气体 + 即将充入的全部气体"在<strong>初态</strong>下打包成一个大对象 (总体积 = V + n·ΔV, 同压强), 末态 = 全部挤进瓶内 (体积 V). 变质量 → 定质量</li>
+            <li><strong>放气</strong>: 把"末态留在瓶内的 + 已放出的气体"在<strong>末态</strong>下合并看待, 倒推初态</li>
+          </ul>
+        </li>
+        <li><strong>等温用玻意耳定律</strong> (锚: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a>): 打包后的大对象 p·V(总) = 恒定</li>
+        <li><strong>变温定容用查理定律</strong>: 第 (2) 问气体质量已锁定且瓶刚性 → p/T 恒定</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 第 (1) 问 = 等温充气 (变质量 → 等效打包); 第 (2) 问 = 定质量定容降温 (常规查理)</li>
+        <li><strong>选路径</strong>: 变质量问题四步 — ① 识别场景 (充/放/抽/灌) → ② 选打包时刻 (充气在初态打包, 放气在末态合并) → ③ 写出打包后的初末态参量 → ④ 套玻意耳 (等温) 或状态方程 (变温)</li>
+        <li><strong>核心一句话</strong>: 定律不变, <strong>研究对象变</strong> — 把"会变的质量"圈成"不变的总量"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 设需打气 n 次. <strong>打包研究对象</strong> = 瓶内原有气体 + n 筒待充气体, 初态 (同温同压 1.0×10<sup>5</sup> Pa) 总体积:
+        <br>V(总) = V + n·ΔV = 10 + 2n (单位: L)
+        <div class="step-rule">规则: 充气问题在初态打包 — 等效定质量法</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 末态: 这包气体全部位于瓶内, 体积 V = 10 L, 压强 p<sub>2</sub> = 3.0×10<sup>5</sup> Pa. 等温 → 玻意耳定律:
+        <br>p<sub>1</sub>(V + n·ΔV) = p<sub>2</sub>V
+        <br>1.0×10<sup>5</sup> × (10 + 2n) = 3.0×10<sup>5</sup> × 10
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 解出: 10 + 2n = 30 → n = <strong>10 次</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">4</span> 第 (2) 问: 质量锁定 + 刚性瓶 (等容), 降温 T<sub>2</sub> = 300 K → T<sub>3</sub> = 270 K, 查理定律:
+        <br>p<sub>2</sub>/T<sub>2</sub> = p<sub>3</sub>/T<sub>3</sub> → p<sub>3</sub> = 3.0×10<sup>5</sup> × 270/300 = <strong>2.7×10<sup>5</sup> Pa</strong>
+      </div>
+
+      <div class="answer-box">最终答案: (1) 打气 10 次; (2) p<sub>3</sub> = 2.7×10<sup>5</sup> Pa</div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 第 (1) 问用"分子数守恒"复核 — 初态 10 L×1 + 充入 20 L×1 = 30 (L·10<sup>5</sup> Pa) = 末态 10 L×3 ✓; 第 (2) 问降温压强应下降, 2.7 &lt; 3.0 方向正确.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 对<strong>变质量</strong>气体直接套定律
+        <br><span class="wrong">❌ 错答</span>: 对"瓶内气体"写 p<sub>1</sub>V = p<sub>2</sub>V, 得出压强不可能变的荒谬结论
+        <br><span class="right">✓ 正答</span>: 瓶内气体质量在增加, 不满足定律前提. 必须先<strong>打包成定质量对象</strong>再套定律
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 打包时<strong>漏算瓶内原有气体</strong>
+        <br><span class="wrong">❌ 错答</span>: 只算 n 筒气: 1.0×10<sup>5</sup>×2n = 3.0×10<sup>5</sup>×10 → n = 15 次
+        <br><span class="right">✓ 正答</span>: 末态瓶内 3.0×10<sup>5</sup> Pa 的气体里<strong>包含原有的那一份</strong>, 初态总体积是 10 + 2n 而不是 2n
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 充气筒体积与瓶体积单位混用
+        <br><span class="wrong">❌ 错答</span>: 一边用 L 一边换算成 m<sup>3</sup>, 比例式两边不齐
+        <br><span class="right">✓ 正答</span>: 比例式中<strong>同一物理量单位统一即可</strong> (全用 L 或全用 m<sup>3</sup>); 涉及做功 W = pΔV 时才必须换国际单位制
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: 第 (2) 问又把充气次数搅进来
+        <br><span class="wrong">❌ 错答</span>: 降温段还想用"打包对象"分析
+        <br><span class="right">✓ 正答</span>: 充气结束后质量<strong>已锁定</strong>, 第 (2) 问就是普通的定质量等容降温, 切换回常规查理定律即可 — 识别"哪一段变质量、哪一段定质量"是本题型的分水岭
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="gas-liquid-solid-task-cards.html">理想气体的状态方程 task-cards</a> (玻意耳 / 查理定律 · 变质量等效定质量法详见该板块<strong>方法卡 M</strong>)</div>
+</div>
+
+<!-- =================== 例题 6 · P1.4 · ΔU = CΔT 第一定律综合大题 =================== -->
+<div class="example-card" id="example-6">
+  <div class="example-card-header">
+    <div class="example-card-no">6</div>
+    <div class="example-card-title">第一定律综合大题 · 电热顶升演示缸 (ΔU = CΔT)</div>
+    <div class="example-card-type">P1.4</div>
+    <div class="example-card-diff 综合压轴">综合压轴</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      创新实验社团制作了一台"电热顶升"演示装置: <strong>竖直放置、开口向上</strong>的绝热汽缸内封有一定质量的理想气体, 缸内装有小电热丝. 活塞质量 m = 1 kg、横截面积 S = 5×10<sup>-4</sup> m<sup>2</sup>, 绝热且可无摩擦滑动、不漏气. 初始气柱长 L<sub>1</sub> = 30 cm, 温度 T<sub>1</sub> = 300 K. 大气压强 p<sub>0</sub> = 1.0×10<sup>5</sup> Pa, g 取 10 m/s<sup>2</sup>.<br><br>
+      接通电热丝缓慢加热, 活塞缓慢上升 6 cm 后断电. 已知该气体内能变化与温度变化满足 <strong>ΔU = CΔT</strong>, 其中 C = 0.5 J/K.<br><br>
+      (1) 求加热结束时气体的温度 T<sub>2</sub>;<br>
+      (2) 求该过程中电热丝放出的热量 Q (即气体吸收的热量).
+    </div>
+    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+      <svg viewBox="0 0 280 380" style="width:100%;max-width:260px;height:auto;" xmlns="http://www.w3.org/2000/svg">
+        <text x="140" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#7f8c8d">大气 p₀ = 1.0×10⁵ Pa</text>
+        <line x1="115" y1="22" x2="115" y2="46" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrD6)"/>
+        <line x1="140" y1="22" x2="140" y2="46" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrD6)"/>
+        <line x1="165" y1="22" x2="165" y2="46" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrD6)"/>
+        <defs>
+          <marker id="arrD6" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto"><polygon points="0 0, 10 0, 5 10" fill="#7f8c8d"/></marker>
+        </defs>
+
+        <!-- 双层绝热壁 -->
+        <rect x="80" y="56" width="8" height="290" fill="#5a6c7d"/>
+        <rect x="76" y="52" width="4" height="298" fill="#bdc3c7" stroke-dasharray="3,2"/>
+        <rect x="192" y="56" width="8" height="290" fill="#5a6c7d"/>
+        <rect x="200" y="52" width="4" height="298" fill="#bdc3c7" stroke-dasharray="3,2"/>
+        <rect x="80" y="340" width="120" height="8" fill="#5a6c7d"/>
+        <rect x="76" y="348" width="128" height="4" fill="#bdc3c7"/>
+        <text x="60" y="200" text-anchor="end" font-size="10" fill="#888">绝热</text>
+        <text x="220" y="200" text-anchor="start" font-size="10" fill="#888">绝热</text>
+
+        <!-- 活塞（初始位置）-->
+        <rect x="88" y="170" width="104" height="14" fill="#34495e" stroke="#2c3e50" stroke-width="1" opacity="0.5"/>
+        <text x="140" y="180" text-anchor="middle" font-size="9" fill="white">活塞(初)</text>
+        <line x1="140" y1="170" x2="140" y2="135" stroke="#0055B8" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arrU6)"/>
+        <text x="148" y="155" font-size="10" font-weight="600" fill="#0055B8">↑ 6 cm</text>
+
+        <!-- 活塞（末态位置）-->
+        <rect x="88" y="135" width="104" height="14" fill="#34495e" stroke="#2c3e50" stroke-width="1"/>
+        <text x="140" y="145" text-anchor="middle" font-size="10" fill="white">活塞(末)</text>
+        <text x="208" y="142" text-anchor="start" font-size="10" fill="#5a6c7d">m = 1 kg</text>
+        <text x="208" y="154" text-anchor="start" font-size="10" fill="#5a6c7d">S = 5×10⁻⁴ m²</text>
+
+        <!-- 活塞重力 -->
+        <line x1="140" y1="120" x2="140" y2="100" stroke="#c0392b" stroke-width="1.5" marker-end="url(#arrG6)"/>
+        <text x="147" y="113" font-size="11" font-weight="600" fill="#c0392b">mg ↓</text>
+        <defs>
+          <marker id="arrG6" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto"><polygon points="0 0, 10 0, 5 10" fill="#c0392b"/></marker>
+          <marker id="arrU6" markerWidth="10" markerHeight="10" refX="5" refY="1" orient="auto"><polygon points="0 10, 10 10, 5 0" fill="#0055B8"/></marker>
+        </defs>
+
+        <!-- 气体 -->
+        <rect x="88" y="184" width="104" height="156" fill="#e8f0fe" stroke="#0055B8" stroke-width="0.5" stroke-dasharray="3,2"/>
+        <text x="140" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#0055B8">气体</text>
+        <text x="140" y="256" text-anchor="middle" font-size="10" fill="#0055B8">L₁ = 30 cm → L₂ = 36 cm</text>
+        <text x="140" y="270" text-anchor="middle" font-size="10" fill="#0055B8">T₁ = 300 K</text>
+
+        <!-- 电热丝（缸内）-->
+        <g transform="translate(115, 295)">
+          <path d="M 0,0 L 6,-5 L 12,0 L 18,-5 L 24,0 L 30,-5 L 36,0 L 42,-5 L 48,0" fill="none" stroke="#e74c3c" stroke-width="2"/>
+          <line x1="-8" y1="0" x2="0" y2="0" stroke="#2c3e50" stroke-width="1.5"/>
+          <line x1="48" y1="0" x2="56" y2="0" stroke="#2c3e50" stroke-width="1.5"/>
+          <text x="24" y="15" text-anchor="middle" font-size="10" font-weight="600" fill="#e74c3c">电热丝(放热 Q)</text>
+        </g>
+
+        <!-- 标尺 -->
+        <line x1="218" y1="184" x2="218" y2="340" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="2,2"/>
+        <line x1="214" y1="184" x2="222" y2="184" stroke="#0055B8" stroke-width="1"/>
+        <line x1="214" y1="340" x2="222" y2="340" stroke="#0055B8" stroke-width="1"/>
+        <text x="225" y="265" font-size="10" fill="#0055B8">L</text>
+      </svg>
+      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">🔧 绝热缸 + 自由活塞 + 电热丝 · 活塞缓慢上升 6 cm = 等压过程. ΔU = CΔT, W = pΔV, Q = ΔU + W</p>
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>三步链全链条 (本题型骨架)</strong>: ① 受力平衡定压强 → ② 气体定律定末态 → ③ ΔU = Q − W 算热量 — 物理热学综合大题的标准流水线</li>
+        <li><strong>等压判定</strong> (锚: <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a>): 活塞自由 + 缓慢移动 → 每一刻都受力平衡 → 气体压强恒定 → 等压过程, 用盖-吕萨克定律</li>
+        <li><strong>等压做功</strong> (锚: <a href="basic-task-cards.html">热力学第一定律</a>): W = pΔV = pS·ΔL (气体对外做功取正)</li>
+        <li><strong>ΔU = CΔT 桥</strong>: 题给常数 C 把"温度变化"直接换算成"内能变化", 是命题人递给你的内能算尺 (其根据见进阶板块: 理想气体内能的微观推导)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 等压升温 (活塞自由) + ΔL + C; 求 = T<sub>2</sub> 与 Q</li>
+        <li><strong>选路径</strong>: 严格走三步链 — 平衡定 p → 盖-吕萨克定 T<sub>2</sub> → 先算 ΔU 和 W 两块, 最后 Q = ΔU + W 收口</li>
+        <li><strong>能量账本意识</strong>: 电热丝放出的热, 一部分存进内能 (ΔU), 一部分被气体用来顶活塞对外做功 (W), 两本账加起来才是 Q</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 受力平衡定压强 (活塞自由, 全程平衡):
+        <br>p = p<sub>0</sub> + mg/S = 1.0×10<sup>5</sup> + 10/(5×10<sup>-4</sup>) = 1.0×10<sup>5</sup> + 0.2×10<sup>5</sup> = <strong>1.2×10<sup>5</sup> Pa</strong> (全程恒定 → 等压)
+        <div class="step-rule">三步链第一步: 力平衡定压强</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 盖-吕萨克定律定末温 (V ∝ L, L<sub>2</sub> = 30 + 6 = 36 cm):
+        <br>L<sub>1</sub>/T<sub>1</sub> = L<sub>2</sub>/T<sub>2</sub> → T<sub>2</sub> = 300 × 36/30 = <strong>360 K</strong>
+        <div class="step-rule">三步链第二步: 气体定律定状态</div>
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 算内能变化: ΔU = CΔT = 0.5 × (360 − 300) = <strong>30 J</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">4</span> 算气体对外做功 (等压):
+        <br>W = pS·ΔL = 1.2×10<sup>5</sup> × 5×10<sup>-4</sup> × 0.06 = <strong>3.6 J</strong>
+        <div class="step-rule">注意: ΔL 必须换成 0.06 m — 做功计算用国际单位制</div>
+      </div>
+      <div class="step">
+        <span class="step-no">5</span> 第一定律收口: ΔU = Q − W → Q = ΔU + W = 30 + 3.6 = <strong>33.6 J</strong>
+        <div class="step-rule">三步链第三步: ΔU = Q − W 算热量</div>
+      </div>
+
+      <div class="answer-box">最终答案: (1) T<sub>2</sub> = 360 K; (2) Q = 33.6 J</div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 能量账本 — 吸热 33.6 J = 存入内能 30 J + 顶升做功 3.6 J, 账目平衡; 缸与活塞绝热 → 热量只能来自电热丝, Q 全归气体, 无旁漏 ✓.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 看到"绝热汽缸"就当<strong>绝热过程</strong> (Q = 0)
+        <br><span class="wrong">❌ 错答</span>: Q = 0 → "气体不吸热", 第 (2) 问无从下手
+        <br><span class="right">✓ 正答</span>: 缸壁绝热只是说<strong>热不外漏</strong>, 缸内电热丝照样给气体供热. "装置绝热"≠"过程绝热", 要看热源在系统内还是系统外
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 做功计算<strong>单位不换</strong>
+        <br><span class="wrong">❌ 错答</span>: W = 1.2×10<sup>5</sup> × 5×10<sup>-4</sup> × 6 = 360 J (ΔL 用了 cm)
+        <br><span class="right">✓ 正答</span>: W = pΔV 必须全用国际单位制: ΔL = 0.06 m → W = 3.6 J. 比例式可以不换单位, <strong>乘积式必须换</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: Q 只算一头
+        <br><span class="wrong">❌ 错答</span>: Q = ΔU = 30 J (忘了做功) 或 Q = W = 3.6 J (忘了内能)
+        <br><span class="right">✓ 正答</span>: 等压吸热<strong>两本账并存</strong>: Q = ΔU + W. 凡末态温度和体积都变的过程, 两项都不为零
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: 把 ΔU = CΔT 的 ΔT 用错温标差
+        <br><span class="wrong">❌ 错答</span>: 犹豫"360 K − 300 K 要不要换摄氏度"而改成错误数值
+        <br><span class="right">✓ 正答</span>: <strong>温差 ΔT 在 K 与 ℃ 下数值相同</strong> (两温标只差平移 273), ΔT = 60 K = 60 ℃, 直接代入
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="basic-task-cards.html">热力学第一定律 task-cards</a> (Q = ΔU + W 链条) · <a href="gas-liquid-solid-task-cards.html">气体、液体与固体 task-cards</a> (等压过程) · <a href="advanced-task-cards.html">理想气体内能的微观推导 (进阶)</a> (C 为常数的根据)</div>
+</div>
+
+<!-- =================== Bottom Nav =================== -->
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="thermodynamics-application-physics-fluency-test.html">📝 熟练度检测 fluency-test</a>
+  <span>oral-exam 待开放</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 融合模块 · 热力学应用 · 物理 · 例题讲解集 · example-cards Skill v0.1.0</footer>
+
+</div>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+});
+</script>
+
+</body>
+</html>

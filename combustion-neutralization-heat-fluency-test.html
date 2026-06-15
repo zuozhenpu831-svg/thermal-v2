@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>燃烧热与中和热 · 熟练度检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 580px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.composite { background: #ede7f6; color: #4527a0; font-weight: 600; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; white-space: pre-wrap; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; min-height: 160px; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-feedback.partial { border-left-color: #e67e22; background: #fff7e8; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-result.partial { color: #e67e22; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-knowledge { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-approach  { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-solution  { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .q-reflection { margin-top: 18px; padding: 18px 22px; background: linear-gradient(135deg, #fef9e7, #fff3e0); border-left: 4px solid #d4af37; border-radius: 8px; }
+  .q-reflection-title { font-weight: 600; color: #b66100; margin-bottom: 12px; font-size: 14px; }
+  .q-reflection ol { padding-left: 22px; margin-bottom: 12px; font-size: 13px; color: #5a3a1a; }
+  .q-reflection ol li { margin: 4px 0; }
+  .q-reflection-input { width: 100%; border: 1px solid #fce4a8; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: white; min-height: 100px; }
+  .q-reflection-input:focus { outline: none; border-color: #d4af37; background: #fffbf0; }
+  .q-reflection-hint { font-size: 12px; color: #b66100; margin-top: 6px; font-style: italic; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .kp-section { background: #f0f7ff; border: 1px solid #cfe0f5; border-radius: 8px; padding: 16px 20px; margin: 18px auto; max-width: 720px; text-align: left; font-size: 13px; }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 600; color: #0055B8; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .kp-toggle::after { content: '▼'; font-size: 10px; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 14px; }
+  .kp-intro { background: #fef9e7; border-left: 3px solid #d4af37; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.8; color: #5a3a1a; }
+  .kp-intro strong { color: #b66100; }
+  .kp-item { background: white; border-radius: 8px; padding: 14px 18px; margin: 12px 0; border-left: 4px solid #0055B8; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #ecf0f1; }
+  .kp-item .kp-no { background: #0055B8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; }
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 15px; color: #00409A; }
+  .kp-item .kp-freq { background: #fdeaea; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .kp-item .kp-note { color: #7f8c8d; font-size: 12px; font-style: italic; margin-bottom: 8px; }
+  .kp-item .kp-section-label { font-weight: 600; color: #00409A; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 13px; line-height: 1.85; color: #2c3e50; }
+  .kp-item .kp-list li { margin: 3px 0; }
+  .kp-item .kp-list li strong { color: #c0392b; }
+  .kp-item .kp-revisit { font-size: 12px; color: #0055B8; margin-top: 10px; padding: 6px 10px; background: #e8f0fe; border-radius: 4px; }
+  .kp-footer { text-align: center; padding: 12px; color: #27ae60; font-weight: 600; font-size: 14px; }
+  .mastery-map { background: #fafbfc; border-radius: 8px; padding: 16px 20px; margin: 18px 0; text-align: left; }
+  .mastery-map h3 { font-size: 14px; color: #00409A; margin-bottom: 12px; }
+  .mastery-row { display: grid; grid-template-columns: 48px 1fr 60px 100px; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; }
+  .mastery-row.correct { background: #f1f8f4; border-left: 3px solid #27ae60; }
+  .mastery-row.partial { background: #fff7e8; border-left: 3px solid #e67e22; }
+  .mastery-row.wrong { background: #fdf2f0; border-left: 3px solid #c0392b; }
+  .mastery-row .m-tid { font-weight: 700; color: #00409A; font-size: 13px; }
+  .mastery-row .m-title { color: #2c3e50; }
+  .mastery-row .m-status { font-weight: 700; text-align: center; font-size: 18px; }
+  .mastery-row .m-status.correct { color: #27ae60; }
+  .mastery-row .m-status.partial { color: #e67e22; }
+  .mastery-row .m-status.wrong { color: #c0392b; }
+  .mastery-row .m-pct { text-align: right; color: #5a6c7d; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 4px; font-size: 12px; }
+  .mastery-row .m-revisit a { color: #0055B8; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 燃烧热与中和热 &raquo;
+  <strong>燃烧热与中和热 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<header class="page-header">
+  <h1>燃烧热与中和热 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(20 题池, 每次随机抽 5 题) · 同高考题型(选择 + 综合大题) · 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 选择(单选) / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考)</li>
+    <li>通过 ≥ 70 分;荣誉 ≥ 90 分</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards 和 mock-check</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, 本地保存, 不判分)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #0055B8;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="combustion-neutralization-heat-task-cards.html">📖 返回学习任务卡</a>
+  <a href="combustion-neutralization-heat-mock-check.html">📝 基础检测练习</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 燃烧热与中和热 · 熟练度检测 · fluency-test Skill v0.1.4(高考实战聚焦)</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'COMBUSTION-ENTHALPY':            '燃烧热定义(25℃ 1 atm 下 1 mol 可燃物完全燃烧生成稳定氧化物的 ΔH)',
+  'COMPLETE-COMBUSTION':            '完全燃烧标志(C→CO₂, H→H₂O, S→SO₂)',
+  'STABLE-PRODUCTS':                '稳定氧化物(CO₂(g) / H₂O(l) / SO₂(g))',
+  '1-MOL-COMBUSTIBLE-CONVENTION':   '『1 mol 可燃物』归一化约定',
+  'H2O-LIQUID-CONVENTION':          '燃烧热约定 H₂O(l)(液态, 高位热值)',
+  'TYPICAL-COMBUSTION-VALUES':      '典型燃烧热数据(CH₄ -890 / H₂ -286 / C₂H₅OH -1367 等)',
+  'BOMB-CALORIMETER':               '弹式量热计构造(钢弹耐压 + 水浴 + 电火花引燃)',
+  'BOMB-CALORIMETER-EQUATION':      '弹式量热计算式 \\(Q_\\text{燃} = m c \\Delta T + C_\\text{弹} \\Delta T\\)',
+  'NEUTRALIZATION-ENTHALPY':        '中和热定义(强酸强碱稀溶液生成 1 mol 液态水的 ΔH ≈ -57.3 kJ/mol)',
+  'STRONG-ACID-STRONG-BASE-NEUTRAL':'强酸强碱中和热基本相同',
+  'NEUTRAL-IONIC-EQUATION':         '中和反应离子方程式 H⁺(aq) + OH⁻(aq) → H₂O(l)',
+  '1-MOL-WATER-CONVENTION':         '『生成 1 mol H₂O』归一化约定',
+  'WEAK-ELECTROLYTE-EFFECT':        '弱电解质中和热差额(|ΔH| < 57.3 kJ/mol)',
+  'WEAK-NEUTRAL-TWO-STEPS':         '弱酸弱碱『两步走』分析(电离吸热 + H⁺+OH⁻ 放热)',
+  'SIMPLE-CALORIMETER':             '简易量热计(保温杯 + 温度计 + 搅拌器)',
+  'Q-MC-DELTA-T-FORMULA':           '核心算式 \\(Q = m c \\Delta T\\)',
+  'TYPICAL-NEUTRAL-EXPERIMENT':     '典型中和实验(50 mL HCl + 50 mL NaOH → ΔT ≈ 6.85 K)',
+  'LINK-TO-HESS-LAW':               '与盖斯定律联用(实验测量入口 + 高频输入数据)',
+  'EXPERIMENTAL-WAY-TO-MEASURE-DELTA-H':'实验测 ΔH 的标准 2 板斧(弹式 + 简易量热计)',
+  'COMBUSTION-DATA-TO-OTHER-RXN':   '用燃烧热数据反算其他反应 ΔH',
+  'CALORIMETRY-ERROR-SOURCES':      '量热计误差来源(热损失 / 仪器吸热 / 反应不完全 / 读数延迟)',
+  'ION-EQUATION-REVEALS-ESSENCE':   '离子方程暴露中和反应本质(为何强酸强碱中和热一致)'
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考化学<strong>反应原理</strong>板块中的<strong>燃烧热 + 中和热 + 量热计实验</strong>核心考查点。属于<strong>化学反应能量分析 + 实验测量 ΔH</strong>能力 — 高考既考概念辨析(燃烧热 / 中和热的严格定义 + 完全燃烧 / 稳定氧化物 / 1 mol 约定)+ 数值计算(用 Q=mcΔT 算实验测定 ΔH + 用燃烧热数据 + 盖斯定律反算其他反应 ΔH)。建议做下面熟练度模拟练习之前, 先对照下方 6 个考察点自查, 不熟的回学习任务卡或基础检测复习。',
+  topics: [
+    { no:'一', title:'燃烧热定义 + 4 大约定', examFreq:'选择题高频', examNote:'每年必考辨析',
+      examMethods:[
+        '选择题:给定一个燃烧方程式, 判断 ΔH 是否为<strong>燃烧热</strong>',
+        '辨析题:『1 mol 可燃物 / 完全燃烧 / 稳定氧化物 / H₂O 液态』4 大约定的辨识',
+        '推断题:典型燃烧热数据(CH₄, H₂, C₂H₅OH 等)的合理性'
+      ],
+      mustMaster:[
+        '<strong>燃烧热定义</strong>: 25℃ 1 atm 下 <strong>1 mol</strong> 可燃物 <strong>完全燃烧</strong>生成<strong>稳定氧化物</strong>时放出的热量, ΔH < 0',
+        '<strong>4 大约定</strong>:① 1 mol 可燃物(不是 1 mol O₂)/ ② 完全燃烧(C→CO₂ 而非 CO)/ ③ 稳定氧化物(H→H₂O(l) 而非 H₂O(g) / S→SO₂ 而非 SO₃)/ ④ H₂O 是液态(高位热值)',
+        '<strong>典型数据</strong>:CH₄ -890 / C(石墨) -394 / H₂ -286 / C₂H₅OH(l) -1367 kJ/mol',
+        '<strong>液气差</strong>:H₂O(l) → H₂O(g) 蒸发吸热 ≈ +44 kJ/mol(故 H₂ 的燃烧热 -286 vs 生成 H₂O(g) 的 -242)'
+      ],
+      prepNotes:[
+        '高考最爱考的<strong>陷阱</strong>:① 写 H₂O(g) 不是液态;② 写 CO 不是 CO₂;③ 系数不是 1 mol 可燃物',
+        '记<strong>典型数据 4 个</strong>(CH₄ / H₂ / C / C₂H₅OH)便于估算',
+        '注意单位<strong>每 mol 可燃物</strong>, 不是每 mol O₂'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 2 + 基础检测 T1, T2 复习' },
+
+    { no:'二', title:'中和热定义 + 离子方程本质', examFreq:'选择题高频',
+      examNote:'每年必考',
+      examMethods:[
+        '选择题:给定多组反应, 判断哪些 ΔH = -57.3 kJ/mol',
+        '辨析题:为何<strong>所有强酸强碱中和热基本相同</strong>',
+        '推断题:从离子方程式推中和热是否归一化到 1 mol H₂O'
+      ],
+      mustMaster:[
+        '<strong>中和热定义</strong>: 25℃ 1 atm 下强酸强碱稀溶液中和生成 <strong>1 mol 液态水</strong>时放出热量 ΔH ≈ -57.3 kJ/mol',
+        '<strong>离子方程暴露本质</strong>:H⁺(aq) + OH⁻(aq) → H₂O(l), ΔH = -57.3 kJ/mol',
+        '<strong>强酸强碱中和热基本相同</strong>:因本质都是 H⁺ + OH⁻ → H₂O, 故 HCl + NaOH / HNO₃ + KOH / ½H₂SO₄ + NaOH 中和热都 ≈ -57.3',
+        '<strong>归一化到 1 mol H₂O</strong>:不是 1 mol 酸也不是 1 mol 碱 — 反映反应本质'
+      ],
+      prepNotes:[
+        '记住<strong>-57.3 kJ/mol</strong> 这个核心数值',
+        '用<strong>离子方程</strong>判断中和反应本质 — 最快也最准',
+        '注意<strong>稀溶液</strong>限定 — 浓溶液有稀释热修正'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 2 + 基础检测 T4 复习' },
+
+    { no:'三', title:'弱酸弱碱中和热差额 + 两步走分析', examFreq:'选择题 + 综合大题中频',
+      examNote:'近年高频考点',
+      examMethods:[
+        '选择题:比较 HCl+NaOH vs CH₃COOH+NaOH 中和热的<strong>大小关系</strong>',
+        '推断题:弱酸<strong>偏离 -57.3</strong> 的方向 + 原因',
+        '综合大题:用『两步走』分析弱酸弱碱中和反应的能量变化'
+      ],
+      mustMaster:[
+        '<strong>弱酸弱碱中和热绝对值 < 57.3 kJ/mol</strong>(典型 CH₃COOH+NaOH 约 -55.5 kJ/mol)',
+        '<strong>原因</strong>: 弱酸先<strong>电离吸热</strong>(ΔH<sub>电离</sub> > 0), 再 H⁺+OH⁻→H₂O 放热 -57.3, 净放热 < 57.3',
+        '<strong>两步走分析</strong>:① CH₃COOH ⇌ CH₃COO⁻ + H⁺(吸热)+ ② H⁺ + OH⁻ → H₂O(放 -57.3)= 总 ΔH ≈ -55~-56 kJ/mol',
+        '<strong>弱酸 + 弱碱</strong>偏离更大(两边都需电离)'
+      ],
+      prepNotes:[
+        '弱酸弱碱中和热<strong>偏小</strong>(绝对值小)— 是高考必考的辨析点',
+        '记『两步走』分析框架:电离吸热 + 中和放热',
+        '弱酸 vs 强酸的中和热差 = 电离热(电离平衡常数 K<sub>a</sub> 越小, 差越大)'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 3 + 基础检测 T5 复习' },
+
+    { no:'四', title:'弹式量热计原理 + 燃烧热实验计算', examFreq:'综合大题必考',
+      examNote:'实验题高频',
+      examMethods:[
+        '综合大题:给定 m, c, ΔT, C<sub>弹</sub> 数据 → 算燃烧热 ΔH',
+        '辨析题:钢弹『耐压』的工程意义(等容反应 → Q<sub>V</sub>)',
+        '推断题:水浴的作用(测温升)+ 电火花引燃的作用'
+      ],
+      mustMaster:[
+        '<strong>弹式量热计构造</strong>:钢弹(放可燃物 + 过量 O₂)+ 水浴 + 温度计 + 电火花引燃 + 搅拌器 + 保温外壳',
+        '<strong>核心算式</strong>: \\(Q_\\text{燃} = m_\\text{水} c_\\text{水} \\Delta T + C_\\text{弹} \\Delta T\\)(水吸热 + 钢弹吸热)',
+        '<strong>计算流程</strong>:测 ΔT → 算 Q<sub>燃</sub> → 除以可燃物摩尔数 → 燃烧热 ΔH<sub>燃</sub> = -Q<sub>燃</sub>/n',
+        '<strong>钢弹耐压</strong>:保证<strong>等容反应</strong>(防爆炸) → 测得 Q<sub>V</sub>, 与 ΔH = Q<sub>p</sub> 略有差(ΔH - Q<sub>V</sub> = RTΔn<sub>g</sub>, 对燃烧反应通常 < 1%, 高考阶段忽略)'
+      ],
+      prepNotes:[
+        '高考综合大题<strong>必考</strong>实验数据处理 + 公式套用',
+        '注意单位换算:c<sub>水</sub> = 4.18 J/(g·K) → 4.18×10⁻³ kJ/(g·K)',
+        '记<strong>钢弹耐压 = 等容 → 测 Q<sub>V</sub></strong>'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 3 + 基础检测 T3 复习' },
+
+    { no:'五', title:'简易量热计 + 中和热实验 + 误差分析', examFreq:'综合大题必考',
+      examNote:'实验题高频',
+      examMethods:[
+        '综合大题:给定 V<sub>酸</sub>, V<sub>碱</sub>, c, ΔT 数据 → 算中和热',
+        '辨析题:简易量热计的<strong>主要误差源</strong>',
+        '应用题:实验设计改进(保温 / 搅拌 / 读数)'
+      ],
+      mustMaster:[
+        '<strong>简易量热计构造</strong>:保温杯(双层) + 温度计 + 搅拌器(玻璃 / 塑料, 不用金属防导热)',
+        '<strong>核心算式</strong>: \\(Q = m_\\text{总} c \\Delta T\\), 中和热 ΔH = -Q / n<sub>H₂O</sub>',
+        '<strong>典型实验</strong>:50 mL 1 mol/L HCl + 50 mL 1 mol/L NaOH → m<sub>总</sub> = 100 g, c ≈ 4.18 J/(g·K), 测得 ΔT ≈ 6.85 K → Q = 2863 J, 中和热 ≈ -57.3 kJ/mol',
+        '<strong>主要误差源</strong>:① 热损失(保温不严)/ ② 仪器吸热(温度计 / 搅拌器)/ ③ 反应不完全 / ④ 温度读数延迟 / ⑤ 溶液比热不严格等于水比热'
+      ],
+      prepNotes:[
+        '高考综合大题<strong>必考</strong>实验数据 + 误差讨论',
+        '记<strong>误差源 5 个</strong>(热损失 / 仪器吸热 / 反应不完全 / 读数延迟 / 比热近似)',
+        '改进方法:保温(双层杯)/ 快速搅拌均温 / 多次读数取均值'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 4 + 基础检测 T6 复习' },
+
+    { no:'六', title:'与盖斯定律联用 + 用燃烧热反算', examFreq:'综合大题中频',
+      examNote:'物化融合点',
+      examMethods:[
+        '综合大题:给定 3 个燃烧热 → 用盖斯定律算其他反应 ΔH',
+        '辨析题:实验测 ΔH(本板块)vs 算法 算 ΔH(盖斯定律)的关系',
+        '应用题:燃烧热数据作为<strong>盖斯定律的输入</strong>'
+      ],
+      mustMaster:[
+        '<strong>实验测 ΔH 的 2 板斧</strong>:① 弹式量热计(燃烧反应) + ② 简易量热计(中和反应)',
+        '<strong>与盖斯定律的关系</strong>:燃烧热 / 中和热是盖斯定律算 ΔH 的<strong>实验测量入口</strong> + <strong>高频输入数据</strong>',
+        '<strong>典型应用</strong>:用 CH₄, H₂, C 的燃烧热数据 + 盖斯定律可反算 CH₄ + ½O₂ → CO + 2H₂ 的 ΔH',
+        '<strong>双重视角</strong>:实验(本板块)和算法(盖斯定律)是 ΔH 体系的两个独立入口, 互补不替代'
+      ],
+      prepNotes:[
+        '<strong>燃烧热是盖斯定律的输入数据</strong> — 这是物化融合点',
+        '会用<strong>反向 + 加 + 乘 k</strong> 组合燃烧热反算其他反应 ΔH',
+        '记<strong>实验 ΔH 和算法 ΔH 必一致</strong>(都源于状态函数性质)'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 3 + 基础检测 T7 + 盖斯定律板块复习' }
+  ],
+  footer:'✓ 6 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1:{ title:'燃烧热定义 + 4 大约定', revisit:'回任务卡 Card 1 STEP 2 + 基础检测 T1, T2 复习' },
+  T2:{ title:'中和热定义 + 离子方程本质', revisit:'回任务卡 Card 2 STEP 2 + 基础检测 T4 复习' },
+  T3:{ title:'弱酸弱碱差额 + 量热计实验综合', revisit:'回任务卡 Card 2 STEP 3 + 基础检测 T5, T6 复习' },
+  T4:{ title:'弹式量热计 + 燃烧热实验计算', revisit:'回任务卡 Card 1 STEP 3 + 基础检测 T3 复习' },
+  T5:{ title:'简易量热计 + 中和热应用 综合', revisit:'回任务卡 Card 2 STEP 4 + Card 3 + 基础检测 T6, T7 复习' }
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["COMBUSTION-ENTHALPY","COMPLETE-COMBUSTION","STABLE-PRODUCTS","H2O-LIQUID-CONVENTION"],
+      stem:"下列热化学方程式中, ΔH 表示<strong>燃烧热</strong>的是:",
+      options:{
+        A:"\\(\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(l)}\\), ΔH = -571.6 kJ/mol",
+        B:"\\(\\mathrm{C(s) + \\tfrac{1}{2}O_2(g) \\to CO(g)}\\), ΔH = -110.5 kJ/mol",
+        C:"\\(\\mathrm{CH_4(g) + 2O_2(g) \\to CO_2(g) + 2H_2O(l)}\\), ΔH = -890.3 kJ/mol",
+        D:"\\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(g)}\\), ΔH = -241.8 kJ/mol"
+      },
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:燃烧热定义的 4 大约定 — ① 1 mol 可燃物;② 完全燃烧;③ 稳定氧化物;④ H₂O 液态。',
+        approach:'<strong>解题思路</strong>:逐项检查 4 大约定是否全部满足。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 2 mol H₂ 不是 1 mol(违反 1 mol 可燃物);<br>B 错 — C 燃烧成 CO 不是 CO₂(违反完全燃烧 / 稳定氧化物);<br>C 正确 — 1 mol CH₄ + 完全燃烧 + 生成 CO₂ + H₂O(l) 全部满足;<br>D 错 — H₂O 是气态(违反 H₂O 液态约定)。<br>故选 <strong>C</strong>。<br>注:H₂ 的真正燃烧热应为 -285.8 kJ/mol(生成 H₂O(l)), 而 -241.8 是 1 mol H₂ → H₂O(g) 的 ΔH(低位热值)。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["1-MOL-COMBUSTIBLE-CONVENTION","COMPLETE-COMBUSTION"],
+      stem:"关于燃烧热的<strong>1 mol 可燃物</strong>约定, 下列说法<strong>正确</strong>的是:",
+      options:{
+        A:"是 1 mol O₂, 因为 O₂ 是反应共有",
+        B:"是 <strong>1 mol 可燃物</strong>, 因为不同可燃物所需 O₂ 系数不同, 用 O₂ 归一无法对比",
+        C:"是 1 mol 产物, 与可燃物无关",
+        D:"是 1 mol 反应分子总数"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:为何用 1 mol 可燃物归一化, 而非 1 mol O₂。',
+        approach:'<strong>解题思路</strong>:抓住『不同可燃物所需 O₂ 系数不同』的原因。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 不同可燃物所需 O₂ 不同(CH₄ 需 2 mol O₂, H₂ 需 0.5 mol O₂), 用 O₂ 归一无法横向对比;<br>B 正确 — 用 1 mol 可燃物归一, 数据可横向对比;<br>C 错 — 与产物归一无关;<br>D 错 — 反应分子总数无意义。<br>故选 <strong>B</strong>。<br>注:这个约定让<strong>典型燃烧热数据</strong>(CH₄ -890 / H₂ -286)有了统一标度, 便于比较和工程应用。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["H2O-LIQUID-CONVENTION"],
+      stem:"已知 \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(g)}\\) ΔH₁ = -241.8 kJ/mol, 水的汽化热为 +44 kJ/mol。则 H₂ 的<strong>燃烧热</strong>为:",
+      options:{
+        A:"-241.8 kJ/mol",
+        B:"-44 kJ/mol",
+        C:"<strong>-285.8 kJ/mol</strong>(生成 H₂O(l), 即 -241.8 + (-44))",
+        D:"-197.8 kJ/mol(-241.8 + 44)"
+      },
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:燃烧热约定 H₂O 是液态(高位热值). 液气差 ≈ 44 kJ/mol.',
+        approach:'<strong>解题思路</strong>:用盖斯定律加法 ① + ② 求 H₂ 燃烧热(生成 H₂O(l))。',
+        solution:'<strong>详细解题</strong>:<br>① \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(g)}\\) ΔH₁ = -241.8 kJ/mol;<br>② \\(\\mathrm{H_2O(g) \\to H_2O(l)}\\) ΔH₂ = -44 kJ/mol(液化放热, 反过来汽化吸热 +44);<br>① + ②: \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\) ΔH = -241.8 + (-44) = -285.8 kJ/mol;<br>故 H₂ 燃烧热 = <strong>-285.8 kJ/mol</strong>, 选 <strong>C</strong>。<br>注:-241.8 称『低位热值』(LHV), -285.8 称『高位热值』(HHV), 工程上多用高位。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"较难", exportIds:["COMBUSTION-ENTHALPY","COMPLETE-COMBUSTION","STABLE-PRODUCTS","1-MOL-COMBUSTIBLE-CONVENTION"],
+      stem:"下列对<strong>燃烧热定义</strong>的描述, <strong>错误</strong>的是:",
+      options:{
+        A:"必须是 25℃ 1 atm 标准条件",
+        B:"必须是 1 mol 可燃物完全燃烧",
+        C:"必须生成稳定氧化物(C → CO₂, H → H₂O(l), S → SO₂)",
+        D:"<strong>ΔH 可正可负, 取决于反应放热还是吸热</strong>"
+      },
+      answer:"D",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:燃烧反应必放热, ΔH < 0(不可能 ΔH > 0)。',
+        approach:'<strong>解题思路</strong>:辨识燃烧反应的<strong>必放热</strong>性质。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 标准条件;<br>B 正确 — 1 mol 可燃物约定;<br>C 正确 — 稳定氧化物约定;<br>D 错 — 燃烧反应必<strong>放热</strong>(\\(\\Delta H < 0\\)), 故燃烧热数据全部为负值。<br>故选错误的 <strong>D</strong>。<br>注:燃烧反应是放热反应, 这是『燃烧 = 剧烈氧化释能』的本质决定的。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["NEUTRALIZATION-ENTHALPY","NEUTRAL-IONIC-EQUATION","STRONG-ACID-STRONG-BASE-NEUTRAL"],
+      stem:"<strong>中和热</strong>的精确表述是:",
+      options:{
+        A:"任意酸碱反应放出的热量",
+        B:"25℃ 1 atm 下稀溶液中<strong>强酸强碱</strong>反应生成 <strong>1 mol 液态水</strong>时放出的热量, ΔH ≈ -57.3 kJ/mol",
+        C:"1 mol 酸消耗的热量",
+        D:"1 mol 碱消耗的热量"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:中和热定义的 3 大约定 — ① 强酸强碱稀溶液;② 生成 1 mol 液态水;③ 25℃ 1 atm。',
+        approach:'<strong>解题思路</strong>:抓住『强酸强碱』+『1 mol H₂O』+『-57.3』3 个关键。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 任意酸碱反应(包括弱酸弱碱)中和热<strong>不一致</strong>;<br>B 正确 — 精确表述;<br>C 错 — 不是按酸归一化;<br>D 错 — 不是按碱归一化。<br>故选 <strong>B</strong>。<br>注:中和热归一化到 <strong>1 mol H₂O</strong>(反映反应本质 H⁺+OH⁻→H₂O)。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"中等", exportIds:["STRONG-ACID-STRONG-BASE-NEUTRAL","NEUTRAL-IONIC-EQUATION","ION-EQUATION-REVEALS-ESSENCE"],
+      stem:"下列稀溶液反应, 中和热 ΔH <strong>基本相同</strong>(≈ -57.3 kJ/mol)的是:",
+      options:{
+        A:"\\(\\mathrm{HCl + NaOH \\to NaCl + H_2O}\\)",
+        B:"\\(\\mathrm{HNO_3 + KOH \\to KNO_3 + H_2O}\\)",
+        C:"\\(\\mathrm{\\tfrac{1}{2}H_2SO_4 + NaOH \\to \\tfrac{1}{2}Na_2SO_4 + H_2O}\\)",
+        D:"以上 A、B、C 都是, 因离子方程式本质都是 H⁺ + OH⁻ → H₂O"
+      },
+      answer:"D",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:离子方程暴露中和反应本质 — 所有强酸强碱中和反应本质都是 H⁺ + OH⁻ → H₂O。',
+        approach:'<strong>解题思路</strong>:抓住『离子方程本质相同 → 中和热相同』。',
+        solution:'<strong>详细解题</strong>:<br>A、B、C 离子方程都是 H⁺(aq) + OH⁻(aq) → H₂O(l);<br>本质相同 → 中和热都 ≈ -57.3 kJ/mol;<br>故选 <strong>D</strong>。<br>注:这就是<strong>离子方程式</strong>的价值 — 暴露反应本质, 解释为何不同强酸强碱中和热相近。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"中等", exportIds:["WEAK-ELECTROLYTE-EFFECT","WEAK-NEUTRAL-TWO-STEPS"],
+      stem:"室温下, 50 mL 1 mol/L HCl 与 50 mL 1 mol/L NaOH 中和热为 ΔH₁; 50 mL 1 mol/L CH₃COOH 与 50 mL 1 mol/L NaOH 中和热为 ΔH₂。比较 |ΔH₁| 和 |ΔH₂|:",
+      options:{
+        A:"|ΔH₁| = |ΔH₂| ≈ 57.3 kJ/mol",
+        B:"<strong>|ΔH₁| > |ΔH₂|</strong>(因 CH₃COOH 是弱酸, 需先电离吸热)",
+        C:"|ΔH₁| < |ΔH₂|(因弱酸更难中和)",
+        D:"无法比较, 取决于温度"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:弱酸弱碱中和热绝对值<strong>偏小</strong>(电离吸热使净放热<-57.3)。',
+        approach:'<strong>解题思路</strong>:两步走分析 — ① 弱酸电离吸热 + ② H⁺+OH⁻ 放热。',
+        solution:'<strong>详细解题</strong>:<br>HCl + NaOH(强酸 + 强碱): |ΔH₁| ≈ 57.3 kJ/mol;<br>CH₃COOH + NaOH(弱酸 + 强碱): 分两步:<br>· 第 1 步: CH₃COOH ⇌ CH₃COO⁻ + H⁺(电离吸热, ΔH<sub>电</sub> > 0);<br>· 第 2 步: H⁺ + OH⁻ → H₂O(放热 -57.3);<br>总 ΔH₂ = ΔH<sub>电</sub> + (-57.3) → 因电离吸热, |ΔH₂| < 57.3;<br>典型值 |ΔH₂| ≈ 55.5 kJ/mol;<br>故 <strong>|ΔH₁| > |ΔH₂|</strong>, 选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"较难", exportIds:["NEUTRALIZATION-ENTHALPY","1-MOL-WATER-CONVENTION","NEUTRAL-IONIC-EQUATION"],
+      stem:"下列对<strong>中和热定义</strong>的描述, <strong>错误</strong>的是:",
+      options:{
+        A:"归一化到<strong>1 mol H₂O</strong>(不是 1 mol 酸也不是 1 mol 碱)",
+        B:"必须是<strong>稀溶液</strong>(浓溶液有稀释热修正)",
+        C:"<strong>离子方程</strong>暴露反应本质 H⁺ + OH⁻ → H₂O",
+        D:"<strong>弱酸弱碱中和热</strong>与强酸强碱<strong>完全相同</strong> ≈ -57.3 kJ/mol"
+      },
+      answer:"D",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:弱酸弱碱中和热<strong>不同</strong>于强酸强碱 — 偏小(|ΔH| < 57.3)。',
+        approach:'<strong>解题思路</strong>:抓住『弱酸弱碱 ≠ 强酸强碱』。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 1 mol H₂O 归一化;<br>B 正确 — 稀溶液约定;<br>C 正确 — 离子方程暴露本质;<br>D 错 — <strong>弱酸弱碱中和热 |ΔH| < 57.3</strong>(因电离吸热), 不同于强酸强碱。<br>故选错误的 <strong>D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"中等", exportIds:["SIMPLE-CALORIMETER","Q-MC-DELTA-T-FORMULA","CALORIMETRY-ERROR-SOURCES"],
+      stem:"在用<strong>简易量热计</strong>(保温杯)测中和热的实验中, 下列说法<strong>正确</strong>的是:",
+      options:{
+        A:"算式 \\(Q = m_\\text{总} c \\Delta T\\), m<sub>总</sub> = 酸 + 碱溶液总质量",
+        B:"温度计 / 搅拌器应选用<strong>玻璃 / 塑料</strong>而非金属(防导热)",
+        C:"读数应取酸碱混合后<strong>温度最高时</strong>的 ΔT",
+        D:"保温杯应<strong>不密封</strong>, 让气体自由进出",
+        E:"溶液比热近似为水比热 c ≈ 4.18 J/(g·K), 但<strong>严格不等</strong>(浓度差异)"
+      },
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:简易量热计的实验细节 + 主要误差源(热损失 / 仪器吸热 / 反应不完全 / 读数延迟 / 比热近似)。',
+        approach:'<strong>解题思路</strong>:逐项审查实验细节 + 误差源。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 算式 + m<sub>总</sub>定义;<br>B 正确 — 金属导热会带走热量, 玻璃 / 塑料导热慢;<br>C 正确 — 测温升最大值, 防止热损失影响;<br>D 错 — 保温杯应<strong>加盖</strong>减少热损失(尤其蒸汽逸出带走热);<br>E 正确 — 溶液比热近似为水 c, 但严格不等(<1% 误差)。<br>故选 <strong>A、B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"中等", exportIds:["CALORIMETRY-ERROR-SOURCES","SIMPLE-CALORIMETER"],
+      stem:"简易量热计测中和热的实验, 下列<strong>误差来源</strong>使测得 |ΔH| <strong>偏小</strong>的是:",
+      options:{
+        A:"<strong>热量损失</strong>到环境(保温不严)",
+        B:"仪器(温度计 / 搅拌器)<strong>吸热</strong>",
+        C:"<strong>溶液浓度偏低</strong>, 但反应物完全反应",
+        D:"读数<strong>过早</strong>(温度未升到最大)",
+        E:"溶液比热<strong>取水比热</strong>(实际比热可能略大)"
+      },
+      answer:["A","B","D"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:误差源对 |ΔH| 测量的方向影响。',
+        approach:'<strong>解题思路</strong>:分别分析每个误差源使测得 Q 偏小还是偏大, 进而 |ΔH| 偏小还是偏大。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 热损失使测得 ΔT 偏小 → Q 偏小 → |ΔH| 偏小;<br>B 正确 — 仪器吸热使测得 ΔT 偏小 → Q 偏小 → |ΔH| 偏小;<br>C 错 — 浓度低不影响 ΔH(只要反应完全, 因 ΔH 是『每 mol 水』归一化);<br>D 正确 — 温度未升到最大, ΔT 测小 → |ΔH| 偏小;<br>E 错 — 用水比热可能使 Q 偏小, 但实际溶液比热与水比热差异 < 1%, 影响极小, 方向不确定。<br>故选 <strong>A、B、D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"中等", exportIds:["BOMB-CALORIMETER","BOMB-CALORIMETER-EQUATION","SIMPLE-CALORIMETER"],
+      stem:"关于<strong>弹式量热计 vs 简易量热计</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{
+        A:"弹式量热计用<strong>钢弹</strong>耐压, 保证<strong>等容</strong>反应(防爆炸)",
+        B:"简易量热计用<strong>保温杯</strong>, 反应在<strong>开口</strong>常压下进行",
+        C:"弹式量热计算式 \\(Q_\\text{燃} = m c \\Delta T + C_\\text{弹} \\Delta T\\), 含<strong>水吸热 + 钢弹吸热</strong>两部分",
+        D:"两种量热计都需<strong>电火花</strong>引燃",
+        E:"弹式量热计用于<strong>燃烧反应</strong>, 简易量热计用于<strong>中和 / 溶解</strong>等液相反应"
+      },
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:弹式 vs 简易量热计的<strong>结构 + 应用 + 算式</strong>区别。',
+        approach:'<strong>解题思路</strong>:逐项辨识两种量热计的核心特征。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 钢弹耐压保证等容;<br>B 正确 — 简易量热计开口常压;<br>C 正确 — 弹式算式 = 水吸热 + 钢弹吸热;<br>D 错 — 只有弹式量热计需电火花(中和反应直接混合即反应, 不需引燃);<br>E 正确 — 应用场景区分。<br>故选 <strong>A、B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["WEAK-ELECTROLYTE-EFFECT","WEAK-NEUTRAL-TWO-STEPS","ION-EQUATION-REVEALS-ESSENCE"],
+      stem:"关于<strong>弱酸 / 弱碱中和热</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{
+        A:"弱酸弱碱中和热绝对值<strong>小于 57.3 kJ/mol</strong>",
+        B:"<strong>原因</strong>: 弱电解质先电离吸热, 再 H⁺+OH⁻→H₂O 放热 -57.3, 净放热 < 57.3",
+        C:"<strong>两步走分析</strong>: ΔH<sub>总</sub> = ΔH<sub>电离</sub>(吸) + ΔH<sub>中和</sub>(放 -57.3)",
+        D:"弱酸 + 弱碱中和热与强酸强碱<strong>完全一致</strong>",
+        E:"中和反应<strong>本质</strong>是 H⁺(aq) + OH⁻(aq) → H₂O(l), 这是强酸强碱中和热一致的原因"
+      },
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:弱酸弱碱中和热的『两步走』分析 + 与强酸强碱的对比。',
+        approach:'<strong>解题思路</strong>:抓住『电离吸热 + 中和放热』+ 『离子方程本质』。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — |ΔH| < 57.3 kJ/mol;<br>B 正确 — 原因 = 电离吸热;<br>C 正确 — 两步走公式;<br>D 错 — 弱酸弱碱与强酸强碱<strong>不一致</strong>;<br>E 正确 — 离子方程本质。<br>故选 <strong>A、B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"中等", exportIds:["BOMB-CALORIMETER","BOMB-CALORIMETER-EQUATION","COMBUSTION-ENTHALPY"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某同学用<strong>弹式量热计</strong>测定<strong>葡萄糖 (C₆H₁₂O₆)</strong> 的燃烧热。实验数据:<br>· 葡萄糖样品质量 m<sub>葡</sub> = 0.900 g<br>· 钢弹内充入<strong>过量 O₂</strong> 引燃完全燃烧<br>· 水浴中水的质量 m<sub>水</sub> = 1500 g, 水比热 c<sub>水</sub> = 4.18 J/(g·K)<br>· 钢弹本身的<strong>热容量</strong> C<sub>弹</sub> = 836 J/K<br>· 反应前水温 25.00℃, 反应后水温<strong>26.50℃</strong><br>· 葡萄糖摩尔质量 M = 180 g/mol<br><br><strong>(1)</strong> 用弹式量热计算式 \\(Q_\\text{燃} = m_\\text{水} c_\\text{水} \\Delta T + C_\\text{弹} \\Delta T\\) 算燃烧释放的<strong>总热量</strong> Q<sub>燃</sub>(单位 kJ);<br><strong>(2)</strong> 算葡萄糖的<strong>燃烧热</strong> ΔH<sub>燃</sub>(每 mol 葡萄糖);<br><strong>(3)</strong> 解释为何弹式量热计用<strong>钢弹耐压</strong>(等容)+ <strong>过量 O₂</strong> 引燃 — 从『实验保证完全燃烧』+『安全性』两方面分析。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["总热量","ΔH","完全燃烧","等容"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 弹式量热计算式;② 燃烧热计算流程(测 ΔT → Q<sub>燃</sub> → ÷n → ΔH<sub>燃</sub>);③ 钢弹耐压 + 过量 O₂ 的工程原因。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 套算式 Q<sub>燃</sub> = (m<sub>水</sub>c<sub>水</sub> + C<sub>弹</sub>)·ΔT;<br>② ΔH<sub>燃</sub> = -Q<sub>燃</sub>/n<sub>葡</sub>(放热取负);<br>③ 解释工程原因。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 算 Q<sub>燃</sub></strong>(关键字命中):<br>ΔT = 26.50 - 25.00 = 1.50 K;<br>Q<sub>燃</sub> = m<sub>水</sub>c<sub>水</sub>·ΔT + C<sub>弹</sub>·ΔT<br>= (1500 × 4.18 + 836) × 1.50<br>= (6270 + 836) × 1.50<br>= 7106 × 1.50<br>= 10659 J ≈ <strong>10.66 kJ</strong><br><br><strong>(2) 算 ΔH<sub>燃</sub></strong>(关键字命中):<br>葡萄糖摩尔数 n<sub>葡</sub> = m<sub>葡</sub>/M = 0.900/180 = 0.005 mol;<br>每 mol 释放热量 = Q<sub>燃</sub>/n<sub>葡</sub> = 10.66/0.005 = 2132 kJ/mol;<br>ΔH<sub>燃</sub> = <strong>-2132 kJ/mol</strong>(放热取负)<br>注:实验值与文献值 -2802 kJ/mol 有差距, 因实验热损失 / 反应不完全等;此处取计算值演示流程。<br><br><strong>(3) 钢弹耐压 + 过量 O₂ 的原因</strong>(关键字命中):<br><strong>① 钢弹耐压(等容设计)的原因</strong>:<br>· 燃烧反应剧烈, 瞬间产生高温高压(几千 K, 几十 atm);<br>· 钢弹耐压设计 → 防止反应器破裂 → <strong>安全保障</strong>;<br>· 钢弹也限定<strong>反应在固定容积下进行</strong>(等容) → 测得 Q<sub>V</sub>(不是 Q<sub>p</sub>);<br>· 严格来讲 ΔH = Q<sub>p</sub> ≠ Q<sub>V</sub>, 但燃烧反应 ΔH - Q<sub>V</sub> = RTΔn<sub>g</sub> 通常 < 1%, 高考阶段忽略, 直接用 -Q<sub>燃</sub>/n 作 ΔH<sub>燃</sub>。<br><br><strong>② 过量 O₂ 的原因</strong>:<br>· 保证可燃物<strong>完全燃烧</strong>(否则碳燃成 CO 而非 CO₂, 释能不足);<br>· 完全燃烧 → 测得 ΔH 才是<strong>燃烧热</strong>(定义要求完全燃烧 + 稳定氧化物);<br>· 过量 O₂ 也是<strong>实验可重复性</strong>的保证(否则燃烧不充分, 数据偏差大)。<br><br><strong>关键字命中</strong>:① 总热量 / ② ΔH / ③ 完全燃烧 / ④ 等容<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"弹式量热计算式 Q_燃 = m·c·ΔT + C_弹·ΔT 含水吸热 + 钢弹吸热" 我能熟练应用吗?',
+        '"钢弹耐压 = 等容反应 = 测 Q_V" 这一物理含义我能解释吗?',
+        '"过量 O₂ 保证完全燃烧" 与燃烧热定义中的『稳定氧化物』如何关联?',
+        '高考综合题"弹式量热计数据 → 算燃烧热" 我能熟练完成流程吗?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"中等", exportIds:["TYPICAL-COMBUSTION-VALUES","COMBUSTION-DATA-TO-OTHER-RXN","LINK-TO-HESS-LAW"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:已知<strong>3 个燃烧反应</strong>的 ΔH(298 K, 1 atm):<br>· 反应 ①: \\(\\mathrm{C(石墨, s) + O_2(g) \\to CO_2(g)}\\), ΔH₁ = <strong>-393.5</strong> kJ/mol<br>· 反应 ②: \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\), ΔH₂ = <strong>-285.8</strong> kJ/mol<br>· 反应 ③: \\(\\mathrm{CH_4(g) + 2O_2(g) \\to CO_2(g) + 2H_2O(l)}\\), ΔH₃ = <strong>-890.3</strong> kJ/mol<br><br>这就是 C、H₂、CH₄ 的<strong>燃烧热</strong>数据。<br><br><strong>(1)</strong> 用<strong>盖斯定律</strong>(以燃烧热数据 + 代数组合)算<strong>甲烷的标准生成焓</strong> \\(\\Delta H_f^\\circ(\\mathrm{CH_4})\\): 即反应 \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)}\\) 的 ΔH;<br><strong>(2)</strong> 已知 ΔH 在不同 H₂O 物态下不同:若反应 ② 改为生成 H₂O(g), 则 ΔH₂' = -241.8 kJ/mol(液气差 +44)。算<strong>『甲烷低位热值』</strong>(生成 H₂O(g) 而非 H₂O(l)) — 即 CH₄ + 2O₂ → CO₂(g) + 2H₂O(g) 的 ΔH;<br><strong>(3)</strong> 解释<strong>路径无关 → 工程价值</strong>:不能直接测的 \\(\\Delta H_f^\\circ(\\mathrm{CH_4})\\)(因为石墨 + H₂ 不能直接合成 CH₄)如何借<strong>3 个燃烧热</strong>反算 — 这就是『实验测 ΔH(燃烧)』为<strong>盖斯定律提供输入</strong>的核心价值。",
+      keywords:["盖斯定律","代数组合","燃烧热","低位热值"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 用燃烧热反算 ΔH<sub>f</sub>°;② 高位 vs 低位热值;③ 燃烧热是盖斯定律的『输入数据』。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 用 ① + 2×② - ③ 凑出目标反应;<br>② 用 H₂O(l) → H₂O(g) 修正;<br>③ 解释路径无关的工程价值。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 算 \\(\\Delta H_f^\\circ(\\mathrm{CH_4})\\)</strong>(关键字命中):<br>目标反应: \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)}\\)<br>· 反应 ①: \\(\\mathrm{C + O_2 \\to CO_2}\\), ΔH₁ = -393.5;<br>· 反应 ② × 2: \\(\\mathrm{2H_2 + O_2 \\to 2H_2O(l)}\\), 2·ΔH₂ = -571.6;<br>· 反应 ③ <strong>反向</strong>: \\(\\mathrm{CO_2 + 2H_2O(l) \\to CH_4 + 2O_2}\\), -ΔH₃ = +890.3;<br>组合 ① + 2×② + (反向 ③):<br>\\(\\mathrm{C + O_2 + 2H_2 + O_2 + CO_2 + 2H_2O(l) \\to CO_2 + 2H_2O(l) + CH_4 + 2O_2}\\)<br>消去两边 CO₂ + 2H₂O + 2O₂: \\(\\mathrm{C + 2H_2 \\to CH_4}\\) ✓ 目标<br>\\(\\Delta H_f^\\circ(\\mathrm{CH_4}) = -393.5 + (-571.6) + 890.3 = -74.8\\) kJ/mol<br><br><strong>(2) 算甲烷低位热值</strong>:<br>反应 ③: \\(\\mathrm{CH_4 + 2O_2 \\to CO_2 + 2H_2O(l)}\\), ΔH = -890.3(高位)<br>液气差: 2H₂O(l) → 2H₂O(g) ΔH = 2×(+44) = +88 kJ/mol<br>低位热值:\\(\\mathrm{CH_4 + 2O_2 \\to CO_2 + 2H_2O(g)}\\), ΔH<sub>低</sub> = -890.3 + 88 = <strong>-802.3 kJ/mol</strong><br>这是工程上(尤其燃气锅炉)常用的『低位热值』(假设蒸汽不凝结回收)。<br><br><strong>(3) 路径无关 → 工程价值</strong>(关键字命中):<br>· <strong>\\(\\Delta H_f^\\circ(\\mathrm{CH_4})\\) 不能直接测</strong>:因石墨 + H₂ 不能直接合成 CH₄(动力学不允许 / 速率为 0);<br>· 但用<strong>路径无关</strong>性: 反应任意路径 ΔH 相同;<br>· 故借<strong>3 个燃烧热</strong>(实验可测)+ <strong>代数组合</strong>(盖斯定律)→ 反算 \\(\\Delta H_f^\\circ(\\mathrm{CH_4})\\) = -74.8 kJ/mol;<br>· 这就是<strong>实验测 ΔH(燃烧)是盖斯定律的『输入数据』</strong>的核心价值:燃烧热实验数据 → 进入盖斯定律算法 → 算出任意反应的 ΔH;<br>· 这套体系让<strong>所有反应的 ΔH 都可算</strong>(只要相关物质有标准生成焓数据), 极大拓展了化学反应能量分析的范围。<br><br><strong>双重视角</strong>:<br>· 实验(本板块的燃烧热 / 中和热)= 提供<strong>原始数据</strong>;<br>· 算法(盖斯定律)= 提供<strong>计算方法</strong>;<br>· 两者<strong>互补不替代</strong> — 实验提供数据, 算法扩展应用。<br><br><strong>关键字命中</strong>:① 盖斯定律 / ② 代数组合 / ③ 燃烧热 / ④ 低位热值<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"用燃烧热数据 + 盖斯定律反算其他反应 ΔH" 我能熟练做代数组合吗?',
+        '"高位热值 vs 低位热值" 的工程意义(燃气锅炉是否回收蒸汽冷凝热)我能体会吗?',
+        '"实验(燃烧热)+ 算法(盖斯定律)互补" 这一物化体系我能联系吗?',
+        '高考综合题"用 3 个燃烧热数据 + 盖斯定律反算其他反应" 我能熟练应用吗?'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"较难", exportIds:["BOMB-CALORIMETER-EQUATION","COMBUSTION-ENTHALPY","CALORIMETRY-ERROR-SOURCES"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:用<strong>弹式量热计</strong>测<strong>乙醇 (C₂H₅OH)</strong> 燃烧热。实验数据:<br>· 乙醇液体样品质量 m<sub>乙</sub> = 0.460 g<br>· 钢弹充入过量 O₂, 电火花引燃完全燃烧<br>· 水浴水质量 m<sub>水</sub> = 2000 g, 水比热 c<sub>水</sub> = 4.18 J/(g·K)<br>· 钢弹热容量 C<sub>弹</sub> = 1240 J/K<br>· 反应前水温 25.000℃, 反应后水温 26.346℃<br>· 乙醇摩尔质量 M = 46 g/mol<br><br><strong>(1)</strong> 算实验测得乙醇的<strong>燃烧热</strong> ΔH<sub>燃, 实验</strong>;<br><strong>(2)</strong> 文献值 ΔH<sub>燃, 文献</strong> = -1366.8 kJ/mol。算<strong>相对误差</strong> \\(|\\Delta H_\\text{实验} - \\Delta H_\\text{文献}|/|\\Delta H_\\text{文献}|\\) × 100%;<br><strong>(3)</strong> 分析<strong>误差来源 + 改进措施</strong>(至少 3 个误差源 + 对应改进)。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["ΔH","相对误差","热损失","完全燃烧"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 弹式量热计算式应用;② 实验数据 vs 文献值的相对误差分析;③ 误差源识别 + 改进措施。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 套算式算 ΔH;<br>② 相对误差公式;<br>③ 识别误差源 + 改进。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 算实验 ΔH<sub>燃</sub></strong>(关键字命中):<br>ΔT = 26.346 - 25.000 = 1.346 K;<br>Q<sub>燃</sub> = m<sub>水</sub>c<sub>水</sub>·ΔT + C<sub>弹</sub>·ΔT<br>= (2000 × 4.18 + 1240) × 1.346<br>= (8360 + 1240) × 1.346<br>= 9600 × 1.346<br>= 12921.6 J ≈ 12.92 kJ;<br>乙醇摩尔数 n<sub>乙</sub> = 0.460 / 46 = 0.010 mol;<br>ΔH<sub>燃, 实验</sub> = -Q<sub>燃</sub>/n<sub>乙</sub> = -12.92 / 0.010 = <strong>-1292 kJ/mol</strong><br><br><strong>(2) 相对误差</strong>(关键字命中):<br>|ΔH<sub>实验</sub> - ΔH<sub>文献</sub>| = |-1292 - (-1366.8)| = 74.8 kJ/mol;<br>相对误差 = 74.8 / 1366.8 × 100% ≈ <strong>5.47%</strong><br>这个误差对于<strong>本科物化实验</strong>而言略大, 但对<strong>高中演示实验</strong>已属可接受范围。<br><br><strong>(3) 误差来源 + 改进措施</strong>(关键字命中):<br><strong>① 热量损失到环境</strong>(主要误差源):<br>· 表现:Q<sub>燃</sub> 部分通过保温层 / 钢弹外壁 / 探针等通道损失 → ΔT 偏小 → 测得 |ΔH| 偏小;<br>· 改进:加强保温层(更厚泡沫塑料 / 真空夹套)+ 缩短测量时间 + 用<strong>反推延迟温升</strong>修正(冷却法外推);<br><strong>② 燃烧不完全</strong>:<br>· 表现:乙醇部分仅燃烧成 CO + 部分变成 C(炭烟)→ 释能不足 → 测得 |ΔH| 偏小;<br>· 改进:增大 O₂ 过量比 + 充分混合 + 用<strong>电火花持续引燃</strong> + 检查燃烧后残渣(无炭烟);<br><strong>③ 温度读数延迟 / 不准</strong>:<br>· 表现:温升后未读到最大温度即记录, 或温度计读数精度不够;<br>· 改进:使用<strong>0.01℃ 精度数字温度计</strong> + 持续记录温度 - 时间曲线 + 取最高点;<br><strong>④ 仪器吸热</strong>:<br>· 表现:温度计 / 搅拌器吸收部分热量, 但未计入 Q<sub>燃</sub>;<br>· 改进:在 C<sub>弹</sub> 中已包含主要仪器吸热, 但若仪器有改动需重新校准 C<sub>弹</sub>;<br><strong>⑤ 水比热近似</strong>:<br>· 表现:实际水 + 溶解物的混合比热与纯水略有差异;<br>· 改进:此误差 < 1%, 通常忽略。<br><br><strong>误差源主次排序</strong>:① 热损失 > ② 燃烧不完全 > ③ 读数延迟 > ④ 仪器吸热 > ⑤ 比热近似。<br><strong>实验改进的总思路</strong>:加强保温 + 提高 O₂ 过量比 + 高精度温度计 + 多次测量取均值。<br><br><strong>关键字命中</strong>:① ΔH / ② 相对误差 / ③ 热损失 / ④ 完全燃烧<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"实验数据 → 算 ΔH" 我能熟练套弹式量热计算式吗?',
+        '"相对误差分析" 对实验结果的可靠性评估有何意义?',
+        '"误差源主次排序" 对改进实验设计有何指导?',
+        '高考综合题"实验数据 + 误差讨论" 我能熟练完成吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["COMBUSTION-ENTHALPY","COMBUSTION-DATA-TO-OTHER-RXN","LINK-TO-HESS-LAW","TYPICAL-COMBUSTION-VALUES"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:<strong>氢能 vs 甲烷</strong>燃料对比。已知 H₂ 燃烧热 ΔH<sub>燃, H₂</sub> = -285.8 kJ/mol(H₂O(l)), CH₄ 燃烧热 ΔH<sub>燃, CH₄</sub> = -890.3 kJ/mol(H₂O(l))。<br><br>设燃料用于<strong>家用燃气热水器</strong>: 每月需 8000 MJ 燃料能量。<br>分子量: H₂ = 2 g/mol; CH₄ = 16 g/mol。<br>密度(气态 25℃, 1 atm): H₂ ≈ 0.082 g/L; CH₄ ≈ 0.654 g/L。<br><br><strong>(1)</strong> 算每月所需<strong>H₂ 体积</strong>(L), <strong>CH₄ 体积</strong>(L), 比较两者;<br><strong>(2)</strong> 算每 kg 燃料的<strong>能量密度</strong>(kJ/kg), 比较 H₂ 和 CH₄ 的能量密度;<br><strong>(3)</strong> 结合<strong>燃烧产物</strong>(H₂O vs CO₂)+ <strong>能量密度</strong>差异, 分析<strong>氢能源 vs 天然气</strong>在<strong>家用 / 汽车 / 工业</strong>不同场景的优劣势。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:化学式中的下标 ₂ 是特殊小号字符, 可直接复制本提示中的 ₂ 使用;不要用普通数字 2 代替。</em>",
+      keywords:["燃烧热","能量密度","CO₂","氢能"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 燃烧热 → 能量需求换算;② 能量密度比较(每 kg / 每 L);③ 氢能源 vs 天然气工程优缺点。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① n = E/|ΔH<sub>燃</sub>|, V = nVm 或 V = m/ρ;<br>② 能量密度 = |ΔH<sub>燃</sub>|/M;<br>③ 工程综合分析。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 每月所需 H₂ 和 CH₄ 体积</strong>(关键字命中):<br>所需能量 E = 8000 MJ = 8 × 10⁶ kJ;<br><br>· H₂: n<sub>H₂</sub> = E/|ΔH<sub>燃, H₂</sub>| = 8 × 10⁶ / 285.8 ≈ 27993 mol;<br>　质量 m<sub>H₂</sub> = 27993 × 2 = 55987 g ≈ <strong>56 kg</strong>;<br>　体积(25℃ 1 atm): V<sub>H₂</sub> = m<sub>H₂</sub>/ρ<sub>H₂</sub> = 55987 / 0.082 ≈ <strong>682767 L ≈ 683 m³</strong><br><br>· CH₄: n<sub>CH₄</sub> = 8 × 10⁶ / 890.3 ≈ 8985 mol;<br>　质量 m<sub>CH₄</sub> = 8985 × 16 = 143765 g ≈ <strong>144 kg</strong>;<br>　体积(25℃ 1 atm): V<sub>CH₄</sub> = 143765 / 0.654 ≈ <strong>219825 L ≈ 220 m³</strong><br><br>比较:H₂ 体积约为 CH₄ 的 <strong>3.1 倍</strong>(气态), 但质量约为 CH₄ 的 <strong>0.39 倍</strong>。<br><br><strong>(2) 能量密度比较</strong>(关键字命中):<br>· H₂: 能量密度 = 285.8 / 2 = <strong>142.9 kJ/g = 142900 kJ/kg</strong>;<br>· CH₄: 能量密度 = 890.3 / 16 = <strong>55.6 kJ/g = 55600 kJ/kg</strong>;<br>· 比较:<strong>H₂ 单位质量能量密度约为 CH₄ 的 2.57 倍</strong>(优势);<br>· 但<strong>单位体积能量密度</strong>(气态):H₂ = 285.8 × 0.082 / 2 ≈ 11.7 kJ/L; CH₄ = 890.3 × 0.654 / 16 ≈ 36.4 kJ/L → CH₄ 是 H₂ 的 <strong>3.1 倍</strong>(气态体积比的反例)。<br><br><strong>(3) 氢能源 vs 天然气工程优缺点</strong>(关键字命中):<br><br><strong>氢能 (H₂) 优点</strong>:<br>· <strong>燃烧产物只有 H₂O</strong> — <strong>零碳排放</strong>, 完全清洁;<br>· <strong>单位质量能量密度高</strong>(142.9 kJ/g)— 适合<strong>航天 / 重型运输</strong>等对载重敏感的应用;<br>· 可由<strong>电解水</strong>(尤其用可再生能源电力)制造 — 与新能源系统协同。<br><br><strong>氢能 (H₂) 不足</strong>:<br>· <strong>气态体积大</strong>(常压下) — 必须<strong>高压压缩</strong>(350-700 bar)或<strong>液化</strong>(-253℃)储运 → <strong>设备成本高 + 安全风险大</strong>;<br>· <strong>易爆炸</strong>(爆炸下限低)+ 易泄露(分子小);<br>· <strong>制造能耗高</strong>(电解水效率 70%);<br>· 民用基础设施<strong>未建</strong>(管道 / 加氢站等)。<br><br><strong>天然气 (CH₄) 优点</strong>:<br>· <strong>体积能量密度高</strong>(36.4 kJ/L 气态)— 适合<strong>家用 / 工业</strong>大流量场景;<br>· <strong>管道运输</strong>成熟 — 城市天然气网已建;<br>· <strong>液化技术</strong>(LNG)成熟 — 适合远洋运输;<br>· <strong>燃气具</strong>成熟 — 加热 / 烹饪 / 工业窑炉等。<br><br><strong>天然气 (CH₄) 不足</strong>:<br>· <strong>燃烧产 CO₂</strong>(每 kg 燃料约 2.75 kg CO₂)— 不利于减碳;<br>· <strong>开采有甲烷泄露</strong>(CH₄ 自身是强温室气体, 增温潜值是 CO₂ 的 28 倍);<br>· 单位质量能量密度低于 H₂。<br><br><strong>场景适用性</strong>:<br>· <strong>家用</strong>:目前天然气主导(基础设施成熟), 未来氢能可能渗透(尤其燃料电池 + 微电网);<br>· <strong>汽车</strong>:氢能在重型卡车 / 公交有优势(单位质量大), 但需建加氢站; 天然气车(CNG)是过渡方案;<br>· <strong>工业</strong>:天然气主导(高温炉 / 化工原料), 氢能正逐步取代用于<strong>钢铁脱碳</strong>(氢炼钢);<br>· <strong>航天</strong>:液氢绝对主导(高比冲)。<br><br><strong>关键字命中</strong>:① 燃烧热 / ② 能量密度 / ③ CO₂ / ④ 氢能<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"能量密度(质量 vs 体积)" 在不同应用场景的权衡我能体会吗?',
+        '"H₂ 零碳排 vs CH₄ 有 CO₂" 对能源转型的意义我能联系吗?',
+        '"基础设施 vs 技术性能" 的工程权衡我能理解吗?',
+        '高考综合题"燃料对比 + 能量密度 + 环境影响" 我能熟练完成吗?'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"中等", exportIds:["SIMPLE-CALORIMETER","Q-MC-DELTA-T-FORMULA","NEUTRALIZATION-ENTHALPY","TYPICAL-NEUTRAL-EXPERIMENT"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某同学用<strong>简易量热计</strong>测中和热。实验:<br>· 量取 50 mL <strong>1.0 mol/L HCl</strong> 加入保温杯, 测起始温度 T₁ = 24.50℃;<br>· 另量取 50 mL <strong>1.0 mol/L NaOH</strong>, 测起始温度也是 T₁ = 24.50℃;<br>· 将 NaOH 快速倒入保温杯混合, 持续搅拌, 测得<strong>最高温度</strong> T₂ = <strong>31.35℃</strong>;<br>· 溶液密度近似为 1.00 g/mL, 比热 c ≈ 4.18 J/(g·K);<br>· 忽略仪器吸热和热损失。<br><br><strong>(1)</strong> 算反应释放的<strong>总热量</strong> Q(单位 kJ);<br><strong>(2)</strong> 算<strong>中和热</strong> ΔH<sub>中和</sub>(每 mol H₂O);<br><strong>(3)</strong> 该实验结果与文献值<strong>-57.3 kJ/mol</strong> 比较, 算<strong>相对误差</strong>; 并分析为何实验值通常<strong>偏小</strong>(|ΔH| 偏小)— 用『热损失』+『仪器吸热』+『反应不完全』等误差源解释。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["Q","ΔH","-57.3","偏小"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 简易量热计算式 Q = m·c·ΔT;② 中和热归一化到 1 mol H₂O;③ 误差源分析(为何 |ΔH| 偏小)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① Q = m<sub>总</sub>c·ΔT;<br>② ΔH = -Q/n<sub>H₂O</sub>;<br>③ 相对误差 + 误差源分析。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 算 Q</strong>(关键字命中):<br>溶液总质量 m<sub>总</sub> = (50 + 50) × 1.00 = 100 g;<br>ΔT = T₂ - T₁ = 31.35 - 24.50 = 6.85 K;<br>Q = m<sub>总</sub>c·ΔT = 100 × 4.18 × 6.85 = 2863.3 J ≈ <strong>2.863 kJ</strong><br><br><strong>(2) 算中和热 ΔH<sub>中和</sub></strong>(关键字命中):<br>HCl 摩尔数 n<sub>HCl</sub> = 0.050 L × 1.0 mol/L = 0.050 mol;<br>NaOH 摩尔数 n<sub>NaOH</sub> = 0.050 L × 1.0 mol/L = 0.050 mol;<br>生成 H₂O 摩尔数 n<sub>H₂O</sub> = 0.050 mol(按反应方程式 1:1:1);<br>ΔH<sub>中和</sub> = -Q/n<sub>H₂O</sub> = -2.863 / 0.050 = <strong>-57.3 kJ/mol</strong><br>(注:本题数据是『理想』数据, 实际计算正好得 -57.3。)<br><br><strong>(3) 相对误差 + 误差源分析</strong>(关键字命中):<br>· 本题<strong>计算值正好等于文献值 -57.3 kJ/mol</strong>, 相对误差 = 0%(理想情况);<br>· 但<strong>真实实验</strong>中, 实验测得 |ΔH| 通常<strong>偏小</strong>(典型 |ΔH| 测得 53-56 kJ/mol);<br><br><strong>误差源分析(为何偏小)</strong>:<br>· <strong>热损失</strong>到环境:<br>　- 保温杯不严密, 部分热量经杯壁 / 杯盖辐射 / 蒸气逸出带走;<br>　- 结果:测得 ΔT 偏小 → Q 偏小 → |ΔH| 偏小;<br>· <strong>仪器吸热</strong>:<br>　- 温度计 / 搅拌器吸收部分热量, 但未计入 Q;<br>　- 结果:|ΔH| 偏小;<br>· <strong>反应不完全</strong>:<br>　- 若搅拌不均, 反应物未充分接触 → 部分反应不充分;<br>　- 结果:Q 偏小 → |ΔH| 偏小;<br>· <strong>温度读数延迟</strong>:<br>　- 温度计响应慢, 实际最高温未读到 → ΔT 偏小;<br>　- 结果:|ΔH| 偏小;<br>· <strong>溶液比热</strong> ≈ 水比热:<br>　- 严格不等, 但 < 1% 误差, 方向不确定;<br><br><strong>改进方法</strong>:① 双层保温杯 + 加盖 + 真空夹套;② 高精度温度计(0.01℃);③ 快速搅拌均匀;④ 多次测量取均值;⑤ 时间-温度曲线外推法。<br><br><strong>关键字命中</strong>:① Q / ② ΔH / ③ -57.3 / ④ 偏小<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"简易量热计算式 Q = m·c·ΔT 中 m 是溶液总质量" 我能熟练应用吗?',
+        '"实验 |ΔH| 通常偏小" 的物理原因(热损失 + 仪器吸热为主)我能解释吗?',
+        '"改进保温 + 高精度温度计 + 快速搅拌" 哪一项最关键?',
+        '高考综合题"简易量热计实验 + 误差讨论" 我能熟练完成吗?'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"较难", exportIds:["WEAK-ELECTROLYTE-EFFECT","WEAK-NEUTRAL-TWO-STEPS","NEUTRALIZATION-ENTHALPY"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某同学用简易量热计测<strong>3 组不同酸碱</strong>的中和热:<br>· 组 1: 50 mL 1.0 mol/L HCl + 50 mL 1.0 mol/L NaOH → 测得 ΔT₁ = 6.85 K;<br>· 组 2: 50 mL 1.0 mol/L CH₃COOH + 50 mL 1.0 mol/L NaOH → 测得 ΔT₂ = <strong>6.60 K</strong>;<br>· 组 3: 50 mL 1.0 mol/L CH₃COOH + 50 mL 1.0 mol/L NH₃·H₂O → 测得 ΔT₃ = <strong>6.35 K</strong>;<br>· 溶液密度 1.00 g/mL, 比热 4.18 J/(g·K), 忽略仪器吸热和热损失。<br><br><strong>(1)</strong> 分别算 3 组的<strong>中和热</strong> ΔH<sub>1</sub>, ΔH<sub>2</sub>, ΔH<sub>3</sub>;<br><strong>(2)</strong> 解释为何 |ΔH<sub>1</sub>| > |ΔH<sub>2</sub>| > |ΔH<sub>3</sub>|(<strong>两步走分析</strong>:电离吸热 + 中和放热);<br><strong>(3)</strong> 算<strong>CH₃COOH 电离热</strong> ΔH<sub>电离</sub>(从 ΔH<sub>1</sub> 和 ΔH<sub>2</sub> 推) + <strong>NH₃·H₂O 电离热</strong>(从 ΔH<sub>2</sub> 和 ΔH<sub>3</sub> 推); 解释这两个数据反映了<strong>弱电解质电离</strong>的什么性质。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["ΔH","两步走","电离吸热","弱电解质"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 3 组不同酸碱中和热的对比;② 两步走分析(电离吸热 + 中和放热);③ 电离热推算 + 弱电解质性质。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 套 Q = mcΔT, ΔH = -Q/n;<br>② 两步走解释 |ΔH| 顺序;<br>③ 用差额推电离热。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 分别算 3 组 ΔH</strong>(关键字命中):<br>m<sub>总</sub> = 100 g, c = 4.18 J/(g·K), n<sub>H₂O</sub> = 0.050 mol;<br>· 组 1: Q<sub>1</sub> = 100 × 4.18 × 6.85 = 2863.3 J = 2.863 kJ; <strong>ΔH<sub>1</sub> = -57.3 kJ/mol</strong>(强 + 强);<br>· 组 2: Q<sub>2</sub> = 100 × 4.18 × 6.60 = 2758.8 J = 2.759 kJ; <strong>ΔH<sub>2</sub> = -55.2 kJ/mol</strong>(弱 + 强);<br>· 组 3: Q<sub>3</sub> = 100 × 4.18 × 6.35 = 2654.3 J = 2.654 kJ; <strong>ΔH<sub>3</sub> = -53.1 kJ/mol</strong>(弱 + 弱)。<br><br><strong>(2) 两步走解释 |ΔH<sub>1</sub>| > |ΔH<sub>2</sub>| > |ΔH<sub>3</sub>|</strong>(关键字命中):<br>反应本质:H⁺(aq) + OH⁻(aq) → H₂O(l), ΔH<sub>本</sub> = -57.3 kJ/mol(强 + 强)<br><br>· <strong>组 1(HCl + NaOH 强 + 强)</strong>:<br>　- 两边都是强电解质, 完全电离;<br>　- ΔH<sub>1</sub> = ΔH<sub>本</sub> = -57.3 kJ/mol;<br><br>· <strong>组 2(CH₃COOH + NaOH 弱 + 强)</strong>:<br>　- CH₃COOH 是弱酸, 需先电离吸热;<br>　- 两步走:<br>　　第 1 步: CH₃COOH ⇌ CH₃COO⁻ + H⁺, ΔH<sub>电离, 醋</sub> > 0(吸热);<br>　　第 2 步: H⁺ + OH⁻ → H₂O, ΔH<sub>本</sub> = -57.3;<br>　- 总 ΔH<sub>2</sub> = ΔH<sub>电离, 醋</sub> + (-57.3) → |ΔH<sub>2</sub>| < 57.3;<br><br>· <strong>组 3(CH₃COOH + NH₃·H₂O 弱 + 弱)</strong>:<br>　- 两边都是弱电解质;<br>　- 三步走:<br>　　CH₃COOH 电离吸热 + NH₃·H₂O 电离吸热 + H⁺+OH⁻ 放 -57.3;<br>　- 总 ΔH<sub>3</sub> = ΔH<sub>电离, 醋</sub> + ΔH<sub>电离, 氨</sub> + (-57.3) → |ΔH<sub>3</sub>| < |ΔH<sub>2</sub>| < 57.3;<br><br>故 <strong>|ΔH<sub>1</sub>| > |ΔH<sub>2</sub>| > |ΔH<sub>3</sub>|</strong> ✓ 与实验测得一致。<br><br><strong>(3) 推算电离热</strong>(关键字命中):<br>· CH₃COOH 电离热:<br>　ΔH<sub>电离, 醋</sub> = ΔH<sub>2</sub> - ΔH<sub>本</sub> = -55.2 - (-57.3) = <strong>+2.1 kJ/mol</strong>(吸热);<br>· NH₃·H₂O 电离热:<br>　ΔH<sub>电离, 氨</sub> = ΔH<sub>3</sub> - ΔH<sub>2</sub> = -53.1 - (-55.2) = <strong>+2.1 kJ/mol</strong>(吸热)。<br><br><strong>反映了弱电解质电离的性质</strong>:<br>· <strong>弱电解质电离是吸热过程</strong>(ΔH<sub>电离</sub> > 0)— 因为打破分子结构 → 形成水合离子需吸收能量;<br>· <strong>典型电离热 ≈ +2-3 kJ/mol</strong>(对常见弱电解质);<br>· <strong>电离热 = 中和热与 -57.3 的差额</strong> — 这是『两步走』分析的物理本质;<br>· 电离热与<strong>电离平衡常数 K<sub>a</sub></strong> 相关(K<sub>a</sub> 越小, 电离越吸热), 不过 K<sub>a</sub> 的精确量化属于<strong>水溶液化学</strong>板块(本板块只定性). 故 CH₃COOH 和 NH₃·H₂O 在此实验温度下电离热接近(都约 2 kJ/mol), 反映它们都是中等强度的弱电解质。<br><br><strong>关键字命中</strong>:① ΔH / ② 两步走 / ③ 电离吸热 / ④ 弱电解质<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"两步走分析(电离吸热 + 中和放热)" 我能熟练应用吗?',
+        '"弱酸 / 弱碱中和热偏小" 的化学本质我能解释吗?',
+        '"用 ΔH 差额推电离热" 我能熟练计算吗?',
+        '高考综合题"3 组对比测中和热 + 弱电解质分析" 我能熟练完成吗?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"较难", exportIds:["LINK-TO-HESS-LAW","EXPERIMENTAL-WAY-TO-MEASURE-DELTA-H","COMBUSTION-DATA-TO-OTHER-RXN","Q-MC-DELTA-T-FORMULA"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:研究员要测<strong>反应</strong> \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)}\\) <strong>的 ΔH</strong>。但石墨和 H₂ 不能直接反应合成 CH₄(动力学不允许)。<br><br>研究员用<strong>燃烧热实验</strong>反推。已测得:<br>· C(石墨) 燃烧热 = <strong>-393.5</strong> kJ/mol;<br>· H₂ 燃烧热 = <strong>-285.8</strong> kJ/mol;<br>· CH₄ 燃烧热 = <strong>-890.3</strong> kJ/mol;<br><br><strong>(1)</strong> 用<strong>盖斯定律</strong>(以 3 个燃烧热作输入)+ <strong>代数组合</strong>算目标反应 \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)}\\) 的 ΔH;<br><strong>(2)</strong> 解释为何要<strong>反应 ①(C 燃烧)+ 反应 ②(H₂ 燃烧)× 2 - 反应 ③(CH₄ 燃烧)</strong>这一组合 — 从『系数 + 反向』角度分析;<br><strong>(3)</strong> 解释这种方法的<strong>核心思想</strong>:实验测<strong>燃烧热</strong>(本板块) → 作为<strong>盖斯定律</strong>的<strong>输入数据</strong> → 算出无法直接测的反应 ΔH。这就是『<strong>实验测 + 算法算</strong>』<strong>互补</strong>的 ΔH 体系。",
+      keywords:["盖斯定律","燃烧热","代数组合","互补"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 用 3 个燃烧热数据 + 盖斯定律反算目标反应 ΔH;② 系数确定 + 反向规则;③ 实验测 + 算法算 互补体系.',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 写出 3 个燃烧热反应 + 组合;<br>② 用净计量数法解释组合系数;<br>③ 总结互补体系。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 用 3 个燃烧热 + 盖斯定律算目标 ΔH</strong>(关键字命中):<br>3 个燃烧热反应:<br>· 反应 ①: \\(\\mathrm{C(石墨) + O_2 \\to CO_2}\\), ΔH₁ = -393.5;<br>· 反应 ②: \\(\\mathrm{H_2 + \\tfrac{1}{2}O_2 \\to H_2O(l)}\\), ΔH₂ = -285.8;<br>· 反应 ③: \\(\\mathrm{CH_4 + 2O_2 \\to CO_2 + 2H_2O(l)}\\), ΔH₃ = -890.3;<br><br>组合 ① + 2 × ② <strong>反向</strong> ③:<br>· ① + 2·②: \\(\\mathrm{C(石墨) + O_2 + 2H_2 + O_2 \\to CO_2 + 2H_2O(l)}\\), ΔH<sub>合</sub> = -393.5 + 2×(-285.8) = -965.1;<br>· 反向 ③: \\(\\mathrm{CO_2 + 2H_2O(l) \\to CH_4 + 2O_2}\\), -ΔH₃ = +890.3;<br>· (① + 2 × ②) + (反向 ③): \\(\\mathrm{C(石墨) + 2O_2 + 2H_2 + CO_2 + 2H_2O(l) \\to CO_2 + 2H_2O(l) + CH_4 + 2O_2}\\);<br>· 消去两边 CO₂ + 2H₂O(l) + 2O₂: \\(\\mathrm{C(石墨) + 2H_2 \\to CH_4}\\) ✓ 目标反应;<br>· <strong>ΔH</strong> = ΔH₁ + 2·ΔH₂ - ΔH₃ = -393.5 + 2×(-285.8) - (-890.3) = -393.5 + (-571.6) + 890.3 = <strong>-74.8 kJ/mol</strong><br>故 CH₄ 标准生成焓 \\(\\Delta H_f^\\circ(\\mathrm{CH_4})\\) = -74.8 kJ/mol。<br><br><strong>(2) 解释组合系数的来源</strong>(关键字命中):<br>用<strong>净计量数法</strong>对每个物质列方程:<br>· <strong>C(石墨)</strong>:目标左 1, ① 左 1, ② 0, ③ 0 → ① 系数 = 1;<br>· <strong>H₂</strong>:目标左 2, ① 0, ② 左 1, ③ 0 → ② 系数 = 2(因每个 ② 贡献 1 mol H₂);<br>· <strong>CH₄</strong>:目标右 1, ① 0, ② 0, ③ 左 1 → ③ 系数 = -1(反向, 因 ③ 中 CH₄ 在左);<br>· <strong>O₂</strong>:目标 0, ① 左 1, ② 左 1/2, ③ 左 2 → 1 + 2×(1/2) + (-1)×2 = 1 + 1 - 2 = 0 ✓<br>· <strong>CO₂</strong>:目标 0, ① 右 1, ② 0, ③ 右 1 → 1 + (-1)×1 = 0 ✓<br>· <strong>H₂O(l)</strong>:目标 0, ① 0, ② 右 1, ③ 右 2 → 2 + (-1)×2 = 0 ✓<br><br>故系数 ① = +1, ② = +2, ③ = -1(反向)的<strong>必然性</strong>来自<strong>每个物质净计量数为目标值</strong>。<br><strong>反向规则</strong>:反应 ③ 系数为 -1 → 反向 + ΔH 取负;<br><strong>乘 2 规则</strong>:反应 ② 系数为 2 → ΔH 乘 2。<br><br><strong>(3) 实验测 + 算法算 互补体系</strong>(关键字命中):<br><br><strong>实验测 ΔH</strong>(本板块):<br>· <strong>弹式量热计</strong>测燃烧热(C / H₂ / CH₄ 等);<br>· <strong>简易量热计</strong>测中和热;<br>· 提供<strong>直接的、原始的 ΔH 数据</strong>。<br><br><strong>算法算 ΔH</strong>(盖斯定律):<br>· 用<strong>4 条代数规则</strong>(+ / − / 反向 / 乘 k)组合已知反应;<br>· 算出<strong>任意目标反应</strong>的 ΔH;<br>· 适用于<strong>无法直接测</strong>的反应(如本题 C + 2H₂ → CH₄)。<br><br><strong>两者的互补性</strong>:<br>· <strong>实验测</strong> 提供<strong>原始数据</strong>(燃烧热表);<br>· <strong>算法</strong> 提供<strong>扩展工具</strong>(从有限燃烧热 → 无限多反应);<br>· 两者<strong>必须一致</strong>(都源于 \\(H\\) 是状态函数);<br>· <strong>没有实验就没有数据, 没有算法就没有扩展</strong> — 两者缺一不可。<br><br>这就是<strong>化学反应能量分析体系</strong>的核心:<br>① 选取关键反应实验测(燃烧热 / 中和热 / 形成热);<br>② 建标准生成焓表;<br>③ 用盖斯定律(代数组合 + ΔH<sub>f</sub>° 公式)算任意反应 ΔH;<br>④ 应用于工程能量分析(燃料效率 / 反应器设计 / 工艺优化)。<br><br><strong>关键字命中</strong>:① 盖斯定律 / ② 燃烧热 / ③ 代数组合 / ④ 互补<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"用 3 个燃烧热 + 盖斯定律反算 ΔH" 我能熟练完成代数组合吗?',
+        '"实验测(本板块) + 算法算(盖斯定律) 互补" 这一物化体系我能体会吗?',
+        '"系数 + 反向" 的净计量数法 我能熟练应用吗?',
+        '高考综合题"用燃烧热 + 盖斯定律算复杂反应 ΔH" 我能熟练完成吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"较难", exportIds:["SIMPLE-CALORIMETER","TYPICAL-NEUTRAL-EXPERIMENT","CALORIMETRY-ERROR-SOURCES","NEUTRALIZATION-ENTHALPY"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某<strong>化工厂废酸中和处理</strong>实例:每小时排放<strong>0.50 m³ 1.0 mol/L 稀盐酸</strong>(温度 25.0℃) 需要用 NaOH 中和处理后排放。<br>· 中和反应 \\(\\mathrm{HCl + NaOH \\to NaCl + H_2O}\\), 中和热 ΔH = -57.3 kJ/mol;<br>· 工厂用<strong>等体积等浓度 1.0 mol/L NaOH 溶液</strong>(25.0℃)中和;<br>· 中和反应后液体的总比热近似为 4.18 J/(g·K), 密度 1.00 g/mL;<br>· 假设 <strong>80% 反应热被反应液体吸收升温</strong>(20% 通过管道散失);<br><br><strong>(1)</strong> 算每小时反应释放的<strong>总热量</strong>(单位 MJ);<br><strong>(2)</strong> 算反应液体的<strong>温度升高</strong> ΔT(单位 K), 评估这一温升对<strong>排放温度</strong>的影响(中国一般要求<strong>排放温度 ≤ 40℃</strong>);<br><strong>(3)</strong> 提出<strong>工程优化方案</strong> — 至少 2 个降低排放温度的措施(从『反应工艺 / 热交换 / 稀释』等角度), 并解释其物化原理。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["中和热","ΔT","排放温度","热交换"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 中和热的工程应用(废酸处理);② 反应热与温升关系;③ 工程优化(热交换 / 稀释);④ 环保排放标准.',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 总热量 = n × |ΔH|;<br>② ΔT = Q × 0.80 / (m·c);<br>③ 提出 2-3 个工程方案。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 每小时反应总热量</strong>(关键字命中):<br>HCl 体积 = 0.50 m³ = 500 L; n<sub>HCl</sub> = 500 × 1.0 = 500 mol;<br>NaOH 体积同 = 0.50 m³ = 500 L; n<sub>NaOH</sub> = 500 mol;<br>反应 1:1 → n<sub>H₂O</sub> = 500 mol(完全反应);<br>总热量 Q<sub>总</sub> = n<sub>H₂O</sub> × |ΔH| = 500 × 57.3 = 28650 kJ ≈ <strong>28.65 MJ/h</strong><br><br><strong>(2) 反应液体温升 ΔT</strong>(关键字命中):<br>反应液体总质量 m<sub>总</sub> = 1000 L × 1.00 kg/L = 1000 kg = 10⁶ g;<br>被吸收的热量 Q<sub>吸</sub> = 0.80 × 28650 = 22920 kJ = 22.92 × 10⁶ J;<br>ΔT = Q<sub>吸</sub> / (m<sub>总</sub>·c) = 22.92 × 10⁶ / (10⁶ × 4.18) = 22.92 / 4.18 ≈ <strong>5.48 K</strong>;<br>故反应液体从 25.0℃ 升到 25.0 + 5.48 ≈ <strong>30.5℃</strong>;<br><br>评估:30.5℃ < 40℃ 排放标准, 排放温度<strong>合规</strong>。但接近上限, 若实际<strong>吸热比例较低</strong>(管道散失少)或<strong>反应液体回流时间长</strong>(累积升温), 可能超标。<br><br><strong>(3) 工程优化方案</strong>(关键字命中):<br><br><strong>方案 1: 热交换器(HEX)预冷</strong>:<br>· 在反应液体进入排放前, 引入<strong>逆流热交换器</strong>(管壳式), 让排放液体与冷水流逆向接触;<br>· 物化原理:Q<sub>放</sub> = Q<sub>吸</sub> — 反应液体放热 → 冷水升温, 冷水回收热可用于<strong>厂区供暖 / 蒸汽预热</strong>;<br>· 工程优势:① 降低排放温度;② 能量循环利用 → 降低工厂能耗;<br>· 投资:中等(管壳式 HEX 设备成本 + 管道改造);<br><br><strong>方案 2: 稀释 + 大流量低浓度</strong>:<br>· 将 1.0 mol/L 稀盐酸<strong>预稀释</strong>为 0.5 mol/L(1:1 加水), 同时用 0.5 mol/L NaOH;<br>· 物化原理:总反应热 Q<sub>总</sub> 不变(因为 H₂O 摩尔数不变), 但反应液体总质量加倍 → ΔT 降一半 (从 5.5 K → 2.7 K);<br>· 工程优势:① 简单可行;② 设备改造小;<br>· 不足:① 排水量增大;② 需要更大稀释水源;③ 中和液浓度低, 后续处理流量大;<br><br><strong>方案 3: 分段中和 + 缓冲池</strong>:<br>· 不一次中和全部, 分 2-3 阶段, 每阶段中间设缓冲池冷却;<br>· 物化原理:每段反应释能减少 → 单段 ΔT 减小;<br>· 工程优势:① 灵活控制;② 配合自然冷却;<br>· 不足:① 占地大;② 流程复杂;<br><br><strong>方案 4: 用其他碱(Ca(OH)₂ / Na₂CO₃ 等)替换 NaOH</strong>:<br>· Ca(OH)₂ 中和热相近(强碱), 但成本低;<br>· Na₂CO₃ 是<strong>弱碱性</strong>盐, 反应热<strong>低于</strong>强碱(约 -45 kJ/mol)→ 总放热减少;<br>· 物化原理:替换碱选择影响反应热;<br>· 工程优势:① Na₂CO₃ 放热少 → 温升小;② Ca(OH)₂ 成本低;<br>· 不足:① Na₂CO₃ 中和后会有 CO₂ 释放;② Ca(OH)₂ 溶解度低 → 操作不便;<br><br><strong>推荐组合</strong>:<strong>方案 1(热交换器)+ 方案 3(分段)</strong>是<strong>大型化工厂</strong>的<strong>主流方案</strong>(综合考虑能量回收 + 排放合规)。<br><br><strong>关键字命中</strong>:① 中和热 / ② ΔT / ③ 排放温度 / ④ 热交换<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"中和热的工程应用(废酸处理)" 与实际工厂运作的联系我能体会吗?',
+        '"反应热 → 温升" 的换算 我能熟练完成吗?',
+        '"工程优化方案(热交换 / 稀释 / 分段)" 的物化原理 我能分析吗?',
+        '高考综合题"实际工程的能量分析 + 环保约束" 我能熟练完成吗?'
+      ]
+    }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "combustion-neutralization-heat";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    html += `<div class="kp-item">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        ${compositeTag}
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="8" data-q-id="q${n}" placeholder="请分小问作答(150-300 字, 可分段)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 或 mock-check 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="combustion-neutralization-heat-task-cards.html">学习任务卡</a> · <a href="combustion-neutralization-heat-mock-check.html">基础检测</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "combustion-neutralization-heat";
+  const MODULE_NAME = "燃烧热与中和热";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

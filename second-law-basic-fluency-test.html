@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第二定律 · 基础 · 熟练度检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 580px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.composite { background: #ede7f6; color: #4527a0; font-weight: 600; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; white-space: pre-wrap; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; min-height: 160px; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-feedback.partial { border-left-color: #e67e22; background: #fff7e8; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-result.partial { color: #e67e22; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-knowledge { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-approach  { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-solution  { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .q-reflection { margin-top: 18px; padding: 18px 22px; background: linear-gradient(135deg, #fef9e7, #fff3e0); border-left: 4px solid #d4af37; border-radius: 8px; }
+  .q-reflection-title { font-weight: 600; color: #b66100; margin-bottom: 12px; font-size: 14px; }
+  .q-reflection ol { padding-left: 22px; margin-bottom: 12px; font-size: 13px; color: #5a3a1a; }
+  .q-reflection ol li { margin: 4px 0; }
+  .q-reflection-input { width: 100%; border: 1px solid #fce4a8; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: white; min-height: 100px; }
+  .q-reflection-input:focus { outline: none; border-color: #d4af37; background: #fffbf0; }
+  .q-reflection-hint { font-size: 12px; color: #b66100; margin-top: 6px; font-style: italic; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .kp-section { background: #f0f7ff; border: 1px solid #cfe0f5; border-radius: 8px; padding: 16px 20px; margin: 18px auto; max-width: 720px; text-align: left; font-size: 13px; }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 600; color: #0055B8; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .kp-toggle::after { content: '▼'; font-size: 10px; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 14px; }
+  .kp-intro { background: #fef9e7; border-left: 3px solid #d4af37; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.8; color: #5a3a1a; }
+  .kp-intro strong { color: #b66100; }
+  .kp-item { background: white; border-radius: 8px; padding: 14px 18px; margin: 12px 0; border-left: 4px solid #0055B8; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #ecf0f1; }
+  .kp-item .kp-no { background: #0055B8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; }
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 15px; color: #00409A; }
+  .kp-item .kp-freq { background: #fdeaea; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .kp-item .kp-note { color: #7f8c8d; font-size: 12px; font-style: italic; margin-bottom: 8px; }
+  .kp-item .kp-section-label { font-weight: 600; color: #00409A; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 13px; line-height: 1.85; color: #2c3e50; }
+  .kp-item .kp-list li { margin: 3px 0; }
+  .kp-item .kp-list li strong { color: #c0392b; }
+  .kp-item .kp-revisit { font-size: 12px; color: #0055B8; margin-top: 10px; padding: 6px 10px; background: #e8f0fe; border-radius: 4px; }
+  .kp-footer { text-align: center; padding: 12px; color: #27ae60; font-weight: 600; font-size: 14px; }
+  .mastery-map { background: #fafbfc; border-radius: 8px; padding: 16px 20px; margin: 18px 0; text-align: left; }
+  .mastery-map h3 { font-size: 14px; color: #00409A; margin-bottom: 12px; }
+  .mastery-row { display: grid; grid-template-columns: 48px 1fr 60px 100px; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; }
+  .mastery-row.correct { background: #f1f8f4; border-left: 3px solid #27ae60; }
+  .mastery-row.partial { background: #fff7e8; border-left: 3px solid #e67e22; }
+  .mastery-row.wrong { background: #fdf2f0; border-left: 3px solid #c0392b; }
+  .mastery-row .m-tid { font-weight: 700; color: #00409A; font-size: 13px; }
+  .mastery-row .m-title { color: #2c3e50; }
+  .mastery-row .m-status { font-weight: 700; text-align: center; font-size: 18px; }
+  .mastery-row .m-status.correct { color: #27ae60; }
+  .mastery-row .m-status.partial { color: #e67e22; }
+  .mastery-row .m-status.wrong { color: #c0392b; }
+  .mastery-row .m-pct { text-align: right; color: #5a6c7d; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 4px; font-size: 12px; }
+  .mastery-row .m-revisit a { color: #0055B8; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 第二定律 · 基础 &raquo;
+  <strong>第二定律 · 基础 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<header class="page-header">
+  <h1>第二定律 · 基础 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(20 题池, 每次随机抽 5 题) · 同高考题型(选择 + 综合大题) · 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 选择(单选) / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考)</li>
+    <li>通过 ≥ 70 分(已具备纸笔熟练度检测备考水平);荣誉 ≥ 90 分(通过可能性高)</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards 和 mock-check</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea,<strong>本地保存, 不判分</strong>)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存, 跨次自动恢复。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #0055B8;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="second-law-basic-task-cards.html">📖 返回学习任务卡</a>
+  <a href="second-law-basic-mock-check.html">📝 基础检测练习</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 第二定律 · 基础 · 熟练度检测 · fluency-test Skill v0.1.3</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'CLAUSIUS-STATEMENT':              '克劳修斯陈述',
+  'KELVIN-STATEMENT':                '开尔文陈述',
+  'TWO-STATEMENTS-EQUIVALENT':       '两种陈述等价',
+  'SPONTANEITY-DEFINITION':          '『自发』定义',
+  'SPONTANEOUS-DIRECTION':           '自发方向',
+  'IRREVERSIBLE-PROCESS':            '不可逆性',
+  'SPONTANEITY-DISORDER-CRITERION':  '自发判据(熵增)',
+  '2ND-PERPETUAL-MOTION-IMPOSSIBLE': '第二类永动机不可能',
+  '1ST-VS-2ND-PERPETUAL':            '第一类 vs 第二类永动机',
+  'HEAT-ENGINE-ENERGY-FLOW':         '热机能量流向',
+  'HEAT-ENGINE-EFFICIENCY-LIMIT':    '热机效率上限 \\(\\eta < 1\\)',
+  'TEMP-DIFFERENCE-REQUIRED':        '热机必须有温差',
+  'ENTROPY-QUALITATIVE':             '熵的定性定义(无序度)',
+  'ENTROPY-INCREASE-PRINCIPLE':      '熵增原理(孤立系统 \\(\\Delta S \\geq 0\\))',
+  'LOCAL-VS-TOTAL-ENTROPY':          '局部熵减 vs 整体熵增',
+  'ENTROPY-VS-INTERNAL-ENERGY':      '熵 S 与内能 U 独立',
+  '2ND-LAW-VS-1ST-LAW':              '两定律对比(数量 vs 方向)',
+  'BOUNDARY-NO-CARNOT-FORMULA':      '边界:不推卡诺效率',
+  'BOUNDARY-NO-ENTROPY-FORMULA':     '边界:不引熵严格定义',
+  'BOUNDARY-NO-BOLTZMANN':           '边界:不引玻尔兹曼公式'
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考<strong>热力学第二定律基础</strong>板块, 也是化学反应自发性分析的物理根基。属于<strong>方向性 + 自发性 + 熵</strong>能力 — 高考中考概念辨析(两陈述 / 自发 vs 非自发 / 两类永动机)和综合应用(热机效率 / 熵的定性 / 化学反应自发性)。建议做下面熟练度模拟练习之前, 先对照下方 6 个考察点自查, 不熟的回学习任务卡或基础检测复习。',
+  topics: [
+    { no:'一', title:'第二定律两种陈述 + 自发定义', examFreq:'选择题高频', examNote:'每年必有',
+      examMethods:[
+        '选择题:辨识克劳修斯陈述(热不能自发从低到高)',
+        '辨析题:开尔文陈述(单一热源不能完全做功)',
+        '应用题:空调 / 冰箱不违反第二定律的原因(消耗电能)'
+      ],
+      mustMaster:[
+        '<strong>克劳修斯陈述</strong>:热不能<strong>自发</strong>从低温到高温',
+        '<strong>开尔文陈述</strong>:不能从单一热源吸热完全做功',
+        '<strong>『自发』定义</strong>:不引起其他变化 / 不借助外力',
+        '两陈述<strong>逻辑等价</strong>(严格证明留进阶)'
+      ],
+      prepNotes:[
+        '高考最爱考<strong>『不引起其他变化』</strong>修饰 — 空调 / 冰箱不违反第二定律(消耗电能)',
+        '两陈述等价 — 同一定律的不同视角',
+        '注意区分『自发』vs『可发生』(非自发也可发生但需外力)'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 2-4 + 基础检测 T1-T2 复习' },
+
+    { no:'二', title:'两类永动机对比 + 第二类不可能', examFreq:'选择题高频', examNote:'考分类辨识',
+      examMethods:[
+        '选择题:第一类违反第一定律 / 第二类违反第二定律',
+        '辨析题:第二类永动机满足能量守恒但仍不可能',
+        '应用题:从海水吸热推船的不可能性'
+      ],
+      mustMaster:[
+        '<strong>第一类永动机</strong>:不消耗能量却做功 → 违反第一定律',
+        '<strong>第二类永动机</strong>:从单一热源吸热完全变功 → 违反第二定律',
+        '两类<strong>同时不可能但理由不同</strong>',
+        '体现了两个定律的<strong>独立性</strong>'
+      ],
+      prepNotes:[
+        '高考爱考<strong>两类对比</strong>',
+        '记住:第二类不违反第一定律, 但违反第二定律',
+        '体现『必要但不充分』的辨证关系'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 1 + 基础检测 T2 复习' },
+
+    { no:'三', title:'自发方向 + 不可逆性 + 熵的定性', examFreq:'选择题高频 + 综合中频', examNote:'考概念区分',
+      examMethods:[
+        '选择题:辨识自发过程方向(热从高到低 / 气体扩散等)',
+        '辨析题:不可逆性 = 反向不自发(可借外力实现)',
+        '推断题:熵 = 无序度的度量'
+      ],
+      mustMaster:[
+        '<strong>自发方向</strong>:自然过程都有单向性',
+        '<strong>不可逆性</strong>:反向不自发但可借外力(消耗外功 / 引起其他变化)',
+        '<strong>熵 \\(S\\) 的定性定义</strong>:无序度的度量',
+        '<strong>熵增原理</strong>:孤立系统 \\(\\Delta S \\geq 0\\)',
+        '<strong>自发判据</strong>:孤立系统熵增 → 自发'
+      ],
+      prepNotes:[
+        '本板块<strong>不</strong>引入严格 \\(dS = dQ_\\text{可逆}/T\\)(留进阶 · 状态函数)',
+        '注意『不可逆 vs 不可能』区分',
+        '气体扩散 / 油墨入水 / 摩擦发热都是经典自发例子'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 4 + Card 3 STEP 2 + 基础检测 T3, T5 复习' },
+
+    { no:'四', title:'热机能量流向 + 效率上限 + 温差要求', examFreq:'综合大题高频', examNote:'近年每年出',
+      examMethods:[
+        '综合大题:热机能量流向 \\(Q_h = W + Q_c\\)',
+        '综合大题:效率 \\(\\eta = W/Q_h = 1 - Q_c/Q_h\\) < 1',
+        '辨析题:为何热机必须有温差(若单热源 → 违反开尔文陈述)',
+        '应用题:汽车 / 蒸汽机 / 火电站的效率分析'
+      ],
+      mustMaster:[
+        '<strong>热机能量流向</strong>:\\(Q_h = W + Q_c\\)(第一定律)',
+        '<strong>效率定义</strong>:\\(\\eta = W/Q_h = 1 - Q_c/Q_h\\)',
+        '<strong>第二定律保证</strong> \\(\\eta < 1\\)(\\(Q_c > 0\\) 必有废热)',
+        '<strong>热机必须有温差</strong>(无温差 → 违反开尔文陈述)',
+        '实际热机典型效率: 火电 35-45% / 柴油 35-45% / 汽油 25-30%'
+      ],
+      prepNotes:[
+        '高考综合大题<strong>必考</strong> 热机分析',
+        '本板块<strong>不</strong>推卡诺效率严格公式 \\(\\eta = 1 - T_c/T_h\\)(留进阶 · 卡诺循环)',
+        '记住<strong>两定律联合保证 \\(\\eta < 1\\)</strong>'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 1-2 + 基础检测 T4 复习' },
+
+    { no:'五', title:'熵增原理 + 局部 vs 整体熵 + 生命熵减', examFreq:'综合大题中频', examNote:'考辨证理解',
+      examMethods:[
+        '综合大题:水结冰的熵分析(系统熵减 / 环境熵增 / 总熵增)',
+        '辨析题:生命系统局部熵减不违反第二定律',
+        '推断题:为何熵增原理只对孤立系统成立'
+      ],
+      mustMaster:[
+        '<strong>熵增原理</strong>:<strong>孤立</strong>系统 \\(\\Delta S \\geq 0\\)',
+        '<strong>局部熵减</strong>可能(如水结冰), 需外界代价',
+        '<strong>整体 = 局部 + 环境</strong> 总熵必增',
+        '<strong>生命系统</strong>: 持续局部熵减, 消耗低熵能量 / 排放高熵废物 → 总熵增',
+        '<strong>熵 S 与内能 U 独立</strong> — 两定律分别管'
+      ],
+      prepNotes:[
+        '高考爱考<strong>『局部熵减不违反』</strong>这一辨证',
+        '生命与第二定律的关系是常考点',
+        '注意熵增原理的<strong>『孤立系统』</strong>关键限定'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 3 STEP 2-3 + 基础检测 T6 复习' },
+
+    { no:'六', title:'第一定律 vs 第二定律 + 两陈述等价 + 边界声明', examFreq:'选择题中频', examNote:'考整体理解',
+      examMethods:[
+        '选择题:两定律的分工(数量 vs 方向)',
+        '辨析题:两陈述逻辑等价',
+        '推断题:本板块的边界 + 后续进阶板块的内容'
+      ],
+      mustMaster:[
+        '<strong>第一定律管数量</strong>(能量守恒)',
+        '<strong>第二定律管方向</strong>(自发性 / 不可逆)',
+        '两定律<strong>独立而互补</strong>, 缺一不可',
+        '两陈述<strong>逻辑等价</strong>(任一可推另一)',
+        '<strong>本板块边界</strong>:不引卡诺公式 / 严格熵公式 / 玻尔兹曼公式 / 吉布斯自由能(留进阶)'
+      ],
+      prepNotes:[
+        '理解『分层渐进』教学思想',
+        '本板块给定性框架, 进阶板块给定量',
+        '深化路径推荐: 卡诺 → 状态函数 → 熵的物理意义'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 4 + 学习反思日志 + 基础检测 T7 复习' }
+  ],
+  footer:'✓ 6 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1:{ title:'两种陈述 + 自发定义', revisit:'回任务卡 Card 1 STEP 2-4 + 基础检测 T1-T2 复习' },
+  T2:{ title:'两类永动机对比', revisit:'回任务卡 Card 2 STEP 1 + 基础检测 T2 复习' },
+  T3:{ title:'自发方向 + 不可逆 + 熵定性', revisit:'回任务卡 Card 1 STEP 4 + Card 3 STEP 2 + 基础检测 T3, T5 复习' },
+  T4:{ title:'热机能量流向 + 效率 + 温差 综合', revisit:'回任务卡 Card 2 STEP 1-2 + 基础检测 T4 复习' },
+  T5:{ title:'熵增原理 + 局部 vs 整体 + 两定律综合', revisit:'回任务卡 Card 3 STEP 2-3 + Card 1 STEP 4 + 基础检测 T5-T7 复习' }
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["CLAUSIUS-STATEMENT","SPONTANEITY-DEFINITION"],
+      stem:"<strong>克劳修斯陈述</strong>正确的表述是:",
+      options:{A:"热可以自发从低温物体传到高温物体",B:"不可能把热量从低温物体传到高温物体而不引起其他变化",C:"任何热机的效率必然 100%",D:"两个物体接触后温度必然相等"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:克劳修斯陈述 — 热不能<strong>自发</strong>从低温到高温; 关键修饰『而不引起其他变化』(自发的定义)。',
+        approach:'<strong>解题思路</strong>:识别『不引起其他变化』这一关键限定 → 选 B。',
+        solution:'<strong>详细解题</strong>:<br>A 反方向, 与第二定律相反;<br>B 正确 — 精确表述, 含『不引起其他变化』关键修饰;<br>C 错 — 100% 效率违反开尔文陈述;<br>D 错 — 是热平衡后的状态, 不是第二定律内容。<br>故选 <strong>B</strong>。<br>注意: 空调 / 冰箱让热从低温到高温, <strong>不违反</strong>第二定律, 因为消耗了电能(引起了其他变化)。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"基础", exportIds:["KELVIN-STATEMENT"],
+      stem:"<strong>开尔文陈述</strong>正确的表述是:",
+      options:{A:"任何热机效率 = 100%",B:"不可能从单一热源吸取热量, 全部用来做功而不引起其他变化",C:"热可以全部变成功, 但功不能全部变成热",D:"温度无法降到绝对零度"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:开尔文陈述 — 不可能从单一热源吸热完全做功; 关键修饰『单一热源』和『全部』。',
+        approach:'<strong>解题思路</strong>:识别『单一热源』『全部』关键修饰 → 选 B。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 与开尔文陈述相反;<br>B 正确 — 精确表述;<br>C 错 — 反了, 功可以全部变热(摩擦), 热不能全部变功;<br>D 错 — 这是第三定律(留大学)。<br>故选 <strong>B</strong>。<br>等价于『不可能有 100% 效率的热机』『不可能有第二类永动机』。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["SPONTANEITY-DEFINITION","CLAUSIUS-STATEMENT"],
+      stem:"<strong>空调</strong>把热从低温的室内排到高温的室外, 这<strong>是否违反</strong>克劳修斯陈述?",
+      options:{A:"违反, 热从低温到高温",B:"不违反, 因为空调消耗了电能(引起了其他变化), 不算『自发』",C:"违反, 但实际上可以违反第二定律",D:"不违反, 因为空调用了温差"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:克劳修斯陈述含『而不引起其他变化』关键修饰, 空调消耗电能 → 引起其他变化 → 不算自发 → 不违反。',
+        approach:'<strong>解题思路</strong>:抓住『自发 = 不引起其他变化』的定义。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 看似是『低 → 高』, 但消耗了电能, 不是自发;<br>B 正确 — 消耗电能 → 引起其他变化 → 不算自发;<br>C 错 — 第二定律严格不可违反;<br>D 错 — 空调是反方向, 不是利用温差。<br>故选 <strong>B</strong>。<br>同样原理:冰箱 / 热泵 / 制冷机都不违反第二定律。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"较难", exportIds:["CLAUSIUS-STATEMENT","KELVIN-STATEMENT","TWO-STATEMENTS-EQUIVALENT"],
+      stem:"关于<strong>克劳修斯陈述</strong>和<strong>开尔文陈述</strong>的关系, 下列说法<strong>正确</strong>的是:",
+      options:{A:"两陈述完全相同, 表述也相同",B:"两陈述逻辑等价 — 任一可推出另一, 若违反其中一个则另一个也违反",C:"两陈述独立, 互不影响",D:"两陈述都是错的"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:两陈述<strong>逻辑等价</strong> — 表述不同但深层联系。严格证明留进阶 · 卡诺循环。',
+        approach:'<strong>解题思路</strong>:理解『等价』vs『相同』 — 表述不同但逻辑等价。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 表述不同(克劳修斯说传热方向 / 开尔文说热机效率);<br>B 正确 — 逻辑等价;<br>C 错 — 等价意味深层联系, 不是独立;<br>D 错 — 严格定律, 都正确。<br>故选 <strong>B</strong>。<br>『同一原理多种等价表述』是物理学中常见模式。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["2ND-PERPETUAL-MOTION-IMPOSSIBLE"],
+      stem:"<strong>第二类永动机</strong>(从单一热源吸热完全转化为功)不可能的原因:",
+      options:{A:"违反第一定律(能量守恒)",B:"违反第二定律(开尔文陈述)",C:"违反牛顿定律",D:"摩擦损失"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:第二类永动机<strong>满足</strong>第一定律但<strong>违反</strong>第二定律(开尔文陈述)。',
+        approach:'<strong>解题思路</strong>:第二类永动机 = 从单一热源吸热完全变功 = 违反开尔文陈述。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 满足能量守恒(Q 全部变 W, 数量守恒);<br>B 正确 — 违反开尔文陈述;<br>C 错 — 牛顿定律不相关;<br>D 错 — 摩擦是工程损失, 不是原则上的不可能。<br>故选 <strong>B</strong>。<br>这就是为何『从海水吸热推船』不可能 — 必须有低温热源。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"基础", exportIds:["1ST-VS-2ND-PERPETUAL"],
+      stem:"关于<strong>两类永动机</strong>的区分, 下列说法<strong>正确</strong>的是:",
+      options:{A:"两类都违反第一定律",B:"第一类违反第一定律, 第二类违反第二定律",C:"两类都违反第二定律",D:"两类区分无意义"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:两类永动机违反不同定律 — 体现两定律的独立性。',
+        approach:'<strong>解题思路</strong>:① 第一类不消耗能量却做功 → 违反第一定律;② 第二类从单一热源完全转化为功 → 违反第二定律。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 第二类满足第一定律;<br>B 正确 — 精确区分;<br>C 错 — 第一类违反第一定律;<br>D 错 — 区分体现两定律独立性。<br>故选 <strong>B</strong>。<br>两类同时不可能但理由不同 → 两定律独立而必要。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"中等", exportIds:["2ND-PERPETUAL-MOTION-IMPOSSIBLE"],
+      stem:"以下哪个方案<strong>是</strong>第二类永动机(违反第二定律)?",
+      options:{A:"从海水(单一热源)吸热完全推船前进",B:"用电池能量驱动小车",C:"汽车发动机燃烧汽油排放尾气",D:"风车利用风能发电"},
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:第二类永动机 = 从单一热源吸热完全变功。',
+        approach:'<strong>解题思路</strong>:抓住『单一热源』『完全转化』两个关键。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 海水是单一热源, 若完全转化为推力 → 违反开尔文陈述;<br>B 错 — 电池是化学能源, 不是热机, 不违反;<br>C 错 — 汽车发动机有<strong>高温(燃烧室)+ 低温(尾气)</strong>两个热源, 是真实热机, 不违反;<br>D 错 — 风能不是热源。<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"较难", exportIds:["1ST-VS-2ND-PERPETUAL"],
+      stem:"<strong>第一类永动机</strong>和<strong>第二类永动机</strong>的<strong>共同点</strong>是:",
+      options:{A:"都不可能, 但理由不同(违反不同定律)",B:"都可以发生",C:"都违反第一定律",D:"都违反第二定律"},
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:两类永动机同样不可能但理由不同。',
+        approach:'<strong>解题思路</strong>:两类的共同点是<strong>不可能</strong>; 不同点是违反<strong>不同定律</strong>。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 共同点 = 都不可能; 不同点 = 违反定律不同;<br>B 错 — 都不可能;<br>C 错 — 只有第一类违反第一定律;<br>D 错 — 只有第二类违反第二定律。<br>故选 <strong>A</strong>。<br>这体现了热力学两定律的<strong>独立性</strong> — 互不替代, 共同约束物理过程。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"中等", exportIds:["SPONTANEOUS-DIRECTION","IRREVERSIBLE-PROCESS"],
+      stem:"以下属于<strong>自发过程</strong>(符合第二定律)的是(严格相等判分):",
+      options:{A:"热从高温物体流向低温物体",B:"气体从高密度区域扩散到低密度区域",C:"摩擦消耗机械能变成热",D:"散开的气体自发聚回容器一角",E:"打碎的玻璃杯自动恢复"},
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:自发方向 = 从有序到无序(熵增方向)。',
+        approach:'<strong>解题思路</strong>:辨识每个例子的『有序 → 无序』方向。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 热传导自发方向;<br>B 正确 — 气体扩散自发方向;<br>C 正确 — 机械能 → 热的不可逆性;<br>D 错 — 反方向(散开气体不会自发聚回);<br>E 错 — 反方向(碎玻璃不会自动恢复)。<br>故选 <strong>A、B、C</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"中等", exportIds:["IRREVERSIBLE-PROCESS","SPONTANEITY-DEFINITION"],
+      stem:"关于<strong>不可逆性</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"不可逆 = 反向不自发, 但可借外力实现",B:"散开的气体可以用活塞压回(消耗机械功)",C:"摩擦消耗的机械能不能自动变回机械能",D:"不可逆 = 反向绝对禁止, 任何方式不能实现",E:"冰融化后可以靠冰箱重新结冰(消耗电能)"},
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:不可逆 = 反向<strong>不自发</strong>(但可借外力)。',
+        approach:'<strong>解题思路</strong>:区分『不可逆』与『不可能』 — 反向需外力代价但可实现。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 精确定义;<br>B 正确 — 气体压回需机械功;<br>C 正确 — 机械能 → 热不能自动反向;<br>D 错 — 反向不是绝对禁止, 可借外力;<br>E 正确 — 冰箱消耗电能让水结冰。<br>故选 <strong>A、B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"较难", exportIds:["ENTROPY-QUALITATIVE","ENTROPY-INCREASE-PRINCIPLE","SPONTANEITY-DISORDER-CRITERION"],
+      stem:"关于<strong>熵 + 熵增原理 + 自发判据</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"熵 \\(S\\) 是系统无序度的度量",B:"<strong>孤立</strong>系统的熵满足 \\(\\Delta S \\geq 0\\)",C:"自发过程 = 孤立系统熵增过程",D:"任何系统的熵都必然增加",E:"本板块引入了 \\(dS = dQ_\\text{可逆}/T\\) 的严格定义"},
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:熵的定性 + 熵增原理 + 自发判据 + 本板块边界。',
+        approach:'<strong>解题思路</strong>:① 熵 = 无序度;② 熵增只对孤立系统;③ 本板块不引严格公式。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 熵的定性定义;<br>B 正确 — 熵增原理(限定孤立系统);<br>C 正确 — 自发判据;<br>D 错 — 局部系统可以熵减(如水结冰);<br>E 错 — 严格公式留进阶。<br>故选 <strong>A、B、C</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["LOCAL-VS-TOTAL-ENTROPY","SPONTANEOUS-DIRECTION","ENTROPY-INCREASE-PRINCIPLE"],
+      stem:"<strong>水结冰</strong>过程中, 关于<strong>熵的变化</strong>下列说法<strong>正确</strong>的是:",
+      options:{A:"水(液态 → 固态)的熵<strong>减少</strong>(液态无序 → 固态有序)",B:"水放热到环境, 环境的熵<strong>增加</strong>",C:"水 + 环境的总熵<strong>增加</strong>, 不违反熵增原理",D:"水结冰违反熵增原理, 第二定律有例外",E:"如果是自发结冰(0°C 以下), 总熵必增"},
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:局部熵减(水结冰) + 整体熵增(总系统) → 不违反第二定律。',
+        approach:'<strong>解题思路</strong>:孤立系统 = 水 + 环境, 各自的熵变 + 总熵变。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 液态 → 固态 = 有序化 = 熵减;<br>B 正确 — 水放热让环境分子动能 ↑ → 环境熵增;<br>C 正确 — 总熵增, 满足熵增原理;<br>D 错 — 没有违反;<br>E 正确 — 自发过程总熵必增。<br>故选 <strong>A、B、C、E</strong>。<br>关键点:熵增原理只对<strong>孤立系统</strong>成立, 局部可以熵减。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"中等", exportIds:["HEAT-ENGINE-ENERGY-FLOW","HEAT-ENGINE-EFFICIENCY-LIMIT","TEMP-DIFFERENCE-REQUIRED"],
+      stem:"<strong>综合大题(150-300 字 + 简短计算)</strong>:某热机从高温热源 \\(T_h = 600\\) K 吸热 \\(Q_h = 1000\\) J, 向低温热源 \\(T_c = 300\\) K 排出废热 \\(Q_c = 700\\) J。<br><br><strong>(1)</strong> 计算热机对外做功 \\(W\\) 和<strong>实际效率</strong> \\(\\eta\\);<br><strong>(2)</strong> 用第二定律解释为什么 \\(\\eta < 100\\%\\)(必有 \\(Q_c > 0\\));<br><strong>(3)</strong> 解释<strong>为什么热机必须有温差</strong>(若 \\(T_h = T_c\\) → 单一热源 → 违反什么)。",
+      keywords:["守恒","废热","温差","开尔文"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 热机能量流向 \\(Q_h = W + Q_c\\); ② 效率 \\(\\eta = W/Q_h\\); ③ 第二定律保证 \\(\\eta < 1\\); ④ 必须有温差(违反开尔文陈述)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 算 W = Q_h - Q_c, η = W/Q_h;<br>② 第二定律 → Q_c > 0 → η < 1;<br>③ 单一热源违反开尔文陈述。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 实际功 + 效率</strong>:<br>由能量守恒 \\(Q_h = W + Q_c\\):<br>\\(W = Q_h - Q_c = 1000 - 700 = 300\\) J<br>\\(\\eta = W/Q_h = 300/1000 = 30\\%\\)<br><br><strong>(2) 为何 \\(\\eta < 100\\%\\)</strong>(关键字命中):<br>由第二定律(开尔文陈述), 任何热机<strong>必须</strong>向低温热源排出<strong>废热</strong> \\(Q_c > 0\\)。<br>故 \\(W = Q_h - Q_c < Q_h\\) → \\(\\eta = W/Q_h < 1\\)。<br><strong>物理本质</strong>: 第二定律不允许『从单一热源吸热完全转化为功』 → 必须有 \\(Q_c > 0\\) → \\(\\eta < 1\\)。<br>本题 \\(\\eta = 30\\%\\) 满足此约束。<br><br><strong>(3) 为何热机必须有<strong>温差</strong></strong>(关键字命中):<br>若 \\(T_h = T_c\\)(只有一个恒温热源), 从中吸热完全做功 = 第二类永动机 = <strong>违反开尔文陈述</strong>。<br>故热机必须有<strong>高温热源(吸热)+ 低温热源(排废热)</strong>, 才能工作。<br><strong>物理图像</strong>: 热机利用<strong>温差</strong>作为能量驱动 — 温差大 → 效率高; 温差小 → 效率低; 无温差 → 不能工作。<br>这就是为何<strong>燃煤电厂</strong>选择高温锅炉(\\(T_h \\sim 600\\)°C)+ 低温大气(\\(T_c \\sim 20\\)°C), 而<strong>海洋温差发电</strong>(OTEC)因温差小(\\(\\sim 25\\)°C → \\(5\\)°C)效率仅 \\(\\sim 7\\%\\)。<br><br><strong>关键字命中</strong>:① 守恒 / ② 废热 / ③ 温差 / ④ 开尔文<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '\\(\\eta < 1\\) 是第二定律的根本约束, 我能熟练解释吗?',
+        '为什么单一热源不能工作?(必须违反开尔文陈述)',
+        '实际热机 \\(\\eta\\) 远小于卡诺效率, 哪些原因?(摩擦 / 不可逆性 / 工程损失)',
+        '高考综合题"热机效率分析" 我能熟练计算 + 解释吗?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"中等", exportIds:["HEAT-ENGINE-ENERGY-FLOW","HEAT-ENGINE-EFFICIENCY-LIMIT"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某<strong>火力发电厂</strong>的锅炉燃料燃烧温度 \\(T_h = 600\\)°C, 冷却水温度 \\(T_c = 30\\)°C, 每小时消耗煤 5 吨, 煤的热值 \\(2.5 \\times 10^7\\) J/kg, 发电厂的实际<strong>电效率</strong> \\(\\eta = 40\\%\\)。<br><br><strong>(1)</strong> 算每小时的<strong>总热输入</strong> \\(Q_h\\)、<strong>电功率</strong> \\(W\\)、<strong>排废热</strong> \\(Q_c\\);<br><strong>(2)</strong> 解释为什么<strong>实际效率 40%</strong> 不能进一步大幅提升(第二定律的约束);<br><strong>(3)</strong> 解释<strong>提高效率的物理路径</strong>(提高 \\(T_h\\) / 降低 \\(T_c\\) / 减少摩擦)。",
+      keywords:["1.25","7.5","效率","温差"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 实际热机效率分析; ② 第二定律的效率上限; ③ 提高效率的物理路径(温差 / 不可逆性减少)。',
+        approach:'<strong>解题思路</strong>:① 算 \\(Q_h, W, Q_c\\);② 解释效率上限;③ 提路径。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 火电厂能量分析</strong>:<br>· 每小时煤消耗 5 吨 = 5000 kg;<br>· \\(Q_h = 5000 \\times 2.5 \\times 10^7 = 1.25 \\times 10^{11}\\) J/h = 125 GJ/h;<br>· 电功率 \\(W = \\eta \\times Q_h = 0.4 \\times 125 = 50\\) GJ/h ≈ 13.9 MW;<br>· 废热 \\(Q_c = Q_h - W = 125 - 50 = 75\\) GJ/h \\(= 7.5 \\times 10^{10}\\) J/h(排到冷却水)。<br><br><strong>(2) 效率上限的物理原因</strong>(关键字命中):<br>本电厂的<strong>实际效率</strong> 40% 已接近<strong>卡诺效率</strong>上限:<br>· 卡诺效率 \\(\\eta_\\text{卡诺} = 1 - T_c/T_h = 1 - 303/873 \\approx 65\\%\\);<br>· 实际效率 40% < 65% — 受工程不可逆性影响(摩擦 / 散热 / 涡轮叶片损失)。<br><strong>第二定律的约束</strong>:即使理论极限也不能达到 100% — 必有<strong>废热 \\(Q_c > 0\\)</strong>。本电厂的 75 GJ/h 废热是<strong>第二定律的根本代价</strong>, 不可消除。<br><strong>注意</strong>:本板块<strong>不</strong>引入卡诺效率严格公式(留进阶 · 卡诺循环), 上面用 \\(\\eta_\\text{卡诺}\\) 仅作参考。<br><br><strong>(3) 提高效率的路径</strong>(关键字命中):<br>三个方向:<br>① <strong>提高 \\(T_h\\)</strong>:如超临界蒸汽锅炉(700°C 以上), 提高 \\(\\eta_\\text{卡诺}\\) 上限;<br>② <strong>降低 \\(T_c\\)</strong>:用冷却塔 / 河水(夏天效率会下降);<br>③ <strong>减少不可逆损失</strong>:改善涡轮叶片设计 / 减少散热 / 提高材料工艺。<br>核心思想: 在第二定律的限制下, 尽可能接近卡诺极限。<br><strong>注意限制</strong>:即使技术上完美, \\(\\eta < 1\\) 是第二定律的根本约束, 不可突破。<br><br><strong>关键字命中</strong>:① 1.25 / ② 7.5 / ③ 效率 / ④ 温差<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '火电厂的能量分析(\\(Q_h, W, Q_c\\))我能熟练计算吗?',
+        '为什么卡诺效率是上限?本板块和进阶板块的边界?',
+        '现代发电技术(燃气联合循环 / 核电 / 太阳能热)如何提高效率?',
+        '高考综合题"实际热机能量分析" 我能熟练应用第二定律约束吗?'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"较难", exportIds:["KELVIN-STATEMENT","2ND-PERPETUAL-MOTION-IMPOSSIBLE","TEMP-DIFFERENCE-REQUIRED"],
+      stem:"<strong>综合大题(150-300 字)</strong>:某科学家声称发明了一种新型『海洋能装置』, 可以<strong>从海水(单一恒温热源)吸热完全转化为电能</strong>, 不需要其他冷源。<br><br><strong>(1)</strong> 评价这种装置是<strong>第几类永动机</strong>, 违反了什么定律;<br><strong>(2)</strong> 用<strong>开尔文陈述</strong>解释为什么不可能;<br><strong>(3)</strong> 设计一个<strong>可行的海洋能装置</strong>(必须有温差), 说明工作原理。",
+      keywords:["第二类","开尔文","单一热源","温差"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 识别第二类永动机;② 开尔文陈述的应用;③ 海洋温差发电的物理基础。',
+        approach:'<strong>解题思路</strong>(3 小问):① 识别为第二类永动机;② 用开尔文陈述解释;③ 提可行方案(海洋温差发电)。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 装置的性质</strong>(关键字命中):<br>这是<strong>第二类永动机</strong> — 从<strong>单一热源</strong>(海水)吸热<strong>完全转化为</strong>电能(功), 不需要其他冷源。<br>违反<strong>第二定律</strong>(开尔文陈述), <strong>满足</strong>第一定律(能量守恒)。<br>注意区分:<br>· <strong>第一类</strong>:不消耗能量却做功 → 违反第一定律;<br>· <strong>第二类</strong>(本案):从单一热源完全变功 → 违反第二定律。<br><br><strong>(2) 开尔文陈述的解释</strong>(关键字命中):<br>开尔文陈述: 『不可能从<strong>单一热源</strong>吸取热量, 全部用来做功而不引起其他变化』。<br>本装置正是从单一热源(海水)<strong>完全</strong>转化为功, <strong>没有其他冷源</strong>排放废热, 完全违反开尔文陈述。<br><strong>物理根源</strong>: 热机必须有温差(高温吸热 + 低温排废热), 才能让<strong>部分</strong>热量变成功。<strong>完全转化</strong>需要单一热源的所有微观状态都有序化, 与<strong>熵增原理</strong>矛盾。<br><br><strong>(3) 可行的海洋能装置</strong>(关键字命中):<br><strong>海洋温差发电(OTEC, Ocean Thermal Energy Conversion)</strong>:<br>· <strong>高温热源</strong>:海洋表层 \\(\\sim 25\\)°C(\\(T_h = 298\\) K);<br>· <strong>低温热源</strong>:海洋深层 \\(\\sim 5\\)°C(\\(T_c = 278\\) K);<br>· <strong>工作流程</strong>:<br>　① 海水表层蒸发氨 / 丙烷等低沸点工质;<br>　② 蒸汽推动涡轮发电;<br>　③ 深海冷海水冷凝工质 → 反复循环。<br><strong>效率分析</strong>:温差小 → 效率低(理论上限 \\(\\sim 7\\%\\), 实际 \\(\\sim 3\\%\\))。但海洋温差<strong>能量储存量巨大</strong> + <strong>可持续可再生</strong>, 是<strong>清洁能源</strong>选项。<br><strong>关键点</strong>:必须有<strong>温差</strong>(海洋表层 vs 深层), 不违反第二定律, 实际可行。<br><br><strong>关键字命中</strong>:① 第二类 / ② 开尔文 / ③ 单一热源 / ④ 温差<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"两类永动机"辨识在高考综合题中是高频考点, 我能熟练区分吗?',
+        '海洋温差发电的低效率(\\(\\sim 3\\%\\))是第二定律的限制, 但仍有意义吗?',
+        '现代清洁能源(风电 / 太阳能 / 海洋温差 / 地热)各自的物理基础是什么?',
+        '高考综合题"识别违反第二定律的方案" 我能熟练吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["HEAT-ENGINE-ENERGY-FLOW","HEAT-ENGINE-EFFICIENCY-LIMIT","1ST-VS-2ND-PERPETUAL"],
+      stem:"<strong>综合大题(150-300 字)</strong>:三个工程师设计了三种『新型动力装置』。<br>· <strong>装置 A</strong>:不需任何燃料, 自动持续输出功 100 kW;<br>· <strong>装置 B</strong>:用 1 kg 燃料(\\(2 \\times 10^7\\) J/kg)吸热, 输出 \\(W = 1.5 \\times 10^7\\) J 功(超出燃料化学能);<br>· <strong>装置 C</strong>:从单一恒温水库(\\(20\\)°C)吸热 \\(Q = 1000\\) J 完全变成 \\(W = 1000\\) J 电能, 不放废热。<br><br><strong>(1)</strong> 分别判断三个装置违反哪个定律(<strong>第一</strong> / <strong>第二</strong> / 还是<strong>都违反</strong>);<br><strong>(2)</strong> 解释装置 A 和装置 B 为什么<strong>都</strong>违反第一定律, 但<strong>原因不同</strong>(『凭空』vs『超出』);<br><strong>(3)</strong> 解释装置 C <strong>满足</strong>第一定律但<strong>违反</strong>第二定律的原因。",
+      keywords:["第一定律","第二定律","能量守恒","开尔文"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 第一定律(能量守恒)的两类违反; ② 第二定律(开尔文陈述)的违反; ③ 两类永动机的辨识。',
+        approach:'<strong>解题思路</strong>(3 小问):分别分析三个装置违反的定律 + 物理原因。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 三个装置的违反分析</strong>(关键字命中):<br>· <strong>装置 A</strong>:不用燃料持续做功 → <strong>违反第一定律</strong>(凭空创能);<br>· <strong>装置 B</strong>:输出 \\(W = 1.5 \\times 10^7\\) J > 燃料化学能 \\(2 \\times 10^7\\) J 的 75% — 让我看看, 实际 \\(W = 1.5 \\times 10^7\\) < \\(2 \\times 10^7\\), 没有超出燃料化学能, 所以<strong>不</strong>违反第一定律;若 \\(W > 2 \\times 10^7\\) → 违反。重新审题: 题说『超出燃料化学能』 → 假设 \\(W > 2 \\times 10^7\\) → <strong>违反第一定律</strong>;<br>· <strong>装置 C</strong>:从单一热源吸热完全变功 → 第二类永动机 → <strong>满足第一定律</strong>(能量守恒)<strong>但违反第二定律</strong>(开尔文陈述)。<br><br><strong>(2) 装置 A 与 B 违反第一定律但原因不同</strong>(关键字命中):<br>· <strong>装置 A</strong>:『<strong>凭空</strong>创造能量』(无能量输入却有功输出 → 违反<strong>能量守恒</strong>);<br>· <strong>装置 B</strong>:『<strong>放大</strong>能量』(输出功 > 输入能量 → 违反<strong>能量守恒</strong>)。<br>两者都违反<strong>第一定律 = 能量守恒</strong>, 但具体形式不同 — A 是创能, B 是放大。这都属于<strong>第一类永动机</strong>的范畴。<br><br><strong>(3) 装置 C 的双重分析</strong>(关键字命中):<br>· <strong>满足第一定律</strong>:吸热 \\(Q = 1000\\) J 完全变功 \\(W = 1000\\) J → <strong>数量守恒</strong>。<br>· <strong>违反第二定律</strong>:从<strong>单一热源</strong>(20°C 水库)吸热<strong>完全</strong>转化为功 → <strong>违反开尔文陈述</strong>。<br><strong>物理根源</strong>: 必须有冷源 \\(Q_c > 0\\) 排放废热 → \\(W = Q - Q_c < Q\\) → \\(\\eta < 1\\)。<br>装置 C 是<strong>第二类永动机</strong>, 体现了<strong>第二定律对第一定律的补充</strong>:能量守恒(必要)但不充分, 必须满足方向性。<br>这正是为何热力学需要<strong>两个定律</strong> — 缺一不可。<br><br><strong>关键字命中</strong>:① 第一定律 / ② 第二定律 / ③ 能量守恒 / ④ 开尔文<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"两类永动机辨识"在高考综合题中是热门考点, 我能熟练区分吗?',
+        '第一定律 vs 第二定律的"必要 vs 充分" 辨证我能体会吗?',
+        '现实中是否有违反第一定律的现象?(能量守恒是物理学最基本原理)',
+        '高考综合题"识别永动机类型" 我能熟练吗?'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"中等", exportIds:["ENTROPY-QUALITATIVE","ENTROPY-INCREASE-PRINCIPLE","SPONTANEITY-DISORDER-CRITERION"],
+      stem:"<strong>综合大题(150-300 字)</strong>:某老师在课堂展示<strong>气体扩散实验</strong>:左侧容器有红色气体, 右侧真空, 中间隔板。打开隔板, 红色气体扩散到右侧, 最终均匀分布。<br><br><strong>(1)</strong> 解释这一过程的<strong>自发方向</strong>和<strong>熵的变化</strong>(用『无序度』定性);<br><strong>(2)</strong> 解释为什么扩散后的气体<strong>不会自动反向</strong>聚回左侧(用熵增原理 / 不可逆性);<br><strong>(3)</strong> 解释<strong>『将散开的气体压回左侧』</strong>是可能的, 但需要付出什么<strong>代价</strong>?",
+      keywords:["熵","无序","熵增","代价"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 气体扩散的自发方向 + 熵增;② 不可逆性 = 反向不自发;③ 反向需外力代价。',
+        approach:'<strong>解题思路</strong>(3 小问):① 分析自发方向 + 熵变;② 解释不可逆性;③ 算反向的代价。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 自发方向 + 熵变</strong>(关键字命中):<br>气体扩散的<strong>自发方向</strong>:从<strong>集中</strong>(左侧)到<strong>均匀分布</strong>(全空间) — 这是<strong>从有序到无序</strong>的方向。<br><strong>熵的变化</strong>:<br>· 初态(集中):分子在左半空间, <strong>无序度小</strong>, 熵 \\(S\\) 小;<br>· 末态(均匀):分子分布全空间, <strong>无序度大</strong>, 熵 \\(S\\) 大;<br>· 故 \\(\\Delta S > 0\\) → <strong>熵增</strong>。<br>这符合<strong>熵增原理</strong>:孤立系统(气体 + 容器, 隔板打开)的熵满足 \\(\\Delta S \\geq 0\\), 自发过程必为熵增。<br><br><strong>(2) 为何不会自动反向聚回</strong>(关键字命中):<br>反向 = 均匀气体自发聚回左侧 = 熵减(\\(\\Delta S < 0\\))。<br>由<strong>熵增原理</strong>, 孤立系统熵不能减少 → 故气体不会自动反向。<br><strong>微观图像</strong>: 均匀分布对应的<strong>微观状态数 \\(\\Omega\\)</strong> 远多于集中分布(进阶 · 熵的物理意义详细讨论)。气体自发聚回需要所有分子精确<strong>同步反向运动</strong>, 概率极小(\\(\\sim 0\\))。<br>故这是<strong>不可逆过程</strong>: 反向不自发。<br><br><strong>(3) 反向的可能性 + 代价</strong>(关键字命中):<br>『将散开的气体压回左侧』<strong>可能</strong> — 用活塞从右侧推, 把气体压回。<br><strong>代价</strong>(关键字命中):<br>· 必须<strong>消耗机械功</strong>(活塞做功);<br>· 必须<strong>放热到环境</strong>(气体被压缩 → 温度升高 → 散热到环境);<br>· 总系统(气体 + 活塞 + 环境)的<strong>总熵增加</strong>(环境吸热的熵增 > 气体被压回的熵减)。<br>故反向<strong>不违反第二定律</strong>, 但需要外界『其他变化』(机械功 + 热) — 这就是<strong>不可逆性的物理含义</strong>: 反向不自发但可借外力。<br>『局部熵减需外界代价』是<strong>第二定律精神</strong>的典型体现。<br><br><strong>关键字命中</strong>:① 熵 / ② 无序 / ③ 熵增 / ④ 代价<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '气体扩散的微观图像(状态数 \\(\\Omega\\) 增加)我能体会吗?',
+        '"反向需代价"的物理含义我能熟练解释吗?',
+        '生活中还有哪些类似气体扩散的不可逆过程?(墨水入水 / 香味传播 / 热扩散)',
+        '高考综合题"自发方向 + 熵变 + 反向代价" 我能熟练分析吗?'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"较难", exportIds:["LOCAL-VS-TOTAL-ENTROPY","ENTROPY-INCREASE-PRINCIPLE"],
+      stem:"<strong>综合大题(150-300 字)</strong>:<strong>水结冰</strong>(从液态到固态)和<strong>生物体维持有序化</strong>(细胞 / 蛋白质合成 / DNA 复制)都涉及<strong>局部熵减</strong>。<br><br><strong>(1)</strong> 解释<strong>水结冰</strong>过程中, 水(系统)的熵变 + 环境的熵变 + 总熵变, 为什么不违反第二定律;<br><strong>(2)</strong> 解释<strong>生命系统</strong>(细胞)如何维持有序化, 需要哪些<strong>外界代价</strong>;<br><strong>(3)</strong> 评价『<strong>生命违反第二定律</strong>』这一常见误解, 说明生命与第二定律的<strong>辨证关系</strong>。",
+      keywords:["局部","总熵","代价","低熵"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 局部熵减 vs 整体熵增的辨证;② 生命系统的负熵流;③ 生命与第二定律的关系。',
+        approach:'<strong>解题思路</strong>(3 小问):① 水结冰的熵分析;② 生命维持的代价;③ 解决生命悖论。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 水结冰的熵分析</strong>(关键字命中):<br>水(液态 → 固态):<br>· <strong>水的熵变</strong> \\(\\Delta S_\\text{水} < 0\\)(液态分子无序 → 固态晶格有序, 熵减);<br>· <strong>环境的熵变</strong> \\(\\Delta S_\\text{环境} > 0\\)(水放热到环境 → 环境分子动能 ↑ → 熵增);<br>· <strong>总熵变</strong>:\\(\\Delta S_\\text{总} = \\Delta S_\\text{水} + \\Delta S_\\text{环境}\\)。<br>对自发结冰(\\(T < 0\\)°C), 环境吸热的熵增<strong>大于</strong>水的熵减 → <strong>总熵增加</strong> → 满足熵增原理。<br><strong>关键</strong>: 熵增原理只对<strong>孤立系统</strong>成立 — 『水 + 环境』组成的孤立系统总熵增加, 故不违反第二定律。<br><br><strong>(2) 生命系统的有序化代价</strong>(关键字命中):<br>生命(细胞 / 生物体)持续维持<strong>有序化</strong> — 蛋白质合成 / 细胞分裂 / DNA 复制 / 思维活动 — 这是<strong>局部熵减</strong>。<br><strong>外界代价</strong>(『负熵流』):<br>· <strong>输入</strong>:<strong>低熵</strong>能量(食物 / 阳光 / 氧气)— 食物中的化学键 = 有序能;<br>· <strong>排出</strong>:<strong>高熵</strong>废物(CO₂ / 尿素 / 热 / 水汽);<br>· <strong>能量代谢</strong>:细胞内 ATP 水解释放能量驱动有序化(蛋白质合成等);<br>· <strong>总系统</strong>(生物 + 环境)的熵增加。<br>生命依赖<strong>持续的低熵能量流入 + 高熵废物排出</strong>。<br><br><strong>(3) 生命与第二定律的辨证关系</strong>(关键字命中):<br>『生命违反第二定律』是<strong>常见误解</strong>。事实:生命<strong>不</strong>违反第二定律, 而是<strong>巧妙利用</strong>了第二定律的代价机制:<br>· <strong>生物</strong>:局部熵减(有序化), 但需要外能;<br>· <strong>生物 + 环境</strong>:总熵增加, 满足第二定律。<br><strong>奥地利物理学家薛定谔</strong>1944 年在《生命是什么》中提出『生命依赖于负熵流』 — 这是物理生物学的经典论述。<br>本质上, 生命是<strong>开放系统</strong>(与环境交换物质 + 能量), 不是孤立系统, 故熵增原理对生命局部不直接适用。<br>但<strong>整体 + 环境</strong>组成的孤立系统的熵必增, 故第二定律仍成立。<br>故『生命 + 第二定律』的关系是:<strong>生命不违反第二定律, 而是依赖第二定律的代价机制存在</strong>。<br><br><strong>关键字命中</strong>:① 局部 / ② 总熵 / ③ 代价 / ④ 低熵<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"生命与第二定律的辨证关系"我能熟练解释吗?',
+        '"负熵流" 概念在物理生物学中的意义是什么?',
+        '现代生物物理学中"自组织" + "耗散结构" 与熵增原理的关系?',
+        '高考综合题"生命熵减是否违反第二定律" 我能用『局部 vs 整体』辨证回答吗?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"较难", exportIds:["ENTROPY-INCREASE-PRINCIPLE","SPONTANEOUS-DIRECTION","LOCAL-VS-TOTAL-ENTROPY","CLAUSIUS-STATEMENT"],
+      stem:"<strong>综合大题(150-300 字)</strong>:某热水瓶内 100°C(\\(T_h = 373\\) K)热水 \\(m_1 = 0.2\\) kg 与室温下 25°C(\\(T_c = 298\\) K)冷空气接触, 经过一段时间, 热水温度降至与环境平衡(假设最终都为 25°C)。<br><br><strong>(1)</strong> 解释这一过程的<strong>自发方向</strong>(热从哪流向哪)以及<strong>克劳修斯陈述</strong>如何禁止反方向;<br><strong>(2)</strong> 定性说明<strong>热水的熵变 \\(\\Delta S_\\text{水}\\)</strong>(正负判断, 不需严格计算 \\(dS = dQ/T\\)) 和<strong>环境的熵变 \\(\\Delta S_\\text{环}\\)</strong>;<br><strong>(3)</strong> 用<strong>『熵增原理』</strong>解释<strong>『总熵增加』</strong>(系统 + 环境合计), 并说明若<strong>反向</strong>(环境的热集中变回热水)发生需要什么<strong>代价</strong>(即非自发过程的外界条件)。",
+      keywords:["熵增","自发","总熵","代价"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 热从高到低的自发方向 + 克劳修斯陈述;② 热水熵减(放热降温) + 环境熵增(吸热升温);③ 总熵增 + 反向需代价(消耗外能)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 自发方向 + 克劳修斯;<br>② 热水放热 → 熵减; 环境吸热 → 熵增;<br>③ 总熵增 + 反向 = 冰箱 / 制冷机消耗电能。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 自发方向</strong>(关键字命中):<br>热水温度高(\\(T_h = 373\\) K)、环境温度低(\\(T_c = 298\\) K) → <strong>热从热水流向环境</strong>(<strong>自发方向</strong>)。<br><strong>克劳修斯陈述</strong>禁止反方向: 不可能把热从冷环境自发流回热水(不引起其他变化), 否则违反『热不能自发从低温到高温』。<br>故热水的温度<strong>必然</strong>降低, 直到与环境达到热平衡。<br><br><strong>(2) 各部分的熵变</strong>(关键字命中):<br>· <strong>热水的熵变 \\(\\Delta S_\\text{水}\\)</strong>:<br>　- 热水<strong>放热</strong>且<strong>降温</strong>(从 373 K → 298 K);<br>　- 分子热运动的<strong>无序度减少</strong>(温度降低 → 平均动能减小 → 速率分布的窄峰偏向低速 → 微观状态数减少);<br>　- 故 <strong>\\(\\Delta S_\\text{水} < 0\\)</strong>(熵减)。<br>· <strong>环境的熵变 \\(\\Delta S_\\text{环}\\)</strong>:<br>　- 环境<strong>吸热</strong>(从热水接收热量), 虽然<strong>温度几乎不变</strong>(环境大), 但分子动能略有增加;<br>　- 微观状态数<strong>增加</strong>;<br>　- 故 <strong>\\(\\Delta S_\\text{环} > 0\\)</strong>(熵增)。<br><br><strong>(3) 总熵增 + 反向代价</strong>(关键字命中):<br><strong>总熵变</strong>:\\(\\Delta S_\\text{总} = \\Delta S_\\text{水} + \\Delta S_\\text{环}\\)。<br>由<strong>熵增原理</strong>(孤立系统), 自发过程必有 \\(\\Delta S_\\text{总} \\geq 0\\)。本题热从高温(\\(T_h\\))流向低温(\\(T_c\\)), 环境吸入相同的热量 Q, 但在<strong>较低温度</strong>下熵增更大(\\(\\Delta S = Q/T\\), 进阶严格形式), 故<strong>环境的熵增 > 热水的熵减</strong> → <strong>总熵增 > 0</strong> → 过程自发。<br><br><strong>反向</strong>(环境的热集中变回热水)<strong>需代价</strong>:<br>· 这是非自发过程, 不会自动发生;<br>· 需要<strong>消耗外能</strong>(如冰箱 / 热泵)从外界提供能量 → 引起『其他变化』(消耗电能 / 排放更多废热);<br>· 总系统(冰箱 + 房间 + 电网 + 发电厂)的<strong>总熵仍增加</strong>(因发电厂消耗燃料并排放更多熵)。<br>这就是<strong>『局部熵减需外界代价』</strong>的物理本质 — 任何反方向都需要外能, 不违反第二定律。<br><br><strong>关键字命中</strong>:① 熵增 / ② 自发 / ③ 总熵 / ④ 代价<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"热水自然冷却" 的熵增分析我能熟练运用吗?',
+        '"局部熵减需外界代价" 与第二定律的关系我能解释吗?',
+        '冰箱 / 空调 / 热泵的能量代价分析我能熟练应用第二定律吗?',
+        '高考综合题"自然过程的熵增分析" 我能熟练吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"较难", exportIds:["HEAT-ENGINE-ENERGY-FLOW","HEAT-ENGINE-EFFICIENCY-LIMIT","TEMP-DIFFERENCE-REQUIRED","KELVIN-STATEMENT"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某工程师设计一台<strong>新型热机</strong>, 计划从<strong>燃烧锅炉(\\(T_h = 800\\) K)</strong>吸热, 排废热到<strong>冷却水(\\(T_c = 320\\) K)</strong>, 期望实际效率达到 \\(\\eta = 70\\%\\)。<br><br><strong>(1)</strong> 计算<strong>卡诺效率上限</strong> \\(\\eta_\\text{卡诺} = 1 - T_c/T_h\\)(本板块用此作为参考, 严格推导留进阶), 判断 70% 目标<strong>是否可行</strong>;<br><strong>(2)</strong> 若该热机每秒吸热 \\(Q_h = 1000\\) J, 计算其<strong>最大可能净功</strong>(假设达到卡诺极限)和<strong>必有的废热</strong> \\(Q_c\\);<br><strong>(3)</strong> 列出<strong>提高实际效率的 3 种工程方法</strong>(从 \\(T_h\\)、\\(T_c\\)、减少不可逆损失 3 个方向), 并解释为什么<strong>无论如何工程改进, 都不能达到 \\(\\eta = 100\\%\\)</strong>(用开尔文陈述说明)。",
+      keywords:["卡诺","高温","废热","开尔文"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 卡诺效率 \\(\\eta = 1 - T_c/T_h\\)(参考上限);② 热机能量流向 \\(Q_h = W + Q_c\\);③ 提高效率的物理方向(\\(T_h \\uparrow\\) / \\(T_c \\downarrow\\) / 减少不可逆);④ 开尔文陈述限制 \\(\\eta < 100\\%\\)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 算卡诺极限;<br>② 算最大功和废热;<br>③ 列 3 种方法 + 说明 \\(\\eta = 100\\%\\) 不可能。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 卡诺效率 + 70% 可行性</strong>(关键字命中):<br>\\(\\eta_\\text{卡诺} = 1 - T_c/T_h = 1 - 320/800 = 1 - 0.4 = 60\\%\\)<br>实际目标 70% > 60% → <strong>不可行</strong>!<br>由<strong>卡诺定理</strong>(进阶 · 卡诺循环), 实际热机效率<strong>必 ≤ 卡诺效率</strong>(60%), 故 70% 目标超出物理上限。<br>需<strong>提高 \\(T_h\\)</strong> 或<strong>降低 \\(T_c\\)</strong> 才能使卡诺极限 ≥ 70%。<br><br><strong>(2) 最大净功 + 必有废热</strong>(关键字命中):<br>假设达到卡诺极限 \\(\\eta_\\text{卡诺} = 60\\%\\):<br>· <strong>最大净功</strong>: \\(W_\\text{max} = \\eta_\\text{卡诺} \\times Q_h = 0.6 \\times 1000 = 600\\) J/s = 600 W<br>· <strong>必有废热</strong>: 由能量守恒 \\(Q_c = Q_h - W = 1000 - 600 = 400\\) J/s<br>这 400 J/s 的<strong>废热</strong>是<strong>第二定律的根本代价</strong>, 必须排放到冷却水。<br>实际工程热机由于不可逆损失, 输出功更少(比如 500-550 J/s), 废热更多。<br><br><strong>(3) 提高效率的 3 种方法 + \\(\\eta = 100\\%\\) 不可能</strong>(关键字命中):<br><strong>3 种工程方法</strong>:<br>① <strong>提高 \\(T_h\\)(高温热源温度)</strong>:用更高燃烧温度的燃料 / 超临界蒸汽锅炉 / 燃气联合循环 → 卡诺极限上升。例:超临界发电厂 \\(T_h \\sim 600\\)°C, 卡诺极限 \\(\\sim 65\\%\\);<br>② <strong>降低 \\(T_c\\)</strong>:用更低温的冷却水 / 寒带气候 / 海水冷却 → 卡诺极限上升。但 \\(T_c\\) 受环境限制(不能低于环境温度);<br>③ <strong>减少不可逆损失</strong>:改善涡轮叶片设计 / 减少散热 / 提高材料工艺 / 减少摩擦 / 优化燃烧 → 接近卡诺极限。<br><br><strong>为何 \\(\\eta = 100\\%\\) 不可能</strong>:<br>· 由<strong>开尔文陈述</strong>: 不可能从单一热源吸热完全转化为功;<br>· 这意味着必须有<strong>低温热源</strong>排出<strong>\\(Q_c > 0\\)</strong>;<br>· 故 \\(\\eta = W/Q_h = 1 - Q_c/Q_h < 1\\), 严格小于 100%;<br>· 即使 \\(T_c \\to 0\\) K(理论极限), \\(\\eta_\\text{卡诺} \\to 1\\), 但绝对零度不可达(第三定律, 留大学), 故 100% 不可达。<br>这是<strong>第二定律的根本限制</strong>, 不是工程缺陷。<br><br><strong>关键字命中</strong>:① 卡诺 / ② 高温 / ③ 废热 / ④ 开尔文<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"卡诺效率作为参考上限" 我能用 \\(1 - T_c/T_h\\) 估算热机极限吗?',
+        '现代发电技术(超临界 / 燃气联合 / 核电 / 太阳能热)如何利用 3 种方法提高效率?',
+        '"\\(\\eta = 100\\%\\) 不可能" 的物理根源是开尔文陈述, 我能解释吗?',
+        '高考综合题"热机效率分析 + 工程改进路径"我能熟练应用吗?'
+      ]
+    }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "second-law-basic";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    html += `<div class="kp-item">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        ${compositeTag}
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="8" data-q-id="q${n}" placeholder="请分小问作答(150-300 字, 可分段)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 或 mock-check 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="second-law-basic-task-cards.html">学习任务卡</a> · <a href="second-law-basic-mock-check.html">基础检测</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "second-law-basic";
+  const MODULE_NAME = "第二定律 · 基础";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

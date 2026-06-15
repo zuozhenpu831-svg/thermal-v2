@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学应用 · 化学 · 例题讲解集 · 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f3f8; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #6a1b9a; text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  header.page-header { background: linear-gradient(135deg, #6a1b9a, #8e24aa, #ab47bc); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(106,27,154,0.18); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; line-height: 1.7; }
+  .intro-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #6a1b9a; }
+  .intro-card h2 { color: #4a148c; font-size: 18px; margin-bottom: 12px; }
+  .intro-card p { color: #5a6c7d; font-size: 14px; margin-bottom: 10px; line-height: 1.8; }
+  .intro-card .learning-path { background: linear-gradient(135deg, rgba(106,27,154,0.06), rgba(171,71,188,0.10)); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
+  .intro-card .learning-path strong { color: #6a1b9a; }
+  .toc-card { background: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .toc-card h3 { color: #6a1b9a; font-size: 16px; margin-bottom: 12px; }
+  .toc-card ol { padding-left: 24px; font-size: 14px; }
+  .toc-card ol li { margin: 6px 0; color: #5a6c7d; }
+  .toc-card ol li a { color: #6a1b9a; text-decoration: none; font-weight: 500; }
+  .toc-card ol li a:hover { text-decoration: underline; }
+  .toc-card .type-tag { background: #f3e7fb; color: #6a1b9a; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; }
+  .toc-card .diff-tag { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 4px; }
+  .toc-card .diff-tag.中等 { background: #fff3e0; color: #e67e22; }
+  .toc-card .diff-tag.较难 { background: #fce4ec; color: #c0392b; }
+  .toc-card .diff-tag.综合压轴 { background: #ede7f6; color: #4527a0; }
+
+  .prereq-card { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #0055B8; }
+  .prereq-card h3 { color: #0055B8; font-size: 17px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .prereq-card h4 { color: #b66100; font-size: 14px; margin: 18px 0 8px 0; display: flex; align-items: center; gap: 8px; }
+  .prereq-card h4.recommend { color: #6a1b9a; }
+  .prereq-card p { font-size: 13px; color: #5a6c7d; margin-bottom: 10px; line-height: 1.8; }
+  .prereq-card .prereq-list { list-style: none; padding: 0; margin: 10px 0; }
+  .prereq-card .prereq-list li { background: #f5f9ff; border-radius: 8px; padding: 12px 16px; margin: 8px 0; border-left: 3px solid #0055B8; font-size: 14px; line-height: 1.8; }
+  .prereq-card .prereq-list li a { color: #0055B8; font-weight: 600; text-decoration: none; }
+  .prereq-card .prereq-list li a:hover { text-decoration: underline; }
+  .prereq-card .prereq-list li .usage { color: #5a6c7d; font-size: 13px; margin-left: 4px; }
+  .prereq-card .cross-prereq { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-size: 13px; color: #5a3a1a; line-height: 1.8; }
+  .prereq-card .cross-prereq strong { color: #b66100; }
+  .prereq-card .recommend-list { padding-left: 22px; margin: 6px 0; font-size: 13px; }
+  .prereq-card .recommend-list li { margin: 6px 0; color: #5a6c7d; }
+  .prereq-card .recommend-list li a { color: #6a1b9a; text-decoration: none; font-weight: 500; }
+
+  .example-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; border-left: 5px solid #6a1b9a; box-shadow: 0 2px 12px rgba(106,27,154,0.08); }
+  .example-card-header { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed #e8e0f4; flex-wrap: wrap; }
+  .example-card-no { background: linear-gradient(135deg, #6a1b9a, #ab47bc); color: white; width: 38px; height: 38px; border-radius: 50%; text-align: center; line-height: 38px; font-weight: 700; font-size: 17px; flex-shrink: 0; }
+  .example-card-title { font-size: 17px; font-weight: 700; color: #4a148c; flex: 1; min-width: 200px; }
+  .example-card-type { background: #f3e7fb; color: #6a1b9a; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .example-card-diff { background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .example-card-diff.中等 { background: #fff3e0; color: #e67e22; }
+  .example-card-diff.较难 { background: #fce4ec; color: #c0392b; }
+  .example-card-diff.综合压轴 { background: #ede7f6; color: #4527a0; }
+
+  .q-stem { background: #fafafe; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; font-size: 15px; line-height: 1.85; border-left: 3px solid #6a1b9a; }
+  .q-stem .stem-label { display: inline-block; background: #6a1b9a; color: white; padding: 2px 10px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+  .q-stem .cross-topic-warn { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 6px; padding: 12px 14px; margin: 12px 0; font-size: 13px; color: #5a3a1a; }
+  .q-stem .cross-topic-warn strong { color: #b66100; }
+
+  .four-sec { background: white; border-radius: 8px; padding: 16px 20px; margin: 14px 0; border-left: 4px solid; line-height: 1.85; font-size: 14.5px; }
+  .four-sec.knowledge { background: #e8f0fe; border-left-color: #0055B8; }
+  .four-sec.approach  { background: #f3e7fb; border-left-color: #6a1b9a; }
+  .four-sec.solution  { background: #f1f8f4; border-left-color: #2e7d32; }
+  .four-sec.mistakes  { background: #fdeaea; border-left-color: #c0392b; }
+  .four-sec-title { font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 15px; }
+  .four-sec.knowledge .four-sec-title { color: #0055B8; }
+  .four-sec.approach  .four-sec-title { color: #6a1b9a; }
+  .four-sec.solution  .four-sec-title { color: #2e7d32; }
+  .four-sec.mistakes  .four-sec-title { color: #c0392b; }
+  .four-sec-body { line-height: 1.9; }
+  .four-sec-body ul { padding-left: 22px; margin: 4px 0; }
+  .four-sec-body ul li { margin: 4px 0; }
+  .four-sec-body .step { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px 14px; margin: 10px 0; border-left: 3px solid #2e7d32; }
+  .four-sec-body .step .step-no { display: inline-block; background: #2e7d32; color: white; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-right: 6px; }
+  .four-sec-body .step .step-rule { font-size: 12px; color: #5a6c7d; font-style: italic; margin-top: 4px; }
+  .four-sec-body .mistake-item { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px 14px; margin: 10px 0; }
+  .four-sec-body .mistake-item .mistake-no { font-weight: 600; color: #c0392b; }
+  .four-sec-body .mistake-item .wrong { color: #c0392b; font-weight: 500; }
+  .four-sec-body .mistake-item .right { color: #2e7d32; font-weight: 500; }
+  .four-sec-body code.formula { background: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 4px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px; color: #4a148c; }
+  .four-sec-body .answer-box { background: rgba(46,125,50,0.10); border: 1px dashed #2e7d32; border-radius: 6px; padding: 10px 14px; margin: 12px 0; font-weight: 600; color: #1b5e20; }
+
+  .verify-box { background: linear-gradient(90deg, #e8f5e9, #f1f8f4); border-left: 4px solid #2e7d32; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #1b5e20; }
+  .verify-box strong { color: #2e7d32; }
+
+  .anchor-link { font-size: 13px; color: #5a6c7d; padding: 8px 12px; background: #f5f3f8; border-radius: 4px; margin: 8px 0; border-left: 3px solid #6a1b9a; }
+  .anchor-link a { color: #6a1b9a; }
+
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f3f8; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #f3e7fb; color: #6a1b9a; }
+  .bottom-nav a:hover { background: #ede7f6; }
+  .bottom-nav span { color: #bdc3c7; }
+
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+  sub, sup { font-size: 0.78em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学大主题 &raquo;
+  <strong>热力学应用 · 化学 · 例题讲解集</strong>
+</nav>
+
+<header class="page-header">
+  <h1>热力学应用 · 化学 · 例题讲解集</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 融合模块 · 跨板块综合应用 · 6 道典型题型例题 (题型骨架对接化学反应原理高考综合题) · 每题 4 段(知识 / 思路 / 步骤 / 易错)</div>
+</header>
+
+<div class="intro-card">
+  <h2>📌 关于本例题集</h2>
+  <p>本融合模块是『<strong>热力学大主题</strong>』的<strong>跨板块综合应用</strong>单元, 整合<strong>盖斯定律 / 燃烧热与中和热 / 键能与反应焓变 / 吉布斯自由能基础</strong> 4 个基础板块的核心定理, 应对化学反应原理类综合题型.</p>
+  <p>6 道例题骨架对接<strong>多反应组合算 ΔH</strong> / <strong>热化学方程式辨析</strong> / <strong>ΔH<sub>f</sub>° 表算 ΔH</strong> / <strong>键能联用</strong> / <strong>能量历程图综合</strong>等综合题型.</p>
+  <div class="learning-path">
+    <strong>建议学习路径</strong>:
+    <strong>① 例题讲解集</strong>(本文件 · 学方法)
+    → <strong>② 熟练度检测</strong> fluency-test(模仿题独立做)
+    → <strong>③ 深度口试</strong> oral-exam(选 1-2 题向老师讲解)
+  </div>
+</div>
+
+<div class="prereq-card">
+  <h3>📚 前置板块清单</h3>
+  <p>本融合模块预设学生<strong>已完成以下 4 个基础板块</strong>(若未学完, 建议先回去学单板块再来):</p>
+
+  <ul class="prereq-list">
+    <li>
+      <a href="hess-law-task-cards.html">盖斯定律</a> ·
+      <a href="hess-law-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="hess-law-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>4 大代数规则</strong>(加/减/反向/乘 k) + <strong>状态函数性质</strong>(路径无关) + <strong>ΔH<sub>f</sub>° 公式</strong>(末减初) — 例题 2/3/4/6 核心</div>
+    </li>
+    <li>
+      <a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热</a> ·
+      <a href="combustion-neutralization-heat-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="combustion-neutralization-heat-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>燃烧热定义 + 4 大约定</strong>(1 mol 可燃物 / 完全燃烧 / 稳定氧化物 / H<sub>2</sub>O(l)) + <strong>物态修正</strong>(液气差 ≈ 44 kJ/mol) — 例题 1 核心</div>
+    </li>
+    <li>
+      <a href="bond-energy-reaction-enthalpy-task-cards.html">键能与反应焓变</a> ·
+      <a href="bond-energy-reaction-enthalpy-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="bond-energy-reaction-enthalpy-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>ΔH = Σ键能(反) − Σ键能(产)</strong>公式 + <strong>原子键计数</strong>(NH<sub>3</sub> 3 个 N-H) + <strong>字母代数</strong>表达式 — 例题 5 核心</div>
+    </li>
+    <li>
+      <a href="gibbs-free-energy-basic-task-cards.html">吉布斯自由能 · 基础</a> ·
+      <a href="gibbs-free-energy-basic-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
+      <a href="gibbs-free-energy-basic-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <div class="usage">→ 本融合用到: <strong>反应自发性判据</strong> ΔG = ΔH − TΔS &lt; 0 + <strong>放热 ≠ 自发</strong>的辨证(联合 ΔH 与 ΔS) — 例题 5/6 解释段</div>
+    </li>
+  </ul>
+
+  <h4>⚠️ 跨主题前置(反应动力学 · 仅例题 6 用到)</h4>
+  <div class="cross-prereq">
+    例题 6 涉及<strong>反应历程图</strong>, 用到: <strong>活化能 E<sub>a</sub></strong> · <strong>过渡态</strong> · <strong>决速步</strong> · <strong>中间体</strong> — 这些来自<strong>反应动力学</strong>(蓝色诺瓦目前未建立的大主题).<br>
+    例题 6 顶部含<strong>最小自包含简介</strong>, 够本题用. 详细概念待后续『反应动力学』板块建成后系统学.
+  </div>
+
+  <h4 class="recommend">🔭 推荐深化(进阶板块 · 学有余力可选)</h4>
+  <p style="font-size:13px;">学完本融合模块后, 想从更深角度理解 ΔH / 路径无关 / 自发性, 推荐:</p>
+  <ul class="recommend-list">
+    <li><a href="state-functions-task-cards.html">状态函数(进阶)</a> — 看『循环里 ΣΔS = 0』的精巧证明 + ΔH 路径无关的严格根据</li>
+    <li><a href="enthalpy-meaning-task-cards.html">焓与焓变 · 进阶</a> — 看反向推 H = U + PV + 等压条件下 Q<sub>p</sub> = ΔH</li>
+    <li><a href="entropy-meaning-task-cards.html">熵的物理意义</a> — 看玻尔兹曼公式 S = k ln Ω + 熵增定律(反应自发的完整判据)</li>
+    <li><a href="gibbs-free-energy-advanced-task-cards.html">吉布斯自由能 · 进阶</a> — 看 ΔG = ΔH − TΔS 严格推导 + 与平衡常数 K 的桥</li>
+    <li><a href="carnot-cycle-task-cards.html">卡诺循环</a> — 看效率公式 η = 1 − T<sub>2</sub>/T<sub>1</sub> 的数学推导</li>
+  </ul>
+</div>
+
+<div class="toc-card">
+  <h3>📋 6 道例题</h3>
+  <ol>
+    <li><a href="#example-1">热化学方程式辨析</a><span class="type-tag">题型 A3</span><span class="diff-tag">基础</span></li>
+    <li><a href="#example-2">多反应组合 4 选 1</a><span class="type-tag">题型 A2.1</span><span class="diff-tag 中等">中等</span></li>
+    <li><a href="#example-3">多反应组合填空求 ΔH</a><span class="type-tag">题型 A2.2</span><span class="diff-tag 中等">中等</span></li>
+    <li><a href="#example-4">ΔH<sub>f</sub>° 表算综合 ΔH</a><span class="type-tag">题型 A4</span><span class="diff-tag 较难">较难</span></li>
+    <li><a href="#example-5">键能 + 盖斯联用</a><span class="type-tag">题型 A5</span><span class="diff-tag 较难">较难</span></li>
+    <li><a href="#example-6">反应历程图综合(含动力学前置)</a><span class="type-tag">题型 A1</span><span class="diff-tag 综合压轴">综合压轴</span></li>
+  </ol>
+</div>
+
+<!-- =================== 例题 1 · A3 · 热化学方程式辨析 =================== -->
+<div class="example-card" id="example-1">
+  <div class="example-card-header">
+    <div class="example-card-no">1</div>
+    <div class="example-card-title">热化学方程式辨析 · 4 燃料对比</div>
+    <div class="example-card-type">A3</div>
+    <div class="example-card-diff">基础</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      某新能源研究室对比 3 种家用 / 车用燃料的能量密度. 已知 (298 K, 101 kPa):<br>
+      · CH<sub>4</sub>(g) 燃烧热 ΔH<sub>1</sub> = -890.3 kJ/mol<br>
+      · H<sub>2</sub>(g) 燃烧热 ΔH<sub>2</sub> = -285.8 kJ/mol<br>
+      · C<sub>2</sub>H<sub>5</sub>OH(l) 燃烧热 ΔH<sub>3</sub> = -1366.8 kJ/mol<br><br>
+      下列热化学方程式中, ΔH 表示<strong>燃烧热</strong>的是 (    )<br><br>
+      A. 2CH<sub>4</sub>(g) + 4O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 4H<sub>2</sub>O(l), ΔH = -1780.6 kJ/mol<br>
+      B. H<sub>2</sub>(g) + ½O<sub>2</sub>(g) → H<sub>2</sub>O(g), ΔH = -241.8 kJ/mol<br>
+      C. C<sub>2</sub>H<sub>5</sub>OH(l) + 3O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 3H<sub>2</sub>O(l), ΔH = -1366.8 kJ/mol<br>
+      D. CH<sub>4</sub>(g) + 2O<sub>2</sub>(g) → CO<sub>2</sub>(g) + 2H<sub>2</sub>O(g), ΔH = -802.3 kJ/mol
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li>涉及<strong>燃烧热定义</strong>的 4 大约定 (锚: <a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热</a> Card 1 STEP 2):
+          <ul>
+            <li>① <strong>1 mol</strong> 可燃物 (不是 1 mol O<sub>2</sub>, 也不是 2 mol 可燃物)</li>
+            <li>② <strong>完全燃烧</strong> (C→CO<sub>2</sub>, H→H<sub>2</sub>O, S→SO<sub>2</sub>)</li>
+            <li>③ <strong>稳定氧化物</strong> (H<sub>2</sub>O 必须是 <strong>液态 l</strong>)</li>
+            <li>④ 标准条件 (25°C, 101 kPa)</li>
+          </ul>
+        </li>
+        <li>跨板块综合: 用『燃烧热的严格定义』辨识 4 个看似合理的热化学方程式</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 4 个候选方程式; 求 = 哪个符合燃烧热全部 4 大约定</li>
+        <li><strong>选路径</strong>: 用<strong>逐项辨识法</strong> — 4 选项逐个对照 4 大约定</li>
+        <li><strong>执行计划</strong>:
+          <ul>
+            <li>查 ① 可燃物系数是否 = 1</li>
+            <li>查 ② 是否完全燃烧</li>
+            <li>查 ③ 产物物态是否 H<sub>2</sub>O(l)</li>
+            <li>查 ④ 数值是否合理 (与已知燃烧热数据一致)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">A</span> 2CH<sub>4</sub> + 4O<sub>2</sub> → 2CO<sub>2</sub> + 4H<sub>2</sub>O(l), ΔH = -1780.6 kJ/mol
+        <br>查约定: 可燃物 = <strong>2 mol</strong> CH<sub>4</sub>, 违反 ① "1 mol 可燃物".
+        <br>注: 数值 -1780.6 = 2 × (-890.3), 数据本身没问题, 但归一化错.
+        <div class="step-rule">→ 违反约定 ① → ❌ 不是燃烧热</div>
+      </div>
+      <div class="step">
+        <span class="step-no">B</span> H<sub>2</sub> + ½O<sub>2</sub> → H<sub>2</sub>O(<strong>g</strong>), ΔH = -241.8 kJ/mol
+        <br>查约定: 可燃物 = 1 mol ✓; 完全燃烧 ✓; 但 <strong>H<sub>2</sub>O 是气态 (g)</strong>, 违反 ③ "稳定氧化物 H<sub>2</sub>O(l)".
+        <br>注: -241.8 是<strong>低位热值 (LHV)</strong>, 与已知 -285.8 (高位 HHV, H<sub>2</sub>O(l)) 差 +44 kJ/mol = 水汽化热.
+        <div class="step-rule">→ 违反约定 ③ → ❌ 不是燃烧热</div>
+      </div>
+      <div class="step">
+        <span class="step-no">C</span> C<sub>2</sub>H<sub>5</sub>OH(l) + 3O<sub>2</sub> → 2CO<sub>2</sub> + 3H<sub>2</sub>O(<strong>l</strong>), ΔH = -1366.8 kJ/mol
+        <br>查约定: 可燃物 = <strong>1 mol</strong> C<sub>2</sub>H<sub>5</sub>OH ✓; <strong>完全燃烧</strong> (C→CO<sub>2</sub>, H→H<sub>2</sub>O) ✓; <strong>H<sub>2</sub>O(l)</strong> ✓; 数值 = -1366.8 与已知一致 ✓
+        <div class="step-rule">→ 全部 4 约定满足 → ✓ 是燃烧热</div>
+      </div>
+      <div class="step">
+        <span class="step-no">D</span> CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O(<strong>g</strong>), ΔH = -802.3 kJ/mol
+        <br>查约定: 可燃物 = 1 mol ✓; 但 <strong>H<sub>2</sub>O 是气态 (g)</strong>, 违反 ③.
+        <br>注: -802.3 = -890.3 + 2 × 44 (减去 2 mol 水液化热), 是 CH<sub>4</sub> 的低位热值.
+        <div class="step-rule">→ 违反约定 ③ → ❌ 不是燃烧热</div>
+      </div>
+
+      <div class="answer-box">最终答案: <strong>C</strong></div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 选项 C 的 1 mol 可燃物 + 完全燃烧 + 稳定氧化物 H<sub>2</sub>O(l) + 数值一致, 4 约定全过. 其他 3 项各破 1 约定. 选 C 唯一.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 把 <strong>"1 mol 可燃物"</strong> 错记为 <strong>"1 mol O<sub>2</sub>"</strong>
+        <br><span class="wrong">❌ 错答</span>: 看到 A 项 4 mol O<sub>2</sub> 就觉得『O<sub>2</sub> 系数不对』
+        <br><span class="right">✓ 正答</span>: O<sub>2</sub> 系数随可燃物变化, 但<strong>可燃物必须 1 mol</strong>(用 O<sub>2</sub> 归一无法对比不同可燃物)
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 忽略 <strong>H<sub>2</sub>O 物态</strong>
+        <br><span class="wrong">❌ 错答</span>: 看 B 选项 H<sub>2</sub> + ½O<sub>2</sub> → H<sub>2</sub>O 觉得『1 mol 可燃物 + 完全燃烧』就对
+        <br><span class="right">✓ 正答</span>: 燃烧热<strong>约定 H<sub>2</sub>O(l)</strong> (高位热值 HHV), 写成 H<sub>2</sub>O(g) 是<strong>低位热值 LHV</strong>, 差 +44 kJ/mol 水汽化热, 不算燃烧热
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 把 <strong>低位热值</strong>当燃烧热
+        <br><span class="wrong">❌ 错答</span>: D 选项 -802.3 = -890.3 + 88, 觉得"数值算对了就行"
+        <br><span class="right">✓ 正答</span>: 燃烧热定义本身要求 <strong>H<sub>2</sub>O(l)</strong>. 工程上工业锅炉常用低位热值(蒸汽不冷凝回收), 但化学反应原理严格定义用高位
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: 数值看对了但 <strong>归一化</strong>忘检
+        <br><span class="wrong">❌ 错答</span>: A 选项 -1780.6 = 2 × (-890.3) 数值合理就觉得对
+        <br><span class="right">✓ 正答</span>: 燃烧热严格要求 <strong>1 mol 可燃物</strong> 归一. 写 2 mol CH<sub>4</sub> 的方程式即便数值对, ΔH 也<strong>不是燃烧热</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热 task-cards</a> · <a href="combustion-neutralization-heat-mock-check.html">基础检测</a> · <a href="hess-law-task-cards.html">盖斯定律 task-cards</a></div>
+</div>
+
+<!-- =================== 例题 2 · A2.1 · 多反应组合 4 选 1 =================== -->
+<div class="example-card" id="example-2">
+  <div class="example-card-header">
+    <div class="example-card-no">2</div>
+    <div class="example-card-title">多反应组合 · 工业制甲醇 ΔH 选择</div>
+    <div class="example-card-type">A2.1</div>
+    <div class="example-card-diff 中等">中等</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      工业上 CO<sub>2</sub> 催化加氢制甲醇 (CH<sub>3</sub>OH) 是『双碳目标』的重要研究方向. 已知:<br>
+      · 反应 ①: CO<sub>2</sub>(g) + H<sub>2</sub>(g) → CO(g) + H<sub>2</sub>O(g), ΔH<sub>1</sub> = +41.2 kJ/mol<br>
+      · 反应 ②: CO(g) + 2H<sub>2</sub>(g) → CH<sub>3</sub>OH(g), ΔH<sub>2</sub> = -90.8 kJ/mol<br>
+      · 反应 ③: H<sub>2</sub>O(g) → H<sub>2</sub>O(l), ΔH<sub>3</sub> = -44.0 kJ/mol<br><br>
+      则<strong>目标反应</strong> CO<sub>2</sub>(g) + 3H<sub>2</sub>(g) → CH<sub>3</sub>OH(g) + H<sub>2</sub>O(<strong>l</strong>) 的 ΔH 为 (    )<br><br>
+      A. -93.6 kJ/mol<br>
+      B. -49.6 kJ/mol<br>
+      C. +5.6 kJ/mol<br>
+      D. -137.6 kJ/mol
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li>涉及<strong>盖斯定律 4 大代数规则</strong> (锚: <a href="hess-law-task-cards.html">盖斯定律</a> Card 2):
+          <ul>
+            <li><strong>加规则</strong>: ① + ② → ΔH<sub>合</sub> = ΔH<sub>1</sub> + ΔH<sub>2</sub></li>
+            <li><strong>减规则</strong>: ① - ②</li>
+            <li><strong>反向规则</strong>: ① 反向 → ΔH<sub>-1</sub> = -ΔH<sub>1</sub> (符号取负)</li>
+            <li><strong>乘 k 规则</strong>: ① × k → ΔH 也乘 k</li>
+          </ul>
+        </li>
+        <li>涉及<strong>状态函数性质 ΔH = H<sub>末</sub> - H<sub>初</sub></strong> (路径无关)</li>
+        <li>跨板块综合: <strong>多反应组合凑出目标反应</strong> + 用代数加法算 ΔH</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 3 反应 + 各自 ΔH; 求 = 目标反应 ΔH; 桥接 = 用 ①②③ 代数组合凑出目标</li>
+        <li><strong>选路径</strong>: 用<strong>逐物质消元法</strong> (净计量数法) 定各反应系数</li>
+        <li><strong>执行计划</strong>:
+          <ul>
+            <li>对每个物质列净计量数方程 (目标方程系数 = 各已知反应贡献系数之和)</li>
+            <li>解出 ①②③ 系数 (反向 / 乘 k)</li>
+            <li>累加 ΔH</li>
+            <li>量纲 / 数值合理性验证</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 用<strong>净计量数法</strong>对每个物质列方程, 设组合系数 a·① + b·② + c·③:
+        <br>· <strong>CO<sub>2</sub></strong>: 目标左 1 → a·1 + b·0 + c·0 = 1 → <strong>a = 1</strong>
+        <br>· <strong>CO</strong>: 目标 0 → a·(-1) + b·(-1) + c·0 = 0(因 ① 右 1 → a; ② 左 1 → -b)→ a - b = 0 → <strong>b = 1</strong>
+        <br>· <strong>H<sub>2</sub>O(g)</strong>: 目标 0 → a·1 + b·0 + c·(-1) = 0 → c = a = <strong>1</strong>
+        <br>· <strong>H<sub>2</sub>O(l)</strong>: 目标右 1 → c·1 = 1 → <strong>c = 1</strong> ✓
+        <br>· <strong>验</strong> H<sub>2</sub>: 目标左 3 → a·1 + b·2 = 1 + 2 = 3 ✓
+        <br>· <strong>验</strong> CH<sub>3</sub>OH: 目标右 1 → b·1 = 1 ✓
+        <div class="step-rule">→ 系数 ① = 1, ② = 1, ③ = 1 (全部正向)</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 累加 ΔH:
+        <br>ΔH<sub>目标</sub> = 1·ΔH<sub>1</sub> + 1·ΔH<sub>2</sub> + 1·ΔH<sub>3</sub>
+        <br>= (+41.2) + (-90.8) + (-44.0)
+        <br>= 41.2 - 90.8 - 44.0
+        <br>= <strong>-93.6 kJ/mol</strong>
+        <div class="step-rule">→ 由<strong>加规则</strong></div>
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 物理含义验证: ΔH &lt; 0 → 放热反应. 合理(气相 → 液相 + 形成 CH<sub>3</sub>OH 释能).
+      </div>
+
+      <div class="answer-box">最终答案: <strong>A (-93.6 kJ/mol)</strong></div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 量纲 kJ/mol ✓; 放热合理(双碳工业反应放热); 数值与 ① + ② + ③ 累加自洽. 干扰项 B (-49.6) = 忘加 ③(液化); C (+5.6) = 反向 ② 错; D (-137.6) = ② 系数算错.
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 忘考虑 <strong>H<sub>2</sub>O 物态变化</strong>(③ 液化)
+        <br><span class="wrong">❌ 错答</span>: 直接 ① + ② = -49.6 kJ/mol → 选 B
+        <br><span class="right">✓ 正答</span>: 目标反应右是 H<sub>2</sub>O(<strong>l</strong>), ① 反应生成 H<sub>2</sub>O(<strong>g</strong>) → <strong>必须加 ③ 液化步骤</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: <strong>系数</strong>认错(②, ③ 是否反向)
+        <br><span class="wrong">❌ 错答</span>: 觉得 ② 应反向, ΔH 取负
+        <br><span class="right">✓ 正答</span>: 检查 CO 在目标中 0, ② 中 CO 在左, ① 中 CO 在右 → ① 右 + ② 左 = ① + ② 正向消 CO. <strong>没有反向</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 忘对 <strong>每个物质</strong>列方程, 漏 H<sub>2</sub>O(g)
+        <br><span class="wrong">❌ 错答</span>: 只对反应物 CO<sub>2</sub>, H<sub>2</sub> 列方程
+        <br><span class="right">✓ 正答</span>: 必须对<strong>所有出现的物质</strong>列净计量数方程, 包括<strong>中间体</strong>(CO) 和<strong>不同物态</strong>的同物质 (H<sub>2</sub>O(g) vs H<sub>2</sub>O(l))
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: <strong>符号</strong>翻车(正反号)
+        <br><span class="wrong">❌ 错答</span>: 算 ΔH 时把 ΔH<sub>1</sub> = +41.2 当负数
+        <br><span class="right">✓ 正答</span>: ΔH<sub>1</sub> = <strong>+41.2 kJ/mol</strong>(吸热), 累加时保留正号. <strong>反向才取负</strong>, 正向用原符号
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="hess-law-task-cards.html">盖斯定律</a> Card 2 (4 大代数规则) · <a href="hess-law-mock-check.html">盖斯定律基础检测</a></div>
+</div>
+
+<!-- =================== 例题 3 · A2.2 · 多反应组合填空 =================== -->
+<div class="example-card" id="example-3">
+  <div class="example-card-header">
+    <div class="example-card-no">3</div>
+    <div class="example-card-title">多反应组合填空 · 水煤气变换 ΔH</div>
+    <div class="example-card-type">A2.2</div>
+    <div class="example-card-diff 中等">中等</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      工业制氢的核心反应是<strong>水煤气变换反应</strong> (Water-Gas Shift): 用 CO 与 H<sub>2</sub>O 生成 H<sub>2</sub> 和 CO<sub>2</sub>. 已知 (298 K, 101 kPa):<br>
+      · 反应 ①: C(s) + ½O<sub>2</sub>(g) → CO(g), ΔH<sub>1</sub> = -110.5 kJ/mol<br>
+      · 反应 ②: H<sub>2</sub>(g) + ½O<sub>2</sub>(g) → H<sub>2</sub>O(g), ΔH<sub>2</sub> = -241.8 kJ/mol<br>
+      · 反应 ③: C(s) + O<sub>2</sub>(g) → CO<sub>2</sub>(g), ΔH<sub>3</sub> = -393.5 kJ/mol<br><br>
+      则<strong>水煤气变换反应</strong>: CO(g) + H<sub>2</sub>O(g) → CO<sub>2</sub>(g) + H<sub>2</sub>(g) 的 ΔH = ________ kJ/mol
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li>涉及<strong>盖斯定律 + 净计量数法</strong> (锚: <a href="hess-law-task-cards.html">盖斯定律</a> Card 2)</li>
+        <li>涉及<strong>反向规则</strong>: 反应反向 → ΔH 取负 (锚: 盖斯定律 Card 2)</li>
+        <li>跨板块综合: 利用『不能直接测量的反应 ΔH (水煤气变换实际可测但本题练方法) 可借能直接测的反应组合算出』 (路径无关的工程价值)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 3 反应 + ΔH; 求 = 目标反应 ΔH; 桥接 = 用 ①②③ 组合</li>
+        <li><strong>选路径</strong>: 净计量数法 + 反向/加和; 注意目标物质 CO, H<sub>2</sub>O(g), CO<sub>2</sub>, H<sub>2</sub> 都在已知中, 找出哪些反应反向</li>
+        <li><strong>执行计划</strong>:
+          <ul>
+            <li>识别目标反应物 / 产物在 3 个已知反应中的位置</li>
+            <li>定哪些反应反向 (取负 ΔH)</li>
+            <li>累加 ΔH</li>
+            <li>验证消元正确</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">1</span> 识别目标反应中各物质在已知反应的位置:
+        <br>· <strong>CO</strong>: 目标左 (反应物), 但 ① 中 CO 在右 → ① <strong>反向</strong>(取负)
+        <br>· <strong>H<sub>2</sub>O(g)</strong>: 目标左, ② 中 H<sub>2</sub>O 在右 → ② <strong>反向</strong>(取负)
+        <br>· <strong>CO<sub>2</sub></strong>: 目标右, ③ 中 CO<sub>2</sub> 在右 → ③ <strong>正向</strong>
+        <br>· <strong>H<sub>2</sub></strong>: 目标右, ② 反向后 H<sub>2</sub> 在右 ✓ (由 ② 反向贡献)
+        <br>· <strong>C(s)</strong>: 目标 0, ① 反向 + ③ 正向 → -C + C = 0 ✓
+        <br>· <strong>O<sub>2</sub></strong>: 目标 0, ① 反向 + ② 反向 + ③ 正向 → -½ - ½ + 1 = 0 ✓
+        <div class="step-rule">→ 组合 = -① - ② + ③</div>
+      </div>
+      <div class="step">
+        <span class="step-no">2</span> 验证目标反应:
+        <br>-① = CO → C + ½O<sub>2</sub>; -② = H<sub>2</sub>O(g) → H<sub>2</sub> + ½O<sub>2</sub>; ③ = C + O<sub>2</sub> → CO<sub>2</sub>
+        <br>累加: CO + H<sub>2</sub>O(g) + C + O<sub>2</sub> → C + ½O<sub>2</sub> + H<sub>2</sub> + ½O<sub>2</sub> + CO<sub>2</sub>
+        <br>消 C, O<sub>2</sub>: <strong>CO + H<sub>2</sub>O(g) → H<sub>2</sub> + CO<sub>2</sub></strong> ✓ 目标!
+        <div class="step-rule">→ 由<strong>消元法</strong>验证</div>
+      </div>
+      <div class="step">
+        <span class="step-no">3</span> 累加 ΔH:
+        <br>ΔH = -ΔH<sub>1</sub> - ΔH<sub>2</sub> + ΔH<sub>3</sub>
+        <br>= -(-110.5) - (-241.8) + (-393.5)
+        <br>= +110.5 + 241.8 - 393.5
+        <br>= 352.3 - 393.5
+        <br>= <strong>-41.2 kJ/mol</strong>
+        <div class="step-rule">→ 由<strong>反向规则 + 加规则</strong></div>
+      </div>
+
+      <div class="answer-box">最终答案: ΔH = <strong>-41.2 kJ/mol</strong></div>
+
+      <div class="verify-box">
+        <strong>✓ 验证</strong>: 量纲 kJ/mol ✓; 实际水煤气变换实验值 ≈ -41.2 kJ/mol(放热反应)✓; 物理含义合理(CO 较活泼, 变成更稳定的 CO<sub>2</sub>, 释能).
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: <strong>反向规则</strong>忘取负号
+        <br><span class="wrong">❌ 错答</span>: -ΔH<sub>1</sub> 时直接写 ΔH<sub>1</sub> = -110.5 当 -110.5 用
+        <br><span class="right">✓ 正答</span>: -ΔH<sub>1</sub> = -(-110.5) = <strong>+110.5</strong>. 反向规则: ΔH 取负 = 原 ΔH 加负号
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: <strong>系数定向</strong>错
+        <br><span class="wrong">❌ 错答</span>: 不分析目标位置直接 ① + ② + ③ 累加
+        <br><span class="right">✓ 正答</span>: 逐个物质看在目标 / 已知中的位置 → 若<strong>反向</strong>定哪个反应反 → 才能确定 ±
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 忘<strong>消元验证</strong>
+        <br><span class="wrong">❌ 错答</span>: 算完 ΔH = -41.2 就提交, 没验消元
+        <br><span class="right">✓ 正答</span>: 必须把累加后的方程消元 → 看是否得到目标反应. 若中间体没消干净 (C / O<sub>2</sub>), 系数错
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: <strong>填空题</strong>忘单位
+        <br><span class="wrong">❌ 错答</span>: 填 "-41.2"
+        <br><span class="right">✓ 正答</span>: 答案是 ΔH = <strong>-41.2 kJ/mol</strong>. 高考填空若单位题面给, 数值即可; 若没给, 必须带单位
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="hess-law-task-cards.html">盖斯定律</a> Card 4 (用已知反应算未知反应)</div>
+</div>
+
+<!-- =================== 例题 4 · A4 · ΔHf° 表算 ΔH =================== -->
+<div class="example-card" id="example-4">
+  <div class="example-card-header">
+    <div class="example-card-no">4</div>
+    <div class="example-card-title">ΔH<sub>f</sub>° 表算综合 · 葡萄糖代谢能量</div>
+    <div class="example-card-type">A4</div>
+    <div class="example-card-diff 较难">较难</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      生命科学研究: 人体内<strong>葡萄糖完全氧化代谢</strong>(对应有氧呼吸总反应) 为:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(s) + 6O<sub>2</sub>(g) → 6CO<sub>2</sub>(g) + 6H<sub>2</sub>O(l)<br><br>
+      已知<strong>标准摩尔生成焓</strong>(298 K, kJ/mol):<br>
+      · ΔH<sub>f</sub>°(C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>, s) = -1273.3<br>
+      · ΔH<sub>f</sub>°(O<sub>2</sub>, g) = 0 (稳定单质)<br>
+      · ΔH<sub>f</sub>°(CO<sub>2</sub>, g) = -393.5<br>
+      · ΔH<sub>f</sub>°(H<sub>2</sub>O, l) = -285.8<br><br>
+      葡萄糖摩尔质量 M = 180 g/mol.<br><br>
+      <strong>(1)</strong> 求葡萄糖完全氧化反应的 ΔH = ________ kJ/mol;<br>
+      <strong>(2)</strong> 一颗中等大小苹果含约 27 g 可代谢葡萄糖, 完全代谢可释放<strong>能量</strong>约 ________ kJ;<br>
+      <strong>(3)</strong> 解释为何此反应可看作 6 个『C(s) + O<sub>2</sub> → CO<sub>2</sub>』 + 6 个『H<sub>2</sub> + ½O<sub>2</sub> → H<sub>2</sub>O(l)』 + 1 个『分解葡萄糖为稳定单质』的代数加和 — 这就是 ΔH<sub>f</sub>° 公式<strong>末减初</strong>的物理本质.
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li>涉及<strong>标准摩尔生成焓 ΔH<sub>f</sub>°</strong>定义: 25°C, 1 atm 下『稳定单质 → 1 mol 物质』反应的 ΔH (锚: <a href="hess-law-task-cards.html">盖斯定律</a> Card 3)</li>
+        <li>涉及<strong>反应焓变公式</strong>: ΔH<sub>反应</sub> = Σν·ΔH<sub>f</sub>°(产) - Σν·ΔH<sub>f</sub>°(反), 按化学计量数加权</li>
+        <li>涉及<strong>稳定单质零点参考</strong>: ΔH<sub>f</sub>°(O<sub>2</sub>) = 0, ΔH<sub>f</sub>°(石墨 C) = 0, ΔH<sub>f</sub>°(H<sub>2</sub>) = 0</li>
+        <li>跨板块综合: ΔH<sub>f</sub>° 公式 + 摩尔数 → kJ 总能量(代谢应用)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 3 小问 — (1) 算反应 ΔH (套公式); (2) 算 27 g 葡萄糖能量 (摩尔数 × |ΔH|); (3) 解释公式物理本质</li>
+        <li><strong>选路径</strong>: 用 <strong>ΔH<sub>f</sub>° 公式</strong>『末减初 + 化学计量数加权』, 不用代数组合法 (无现成 3 反应)</li>
+        <li><strong>执行计划</strong>:
+          <ul>
+            <li>(1) ΔH = [6·ΔH<sub>f</sub>°(CO<sub>2</sub>) + 6·ΔH<sub>f</sub>°(H<sub>2</sub>O,l)] - [ΔH<sub>f</sub>°(C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>) + 6·ΔH<sub>f</sub>°(O<sub>2</sub>)]</li>
+            <li>(2) n = m / M; 能量 = n × |ΔH|</li>
+            <li>(3) 用『两步法』解释: ① 葡萄糖分解为单质 (反向 ΔH<sub>f</sub>°) + ② 单质合成 CO<sub>2</sub> + H<sub>2</sub>O (生成焓加和)</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">(1)-1</span> 套<strong>反应焓变公式</strong>:
+        <br>ΔH = Σν·ΔH<sub>f</sub>°(产) - Σν·ΔH<sub>f</sub>°(反)
+        <br>= [6 × ΔH<sub>f</sub>°(CO<sub>2</sub>) + 6 × ΔH<sub>f</sub>°(H<sub>2</sub>O, l)] - [1 × ΔH<sub>f</sub>°(C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>) + 6 × ΔH<sub>f</sub>°(O<sub>2</sub>)]
+        <div class="step-rule">→ 用<strong>末减初 + 按化学计量数加权</strong></div>
+      </div>
+      <div class="step">
+        <span class="step-no">(1)-2</span> 代入数值:
+        <br>= [6 × (-393.5) + 6 × (-285.8)] - [1 × (-1273.3) + 6 × 0]
+        <br>= [-2361 + (-1714.8)] - [-1273.3]
+        <br>= -4075.8 + 1273.3
+        <br>= <strong>-2802.5 kJ/mol</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">(2)-1</span> 算 27 g 葡萄糖摩尔数:
+        <br>n = m / M = 27 / 180 = <strong>0.15 mol</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">(2)-2</span> 算释放能量:
+        <br>E = n × |ΔH| = 0.15 × 2802.5 ≈ <strong>420.4 kJ</strong>
+        <br>换算: 1 cal ≈ 4.184 J → 420.4 kJ ≈ <strong>100 kcal</strong>(即营养标签的『100 千卡』, 一颗苹果的典型能量值)
+      </div>
+      <div class="step">
+        <span class="step-no">(3)</span> 物理本质解释:
+        <br>反应 C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>(s) + 6O<sub>2</sub> → 6CO<sub>2</sub> + 6H<sub>2</sub>O(l) 可拆为<strong>两步</strong>:
+        <br>· 第 1 步: 葡萄糖<strong>分解</strong>为稳定单质 C + H<sub>2</sub> + O<sub>2</sub> (反向 ΔH<sub>f</sub>°, 数学上是 -ΔH<sub>f</sub>°(葡萄糖) = +1273.3 kJ/mol, 吸热)
+        <br>· 第 2 步: 稳定单质<strong>合成</strong> 6CO<sub>2</sub> + 6H<sub>2</sub>O(l) (生成焓加和, 6·ΔH<sub>f</sub>°(CO<sub>2</sub>) + 6·ΔH<sub>f</sub>°(H<sub>2</sub>O,l) = -4075.8 kJ/mol, 放热)
+        <br>· 总 ΔH = 第 1 步 + 第 2 步 = +1273.3 - 4075.8 = -2802.5 kJ/mol ✓
+        <br>→ 这就是<strong>末减初公式的物理本质</strong>: 任何反应都可看作『反应物分解为稳定单质 + 单质合成产物』, 用 ΔH<sub>f</sub>° 表中数据直接算 ΔH
+
+        <div class="answer-box">
+          (1) ΔH = <strong>-2802.5 kJ/mol</strong><br>
+          (2) E ≈ <strong>420.4 kJ</strong> (≈ 100 kcal, 一颗苹果的典型能量)<br>
+          (3) 末减初公式 = 反应物分解为单质 + 单质合成产物 (两步法)
+        </div>
+
+        <div class="verify-box">
+          <strong>✓ 验证</strong>: 量纲 kJ/mol, kJ ✓; 一颗苹果约 100 kcal 与营养学常识一致 ✓; -2802.5 kJ/mol 与文献值 (-2800 ~ -2820) 一致 ✓; 物理本质 (两步法)与盖斯定律路径无关一致 ✓.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: <strong>化学计量数</strong>忘乘
+        <br><span class="wrong">❌ 错答</span>: ΔH = ΔH<sub>f</sub>°(CO<sub>2</sub>) + ΔH<sub>f</sub>°(H<sub>2</sub>O) - ΔH<sub>f</sub>°(C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>) (忘乘 6)
+        <br><span class="right">✓ 正答</span>: 必须乘<strong>化学计量数</strong>! 6 mol CO<sub>2</sub> 时是 <strong>6 × ΔH<sub>f</sub>°(CO<sub>2</sub>)</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: 漏 <strong>稳定单质 ΔH<sub>f</sub>° = 0</strong>
+        <br><span class="wrong">❌ 错答</span>: 忘把 6 × 0 (O<sub>2</sub>) 写进公式
+        <br><span class="right">✓ 正答</span>: 公式必须<strong>完整</strong>包含所有物质. 稳定单质 ΔH<sub>f</sub>° = 0, 但在公式里要写 6 × 0 = 0 (虽不影响数值, 形式上不能漏)
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: <strong>物态</strong>选错(H<sub>2</sub>O(l) vs H<sub>2</sub>O(g))
+        <br><span class="wrong">❌ 错答</span>: 用 ΔH<sub>f</sub>°(H<sub>2</sub>O, g) ≈ -241.8 代入
+        <br><span class="right">✓ 正答</span>: 反应方程式中是<strong>液态</strong>水, 用<strong>液态生成焓</strong> -285.8. 物态决定哪个值
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: <strong>能量单位</strong>换算错
+        <br><span class="wrong">❌ 错答</span>: 0.15 mol × 2802.5 kJ/mol = 420.4 J (单位错)
+        <br><span class="right">✓ 正答</span>: ΔH 单位 kJ/mol, 乘 mol 得 <strong>kJ</strong>(不是 J)
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 5</span>: 第 (3) 小问<strong>解释空洞</strong>
+        <br><span class="wrong">❌ 错答</span>: "因为是状态函数所以路径无关"(没说怎么对应两步法)
+        <br><span class="right">✓ 正答</span>: 必须<strong>显式拆出两步</strong>(分解为单质 + 单质合成产物), 并说明数值=两步 ΔH 加和
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="hess-law-task-cards.html">盖斯定律</a> Card 3 (ΔH<sub>f</sub>° 公式) · <a href="enthalpy-meaning-task-cards.html">焓与焓变 (进阶)</a></div>
+</div>
+
+<!-- =================== 例题 5 · A5 · 键能 + 盖斯联用 =================== -->
+<div class="example-card" id="example-5">
+  <div class="example-card-header">
+    <div class="example-card-no">5</div>
+    <div class="example-card-title">键能 + 盖斯联用 · 合成氨求 N≡N 键能</div>
+    <div class="example-card-type">A5</div>
+    <div class="example-card-diff 较难">较难</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      工业合成氨 (Haber-Bosch) 是 20 世纪最重要的化工反应, 让人类从大气中固氮 → 大幅提高化肥产量. 反应:<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;N<sub>2</sub>(g) + 3H<sub>2</sub>(g) → 2NH<sub>3</sub>(g), ΔH = -92 kJ/mol<br><br>
+      已知 (298 K):<br>
+      · H-H 键能 a = 436 kJ/mol<br>
+      · N-H 键能 b = 391 kJ/mol<br><br>
+      <strong>(1)</strong> 求 N≡N 键能 (用字母 a, b 表示) = ________ kJ/mol;<br>
+      <strong>(2)</strong> 代入数值, N≡N 键能 = ________ kJ/mol;<br>
+      <strong>(3)</strong> 解释为何 N≡N 键能如此大 (~946 kJ/mol), 这对工业合成氨的<strong>反应条件</strong>有何意义?
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li>涉及<strong>键能与反应焓变的关系</strong>: <code class="formula">ΔH = Σ键能(反应物) - Σ键能(产物)</code> (锚: <a href="bond-energy-reaction-enthalpy-task-cards.html">键能与反应焓变</a> Card 2)</li>
+        <li>涉及<strong>计数原子键</strong>: NH<sub>3</sub> 含 3 个 N-H, 每个 NH<sub>3</sub> 贡献 3 个 N-H 键</li>
+        <li>涉及<strong>盖斯定律</strong>: 反应 ΔH 已知 → 反推某键键能 (相当于反推某个单分子的『分解能』)</li>
+        <li>跨板块综合: 键能式 + 给定 ΔH → 解字母代数方程</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 已知 = 反应 ΔH + 2 个键能; 求 = N≡N 键能 (字母 + 数值)</li>
+        <li><strong>选路径</strong>: 用<strong>键能公式</strong> ΔH = Σ反应物键能 - Σ产物键能, 解出 N≡N</li>
+        <li><strong>执行计划</strong>:
+          <ul>
+            <li>计数反应物键: 1 个 N≡N + 3 个 H-H (N<sub>2</sub> + 3H<sub>2</sub>)</li>
+            <li>计数产物键: 2 个 NH<sub>3</sub> × 3 个 N-H/NH<sub>3</sub> = 6 个 N-H</li>
+            <li>列方程: ΔH = (N≡N + 3a) - 6b = -92</li>
+            <li>解出 N≡N = -92 - 3a + 6b</li>
+            <li>代入 a=436, b=391 算数值</li>
+            <li>解释 N≡N 大键能的工业意义</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">(1)-1</span> 列<strong>键能公式</strong>:
+        <br>反应物键能和 = 1 × <strong>(N≡N)</strong> + 3 × (H-H) = (N≡N) + 3a
+        <br>产物键能和 = 2 × NH<sub>3</sub> × 3 (N-H 每 NH<sub>3</sub>) = 6 × (N-H) = 6b
+        <br>ΔH = Σ反 - Σ产 = [(N≡N) + 3a] - 6b
+        <div class="step-rule">→ 由<strong>键能 ΔH 公式</strong></div>
+      </div>
+      <div class="step">
+        <span class="step-no">(1)-2</span> 代入 ΔH = -92, 解 N≡N:
+        <br>-92 = (N≡N) + 3a - 6b
+        <br>(N≡N) = -92 - 3a + 6b
+        <br>= <strong>6b - 3a - 92 kJ/mol</strong>
+        <br>(或写作 -3a + 6b - 92)
+      </div>
+      <div class="step">
+        <span class="step-no">(2)</span> 代入 a = 436, b = 391:
+        <br>(N≡N) = 6 × 391 - 3 × 436 - 92
+        <br>= 2346 - 1308 - 92
+        <br>= <strong>946 kJ/mol</strong>
+      </div>
+      <div class="step">
+        <span class="step-no">(3)</span> N≡N 键能大的物理与工业意义:
+        <br>· <strong>物理</strong>: N≡N 是<strong>三键</strong> (1 σ + 2 π), 比一般的单键 (~300-400) 强 2-3 倍. 这是 N<sub>2</sub> 在大气中极<strong>稳定</strong>的根本原因(占大气 78% 但常温下化学惰性).
+        <br>· <strong>工业意义</strong>: 打开 N≡N 需要 ~946 kJ/mol 的<strong>极高活化能</strong> → 故合成氨反应虽然 <strong>ΔH = -92 (放热)</strong>, 但<strong>动力学极慢</strong> → 必须用<strong>高温 (400-500°C)</strong> 提高分子动能 + <strong>催化剂 (Fe-based)</strong> 大幅降活化能, 同时<strong>高压 (200-300 atm)</strong> 利用气体摩尔数减少推产率.
+        <br>· 这也是为什么 1909 Haber 发现 + 1913 Bosch 工业化是诺贝尔级的成就 — 攻克的就是 <strong>N≡N 键能大</strong>的难关.
+
+        <div class="answer-box">
+          (1) N≡N 键能 = <strong>6b - 3a - 92 kJ/mol</strong> (字母表达式)<br>
+          (2) N≡N 键能 = <strong>946 kJ/mol</strong> (数值, 与文献值一致)<br>
+          (3) N≡N 大键能 → N<sub>2</sub> 稳定 → 合成氨需高温 + 高压 + 催化剂
+        </div>
+
+        <div class="verify-box">
+          <strong>✓ 验证</strong>: 字母表达式与数值代入自洽 ✓; 946 kJ/mol 与文献 (~945) 一致 ✓; 解释关联到 Haber-Bosch 工业实际 ✓.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: <strong>键能公式</strong>方向反 (产 - 反 vs 反 - 产)
+        <br><span class="wrong">❌ 错答</span>: ΔH = Σ产 - Σ反 → 算出 N≡N 错号
+        <br><span class="right">✓ 正答</span>: <strong>ΔH = Σ反 - Σ产</strong>(键能消耗 - 键能生成). 易记: 『反应物断键吸能, 产物成键放能』, 故 ΔH = 断键能 - 成键能 = Σ反键 - Σ产键
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: <strong>计数键数</strong>错 (NH<sub>3</sub> 有几个 N-H)
+        <br><span class="wrong">❌ 错答</span>: 觉得 NH<sub>3</sub> 只有 1 个 N-H → 2 NH<sub>3</sub> = 2 个 N-H
+        <br><span class="right">✓ 正答</span>: NH<sub>3</sub> 含 <strong>3 个 N-H</strong>(画结构: H-N(-H)-H), 2 NH<sub>3</sub> = 6 个 N-H. 画结构核对
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 系数<strong>没乘到键能</strong>
+        <br><span class="wrong">❌ 错答</span>: 3 H<sub>2</sub> 只算 H-H 键能 a, 没乘 3
+        <br><span class="right">✓ 正答</span>: 3 mol H<sub>2</sub> 有 3 个 H-H 键 → 键能贡献 = <strong>3a</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: <strong>字母代数</strong>整理失误
+        <br><span class="wrong">❌ 错答</span>: -92 = (N≡N) + 3a - 6b → 解 N≡N = -92 + 3a - 6b (符号错)
+        <br><span class="right">✓ 正答</span>: 移项: (N≡N) = -92 - 3a + 6b = <strong>6b - 3a - 92</strong>. 检验代入数值合理性
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 5</span>: 第 (3) 小问<strong>没联系工业实际</strong>
+        <br><span class="wrong">❌ 错答</span>: 只说"N≡N 键能大所以稳定", 没说为何<strong>高温 / 高压 / 催化剂</strong>都需要
+        <br><span class="right">✓ 正答</span>: 必须说<strong>放热 ≠ 自发, 动力学障碍</strong> → 高温升速率 + 催化剂降活化能 + 高压推产率
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="bond-energy-reaction-enthalpy-task-cards.html">键能与反应焓变</a> Card 2 (ΔH 键能式) · <a href="hess-law-task-cards.html">盖斯定律</a> · <a href="second-law-basic-task-cards.html">第二定律 基础</a> (放热 vs 自发)</div>
+</div>
+
+<!-- =================== 例题 6 · A1 · 反应历程图综合 (含动力学前置) =================== -->
+<div class="example-card" id="example-6">
+  <div class="example-card-header">
+    <div class="example-card-no">6</div>
+    <div class="example-card-title">反应历程图综合 · CO<sub>2</sub> 加氢制甲醇 (含动力学前置)</div>
+    <div class="example-card-type">A1</div>
+    <div class="example-card-diff 综合压轴">综合压轴</div>
+  </div>
+
+  <div class="q-stem">
+    <span class="stem-label">题目</span>
+    <div>
+      『双碳目标』研究: CO<sub>2</sub> 加氢制甲醇 (CH<sub>3</sub>OH) 是 CO<sub>2</sub> 资源化利用的关键途径. 在 Cu/ZnO 催化剂作用下, 总反应分两步:<br>
+      &nbsp;&nbsp;· 第 1 步: CO<sub>2</sub>(g) + H<sub>2</sub>(g) → CO(g) + H<sub>2</sub>O(g), ΔH<sub>1</sub><br>
+      &nbsp;&nbsp;· 第 2 步: CO(g) + 2H<sub>2</sub>(g) → CH<sub>3</sub>OH(g), ΔH<sub>2</sub><br><br>
+
+      实测能量历程图(能量单位 kJ/mol, 以 CO<sub>2</sub> + 3H<sub>2</sub> 起点为 0):
+      <svg viewBox="0 0 600 280" style="width:100%;max-width:560px;height:auto;background:#fafafe;border-radius:8px;margin:12px 0;">
+        <!-- axes -->
+        <line x1="40" y1="40" x2="40" y2="240" stroke="#666" stroke-width="1.5"/>
+        <line x1="40" y1="240" x2="580" y2="240" stroke="#666" stroke-width="1.5"/>
+        <text x="20" y="44" font-size="11" fill="#666">能量/kJ·mol⁻¹</text>
+        <text x="530" y="258" font-size="11" fill="#666">反应进程</text>
+
+        <!-- y axis ticks -->
+        <line x1="36" y1="200" x2="40" y2="200" stroke="#666"/>
+        <text x="8" y="204" font-size="10" fill="#666">-50</text>
+        <line x1="36" y1="170" x2="40" y2="170" stroke="#666"/>
+        <text x="14" y="174" font-size="10" fill="#666">0</text>
+        <line x1="36" y1="150" x2="40" y2="150" stroke="#666"/>
+        <text x="8" y="154" font-size="10" fill="#666">+40</text>
+        <line x1="36" y1="100" x2="40" y2="100" stroke="#666"/>
+        <text x="0" y="104" font-size="10" fill="#666">+130</text>
+        <line x1="36" y1="60" x2="40" y2="60" stroke="#666"/>
+        <text x="0" y="64" font-size="10" fill="#666">+178</text>
+
+        <!-- energy curve -->
+        <path d="M 60 170 L 100 170 L 140 60 L 200 60 L 220 150 L 260 150 L 300 100 L 380 100 L 410 200 L 460 200 L 460 200 L 540 200"
+              fill="none" stroke="#6a1b9a" stroke-width="2.5"/>
+
+        <!-- TS1 -->
+        <circle cx="160" cy="60" r="3" fill="#c0392b"/>
+        <text x="120" y="50" font-size="10" fill="#c0392b" font-weight="600">过渡态 1 (+178)</text>
+
+        <!-- intermediate -->
+        <text x="240" y="142" font-size="10" fill="#6a1b9a" font-weight="600">中间体 (+41.2)</text>
+        <text x="220" y="166" font-size="9" fill="#5a6c7d">CO+H₂O(g)+2H₂</text>
+
+        <!-- TS2 -->
+        <circle cx="340" cy="100" r="3" fill="#c0392b"/>
+        <text x="295" y="92" font-size="10" fill="#c0392b" font-weight="600">过渡态 2 (+130)</text>
+
+        <!-- start label -->
+        <text x="50" y="190" font-size="10" fill="#0055B8" font-weight="600">起点 0</text>
+        <text x="50" y="205" font-size="9" fill="#5a6c7d">CO₂+3H₂</text>
+
+        <!-- end label -->
+        <text x="450" y="222" font-size="10" fill="#2e7d32" font-weight="600">终点 -49.6</text>
+        <text x="450" y="236" font-size="9" fill="#5a6c7d">CH₃OH(g)+H₂O(g)</text>
+
+        <!-- E_a1 indication -->
+        <path d="M 60 170 L 60 60" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="58" y="118" font-size="9" fill="#c0392b" transform="rotate(-90 58,118)">E_a1=178</text>
+
+        <!-- E_a2 -->
+        <path d="M 240 150 L 240 100" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,2"/>
+        <text x="244" y="128" font-size="9" fill="#c0392b">E_a2=88.8</text>
+      </svg><br>
+
+      <div class="cross-topic-warn">
+        <strong>⚠️ 跨主题前置 (反应动力学)</strong><br>
+        本题图涉及『活化能 E<sub>a</sub> / 过渡态 / 决速步 / 中间体』, 来自反应动力学. 本题对动力学只作概念引用, 计算重点仍在 ΔH (热力学). 最小前置概念:
+        <ul style="margin-top:6px;font-size:13px;">
+          <li><strong>活化能 E<sub>a</sub></strong>: 反应物 → 过渡态最高点的<strong>能量差</strong>(反应能否进行的『能垒』)</li>
+          <li><strong>过渡态</strong>: 反应过程中能量最高的瞬态(图上波峰)</li>
+          <li><strong>决速步</strong>: 多步反应中<strong>活化能 E<sub>a</sub> 最大</strong>的一步(限速)</li>
+          <li><strong>中间体</strong>: 反应过程中临时产物(图上波谷, 本题为 CO + H<sub>2</sub>O + 2H<sub>2</sub>)</li>
+        </ul>
+        若不熟, 详见未来『反应动力学』板块. 本例题<strong>所有定量计算</strong>(ΔH / 反应能否放热 / 催化剂影响)都靠<strong>热力学</strong>解决.
+      </div>
+
+      回答下列问题:<br>
+      <strong>(1)</strong> 总反应 CO<sub>2</sub>(g) + 3H<sub>2</sub>(g) → CH<sub>3</sub>OH(g) + H<sub>2</sub>O(g) 的 ΔH = ________ kJ/mol;<br>
+      <strong>(2)</strong> 反应第 1 步 ΔH<sub>1</sub> = ________ kJ/mol; 第 2 步 ΔH<sub>2</sub> = ________ kJ/mol;<br>
+      <strong>(3)</strong> 该两步反应的<strong>决速步骤</strong>是第 ____ 步 (从图上活化能判断);<br>
+      <strong>(4)</strong> 若加入新型催化剂, 使过渡态 1 能量降至 +120 kJ/mol, 过渡态 2 不变. 总反应 ΔH 是否改变? 解释原因 (从盖斯定律 / 状态函数角度).
+    </div>
+  </div>
+
+  <div class="four-sec knowledge">
+    <div class="four-sec-title">📚 ① 知识点梳理</div>
+    <div class="four-sec-body">
+      <ul>
+        <li>涉及<strong>盖斯定律核心</strong>: ΔH 由始末态决定, 与路径无关 (锚: <a href="hess-law-task-cards.html">盖斯定律</a> Card 1, 4)</li>
+        <li>涉及<strong>分步反应 ΔH 加和</strong>: 第 1 步 ΔH<sub>1</sub> + 第 2 步 ΔH<sub>2</sub> = 总反应 ΔH (锚: 盖斯定律 Card 2)</li>
+        <li>涉及<strong>状态函数性质</strong>: 焓 H 是状态函数, ΔH = H<sub>末</sub> - H<sub>初</sub> (锚: <a href="state-functions-task-cards.html">状态函数 (进阶)</a>)</li>
+        <li>涉及<strong>催化剂作用</strong>(关键): 改变路径 → <strong>降低 E<sub>a</sub></strong> (动力学), <strong>不改 ΔH</strong> (热力学)</li>
+        <li>跨板块综合 + 跨主题前置 (动力学最小自包含): 用<strong>图上能量值</strong>读 ΔH (热力学) + 用<strong>活化能</strong>判决速步 (动力学引用)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec approach">
+    <div class="four-sec-title">🧭 ② 解题思路与方法</div>
+    <div class="four-sec-body">
+      <ul>
+        <li><strong>拆题</strong>: 4 小问 — (1)(2) 读图算 ΔH (热力学); (3) 判决速步(动力学概念引用 + 比较 E<sub>a</sub>); (4) 催化剂改不改 ΔH (盖斯核心)</li>
+        <li><strong>选路径</strong>:
+          <ul>
+            <li>(1)(2)(3): <strong>读图法</strong> — ΔH = 终点 - 起点; ΔH<sub>分步</sub> = 中间能量差; E<sub>a</sub> = 过渡态 - 起点</li>
+            <li>(4): <strong>盖斯定律论证</strong> — ΔH 由始末态决定, 中间路径任意</li>
+          </ul>
+        </li>
+        <li><strong>执行计划</strong>:
+          <ul>
+            <li>(1) 读图: 终点 -49.6 - 起点 0 = -49.6 kJ/mol</li>
+            <li>(2) 读图: ΔH<sub>1</sub> = 中间体能量(+41.2) - 起点(0); ΔH<sub>2</sub> = 终点(-49.6) - 中间体(+41.2)</li>
+            <li>(3) 比较 E<sub>a1</sub> = 178 vs E<sub>a2</sub> = 过渡态 2(130) - 中间体(41.2) = 88.8; 取 max 步</li>
+            <li>(4) 用盖斯定律: ΔH 与路径无关, 催化剂改路径(过渡态高度), 不改始末态 → ΔH 不变</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="four-sec solution">
+    <div class="four-sec-title">📝 ③ 详细解题步骤</div>
+    <div class="four-sec-body">
+      <div class="step">
+        <span class="step-no">(1)</span> 总反应 ΔH = <strong>终点 - 起点</strong>:
+        <br>从图: 终点能量 = -49.6, 起点 = 0
+        <br>ΔH<sub>总</sub> = -49.6 - 0 = <strong>-49.6 kJ/mol</strong>
+        <br>(放热反应, 合理)
+        <div class="step-rule">→ 由<strong>状态函数性质</strong>: ΔH = H<sub>末</sub> - H<sub>初</sub></div>
+      </div>
+      <div class="step">
+        <span class="step-no">(2)</span> 分步 ΔH:
+        <br>· 第 1 步: 起点(0) → 中间体(+41.2)
+        <br>ΔH<sub>1</sub> = +41.2 - 0 = <strong>+41.2 kJ/mol</strong> (吸热)
+        <br>· 第 2 步: 中间体(+41.2) → 终点(-49.6)
+        <br>ΔH<sub>2</sub> = -49.6 - 41.2 = <strong>-90.8 kJ/mol</strong> (放热)
+        <br>验: ΔH<sub>1</sub> + ΔH<sub>2</sub> = 41.2 + (-90.8) = -49.6 = ΔH<sub>总</sub> ✓ (与 (1) 自洽, 这就是盖斯定律加和)
+        <div class="step-rule">→ 由<strong>读图 + 盖斯定律加和</strong></div>
+      </div>
+      <div class="step">
+        <span class="step-no">(3)</span> 判决速步:
+        <br>· 第 1 步活化能 E<sub>a1</sub> = 过渡态 1 (+178) - 起点 (0) = <strong>178 kJ/mol</strong>
+        <br>· 第 2 步活化能 E<sub>a2</sub> = 过渡态 2 (+130) - 中间体 (+41.2) = <strong>88.8 kJ/mol</strong>
+        <br>· 比较: E<sub>a1</sub> = 178 > E<sub>a2</sub> = 88.8 → 第 1 步活化能更大
+        <br>· 由决速步定义: 第 1 步是<strong>决速步</strong>
+        <br>· 物理含义: 第 1 步速率最慢, 决定了整个反应的速率
+        <div class="step-rule">→ 由<strong>决速步 = E<sub>a</sub> 最大者</strong> (动力学引用)</div>
+      </div>
+      <div class="step">
+        <span class="step-no">(4)</span> 催化剂改变后 ΔH 是否变?
+        <br>· 答: <strong>ΔH 不改变</strong>, 仍为 -49.6 kJ/mol
+        <br>· <strong>原因</strong>: 由<strong>盖斯定律</strong>(状态函数性质), ΔH = H<sub>末</sub> - H<sub>初</sub> 只与<strong>始末态决定</strong>, 与中间路径无关
+        <br>· 催化剂作用机理: 改变反应<strong>路径</strong>(降低过渡态能量 + 改变中间体), 但<strong>起点</strong>(CO<sub>2</sub> + 3H<sub>2</sub>) 和<strong>终点</strong>(CH<sub>3</sub>OH + H<sub>2</sub>O(g)) 物质和能量不变 → ΔH 不变
+        <br>· 催化剂改变的是<strong>动力学</strong>(降 E<sub>a</sub> → 升速率), 不改<strong>热力学</strong>(ΔH 不变)
+        <br>· 工业意义: 催化剂让反应在低温下加速(节能), 但<strong>放热总量不变</strong>(总能量收益固定)
+        <div class="step-rule">→ 由<strong>盖斯定律 = 状态函数性质</strong> + 催化剂作用机理</div>
+
+        <div class="answer-box">
+          (1) ΔH<sub>总</sub> = <strong>-49.6 kJ/mol</strong><br>
+          (2) ΔH<sub>1</sub> = <strong>+41.2 kJ/mol</strong>, ΔH<sub>2</sub> = <strong>-90.8 kJ/mol</strong><br>
+          (3) 决速步 = 第 <strong>1</strong> 步 (E<sub>a1</sub> = 178 > E<sub>a2</sub> = 88.8)<br>
+          (4) ΔH <strong>不改变</strong>(路径无关 / 状态函数性质 / 催化剂不改始末态)
+        </div>
+
+        <div class="verify-box">
+          <strong>✓ 验证</strong>: 量纲 ✓; ΔH<sub>1</sub> + ΔH<sub>2</sub> = ΔH<sub>总</sub> 自洽 ✓; 总反应放热 (CO<sub>2</sub> 加氢制甲醇实际放热, 文献 ΔH ≈ -49 kJ/mol) ✓; (4) 答案与盖斯定律核心一致 ✓.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="four-sec mistakes">
+    <div class="four-sec-title">⚠️ ④ 易错点</div>
+    <div class="four-sec-body">
+      <div class="mistake-item">
+        <span class="mistake-no">易错 1</span>: 把<strong>过渡态能量</strong>当 ΔH
+        <br><span class="wrong">❌ 错答</span>: ΔH<sub>总</sub> = 过渡态 1 (+178) - 起点 (0) = +178 kJ/mol
+        <br><span class="right">✓ 正答</span>: ΔH = <strong>终点 - 起点</strong>(看产物 vs 反应物). 过渡态是中间瞬态, 不是产物. <strong>过渡态 = 活化能 (动力学), 终点 = ΔH (热力学)</strong>
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 2</span>: <strong>E<sub>a</sub> 起点</strong>错(从哪算)
+        <br><span class="wrong">❌ 错答</span>: E<sub>a2</sub> = 过渡态 2 (+130) - 起点 (0) = 130 kJ/mol
+        <br><span class="right">✓ 正答</span>: E<sub>a</sub> 从<strong>该步起点</strong>算. 第 2 步起点 = <strong>中间体</strong>(+41.2), 不是初始反应物. E<sub>a2</sub> = 130 - 41.2 = 88.8
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 3</span>: 决速步判错 (取<strong>较小</strong> E<sub>a</sub>)
+        <br><span class="wrong">❌ 错答</span>: 因第 2 步 E<sub>a2</sub> = 88.8 较小, 觉得第 2 步是决速步
+        <br><span class="right">✓ 正答</span>: 决速步 = <strong>E<sub>a</sub> 最大</strong>的一步(限速). 越大 = 越慢. 第 1 步 E<sub>a1</sub> = 178 大, 它是决速步
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 4</span>: 催化剂改不改 ΔH 答错 (说『催化剂使反应放更多热』)
+        <br><span class="wrong">❌ 错答</span>: 催化剂降 E<sub>a</sub> → 反应更容易 → 放更多热 → ΔH 更负
+        <br><span class="right">✓ 正答</span>: 催化剂<strong>只改动力学</strong>(降 E<sub>a</sub> → 速率快). <strong>ΔH 由始末态决定</strong>(状态函数), 催化剂不改始末态 → ΔH 不变. 总放热量 = ΔH × 摩尔数, 不变
+      </div>
+      <div class="mistake-item">
+        <span class="mistake-no">易错 5</span>: <strong>盖斯定律的物理本质</strong>说浅
+        <br><span class="wrong">❌ 错答</span>: "因为盖斯定律所以路径无关"
+        <br><span class="right">✓ 正答</span>: 必须说<strong>焓 H 是状态函数 → ΔH 由始末态决定</strong>. 路径(包括催化剂改变的)只影响动力学, 不影响 ΔH
+      </div>
+    </div>
+  </div>
+
+  <div class="anchor-link">📖 锚回: <a href="hess-law-task-cards.html">盖斯定律</a> Card 1 (状态函数 / 路径无关) · <a href="state-functions-task-cards.html">状态函数 (进阶)</a> · 反应动力学板块(未来)</div>
+</div>
+
+<!-- =================== Bottom Nav =================== -->
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="thermodynamics-application-chemistry-fluency-test.html">📝 熟练度检测 fluency-test</a>
+  <span>oral-exam 待开放</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 融合模块 · 热力学应用 · 化学 · 例题讲解集 · example-cards Skill v0.1.0 (首应用)</footer>
+
+</div>
+
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+});
+</script>
+
+</body>
+</html>

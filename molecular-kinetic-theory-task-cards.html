@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分子动理论 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>分子动理论 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>分子动理论</h1>
+    <div class="subtitle">10⁻¹⁰ 米的世界 · 用阿伏伽德罗常数把宏观和微观连起来 · 为内能定义铺路</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>分子动理论（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>3-4 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td>无（本板块是热力学大主题<strong>基础链的起点</strong>，只需要初中科学里"物质由分子构成"的基本认识；不需要预先学过其他高中物理板块）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；查阿伏伽德罗常数 \(N_A = 6.02 \times 10^{23}\, /\text{mol}\) 和常见物质摩尔质量的能力（教材附录或周期表）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能用 1-2 句话说清"分子"是什么，并知道分子大小的数量级 \(\sim 10^{-10}\) m</li>
+      <li>会用<strong>油膜法 \(d = V/S\)</strong> 估算分子直径；会用<strong>球模型 \(d \approx \sqrt[3]{6V_\text{单}/\pi}\)</strong> 由摩尔体积反推分子尺寸</li>
+      <li>会用<strong>阿伏伽德罗链式</strong>：从宏观（密度、摩尔质量）算出 \(V_\text{单}\)、分子数密度 \(n_\text{数} = \rho N_A / M\)</li>
+      <li>能识别<strong>布朗运动 / 扩散现象</strong>是分子热运动的<strong>间接证据</strong>（看到的是花粉/染料，不是分子本身）</li>
+      <li>能画分子间作用力 \(F\text{–}r\) 曲线：短距斥力 / 长距引力 / 平衡距离 \(r_0\)，并解释为什么固体难压缩、气体易膨胀</li>
+      <li>能用"温度 \(T \propto\) 分子平均动能 \(\bar{\varepsilon}\)"解释温度的<strong>微观本质</strong>；能定性比较同温下不同气体的<strong>平均速度</strong>（\(m \downarrow \Rightarrow v \uparrow\)）</li>
+      <li>能用 <strong>\(U =\) 分子总动能 \(+\) 分子总势能</strong>定义内能；能解释内能是<strong>状态量</strong>（为第一定律 \(\Delta U = Q - W\) 铺路）</li>
+      <li>知道本板块<strong>不引入定量推导</strong>（如 \(P = \tfrac{1}{3} n m \bar{v}^2\) / \(\bar{\varepsilon} = \tfrac{3}{2}kT\)）—— 这些留给进阶<a href="advanced-task-cards.html">微观推导</a>板块</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>烧开一杯水。<strong>宏观上</strong>你看到水温从 20°C 升到 100°C、体积略微膨胀、最后翻腾起来变蒸汽。<strong>微观上</strong>分子做了什么？</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li>分子那么小（&lt; 10⁻⁹ m），我们<strong>根本看不见</strong>。怎么知道它们在动？</li>
+      <li>同样烧到 100°C，氢气分子和氧气分子的<strong>平均动能</strong>一样吗？<strong>平均速度</strong>呢？</li>
+      <li>"水的内能"为什么不是简单"分子动能之和"？还要加一个<strong>分子势能</strong>，凭什么？</li>
+    </ul>
+    <p style="margin-top: 6px;">本板块的任务，是让你<strong>用 \(N_A = 6.02 \times 10^{23}\) 这个数</strong>，把宏观看得见的世界（克、升、米）和微观看不见的世界（分子、原子）<strong>真正连起来</strong>。</p>
+    <p class="hint">（提示：先承认"看不见≠不存在"。物理学有一套"间接看见"的方法 —— 让看得见的现象告诉我们看不见的事。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>10⁻¹⁰ 米的尺度 —— 油膜法 + 阿伏伽德罗链式</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：建立"分子很小（\(\sim 10^{-10}\) m）"的尺度感 → 用油膜法估算分子直径 → 用阿伏伽德罗常数把"宏观可测的量"（密度、体积、摩尔质量）和"单分子尺度"链起来<br>
+        <strong>建议时长</strong>：50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不查资料，先估一估 ——</p>
+          <ul>
+            <li>一根头发宽度大约多少？（精确到数量级即可，比如 \(10^{-3}\) m 还是 \(10^{-5}\) m？）</li>
+            <li>一个细菌呢？一个病毒呢？一个分子呢？把它们从大到小排个序。</li>
+            <li>如果分子直径约 \(10^{-10}\) m，那 1 mm（\(10^{-3}\) m）能排多少个分子？</li>
+            <li>1 mol 任意物质都含 \(N_A = 6.02 \times 10^{23}\) 个粒子。这个数<strong>有多大</strong>？如果一秒数一个，数完要多少年？</li>
+          </ul>
+          <div class="quote-block">
+            <strong>对比尺度速查</strong>：头发 \(\sim 10^{-4}\) m / 细菌 \(\sim 10^{-6}\) m / 病毒 \(\sim 10^{-7}\) m / 分子 \(\sim 10^{-10}\) m / 原子核 \(\sim 10^{-15}\) m。<br>
+            数 \(N_A\) 需要 \(6 \times 10^{23} \text{ s} \approx 1.9 \times 10^{16}\) 年 ≈ 宇宙年龄的 100 万倍。这个数<strong>不仅大，它"大得不可数"</strong> —— 这正是宏观–微观分水岭。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">油膜法 —— 用"一滴油"测分子大小</span></div>
+        <div class="step-content">
+          <p>1890 年代，瑞利和其他物理学家想了一个聪明办法：</p>
+          <ol>
+            <li>取一滴<strong>已知体积 \(V\)</strong> 的油酸（比如 \(V \approx 10^{-12}\) m³）</li>
+            <li>滴在水面上 —— 油酸不溶于水，会铺开成<strong>极薄</strong>的"油膜"</li>
+            <li>用爽身粉撒在油膜边缘，测出<strong>油膜面积 \(S\)</strong>（典型 \(S \approx 100\) cm²）</li>
+            <li>假设"油膜只有<strong>一个分子厚</strong>"（这是关键假设），则<strong>分子直径 \(d = V/S\)</strong></li>
+          </ol>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-oil-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"></path></marker>
+              </defs>
+              <text x="260" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">油膜法：测分子直径</text>
+              <!-- Left: oil drop -->
+              <circle cx="80" cy="130" r="22" fill="#e67e22" fill-opacity="0.55" stroke="#c0392b" stroke-width="1.5"></circle>
+              <text x="80" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">V</text>
+              <text x="80" y="180" text-anchor="middle" font-size="11" fill="#34495e">一滴油酸</text>
+              <text x="80" y="195" text-anchor="middle" font-size="11" fill="#34495e">体积 V</text>
+              <!-- Middle arrow -->
+              <line x1="125" y1="130" x2="200" y2="130" stroke="#0055B8" stroke-width="2" marker-end="url(#arrow-oil-1)"></line>
+              <text x="162" y="120" text-anchor="middle" font-size="11" fill="#0055B8">滴入水面</text>
+              <text x="162" y="148" text-anchor="middle" font-size="10" fill="#6e6e73">+ 撒爽身粉测面积</text>
+              <!-- Right: oil film on water -->
+              <rect x="220" y="125" width="270" height="10" fill="#e67e22" fill-opacity="0.4" stroke="#c0392b" stroke-width="1"></rect>
+              <rect x="220" y="135" width="270" height="60" fill="#3498db" fill-opacity="0.15" stroke="#2980b9" stroke-width="1"></rect>
+              <text x="355" y="160" text-anchor="middle" font-size="11" fill="#2980b9">水</text>
+              <!-- Thickness label d -->
+              <line x1="495" y1="125" x2="495" y2="135" stroke="#c0392b" stroke-width="2"></line>
+              <line x1="491" y1="125" x2="499" y2="125" stroke="#c0392b" stroke-width="1.5"></line>
+              <line x1="491" y1="135" x2="499" y2="135" stroke="#c0392b" stroke-width="1.5"></line>
+              <text x="495" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">d</text>
+              <!-- Film labels -->
+              <text x="355" y="118" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">单分子膜（厚度 = d）</text>
+              <text x="355" y="220" text-anchor="middle" font-size="11" fill="#34495e">油膜面积 S（用爽身粉边缘测）</text>
+              <!-- Formula box -->
+              <rect x="135" y="245" width="250" height="50" fill="#fff" stroke="#00409A" stroke-width="1.5" rx="6"></rect>
+              <text x="260" y="265" text-anchor="middle" font-size="12" font-weight="700" fill="#00409A">分子直径</text>
+              <text x="260" y="285" text-anchor="middle" font-size="16" font-weight="700" fill="#c0392b">d = V / S</text>
+            </svg>
+            <div class="diagram-caption">图 1 · 油膜法估算分子直径：体积 V 的油酸铺开成面积 S 的单分子膜，直径 d = V/S</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 油膜法公式推导</div>
+            <div class="tp-pause">为什么 \(d = V/S\)？这一步看似简单，但背后有一个<strong>极关键的假设</strong> —— 是什么？没了这个假设公式会怎样？</div>
+            <div class="tp-ask">假设油膜是<strong>正好一个分子厚</strong>的薄层（"单分子层假设"）。我把这层看作长方体：体积 = 底面积 × 高 → \(V = S \cdot d\) → \(d = V/S\)。但如果油膜实际上是 N 个分子厚，公式会怎么改？为什么"单分子层"这个假设在油酸-水体系是合理的？</div>
+            <div class="tp-write">在纸上：① 写出"长方体体积 = 底面积 × 高"的几何关系；② 翻译成"\(V = S \cdot d\)"；③ 解出 \(d = V/S\)；④ 用一句话说清"如果油膜是 N 层分子厚，则 \(d = V/(NS)\)" 与"单分子层"假设的关系。</div>
+            <div class="tp-hint">卡住时：想"为什么油酸会自动铺成单层而不是堆几层"——因为油酸分子一端亲水（羧基头）一端疏水（碳链尾），亲水头扎进水里、疏水尾朝上，自动排列成一个"立"起来的单分子层。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 实战估算</div>
+            <div class="tp-pause">给一组真实数据：1 滴油酸体积 \(V_1 = 5 \times 10^{-11}\) m³（约 0.05 mm³），滴在水面铺成面积 \(S = 100\) cm² \(= 10^{-2}\) m²。估算油酸分子直径 \(d\)。</div>
+            <div class="tp-ask">代入 \(d = V/S\)：\(d = (5 \times 10^{-11}) / (10^{-2}) = 5 \times 10^{-9}\) m \(= 5\) nm。和"分子尺度 \(\sim 10^{-10}\) m"对比 —— 油酸分子比常见小分子（水、氢）大约 10 倍。为什么？提示：油酸是 18 碳长链分子，"长"的方向比"水分子"长得多。</div>
+            <div class="tp-write">在纸上：① 写公式 \(d = V/S\)；② 代数据，注意单位换算（cm² 转 m²）；③ 结果保留 1 位有效数字；④ 把结果与"水分子 \(\sim 4 \times 10^{-10}\) m"对比，写一句结论。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">阿伏伽德罗链式 —— 把"克"和"分子"接起来</span></div>
+        <div class="step-content">
+          <p>油膜法是<strong>直接测</strong>分子大小。还有一种<strong>反推</strong>方法：</p>
+          <ul>
+            <li><strong>给定</strong>：宏观可测的量 —— 物质的<strong>密度 \(\rho\)</strong>（g/cm³）和<strong>摩尔质量 \(M\)</strong>（g/mol）</li>
+            <li><strong>已知</strong>：阿伏伽德罗常数 \(N_A = 6.02 \times 10^{23}\) /mol</li>
+            <li><strong>反推</strong>：单分子体积 \(V_\text{单}\) → 单分子直径 \(d\)（球模型）</li>
+          </ul>
+
+          <div class="derivation-block">
+            <div class="derivation-title">阿伏伽德罗链式推导 — 从 ρ、M 到 V<sub>单</sub> 到 d</div>
+            <div class="step-line"><strong>步骤 1</strong>：摩尔体积 \(V_\text{摩} = M / \rho\)（每 mol 物质占多少体积）</div>
+            <div class="step-line"><strong>步骤 2</strong>：单分子体积 \(V_\text{单} = V_\text{摩} / N_A = M / (\rho N_A)\)（把 \(V_\text{摩}\) 平均分给 \(N_A\) 个分子）</div>
+            <div class="step-line"><strong>步骤 3</strong>（球模型）：把单分子近似看成球，\(V_\text{单} = \tfrac{4}{3}\pi (d/2)^3 = \tfrac{\pi d^3}{6}\) → 解出 \(d = \sqrt[3]{6 V_\text{单}/\pi}\)</div>
+            <div class="step-line"><strong>合起来</strong>：\(d = \sqrt[3]{\dfrac{6M}{\pi \rho N_A}}\) —— 从宏观可测的 \(\rho\)、\(M\) 算出单分子直径！</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 算水分子直径</div>
+            <div class="tp-pause">水的密度 \(\rho = 1.0\) g/cm³ \(= 10^3\) kg/m³，摩尔质量 \(M = 18\) g/mol \(= 1.8 \times 10^{-2}\) kg/mol，\(N_A = 6.02 \times 10^{23}\) /mol。算水分子直径 \(d\)。</div>
+            <div class="tp-ask">代链式：① \(V_\text{摩} = M/\rho = 1.8 \times 10^{-2} / 10^3 = 1.8 \times 10^{-5}\) m³/mol；② \(V_\text{单} = V_\text{摩}/N_A = 1.8 \times 10^{-5} / 6.02 \times 10^{23} \approx 3.0 \times 10^{-29}\) m³；③ \(d = \sqrt[3]{6 V_\text{单}/\pi} = \sqrt[3]{5.7 \times 10^{-29}} \approx 3.85 \times 10^{-10}\) m \(\approx\) 0.4 nm。与实验值"约 \(4 \times 10^{-10}\) m"非常吻合 —— 这是阿伏伽德罗常数力量的体现：宏观可测量直接给出微观尺寸。</div>
+            <div class="tp-write">在纸上：① 一步步代链式 \(V_\text{摩} \to V_\text{单} \to d\)；② 每步注意单位（始终用 SI）；③ 最终结果与"分子尺度 \(10^{-10}\) m"对比。</div>
+            <div class="tp-hint">球模型"近似"在哪？水分子实际不是球（V 字形），但用于估算数量级足够。把复杂分子近似为球，是物理建模"抓主要矛盾、舍弃次要细节"的典型手法。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 分子数密度 n<sub>数</sub> = ρN<sub>A</sub>/M</div>
+            <div class="tp-pause">如果想知道"1 m³ 空气里有多少个气体分子"，怎么算？</div>
+            <div class="tp-ask">分子数密度 = 单位体积里的分子数。<strong>推链</strong>：1 m³ 物质的质量 = \(\rho\)（按 kg/m³）→ 摩尔数 \(n_\text{摩} = \rho/M\) → 分子数 \(N = n_\text{摩} \cdot N_A = \rho N_A / M\) → \(n_\text{数} = \rho N_A / M\)（单位 个/m³）。给空气近似 \(\rho \approx 1.3\) kg/m³，\(M \approx 29 \times 10^{-3}\) kg/mol → \(n_\text{数} \approx 2.7 \times 10^{25}\) 个/m³。即 1 cm³ 空气有 \(\sim 10^{19}\) 个分子。</div>
+            <div class="tp-write">在纸上：① 推出 \(n_\text{数} = \rho N_A / M\) 的链式；② 估算 1 cm³ 室温水有多少个水分子（约 \(3.3 \times 10^{22}\)）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">批判性审查（5 分钟）</span></div>
+        <div class="step-content">
+          <p>回头看油膜法 + 阿伏伽德罗链式两种方法，问自己：</p>
+          <ul>
+            <li>这两种方法<strong>独立测同一个量</strong>（分子直径），结果数量级一致 —— 这件事意味着什么？（提示：<strong>多途径独立验证</strong>是物理学认定一个数值"真实"的标准做法）</li>
+            <li>"单分子层假设"在油膜法里是必要的。如果换一种物质（比如汽油，不会形成单层），油膜法还能用吗？</li>
+            <li>"球模型"在阿伏伽德罗链式里是近似。对长链分子（油酸、DNA）"球模型"会偏离实际多远？</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>科学方法体感</strong>：物理学的关键技能不是"做对一道题"，是"用两种以上独立方法测同一个量，看是否一致"。这是发现实验错误 / 模型局限的核心工具。本板块的下一张卡（布朗运动）就是又一种独立证据。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="mkt-c1-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说清"分子直径 ~ 10⁻¹⁰ m"这个数量级，并能用一个生活类比说明它有多小</span></label>
+        <label data-key="mkt-c1-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立推导油膜法公式 d = V/S，并指出其单分子层假设的物理来源</span></label>
+        <label data-key="mkt-c1-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立写出阿伏伽德罗链式 d = ∛(6M / πρN<sub>A</sub>)，并能用它算水分子直径 ≈ 0.4 nm</span></label>
+        <label data-key="mkt-c1-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用分子数密度公式 n<sub>数</sub> = ρN<sub>A</sub> / M 估算 1 m³ 空气含分子数 ~ 10²⁵</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：科学探究 · 模型构建 · 数据处理 · 数量级估算</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>看不见的运动 —— 布朗运动 + 扩散</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解"分子在做永不停止的无规则运动"这个核心论断 → 学会布朗运动和扩散作为<strong>间接证据</strong> → 体会"间接观察"在物理学中的方法论价值<br>
+        <strong>建议时长</strong>：35-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">观察现象（5 分钟）</span></div>
+        <div class="step-content">
+          <p>1827 年，植物学家布朗用显微镜看悬浮在水里的<strong>花粉颗粒</strong>，意外发现：</p>
+          <div class="quote-block">
+            花粉颗粒在水里<strong>永不停止地做无规则运动</strong> —— 不是往一个方向漂，而是<strong>随机折线移动</strong>。即使水看上去完全静止、温度不变，颗粒仍然在动。
+          </div>
+          <p>另一个常见现象：<strong>扩散</strong> ——</p>
+          <ul>
+            <li>一滴墨水滴入清水，慢慢均匀染色（即使不搅拌）</li>
+            <li>厨房煮菜，香味很快传到隔壁房间（即使没有风）</li>
+            <li>把香水瓶打开，整间屋子很快都能闻到</li>
+          </ul>
+          <p><strong>问自己</strong>：</p>
+          <ul>
+            <li>花粉颗粒不是分子（颗粒太大了，肉眼可见或显微镜可见），为什么它会动？是<strong>什么</strong>在推它？</li>
+            <li>扩散为什么<strong>不需要搅拌</strong>？分子自己会"扩散"吗？</li>
+            <li>这两个现象有什么共同点？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 间接证据的逻辑</span></div>
+        <div class="step-content">
+          <p>分子太小（\(\sim 10^{-10}\) m），即使最好的光学显微镜（分辨极限 \(\sim 10^{-7}\) m）也<strong>看不见</strong>分子本身。但物理学有一套"间接看见"的方法：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 360" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-brown-1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker>
+              </defs>
+              <text x="260" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">布朗运动：看花粉，"看见"分子</text>
+              <!-- Water background -->
+              <rect x="40" y="40" width="440" height="290" fill="#e6f3fa" stroke="#3498db" stroke-width="1.5" rx="10"></rect>
+              <text x="60" y="62" font-size="11" fill="#2980b9">水（看上去静止）</text>
+              <!-- Pollen particle trajectory (zigzag) -->
+              <polyline points="120,180 160,140 200,170 240,120 290,160 320,210 270,250 200,220 150,260" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-dasharray="6,3"></polyline>
+              <!-- Endpoint markers -->
+              <circle cx="120" cy="180" r="4" fill="#c0392b"></circle>
+              <circle cx="160" cy="140" r="4" fill="#c0392b"></circle>
+              <circle cx="200" cy="170" r="4" fill="#c0392b"></circle>
+              <circle cx="240" cy="120" r="4" fill="#c0392b"></circle>
+              <circle cx="290" cy="160" r="4" fill="#c0392b"></circle>
+              <circle cx="320" cy="210" r="4" fill="#c0392b"></circle>
+              <circle cx="270" cy="250" r="4" fill="#c0392b"></circle>
+              <circle cx="200" cy="220" r="4" fill="#c0392b"></circle>
+              <!-- Pollen particle (current position) -->
+              <circle cx="150" cy="260" r="14" fill="#e67e22" stroke="#c0392b" stroke-width="2"></circle>
+              <text x="150" y="265" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">花粉</text>
+              <!-- Water molecules around (small dots with motion arrows) -->
+              <circle cx="100" cy="250" r="3" fill="#2980b9"></circle>
+              <line x1="100" y1="250" x2="125" y2="255" stroke="#2980b9" stroke-width="1" marker-end="url(#arrow-brown-1)"></line>
+              <circle cx="195" cy="280" r="3" fill="#2980b9"></circle>
+              <line x1="195" y1="280" x2="175" y2="268" stroke="#2980b9" stroke-width="1" marker-end="url(#arrow-brown-1)"></line>
+              <circle cx="140" cy="300" r="3" fill="#2980b9"></circle>
+              <line x1="140" y1="300" x2="148" y2="278" stroke="#2980b9" stroke-width="1" marker-end="url(#arrow-brown-1)"></line>
+              <circle cx="200" cy="245" r="3" fill="#2980b9"></circle>
+              <line x1="200" y1="245" x2="178" y2="252" stroke="#2980b9" stroke-width="1" marker-end="url(#arrow-brown-1)"></line>
+              <circle cx="370" cy="100" r="3" fill="#2980b9"></circle>
+              <circle cx="410" cy="150" r="3" fill="#2980b9"></circle>
+              <circle cx="380" cy="220" r="3" fill="#2980b9"></circle>
+              <circle cx="440" cy="270" r="3" fill="#2980b9"></circle>
+              <!-- Legend -->
+              <text x="380" y="80" font-size="11" font-weight="700" fill="#c0392b">━ 花粉轨迹</text>
+              <text x="380" y="98" font-size="10" fill="#34495e">（折线无规则）</text>
+              <text x="380" y="130" font-size="11" font-weight="700" fill="#2980b9">● 水分子</text>
+              <text x="380" y="148" font-size="10" fill="#34495e">（高速无规则碰撞）</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 布朗运动：花粉颗粒被周围数以亿计的高速水分子从各方向不均匀地撞击，导致呈现折线无规则轨迹</div>
+          </div>
+
+          <p><strong>核心论证链</strong>：</p>
+          <ol>
+            <li>显微镜下<strong>看到</strong>花粉做无规则运动 →</li>
+            <li>花粉本身没有动力（不是生物运动） → 一定是<strong>外部力推</strong>它</li>
+            <li>能推动花粉的"外部"只有<strong>水分子的碰撞</strong>（水里没别的）</li>
+            <li>花粉运动既然<strong>无规则</strong>，水分子的碰撞一定<strong>来自四面八方且不均匀</strong></li>
+            <li><strong>结论</strong>：水分子在永不停止地做<strong>高速无规则运动</strong> —— 哪怕水看上去完全静止</li>
+          </ol>
+          <p>这是<strong>间接观察</strong>的典范：我们看不到水分子本身，但看到了它们<strong>留下的痕迹</strong>（花粉的折线轨迹）。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">温度对热运动的影响 + 扩散</span></div>
+        <div class="step-content">
+          <p>把布朗运动实验放在热水里再做一次：花粉颗粒移动<strong>更剧烈</strong>，折线段更长、折点更频繁。</p>
+          <p>把墨水滴入热水 vs 冷水：热水里<strong>染色更快</strong>。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 温度 ↑ → 运动更剧烈</div>
+            <div class="tp-pause">温度升高 → 布朗运动更剧烈 / 扩散更快。这说明<strong>温度</strong>和<strong>分子运动</strong>之间有什么关系？</div>
+            <div class="tp-ask">温度直接反映分子运动的<strong>剧烈程度</strong>。温度越高，分子（动能）越大，撞击花粉的力越强、频率越高，于是布朗运动越剧烈、扩散越快。这个定性观察留下了一个关键线索 —— "温度 = 微观运动的某种平均量"，Card 4 会用"温度 \(\propto\) 平均动能"把这个定性关系定量化。</div>
+            <div class="tp-write">在纸上：① 写一句"温度对分子运动的定性关系"；② 留白一行，预告"Card 4 把这关系定量为 \(T \propto \bar{\varepsilon}\)"。</div>
+          </div>
+
+          <p>"分子永不停止运动"还有一个名字 —— <strong>分子热运动</strong>。"热"这个字提示了它和温度的密切关系。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思：物理学的"间接观察"</span></div>
+        <div class="step-content">
+          <ul>
+            <li>布朗运动是<strong>分子热运动</strong>的间接证据 —— 不是直接看到分子，是看到"被分子推着走的花粉"</li>
+            <li>扩散是另一个间接证据 —— 不是直接看到分子在动，是看到"染色 / 气味"的宏观结果</li>
+            <li><strong>关键悟性</strong>：物理学很多事都不能直接观察（原子、电子、夸克、引力波），但只要找到合适的"<strong>痕迹</strong>"或"<strong>放大器</strong>"，就能"间接看见"。布朗运动 = 用花粉颗粒做放大器，把单个水分子的运动放大到肉眼可见的尺度</li>
+            <li>1905 年爱因斯坦发表布朗运动数学理论，给出了 \(N_A\) 的独立测定方法 —— 这是<strong>第三种独立测分子数的方法</strong>（油膜 / 电化学 / 布朗运动），三种方法结果一致，最终让分子论从假说变为事实</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="mkt-c2-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 5 步论证链说清"为什么布朗运动是分子热运动的间接证据"（看到的是花粉，不是分子）</span></label>
+        <label data-key="mkt-c2-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"布朗运动"（看花粉）和"扩散"（看染色/气味）—— 都是间接证据，但观察对象不同</span></label>
+        <label data-key="mkt-c2-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说清"温度升高 → 布朗运动 / 扩散加剧"这个定性关系，并预感它指向 Card 4 的"温度 ∝ 分子平均动能"</span></label>
+        <label data-key="mkt-c2-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用一句话说清"物理学的间接观察方法" —— 找到合适的放大器（花粉就是水分子的放大器）</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：科学方法 · 间接证据 · 物理思维（看不见≠不存在）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>分子间作用力 —— F-r 曲线与平衡距离</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解分子之间同时存在引力和斥力，能画 F-r 曲线 → 知道平衡距离 \(r_0 \sim 10^{-10}\) m → 用 F-r 曲线解释固体难压缩 / 气体易膨胀 / 液体既能流动又有体积<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>问自己 ——</p>
+          <ul>
+            <li>固体很难压缩（用力压一块铁，体积几乎不变）。这说明分子之间有什么力？</li>
+            <li>固体也很难<strong>拉断</strong>（拉一根钢丝需要很大力）。这又说明分子之间有什么力？</li>
+            <li>气体很容易压缩，也很容易膨胀。这说明气体分子之间的相互作用力<strong>如何</strong>？</li>
+            <li>液体能流动（说明分子能动），但有固定体积（说明分子不会四散）。液体处于什么状态？</li>
+          </ul>
+          <p>给一个核心猜测：<strong>分子之间同时存在引力和斥力，二者随距离变化方式不同</strong>。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">F-r 曲线 —— 引力 + 斥力 + 合力</span></div>
+        <div class="step-content">
+          <p>实验和理论都表明，分子间作用力 \(F\) 是距离 \(r\) 的函数，呈现以下规律：</p>
+          <ul>
+            <li><strong>斥力 \(F_\text{斥}\)</strong>：在所有 \(r\) 都存在；\(r\) 减小时磁向急剧增大，\(r \to 0\) 时磁向 \(\to \infty\)；\(r\) 增大时磁向迅速减小，\(r\) 较大时几乎可忽略 —— 即"短距离起作用"</li>
+            <li><strong>引力 \(F_\text{引}\)</strong>：在所有 \(r\) 都存在；\(r\) 减小时磁向也增大，\(r \to 0\) 时磁向 \(\to \infty\)；\(r\) 增大时磁向减小，\(r \to \infty\) 时趋于 0。但<strong>引力的衰减速率比斥力慢</strong>，因而长距离时引力相对显著</li>
+            <li><strong>合力 \(F_\text{合} = F_\text{斥} + F_\text{引}\)</strong>（代数和；约定<strong>斥力取正方向、引力取负方向</strong>）</li>
+            <li>存在一个<strong>平衡距离 \(r_0\)</strong>：在 \(r = r_0\) 时斥力与引力磁向相等，合力 \(F_\text{合} = 0\)</li>
+          </ul>
+
+          <div class="diagram-block">
+            <img src="images/molecular-kinetic-theory-fr-curve.jpg" alt="分子间作用力 F-r 曲线" style="max-width: 380px; height: auto;">
+            <div class="diagram-caption">图 3 · 分子间作用力 F-r 曲线。横轴 r 为分子间距离，纵轴 F 为作用力（"斥力"区在 x 轴上方，"引力"区在 x 轴下方）。<strong>粉红色曲线</strong>为斥力 F<sub>斥</sub>(r)（位于 x 轴上方），<strong>蓝色曲线</strong>为引力 F<sub>引</sub>(r)（位于 x 轴下方）。x 轴上标出 r₀ 为平衡距离。图中过 P 点画一条垂直辅助线，与粉红色 F<sub>斥</sub> 曲线交于 C 点、与蓝色 F<sub>引</sub> 曲线交于 D 点；Q 是该垂直线在 x 轴上方的一个标注点（位于 C 与 P 之间），其位置可用于辅助分析 P 处两种力的磁向关系。</div>
+          </div>
+
+          <p><strong>关键读图</strong>：</p>
+          <ul>
+            <li>\(r &lt; r_0\)：净合力 = 斥力 → "压不动" → 固体难压缩</li>
+            <li>\(r = r_0\)：合力 = 0 → 分子处在<strong>平衡位置</strong>，这是固体里分子的"家"</li>
+            <li>\(r &gt; r_0\)：净合力 = 引力（但越远越弱）→ "拉得动但拉不远" → 固体能拉断 / 液体表面张力 / 气体可压缩到 \(r &lt; r_0\) 才反弹</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">用 F-r 曲线解释三态</span></div>
+        <div class="step-content">
+          <table class="compare-table">
+            <tr><th>状态</th><th>分子间距</th><th>主导作用力</th><th>宏观表现</th></tr>
+            <tr><td><strong>固体</strong></td><td>\(r \approx r_0\)</td><td>引斥力都强（互相平衡）</td><td>有固定形状 + 固定体积 / 难压缩、难拉断 / 分子在 \(r_0\) 附近振动</td></tr>
+            <tr><td><strong>液体</strong></td><td>略大于 \(r_0\)</td><td>引力大于斥力（弱）</td><td>有固定体积、无固定形状 / 能流动 / 表面张力（引力把表面分子拉回）</td></tr>
+            <tr><td><strong>气体</strong></td><td>\(\gg r_0\)（约 10\(r_0\)）</td><td>引斥力几乎可忽略</td><td>充满容器（无固定形状 / 体积）/ 易压缩、易膨胀 / 高速无序运动</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 6 · 用 F-r 解释固体振动</div>
+            <div class="tp-pause">固体里分子并不"静止不动"，而是<strong>在 r₀ 附近做振动</strong>。为什么？用 F-r 曲线解释。</div>
+            <div class="tp-ask">分子受热运动驱动，会暂时偏离 r₀。① 如果偏向 r&lt;r₀：净力 = 斥力（→ 把它推回 r₀）；② 如果偏向 r&gt;r₀：净力 = 引力（→ 把它拉回 r₀）。所以分子被"<strong>双向回弹力</strong>"约束在 r₀ 附近 —— 这就是振动。温度越高，振动幅度越大；温度足够高 → 分子能冲出 r₀ 范围 → 熔化（固→液）。</div>
+            <div class="tp-write">在纸上：① 画一个简化的 F-r 曲线 + r₀ 标记；② 标出 r&lt;r₀ 和 r&gt;r₀ 两个方向的"恢复力箭头"；③ 一句话总结"为什么固体里分子是振动而不是静止"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界：本板块的简化</span></div>
+        <div class="step-content">
+          <ul>
+            <li>F-r 曲线是<strong>简化模型</strong>（经典模型为 Lennard-Jones 形式）。真实分子作用力还有<strong>方向性</strong>（角度依赖），比如水分子两侧的 OH 键有不同的相互作用 —— 这是大学物化的内容</li>
+            <li>本板块只用 F-r 曲线的<strong>定性形状</strong>，<strong>不引入势能函数 \(U(r)\) 的解析形式</strong>（由 \(F = -dU/dr\) 反积分得到）—— 这部分留给进阶 微观推导 或大学物化</li>
+            <li>本板块用 F-r 曲线<strong>定性</strong>解释三态，不做定量计算 —— 定性理解先于公式推导，是物理学习的基本顺序</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="mkt-c3-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立画出 F-r 曲线（F<sub>斥</sub> 与 F<sub>引</sub> 两条分量曲线 + x 轴上的 r₀ 平衡距离），并能从这两条曲线推理出 F<sub>合</sub> 的零点（r = r₀）和符号变化（r &lt; r₀ 为净斥力 / r &gt; r₀ 为净引力）</span></label>
+        <label data-key="mkt-c3-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 F-r 曲线解释"为什么固体难压缩 + 难拉断 + 分子在 r₀ 附近振动"</span></label>
+        <label data-key="mkt-c3-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用三态分子间距对比表（r ≈ r₀ / 略大于 r₀ / ≫ r₀）解释固液气三态宏观性质差异</span></label>
+        <label data-key="mkt-c3-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出 r₀ 数量级 ~ 10⁻¹⁰ m，并解释为什么液体分子势能比气体大</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：图像理解 · 力学模型 · 结构-性质关联</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 4 ==================== -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>温度的微观本质 —— T ∝ 分子平均动能</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从"温度计读数"的宏观量上升到"分子平均动能"的微观本质 → 理解温度是<strong>宏观统计平均</strong>（单个分子温度无意义）→ 学会定性比较同温下不同气体的分子速率（\(m \downarrow \Rightarrow v \uparrow\)）<br>
+        <strong>建议时长</strong>：35-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>三个挑战题，凭直觉答 ——</p>
+          <ul>
+            <li>把两个气体瓶放在同一恒温箱里，长时间后，温度计读数相同。你能说<strong>两瓶气体的什么物理量相同</strong>？只能是温度本身吗？</li>
+            <li>一杯 100°C 的开水 vs 一桶 100°C 的开水，温度相同，但你直觉哪个"热"得更厉害 / 烧伤更狠？为什么？</li>
+            <li>"单个分子的温度"是什么意思？1 个氢分子能说它的温度是 27°C 吗？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">温度 ∝ 分子平均动能 —— 核心论断</span></div>
+        <div class="step-content">
+          <p>大量实验和理论一致表明，<strong>热力学温度</strong>（开尔文 T，K）有一个深刻的微观本质：</p>
+          <div class="quote-block">
+            <strong>核心论断 ⭐⭐</strong>：温度 \(T\) 正比于分子的<strong>平均平动动能</strong> \(\bar{\varepsilon}_\text{平}\)：<br>
+            <strong>\(\bar{\varepsilon}_\text{平} \propto T\)</strong>（严格的比例关系 \(\bar{\varepsilon}_\text{平} = \tfrac{3}{2}kT\) 留给进阶<a href="advanced-task-cards.html">微观推导</a>板块推导）。<br>
+            其中"<strong>平均</strong>"指对系统内所有分子取算术平均。
+          </div>
+
+          <p><strong>这个论断的几个直接推论</strong>：</p>
+          <ol>
+            <li><strong>温度相同 \(\Rightarrow\) 分子平均动能相同</strong>（无论是氢气、氧气、还是别的气体）</li>
+            <li><strong>温度反映的是"平均"，与分子数 N 无关</strong>（一杯水和一桶水温度相同，但内能不同 —— 内能与 N 有关，留给 Card 5）</li>
+            <li><strong>"单个分子温度"无意义</strong>（统计平均量必须建立在大量样本上，少数几个分子谈不上"温度"）</li>
+            <li><strong>温度有下限：绝对零度 \(T = 0\) K</strong>（对应分子平均动能 = 0，热运动停止 —— 高中口径简化，量子角度仍有零点能，不在本板块范围）</li>
+          </ol>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 7 · m ↓ → v ↑（同 T 下）</div>
+            <div class="tp-pause">同温下（比如室温 300 K）的氢气 H₂（摩尔质量 2 g/mol）和氧气 O₂（摩尔质量 32 g/mol）：哪种气体分子<strong>平均速度</strong>更大？理由？</div>
+            <div class="tp-ask">同 T 下两种气体<strong>平均动能相同</strong>：\(\bar{\varepsilon}_\text{平}^{(\text{H}_2)} = \bar{\varepsilon}_\text{平}^{(\text{O}_2)}\)。平动动能定义 \(\bar{\varepsilon}_\text{平} = \tfrac{1}{2} m \bar{v^2}\)。所以 \(\tfrac{1}{2} m_\text{H} \bar{v^2}_\text{H} = \tfrac{1}{2} m_\text{O} \bar{v^2}_\text{O}\) → \(\bar{v^2}_\text{H} / \bar{v^2}_\text{O} = m_\text{O} / m_\text{H} = 32/2 = 16\) → \(\bar{v}_\text{H} \approx 4 \bar{v}_\text{O}\)。<strong>氢气分子约比氧气分子快 4 倍</strong>。一般规律：同 T 下 <strong>\(m \downarrow \Rightarrow v \uparrow\)</strong>（轻的跑得快）。</div>
+            <div class="tp-write">在纸上：① 写"同 T → \(\bar{\varepsilon}\) 相同"；② 用 \(\tfrac{1}{2} m v^2 = \bar{\varepsilon}\) 推出 \(v \propto 1/\sqrt{m}\)；③ 算 \(v_\text{H}/v_\text{O} = \sqrt{m_\text{O}/m_\text{H}} = \sqrt{16} = 4\)；④ 一句话总结"轻分子在同温下跑得快"。</div>
+            <div class="tp-hint">"平均动能"和"平均速度"是两个不同的物理量，分清它们的依赖关系：平均动能由 T 决定（同 T 下相等），平均速度还要看 m（同 T 下轻分子跑得快）—— 这是混淆最常见的地方。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 360" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-vd-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">不同温度下分子速率分布（定性）</text>
+              <!-- Axes (right edge shortened to give 'v' label room) -->
+              <line x1="60" y1="300" x2="490" y2="300" stroke="#1d1d1f" stroke-width="1.5" marker-end="url(#arrow-vd-axis)"></line>
+              <line x1="80" y1="320" x2="80" y2="60" stroke="#1d1d1f" stroke-width="1.5" marker-end="url(#arrow-vd-axis)"></line>
+              <!-- Axis labels (compact + away from axes) -->
+              <text x="505" y="305" font-size="12" font-weight="700" fill="#1d1d1f">v</text>
+              <text x="500" y="320" font-size="9" fill="#6e6e73">速率</text>
+              <text x="92" y="58" font-size="12" font-weight="700" fill="#1d1d1f">N(v)</text>
+              <!-- Origin -->
+              <text x="68" y="316" font-size="10" fill="#6e6e73">O</text>
+              <!-- Low T curve (blue, narrow & tall, peak at low v) -->
+              <path d="M 90,300 Q 120,270 145,200 Q 170,110 195,200 Q 220,270 280,295 Q 360,300 480,300" fill="none" stroke="#2980b9" stroke-width="2.5"></path>
+              <!-- Peak marker T1 (dashed vertical) -->
+              <line x1="170" y1="115" x2="170" y2="298" stroke="#2980b9" stroke-width="1" stroke-dasharray="3,3"></line>
+              <!-- Low T label moved to upper-left far from curve -->
+              <text x="100" y="80" font-size="11" font-weight="700" fill="#2980b9">━ 低温 T₁</text>
+              <text x="100" y="95" font-size="10" fill="#2980b9">峰窄高、低 v</text>
+              <!-- High T curve (red, wider & shorter, peak at higher v) -->
+              <path d="M 90,300 Q 140,290 190,255 Q 240,215 290,210 Q 350,220 405,265 Q 450,295 480,300" fill="none" stroke="#c0392b" stroke-width="2.5"></path>
+              <!-- Peak marker T2 -->
+              <line x1="285" y1="218" x2="285" y2="298" stroke="#c0392b" stroke-width="1" stroke-dasharray="3,3"></line>
+              <!-- High T label moved to upper-right far from curve -->
+              <text x="345" y="80" font-size="11" font-weight="700" fill="#c0392b">━ 高温 T₂ &gt; T₁</text>
+              <text x="345" y="95" font-size="10" fill="#c0392b">峰宽矮、高 v</text>
+              <!-- v-bar labels placed below x-axis at appropriate offset -->
+              <text x="170" y="335" text-anchor="middle" font-size="10" fill="#2980b9">v̄₁</text>
+              <text x="285" y="335" text-anchor="middle" font-size="10" fill="#c0392b">v̄₂</text>
+              <!-- Annotation block (compact, away from curves) -->
+              <text x="280" y="130" font-size="10" fill="#34495e">温度 ↑ → 平均速率 ↑ + 峰变宽矮</text>
+            </svg>
+            <div class="diagram-caption">图 4 · 定性：温度升高时分子速率分布的峰向高速移动 + 变宽变矮（曲线下面积不变 = 总分子数不变）</div>
+          </div>
+
+          <p><strong>读图小结</strong>：温度反映的不是"所有分子速度都相同"，而是"<strong>分子速度的分布</strong>"。同一温度下，少数分子速度极快、少数极慢、大多数在平均值附近 —— 但整个分布的"平均量"由温度唯一决定。</p>
+
+          <div class="quote-block">
+            <strong>边界声明</strong>：本板块只到"温度 ∝ 平均动能"的定性论断和"\(m \downarrow \Rightarrow v \uparrow\)"的定性比较。严格公式 \(\bar{\varepsilon} = \tfrac{3}{2}kT\)、方均根速率 \(v_\text{rms} = \sqrt{3RT/M}\)、麦克斯韦速率分布的解析式 —— 都留给进阶 微观推导 板块和大学物化。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">应用：极端情况体感</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>绝对零度 0 K</strong>：分子平均动能 = 0，<strong>热运动停止</strong>（高中口径）。注意这是理想极限，实际上达不到（热力学第三定律：T 不可达 0）—— 第二定律 / 进阶板块会讲</li>
+            <li><strong>气温从 27°C 升到 300°C</strong>：T 从 300 K 到 573 K → 平均动能升高约 1.9 倍 → 平均速率升高约 \(\sqrt{1.9} \approx 1.4\) 倍</li>
+            <li><strong>太阳表面 6000 K vs 室温 300 K</strong>：氢分子平均动能差 20 倍 → 平均速率差约 \(\sqrt{20} \approx 4.5\) 倍</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思：温度是"宏观平均"</span></div>
+        <div class="step-content">
+          <ul>
+            <li>温度是一个<strong>统计平均量</strong>，只能描述大量分子的集体行为</li>
+            <li>"单个分子 27°C" 是错的概念 —— 单个分子有动能（一个具体的速度 v），但不能说它"有温度"</li>
+            <li>这也是为什么<strong>统计力学</strong>是热力学的微观基础 —— 没有大量样本就没有"平均"，没有平均就没有温度</li>
+            <li>这个论断为下一张卡（内能）铺路：内能 \(\propto\) 总动能 + 总势能 \(\propto N \bar{\varepsilon} +\) 势能，依赖于 N 而温度不依赖 N —— 这是<strong>状态量 vs 总量</strong>的区分</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 4 检查点</div>
+        <label data-key="mkt-c4-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"温度 ∝ 分子平均动能"的核心论断，并知道严格公式留给进阶板块</span></label>
+        <label data-key="mkt-c4-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能定性比较同温下不同气体的平均速率：v ∝ 1/√m，并算氢气和氧气分子速率比 v<sub>H</sub> / v<sub>O</sub> = 4</span></label>
+        <label data-key="mkt-c4-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能读懂不同温度下速率分布图：温度 ↑ → 峰右移、变宽变矮、曲线下面积不变</span></label>
+        <label data-key="mkt-c4-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"为什么单个分子温度无意义" —— 温度是统计平均量</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：统计思维 · 宏观-微观桥接 · 极限情况分析</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 5 ==================== -->
+  <div class="task-card" id="task5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">5</div>
+      <h3>内能的微观定义 —— U = 总动能 + 总势能</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把前面 4 张卡的微观图像汇聚到<strong>内能 U</strong> 的定义 → 区分动能项和势能项 → 理解内能是<strong>状态量</strong>（为下一板块第一定律 \(\Delta U = Q - W\) 直接铺路）<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>三个问题先自己答 ——</p>
+          <ul>
+            <li>一杯热水 vs 一杯冷水，<strong>内能</strong>谁多？为什么？</li>
+            <li>一杯热水 vs 一桶冷水，<strong>内能</strong>谁多？为什么？（注意比上一题难）</li>
+            <li>同温度下，同摩尔数的水蒸气（气态）和液态水：内能一样多吗？为什么？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">内能的微观定义</span></div>
+        <div class="step-content">
+          <p>把 Card 2-4 建立的微观图像合起来 —— 系统的<strong>内能 U</strong> 是所有分子运动和相互作用能量的总和：</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">内能 U = 分子总动能 + 分子总势能 ⭐⭐（为第一定律铺路）</div>
+            <div class="step-line"><strong>动能部分 E<sub>动</sub></strong>：所有分子的<strong>平动动能 + 转动动能 + 振动动能</strong> 之和。高中口径主要考虑平动动能 \(E_\text{动} \approx N \cdot \bar{\varepsilon}_\text{平}\)（N 为分子数 / \(\bar{\varepsilon}_\text{平}\) ∝ T）。所以 <strong>\(E_\text{动} \propto N \cdot T\)</strong>。</div>
+            <div class="step-line"><strong>势能部分 E<sub>势</sub></strong>：由<strong>分子间相互作用力</strong>产生（来自 Card 3 的 F-r 曲线）。气体里分子间距远，势能近似 0；液体里分子间距 ≈ r₀ 略大，势能为负（被引力束缚）；固体里势能最负（最被束缚）。所以 <strong>\(E_\text{势}\) 取决于分子间距（与状态 / 结构有关）</strong>。</div>
+            <div class="step-line"><strong>总和</strong>：\(U = E_\text{动} + E_\text{势} = (\text{依赖 } N, T) + (\text{依赖结构 / 三态})\)</div>
+            <div class="step-line"><strong>关键</strong>：U 只依赖系统<strong>当前状态</strong>（N、T、体积 V / 三态等），与系统是怎么到达这个状态的"<strong>路径</strong>"无关 —— 这就是<strong>状态量</strong>的定义。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">内能 U 的两部分</text>
+              <!-- Big rectangle U -->
+              <rect x="60" y="50" width="200" height="220" fill="none" stroke="#00409A" stroke-width="2.5"></rect>
+              <text x="160" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#00409A">U（系统内能）</text>
+              <!-- Top half: kinetic -->
+              <rect x="65" y="55" width="190" height="100" fill="#2980b9" fill-opacity="0.25" stroke="#2980b9" stroke-width="1"></rect>
+              <text x="160" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#2980b9">E<tspan font-size="9" dy="3">动</tspan><tspan dy="-3"></tspan></text>
+              <text x="160" y="118" text-anchor="middle" font-size="10" fill="#2980b9">分子总动能</text>
+              <text x="160" y="135" text-anchor="middle" font-size="10" fill="#2980b9">∝ N · T</text>
+              <!-- Bottom half: potential -->
+              <rect x="65" y="160" width="190" height="105" fill="#8e44ad" fill-opacity="0.25" stroke="#8e44ad" stroke-width="1"></rect>
+              <text x="160" y="200" text-anchor="middle" font-size="13" font-weight="700" fill="#8e44ad">E<tspan font-size="9" dy="3">势</tspan><tspan dy="-3"></tspan></text>
+              <text x="160" y="220" text-anchor="middle" font-size="10" fill="#8e44ad">分子总势能</text>
+              <text x="160" y="237" text-anchor="middle" font-size="10" fill="#8e44ad">取决于分子间距</text>
+              <text x="160" y="252" text-anchor="middle" font-size="10" fill="#8e44ad">（三态结构）</text>
+              <!-- Right: three-state comparison -->
+              <text x="395" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#00409A">同 N + T 下三态 U 对比</text>
+              <!-- Gas -->
+              <rect x="300" y="60" width="190" height="60" fill="none" stroke="#34495e" stroke-width="1.2" rx="4"></rect>
+              <text x="312" y="80" font-size="11" font-weight="700" fill="#34495e">气体</text>
+              <text x="312" y="98" font-size="10" fill="#34495e">分子间距 ≫ r₀ → E<tspan font-size="9" dy="3">势</tspan><tspan dy="-3"></tspan> ≈ 0</text>
+              <text x="312" y="113" font-size="10" fill="#2980b9">U ≈ E<tspan font-size="9" dy="3">动</tspan><tspan dy="-3"></tspan>（最大动能贡献）</text>
+              <!-- Liquid -->
+              <rect x="300" y="135" width="190" height="60" fill="none" stroke="#34495e" stroke-width="1.2" rx="4"></rect>
+              <text x="312" y="155" font-size="11" font-weight="700" fill="#34495e">液体</text>
+              <text x="312" y="173" font-size="10" fill="#34495e">分子间距 ≳ r₀ → E<tspan font-size="9" dy="3">势</tspan><tspan dy="-3"></tspan> &lt; 0</text>
+              <text x="312" y="188" font-size="10" fill="#8e44ad">U &lt; 气体（势能拉低）</text>
+              <!-- Solid -->
+              <rect x="300" y="210" width="190" height="60" fill="none" stroke="#34495e" stroke-width="1.2" rx="4"></rect>
+              <text x="312" y="230" font-size="11" font-weight="700" fill="#34495e">固体</text>
+              <text x="312" y="248" font-size="10" fill="#34495e">分子间距 ≈ r₀ → E<tspan font-size="9" dy="3">势</tspan><tspan dy="-3"></tspan> 最负</text>
+              <text x="312" y="263" font-size="10" fill="#8e44ad">U 最小（最强束缚）</text>
+            </svg>
+            <div class="diagram-caption">图 5 · 内能 U 由分子总动能（∝ N·T）和分子总势能（取决于分子间距/三态）共同决定</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 8 · 一杯热水 vs 一桶冷水</div>
+            <div class="tp-pause">一杯热水（100°C，0.2 L）vs 一桶冷水（5°C，20 L）：哪个内能更多？凭什么？</div>
+            <div class="tp-ask">U ∝ N（分子数）· T（温度）+ 势能项（三态相同 → 势能差别小）。① 杯热水 N₁ 小、T₁ 大（373 K）；② 桶冷水 N₂ 大（约 100 倍多）、T₂ 小（278 K）。算 \(N_2 T_2 / N_1 T_1 \approx 100 \times 278/373 \approx 75\)。<strong>桶冷水内能约比杯热水大 75 倍</strong>。这暴露一个关键认知陷阱 —— 温度 ≠ 内能。烧伤狠不狠取决于温度（局部接触的强度），但<strong>内能</strong>是系统全局的能量总量。</div>
+            <div class="tp-write">在纸上：① 估算 N₁ 和 N₂（用 mol 比即可）；② 算 N · T 比；③ 用一句话总结"温度大 ≠ 内能多"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 9 · 同温下气-液-固内能对比</div>
+            <div class="tp-pause">同温度（100°C）、同摩尔数（1 mol）的水蒸气（气）vs 液态水（液）vs 冰（固，假设也能在 100°C 存在）：内能谁多？</div>
+            <div class="tp-ask">同 T + 同 N → E<sub>动</sub> 相同。差别在 E<sub>势</sub>：① 气：分子间距 ≫ r₀ → E<sub>势</sub> ≈ 0；② 液：分子间距 ≳ r₀ → E<sub>势</sub> &lt; 0（束缚）；③ 固：分子间距 ≈ r₀ → E<sub>势</sub> 最负。<strong>U 气体 &gt; U 液体 &gt; U 固体</strong>。这就是为什么水蒸发要吸热（液→气 需要补足势能差）、为什么冰熔化要吸热（固→液 同理）。<strong>潜热的本质就是势能差</strong>。</div>
+            <div class="tp-write">在纸上：① 写 \(U_\text{气} \gt U_\text{液} \gt U_\text{固}\)；② 解释"汽化吸热"和"熔化吸热"的物理原因（吸收的热量变为分子势能）；③ 留白预告"这点 Card 5 的反思推出第一定律"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">内能是状态量 —— 自然引出 ΔU</span></div>
+        <div class="step-content">
+          <p>因为 \(U\) 只依赖系统当前状态（N、T、V、三态等），不依赖路径，所以可以定义状态变化时的内能变化：</p>
+          <div class="quote-block" style="font-size: 1rem; text-align: center; padding: 16px;">
+            \(\Delta U = U_\text{末} - U_\text{初}\)
+          </div>
+          <p>这个 \(\Delta U\) 就是<strong>下一板块（热力学第一定律）</strong>要追问的关键量 ——</p>
+          <ul>
+            <li>系统内能变化 \(\Delta U\) 是怎么发生的？</li>
+            <li>它一定来自"<strong>外界给系统的能量</strong>"。外界能给两种东西：<strong>热量 Q</strong> 和<strong>做功 W</strong>。</li>
+            <li>所以会有：<strong>\(\Delta U = Q - W\)</strong>（热力学第一定律的雏形 —— 完整论证留给下一板块）</li>
+          </ul>
+          <p>本板块到这里就<strong>结束</strong>了。微观工具（分子、热运动、F-r 曲线、平均动能、内能定义）全部就位。下一板块用这套工具<strong>立第一定律</strong>。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 + 串接</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>本板块的核心成就</strong>：把宏观可测的 ρ、M、T 和微观看不见的 N<sub>A</sub>、d、\(\bar{\varepsilon}\)、\(U\) <strong>用 N<sub>A</sub> 这个数</strong>真正连起来</li>
+            <li><strong>5 张卡片的内在线索</strong>：尺度（Card 1） → 运动（Card 2） → 相互作用（Card 3） → 温度（Card 4） → 内能（Card 5）。这是<strong>微观图像层层加码</strong>的过程，每张卡的核心结论都是下一张卡的前提</li>
+            <li><strong>本板块的边界</strong>：到内能定义为止，下一步两条路 —— ① 应用：第一定律 \(\Delta U = Q - W\) → 气体液体固体（PV=nRT）→ 第二定律基础；② 深化（学有余力）：微观推导 → 卡诺循环 → 状态函数 → 熵 → 焓</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游连接</strong>：本板块的内能定义 \(U = E_\text{动} + E_\text{势}\) 是<strong>整个热力学大主题的基石</strong>。第一定律的 \(\Delta U\) 直接用它；后续盖斯定律用 \(\Delta H = \Delta U + \Delta (PV)\)（焓）— 也建立在本板块的 \(U\) 概念上。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 5 检查点</div>
+        <label data-key="mkt-c5-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立写出"内能 = 分子总动能 + 分子总势能"的微观定义</span></label>
+        <label data-key="mkt-c5-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分动能项（∝ N·T）和势能项（取决于三态/分子间距）</span></label>
+        <label data-key="mkt-c5-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"温度大 ≠ 内能多" —— 用"杯热水 vs 桶冷水"的例子</span></label>
+        <label data-key="mkt-c5-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用势能差解释汽化吸热 / 熔化吸热（潜热的微观本质）</span></label>
+        <label data-key="mkt-c5-5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出 U 是状态量，并预告下一板块的 ΔU = Q − W（第一定律）</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：能量观 · 状态量 · 微观-宏观桥接 · 概念预告</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 3 件事：(1) Card 1 思考点 1 + 思考点 3：油膜法 \(d = V/S\) 推导 + 阿伏伽德罗链式 \(d = \sqrt[3]{6M/(\pi\rho N_A)}\) 完整推导；(2) Card 4 思考点 7：从"同 T 下 \(\bar{\varepsilon}\) 相同"推出 \(v_\text{H}/v_\text{O} = \sqrt{m_\text{O}/m_\text{H}} = 4\) 的完整代数；(3) Card 5：用 F-r 曲线 + 三态结构解释 \(U_\text{气} \gt U_\text{液} \gt U_\text{固}\)。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答：① "看不见≠不存在"在物理学中是什么样的思维？我以前是怎么看待"看不见的东西"的？② 阿伏伽德罗常数把宏观可测和微观看不见连起来 —— 这种"数把两个世界对接起来"的体验，对我学物理有什么启发？</td></tr>
+      <tr><td>自评清单</td><td>所有 5 张卡的 checkpoint 都勾完。重点确认 Card 1（阿伏伽德罗链式）和 Card 5（内能定义）—— 这两条是后续板块的强依赖。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15 分钟口试，准备用<strong>3 分钟</strong>清晰说出"温度的微观本质是什么 + 为什么单个分子谈不上温度"。</td></tr>
+    </table>
+
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：本板块的"<strong>10⁻¹⁰ 米尺度感</strong>"和"<strong>U = 动能 + 势能 的状态量定义</strong>"是后续<strong>所有</strong>热力学板块的基石。手写推导稿是把这种"数量级 + 状态量"语言"<strong>固化进手感</strong>"的关键 —— 不能让 AI 代写。
+    </div>
+  </div>
+
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="molecular-kinetic-theory-mock-check.html">📝 基础检测</a>
+    <a href="molecular-kinetic-theory-fluency-test.html">📈 熟练度检测</a>
+    <a href="molecular-kinetic-theory-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 分子动理论（基础模块 · 2026-06-09 新立）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-molecular-kinetic-theory-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

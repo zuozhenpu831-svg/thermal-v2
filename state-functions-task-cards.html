@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>状态函数与非状态函数（含熵的定义）· 学习任务卡</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.85; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 64, 154,0.06));
+    border-left: 4px solid var(--secondary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(142, 68, 173, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .preview-card {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.04), rgba(142,68,173,0.06));
+    border: 1px solid rgba(142,68,173,0.15);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+  }
+  .preview-card .preview-title { font-size: 1.05rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 12px; }
+  .preview-card p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.7; }
+  .preview-card p:last-child { margin-bottom: 0; }
+  .preview-card .formula-highlight { text-align: center; font-size: 1.2rem; margin: 16px 0; color: var(--primary-blue); font-weight: 600; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>状态函数与非状态函数 · 学习任务卡</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>状态函数与非状态函数</h1>
+    <div class="subtitle">从"找一个循环里归零的量"到熵的定义</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>状态函数与非状态函数（含熵 S 的定义）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>4–5 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td>热力学第一定律（基础）；卡诺循环（进阶）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔；卡诺循环板块的推导稿（用于本板块的关键验证）</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>理解"状态函数"和"过程函数"的本质区别 —— 状态函数只与状态有关、不与路径有关</li>
+      <li>能识别 \(U\)、\(T\)、\(P\)、\(V\) 是状态函数；\(Q\)、\(W\) 是过程函数</li>
+      <li>能从卡诺循环出发，自己提出"找一个新的状态函数"的问题</li>
+      <li>能用 \(\Delta S = Q/T\) 这个假设，独立推导卡诺循环的 \(\Delta S_{cycle} = 0\)</li>
+      <li>能复用上一板块（卡诺循环）的等温功公式与绝热关系，把熵的推导走完整</li>
+      <li>理解"可逆性"在熵的定义中的关键角色，知道为什么是 \(\Delta S = Q_{rev}/T\)</li>
+      <li>理解状态函数的力量 —— path-independent（与路径无关），为下一板块"熵的物理意义"做铺垫</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p><strong>在卡诺循环里，有些量回到了起点，有些却没有。</strong></p>
+    <p>跑完一个完整的卡诺循环 —— 内能 \(U\)、温度 \(T\)、压强 \(P\)、体积 \(V\) 都回到原来的值。但是吸收的热 \(Q_h\)、释放的热 \(Q_c\)、做的功 \(W_{net}\) 都不为零。这些"过程量"似乎不能用来描述"状态"。</p>
+    <p>那么问题来了 —— <strong>能不能在循环里找到一个新的量，让它跟 \(Q\) 有关，但又能像 \(U\) 一样"循环归零"？</strong></p>
+    <p style="margin-top: 12px;">如果能找到这样的量，它就是一个新的"状态函数"。物理学历史上，正是因为有人这样想，才发现了一个深刻的物理量 —— <strong>熵</strong>。</p>
+    <p class="hint">（提示：试试 \(Q/T\) 看看会发生什么。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>状态函数 vs 过程函数：本质区别</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解状态函数与过程函数的本质区别；用循环累加的例子说明 \(Q\) 为什么不是状态函数<br>
+        <strong>建议时长</strong>：30-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>在你目前学过的热力学量中，先用自己的判断分一下类：</p>
+          <ul>
+            <li>内能 \(U\)、温度 \(T\)、压强 \(P\)、体积 \(V\)、热量 \(Q\)、功 \(W\)</li>
+            <li>哪些只取决于"系统当前的状态"？哪些取决于"系统经历的过程"？</li>
+          </ul>
+          <div class="quote-block">
+            先自己分类，哪怕分错也没关系。重点是你<strong>对"状态"和"过程"的直觉</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 定义"状态函数"</span></div>
+        <div class="step-content">
+          <p>把你的分类发给 AI，依次问：</p>
+          <ol>
+            <li>"状态函数（state function）和过程函数（process function）最本质的区别是什么？请反问引导我自己说出关键点。"</li>
+            <li>"如果系统从状态 A 经过两条不同的路径到达状态 B，<strong>哪些量</strong>在两条路径上是相同的？<strong>哪些量</strong>可能不同？"</li>
+            <li>"我们说\(U\) 是状态函数 —— 这意味着什么？怎么用一句话讲清楚？"</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键概念</strong>：状态函数只取决于<strong>系统当前的状态</strong>（用 \(P\)、\(V\)、\(T\) 等状态量唯一确定），与系统怎么到达这个状态<strong>无关</strong>。过程函数则描述系统从一个状态到另一个状态<strong>所经历的路径</strong>，路径不同，过程函数的值也可能不同。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">具体验证 —— Q 为什么不是状态函数</span></div>
+        <div class="step-content">
+          <p>看这个具体场景 ——</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+              </defs>
+              <rect x="40" y="80" width="80" height="80" fill="#E6EEFF" stroke="#0055B8" stroke-width="2" rx="6"/>
+              <text x="80" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#00409A">状态 A</text>
+              <text x="80" y="135" text-anchor="middle" font-size="11" fill="#555">U₀, V₀, P₀, T₀</text>
+              <rect x="200" y="80" width="120" height="80" fill="#FEF5DC" stroke="#b8860b" stroke-width="2" rx="6"/>
+              <text x="260" y="120" text-anchor="middle" font-size="13" font-weight="bold" fill="#8B6914">循环 1 次</text>
+              <text x="260" y="138" text-anchor="middle" font-size="10" fill="#555">吸 Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan>, 放 Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+              <rect x="400" y="80" width="80" height="80" fill="#E6EEFF" stroke="#0055B8" stroke-width="2" rx="6"/>
+              <text x="440" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#00409A">状态 A</text>
+              <text x="440" y="135" text-anchor="middle" font-size="11" fill="#555">U₀, V₀, P₀, T₀</text>
+              <text x="440" y="155" text-anchor="middle" font-size="9" fill="#888">(相同状态)</text>
+              <line x1="123" y1="120" x2="198" y2="120" stroke="#c0392b" stroke-width="2" marker-end="url(#ar-r)"/>
+              <line x1="323" y1="120" x2="398" y2="120" stroke="#c0392b" stroke-width="2" marker-end="url(#ar-r)"/>
+              <text x="260" y="180" text-anchor="middle" font-size="11" fill="#c0392b">累计吸热 Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan>、放热 Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan> 每个循环都"重新计"</text>
+              <text x="260" y="198" text-anchor="middle" font-size="11" fill="#c0392b">— 但 U₀ 不变！</text>
+              <text x="260" y="216" text-anchor="middle" font-size="10" fill="#555">→ Q 累计可以无限增长，U 永远是 U₀</text>
+            </svg>
+            <div class="diagram-caption">系统经过一个循环回到同一状态：U 等状态量恢复原值，但 Q、W 这些"过程量"会累加</div>
+          </div>
+
+          <p>具体数字例子（来自笔记）：</p>
+          <div class="derivation-block">
+            <div class="derivation-title">每次循环后，"累计吸的热"在变</div>
+            <div class="step-line"><strong>第 1 次循环</strong>：吸热 \(Q_{in}=10\)，做功 \(W\) → 累计 \(Q\) 总量 = 10</div>
+            <div class="step-line"><strong>第 2 次循环</strong>：又吸 10 → 累计 \(Q\) 总量 = 20</div>
+            <div class="step-line"><strong>第 3 次循环</strong>：又吸 10 → 累计 \(Q\) 总量 = 30</div>
+            <div class="step-line"><strong>结论</strong>：每次系统的状态完全相同（U₀, P₀, V₀, T₀），但"累计吸入的热"一直在变。<br>👉 <strong>Q 不能用来唯一描述"状态"——所以 Q 不是状态函数。</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">批判性思考</span></div>
+        <div class="step-content">
+          <p>问 AI 一些可能"绕"的问题：</p>
+          <ol>
+            <li>"在等温过程中 \(Q = W\)（吸的热全部变成对外做功）。那是不是说 \(Q\) 和 \(W\) 在等温过程下都成了状态函数？请反问引导我看到这只是<strong>特定过程下的等式</strong>。"</li>
+            <li>"在 P-V 图上，从状态 A 到状态 B，我可以走两条不同的路径（先膨胀再冷却 vs 先冷却再膨胀）。这两条路径下 \(\Delta U\) 是否相同？\(Q\) 和 \(W\) 是否相同？"</li>
+            <li>"如果状态函数和过程函数差别这么大，为什么物理学家还要研究 \(Q\) 和 \(W\)？"</li>
+          </ol>
+          <div class="quote-block">
+            提示：第二个问题是关键 —— 想象 P-V 图上同样的起点和终点，但走两条不同的路径。终点的 \(P\)、\(V\)、\(T\)、\(U\) 都相同（因为是同一个状态），但路径上吸的 \(Q\) 和做的 \(W\) <strong>完全可以不同</strong>。这就是"状态函数 path-independent"和"过程函数 path-dependent"的几何含义。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="s1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用自己的话说清"状态函数"和"过程函数"的本质区别</span></label>
+        <label data-key="s1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能识别 \(U\)、\(T\)、\(P\)、\(V\) 是状态函数；\(Q\)、\(W\) 是过程函数</span></label>
+        <label data-key="s1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"循环累加"的例子说明 \(Q\) 为什么不是状态函数</span></label>
+        <label data-key="s1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"等温过程 \(Q=W\)" 不意味着 \(Q\) 是状态函数 —— 这只是特定过程下的等式</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ③思辨力（识别本质区别 vs 巧合等式） · ⑤学习力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>在卡诺循环里寻找新的状态函数</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解为什么卡诺循环里需要寻找一个"新的状态函数"；自己提出"试 \(Q/T\)"的假设<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <div class="quote-block" style="background: rgba(230, 126, 34, 0.06); border-color: var(--accent-orange);">
+            <strong>开始前请先复习</strong>：本卡和后续推导反复用到卡诺循环的几个关键结果 ——
+            <ul style="margin-top: 6px; margin-bottom: 0;">
+              <li>V 大小关系：\(V_A &lt; V_D &lt; V_B &lt; V_C\)</li>
+              <li>等温功公式：\(W = nRT\ln(V_2/V_1)\)、\(Q = W\)（等温下 \(\Delta U = 0\)）</li>
+              <li>绝热关系推出的核心等式：<strong>\(V_B/V_A = V_C/V_D\)</strong></li>
+            </ul>
+            如果记不清，请先翻回 <a href="carnot-cycle-task-cards.html" style="color: var(--accent-orange); font-weight: 700;">卡诺循环 · 学习任务卡</a> 复习 5-10 分钟再回来。
+          </div>
+          <p>回顾完后，思考：</p>
+          <ul>
+            <li>跑完一个完整的卡诺循环，哪些量"完全恢复"了？</li>
+            <li>哪些量"没有恢复"？</li>
+          </ul>
+          <p>请<strong>逐一列出</strong>这两类量。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">观察 —— 哪些量是状态函数？</span></div>
+        <div class="step-content">
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-axis-c2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+              </defs>
+              <line x1="60" y1="280" x2="490" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-c2)"/>
+              <line x1="60" y1="280" x2="60" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-c2)"/>
+              <text x="500" y="285" font-size="14" font-weight="bold">V</text>
+              <text x="55" y="25" font-size="14" font-weight="bold">P</text>
+
+              <path d="M 100,55 C 167,150 223,153 280,170" stroke="#c0392b" stroke-width="2.5" fill="none"/>
+              <path d="M 280,170 C 333,200 387,240 440,265" stroke="#8e44ad" stroke-width="2.5" fill="none" stroke-dasharray="6,3"/>
+              <path d="M 440,265 C 360,260 230,255 180,205" stroke="#0055B8" stroke-width="2.5" fill="none"/>
+              <path d="M 180,205 C 153,160 130,135 100,55" stroke="#8e44ad" stroke-width="2.5" fill="none" stroke-dasharray="6,3"/>
+
+              <circle cx="100" cy="55" r="5" fill="#c0392b"/>
+              <text x="82" y="48" font-size="14" font-weight="bold" fill="#c0392b">A</text>
+              <circle cx="280" cy="170" r="5" fill="#c0392b"/>
+              <text x="289" y="165" font-size="14" font-weight="bold" fill="#c0392b">B</text>
+              <circle cx="440" cy="265" r="5" fill="#0055B8"/>
+              <text x="449" y="270" font-size="14" font-weight="bold" fill="#0055B8">C</text>
+              <circle cx="180" cy="205" r="5" fill="#0055B8"/>
+              <text x="160" y="220" font-size="14" font-weight="bold" fill="#0055B8">D</text>
+
+              <text x="195" y="120" font-size="11" fill="#c0392b" font-weight="bold">A→B 吸 Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan></text>
+              <text x="370" y="220" font-size="11" fill="#8e44ad" font-weight="bold">B→C 绝热</text>
+              <text x="305" y="240" font-size="11" fill="#0055B8" font-weight="bold">C→D 放 Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+              <text x="65" y="155" font-size="11" fill="#8e44ad" font-weight="bold">D→A 绝热</text>
+
+              <text x="370" y="305" text-anchor="middle" font-size="11" fill="#27ae60" font-weight="bold">循环一周回到 A</text>
+            </svg>
+            <div class="diagram-caption">卡诺循环：A→B→C→D→A。一周后状态完全恢复，但热量已经吸了 \(Q_h\)、放了 \(Q_c\)</div>
+          </div>
+
+          <div class="derivation-block">
+            <div class="derivation-title">卡诺循环里的"恢复"与"不恢复"</div>
+            <div class="step-line"><strong>恢复了（状态函数）</strong>：\(U\)、\(T\)、\(P\)、\(V\) 全部回到原始值。循环一周，它们的总变化 \(\Delta = 0\)</div>
+            <div class="step-line"><strong>没有恢复（过程函数）</strong>：吸热 \(Q_h>0\)、放热 \(Q_c>0\)、净功 \(W_{net}>0\)。循环一周，它们的累计不为零</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">提出问题 —— 能不能造一个"新的状态函数"？</span></div>
+        <div class="step-content">
+          <p>现在的关键问题是：</p>
+
+          <div class="quote-block">
+            <strong>能不能找到一个"和 Q 有关的量"，让它在循环一周后"恢复为零"？</strong>
+          </div>
+
+          <p>如果能找到这样的量，它就有资格做新的状态函数。<strong>请你先自己想几种组合</strong>，再问 AI 引导：</p>
+
+          <ol>
+            <li>"我能直接用 \(Q\) 吗？显然不行（已经证过 \(Q\) 不是状态函数）"</li>
+            <li>"能不能用 \(Q/T\)、\(Q/V\)、\(Q/P\) 之类的组合？AI 请反问引导我考虑"</li>
+            <li>"在卡诺循环里，吸热和放热发生在<strong>不同的温度</strong>下（\(T_h\) 和 \(T_c\)）。这给了我什么线索？"</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">假设：试 ΔS = Q/T</span></div>
+        <div class="step-content">
+          <p>基于上一步的引导，最自然的假设是 ——</p>
+
+          <div class="quote-block" style="background: rgba(39, 174, 96, 0.08); border-color: var(--accent-green);">
+            <strong>假设</strong>：定义某个量 \(\Delta S\)，使得每一段过程的 \(\Delta S = \dfrac{Q}{T}\)（吸热取正，放热取负）。<br>
+            然后看：循环一周以后，\(\sum \Delta S = 0\) 吗？
+          </div>
+
+          <p>如果验证成立，那 \(S\) 就是一个状态函数，物理学就多了一个深刻的量。<br>
+          下一张卡（Card 3）就是来验证这件事。</p>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="s2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能列出卡诺循环中哪些量"恢复"、哪些"不恢复"</span></label>
+        <label data-key="s2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我理解"找一个新的状态函数"为什么是有意义的问题</span></label>
+        <label data-key="s2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"试 \(Q/T\)"的直觉来源（吸热放热温度不同）</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：②创造力（自己提出新假设） · ③思辨力 · ⑤学习力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>验证 ΔS<sub>cycle</sub> = 0 · S 是状态函数</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：用 \(\Delta S = Q/T\) 的假设，独立推导卡诺循环的 \(\sum\Delta S = 0\)；这个推导是本板块的<strong>数学核心</strong><br>
+        <strong>建议时长</strong>：60-90 分钟（推导耐心走完最重要，可分两次完成）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>我们要证明：在卡诺循环里，</p>
+          <p style="text-align:center; font-size:1.1rem;">\[\sum_{\text{4 段}} \Delta S = \sum \frac{Q}{T} = 0\]</p>
+          <p>4 段分别是：A→B 等温吸热（\(T_h\)）、B→C 绝热（\(Q=0\)）、C→D 等温放热（\(T_c\)）、D→A 绝热（\(Q=0\)）。</p>
+          <p>请你<strong>先自己列出</strong>每段的 \(\Delta S\) 表达式（注意符号），看看能不能直接化简到 0。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">自己推导 —— 4 段 ΔS 累加</span></div>
+        <div class="step-content">
+          <p>跟着 4 个思考点走，自己把推导写完整。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 先约定符号 · 写出 4 段的 ΔS 贡献</div>
+            <div class="tp-pause"><strong>先把符号约定锁死</strong>（关键！否则后面会乱）——<br><br>
+            • \(Q_h\) = A→B 段吸入的热<strong>量</strong>，<strong>永远取正值</strong>（表示"吸了多少"）<br>
+            • \(Q_c\) = C→D 段放出的热<strong>量</strong>，<strong>永远取正值</strong>（表示"放了多少"）<br>
+            • 在 \(\Delta S = Q/T\) 累加时，<strong>符号通过 + / - 体现</strong>：吸热段加正号，放热段加负号<br>
+            • 绝热段 \(Q = 0\)，贡献为 0<br><br>
+            按这个约定，请写出 4 段的 \(\Delta S\) 贡献。</div>
+            <div class="tp-ask">"按上面的符号约定（\(Q_h\)、\(Q_c\) 都用正值，符号在加减里体现），4 段的 \(\Delta S\) 是什么？请检查我每段的符号，但<strong>不要给我最终公式</strong>。"</div>
+            <div class="tp-write">写出：<br>
+            \(\Delta S_{cycle} = \underbrace{\dfrac{Q_h}{T_h}}_{A\to B\text{ 吸热}} + \underbrace{0}_{B\to C\text{ 绝热}} + \underbrace{\left(-\dfrac{Q_c}{T_c}\right)}_{C\to D\text{ 放热}} + \underbrace{0}_{D\to A\text{ 绝热}}\)<br>
+            \(\;\;\;\;\;\;\;\;\; = \dfrac{Q_h}{T_h} - \dfrac{Q_c}{T_c}\)</div>
+            <div class="tp-hint">这种约定的好处：所有 \(Q\) 都用正值（"多少"），不需要在 \(Q\) 自己里塞负号。后面思考点 2 写 \(Q_c\) 的公式时，会从这个约定自然得到 \(\ln(V_C/V_D)\)（正值），不会让你混淆。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 把 Q<sub>h</sub> 和 Q<sub>c</sub> 写成具体公式</div>
+            <div class="tp-pause">从上个板块（卡诺循环）你已经推过 ——<br>
+            等温过程的功 \(W = nRT \ln\dfrac{V_2}{V_1}\)；等温过程 \(\Delta U = 0\)，所以 \(Q = W\)。</div>
+            <div class="tp-ask">"我想把 \(Q_h\) 和 \(Q_c\) 都写成 \(nRT \ln\dfrac{V_后}{V_前}\) 的形式。请引导我对 A→B 段和 C→D 段分别写出 \(Q\) 的表达式（含 \(T_h\)、\(T_c\)、和对应的体积比）。"</div>
+            <div class="tp-write">写出：<br>
+            \(Q_h = nRT_h \ln\dfrac{V_B}{V_A}\)（A→B 膨胀，体积比 &gt; 1，\(Q_h &gt; 0\)）<br>
+            \(Q_c = nRT_c \ln\dfrac{V_C}{V_D}\)（C→D 是压缩 \(V_C \to V_D\)，但这里 \(Q_c\) 表示"放热的量"，取正）<br>
+            <br>
+            然后代回 \(\Delta S_{cycle}\)：<br>
+            \(\Delta S_{cycle} = \dfrac{nRT_h \ln(V_B/V_A)}{T_h} - \dfrac{nRT_c \ln(V_C/V_D)}{T_c}\)<br>
+            \(= nR\ln\dfrac{V_B}{V_A} - nR\ln\dfrac{V_C}{V_D}\)</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 关键 —— 用绝热关系简化</div>
+            <div class="tp-pause">你已经化到了 \(\Delta S_{cycle} = nR\ln\dfrac{V_B}{V_A} - nR\ln\dfrac{V_C}{V_D}\)。<br>
+            这两个对数能不能相等？如果相等，\(\Delta S_{cycle} = 0\)，证毕！<br>
+            <strong>线索</strong>：上个板块在推卡诺效率 \(\eta = 1 - T_c/T_h\) 的时候，用过一个关键关系 —— 来自绝热过程的 \(TV^{\gamma-1} = \text{const}\)。</div>
+            <div class="tp-ask">"上个板块用绝热关系推出了 \(V_B/V_A = V_C/V_D\)。请引导我看到 \(\ln(V_B/V_A)\) 和 \(\ln(V_C/V_D)\) 因此相等，但不要直接给我'代入相减为零'这一步 —— 我自己写。"</div>
+            <div class="tp-write">从绝热关系 \(V_B/V_A = V_C/V_D\) 得：<br>
+            \(\ln\dfrac{V_B}{V_A} = \ln\dfrac{V_C}{V_D}\)<br>
+            代回 \(\Delta S_{cycle}\)：<br>
+            \(\Delta S_{cycle} = nR\ln\dfrac{V_B}{V_A} - nR\ln\dfrac{V_C}{V_D} = 0\)<br>
+            <strong>得证：\(\boxed{\Delta S_{cycle} = 0}\)</strong></div>
+            <div class="tp-hint">如果你不记得 \(V_B/V_A = V_C/V_D\) 是怎么来的，请翻回卡诺循环板块的 Card 4 思考点 3、4。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 物理意义 —— S 是状态函数</div>
+            <div class="tp-pause">你证明了卡诺循环里 \(\Delta S_{cycle} = 0\)。这意味着什么？</div>
+            <div class="tp-ask">"如果一个量在闭合循环中总变化为零，这是不是说它是状态函数？请反问引导我，让我自己说出这个判断。"</div>
+            <div class="tp-write">用自己的话写出结论：<br>
+            "因为 \(\Delta S\) 在卡诺循环（一个回到起点的闭合过程）里加起来为零，所以 \(S\) 只取决于状态、不取决于路径 —— \(S\) 是一个状态函数。我们把它命名为<strong>熵</strong>（Entropy）。"</div>
+            <div class="tp-hint">这正是物理学家克劳修斯在 1865 年发现熵时的思路。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>整理</strong>：在纸上完整写一遍 4 个思考点的推导。然后用一句话写下你对"为什么 \(\Delta S_{cycle}=0\) 证明了 \(S\) 是状态函数"的理解。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">批判性审查</span></div>
+        <div class="step-content">
+          <p>问自己几个反思问题：</p>
+          <ul>
+            <li>这个证明只对<strong>卡诺循环</strong>成立，还是对<strong>任何循环</strong>都成立？</li>
+            <li>如果是不可逆的循环（比如有摩擦的真实热机），\(\sum \Delta S\) 还会等于零吗？</li>
+            <li>如果不等于零，那 \(S\) 还能叫"状态函数"吗？</li>
+          </ul>
+          <div class="quote-block">
+            提示：这些问题指向下一张卡（Card 4）——"可逆性"在这里扮演了关键角色。我们目前的证明<strong>只对可逆过程成立</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="s3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>独立</strong>写出卡诺循环 4 段的 \(\Delta S\) 贡献（含正确符号）</span></label>
+        <label data-key="s3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用等温功公式把 \(Q_h\) 和 \(Q_c\) 写成 \(nRT\ln(V_2/V_1)\) 形式</span></label>
+        <label data-key="s3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用绝热关系 \(V_B/V_A = V_C/V_D\) 完成"约去对数"的最后一步</span></label>
+        <label data-key="s3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么 \(\Delta S_{cycle}=0\) 证明了 \(S\) 是状态函数</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：④数学建模 · ⑤学习力（复用前一板块的结果） · ③思辨力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 4 ==================== -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>可逆性 · 为什么 ΔS = Q<sub>rev</sub>/T</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解"可逆过程"和"准静态过程"的关系；理解为什么熵的正式定义必须用 \(Q_{rev}\)<br>
+        <strong>建议时长</strong>：40-50 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>Card 3 的证明里我们用了卡诺循环 —— 一个<strong>理想化的可逆循环</strong>。但真实的热机有摩擦、有限速度，是不可逆的。这给我们几个问题：</p>
+          <ul>
+            <li>什么叫"可逆"？什么叫"不可逆"？</li>
+            <li>卡诺循环为什么是可逆的？它的两个核心假设是什么？</li>
+            <li>真实热机不可逆 —— 这会影响熵的定义吗？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 可逆 vs 不可逆</span></div>
+        <div class="step-content">
+          <p>依次问 AI：</p>
+          <ol>
+            <li>"什么是<strong>可逆过程</strong>（reversible process）？请反问引导我自己说出关键 —— 既能正向走、也能反向走完全恢复，<strong>系统和环境都不留痕迹</strong>。"</li>
+            <li>"<strong>准静态过程</strong>（quasi-static）是什么？为什么它是可逆的<strong>必要</strong>条件？"</li>
+            <li>"摩擦为什么会让过程<strong>不可逆</strong>？请用能量去向解释。"</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键概念</strong>：
+            <ul style="margin-top:6px;">
+              <li><strong>准静态</strong> = 连续的、无限小步骤组成的过程，每一步都接近平衡（极慢极慢）</li>
+              <li><strong>无摩擦</strong> = 没有能量"漏"成不可恢复的热</li>
+              <li><strong>可逆 = 准静态 + 无摩擦</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">看一个具体的不可逆例子 —— 有摩擦的活塞</span></div>
+        <div class="step-content">
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e67e22"/></marker>
+              </defs>
+              <rect x="180" y="60" width="160" height="120" fill="#f0f7fb" stroke="#0055B8" stroke-width="2"/>
+              <rect x="176" y="40" width="168" height="6" fill="#666"/>
+              <rect x="252" y="18" width="16" height="22" fill="#888"/>
+              <circle cx="220" cy="100" r="5" fill="#00409A"/>
+              <circle cx="260" cy="90" r="5" fill="#00409A"/>
+              <circle cx="290" cy="120" r="5" fill="#00409A"/>
+              <circle cx="240" cy="140" r="5" fill="#00409A"/>
+              <circle cx="270" cy="150" r="5" fill="#00409A"/>
+              <circle cx="310" cy="105" r="5" fill="#00409A"/>
+              <text x="260" y="190" text-anchor="middle" font-size="13" font-weight="bold" fill="#00409A">气缸（有摩擦）</text>
+              <line x1="100" y1="80" x2="170" y2="55" stroke="#e67e22" stroke-width="2" marker-end="url(#ar-f)"/>
+              <text x="80" y="75" font-size="12" fill="#e67e22" font-weight="bold">推动</text>
+              <line x1="345" y1="100" x2="385" y2="100" stroke="#c0392b" stroke-width="2" marker-end="url(#ar-f)" stroke-dasharray="4,2"/>
+              <text x="390" y="95" font-size="12" fill="#c0392b" font-weight="bold">Q<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan> 摩擦热</text>
+              <text x="390" y="108" font-size="10" fill="#888">（漏到环境）</text>
+              <text x="260" y="220" text-anchor="middle" font-size="11" fill="#555">外界做功 → 一部分变内能、一部分以 Q<tspan font-size="9" dy="3">f</tspan><tspan dy="-3"></tspan> 损失</text>
+            </svg>
+            <div class="diagram-caption">真实热机有摩擦：外界做的功不能 100% 变成有用的东西，总有一部分以摩擦热 \(Q_f\) 形式损失</div>
+          </div>
+
+          <p>用日常语言先理解发生了什么 —— 不写公式：</p>
+
+          <div class="quote-block">
+            <strong>定性图景</strong>：你推活塞做功 \(W_{in}\)。如果<strong>没有摩擦</strong>，这份功一部分变成气体内能、一部分被气体推回到外界（可以完整回收）。但<strong>有摩擦</strong>时，活塞与气缸壁之间会"蹭"出一部分热 \(Q_f\) —— 这部分热<strong>本可以做的功，就再也回收不回来了</strong>。<br><br>
+            换句话说：摩擦让一部分本该是功的能量，<strong>不可恢复地</strong>退化成了热。能量没有消失（第一定律仍然成立），但能量的"可用性"减少了。
+          </div>
+
+          <p>这对熵意味着什么？我们只需要一句话：</p>
+
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.06); border-color: var(--primary-blue);">
+            <strong>关键结论</strong>：在有摩擦的循环里，多放出的热（用 \(Q/T\) 累加）会让 \(\sum \Delta S\) 不再等于零，而是<strong>偏大</strong>。<br>
+            这意味着 Card 3 的 "\(\sum \Delta S_{cycle} = 0\)" 证明<strong>只对可逆过程成立</strong>。
+          </div>
+
+          <p>（"为什么偏大？为什么自然过程总朝偏大的方向走？"—— 这是下一板块「熵的物理意义」要回答的，那里会引出熵增定律。本板块只到"为什么熵的正式定义必须写 \(Q_{rev}\)" 为止。）</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">熵的正式定义</span></div>
+        <div class="step-content">
+          <p>因此，熵的<strong>正式定义</strong>必须明确指出是"可逆"的热：</p>
+
+          <div class="quote-block" style="background: rgba(0, 64, 154, 0.08); border-color: var(--primary-blue); text-align: center;">
+            <strong style="font-size: 1.05rem;">\[\boxed{\Delta S = \dfrac{Q_{rev}}{T}}\]</strong><br>
+            <span style="font-size: 0.85rem;">（\(Q_{rev}\) = 可逆过程中转移的热量；\(T\) = 转移发生时的温度，单位 K）</span>
+          </div>
+
+          <p>关键说明：</p>
+          <ul>
+            <li><strong>必须是 \(Q_{rev}\)</strong>：可逆过程中的热量。对于卡诺循环的等温吸热段，热量恰好是可逆的</li>
+            <li><strong>单位是 J/K</strong>（焦耳每开尔文）</li>
+            <li><strong>对于不可逆过程</strong>：仍然可以计算 \(\Delta S\)，但要"绕道"想一个能连接同两个状态的<strong>可逆路径</strong>，沿这个想象的可逆路径算 \(Q_{rev}/T\)。这正是状态函数的好处 —— path-independent！</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="s4c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能定义"可逆过程"（既能正向走，也能反向完全恢复，环境不留痕迹）</span></label>
+        <label data-key="s4c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"可逆 = 准静态 + 无摩擦"</span></label>
+        <label data-key="s4c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用摩擦的例子说明真实过程为什么不可逆</span></label>
+        <label data-key="s4c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我记住了熵的正式定义 \(\Delta S = Q_{rev}/T\)，并理解为什么必须是 \(Q_{rev}\)</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：③思辨力（理解"理想化的代价"） · ⑤学习力 · ⑦人文素养（科学语言的精确性）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 5 ==================== -->
+  <div class="task-card" id="task5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">5</div>
+      <h3>状态函数的力量 · 熵的发现的意义</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解 path-independent 的强大；理解"发现新状态函数"在物理学中的意义；为下一板块"熵的物理意义"做铺垫<br>
+        <strong>建议时长</strong>：30-40 分钟（本卡多为概念思辨）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>状态函数的最大特点是 <strong>path-independent</strong>（与路径无关）。这给我们什么力量？</p>
+          <ul>
+            <li>如果想计算从状态 A 到状态 B 的 \(\Delta S\)，我们需要知道<strong>具体走的路径</strong>吗？</li>
+            <li>如果实际过程是不可逆的（如有摩擦），我们还能不能算 \(\Delta S\)？</li>
+            <li>"path-independent" 在数学上类似于什么概念？（提示：物理学其他地方有没有类似的"和路径无关"的量？）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 状态函数的应用</span></div>
+        <div class="step-content">
+          <ol>
+            <li>"状态函数的 path-independent 性质，在实际计算中怎么用？"</li>
+            <li>"如果一个真实过程是不可逆的，能不能用'想象的可逆路径'来算 \(\Delta S\)？为什么可以？"</li>
+            <li>"物理学里其他熟悉的'与路径无关'的量是什么？"（提示：保守力的势能、电场的电势）</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键观察</strong>：状态函数 \(\Leftrightarrow\) 全微分 \(\Leftrightarrow\) path-independent 积分。这是物理学中的<strong>深层结构</strong> —— 出现在力学（势能）、电磁学（电势）、热力学（U, H, S, G, F）等多个领域。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">历史与人物 —— 克劳修斯的革命</span></div>
+        <div class="step-content">
+          <p>问 AI：</p>
+          <ol>
+            <li>"克劳修斯（Clausius）什么时候提出熵的概念？背景是什么？"</li>
+            <li>"'熵' 这个词的词源是什么？克劳修斯为什么选这个词？"</li>
+            <li>"在熵之前，物理学已经有'能量'这个概念。为什么还要再加一个'熵'？它捕捉了能量没捕捉到的什么？"</li>
+          </ol>
+          <div class="quote-block">
+            <strong>历史意义</strong>：1865 年，克劳修斯从卡诺的工作中抽出"熵"这个量。这与之前发现"能量"是同等重要的物理学事件 —— 能量告诉我们"什么是不变的"，而熵将告诉我们"什么是有方向的"。<br>
+            <span style="font-size: 0.9rem; color: #666;">（"熵在不可逆过程中怎么变化？"这个问题留到下一板块「熵的物理意义」回答。）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">下一板块预告</span></div>
+        <div class="step-content">
+          <p>本板块我们定义了熵 \(\Delta S = Q_{rev}/T\)，证明了它是状态函数。但还有一个关键问题没回答：</p>
+          <ul>
+            <li>对于<strong>不可逆过程</strong>，\(\Delta S\) 等于什么？</li>
+            <li>为什么自然过程总是朝某个方向走？热从高温自发流向低温，不会反向。这与熵有什么关系？</li>
+          </ul>
+          <p>这是下一板块"<strong>熵的物理意义</strong>"要回答的核心问题 —— 那里会引出<strong>熵增定律</strong>与热力学第二定律。本板块到此为止。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">批判性反思</span></div>
+        <div class="step-content">
+          <p>合上你的笔记，回答：</p>
+          <ul>
+            <li>你能用一句话告诉一个不学物理的朋友"什么是状态函数"吗？</li>
+            <li>你能用一句话讲清楚"为什么熵是状态函数"吗？</li>
+            <li>本板块让你<strong>最意外</strong>的一件事是什么？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="s5c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我理解 path-independent 的含义及其在计算中的应用</span></label>
+        <label data-key="s5c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能联想到其他与路径无关的物理量（如势能、电势）</span></label>
+        <label data-key="s5c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我了解熵的历史意义 —— 与能量同等重要的物理量</span></label>
+        <label data-key="s5c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用一句话解释"为什么熵是状态函数"</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ③思辨力 · ⑤学习力 · ⑦人文素养（科学史中的重要时刻）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Output Requirements ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <p style="font-size: 0.9rem; margin-bottom: 12px;">本模块学习完成后，请提交以下产出物作为模块通过的依据：</p>
+    <table class="info-table">
+      <tr>
+        <td>手写推导稿</td>
+        <td>A4 纸手写：完整推导卡诺循环 \(\Delta S_{cycle} = 0\)。从 4 段累加 → 代入等温功公式 → 用绝热关系约去对数 → 得到 \(\Delta S_{cycle} = 0\)。<strong>每一步都自己写</strong>，不能让 AI 代写。</td>
+      </tr>
+      <tr>
+        <td>学习反思日志</td>
+        <td>200-300 字。回答：「为什么'找到一个新的状态函数 S'是物理学的一个深刻事件？我对状态函数与过程函数区分的最大体会是什么？」</td>
+      </tr>
+      <tr>
+        <td>自评清单</td>
+        <td>5 张任务卡末尾的检查点全部勾完</td>
+      </tr>
+      <tr>
+        <td>深度口试预约</td>
+        <td>与学科导师约定 15-20 分钟深度口试时间。口试时要能：①用自己的话讲清"状态函数 vs 过程函数"；②独立完成 \(\Delta S_{cycle}=0\) 的推导；③回答"为什么必须是 \(Q_{rev}\)"。</td>
+      </tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：手写推导稿是这一模块的关键产出 —— 推导过程<strong>必须自己写</strong>，不能让 AI 代写。学习反思必须是<strong>你自己的思考</strong>。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="state-functions-mock-check.html">📝 基础检测</a>
+    <a href="state-functions-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 状态函数与非状态函数（含熵的定义）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-state-functions-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

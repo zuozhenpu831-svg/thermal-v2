@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吉布斯自由能 · 进阶 · 深度口试题库 · 蓝色诺瓦学院</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 14px; }
+  header.page-header { background: linear-gradient(135deg, #5A4BD1, #6C5CE7, #8B7CF0); color: white; padding: 32px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(90,75,209,0.18); }
+  header.page-header h1 { margin: 0 0 8px; font-size: 26px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .intro-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #6C5CE7; }
+  .intro-card h2 { color: #5A4BD1; font-size: 19px; margin-bottom: 12px; }
+  .intro-card p { font-size: 14.5px; margin-bottom: 10px; color: #2c3e50; }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card .key { background: #efebff; color: #5A4BD1; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-top: 12px; }
+  .section-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section-card h2 { color: #5A4BD1; font-size: 19px; margin-bottom: 14px; }
+  .section-card h2 .tag { font-size: 12px; background: #efebff; color: #6C5CE7; border-radius: 10px; padding: 2px 10px; vertical-align: middle; margin-left: 8px; font-weight: 500; }
+  .flow-bar { display: flex; flex-wrap: wrap; gap: 10px; }
+  .flow-step { flex: 1; min-width: 180px; background: #f8f9fb; border-top: 4px solid #6C5CE7; border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
+  .flow-step .ft { font-weight: 600; color: #5A4BD1; font-size: 14px; }
+  .flow-step .fm { color: #e67e22; font-weight: 600; font-size: 12px; }
+  .listen-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .listen-table th, .listen-table td { border: 1px solid #e3e8ee; padding: 7px 10px; text-align: left; vertical-align: top; }
+  .listen-table th { background: #efebff; color: #5A4BD1; font-weight: 600; }
+  .listen-table td.cat { background: #f8f9fb; font-weight: 600; color: #5a6c7d; white-space: nowrap; }
+  .lp { background: #e8f5e9; color: #2e7d32; padding: 2px 9px; border-radius: 4px; font-size: 12.5px; margin: 2px 3px 2px 0; display: inline-block; }
+  .lp.core { background: #d8eedc; font-weight: 600; border: 1px solid #2e7d32; }
+  .lp.boundary-lp { background: #f0f0f5; color: #6a1b9a; border: 1px dashed #9b8bc4; }
+  .core-star { color: #d4af37; }
+  .qline { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #6C5CE7; }
+  .qline-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .qline-header h3 { font-size: 17px; color: #5A4BD1; flex: 1; }
+  .qline-num { background: #5A4BD1; color: white; border-radius: 6px; padding: 3px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .qline-time { font-size: 12px; color: #7f8c8d; white-space: nowrap; }
+  .main-q { background: #efebff; border-left: 4px solid #6C5CE7; border-radius: 8px; padding: 13px 16px; font-size: 15px; margin-bottom: 12px; }
+  .main-q .mq-tag { font-weight: 600; color: #5A4BD1; }
+  .key-points { font-size: 14px; }
+  .key-points .kp-title { font-weight: 600; color: #2e7d32; margin-bottom: 6px; }
+  .key-points li { margin: 5px 0 5px 18px; }
+  .prep-card { background: #fffbea; border-left: 4px solid #d4af37; border-radius: 8px; padding: 18px 22px; margin-top: 14px; font-size: 14px; }
+  .prep-card h3 { color: #9a7a00; font-size: 16px; margin-bottom: 8px; }
+  .prep-card ul { margin-left: 22px; }
+  .prep-card li { margin: 5px 0; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; padding: 18px 24px; background: white; border-radius: 10px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #efebff; color: #5A4BD1; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a:hover { background: #dfd6fb; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 16px; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">蓝色诺瓦学院 &raquo; 物理 · 物化融合 &raquo; 热力学 · 吉布斯自由能 · 进阶 &raquo; <strong>深度口试 · 题库</strong></nav>
+
+<header class="page-header">
+  <h1>吉布斯自由能 · 进阶 · 深度口试 · 题库</h1>
+  <div class="subtitle">面对面 15-20 分钟 · 6 条主问题中抽 3 条 · 当场签字 = 真实通关</div>
+</header>
+
+<div id="user-bar"></div>
+
+<section class="intro-card">
+  <h2>关于本板块的深度口试</h2>
+  <p>本板块是<strong>热力学大主题进阶链终点</strong>：基础版给你"会用 ΔG = ΔH − TΔS 判自发性"；进阶版要求你说清楚<strong>为什么</strong> —— G 是怎么从熵增定律严格推出来的、ΔG 在物理上意味着什么有用功、它怎么把电化学与化学平衡接上同一根线。</p>
+  <p>口试由教师当面进行，从下方 6 条主问题中<strong>抽 3 条</strong>。每条主问题先开放讲，再由教师根据你的回答追问。<strong>讲推导链 ＞ 报数</strong>—— 教师听的是你能不能把"宇宙视角 → 系统视角"的等价改写讲透。</p>
+  <div class="key">📌 通关条件：抽中的 3 条里，<strong>至少 2 条把核心推导讲清楚并能回应一层「为什么」</strong>，且整场至少一次在纸上写出 <strong>G ≡ H − TS</strong> 并指着定义说清每一项含义与等温等压前提。</div>
+</section>
+
+<section class="section-card">
+  <h2>口试流程 <span class="tag">总时长 15-20 分钟</span></h2>
+  <div class="flow-bar">
+    <div class="flow-step"><div class="ft">① 暖场 · 自述</div><div class="fm">0-3 分钟</div>你先讲：「进阶版 vs 基础版，对我理解 ΔG 最大的改变是什么？」—— 不卡时间，讲到能切入主问题就行。</div>
+    <div class="flow-step"><div class="ft">② 主问题 ×3</div><div class="fm">3-15 分钟</div>从下方 6 条主问题中由教师抽 3 条，每条约 4-5 分钟。先开放讲，再回答追问。</div>
+    <div class="flow-step"><div class="ft">③ 推导手稿 / 错题联动</div><div class="fm">15-18 分钟</div>带 1-2 张自己整理的推导手稿（4 步链 / dG 推 W_max 链 / ΔG° = −RT ln K 推导），现场挑一步教师指着问「这步为什么能这么写」；或带 1 道 mock-check 错题讲反思。</div>
+    <div class="flow-step"><div class="ft">④ 判定 · 签字</div><div class="fm">18-20 分钟</div>通过 = 当场签字；暂缓 = 给补学方向 + 预约二试（换未用过的主问题）；不通过 = 回到学习阶段重学。</div>
+  </div>
+</section>
+
+<!-- ==================== 主线 1 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 1</span>
+    <h3>G 的引入动机与定义 —— 写出来再说话</h3>
+    <span class="qline-time">约 4-5 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>请你在纸上写出 G 的严格定义，然后告诉我：第二定律已经有了 ΔS<sub>宇宙</sub> ≥ 0 这条判据，为什么还要再引入 G？换句话说，G 是来"取代"熵增判据的，还是来"翻译"它的？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> G ≡ H − TS 严格定义</span> 能在纸上写出，并指认 H、T、S 每一项含义（T 是系统温度，不是环境温度）。</li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> G 引入的物理动机</span> "宇宙视角"换"系统视角" —— 为方便计算，不是因为熵增判据"不对"。</li>
+      <li><span class="lp core"><span class="core-star">⭐</span> G 是状态函数</span> H、T、S 都是状态量；代数组合仍是状态量 ⇒ ΔG 路径无关。</li>
+      <li><span class="lp">盖斯定律 for G</span> 主动提 ΔG 也可以拆步算 / 用 ΔG<sub>f</sub>° 表。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主线 2 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 2</span>
+    <h3>从 ΔS<sub>宇宙</sub> ≥ 0 严格推 ΔG ≤ 0 —— 四步链复现</h3>
+    <span class="qline-time">约 5 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>有人说「ΔG ≤ 0 是一条独立的自发性判据」。请你不要直接反驳，而是在纸上从 ΔS<sub>宇宙</sub> ≥ 0 出发，一步一步推到 ΔG ≤ 0，途中每一步要交代你用了什么假设。最后告诉我：这两条判据之间的关系到底是什么？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> 4 步推导链</span> ΔS<sub>宇宙</sub> = ΔS<sub>系</sub> + ΔS<sub>环</sub> → 代入 ΔS<sub>环</sub> = −ΔH<sub>系</sub>/T → 整理 → 乘 −T 反转得 ΔG ≤ 0。<strong>本主问题核心。</strong></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 环境熵变 ΔS<sub>环</sub> = −Q<sub>p</sub>/T</span> 等压前提 + 大热库假设 + 负号来自系统视角换环境视角。</li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 乘 −T 反转不等号</span> 代数事实（T &gt; 0 ⇒ 乘 −T 必反转）+ 物理含义（两条判据等价改写）。</li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ΔG ≤ 0 ⟺ ΔS<sub>宇宙</sub> ≥ 0</span> 等温等压下完全等价；不是"取代"是"翻译"。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主线 3 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 3</span>
+    <h3>ΔG = −W<sub>max,非膨胀</sub> —— 为什么叫"自由"能</h3>
+    <span class="qline-time">约 4-5 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>等温等压下，一个反应的 ΔH = −100 kJ/mol、TΔS = −30 kJ/mol。这个反应能对外界提供的最大非膨胀有用功是多少？为什么剩下的那部分焓变不能也拿来做功？顺便告诉我：「自由能」里"自由"两个字到底自由在哪？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ΔG = −W<sub>max,非膨胀</sub></span> 算出 ΔG = −70 kJ/mol ⇒ W<sub>max,非膨胀</sub> = 70 kJ/mol；强调"最大"、"可逆才取等"、"等温等压前提"。</li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 可逆 = 最大功的物理原因</span> 不可逆过程的额外熵产生 T·dS<sub>额外</sub> 必须以热的形式放掉，吃掉了可做功的份额。</li>
+      <li><span class="lp">「自由」的含义</span> ΔG 这部分焓变是可被"自由用作有用功"的；TΔS 那部分必须以热释放维持总熵不减，不是凭空多出。</li>
+      <li><span class="lp">dG = −δW<sub>非膨胀,可逆</sub> 推导</span> 学生若展开 8 步链 → 记为亮点。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主线 4 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 4</span>
+    <h3>电化学桥 ΔG = −nFE —— 把化学能换成电能</h3>
+    <span class="qline-time">约 4-5 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>一个铅酸电池放电反应 ΔG° = −393.0 kJ/mol，每生成 1 mol 产物转移 2 mol 电子。请算它的标准电动势 E°。算之前请先告诉我：为什么自发放电对应 E° &gt; 0、ΔG° &lt; 0？这套符号约定是怎么和「电池要给外界供能」配合上的？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> 电化学桥 ΔG = −nFE</span> 写出公式 + 算出 E° = −ΔG°/(nF) = 393000/(2 × 96485) ≈ 2.04 V；强调 kJ → J 换算与 n = 转移电子数（不是反应物摩尔数）。<strong>本主问题核心。</strong></li>
+      <li><span class="lp">单位与符号双校验</span> ΔG 单位 J，F = 96485 C/mol，E 单位 V；自发 ⇔ E &gt; 0 ⇔ ΔG &lt; 0。</li>
+      <li><span class="lp">理论电压 vs 实测电压</span> E° 是可逆上限；实测低于 E° 是不可逆耗散，不是公式错；E° 提供"上限 + 基准 + 诊断"。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主线 5 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 5</span>
+    <h3>反应商 Q + 平衡常数桥 ΔG° = −RT ln K —— ΔG 到底跟谁走</h3>
+    <span class="qline-time">约 5 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>有人讲：「合成氨在 25 ℃ 下 ΔG° ≈ −33 kJ/mol &lt; 0，所以无论我怎么放气体浓度，反应都向产物自发。」这句话错在哪？请你用 ΔG = ΔG° + RT ln Q 与 ΔG° = −RT ln K 这两条把他纠正过来；并告诉我：平衡的本质判据到底是什么？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ΔG° = −RT ln K<sub>eq</sub></span> 写出公式 + 指出 ΔG° 是<strong>标准态</strong>固定参数（只随 T 变）。</li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ΔG = ΔG° + RT ln Q</span> ΔG 随工况浓度变；判方向看 ΔG 而非 ΔG°。</li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ΔG 符号 → 方向</span> ΔG &lt; 0 向产物 / &gt; 0 向反应物 / = 0 平衡；平衡判据是 Q 追上 K（即 Q = K ⇒ ΔG = 0），不是 ΔG° = 0。</li>
+      <li><span class="lp">反应商 Q 的定义</span> 产物在上 / 反应物在下 / 带化学计量数次幂；气相分压 / 溶液浓度 / 纯固液不入式。</li>
+      <li><span class="lp">K<sub>eq</sub> 与 ΔG° 符号对应</span> K &gt; 1 ⟺ ΔG° &lt; 0；K 只随 T 变。</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主线 6 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 6</span>
+    <h3>范特霍夫方程 + 合成氨折中 —— K 为什么随温度走</h3>
+    <span class="qline-time">约 4-5 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>合成氨 N<sub>2</sub> + 3H<sub>2</sub> → 2NH<sub>3</sub>，ΔH° ≈ −92 kJ/mol（放热）。请你从范特霍夫方程出发，推理 K<sub>eq</sub> 是随温度升高变大还是变小，每一步要交代符号怎么来的。然后告诉我：既然低温对 K 更有利，为什么工业上还要把炉温做到 400-500 ℃？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐</span> 范特霍夫方程（微分形式）</span> 写出 d ln K / dT = ΔH° / (RT<sup>2</sup>)；分母 RT<sup>2</sup> &gt; 0 恒正，符号完全由 ΔH° 决定。<strong>本主问题核心。</strong></li>
+      <li><span class="lp">放热 / 吸热 K 走向</span> 放热 ΔH° &lt; 0 ⇒ d ln K / dT &lt; 0 ⇒ T↑则 K↓；不能只背"勒夏特列"。</li>
+      <li><span class="lp">合成氨工业折中</span> 热力学(低温利 K) vs 动力学(高温利速率) vs 经济(成本) —— 多维妥协，不是单维优化。</li>
+      <li><span class="lp">ΔG° vs T 直线</span>（可选展开）截距 = ΔH°、斜率 = −ΔS°、x 截距 = T<sub>转</sub> = ΔH°/ΔS°。</li>
+    </ul>
+  </div>
+</section>
+
+<section class="prep-card">
+  <h3>📝 怎么准备</h3>
+  <ul>
+    <li><strong>不要背口诀</strong>。教师追问的第一刀往往就是「为什么」—— 把每个核心结论的<strong>推导链 + 一句话物理理由</strong>想清楚（比如：4 步推导链里"乘 −T 反转不等号"是因为 T &gt; 0 必反转，物理含义是从宇宙视角换系统视角）。</li>
+    <li><strong>带纸和笔</strong>。主问题 1、2、3、4、5、6 都涉及在纸上写定义 / 推导链 / 计算 —— 教师会指着式子追问每一项含义与符号来源。</li>
+    <li><strong>带 1-2 张推导手稿</strong>（4 步链 / dG = −δW<sub>非膨胀,可逆</sub> 推导链 / ΔG° = −RT ln K 推导链均可），手稿不要求漂亮，要求你能现场指着任一步讲来源。这是流程第 ③ 步。</li>
+    <li><strong>边界声明给你「松绑」</strong>：本板块有些「更深层」的概念不在要求内，没学过也不扣分；如果主动谈到是亮点，教师会简短肯定但不展开（这些深入内容在后续板块或进阶板块里学）。</li>
+    <li><strong>讲推导链 ＞ 报答案</strong>。教师听的是因果重建：你能不能把"宇宙视角 → 系统视角"的等价改写、"ΔG = 最大有用功"的物理意义讲清楚，比报出数值更重要。</li>
+  </ul>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #00409A;">
+  <h2 style="color: #00409A;">📅 申请口试</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">完成学习任务卡 + 基础检测 + 熟练度检测后，向教师申请口试。<strong>申请将自动绑定你的登录账号</strong>，请先确认顶部已登录。</p>
+
+  <div id="my-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选）</label><textarea id="apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="apply-confirm" required style="margin-top:3px;"><span>我已完成本板块的学习任务卡 + 基础检测 + 熟练度检测（如有）</span></label>
+      <button type="submit" id="apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <h3 style="font-size:14px;color:#00409A;margin: 14px 0 6px;">📋 准备清单（建议自查）</h3>
+  <ul style="margin-left: 22px; font-size: 13.5px;">
+    <li>☐ 已学完<strong>吉布斯自由能 · 进阶</strong>板块的学习任务卡（所有 STEP）</li>
+    <li>☐ 基础检测模拟通过率 ≥ 70%</li>
+    <li>☐ 熟练度检测练熟（若该板块含）</li>
+    <li>☐ 已通读本页 6 条主问题 + 准备建议</li>
+    <li>☐ 准备好 1-2 道自己曾经做错的题（用于流程 ③ 错题联动）</li>
+  </ul>
+
+  <details style="margin-top:10px;">
+    <summary style="cursor:pointer;font-weight:600;color:#5a6c7d;font-size:13.5px;">📨 备选：线下申请渠道</summary>
+    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#2c3e50;padding:8px 12px;background:#fafbfc;border-radius:4px;">
+      <strong>📱 班级微信群</strong>：联系班主任 / 学科教师获取群二维码<br>
+      <strong>👨‍🏫 当面找教师</strong>：教师答疑时段当面约时间<br>
+      <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[申请口试]%20吉布斯自由能 · 进阶" style="color:#0055B8;">📧 打开邮件客户端</a>
+    </div>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #27ae60;">
+  <h2 style="color: #1e8449;">📋 我的口试反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有口试单</strong>（含初次判定 + 历次修订）。教师在教师页提交判定后会自动出现在这里。</p>
+  <div id="my-receipts-region"></div>
+  <div style="font-size: 12px; color: #5a6c7d; margin-top: 10px; padding: 8px 12px; background: #f5f7fa; border-radius: 4px;">
+    🚧 <strong>当前 demo</strong>：仅显示本浏览器 localStorage 内的口试单（教师端 + 学生端同一浏览器才能看到）。跨终端实时推送待 starmap 后端上线。
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;">
+  <h2 style="color: #6c3483;">📩 申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师给出的口试判定有异议，可以发起申诉。<strong>申诉将自动绑定你的登录账号</strong>。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成口试 + 收到教师口试单（含口试单 ID）<span style="color:#c0392b;">·未收到 = 请先「📅 申请口试」</span></li>
+    <li><strong>时限</strong>：在收到口试单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后，<strong>① 重新评估 → 出新口试单 v2/v3 ...</strong> 或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+    <li><strong>申诉不影响二试</strong>：选择直接二试不申诉，按约定时间再来一次即可</li>
+  </ul>
+
+  <div id="my-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">口试单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="appeal-receipt" required placeholder="如 OE-BASIC-20260613-160230-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;">
+      <div style="font-size:12px;color:#5a6c7d;margin-top:-4px;margin-bottom:10px;padding:8px 12px;background:#f5f7fa;border-radius:4px;line-height:1.7;">
+        <strong style="color:#6c3483;">ℹ️ 在哪查口试单 ID？</strong><br>
+        · 口试单 ID <strong>自动包含</strong>在教师发给你的反馈里（教师无需单独填写）<br>
+        · 反馈通过 <strong>微信 / 邮件 / 纸面</strong> 发给你；ID 在反馈顶部，格式 <code style="background:white;padding:1px 5px;border-radius:3px;font-size:11.5px;">OE-{板块}-{日期}-{时间}-{你的账号}</code><br>
+        · 遗失了？联系教师从「教师 portal · 📚 历史口试记录」一键重发<br>
+        · 🚧 待 starmap 后端：学生端「我的口试单」可直接查询历史
+      </div></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的主问题编号 <span style="color:#c0392b;">*</span></label><input type="text" id="appeal-qnum" required placeholder="如 主问题 3 / 主问题 5" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">当时我具体讲了什么 + 为什么认为判定有误 <span style="color:#c0392b;">*</span></label><textarea id="appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当时记录</option><option value="reexam">② 补讲后重判（约时间二次评估）</option></select></div>
+      <button type="submit" id="appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+
+  <details style="margin-top:10px;">
+    <summary style="cursor:pointer;font-weight:600;color:#5a6c7d;font-size:13.5px;">📨 备选：线下申诉渠道</summary>
+    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#2c3e50;padding:8px 12px;background:#fafbfc;border-radius:4px;">
+      <strong>📱 班级微信群</strong>「[申诉] 口试单 ID · 主问题 N · 申诉理由」<br>
+      <strong>👨‍🏫 当面找教师</strong>：带纸质口试单 + 想补讲的内容<br>
+      <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[口试申诉]%20吉布斯自由能 · 进阶" style="color:#6c3483;">📧 打开邮件客户端</a>
+    </div>
+  </details>
+
+  <div style="font-size: 13px; color: #6c3483; margin-top: 14px; padding: 12px 16px; background: #faf4fc; border-radius: 6px;">
+    🚧 <strong>待完善（starmap 后端上线后启用）</strong>
+    <ul style="margin: 6px 0 0 22px;">
+      <li>① 真正的账号系统（统一身份认证 / SSO），跨终端登录态同步</li>
+      <li>② 学生在自己设备上「一键申请 / 申诉」实时同步到教师待办</li>
+      <li>③ 学生永久查看历史口试单 / 教师打分明细 / 主问题反馈 / 修订时间线</li>
+      <li>④ 申诉前置条件自动校验（无打分记录 → 禁用申诉表单）</li>
+      <li>⑤ 教师驳回时学生端通知 + 一次"补充申诉"机会</li>
+      <li>⑥ 教师端实时通知（申请 / 申诉 / 二试 / 错题联动材料）</li>
+      <li>⑦ 基础检测 / 熟练度检测：PDF 题库 4-5 套；教师评价时记录选用套号，二试避开</li>
+    </ul>
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="gibbs-free-energy-advanced-task-cards.html">📖 学习任务卡</a>
+  <a href="gibbs-free-energy-advanced-mock-check.html">📝 基础检测</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 吉布斯自由能 · 进阶 · 深度口试题库 · oral-exam Skill v0.1.3</footer>
+
+</div>
+<script>
+(function() {
+  const SLUG = "gibbs-free-energy-advanced";
+  const MODULE_NAME = "吉布斯自由能 · 进阶";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  // mock 账号表（demo · 真账号系统待 starmap 后端）
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    // 更新 apply / appeal 表单的用户信息条
+    ["apply-user-info", "appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30";
+        el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // 禁用 / 启用 提交按钮
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyReceipts === "function") renderMyReceipts();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById("apply-time-day").value;
+    const _hm = document.getElementById("apply-time-hm").value;
+    const _t_other = document.getElementById("apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId("APP"),
+      type: "oral-exam-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById("apply-contact").value.trim(),
+      timeWindow: _timeWindow,
+      note: document.getElementById("apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name + "（" + u.account + "）\n\n教师在 teacher-portal 待办看到后会审核。\n🚧 当前 demo: 跨终端推送待 starmap 后端。");
+    document.getElementById("apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId("APL"),
+      type: "oral-exam-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById("appeal-receipt").value.trim(),
+      qnum: document.getElementById("appeal-qnum").value.trim(),
+      reason: document.getElementById("appeal-reason").value.trim(),
+      want: document.getElementById("appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id + "\n申请人: " + u.name + "（" + u.account + "）");
+    document.getElementById("appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const myApplies = loadMyTasks("oral-exam-apply");
+    const region = document.getElementById("my-applies-region");
+    if (!region) return;
+    if (myApplies.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + myApplies.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    myApplies.forEach(a => {
+      const statusLabel = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li style="margin:4px 0;">' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const myAppeals = loadMyTasks("oral-exam-appeal");
+    const region = document.getElementById("my-appeals-region");
+    if (!region) return;
+    if (myAppeals.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + myAppeals.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    myAppeals.forEach(a => {
+      const statusLabel = { pending: "⏳ 等待教师评估", approved: "✅ 已重判 v2", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li style="margin:4px 0;">主问题 ' + escapeHtml(a.qnum) + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyReceipts() {
+    const u = getUser();
+    const region = document.getElementById("my-receipts-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">请先登录查看你的口试反馈<br><small>（点上方申请/申诉表单的提交按钮也会自动弹登录）</small></div>';
+      return;
+    }
+    const myReceipts = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+      const m = key.match(/^oral-exam-(.+)-v0\.1\.3-(.+)$/);
+      if (!m) continue;
+      if (m[1] !== SLUG) continue;
+      if (m[2] !== u.account) continue;
+      try {
+        const data = JSON.parse(localStorage.getItem(key));
+        if (data && data.submissions && Array.isArray(data.submissions)) {
+          data.submissions.forEach(sub => myReceipts.push(sub));
+        }
+      } catch (e) {}
+    }
+    if (myReceipts.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">👤 ' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无<strong>本板块</strong>口试反馈<br><small>教师在 portal 端为你完成口试并提交判定后会出现在此处</small></div>';
+      return;
+    }
+    myReceipts.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+    let html = '';
+    myReceipts.forEach(sub => {
+      const verdict = sub.verdict;
+      const verdictLabel = { pass: '✅ 通过', defer: '⏸ 暂缓 · 补学后二试', fail: '❌ 不通过 · 重学' }[verdict] || verdict;
+      const verdictColor = { pass: '#27ae60', defer: '#e67e22', fail: '#c0392b' }[verdict] || '#5a6c7d';
+      const verdictBg = { pass: '#d4efdf', defer: '#fdebd0', fail: '#fadbd8' }[verdict] || '#ecf0f1';
+      const picked = (sub.snapshot && sub.snapshot.picked) || [];
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:' + verdictBg + ';color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">v' + sub.version + (sub.version > 1 ? '（修订）' : '') + ' · ' + new Date(sub.submittedAt).toLocaleString("zh-CN") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:12.5px;color:#5a6c7d;margin-bottom:8px;">口试单 ID：<code style="background:#f0f3f5;padding:2px 6px;border-radius:3px;font-size:11.5px;">' + escapeHtml(sub.receiptId || '—') + '</code></div>';
+      html += '<details>';
+      html += '<summary style="cursor:pointer;font-size:13.5px;color:#0055B8;font-weight:500;">查看反馈详情</summary>';
+      html += '<div style="font-size:13px;color:#2c3e50;line-height:1.7;background:#fafbfc;padding:10px 14px;border-radius:6px;margin-top:8px;">';
+      html += '<div style="margin:4px 0;"><strong>抽中主问题：</strong>' + (picked.length ? '主问题 ' + picked.join('、') : '—') + '</div>';
+      if (sub.snapshot && sub.snapshot.statuses) {
+        html += '<div style="margin:4px 0;"><strong>各主问题判定：</strong></div>';
+        html += '<ul style="margin-left:18px;font-size:12.5px;">';
+        Object.keys(sub.snapshot.statuses).forEach(k => {
+          const st = sub.snapshot.statuses[k];
+          const stLabel = { pass: '✅ 通过', stuck: '⏸ 卡壳', fail: '❌ 不通过', auto: '自动判定' }[st] || st;
+          html += '<li>主问题 ' + escapeHtml(k) + ' · ' + stLabel + '</li>';
+        });
+        html += '</ul>';
+      }
+      if (sub.overall) html += '<div style="margin:8px 0;"><strong>📝 教师总体备注：</strong><br>' + escapeHtml(sub.overall).replace(/\n/g, '<br>') + '</div>';
+      if (sub.snapshot && sub.snapshot.notes) {
+        const noteKeys = Object.keys(sub.snapshot.notes);
+        if (noteKeys.length > 0) {
+          html += '<div style="margin:8px 0;"><strong>主问题备注：</strong></div>';
+          html += '<ul style="margin-left:18px;font-size:12.5px;">';
+          noteKeys.forEach(k => {
+            html += '<li>主问题 ' + escapeHtml(k) + '：' + escapeHtml(sub.snapshot.notes[k]).replace(/\n/g, '<br>') + '</li>';
+          });
+          html += '</ul>';
+        }
+      }
+      if (sub.revisionReason) html += '<div style="margin:8px 0;padding:8px 12px;background:#faf4fc;border-left:3px solid #8e44ad;border-radius:4px;"><strong>📨 修订原因（你的申诉详情）：</strong><br>' + escapeHtml(sub.revisionReason).replace(/\n/g, '<br>') + '</div>';
+      html += '</div></details>';
+      html += '</div>';
+    });
+    region.innerHTML = html;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyReceipts();
+    renderMyApplies();
+    renderMyAppeals();
+  });
+})();
+</script>
+</body>
+</html>

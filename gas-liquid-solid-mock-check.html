@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想气体的状态方程 · 基础检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-blank { border: none; border-bottom: 2px solid #0055B8; background: transparent; padding: 2px 8px; margin: 0 4px; font-size: 15px; min-width: 80px; text-align: center; font-family: inherit; }
+  .q-blank:focus { outline: none; border-bottom-color: #006AD6; background: #f0f4f8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 理想气体的状态方程 &raquo;
+  <strong>理想气体的状态方程 · 基础检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的基础检测由教师组织<strong>纸笔形式 + 批改 + 签字</strong>。本练习的"通过 70 分"≈ 已具备纸笔检测的基础水平,可继续备考;"荣誉 90 分"≈ 备考充分。学分由教师组织的真实检测决定,不在此处。
+</div>
+
+<header class="page-header">
+  <h1>理想气体的状态方程 · 基础检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(28 题池, 每次随机抽 7 题) · 100 分 · 约 30-35 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>7</strong> 道题(每个考点 T1-T7 各随机抽 1 道, 共 28 题池)</li>
+    <li>分值: T1=14 / T2=14 / T3=14 / T4=14 / T5=16 / T6=14 / T7=14 = <strong>100</strong></li>
+    <li>通过 ≥ 70 分(已具备纸笔检测基础水平);荣誉 ≥ 90 分(备考充分)</li>
+    <li>建议 30-35 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>计算题数值容差 ±0.5%</li>
+    <li>提交后展示标准答案 + 解析(三段式 · 含常见误区 + 扩展)+ 锚回 task-cards Card N</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+    <li>可点"重新抽题"再做, 抽到不同变体训练(防止背答案)</li>
+  </ul>
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 7</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-mock-check-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-mock-check-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="gas-liquid-solid-task-cards.html">📖 返回学习任务卡</a>
+  <span>熟练度模拟(待开放)</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 理想气体的状态方程 · 基础检测 · mock-check Skill v0.1.4(题库版 + 三段式 + 锚结论中文化)</footer>
+
+</div>
+
+<script>
+const EXPORT_NAMES = {
+  'BOYLE-LAW':                       '玻意耳定律 \\(PV = \\)常数(等温)',
+  'CHARLES-LAW':                     '查理定律 \\(P/T = \\)常数(等容 · 开尔文)',
+  'GAY-LUSSAC-LAW':                  '盖-吕萨克定律 \\(V/T = \\)常数(等压 · 开尔文)',
+  'KELVIN-CELSIUS-RELATION':         '开尔文与摄氏度的关系 \\(T = t + 273.15\\)',
+  'ABSOLUTE-ZERO-EXTRAPOLATION':     '绝对零度的外推由来',
+  'IDEAL-GAS-EQUATION':              '理想气体状态方程 \\(PV = nRT\\)',
+  'GAS-CONSTANT-R':                  '普适气体常数 \\(R = 8.314\\) J/(mol·K)',
+  'COMBINED-GAS-EQUATION':           '结合方程 \\(P_1V_1/T_1 = P_2V_2/T_2\\)',
+  'BOYLE-MICRO':                     '玻意耳定律的微观机制(数密度变化撞壁频率)',
+  'CHARLES-MICRO':                   '查理定律的微观机制(平均动能变化撞壁力)',
+  'IDEAL-GAS-ASSUMPTIONS':           '理想气体模型 2 假设(分子点状 + 无相互作用)',
+  'SURFACE-TENSION':                 '表面张力的微观本质(表面分子少邻居能量高)',
+  'LIQUID-SURFACE-CONTRACTS':        '液面收缩倾向 + 液滴呈球',
+  'WETTING-CRITERION':               '浸润判据(液-固引力 vs 液-液引力)',
+  'CAPILLARY-EFFECT':                '毛细现象(浸润上升 / 不浸润下降)',
+  'CRYSTAL-CHARACTERISTICS':         '晶体特征(规则点阵 + 固定熔点 + 解理 + 单晶各向异性)',
+  'AMORPHOUS-CHARACTERISTICS':       '非晶体特征(无规则 + 渐变软化 + 各向同性 + 亚稳态)',
+  'CRYSTAL-MELT-MECHANISM':          '晶体固定熔点的微观机制(均一束缚同时冲破)',
+  'SINGLE-VS-POLY-CRYSTAL':          '单晶 vs 多晶 + 宏观各向同性',
+  'ANISO-VS-ISOTROPIC':              '各向异性 vs 各向同性',
+  'UNIFIED-MICRO-EXPLAINS-3-STATES': '一套微观工具解释三态(F-r + 数密度 + 平均动能)',
+  'EXPERIMENT-TO-EQUATION':          '从实验综合到方程(\\(PV=nRT\\) = 三定律 + 阿伏伽德罗综合)',
+  'BOUNDARY-NO-IDEAL-GAS-DERIVATION':'边界:本板块不推 \\(P = \\tfrac{1}{3}n_\\text{数} m \\bar{v^2}\\) 严格压强公式',
+  'BOUNDARY-NO-VAN-DER-WAALS':       '边界:不引实际气体方程(范德瓦尔斯等)',
+  'BOUNDARY-NO-CRYSTAL-LATTICE-TYPES':'边界:不引 7 大晶系 / 化学键晶体分类'
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:14, difficulty:"基础", exportIds:["BOYLE-LAW"],
+      stem:"对一定量(\\(n\\) 不变)的气体, 玻意耳定律的正确表述是:",
+      options:{A:"温度不变时, 压强与体积成正比",B:"温度不变时, \\(PV\\) 是常数",C:"压强不变时, 体积与温度(摄氏度)成正比",D:"温度不变时, \\(P + V\\) 是常数"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>玻意耳定律(BOYLE-LAW)</strong>:一定量气体在<strong>等温</strong>下, \\(PV = \\)常数。物理本质:温度不变时, 分子平均动能不变, 故单次撞壁力不变;但体积变化改变了<strong>分子数密度 \\(n_\\text{数}\\)</strong>, 影响撞壁<strong>频率</strong>;最终 P 与 V 成反比。',
+        logic:'各选项分析:<br>· <strong>A「P 与 V 成正比」</strong>:错 — 反比, 不是正比;<br>· <strong>B 正确</strong>:\\(PV\\) 是常数(乘积守恒, 即反比关系);<br>· <strong>C「等压下 V 与摄氏度成正比」</strong>:错 — 这是盖-吕萨克定律, 且温度<strong>必须用开尔文</strong>才"过原点";<br>· <strong>D「P + V」</strong>:错 — 加法没有物理意义。',
+        connection:'<strong>上游</strong>:玻意耳定律来自实验综合(17 世纪玻意耳实验)。<br><strong>下游</strong>:① <strong>理想气体方程 \\(PV = nRT\\)</strong> 的等温片段;② <strong>结合方程</strong> \\(P_1V_1/T_1 = P_2V_2/T_2\\) 中的 PV 项;③ <strong>第一定律 · 等温过程</strong>(\\(\\Delta U = 0 \\Rightarrow Q = W\\)) 用 \\(PV =\\) 常数算等温功 \\(W = nRT \\ln(V_2/V_1)\\);④ <strong>卡诺循环</strong>等温过程的功推导。'
+      },
+      mistakes:'· 把"反比"读成"正比";<br>· 把温度限定漏掉(没说"温度不变");<br>· 把"\\(n\\) 不变"漏掉(气体量必须一定)。',
+      extension:'玻意耳定律的<strong>等温</strong>条件实际是"系统与环境保持热平衡 → 温度维持恒定"。等温过程 vs 绝热过程是热力学第一定律 4 过程的两类极端,后者 \\(Q = 0\\) 时 \\(PV^\\gamma = \\)常数(留进阶)。',
+      cardAnchor:"Card 1 STEP 3" },
+    { id:"T1-2", type:"choice", score:14, difficulty:"基础", exportIds:["CHARLES-LAW","KELVIN-CELSIUS-RELATION"],
+      stem:"查理定律 \\(P/T = \\)常数 中, 温度 \\(T\\) 必须使用<strong>开尔文标度</strong>(K), 这是因为:",
+      options:{A:"摄氏度是较老的单位, 不被科学界接受",B:"在开尔文标度下, P-T 图过原点(\\(P=0\\) 时 \\(T=0\\) K), 物理关系最简洁",C:"开尔文标度的数值更精确",D:"国际单位制(SI)只认开尔文"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>开尔文标度的特殊性</strong>:绝对零度 \\(T = 0\\) K 对应"分子平均动能 = 0" → 由<strong>查理定律外推</strong>:在等容过程, P 随 T 线性变化, 外推到 \\(P = 0\\) 时定义为绝对零度。<strong>此时 P-T 图过原点</strong>, "比例关系 \\(P \\propto T\\) 最简洁";若用摄氏度则 \\(P = a(t + 273.15)\\) 不过原点。',
+        logic:'各选项分析:<br>· <strong>A「摄氏度不被接受」</strong>:错 — 摄氏度仍是日常计量单位, 与开尔文并存;<br>· <strong>B 正确</strong>:开尔文标度下"过原点"是物理关系的根本简洁性;<br>· <strong>C「数值更精确」</strong>:错 — 数值精度与标度无关;<br>· <strong>D「SI 只认开尔文」</strong>:错 — SI 标准温度单位是开尔文, 但摄氏度也是 SI 认可的导出单位。',
+        connection:'<strong>上游</strong>:由查理定律实验数据外推得到绝对零度的概念。<br><strong>下游</strong>:① <strong>理想气体方程 \\(PV = nRT\\)</strong> 中 T 必须是开尔文(否则 R 不普适);② <strong>盖-吕萨克定律</strong> 同样要求开尔文标度;③ <strong>第二定律 · 卡诺效率 \\(\\eta = 1 - T_2/T_1\\)</strong> 中 T 必须开尔文(进阶);④ <strong>分子动理论</strong>"温度 \\(\\propto\\) 平均动能"的零点对应绝对零度。'
+      },
+      mistakes:'· 把"开尔文与摄氏度的关系"等同于"差值是常数",忽略了"过原点"的几何意义;<br>· 误以为摄氏度可以直接代入 \\(P/T\\)。',
+      extension:'<strong>绝对零度</strong>在量子物理角度下并非"完全静止"(分子仍有零点能), 这是经典分子动理论的边界声明之一。',
+      cardAnchor:"Card 1 STEP 3" },
+    { id:"T1-3", type:"choice", score:14, difficulty:"中等", exportIds:["GAY-LUSSAC-LAW","CHARLES-LAW"],
+      stem:"对一定量气体, 下列关系 <strong>正确</strong> 的是:",
+      options:{A:"等容过程: \\(V/T = \\)常数",B:"等压过程: \\(V/T = \\)常数(\\(T\\) 用开尔文)",C:"等温过程: \\(P/T = \\)常数",D:"等容过程: \\(PV = \\)常数"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>气体三定律的等价分类</strong>:<br>· <strong>玻意耳</strong>: 等温 → \\(PV = \\)常数;<br>· <strong>查理</strong>: 等容 → \\(P/T = \\)常数(开尔文);<br>· <strong>盖-吕萨克</strong>: 等压 → \\(V/T = \\)常数(开尔文)。<br>三定律分别约束 3 个独立变量 \\(P, V, T\\) 中固定 1 个时, 其余 2 个的关系。',
+        logic:'各选项分析:<br>· <strong>A「等容 \\(V/T\\)」</strong>:错 — 等容时 V 不变, \\(V/T\\) 无意义; 等容是 \\(P/T = \\)常数;<br>· <strong>B 正确</strong>:盖-吕萨克定律;<br>· <strong>C「等温 \\(P/T\\)」</strong>:错 — 等温时 T 不变, \\(P/T\\) 无意义; 等温是 \\(PV = \\)常数;<br>· <strong>D「等容 \\(PV\\)」</strong>:错 — 等容时 V 不变, \\(PV\\) 不能为常数除非 P 也不变。',
+        connection:'<strong>三定律 + 阿伏伽德罗定律 → 理想气体方程 \\(PV = nRT\\)</strong>(实验综合)。任何一个过程量约束都是 \\(PV = nRT\\) 在该约束下的特殊化。<br><strong>下游</strong>:① <strong>理想气体方程</strong>;② <strong>结合方程 \\(P_1V_1/T_1 = P_2V_2/T_2\\)</strong> — 一定量气体 3 量同时变化时常用;③ <strong>第一定律</strong> 4 过程 — 等容 / 等压 / 等温 / 绝热 — 中前 3 个直接对应三定律。'
+      },
+      mistakes:'· 等容 / 等压 / 等温的过程约束记反;<br>· 把摄氏度代入查理 / 盖-吕萨克(应用开尔文)。',
+      extension:'三定律的<strong>独立性</strong>:每个定律固定 1 个变量,约束剩余 2 个的关系。3 个独立约束 + 阿伏伽德罗定律(气体量与摩尔数线性) → 综合得到 \\(PV = nRT\\)。',
+      cardAnchor:"Card 1 STEP 3" },
+    { id:"T1-4", type:"choice", score:14, difficulty:"较难", exportIds:["ABSOLUTE-ZERO-EXTRAPOLATION","KELVIN-CELSIUS-RELATION"],
+      stem:"用查理定律的实验数据(等容过程 P-T 关系图)外推可得<strong>绝对零度</strong>。绝对零度的物理含义是:",
+      options:{A:"水的冰点(0°C, 273.15 K)",B:"温度的最低可达值, 对应分子热运动停止(经典图像)",C:"理想气体压强为零时的温度(\\(t = -273.15\\)°C)",D:"既是 B 也是 C(两个表述等价)"},
+      answer:"D",
+      explanation:{
+        principle:'<strong>绝对零度</strong>是温度的最低可达值, 对应分子平均动能 = 0(经典图像)。由<strong>查理定律外推</strong>(P-T 等容图过原点)给出实验由来:理想气体压强外推到 \\(P = 0\\) 时, 对应温度 \\(t = -273.15\\)°C = 0 K。',
+        logic:'各选项分析:<br>· <strong>A「水的冰点」</strong>:错 — 水的冰点 0°C = 273.15 K, 不是绝对零度;<br>· <strong>B「分子热运动停止」</strong>:正确(经典图像);<br>· <strong>C「理想气体外推 \\(P = 0\\)」</strong>:正确(实验由来);<br>· <strong>D 正确</strong>:B 和 C 是绝对零度的两种等价表述 — B 给出物理含义, C 给出实验外推由来。',
+        connection:'<strong>两种表述的统一</strong>:<br>· <strong>分子动理论</strong>视角(B): 温度 \\(\\propto\\) 平均动能, 平均动能 = 0 时 T = 0;<br>· <strong>实验外推</strong>视角(C): 查理定律 P-T 等容直线外推到 \\(P = 0\\) 处。<br>两个独立视角给出同一温度数值 → "多途径独立验证"原则。<br><strong>边界</strong>:量子角度仍有零点能, 故"分子完全静止"是经典图像; 本板块定性。<br><strong>下游</strong>:① <strong>卡诺效率 \\(\\eta = 1 - T_2/T_1\\)</strong> 中 \\(T_2 \\to 0\\) 时效率 \\(\\to 1\\) 但绝对零度无法达到(热力学第三定律, 留进阶);② <strong>第二定律 · 基础</strong>讨论温度方向时用此。'
+      },
+      mistakes:'· 把绝对零度与水的冰点混淆;<br>· 漏掉"经典图像"修饰(量子角度仍有零点能)。',
+      extension:'绝对零度无法达到是<strong>热力学第三定律</strong>的内容(留大学物化)。但即使<strong>逼近</strong>绝对零度的实验(目前实验室记录 \\(\\sim 10^{-9}\\) K)仍未违反第二定律。',
+      cardAnchor:"Card 1 STEP 3" }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:14, difficulty:"基础", exportIds:["IDEAL-GAS-EQUATION","GAS-CONSTANT-R"],
+      stem:"理想气体状态方程 \\(PV = nRT\\) 中, 普适气体常数 \\(R\\) 的数值与单位为:",
+      options:{A:"\\(R = 8.314\\) J/(mol·K), 普适指对所有理想气体相同",B:"\\(R = 8.314\\) J/K, 不同气体不同",C:"\\(R = 22.4\\) L·atm/(mol·K)",D:"\\(R\\) 是一个无量纲常数"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>普适气体常数 \\(R = 8.314\\) J/(mol·K)</strong>(SI 单位)。"普适"指对<strong>所有理想气体</strong>(不论分子种类:He / O₂ / N₂ / H₂ / CO₂ 等)<strong>都相同</strong>。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:数值 8.314, 单位 J/(mol·K), 普适;<br>· <strong>B「单位错 / 不普适」</strong>:错 — 单位是 J/(mol·K) 不是 J/K(必须含 mol);"不同气体不同"是双重错;<br>· <strong>C「数值 22.4」</strong>:错 — 这是<strong>摩尔体积</strong> \\(V_m\\)(L/mol, STP), 不是 R;<br>· <strong>D「无量纲」</strong>:错 — R 必有量纲 J/(mol·K)。',
+        connection:'<strong>"普适"的微观意义</strong>:对所有气体相同, 因为 R 由<strong>分子数密度 + 温度 + 体积 + 压强</strong>之间的<strong>统计关系</strong>决定, 不依赖分子的具体种类。<br><strong>下游</strong>:① <strong>第一定律 · 等温功 \\(W = nRT \\ln(V_2/V_1)\\)</strong>;② <strong>卡诺效率推导</strong> 中要用;③ \\(R\\) 与 <strong>玻尔兹曼常数 \\(k\\)</strong> 的关系 \\(R = N_A k\\)(留进阶微观推导);④ <strong>盖斯定律</strong>计算反应焓变时,等压过程 \\(\\Delta H \\approx \\Delta U + nR\\Delta T\\)(气体反应)。'
+      },
+      mistakes:'· 把 \\(R\\) 与 \\(V_m = 22.4\\) L/mol 混淆;<br>· 忘了 R 单位含 mol。',
+      extension:'\\(R = N_A k\\) 把宏观气体常数与微观玻尔兹曼常数 \\(k\\) 连接(留进阶 · 微观推导)。\\(R\\) 也常用 0.0821 L·atm/(mol·K), 这是常见的"L-atm 单位制" 数值, 但 SI 仍以 J/(mol·K) 为基础。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T2-2", type:"calc", score:14, difficulty:"中等", exportIds:["IDEAL-GAS-EQUATION","GAS-CONSTANT-R"],
+      stem:"标准状态下(\\(P_0 = 1.013 \\times 10^5\\) Pa, \\(T_0 = 273.15\\) K), 1 mol 理想气体的体积约为多少?(取 \\(R = 8.314\\) J/(mol·K), 单位 L, 容差 ±2%)",
+      answer:{value: 22.4, unit:"L", tolerance: 0.02},
+      explanation:{
+        principle:'<strong>理想气体方程 \\(PV = nRT\\)</strong>:已知 P、T、n 求 V。<strong>标准状态</strong>下 1 mol 任意理想气体体积约为 22.4 L,这是"摩尔体积" \\(V_m\\) 的经典数值。',
+        logic:'计算:<br>\\(V = nRT/P = (1 \\text{ mol}) \\times (8.314 \\text{ J/(mol·K)}) \\times (273.15 \\text{ K}) / (1.013 \\times 10^5 \\text{ Pa})\\)<br>\\(\\approx 0.02242\\) m³ = <strong>22.42 L</strong>。<br><strong>注意单位</strong>:V 的 SI 单位是 m³, 1 m³ = 1000 L。<br>排除:<br>· 算成 22.4 ± 2% 内为正确;<br>· 单位选 L(题目要求)。',
+        connection:'<strong>"22.4 L/mol"</strong>是高中化学 / 物理常用的<strong>"标准摩尔体积"</strong>,广泛用于:<br>① <strong>气体反应</strong>计算(已知体积反推摩尔数);<br>② <strong>盖斯定律 · 燃烧热</strong>计算(气体反应物 / 生成物的体积换算到摩尔数);<br>③ <strong>第一定律 · 4 过程</strong>初始体积参考。'
+      },
+      mistakes:'· 漏除 P 或单位换算错(Pa vs atm);<br>· 把 V_m = 22.4 L/mol 写成 22.4 m³/mol(差 1000 倍);<br>· 用摄氏度代入(应用 273.15 K)。',
+      extension:'<strong>22.4 L/mol</strong> 是<strong>标准状态</strong>下的摩尔体积。若改用 25°C / 100 kPa 则约为 24.8 L/mol。教科书的"标准状态"定义不唯一,做题时一定要看清题目。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T2-3", type:"choice", score:14, difficulty:"中等", exportIds:["COMBINED-GAS-EQUATION"],
+      stem:"一定量气体由状态 1(\\(P_1, V_1, T_1\\))变化到状态 2(\\(P_2, V_2, T_2\\)), 满足:",
+      options:{A:"\\(P_1V_1 = P_2V_2\\)(玻意耳定律)",B:"\\(P_1V_1/T_1 = P_2V_2/T_2\\)(结合方程)",C:"\\(P_1 + V_1 + T_1 = P_2 + V_2 + T_2\\)",D:"\\(P_1V_1T_1 = P_2V_2T_2\\)"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>结合方程</strong>:由 \\(PV = nRT\\), 一定量气体 \\(n\\) 不变, 故 \\(nR\\) 是常数 → \\(PV/T = nR = \\)常数 → <strong>\\(P_1V_1/T_1 = P_2V_2/T_2\\)</strong>。这是<strong>三量同时变化</strong>时最实用的关系。',
+        logic:'各选项分析:<br>· <strong>A「\\(PV =\\) 常数」</strong>:错 — 这是<strong>等温</strong>条件(玻意耳)的特殊情况, 一般 3 量同时变化时不成立;<br>· <strong>B 正确</strong>:结合方程, 一定量气体一般情况;<br>· <strong>C「P+V+T」</strong>:错 — 加法无物理意义;<br>· <strong>D「PVT」</strong>:错 — 三量相乘不守恒。',
+        connection:'<strong>结合方程的意义</strong>:把理想气体方程 \\(PV = nRT\\) 从"绝对量"形式转化为"初末态比较"形式 — 不需要知道具体的 n 和 R, 只需对比初末态。<br><strong>下游</strong>:① <strong>第一定律</strong> 4 过程初末态比较;② <strong>卡诺循环</strong>各段初末态用结合方程;③ <strong>气体扩散</strong> / 气压随海拔变化等场景都用此。'
+      },
+      mistakes:'· 把玻意耳定律(\\(PV = \\)常数)当作一般情况;<br>· 忘"一定量 n 不变"的前提(若 n 变化, 结合方程不成立)。',
+      extension:'结合方程是<strong>"初末态比较"</strong>的代表 — 工程实践中往往只关心"前后变化"而非绝对值, 故结合方程比 \\(PV = nRT\\) 更实用。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T2-4", type:"calc", score:14, difficulty:"较难", exportIds:["IDEAL-GAS-EQUATION","COMBINED-GAS-EQUATION"],
+      stem:"某气球内气体在 \\(P_1 = 1.0 \\times 10^5\\) Pa, \\(T_1 = 300\\) K 时体积 \\(V_1 = 2.0\\) L。气球升至高空, 压强降至 \\(P_2 = 0.5 \\times 10^5\\) Pa, 温度降至 \\(T_2 = 250\\) K。求此时气球体积 \\(V_2\\)(单位 L, 容差 ±2%)。",
+      answer:{value: 3.33, unit:"L", tolerance: 0.02},
+      explanation:{
+        principle:'<strong>结合方程 \\(P_1V_1/T_1 = P_2V_2/T_2\\)</strong>:一定量气体 3 量同时变化, 用此关系直接求解。',
+        logic:'计算:<br>\\(V_2 = V_1 \\times (P_1/P_2) \\times (T_2/T_1)\\)<br>\\(= 2.0 \\times (1.0/0.5) \\times (250/300)\\)<br>\\(= 2.0 \\times 2.0 \\times 0.833\\)<br>\\(\\approx 3.33\\) L。<br><strong>物理理解</strong>:压强降一半 → 体积约翻一倍(玻意耳); 温度降 → 体积减小(查理 / 盖-吕萨克), 两者综合后体积增加约 67%。',
+        connection:'<strong>结合方程是气体题的『万能公式』</strong>。<br><strong>注意</strong>:T 必须是<strong>开尔文</strong>(如果题目给摄氏度先换算)。<br><strong>下游</strong>:① <strong>第一定律</strong>讨论 4 过程的初末态;② <strong>气压随海拔</strong>(气球上升 / 飞机舱压 / 高山气压)的实际工程应用。'
+      },
+      mistakes:'· 用摄氏度代入(必须开尔文);<br>· P 比颠倒(\\(P_2/P_1\\) vs \\(P_1/P_2\\) — 体积应随压强反比);<br>· 漏单位换算。',
+      extension:'气球升高时, 大气压降低 → 体积膨胀; 温度降低 → 体积收缩。两者通常<strong>压强降影响更大</strong>(因为 P 在分母, 影响幂次更高), 故气球总体膨胀, 这就是为何探测气球到高空时常常爆裂(膨胀超过弹性极限)。',
+      cardAnchor:"Card 1 STEP 4" }
+  ],
+  T3: [
+    { id:"T3-1", type:"choice", score:14, difficulty:"基础", exportIds:["BOYLE-MICRO"],
+      stem:"玻意耳定律 \\(PV = \\)常数 的<strong>微观解释</strong>(等温下压缩气体, 压强增大)是:",
+      options:{A:"压缩使分子温度升高 → 撞壁力增大",B:"压缩使分子数密度 \\(n_\\text{数}\\) 增大 → 撞壁频率增大",C:"压缩使分子质量增大 → 撞壁力增大",D:"压缩使分子间距增大 → 引力增大"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>玻意耳定律的微观机制</strong>(BOYLE-MICRO):等温下温度不变 → 分子<strong>平均动能不变</strong> → 单次撞壁力<strong>不变</strong>。但<strong>体积变小</strong> → <strong>分子数密度 \\(n_\\text{数}\\) 增大</strong> → 单位时间内撞壁的<strong>分子数增加</strong>(频率增大) → 总压强增大。',
+        logic:'各选项分析:<br>· <strong>A「温度升高」</strong>:错 — 等温过程温度不变, 否则就不是玻意耳定律的适用条件;<br>· <strong>B 正确</strong>:数密度变化是核心机制;<br>· <strong>C「分子质量增大」</strong>:错 — 压缩气体不会改变分子的种类和质量;<br>· <strong>D「分子间距增大」</strong>:错 — 压缩使分子间距<strong>减小</strong>不是增大,且引力变化与玻意耳定律无关(理想气体假设忽略分子间作用)。',
+        connection:'<strong>"撞壁频率 vs 撞壁力"二分</strong>是分子动理论解释气压的两个独立维度:<br>· <strong>玻意耳(等温)</strong>:V↓ → \\(n_\\text{数}\\)↑ → 频率↑;<br>· <strong>查理(等容)</strong>:T↑ → 平均动能↑ → 撞壁力↑ + 频率↑(双重作用)。<br>两者综合给出 \\(PV = nRT\\) 的完整微观图像。<br><strong>下游</strong>:① <strong>第二定律</strong>讨论气体自由膨胀(单方向自发)时用此微观图像;② <strong>第一定律</strong> 等温过程做功 \\(W = nRT \\ln(V_2/V_1)\\) 的物理由来。'
+      },
+      mistakes:'· 把"等温"条件漏掉, 误把温度升高当作压强增大的原因;<br>· 不区分"撞壁力"(单次)与"撞壁频率"(单位时间数)。',
+      extension:'<strong>气压 = 撞壁力 × 撞壁频率 / 单位时间</strong>:这是分子动理论给出气压的微观本质。<strong>"力 vs 频率"二分</strong>是后续讨论 4 过程(等温 / 等容 / 等压 / 绝热)各自微观图像的基础。',
+      cardAnchor:"Card 1 STEP 3 思考点 1" },
+    { id:"T3-2", type:"choice", score:14, difficulty:"基础", exportIds:["CHARLES-MICRO"],
+      stem:"查理定律 \\(P/T = \\)常数 的<strong>微观解释</strong>(等容下升温, 压强增大)是:",
+      options:{A:"升温使分子数密度增大 → 撞壁频率增大",B:"升温使分子平均动能增大 → 单次撞壁力增大 + 撞壁频率增大",C:"升温使分子总数增多 → 撞壁更多",D:"升温使分子间引力增大 → 压强增大"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>查理定律的微观机制</strong>(CHARLES-MICRO):等容下 V 不变 → 数密度 \\(n_\\text{数}\\) 不变。但<strong>温度升高</strong> → 分子<strong>平均动能</strong> ↑ → 平均速率 ↑ → 两个独立效应:① 单次撞壁力 ↑(动量 mv 大); ② 撞壁频率 ↑(单位时间撞墙多)。<strong>两者双重作用</strong> → 总压强 ↑。',
+        logic:'各选项分析:<br>· <strong>A「数密度增大」</strong>:错 — 等容下 V 不变, n_数 不变;<br>· <strong>B 正确</strong>:温度升高 → 平均动能升高 → 双重作用(力 + 频率);<br>· <strong>C「分子总数增多」</strong>:错 — 等容下 N 不变(气体量一定);<br>· <strong>D「引力增大」</strong>:错 — 理想气体假设忽略分子间作用力。',
+        connection:'<strong>"双重作用"是温度升高引起气压增大的关键</strong> — 查理与玻意耳的微观本质有重要差异:<br>· <strong>玻意耳</strong>(V 变 T 不变): 单一效应(频率);<br>· <strong>查理</strong>(T 变 V 不变): 双重效应(力 + 频率)。<br><strong>下游</strong>:① <strong>第一定律 · 等容过程</strong>(\\(\\Delta V = 0\\) → \\(W = 0\\) → \\(Q = \\Delta U\\)) 用此微观图像;② 理解为何<strong>同样的温度变化对压强的影响远大于体积变化对压强的影响</strong>(双重 vs 单一)。'
+      },
+      mistakes:'· 漏掉"等容"条件;<br>· 漏一个效应("力" vs "频率")。',
+      extension:'<strong>双重 vs 单一效应</strong>是气体动理论给出微观图像时常常出现的对比。理解后能<strong>预测</strong>各种过程的压强变化方向, 而不必死记公式。',
+      cardAnchor:"Card 1 STEP 3 思考点 2" },
+    { id:"T3-3", type:"choice", score:14, difficulty:"中等", exportIds:["IDEAL-GAS-ASSUMPTIONS"],
+      stem:"理想气体模型的 2 条核心假设是:",
+      options:{A:"① 分子无规则热运动; ② 分子温度均匀",B:"① 分子大小可忽略(点状); ② 分子间无相互作用(碰撞瞬间除外)",C:"① 分子数目无限多; ② 分子运动速度相同",D:"① 分子不可压缩; ② 分子不可破坏"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>理想气体 2 假设</strong>:<br>① <strong>分子大小可忽略</strong>(点状) — 分子占据的体积远小于气体总体积(气体 \\(r \\gg r_0\\) 满足);<br>② <strong>分子间无相互作用</strong>(碰撞瞬间除外) — F-r 曲线在 \\(r \\gg r_0\\) 时作用力可忽略(气体场景成立)。<br>这两条假设在<strong>常温常压</strong>下满足良好, 在<strong>高压低温</strong>下偏离, 需要修正(范德瓦尔斯方程, 留进阶)。',
+        logic:'各选项分析:<br>· <strong>A「热运动 / 温度均匀」</strong>:错 — 这些是任何气体的性质, 不是理想气体的特殊假设;<br>· <strong>B 正确</strong>:理想气体 2 大假设;<br>· <strong>C「无限多 / 速度相同」</strong>:错 — 分子数目有限, 速度各不相同(麦克斯韦分布);<br>· <strong>D「不可压缩 / 不可破坏」</strong>:错 — 气体当然可压缩, 分子也可被破坏(高能反应)。',
+        connection:'<strong>理想气体假设是 \\(PV = nRT\\) 成立的微观前提</strong>:<br>· 假设 ① "分子大小可忽略" → 总体积约等于气体体积, 简化压强计算;<br>· 假设 ② "分子间无作用" → 内能 \\(U\\) 只依赖 T(\\(U = U(T)\\)), 简化第一定律。<br><strong>偏离</strong>:① 高压下分子间距变小, 假设 ② 失效; ② 低温下分子动能降低不足以克服引力, 假设 ② 失效。<br><strong>下游</strong>:① <strong>第一定律 · 等温过程 \\(\\Delta U = 0\\)</strong> 直接依赖假设 ②;② <strong>范德瓦尔斯方程</strong>修正(进阶 · 大学物化)。'
+      },
+      mistakes:'· 把"理想气体假设"与"任何气体性质"混淆;<br>· 漏掉"碰撞瞬间除外"修饰(碰撞时确实有相互作用)。',
+      extension:'理想气体在常温常压(101 kPa / 25°C)下偏离不到 1%; 但在<strong>液化前夕</strong>(高压低温)偏离可达 10-50%。这就是为何化学讨论气体反应时通常默认『理想气体』假设满足。',
+      cardAnchor:"Card 1 STEP 5" },
+    { id:"T3-4", type:"multi", score:14, difficulty:"较难", exportIds:["BOYLE-MICRO","CHARLES-MICRO","IDEAL-GAS-ASSUMPTIONS"],
+      stem:"下列对气体三定律微观机制的说法 <strong>正确</strong> 的是:",
+      options:{A:"玻意耳定律的微观本质是\"等温下数密度变化引起撞壁频率变化\"",B:"查理定律的微观本质是\"等容下温度变化引起撞壁力和频率双重变化\"",C:"理想气体方程 \\(PV = nRT\\) 是由实验综合得到, 不是纯理论假设",D:"理想气体假设包括\"分子间引力为零\"(全部 r 都不作用)",E:"高压低温时理想气体方程会偏离, 需修正"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>气体三定律的微观机制 + 理想气体边界</strong>:三定律分别从不同维度(玻意耳-数密度 / 查理-动能 / 盖-吕萨克-压强)解释气体行为; 理想气体方程是三定律 + 阿伏伽德罗定律的实验综合, 在高压低温下偏离。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:玻意耳微观机制;<br>· <strong>B 正确</strong>:查理微观机制(双重效应);<br>· <strong>C 正确</strong>:\\(PV = nRT\\) 来自实验综合, 不是公理;<br>· <strong>D 错</strong>:理想气体假设是"<strong>分子间无相互作用</strong>"(<strong>碰撞瞬间除外</strong>); 碰撞瞬间作用力极大(否则气体会塌陷)。D 漏了"碰撞除外"修饰, 故错;<br>· <strong>E 正确</strong>:高压低温下偏离, 需范德瓦尔斯等修正。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>"实验综合 vs 公理"</strong>是物理学发展的重要思想 — 大多数定律都是从大量实验综合而成, 而非纯理论假设。<br><strong>下游</strong>:① <strong>第一定律</strong> 同样源于实验综合(焦耳热功当量实验);② <strong>盖斯定律</strong>(化学反应焓变的实验综合);③ <strong>开普勒三定律 → 万有引力</strong>(也是实验综合而成的范例)。'
+      },
+      mistakes:'· 选 D(忽略"碰撞瞬间除外");<br>· 漏选 C(误以为 \\(PV = nRT\\) 是理论假设而非实验综合)。',
+      extension:'<strong>"理论 vs 实验"在物理学中的辩证关系</strong>:多数定律源于实验综合, 但<strong>少数</strong>定律(如热力学第二定律的克劳修斯陈述 / 第一定律的能量守恒)有"基本原理"的地位。',
+      cardAnchor:"Card 1 STEP 4-5" }
+  ],
+  T4: [
+    { id:"T4-1", type:"choice", score:14, difficulty:"基础", exportIds:["SURFACE-TENSION","LIQUID-SURFACE-CONTRACTS"],
+      stem:"<strong>表面张力</strong>的微观本质是:",
+      options:{A:"表面分子的引力比内部分子大",B:"表面分子比内部分子<strong>少了上方邻居的引力束缚</strong>, 能量更高, 系统倾向最小化表面积",C:"表面有外力作用, 把分子压向液体内部",D:"表面分子运动速率慢, 故压力大"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>表面张力的微观本质</strong>(SURFACE-TENSION):液体内部分子四面八方都有邻居 → 引力<strong>合力为零</strong>(平衡); 表面分子<strong>少了上方邻居</strong> → 引力<strong>不平衡</strong>, 净力向内, 同时<strong>能量更高</strong>(因为少了一部分负势能贡献)。系统倾向最小化表面积来<strong>降低总能量</strong>, 表现为表面"想要收缩"的力。',
+        logic:'各选项分析:<br>· <strong>A「表面分子引力比内部分子大」</strong>:错 — 表面分子的<strong>引力本身大小相同</strong>(都是 F-r 曲线决定), 但<strong>邻居少</strong>导致合力不平衡;<br>· <strong>B 正确</strong>:邻居少 → 能量高 → 系统最小化表面积;<br>· <strong>C「外力压向内部」</strong>:错 — 没有外力, 是分子间引力本身;<br>· <strong>D「速率慢 / 压力大」</strong>:错 — 与速率无关, 与势能有关。',
+        connection:'<strong>"能量最小化"原则</strong>是物理学的统一原则:<br>· 自由液滴呈球形(表面积最小);<br>· 气球被刺穿后表面要收缩;<br>· 这是与<strong>第二定律 · 熵增方向</strong>类似的"自发降低自由能"的体现(进阶板块讨论 G = H - TS 时呼应)。<br><strong>下游</strong>:① <strong>毛细现象</strong>用此; ② <strong>液体 vs 气体</strong>的相变机制(进阶板块)。'
+      },
+      mistakes:'· 把"邻居少"误读为"引力不存在";<br>· 把表面张力理解为"外力"(其实是分子间内部引力)。',
+      extension:'<strong>地表的水面、雨滴、气泡、肥皂泡 等都呈球形</strong>(完全自由时), 这是表面张力的宏观表现, 也是"能量最小化"的视觉化。',
+      cardAnchor:"Card 2 STEP 2" },
+    { id:"T4-2", type:"choice", score:14, difficulty:"基础", exportIds:["WETTING-CRITERION"],
+      stem:"浸润是<strong>液体 + 固体的组合属性</strong>。判断浸润的微观依据是:",
+      options:{A:"液体本身的密度",B:"液体本身的表面张力大小",C:"液-固分子的引力 vs 液-液分子的引力 — 前者大则浸润",D:"固体的硬度"},
+      answer:"C",
+      explanation:{
+        principle:'<strong>浸润判据(WETTING-CRITERION)</strong>:浸润的本质是<strong>液体分子是否"愿意"接触固体表面</strong>。这取决于两个引力的<strong>比较</strong>:<br>· <strong>液-固分子引力</strong>(液体分子被固体表面吸引);<br>· <strong>液-液分子引力</strong>(液体分子被自身分子吸引)。<br>前者大 → 液体倾向铺开接触固体(<strong>浸润</strong>); 后者大 → 液体倾向收缩成球避开固体(<strong>不浸润</strong>)。',
+        logic:'各选项分析:<br>· <strong>A「密度」</strong>:错 — 密度与浸润无关;<br>· <strong>B「液体表面张力」</strong>:错 — 表面张力只反映液-液引力, 不足以判断浸润(必须比较液-固);<br>· <strong>C 正确</strong>:浸润的物理本质是<strong>两种引力的比较</strong>;<br>· <strong>D「硬度」</strong>:错 — 浸润与固体硬度无关。',
+        connection:'<strong>"组合属性"是浸润判据的关键</strong>:水浸润玻璃但不浸润蜡; 水银不浸润玻璃但浸润铅。<strong>同一液体, 在不同固体表面浸润行为完全不同</strong>。<br><strong>下游</strong>:① <strong>毛细现象</strong>(浸润 → 上升; 不浸润 → 下降); ② <strong>植物根系吸水</strong>(水浸润根细胞 → 上升);③ <strong>液体在不同表面的行为</strong>(雨水从荷叶上滚落 = 不浸润, 水在棉布上铺开 = 浸润)。'
+      },
+      mistakes:'· 把浸润看作液体本身的属性, 而非液-固组合;<br>· 误以为表面张力越大越浸润(实际反之)。',
+      extension:'<strong>"水珠在荷叶上滚落"</strong>是不浸润的范例(荷叶表面有微纳米结构使水-叶引力极弱)。<strong>"水墨在宣纸上扩散"</strong>是浸润的范例(水-纤维引力强)。',
+      cardAnchor:"Card 2 STEP 3" },
+    { id:"T4-3", type:"choice", score:14, difficulty:"中等", exportIds:["CAPILLARY-EFFECT","WETTING-CRITERION"],
+      stem:"<strong>毛细现象</strong>:玻璃细管插入水中, 水<strong>上升</strong>;插入水银中, 水银<strong>下降</strong>。原因是:",
+      options:{A:"水比水银轻, 所以上升",B:"玻璃-水浸润(液-固引力大), 玻璃-水银不浸润(液-液引力大)",C:"水的表面张力大于水银",D:"水银有毒, 自然下降"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>毛细现象的微观本质</strong>(CAPILLARY-EFFECT):<br>· <strong>浸润液体(水 vs 玻璃)</strong>:管壁吸引液体, 液面凹陷 → 表面张力把液体"拉起" → 上升;<br>· <strong>不浸润液体(水银 vs 玻璃)</strong>:管壁不吸引液体, 液面凸起 → 表面张力把液体"压下" → 下降。<br><strong>管越细, 效应越显著</strong>(因为表面张力影响力不变, 但内部分子重力变小)。',
+        logic:'各选项分析:<br>· <strong>A「水比水银轻」</strong>:错 — 与密度比较无关, 与浸润有关;<br>· <strong>B 正确</strong>:浸润 vs 不浸润决定上升 vs 下降;<br>· <strong>C「表面张力大小」</strong>:错 — 单独的表面张力大小不足以判断方向; 必须比较液-固 vs 液-液引力;<br>· <strong>D「水银有毒」</strong>:与现象无关。',
+        connection:'<strong>"管越细越显著"是表面张力 vs 重力的竞争</strong>:管细 → 内部体积小 → 重力小 → 表面张力影响大。<br><strong>下游应用</strong>:① <strong>植物根系</strong>:细毛根管吸水上升(蒸腾拉力的初始机制);② <strong>纸巾吸水</strong>:纤维细管浸润水;③ <strong>钢笔笔尖吸墨</strong>。'
+      },
+      mistakes:'· 把毛细现象与密度联系;<br>· 不能区分"浸润 → 上升, 不浸润 → 下降"。',
+      extension:'<strong>植物根系吸水</strong>不只靠毛细, 还需蒸腾拉力(叶子蒸发水分形成压差);但毛细现象是根毛进入土壤吸水的<strong>初始动力</strong>。',
+      cardAnchor:"Card 2 STEP 3" },
+    { id:"T4-4", type:"multi", score:14, difficulty:"较难", exportIds:["SURFACE-TENSION","WETTING-CRITERION","CAPILLARY-EFFECT"],
+      stem:"下列关于液体表面现象的说法 <strong>正确</strong> 的是:",
+      options:{A:"自由液滴(无外力)呈球形, 是表面张力使表面积最小化的结果",B:"水滴在荷叶上呈球形是因为水不浸润荷叶",C:"水珠从地面流向高山(向上)是毛细现象的体现",D:"表面张力反映液-液分子的吸引能力,浸润反映液-固组合的吸引比较",E:"管越粗, 毛细现象越显著"},
+      answer:["A","B","D"],
+      explanation:{
+        principle:'<strong>液体表面现象的微观本质 + 边界辨析</strong>:表面张力是液-液引力的体现; 浸润是液-固组合属性; 毛细现象在管细时显著。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:自由液滴呈球形是表面张力 / 能量最小化的结果;<br>· <strong>B 正确</strong>:水珠在荷叶上呈球形 = 水不浸润荷叶, 倾向收缩;<br>· <strong>C 错</strong>:毛细现象只能在<strong>细管 / 多孔介质</strong>中发生, 范围有限(几厘米到几米);<strong>水流向高山</strong>(地下水到山顶)需要其他机制(蒸腾 / 抽水机 / 压差);<br>· <strong>D 正确</strong>:表面张力与浸润的本质区分;<br>· <strong>E 错</strong>:管越<strong>细</strong>毛细越显著(管细 → 内部体积小 → 重力小);<br>故选 <strong>A、B、D</strong>。',
+        connection:'<strong>"液体表面现象的统一理解"</strong>:表面张力 / 浸润 / 毛细 都建立在<strong>分子间引力</strong>(F-r 曲线 \\(r > r_0\\) 段)的基础上, 这是<strong>"一套微观工具解释三态"</strong>的具体体现。<br><strong>下游</strong>:① <strong>第二定律 · 自发方向</strong>讨论液体行为时呼应;② <strong>盖斯定律 · 反应焓变</strong>中液-气相变贡献 \\(\\Delta H\\) 涉及液体表面性质间接。'
+      },
+      mistakes:'· 误选 C(把毛细现象的范围理解过大);<br>· 误选 E(管越粗反而毛细越弱);<br>· 漏选 D(忽略"组合属性"的关键)。',
+      extension:'<strong>表面张力 / 浸润 / 毛细 三者关系</strong>:<br>· 表面张力 ⊂ 液-液引力 的宏观体现;<br>· 浸润 = 液-液 vs 液-固 引力比较的结果;<br>· 毛细 = 表面张力 + 浸润 + 细管几何 的综合现象。',
+      cardAnchor:"Card 2 STEP 2-3" }
+  ],
+  T5: [
+    { id:"T5-1", type:"choice", score:16, difficulty:"基础", exportIds:["CRYSTAL-CHARACTERISTICS"],
+      stem:"<strong>晶体</strong>的四个核心特征是:",
+      options:{A:"无规则排列 + 渐变软化 + 各向同性 + 亚稳态",B:"规则点阵 + 固定熔点 + 解理性 + 单晶各向异性",C:"软 + 易碎 + 透明 + 导电",D:"低密度 + 高熔点 + 高硬度 + 高导热"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>晶体 4 大特征</strong>(CRYSTAL-CHARACTERISTICS):<br>① <strong>微观规则点阵</strong>(分子 / 离子严格周期排列);<br>② <strong>固定熔点</strong>(单一温度下整体熔化, 因均一束缚);<br>③ <strong>解理性</strong>(沿特定晶面易裂开);<br>④ <strong>单晶各向异性</strong>(不同方向物理性质不同, 因规则方向性)。',
+        logic:'各选项分析:<br>· <strong>A 错</strong>:这是<strong>非晶体</strong>的特征(无规则 + 渐变软化 + 各向同性 + 亚稳态);<br>· <strong>B 正确</strong>:晶体 4 大特征;<br>· <strong>C「软 / 易碎 / 透明 / 导电」</strong>:错 — 这些不是晶体的<strong>定义特征</strong>, 只是部分晶体的偶然性质;<br>· <strong>D「低密度 / 高熔点 / 高硬度 / 高导热」</strong>:错 — 同上, 不是定义特征。',
+        connection:'<strong>晶体 vs 非晶体的根本区别</strong>是<strong>微观结构的规则性</strong>。<strong>"微观决定宏观"</strong>这一思想:微观规则点阵 → 宏观固定熔点 + 解理 + 各向异性。<br><strong>下游</strong>:① <strong>盖斯定律</strong>计算反应焓变时, 晶体反应物 / 生成物的<strong>晶型变化</strong>(如石墨 → 金刚石)涉及焓变;② <strong>第二定律 · 熵</strong>讨论时, 晶体熵低 / 非晶熵高的微观本质;③ <strong>固体物理</strong>(大学)展开晶体的能带 / 缺陷理论。'
+      },
+      mistakes:'· 把晶体 vs 非晶体的 4 大特征记反;<br>· 把偶然性质(导电 / 透明)与定义性质混淆。',
+      extension:'<strong>"晶体 4 大特征互相支持"</strong>:规则点阵是<strong>根本原因</strong>, 固定熔点 + 解理 + 各向异性是<strong>宏观表现</strong>。理解这种"微观 → 宏观"的解释链是<strong>一套微观工具解释三态</strong>这一核心思维的体现。',
+      cardAnchor:"Card 3 STEP 2" },
+    { id:"T5-2", type:"choice", score:16, difficulty:"基础", exportIds:["AMORPHOUS-CHARACTERISTICS"],
+      stem:"<strong>非晶体</strong>(如玻璃、塑料、石蜡)的四大特征是:",
+      options:{A:"规则点阵 + 固定熔点 + 解理性 + 单晶各向异性",B:"微观无规则排列 + 渐变软化(无固定熔点) + 各向同性 + 亚稳态",C:"晶体的反义词", D:"软, 易塑形, 易碎"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>非晶体 4 大特征</strong>(AMORPHOUS-CHARACTERISTICS):<br>① <strong>微观无规则排列</strong>(无周期, 类似"冻结的液体");<br>② <strong>渐变软化</strong>(无固定熔点, 加热时逐渐变软);<br>③ <strong>各向同性</strong>(不同方向物理性质相同, 因无规则方向);<br>④ <strong>亚稳态</strong>(能量上不是最低, 长时间可能慢慢"重结晶"成晶体)。',
+        logic:'各选项分析:<br>· <strong>A 错</strong>:这是晶体的 4 大特征;<br>· <strong>B 正确</strong>:非晶体 4 大特征;<br>· <strong>C「晶体的反义词」</strong>:错 — 太抽象, 没说出具体特征;<br>· <strong>D「软 / 易塑形 / 易碎」</strong>:错 — 这些是部分非晶体的偶然性质, 不是定义特征(比如玻璃易碎, 但塑料不易碎)。',
+        connection:'<strong>"亚稳态"是非晶体最深刻的性质</strong>:玻璃看似坚硬永恒, 实际上是过冷液体的"冻结态", 数千年的玻璃窗会缓慢流动(<strong>玻璃流</strong>现象), 数百万年后可能"自发重结晶"成石英晶体。<br><strong>下游</strong>:① <strong>第二定律 · 自发方向</strong>讨论时, 非晶 → 晶体是熵减但能量降低的过程(类比化学反应的吉布斯自由能判据); ② <strong>反应焓变</strong>计算时, 物质的<strong>晶态 vs 非晶态</strong>有不同的 \\(\\Delta H_f^\\circ\\)。'
+      },
+      mistakes:'· 误把非晶体当"晶体的反义词"而不知具体特征;<br>· 漏掉"亚稳态"特征。',
+      extension:'<strong>"玻璃流"</strong>:数千年的古玻璃窗下方厚度大于上方, 一种解释是缓慢流动(亚稳态液体性质); 另一种解释是古代玻璃工艺不均。两种解释都涉及非晶体的本质性质。',
+      cardAnchor:"Card 3 STEP 2" },
+    { id:"T5-3", type:"choice", score:16, difficulty:"中等", exportIds:["CRYSTAL-MELT-MECHANISM"],
+      stem:"<strong>晶体有固定熔点</strong>(在某一确定温度下整体熔化, 非晶体则渐变软化), 其微观原因是:",
+      options:{A:"晶体的分子比非晶体大",B:"晶体规则点阵 → 所有分子被引力束缚<strong>均一</strong> → 加热到某温度时同时冲破约束 → 瞬间熔化",C:"晶体的分子运动更快",D:"晶体颗粒比非晶体重"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>晶体固定熔点的微观机制</strong>(CRYSTAL-MELT-MECHANISM):规则点阵 → 所有分子在<strong>相同的几何环境</strong>下被周围邻居引力束缚 → 束缚程度<strong>均一</strong> → 加热时所有分子的<strong>"逃脱阈值"相同</strong> → 在<strong>某一确定温度</strong>时同时冲破约束 → 瞬间熔化。<br>非晶体则<strong>无规则</strong> → 每个分子的束缚程度不一 → 不同分子的"逃脱阈值"不同 → 加热时<strong>不同分子在不同温度下逐个挣脱</strong> → <strong>渐变软化</strong>(无固定熔点)。',
+        logic:'各选项分析:<br>· <strong>A「分子更大」</strong>:错 — 分子大小与熔点机制无关;<br>· <strong>B 正确</strong>:均一束缚是晶体固定熔点的微观本质;<br>· <strong>C「分子运动更快」</strong>:错 — 同温下平均动能相同, 与晶 / 非晶无关;<br>· <strong>D「颗粒更重」</strong>:错 — 与熔点机制无关。',
+        connection:'<strong>"均一束缚"思想</strong>是物理学统计思维的范例:<br>· <strong>晶体</strong>:全局有序 → 性质均一 → 相变集体进行;<br>· <strong>非晶体</strong>:无序 → 性质各异 → 相变各分子独立。<br><strong>下游</strong>:① <strong>盖斯定律</strong>计算时, 晶型变化(如石墨 → 金刚石, ΔH 不同)有特定 ΔH;② <strong>第二定律 · 熵</strong>讨论时, 晶体熵低 / 非晶熵高, 与"有序 vs 无序"对应。'
+      },
+      mistakes:'· 把晶体 / 非晶体的差别归因于分子大小、运动速度;<br>· 不能解释"为什么相变是集体性的"。',
+      extension:'<strong>玻璃化温度 \\(T_g\\)</strong>:非晶体的"软化"在某温度区间内显著, 称为玻璃化温度。塑料 \\(T_g\\) 远低于水的冰点是塑料在常温下保形的物理基础。',
+      cardAnchor:"Card 3 STEP 2 思考点 7" },
+    { id:"T5-4", type:"multi", score:16, difficulty:"较难", exportIds:["CRYSTAL-CHARACTERISTICS","AMORPHOUS-CHARACTERISTICS","CRYSTAL-MELT-MECHANISM"],
+      stem:"下列关于晶体 vs 非晶体的说法 <strong>正确</strong> 的是:",
+      options:{A:"晶体有固定熔点, 因为微观规则点阵导致束缚均一",B:"非晶体的「亚稳态」意味着它有可能缓慢重结晶成晶体",C:"非晶体(如玻璃)是固体的一种",D:"晶体一定是透明的, 非晶体一定不透明",E:"晶体的解理性是规则点阵在断裂时的宏观表现"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>晶体 vs 非晶体的全面对比</strong>:微观规则性决定宏观行为, 共同属于"固体"范畴, 但热力学性质和力学行为有质的差异。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:晶体固定熔点的微观机制;<br>· <strong>B 正确</strong>:非晶体亚稳态有可能(虽然时间尺度可能很长)重结晶;<br>· <strong>C 正确</strong>:玻璃 / 塑料 / 石蜡都是<strong>固体</strong>(虽然是非晶固体, 不是晶体);<br>· <strong>D 错</strong>:晶体不一定透明(金属晶体不透明), 非晶体不一定不透明(玻璃透明); 透明性与微观结构关系复杂, 不是晶 / 非晶的判定;<br>· <strong>E 正确</strong>:解理性是规则点阵在断裂时沿"晶面"裂开的宏观表现。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>"固体"的内涵包括晶体和非晶体</strong> — 这是基础但容易被忽略的点。<br><strong>下游</strong>:① <strong>气液固三态</strong>对比时, "固体"统一指代两种类型;② <strong>第一定律</strong> 4 过程讨论固体时也应区分晶 / 非晶。'
+      },
+      mistakes:'· 误选 D(把透明性当作晶 / 非晶判据);<br>· 漏选 C(误以为非晶体不是固体);<br>· 漏选 E(不知解理性的微观由来)。',
+      extension:'<strong>"亚稳态"的时间尺度</strong>:玻璃从液态冷却到固态, 重结晶为石英可能需数百万年; 但<strong>金属玻璃</strong>(非晶金属)在几小时内就可能开始重结晶, 这是金属玻璃的工业利用难点。',
+      cardAnchor:"Card 3 STEP 2" }
+  ],
+  T6: [
+    { id:"T6-1", type:"choice", score:14, difficulty:"基础", exportIds:["SINGLE-VS-POLY-CRYSTAL"],
+      stem:"<strong>单晶</strong>和<strong>多晶</strong>的本质区别是:",
+      options:{A:"单晶质量更高",B:"单晶整体规则 → 各向异性; 多晶 = 大量小晶粒随机取向 → 宏观各向同性",C:"单晶大, 多晶小",D:"单晶透明, 多晶不透明"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>单晶 vs 多晶的本质区别</strong>(SINGLE-VS-POLY-CRYSTAL):<br>· <strong>单晶</strong>:整体是<strong>一个</strong>规则点阵, 微观取向一致 → <strong>各向异性</strong>(不同方向物理性质不同);<br>· <strong>多晶</strong>:由<strong>大量小晶粒</strong>组成, 每个晶粒内部规则但<strong>各晶粒取向随机</strong> → <strong>宏观各向同性</strong>(平均后方向性消失)。',
+        logic:'各选项分析:<br>· <strong>A「质量更高」</strong>:错 — 这是主观判断, 不是物理性质;<br>· <strong>B 正确</strong>:微观取向决定宏观各向性质;<br>· <strong>C「大 vs 小」</strong>:错 — 不一定;<br>· <strong>D「透明 vs 不透明」</strong>:错 — 不是单晶 vs 多晶的判据。',
+        connection:'<strong>"晶粒间界"是多晶的微观特征</strong>:多晶不是单晶的简单堆积, 各晶粒之间还有"晶界"(无规则的过渡区域)。<br><strong>下游</strong>:① <strong>金属力学性能</strong>:晶界阻碍位错运动, 晶粒越小金属越硬(<strong>霍尔-佩奇关系</strong>, 留大学材料);② <strong>半导体</strong>:多晶硅光电效率低于单晶硅, 但成本低;③ <strong>盖斯定律</strong>计算时, 多晶 vs 单晶的<strong>晶界能</strong>会小幅影响 \\(\\Delta H\\)。'
+      },
+      mistakes:'· 把单晶 vs 多晶的区别误读为"大小";<br>· 不知道"取向"是关键。',
+      extension:'<strong>金属一般是多晶</strong>(因为冷却快, 多个晶核同时长大), 故金属宏观各向同性。但<strong>单晶硅</strong>(为半导体器件)需要特殊工艺<strong>"提拉法"</strong>(直拉法)从熔融硅中拉出单晶, 极其昂贵。',
+      cardAnchor:"Card 3 STEP 3" },
+    { id:"T6-2", type:"choice", score:14, difficulty:"基础", exportIds:["ANISO-VS-ISOTROPIC"],
+      stem:"下列物体中, 表现出<strong>各向异性</strong>的是:",
+      options:{A:"水",B:"玻璃",C:"普通铁丝(多晶金属)",D:"完整的单晶云母片"},
+      answer:"D",
+      explanation:{
+        principle:'<strong>各向异性 vs 各向同性</strong>(ANISO-VS-ISOTROPIC):<br>· <strong>各向异性</strong>:不同方向物理性质<strong>不同</strong>; 出现在<strong>单晶</strong>(微观规则方向性);<br>· <strong>各向同性</strong>:不同方向物理性质<strong>相同</strong>; 出现在<strong>液体 / 非晶 / 多晶</strong>(微观无方向性或方向性平均化)。',
+        logic:'各选项分析:<br>· <strong>A「水(液体)」</strong>:错 — 液体各向同性;<br>· <strong>B「玻璃(非晶)」</strong>:错 — 非晶各向同性;<br>· <strong>C「普通铁丝(多晶)」</strong>:错 — 多晶各向同性(虽然每个小晶粒各向异性, 但宏观平均后消失);<br>· <strong>D 正确</strong>:单晶云母片具有完整的规则点阵, 各向异性。',
+        connection:'<strong>"宏观平均"思想</strong>:多晶中每个小晶粒各向异性, 但<strong>大量小晶粒取向随机平均</strong>后宏观各向同性。这与<strong>"温度是平均"</strong>的思想一致, 都是<strong>统计平均思维</strong>的体现。<br><strong>下游</strong>:① <strong>第二定律 · 熵</strong>讨论时, "宏观平均使方向性消失"对应"宏观熵高 vs 微观状态多";② <strong>分子动理论</strong>"温度反映平均"的相同思想。'
+      },
+      mistakes:'· 误以为多晶金属各向异性;<br>· 把"晶体" 一律等同于"各向异性"(实际是<strong>单晶</strong>才各向异性, 多晶宏观各向同性)。',
+      extension:'<strong>云母</strong>是天然形成的多层硅酸盐单晶, 容易解理成薄片 → 各向异性显著(沿层方向 vs 垂直层方向的物理性质大不同), 故是高中常用的"各向异性"演示材料。',
+      cardAnchor:"Card 3 STEP 3" },
+    { id:"T6-3", type:"choice", score:14, difficulty:"中等", exportIds:["SINGLE-VS-POLY-CRYSTAL","ANISO-VS-ISOTROPIC"],
+      stem:"下列说法 <strong>错误</strong> 的是:",
+      options:{A:"单晶体内部分子的取向是一致的",B:"多晶体宏观各向同性, 因为各晶粒的取向随机平均后方向性消失",C:"非晶体(如玻璃)各向同性, 因为没有微观规则方向",D:"单晶体一定是大块的, 肉眼可见"},
+      answer:"D",
+      explanation:{
+        principle:'<strong>单晶 vs 多晶 vs 非晶的尺度无关性</strong>:单晶 / 多晶 / 非晶是<strong>微观结构</strong>的分类, 与宏观尺寸无关。微小的单晶(如纳米晶)和大块的单晶都存在; 微小的多晶(如金属粉末)和大块的多晶(如金属棒)都存在。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:单晶内部分子取向一致;<br>· <strong>B 正确</strong>:多晶宏观各向同性的微观本质;<br>· <strong>C 正确</strong>:非晶体的各向同性;<br>· <strong>D 错</strong>:<strong>单晶不一定大块</strong> — 微小的纳米晶也是单晶, 不是"必须肉眼可见"。',
+        connection:'<strong>"微观结构 vs 宏观尺寸"</strong>是物理学的常见混淆。例如:<br>· 单晶 / 多晶 / 非晶 = 微观结构;<br>· 大块 / 微粒 / 薄膜 = 宏观尺寸;<br>· 二者<strong>独立</strong>(微小可单晶, 大块也可非晶)。<br><strong>下游</strong>:① <strong>纳米材料</strong>(大学)讨论纳米尺度下的尺度效应;② <strong>多晶硅 vs 单晶硅</strong>在半导体工业中的差异不在尺寸, 而在微观结构。'
+      },
+      mistakes:'· 把单晶与"大块"绑定;<br>· 把多晶与"小颗粒"绑定。',
+      extension:'<strong>纳米晶</strong>(尺寸 \\(\\sim 1-100\\) nm 的单晶 / 多晶)是现代材料科学的核心 — 同一物质的纳米晶 vs 块体晶有截然不同的物理性质(光学 / 电学 / 力学), 这是"尺度效应"的体现。',
+      cardAnchor:"Card 3 STEP 3" },
+    { id:"T6-4", type:"multi", score:14, difficulty:"较难", exportIds:["SINGLE-VS-POLY-CRYSTAL","ANISO-VS-ISOTROPIC","CRYSTAL-CHARACTERISTICS"],
+      stem:"下列关于晶体 / 多晶 / 非晶 / 单晶 的说法 <strong>正确</strong> 的是:",
+      options:{A:"普通的食盐(NaCl)颗粒每一颗是一个单晶(规则点阵 + 各向异性)",B:"普通铁块是多晶, 由大量小铁晶粒组成",C:"普通玻璃是非晶体, 但极慢冷却的硅熔体可能形成石英晶体",D:"沥青是液体, 不是固体(因为常温下会流动)",E:"金属一般冷却时形成多晶, 是因为多个晶核同时形成并长大"},
+      answer:["A","B","C","E"],
+      explanation:{
+        principle:'<strong>常见物质的微观结构分类</strong>:理解食盐 / 铁块 / 玻璃 / 沥青等常见材料的微观结构是检验"晶体 vs 非晶 vs 单晶 vs 多晶"理论的关键。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:食盐颗粒每一颗是 NaCl 单晶(肉眼可见的小立方);<br>· <strong>B 正确</strong>:铁块是多晶, 由大量小晶粒组成;<br>· <strong>C 正确</strong>:玻璃是非晶, 极慢冷却可形成石英晶体(地质过程数百万年);<br>· <strong>D 错</strong>:沥青是<strong>非晶固体</strong>(亚稳态液体), <strong>常温下黏度极高近似固体</strong>(常温下虽然慢但会流动);<br>· <strong>E 正确</strong>:金属冷却的多晶形成机制(多个晶核同时形成竞争长大)。<br>故选 <strong>A、B、C、E</strong>。',
+        connection:'<strong>"日常物质的微观结构"</strong>:理解后能<strong>预测</strong>物质性质 — 为什么食盐易解理(因为单晶有解理), 为什么铁块没解理(因为多晶宏观各向同性, 不沿特定方向裂开)。<br><strong>下游</strong>:① <strong>盖斯定律</strong>:不同晶型 (NaCl 单晶 vs 多晶 vs 非晶 NaCl) 的反应焓变略有不同;② <strong>第二定律 · 熵</strong>:晶体熵低 / 多晶熵高 / 非晶熵更高 → 自发方向偏向无序。'
+      },
+      mistakes:'· 误选 D(把沥青当液体, 实际为非晶亚稳固体);<br>· 漏选 C(不知玻璃可以重结晶);<br>· 漏选 E(不理解多晶的形成机制)。',
+      extension:'<strong>"沥青滴漏实验"</strong>:澳洲昆士兰大学自 1927 年开始的著名实验, 沥青在漏斗下方每 8-10 年才滴下 1 滴, 证明沥青是非晶亚稳态液体。',
+      cardAnchor:"Card 3 STEP 2-3" }
+  ],
+  T7: [
+    { id:"T7-1", type:"choice", score:14, difficulty:"基础", exportIds:["UNIFIED-MICRO-EXPLAINS-3-STATES"],
+      stem:"本板块的<strong>核心思维成就</strong>是:",
+      options:{A:"分别用 3 套独立理论解释三态(气 / 液 / 固)",B:"用<strong>一套</strong>分子动理论(F-r 曲线 + 分子数密度 + 温度 ∝ 平均动能)<strong>统一</strong>解释三态",C:"否定了热力学第一定律",D:"提出了量子理论"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>本板块的核心思维成就</strong>(UNIFIED-MICRO-EXPLAINS-3-STATES):用<strong>一套</strong>分子动理论工具(F-r 曲线决定分子间作用力 + 分子数密度决定撞壁频率 + 温度 ∝ 平均动能)<strong>统一</strong>解释三态的所有"看似不同"的宏观现象:气体的 \\(PV = nRT\\) / 液体的表面张力 / 固体的晶体结构。',
+        logic:'各选项分析:<br>· <strong>A「3 套独立理论」</strong>:错 — 物理学追求<strong>统一</strong>不是分裂, 本板块的成就是<strong>统一</strong>;<br>· <strong>B 正确</strong>:一套微观工具解释三态;<br>· <strong>C「否定第一定律」</strong>:错 — 第一定律是热力学的基础, 不可否定;<br>· <strong>D「量子理论」</strong>:错 — 经典分子动理论, 不涉及量子。',
+        connection:'<strong>"一套微观工具解释多种宏观现象"</strong>是物理学的统一思想:<br>· <strong>牛顿力学</strong>:统一解释天体运动和地面物体运动;<br>· <strong>分子动理论</strong>:统一解释三态;<br>· <strong>麦克斯韦方程</strong>:统一电、磁、光;<br>· <strong>相对论</strong>:统一时空。<br>这是物理学的<strong>美学和哲学</strong>价值。<br><strong>下游</strong>:① <strong>第一定律</strong>把"热"和"功"统一为"能量";② <strong>第二定律</strong>把"宏观不可逆"和"微观涨落"统一;③ <strong>盖斯定律</strong>是状态函数性质的化学统一。'
+      },
+      mistakes:'· 把"一套理论 vs 多套理论"看作偶然, 不理解"统一"是物理学追求;<br>· 把本板块的成就误读为别的内容。',
+      extension:'<strong>"统一"的代价</strong>:在每个具体场景下, "一套理论"的细节非常多(气体 / 液体 / 固体的具体公式都不同), 但<strong>底层原则统一</strong>就是真正的成就。',
+      cardAnchor:"学习反思日志" },
+    { id:"T7-2", type:"choice", score:14, difficulty:"中等", exportIds:["EXPERIMENT-TO-EQUATION"],
+      stem:"理想气体方程 \\(PV = nRT\\) 的<strong>由来</strong>是:",
+      options:{A:"从牛顿力学公理推导而来",B:"由<strong>三定律(实验) + 阿伏伽德罗定律(实验)</strong>综合而成 — 物理方程常常源于<strong>实验综合</strong>",C:"是量子力学的推论",D:"是热力学第一定律的特例"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>"从实验综合到方程"</strong>(EXPERIMENT-TO-EQUATION):\\(PV = nRT\\) 不是"新原理"或"理论假设", 而是<strong>实验综合</strong>:<br>① 玻意耳定律(等温实验);<br>② 查理定律(等容实验);<br>③ 盖-吕萨克定律(等压实验);<br>④ 阿伏伽德罗定律("同温同压同体积的不同气体含等量摩尔数"的实验)。<br>4 条实验定律综合而成 \\(PV = nRT\\)。',
+        logic:'各选项分析:<br>· <strong>A「牛顿力学推出」</strong>:错 — 牛顿力学是力学, 不直接给出气体方程;<br>· <strong>B 正确</strong>:实验综合;<br>· <strong>C「量子力学推论」</strong>:错 — 经典方程, 早于量子论;<br>· <strong>D「热力学第一定律特例」</strong>:错 — 第一定律是能量守恒, 与气体方程是不同维度。',
+        connection:'<strong>"物理方程常源于实验综合"</strong>这一思想:<br>· <strong>开普勒三定律</strong>:从天文观测综合而成;<br>· <strong>万有引力定律</strong>:从开普勒定律 + 牛顿第二定律综合;<br>· <strong>盖斯定律</strong>:从大量化学反应热数据综合;<br>· <strong>欧姆定律</strong>:从电路实验综合。<br><strong>"实验综合"是物理学方法论的核心模式</strong> — 让物理学始终与实验保持紧密关系。<br><strong>下游</strong>:① <strong>热力学第一定律</strong>同样源于焦耳热功当量实验;② <strong>盖斯定律</strong>计算反应焓变时, 用此思想。'
+      },
+      mistakes:'· 把"实验综合"误读为"猜想 / 假设";<br>· 不理解物理方程的来源多样性。',
+      extension:'<strong>从实验到方程的两类模式</strong>:① "唯象方程"(直接实验拟合, 如气体三定律); ② "理论推导方程"(从更基础原理出发, 如牛顿万有引力)。\\(PV = nRT\\) 属于第一类; 但<strong>进阶</strong>板块从分子动理论严格推导 \\(PV = NkT\\) 后, 它就有第二类的地位。',
+      cardAnchor:"Card 1 STEP 4" },
+    { id:"T7-3", type:"multi", score:14, difficulty:"较难", exportIds:["UNIFIED-MICRO-EXPLAINS-3-STATES","BOUNDARY-NO-IDEAL-GAS-DERIVATION","BOUNDARY-NO-VAN-DER-WAALS"],
+      stem:"关于本板块的<strong>边界声明</strong>(留给后续学习的内容), 下列说法 <strong>正确</strong> 的是:",
+      options:{A:"本板块给出 \\(PV = nRT\\) 的实验综合形式, 但严格的微观推导 \\(P = \\tfrac{1}{3}n_\\text{数} m\\bar{v^2}\\) 留进阶<strong>微观推导</strong>",B:"本板块不引入实际气体方程(范德瓦尔斯方程等), 留大学物化",C:"本板块严格推导了 \\(\\bar{\\varepsilon} = \\tfrac{3}{2}kT\\)",D:"本板块不引 7 大晶系 + 化学键晶体分类(离子 / 共价 / 金属 / 分子), 留大学化学",E:"本板块完整推导了能带 / 半导体 / 超导等固态物理"},
+      answer:["A","B","D"],
+      explanation:{
+        principle:'<strong>边界声明</strong>是教学的重要部分 — 明确告诉学生本板块停在哪里 + 后续往哪里走。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>:\\(PV = nRT\\) 仅是实验形式, 严格推导留进阶;<br>· <strong>B 正确</strong>:不引范德瓦尔斯, 留大学物化;<br>· <strong>C 错</strong>:本板块<strong>不严格推导</strong> \\(\\bar{\\varepsilon} = \\tfrac{3}{2}kT\\), 只用分子动理论"\\(T \\propto \\bar{\\varepsilon}\\)"的定性结论;<br>· <strong>D 正确</strong>:不引晶系 / 化学键晶体, 留大学化学;<br>· <strong>E 错</strong>:本板块<strong>不</strong>讨论能带 / 半导体 / 超导, 留大学固态物理。<br>故选 <strong>A、B、D</strong>。',
+        connection:'<strong>"边界声明"对学习路径的指导</strong>:学完本板块后, 学生应清楚:① 本板块讲了什么; ② 哪些留给进阶 / 大学; ③ 各板块之间的递进关系。<br><strong>本板块的下游路径</strong>:① <strong>热力学第一定律 · 基础</strong>(用 \\(PV = nRT\\) 推 4 过程);② <strong>第二定律 · 基础</strong>(用气体微观图像);③ <strong>盖斯定律</strong>(气体反应物 / 生成物的相态考量);④ 进阶<strong>微观推导</strong>(严格推 \\(PV = nRT\\));⑤ 大学物化(实际气体 / 表面张力定量);⑥ 大学化学(晶体分类 / 化学键)。'
+      },
+      mistakes:'· 误选 C(把本板块定性论断当作严格推导);<br>· 误选 E(把固态物理与本板块混淆);<br>· 漏选 D(不知晶系 / 化学键晶体不在本板块)。',
+      extension:'<strong>"知道边界 = 知道学习路径"</strong>:边界声明清晰让学生不会"以为已经全学了", 也不会"以为某些内容是更高深的"。这是<strong>认知地图</strong>的体现。',
+      cardAnchor:"Card 1 STEP 5 + Card 3 STEP 4" },
+    { id:"T7-4", type:"choice", score:14, difficulty:"较难", exportIds:["UNIFIED-MICRO-EXPLAINS-3-STATES","EXPERIMENT-TO-EQUATION"],
+      stem:"<strong>综合判断</strong>:本板块对『分子动理论』的最重要贡献是:",
+      options:{A:"否定了分子动理论",B:"用分子动理论<strong>具体应用</strong>解释了气液固三态的代表性现象, 验证了『一套微观工具的统一解释力』",C:"提出了量子分子动理论",D:"严格推出了所有微观-宏观定量关系"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>本板块的贡献</strong>:不是新理论, 也不是严格推导, 而是把分子动理论<strong>应用</strong>到三态的代表性现象, <strong>验证</strong>了"一套微观工具"的统一解释力。',
+        logic:'各选项分析:<br>· <strong>A「否定」</strong>:错 — 本板块巩固而非否定分子动理论;<br>· <strong>B 正确</strong>:具体应用 + 验证统一解释力;<br>· <strong>C「量子分子动理论」</strong>:错 — 本板块是经典, 不涉及量子;<br>· <strong>D「严格推出所有」</strong>:错 — 本板块只给定性论断 / 实验综合形式, 严格推导留进阶。',
+        connection:'<strong>"应用 + 验证"</strong>是物理学方法论的重要环节 — 一个理论的价值不仅在其内容,还在其<strong>解释广泛现象的能力</strong>。<br>本板块通过验证<strong>分子动理论</strong>在<strong>气液固三态</strong>的解释力, 让学生不仅"知道"分子动理论, 还"看到"它的统一解释力。<br><strong>下游</strong>:① <strong>第一定律 · 基础</strong>把分子动理论中的"内能"概念用于热功转化;② <strong>第二定律 · 基础</strong>把"分子无规则运动"的图像用于熵的统计本质;③ 分子动理论的解释力<strong>层层叠加</strong>到整个热力学大主题。'
+      },
+      mistakes:'· 把"应用"误读为"否定 / 提出新理论";<br>· 不理解"一个理论的广泛解释力"是其价值的体现。',
+      extension:'<strong>"理论 vs 应用"的辩证</strong>:好的物理理论不仅要"自洽" / "数学优美", 还要"解释广泛现象"。爱因斯坦相对论的伟大不只在其数学美, 更在其解释从光速到引力波的多种现象。',
+      cardAnchor:"学习反思日志" }
+  ]
+};
+
+// ===== 状态 =====
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "gas-liquid-solid";
+const KEY_STATE = `mockcheck_${SLUG}_state`;
+const UNIT_TO_SI = { "kJ/mol":1000, "J/mol":1, "kcal/mol":4184, "m":1, "L":1, "m^3":1000 };
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5","T6","T7"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", fill:"填空", short:"简答", calc:"计算" }[q.type];
+    const inputHtml = renderInput(q, n);
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "calc") {
+    return `<div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      答案: <input type="number" class="q-blank" data-q-id="q${n}" data-blank-id="num" step="any" placeholder="数值" style="min-width:140px;border-bottom:2px solid #0055B8;">
+      <select class="q-blank" data-q-id="q${n}" data-blank-id="unit" style="border:1px solid #ecf0f1;padding:6px 10px;border-radius:4px;background:white;">
+        <option value="L">L</option>
+        <option value="m^3">m³</option>
+        <option value="kJ/mol">kJ/mol</option>
+        <option value="J/mol">J/mol</option>
+      </select>
+    </div>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "calc") {
+      const numEl = document.querySelector(`input.q-blank[data-q-id="${qid}"][data-blank-id="num"]`);
+      const unitEl = document.querySelector(`select.q-blank[data-q-id="${qid}"][data-blank-id="unit"]`);
+      if (numEl) numEl.addEventListener("input", updateAnsweredCount);
+      if (unitEl) unitEl.addEventListener("change", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "calc") {
+    const numEl = document.querySelector(`input.q-blank[data-q-id="${qid}"][data-blank-id="num"]`);
+    const unitEl = document.querySelector(`select.q-blank[data-q-id="${qid}"][data-blank-id="unit"]`);
+    const v = parseFloat(numEl?.value);
+    return { value: isNaN(v) ? null : v, unit: unitEl?.value || "L" };
+  }
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "calc" && a && a.value !== null) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "calc") {
+    if (!ua || typeof ua.value !== "number" || isNaN(ua.value)) return { score: 0, isCorrect: false };
+    const userSI = ua.value * (UNIT_TO_SI[ua.unit] || 1);
+    const ansSI  = q.answer.value * (UNIT_TO_SI[q.answer.unit] || 1);
+    const tol = q.answer.tolerance ?? 0.005;
+    const relErr = Math.abs(userSI - ansSI) / Math.abs(ansSI || 1);
+    const isCorrect = relErr <= tol;
+    return { score: isCorrect ? q.score : 0, isCorrect, relErr };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "calc" && a && a.value !== null) answered++;
+  });
+  if (answered < 6) { if (!confirm(`已答 ${answered} / 7 题(< 85%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 备考充分(90%+) — 推荐进入教师组织的真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔检测基础水平(70%+) — 可继续备考或申请真实检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    const exportCounts = {};
+    wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
+    const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `${EXPORT_NAMES[id] ? '<span class="q-export-label">'+EXPORT_NAMES[id]+'</span>' : '<code>'+id+'</code>'}(${n}题)`).join(" / ")}</small>` : "";
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
+  }
+
+  document.querySelectorAll(".question input, .question select").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const fbEl = document.querySelector(`[data-q-id="q${r.idx+1}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "calc") stdAns = `${q.answer.value} ${q.answer.unit}`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-principle"><strong>🔬 涉及的核心原理</strong><div>${q.explanation.principle}</div></div>` +
+      `<div class="q-fb-row q-fb-logic"><strong>🧩 逻辑分析</strong><div>${q.explanation.logic}</div></div>` +
+      `<div class="q-fb-row q-fb-connection"><strong>🌐 知识系统中的位置</strong><div>${q.explanation.connection}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  fbEl.innerHTML = `
+    <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : '✗ 答错'} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="gas-liquid-solid-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
+  `;
+  fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
+  fbEl.hidden = false;
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空, 通过记录保留。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "gas-liquid-solid";
+  const MODULE_NAME = "理想气体状态方程";
+  const PRODUCT_TYPE = "mock-check";
+  const PRODUCT_LABEL = "基础检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitMock_checkApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitMock_checkAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

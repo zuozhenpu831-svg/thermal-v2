@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教师入口 · 蓝色诺瓦学院</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
+  .teacher-banner { background: linear-gradient(90deg, #fdecea, #fadbd8); border: 2px solid #c0392b; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; font-size: 14.5px; color: #78281f; }
+  .teacher-banner strong { color: #c0392b; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 32px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px; font-size: 26px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .section-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section-card h2 { color: #00409A; font-size: 19px; margin-bottom: 14px; }
+  .section-card h2 .tag { font-size: 12px; background: #e8f0fe; color: #0055B8; border-radius: 10px; padding: 2px 10px; vertical-align: middle; margin-left: 8px; font-weight: 500; }
+  .tool-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .tool-card { background: #fafbfc; border-radius: 10px; padding: 14px 18px; border-left: 4px solid #00409A; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .tool-card .tool-title { font-weight: 600; color: #00409A; font-size: 15px; flex: 1; min-width: 200px; }
+  .tool-card .tool-meta { font-size: 12.5px; color: #7f8c8d; }
+  .tool-card a { color: #0055B8; text-decoration: none; background: #e8f0fe; border-radius: 6px; padding: 8px 16px; font-size: 13.5px; font-weight: 500; }
+  .tool-card a:hover { background: #d7e6fc; }
+  .tool-card.pending { border-left-color: #bdc3c7; opacity: 0.7; }
+  .tool-card.pending .tool-title { color: #95a5a6; }
+  .tool-card.pending .placeholder { color: #95a5a6; font-size: 13px; padding: 8px 16px; background: #f5f7fa; border-radius: 6px; }
+  .module-section { margin-bottom: 18px; }
+  .module-section h3 { color: #00409A; font-size: 16px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid #e3e8ee; }
+  .student-link-card { background: #f8f9fb; border-radius: 8px; padding: 14px 18px; margin-top: 14px; font-size: 13.5px; color: #5a6c7d; }
+  .student-link-card a { color: #0055B8; text-decoration: none; }
+  .student-link-card a:hover { text-decoration: underline; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<div class="teacher-banner">
+  🔒 <strong>教师入口 · 请勿向学生展示本页</strong><br>
+  本页集中列出所有<strong>教师工具页</strong>（深度口试 · 含追问树 / 误区信号 / 救场话术 / 判定 rubric / 记录区）。学生面 <code>index.html</code> 不链接本页 —— 教师直接打开本文件，或按学校教师手册指引访问。
+</div>
+
+<header class="page-header">
+  <h1>教师入口</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 教师工作面板 · 跨主题入口（当前接入主题：热力学）</div>
+</header>
+
+<!-- ============ Tab 切换 ============ -->
+<nav class="portal-tabs" style="display:flex;gap:8px;margin-bottom:18px;padding:8px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+  <button class="portal-tab active" data-tab="workpanel" onclick="switchTab('workpanel')">📋 工作面板</button>
+  <button class="portal-tab" data-tab="studentview" onclick="switchTab('studentview')">👁 学生视图</button>
+</nav>
+<style>
+  .portal-tab { flex:1; padding:10px 18px; border-radius:6px; cursor:pointer; font-size:14px; font-weight:500; font-family:inherit; background:white; color:#5a6c7d; border:1px solid #ccc; transition: all 0.2s; }
+  .portal-tab:hover:not(.active) { background:#f5f7fa; }
+  .portal-tab.active { background:linear-gradient(135deg,#00409A,#0055B8); color:white; border-color:transparent; }
+  .portal-pane { display:none; }
+  .portal-pane.active { display:block; }
+  .subject-section { margin-bottom: 24px; }
+  .subject-section h3.subject-h3 { color:#00409A; font-size:16px; padding:8px 12px; background:#e8f0fe; border-radius:6px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+  .subject-badge { background:#0055B8; color:white; padding:2px 8px; border-radius:10px; font-size:11.5px; font-weight:500; }
+  .student-view-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:8px; margin-bottom:14px; }
+  .sv-link { background:#fafbfc; border:1px solid #ecf0f1; border-radius:6px; padding:10px 14px; text-decoration:none; color:#2c3e50; font-size:13.5px; transition:all 0.2s; display:flex; align-items:center; gap:8px; }
+  .sv-link:hover { background:#e8f0fe; border-color:#0055B8; color:#0055B8; }
+  .sv-link .sv-icon { flex-shrink:0; }
+  .sv-link .sv-meta { font-size:11px; color:#95a5a6; margin-left:auto; }
+</style>
+
+<div id="tab-workpanel" class="portal-pane active">
+
+<!-- ============ 📥 待办任务 ============ -->
+<section class="section-card" id="todo-section" style="border-left:5px solid #e67e22;">
+  <h2 style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    📥 待办任务
+    <span class="tag" id="todo-count" style="background:#fdf6ec;color:#b66100;">0 项</span>
+    <span style="margin-left:auto;display:flex;gap:8px;">
+      <button onclick="injectMockTasks()" style="background:white;color:#5a6c7d;border:1px solid #ccc;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12.5px;">🧪 注入测试用例</button>
+      <button onclick="clearAllTasks()" style="background:white;color:#c0392b;border:1px solid #c0392b;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12.5px;">🗑 清空</button>
+    </span>
+  </h2>
+
+  <p style="font-size:13.5px;color:#5a6c7d;margin-bottom:12px;">
+    学生从「学生题库页」/「检测页」提交的申请、申诉、修改请求等汇总在此。点「开始处理」进入对应工作流页面。
+    <br><span style="color:#b66100;">🚧 当前为单端 demo：仅显示本浏览器 localStorage 内的待办（学生在自己设备提交时跨终端推送待 starmap 后端）。可点「🧪 注入测试用例」生成 mock 数据查看 UI。</span>
+  </p>
+
+  <div id="todo-tabs" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;border-bottom:2px solid #ecf0f1;padding-bottom:8px;">
+    <button class="todo-tab active" data-cat="all" onclick="filterTodo('all')">全部</button>
+    <button class="todo-tab" data-cat="oral-exam-apply" onclick="filterTodo('oral-exam-apply')">🎤 深度口试申请</button>
+    <button class="todo-tab" data-cat="oral-exam-appeal" onclick="filterTodo('oral-exam-appeal')">📨 深度口试申诉</button>
+    <button class="todo-tab" data-cat="mock-check-apply" onclick="filterTodo('mock-check-apply')">📝 基础检测申请</button>
+    <button class="todo-tab" data-cat="fluency-test-apply" onclick="filterTodo('fluency-test-apply')">📈 熟练度检测申请</button>
+    <button class="todo-tab" data-cat="task-cards-apply" onclick="filterTodo('task-cards-apply')">📖 任务卡相关</button>
+  </div>
+
+  <style>
+    .todo-tab { background:white; color:#5a6c7d; border:1px solid #ccc; padding:6px 14px; border-radius:6px; cursor:pointer; font-size:13px; font-family:inherit; }
+    .todo-tab:hover { background:#f5f7fa; }
+    .todo-tab.active { background:#00409A; color:white; border-color:#00409A; }
+    .todo-item { background:#fafbfc; border-radius:8px; padding:14px 18px; margin-bottom:10px; border-left:4px solid #e67e22; }
+    .todo-item.appeal { border-left-color:#8e44ad; }
+    .todo-item .ti-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+    .todo-item .ti-type { background:#e67e22; color:white; padding:2px 8px; border-radius:4px; font-size:12px; font-weight:600; }
+    .todo-item.appeal .ti-type { background:#8e44ad; }
+    .todo-item .ti-student { font-weight:600; color:#00409A; font-size:15px; }
+    .todo-item .ti-module { font-size:13px; color:#5a6c7d; }
+    .todo-item .ti-time { font-size:12px; color:#95a5a6; margin-left:auto; }
+    .todo-item .ti-detail { font-size:13.5px; color:#2c3e50; line-height:1.6; background:white; padding:10px 14px; border-radius:6px; margin:8px 0; }
+    .todo-item .ti-actions { display:flex; gap:8px; flex-wrap:wrap; }
+    .todo-item .ti-actions button { padding:8px 16px; border-radius:6px; cursor:pointer; font-size:13.5px; font-family:inherit; font-weight:500; border:none; }
+    .btn-start { background:linear-gradient(135deg,#00409A,#006AD6); color:white; }
+    .btn-reject { background:white; color:#c0392b; border:1.5px solid #c0392b !important; }
+    .btn-approve { background:white; color:#27ae60; border:1.5px solid #27ae60 !important; }
+    .todo-item.done { opacity:0.6; }
+    .todo-item.done::before { content:""; }
+    .todo-status-tag { padding:3px 10px; border-radius:4px; font-size:12px; font-weight:600; }
+    .ts-pending { background:#fdf6ec; color:#b66100; }
+    .ts-approved { background:#d4efdf; color:#1e8449; }
+    .ts-rejected { background:#fadbd8; color:#c0392b; }
+  </style>
+
+  <div id="todo-region"></div>
+</section>
+
+<!-- ============ 📚 历史口试记录 ============ -->
+<section class="section-card" id="receipts-section" style="border-left:5px solid #00409A;">
+  <h2 style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    📚 历史口试记录
+    <span class="tag" id="receipts-count" style="background:#e8f0fe;color:#0055B8;">0 份</span>
+    <span style="margin-left:auto;display:flex;gap:8px;">
+      <input type="text" id="receipts-search" placeholder="🔍 搜索（学生姓名 / 账号 / 板块 / 口试单 ID）" style="padding:6px 12px;border:1px solid #ccc;border-radius:6px;font-size:12.5px;font-family:inherit;min-width:240px;" oninput="renderReceipts()">
+      <button onclick="injectMockReceipts()" style="background:white;color:#5a6c7d;border:1px solid #ccc;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12.5px;">🧪 注入测试记录</button>
+    </span>
+  </h2>
+
+  <p style="font-size:13.5px;color:#5a6c7d;margin-bottom:12px;">
+    从 localStorage 扫描本浏览器内所有教师页生成的口试单（含初次判定 + 所有修订版本）。学生申诉时如遗失口试单 ID，可在此查询并重发。
+    <br><span style="color:#b66100;">🚧 跨终端汇总待 starmap 后端推送。</span>
+  </p>
+
+  <style>
+    .receipt-item { background:#fafbfc; border-radius:8px; padding:14px 18px; margin-bottom:10px; border-left:4px solid #00409A; }
+    .receipt-item.pass { border-left-color:#27ae60; }
+    .receipt-item.defer { border-left-color:#e67e22; }
+    .receipt-item.fail { border-left-color:#c0392b; }
+    .receipt-item .ri-head { display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:8px; }
+    .receipt-item .ri-verdict-tag { padding:3px 10px; border-radius:4px; font-size:12.5px; font-weight:600; }
+    .receipt-item.pass .ri-verdict-tag { background:#d4efdf; color:#1e8449; }
+    .receipt-item.defer .ri-verdict-tag { background:#fdebd0; color:#b66100; }
+    .receipt-item.fail .ri-verdict-tag { background:#fadbd8; color:#c0392b; }
+    .receipt-item .ri-student { font-weight:600; color:#00409A; font-size:15px; }
+    .receipt-item .ri-meta { font-size:12.5px; color:#7f8c8d; }
+    .receipt-item .ri-id { font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:11.5px; background:white; padding:2px 8px; border-radius:3px; color:#5a6c7d; }
+    .receipt-item .ri-detail { background:white; padding:10px 14px; border-radius:6px; font-size:13px; color:#2c3e50; line-height:1.65; margin-top:6px; }
+    .receipt-item .ri-detail .row { margin:4px 0; }
+    .receipt-item .ri-detail strong { color:#00409A; }
+    .receipt-item .ri-revisions { margin-top:8px; padding:8px 12px; background:#faf4fc; border-left:3px solid #8e44ad; border-radius:4px; font-size:12.5px; color:#4a235a; }
+  </style>
+
+  <div id="receipts-region"></div>
+</section>
+
+<!-- ============ 📦 板块清单管理（雏形）============ -->
+<details class="section-card" style="padding:0;cursor:pointer;border-left:5px solid #16a085;">
+  <summary style="padding:20px 28px;cursor:pointer;list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
+    <span style="color:#16a085;font-size:19px;font-weight:600;">📦 板块清单管理</span>
+    <span style="font-size:12px;background:#d1f2eb;color:#117a65;border-radius:10px;padding:2px 10px;font-weight:500;">雏形 · 未来 portal 工具卡片将由本清单动态驱动</span>
+  </summary>
+  <div style="padding:0 28px 24px;">
+    <p style="font-size:13.5px;color:#5a6c7d;margin-bottom:14px;">
+      板块元数据清单（主题 / 板块名 / slug / 教师工具页 / 学生题库页 / 等级 / 颜色等）存在 localStorage <code style="background:#fafbfc;padding:1px 6px;border-radius:3px;">bn-board-manifest</code>。
+      <br><span style="color:#7d4e10;">🚧 当前 demo：清单可编辑，但 portal 工具卡片 + 学生视图仍硬编码（待 starmap 后端真正驱动）。</span>
+    </p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+      <button onclick="seedManifest()" style="background:#16a085;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;">🌱 种子化（用当前硬编码 16 板块填充清单）</button>
+      <button onclick="showManifestAddForm()" style="background:white;color:#16a085;border:1.5px solid #16a085;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;">➕ 添加新板块</button>
+      <button onclick="exportManifest()" style="background:white;color:#5a6c7d;border:1.5px solid #ccc;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;">📤 导出 JSON</button>
+      <button onclick="clearManifest()" style="background:white;color:#c0392b;border:1.5px solid #c0392b;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;">🗑 清空</button>
+    </div>
+
+    <div id="manifest-add-form" style="display:none;background:#fafbfc;border:1px solid #d1f2eb;border-radius:8px;padding:14px 18px;margin-bottom:14px;">
+      <h4 style="color:#117a65;font-size:14px;margin-bottom:10px;">➕ 添加新板块</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <label style="font-size:13px;">主题<br><input type="text" id="mf-subject" placeholder="如 热力学 / 电磁学" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"></label>
+        <label style="font-size:13px;">中文板块名<br><input type="text" id="mf-name" placeholder="如 焦耳-汤姆孙效应" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"></label>
+        <label style="font-size:13px;">slug<br><input type="text" id="mf-slug" placeholder="如 joule-thomson" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"></label>
+        <label style="font-size:13px;">等级<br><select id="mf-level" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"><option value="basic">基础</option><option value="advanced">进阶</option><option value="capstone">融合 capstone</option></select></label>
+        <label style="font-size:13px;grid-column:1/-1;">学生题库页文件<br><input type="text" id="mf-student" placeholder="如 joule-thomson-oral-exam.html（先用 oral-exam Skill 生成再填）" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"></label>
+        <label style="font-size:13px;grid-column:1/-1;">前置板块（slug 数组 · 用逗号分隔 · 可选）<br><input type="text" id="mf-prereqs" placeholder="如 basic, hess-law" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"></label>
+        <label style="font-size:13px;grid-column:1/-1;">教师工具页文件<br><input type="text" id="mf-teacher" placeholder="如 teacher-oral-exam-joule-thomson.html" style="width:100%;padding:6px 10px;border:1px solid #ccc;border-radius:4px;font-family:inherit;font-size:13px;"></label>
+      </div>
+      <div style="margin-top:10px;display:flex;gap:8px;">
+        <button onclick="addManifestEntry()" style="background:linear-gradient(135deg,#16a085,#27ae60);color:white;border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-size:13px;">✓ 添加到清单</button>
+        <button onclick="document.getElementById('manifest-add-form').style.display='none';" style="background:white;color:#5a6c7d;border:1px solid #ccc;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:13px;">取消</button>
+      </div>
+      <div style="font-size:12px;color:#7d4e10;margin-top:10px;padding:8px 12px;background:#fdf6ec;border-radius:4px;">
+        ⚠️ 注意：清单只记录元数据。<strong>实际 HTML 文件（学生题库 + 教师工具）需先通过 oral-exam Skill 协作 AI 生成</strong>，不能在 portal 这里凭空创建。
+      </div>
+    </div>
+
+    <div id="manifest-region"></div>
+  </div>
+</details>
+
+<details class="section-card" style="padding:0;cursor:pointer;">
+  <summary style="padding:20px 28px;cursor:pointer;list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:10px;">
+    <span style="color:#00409A;font-size:19px;font-weight:600;">🛠 深度口试 · 教师工具页清单</span>
+    <span style="font-size:12px;background:#e8f0fe;color:#0055B8;border-radius:10px;padding:2px 10px;font-weight:500;">📂 16 板块 · 点击展开</span>
+    <input type="text" id="tool-search" placeholder="🔍 搜索板块名" onclick="event.stopPropagation();" oninput="filterToolCards()" style="margin-left:auto;padding:6px 12px;border:1px solid #ccc;border-radius:6px;font-size:12.5px;font-family:inherit;min-width:180px;">
+  </summary>
+  <div style="padding:0 28px 24px;">
+  <h2 style="display:none;">深度口试 · 教师工具页 <span class="tag">题库 + 追问树 + rubric + 记录区</span></h2>
+  <p style="font-size:14px;color:#5a6c7d;margin-bottom:14px;">📍 当前主题：<strong>热力学</strong>。每一页 = 一个板块的口试教师工具页（含追问树 / 误区 / rubric / 记录区）。学生从自己页面底部「🎤 深度口试」入口看到的<strong>仅是题库</strong>。其他主题接入待 starmap 后端。</p>
+
+  <div id="tools-region"></div>
+  </div>
+</details>
+
+<section class="section-card">
+  <h2>口试操作流程速查 <span class="tag">15-20 分钟（板块级）/ 20-25 分钟（capstone）</span></h2>
+  <ol style="margin-left:22px;font-size:14px;">
+    <li><strong>预约 + 暖场（0-3 分钟）</strong>：让学生先讲「这个板块最重要的一件事」，听切入点。</li>
+    <li><strong>主问题 ×3（3-15 分钟）</strong>：在教师工具页用选题器抽 3 条（二试必须换未用过的主线），按学生反应走追问树。</li>
+    <li><strong>错题联动（15-18 分钟）</strong>：学生带 1-2 道自己的错题（基础检测 / 熟练度检测里的），听因果重建。</li>
+    <li><strong>判定 + 签字（18-20 分钟）</strong>：对照三档 rubric —— 通过当场签字；暂缓给补学清单 + 预约二试；不通过约定重学路径。</li>
+  </ol>
+</section>
+
+<section class="section-card">
+  <h2>设计原则速查 <span class="tag">公开 vs 私有 边界</span></h2>
+  <ul style="margin-left:22px;font-size:14px;">
+    <li><strong>学生题库页（公开 · basic-oral-exam.html）</strong>：开放主问 + 考查锚点 + 流程说明 + 准备建议。学生可以从板块底部 nav「🎤 深度口试」直接打开。</li>
+    <li><strong>教师工具页（私有 · teacher-oral-exam-{slug}.html）</strong>：以上全部 + <strong>追问树 (深追 L1/L2 vs 台阶 1/2) + 误区信号 + 救场话术 + 边界守门 + 三档 rubric + 补学清单 + 记录区</strong>。学生面 <strong>不链接</strong>本类页面。</li>
+    <li><strong>红线（教师页也遵守）</strong>：防投屏 —— 禁用「高考 / 备考 / 课标 / 必修 X / 选修 / 人教版」措辞。</li>
+    <li><strong>核心规则</strong>：教师页面 ≠ 答案册。题库公开不影响口试效力，因为追问 / rubric / 判定都在教师手里。</li>
+  </ul>
+</section>
+
+<section class="section-card">
+  <h2>相关链接</h2>
+  <div class="student-link-card">
+    <strong>学生入口：</strong><a href="index.html">← 返回学生主页</a>（学生在自己的板块底部 nav 上看到「🎤 深度口试」直接进入题库页；本入口不出现在学生导航里）
+  </div>
+</section>
+
+</div><!-- /tab-workpanel -->
+
+<div id="tab-studentview" class="portal-pane">
+  <section class="section-card">
+    <h2>👁 学生视图 · 查看学生看到什么</h2>
+    <p style="font-size:13.5px;color:#5a6c7d;margin-bottom:14px;">
+      点击下方任一模块链接，新窗口打开该模块的<strong>学生页面</strong>（学生题库 / 基础检测 / 熟练度检测）。教师可在此预览学生界面，理解学生看到的内容、申请/申诉表单等。
+    </p>
+
+    <!-- 热力学 -->
+    <div id="student-view-region"></div>
+
+    <!-- 待接入主题 -->
+    <div class="subject-section" style="opacity:0.7;">
+      <h3 class="subject-h3" style="background:#fafbfc;color:#95a5a6;">🚧 其他主题 <span class="subject-badge" style="background:#bdc3c7;">待接入</span></h3>
+      <p style="font-size:13px;color:#7d4e10;padding:10px 14px;background:#fdf6ec;border-radius:6px;">
+        以下主题待 starmap 后端接入。当前 demo 仅热力学已 接入：
+      </p>
+      <div class="student-view-grid">
+        <span class="sv-link" style="cursor:not-allowed;opacity:0.5;"><span class="sv-icon">⚛️</span> 电磁学</span>
+        <span class="sv-link" style="cursor:not-allowed;opacity:0.5;"><span class="sv-icon">🧪</span> 化学有机</span>
+        <span class="sv-link" style="cursor:not-allowed;opacity:0.5;"><span class="sv-icon">🔬</span> 量子基础</span>
+        <span class="sv-link" style="cursor:not-allowed;opacity:0.5;"><span class="sv-icon">📐</span> 高等数学</span>
+      </div>
+    </div>
+
+  </section>
+</div><!-- /tab-studentview -->
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 教师入口 · oral-exam Skill v0.1.6</footer>
+
+</div>
+
+<script>
+(function() {
+  const GLOBAL_KEY = "bn-all-tasks";
+  let currentFilter = "all";
+
+  function loadTasks() {
+    return JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+  }
+  function saveTasks(list) {
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+  function escapeHtml(s) {
+    return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  const TYPE_LABEL = {
+    "oral-exam-apply": "🎤 口试申请",
+    "oral-exam-appeal": "📨 口试申诉",
+    "mock-check-apply": "📝 基础检测申请",
+    "mock-check-appeal": "📝 基础检测申诉",
+    "fluency-test-apply": "📈 熟练度检测申请",
+    "fluency-test-appeal": "📈 熟练度检测申诉",
+    "task-cards-apply": "📖 任务卡相关"
+  };
+
+  function renderTodo() {
+    const all = loadTasks();
+    const region = document.getElementById("todo-region");
+    document.getElementById("todo-count").textContent = all.length + " 项";
+    let tasks = currentFilter === "all" ? all : all.filter(t => t.type === currentFilter);
+    if (tasks.length === 0) {
+      region.innerHTML = '<div style="padding:30px 20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">暂无' + (currentFilter === "all" ? "" : TYPE_LABEL[currentFilter] || "") + '待办（学生提交后会出现在此处）<br><small style="color:#bdc3c7;">点击上方「🧪 注入测试用例」生成 mock 数据查看 UI</small></div>';
+      return;
+    }
+    // 按时间倒序
+    tasks = tasks.slice().sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+    let html = "";
+    tasks.forEach(t => {
+      const isAppeal = t.type === "oral-exam-appeal";
+      const cls = "todo-item" + (isAppeal ? " appeal" : "") + (t.status !== "pending" ? " done" : "");
+      const statusTag = { pending: '<span class="todo-status-tag ts-pending">⏳ 待处理</span>', approved: '<span class="todo-status-tag ts-approved">✅ 已通过 / 已重判</span>', rejected: '<span class="todo-status-tag ts-rejected">❌ 已驳回</span>' }[t.status] || "";
+      html += '<div class="' + cls + '">';
+      html += '<div class="ti-head"><span class="ti-type">' + (TYPE_LABEL[t.type] || t.type) + '</span><span class="ti-student">' + escapeHtml(t.studentName || t.student || "（未登录）") + '</span><span class="ti-module">· ' + escapeHtml(t.moduleName) + '</span>' + statusTag + '<span class="ti-time">' + new Date(t.submittedAt).toLocaleString("zh-CN") + '</span></div>';
+      // 详细
+      let detail = "";
+      // 兼容旧数据（t.student） + 新数据（t.account + t.studentName）
+      const displayName = t.studentName || t.student || "（未登录）";
+      const displayAccount = t.account ? '<code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;color:#7f8c8d;">' + escapeHtml(t.account) + '</code>' : '';
+      if (t.type === "oral-exam-apply" || t.type === "mock-check-apply" || t.type === "fluency-test-apply") {
+        detail = "账号 " + displayAccount + " · 联系方式：" + escapeHtml(t.contact || "—") + " · 期望时间：" + escapeHtml(t.timeWindow || "—");
+        if (t.note) detail += "<br>备注：" + escapeHtml(t.note);
+      } else if (t.type === "oral-exam-appeal" || t.type === "mock-check-appeal" || t.type === "fluency-test-appeal") {
+        detail = "账号 " + displayAccount + " · 单据 ID：<code>" + escapeHtml(t.receiptId || "—") + "</code>";
+        if (t.qnum) detail += " · 主问题/题号 " + escapeHtml(t.qnum);
+        detail += "<br>申诉理由：" + escapeHtml(t.reason || "").replace(/\n/g, "<br>");
+        if (t.want) detail += "<br>期望：" + ({ reassess: "重新评估", reexam: "补讲后重判" }[t.want] || t.want);
+      } else {
+        detail = "账号 " + displayAccount + " · （详细字段待后端定义）";
+      }
+      html += '<div class="ti-detail">' + detail + '</div>';
+      html += '<div class="ti-actions">';
+      if (t.status === "pending") {
+        if (t.type === "oral-exam-apply") {
+          html += '<button class="btn-start" onclick="startTask(&#39;' + t.id + '&#39;)">▶ 开始处理（跳教师页）</button>';
+          html += '<button class="btn-approve" onclick="setStatus(&#39;' + t.id + '&#39;, &#39;approved&#39;)">✅ 标记已通过</button>';
+          html += '<button class="btn-reject" onclick="rejectTask(&#39;' + t.id + '&#39;)">❌ 驳回</button>';
+        } else if (t.type === "oral-exam-appeal") {
+          html += '<button class="btn-start" onclick="startTask(&#39;' + t.id + '&#39;)">▶ 进入修改判定（重评）</button>';
+          html += '<button class="btn-reject" onclick="rejectTask(&#39;' + t.id + '&#39;)">❌ 驳回（附理由）</button>';
+        } else {
+          html += '<button class="btn-start" onclick="alert(&#39;🚧 该类型待 starmap 后端实现&#39;)">▶ 开始处理</button>';
+        }
+      } else if (t.rejectReason) {
+        html += '<div style="font-size:13px;color:#c0392b;padding:8px 12px;background:#fdf2f0;border-radius:4px;width:100%;">驳回理由：' + escapeHtml(t.rejectReason).replace(/\n/g, "<br>") + '</div>';
+      }
+      html += '</div>';
+      html += '</div>';
+    });
+    region.innerHTML = html;
+  }
+
+  window.filterTodo = function(cat) {
+    currentFilter = cat;
+    document.querySelectorAll(".todo-tab").forEach(b => b.classList.remove("active"));
+    document.querySelector('.todo-tab[data-cat="' + cat + '"]').classList.add("active");
+    renderTodo();
+  };
+
+  window.startTask = function(id) {
+    const list = loadTasks();
+    const t = list.find(x => x.id === id);
+    if (!t) return;
+    if (t.type === "oral-exam-apply") {
+      // 跳教师口试页 + 注入学生账号（用 account 作为 storage key 与学生端一致）
+      const url = "teacher-oral-exam-" + t.slug + ".html?student=" + encodeURIComponent(t.account || t.student) + "&studentName=" + encodeURIComponent(t.studentName || t.student) + "&taskId=" + encodeURIComponent(t.id);
+      window.location.href = url;
+    } else if (t.type === "oral-exam-appeal") {
+      const url = "teacher-oral-exam-" + t.slug + ".html?student=" + encodeURIComponent(t.account || t.student) + "&studentName=" + encodeURIComponent(t.studentName || t.student) + "&appealId=" + encodeURIComponent(t.id) + "&receiptId=" + encodeURIComponent(t.receiptId);
+      window.location.href = url;
+    } else {
+      alert("🚧 该类型待 starmap 后端实现");
+    }
+  };
+
+  window.setStatus = function(id, status) {
+    const list = loadTasks();
+    const t = list.find(x => x.id === id);
+    if (!t) return;
+    t.status = status;
+    t.processedAt = new Date().toISOString();
+    saveTasks(list);
+    renderTodo();
+  };
+
+  window.rejectTask = function(id) {
+    const reason = prompt("驳回理由（学生端可见）：");
+    if (!reason || !reason.trim()) return;
+    const list = loadTasks();
+    const t = list.find(x => x.id === id);
+    if (!t) return;
+    t.status = "rejected";
+    t.rejectReason = reason.trim();
+    t.processedAt = new Date().toISOString();
+    saveTasks(list);
+    renderTodo();
+  };
+
+  window.clearAllTasks = function() {
+    if (!confirm("确认清空 portal 所有待办（学生 localStorage 也会丢，不可恢复）？")) return;
+    localStorage.removeItem(GLOBAL_KEY);
+    renderTodo();
+  };
+
+  window.injectMockCheckResults = function() {
+    const results = [
+      { id: "MC-RES-001", type: "mock-check-result", slug: "basic", account: "stu001", studentName: "演示账号 01", setNum: "2", score: 82, feedback: "Q1-Q5 基本掌握 · Q6(4) 复合过程计算思路有断层 · 状态量 vs 过程量回答到位", weakPoints: "等温与等压复合判断 / 多步骤 ΔU 累加", teacherName: "李老师", batchedAt: new Date(Date.now() - 86400000 * 2).toISOString() },
+      { id: "MC-RES-002", type: "mock-check-result", slug: "hess-law", account: "stu001", studentName: "演示账号 01", setNum: "1", score: 94, feedback: "代数运算非常熟练 · 3 反应组合判反向方法到位 · 燃烧热定义 4 个限定词都说全", weakPoints: "无显著薄弱", teacherName: "李老师", batchedAt: new Date(Date.now() - 86400000).toISOString() },
+      { id: "FT-RES-001", type: "fluency-test-result", slug: "basic", account: "stu001", studentName: "演示账号 01", setNum: "3", score: 88, feedback: "综合大题（变质量问题）满分 · 选择题第 4 题掉了 5 分（绝热膨胀温度判断画反） · 填空题字迹工整", weakPoints: "P-V 图绝热段方向判断", teacherName: "张老师", batchedAt: new Date(Date.now() - 86400000 * 5).toISOString() },
+      { id: "MC-RES-003", type: "mock-check-result", slug: "carnot-cycle", account: "stu002", studentName: "演示账号 02", setNum: "2", score: 65, feedback: "卡诺定理记忆良好 · 但效率公式 η=1-T_c/T_h 推导步骤跳跃过快 · 4 步循环 P-V 图画反第三步", weakPoints: "卡诺循环 4 步顺序 / 效率公式推导链", teacherName: "李老师", batchedAt: new Date(Date.now() - 3600000 * 12).toISOString() }
+    ];
+    const list = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    let added = 0;
+    results.forEach(r => { if (!list.find(x => x.id === r.id)) { list.push(r); added++; } });
+    localStorage.setItem("bn-check-results", JSON.stringify(list));
+    alert("✓ 已注入 " + added + " 条 mock 检测反馈\n(学生在 mock-check / fluency-test 学生页底部「📋 我的检测反馈」可查看)");
+  };
+
+  window.injectMockTasks = function() {
+    const mock = [
+      { id: "APP-MOCK-001", type: "oral-exam-apply", slug: "basic", moduleName: "热力学第一定律", account: "stu001", studentName: "演示账号 01", contact: "微信 mock-wechat-001", timeWindow: "周三 16:00 后", note: "已完成全部学习内容", submittedAt: new Date(Date.now() - 86400000).toISOString(), status: "pending" },
+      { id: "APP-MOCK-002", type: "oral-exam-apply", slug: "advanced", moduleName: "理想气体内能的微观推导", account: "stu002", studentName: "演示账号 02", contact: "邮箱 mock@example.com", timeWindow: "周五全天", note: "", submittedAt: new Date(Date.now() - 3600000).toISOString(), status: "pending" },
+      { id: "APL-MOCK-001", type: "oral-exam-appeal", slug: "basic", moduleName: "热力学第一定律", account: "stu001", studentName: "演示账号 01", receiptId: "OE-BASIC-20260613-160230-stu001", qnum: "主问题 3", reason: "当时我已经讲清楚 ΔU 只看始末态 + 循环过程 ΔU=0，但教师标的是「状态量 vs 过程量」核心听点缺失。申请重新评估。", want: "reassess", submittedAt: new Date(Date.now() - 7200000).toISOString(), status: "pending" },
+      { id: "MC-MOCK-001", type: "mock-check-apply", slug: "second-law-basic", moduleName: "第二定律 · 基础", account: "stu003", studentName: "演示账号 03", contact: "微信 mock-003", timeWindow: "下周二 14:00", note: "申请纸笔形式的基础检测", submittedAt: new Date(Date.now() - 1800000).toISOString(), status: "pending" },
+      { id: "FT-MOCK-001", type: "fluency-test-apply", slug: "hess-law", moduleName: "盖斯定律", account: "stu004", studentName: "演示账号 04", contact: "手机 13800000004", timeWindow: "下周三下午", note: "申请熟练度检测", submittedAt: new Date(Date.now() - 900000).toISOString(), status: "pending" }
+    ];
+    const list = loadTasks();
+    mock.forEach(m => { if (!list.find(x => x.id === m.id)) list.push(m); });
+    saveTasks(list);
+    renderTodo();
+    alert("已注入 " + mock.length + " 条 mock 待办。");
+  };
+
+
+  // 初始化 mermaid
+  if (window.mermaid) {
+    mermaid.initialize({ startOnLoad: false, securityLevel: 'loose', theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' } });
+  }
+
+  // ============ 📦 板块清单管理 ============
+  const MANIFEST_KEY = "bn-board-manifest";
+  const DEFAULT_MANIFEST = [
+    // 基础链
+    { subject: "热力学", name: "分子动理论", slug: "molecular-kinetic-theory", level: "basic", prereqs: [], student: "molecular-kinetic-theory-oral-exam.html", teacher: "teacher-oral-exam-molecular-kinetic-theory.html" },
+    { subject: "热力学", name: "理想气体状态方程", slug: "gas-liquid-solid", level: "basic", prereqs: [], student: "gas-liquid-solid-oral-exam.html", teacher: "teacher-oral-exam-gas-liquid-solid.html" },
+    { subject: "热力学", name: "热力学第一定律", slug: "basic", level: "basic", prereqs: ["molecular-kinetic-theory", "gas-liquid-solid"], student: "basic-oral-exam.html", teacher: "teacher-oral-exam-basic.html" },
+    { subject: "热力学", name: "第二定律 · 基础", slug: "second-law-basic", level: "basic", prereqs: ["basic"], student: "second-law-basic-oral-exam.html", teacher: "teacher-oral-exam-second-law-basic.html" },
+    { subject: "热力学", name: "盖斯定律", slug: "hess-law", level: "basic", prereqs: ["basic"], student: "hess-law-oral-exam.html", teacher: "teacher-oral-exam-hess-law.html" },
+    { subject: "热力学", name: "燃烧热与中和热", slug: "combustion-neutralization-heat", level: "basic", prereqs: ["hess-law"], student: "combustion-neutralization-heat-oral-exam.html", teacher: "teacher-oral-exam-combustion-neutralization-heat.html" },
+    { subject: "热力学", name: "键能与反应焓变", slug: "bond-energy-reaction-enthalpy", level: "basic", prereqs: ["hess-law"], student: "bond-energy-reaction-enthalpy-oral-exam.html", teacher: "teacher-oral-exam-bond-energy-reaction-enthalpy.html" },
+    { subject: "热力学", name: "吉布斯自由能 · 基础", slug: "gibbs-free-energy-basic", level: "basic", prereqs: ["second-law-basic", "hess-law"], student: "gibbs-free-energy-basic-oral-exam.html", teacher: "teacher-oral-exam-gibbs-free-energy-basic.html" },
+    // 进阶链
+    { subject: "热力学", name: "理想气体内能的微观推导", slug: "advanced", level: "advanced", prereqs: ["molecular-kinetic-theory", "gas-liquid-solid"], student: "advanced-oral-exam.html", teacher: "teacher-oral-exam-advanced.html" },
+    { subject: "热力学", name: "卡诺循环", slug: "carnot-cycle", level: "advanced", prereqs: ["second-law-basic"], student: "carnot-cycle-oral-exam.html", teacher: "teacher-oral-exam-carnot-cycle.html" },
+    { subject: "热力学", name: "状态函数与非状态函数", slug: "state-functions", level: "advanced", prereqs: ["carnot-cycle"], student: "state-functions-oral-exam.html", teacher: "teacher-oral-exam-state-functions.html" },
+    { subject: "热力学", name: "熵的物理意义", slug: "entropy-meaning", level: "advanced", prereqs: ["state-functions"], student: "entropy-meaning-oral-exam.html", teacher: "teacher-oral-exam-entropy-meaning.html" },
+    { subject: "热力学", name: "焓与焓变的意义", slug: "enthalpy-meaning", level: "advanced", prereqs: ["state-functions"], student: "enthalpy-meaning-oral-exam.html", teacher: "teacher-oral-exam-enthalpy-meaning.html" },
+    { subject: "热力学", name: "吉布斯自由能 · 进阶", slug: "gibbs-free-energy-advanced", level: "advanced", prereqs: ["enthalpy-meaning", "gibbs-free-energy-basic"], student: "gibbs-free-energy-advanced-oral-exam.html", teacher: "teacher-oral-exam-gibbs-free-energy-advanced.html" },
+    // 融合 capstone
+    { subject: "热力学", name: "热力学应用 · 物理", slug: "thermodynamics-application-physics", level: "capstone", prereqs: ["basic", "molecular-kinetic-theory", "gas-liquid-solid"], student: "thermodynamics-application-physics-oral-exam.html", teacher: "teacher-oral-exam-thermodynamics-application-physics.html" },
+    { subject: "热力学", name: "热力学应用 · 化学", slug: "thermodynamics-application-chemistry", level: "capstone", prereqs: ["hess-law", "combustion-neutralization-heat", "bond-energy-reaction-enthalpy", "gibbs-free-energy-basic"], student: "thermodynamics-application-chemistry-oral-exam.html", teacher: "teacher-oral-exam-thermodynamics-application-chemistry.html" }
+  ];
+
+  function loadManifest() { return JSON.parse(localStorage.getItem(MANIFEST_KEY) || "[]"); }
+  function saveManifest(m) { localStorage.setItem(MANIFEST_KEY, JSON.stringify(m)); }
+
+  window.seedManifest = function() {
+    if (loadManifest().length > 0 && !confirm("已存在 " + loadManifest().length + " 条板块，确认覆盖为默认 16 板块？")) return;
+    saveManifest(DEFAULT_MANIFEST);
+    renderManifest();
+    renderToolCards();
+    renderStudentView();
+    alert("✓ 已用 16 个热力学板块种子化 · portal 工具卡片 + 学生视图已自动更新");
+  };
+
+  window.exportManifest = function() {
+    const text = JSON.stringify(loadManifest(), null, 2);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => alert("✓ JSON 已复制 (" + loadManifest().length + " 条)"), () => prompt("手动复制：", text));
+    } else prompt("手动复制：", text);
+  };
+
+  window.clearManifest = function() {
+    if (!confirm("清空板块清单？")) return;
+    localStorage.removeItem(MANIFEST_KEY);
+    renderManifest();
+    renderToolCards();
+    renderStudentView();
+  };
+
+  window.showManifestAddForm = function() {
+    document.getElementById("manifest-add-form").style.display = "block";
+  };
+
+  window.addManifestEntry = function() {
+    const prereqStr = document.getElementById("mf-prereqs").value.trim();
+    const entry = {
+      subject: document.getElementById("mf-subject").value.trim(),
+      name: document.getElementById("mf-name").value.trim(),
+      slug: document.getElementById("mf-slug").value.trim(),
+      level: document.getElementById("mf-level").value,
+      prereqs: prereqStr ? prereqStr.split(",").map(x => x.trim()).filter(Boolean) : [],
+      student: document.getElementById("mf-student").value.trim(),
+      teacher: document.getElementById("mf-teacher").value.trim()
+    };
+    if (!entry.subject || !entry.name || !entry.slug) { alert("主题 / 板块名 / slug 必填"); return; }
+    const m = loadManifest();
+    m.push(entry);
+    saveManifest(m);
+    renderManifest();
+    renderToolCards();
+    renderStudentView();
+    document.getElementById("manifest-add-form").style.display = "none";
+    ["mf-subject","mf-name","mf-slug","mf-prereqs","mf-student","mf-teacher"].forEach(id => document.getElementById(id).value = "");
+    alert("✓ 已添加：" + entry.name);
+  };
+
+  window.removeManifestEntry = function(idx) {
+    const m = loadManifest();
+    if (!confirm("删除「" + m[idx].name + "」？")) return;
+    m.splice(idx, 1);
+    saveManifest(m);
+    renderManifest();
+    renderToolCards();
+    renderStudentView();
+  };
+
+  function renderManifest() {
+    const m = loadManifest();
+    const region = document.getElementById("manifest-region");
+    if (!region) return;
+    if (m.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:6px;">清单为空 · 点「🌱 种子化」用 16 板块默认值填充，或「➕ 添加新板块」逐个建</div>';
+      return;
+    }
+    // 按主题分组
+    const bySubject = {};
+    m.forEach((e, i) => {
+      if (!bySubject[e.subject]) bySubject[e.subject] = [];
+      bySubject[e.subject].push({ entry: e, idx: i });
+    });
+    let html = "";
+    Object.keys(bySubject).forEach(subj => {
+      html += '<h4 style="font-size:14px;color:#117a65;margin:12px 0 8px;">' + escapeHtml(subj) + '（' + bySubject[subj].length + ' 板块）</h4>';
+      html += '<div style="display:grid;grid-template-columns:1fr;gap:6px;margin-bottom:12px;">';
+      bySubject[subj].forEach(({ entry, idx }) => {
+        const levelLabel = { basic: "🔵 基础", advanced: "🟣 进阶", capstone: "🟠 融合" }[entry.level] || entry.level;
+        html += '<div style="display:flex;gap:10px;align-items:center;padding:8px 12px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:4px;font-size:13px;">';
+        html += '<span style="font-weight:600;color:#2c3e50;min-width:160px;">' + escapeHtml(entry.name) + '</span>';
+        html += '<span style="font-size:11.5px;color:#7f8c8d;">' + levelLabel + '</span>';
+        html += '<code style="background:#e8f0fe;color:#0055B8;padding:1px 6px;border-radius:3px;font-size:11.5px;">' + escapeHtml(entry.slug) + '</code>';
+        html += '<a href="' + escapeHtml(entry.teacher) + '" target="_blank" style="margin-left:auto;color:#0055B8;font-size:12px;text-decoration:none;">🛠 教师</a>';
+        html += '<a href="' + escapeHtml(entry.student) + '" target="_blank" style="color:#27ae60;font-size:12px;text-decoration:none;">👁 学生</a>';
+        html += '<button onclick="removeManifestEntry(' + idx + ')" style="background:white;color:#c0392b;border:1px solid #c0392b;padding:3px 8px;border-radius:4px;cursor:pointer;font-size:11.5px;font-family:inherit;">🗑</button>';
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  // 静默种子化（首次加载 manifest 为空时自动调用 · 不弹 alert）
+  function autoSeedManifestSilent() {
+    if (loadManifest().length > 0) return;
+    saveManifest(DEFAULT_MANIFEST);
+  }
+
+  // ============ 教师工具卡片：从 manifest 动态渲染 ============
+  function renderToolCards() {
+    const m = loadManifest();
+    const region = document.getElementById("tools-region");
+    if (!region) return;
+    if (m.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">板块清单为空 · 请到「📦 板块清单管理」点「🌱 种子化」或「➕ 添加新板块」</div>';
+      return;
+    }
+    const bySubject = {};
+    m.forEach(e => {
+      const subj = e.subject || "其他";
+      if (!bySubject[subj]) bySubject[subj] = { basic: [], advanced: [], capstone: [] };
+      (bySubject[subj][e.level || "basic"] = bySubject[subj][e.level || "basic"] || []).push(e);
+    });
+    const LEVEL_LABEL = { basic: "基础链", advanced: "进阶链", capstone: "融合 capstone" };
+    const LEVEL_COLOR = { basic: "#00409A", advanced: "#8e44ad", capstone: "#e67e22" };
+    let html = "";
+    Object.keys(bySubject).forEach(subj => {
+      Object.keys(LEVEL_LABEL).forEach(lvl => {
+        const items = bySubject[subj][lvl] || [];
+        if (items.length === 0) return;
+        html += '<div class="module-section">';
+        html += '<h3 style="color:' + LEVEL_COLOR[lvl] + ';">' + escapeHtml(subj) + ' · ' + LEVEL_LABEL[lvl] + '（' + items.length + ' 板块）</h3>';
+        html += '<div class="tool-grid">';
+        items.forEach(e => {
+          html += '<div class="tool-card" style="border-left-color:' + LEVEL_COLOR[lvl] + ';">';
+          html += '<div class="tool-title">' + escapeHtml(e.name) + '</div>';
+          html += '<span class="tool-meta">板块级 · ' + LEVEL_LABEL[lvl] + '</span>';
+          html += '<a href="' + escapeHtml(e.teacher) + '">🛠 打开教师页</a>';
+          html += '<a href="' + escapeHtml(e.student) + '" style="background:#e8f5e9;color:#2e7d32;">👁 学生题库版</a>';
+          html += '</div>';
+        });
+        html += '</div></div>';
+      });
+    });
+    region.innerHTML = html;
+    // 重置搜索框筛选
+    if (document.getElementById("tool-search")) document.getElementById("tool-search").value = "";
+  }
+
+  // ============ 学生视图：思维导图（mermaid · 节点 click 跳 task-cards）============
+  function generateMermaidGraph(items) {
+    const lines = ["flowchart TB"];
+    items.forEach(e => {
+      const id = "n_" + e.slug.replace(/-/g, '_');
+      lines.push('  ' + id + '["' + e.name + '"]:::' + (e.level || 'basic'));
+    });
+    items.forEach(e => {
+      const id = "n_" + e.slug.replace(/-/g, '_');
+      (e.prereqs || []).forEach(p => {
+        if (items.find(i => i.slug === p)) {
+          const pid = "n_" + p.replace(/-/g, '_');
+          lines.push('  ' + pid + ' --> ' + id);
+        }
+      });
+    });
+    items.forEach(e => {
+      const id = "n_" + e.slug.replace(/-/g, '_');
+      const url = e.slug + '-task-cards.html';
+      lines.push('  click ' + id + ' "' + url + '" "打开任务卡" _blank');
+    });
+    lines.push('  classDef basic fill:#e8f0fe,stroke:#0055B8,color:#00409A,stroke-width:2px');
+    lines.push('  classDef advanced fill:#ebdef0,stroke:#8e44ad,color:#6c3483,stroke-width:2px');
+    lines.push('  classDef capstone fill:#fdebd0,stroke:#e67e22,color:#b66100,stroke-width:2px');
+    return lines.join("\n");
+  }
+
+  function renderStudentView() {
+    const m = loadManifest();
+    const region = document.getElementById("student-view-region");
+    if (!region) return;
+    if (m.length === 0) {
+      region.innerHTML = '<p style="font-size:13.5px;color:#95a5a6;padding:14px;background:#fafbfc;border-radius:6px;">板块清单为空 · 请到「📦 板块清单管理」种子化</p>';
+      return;
+    }
+    const bySubject = {};
+    m.forEach(e => {
+      const subj = e.subject || "其他";
+      if (!bySubject[subj]) bySubject[subj] = [];
+      bySubject[subj].push(e);
+    });
+    let html = '<p style="font-size:13.5px;color:#5a6c7d;margin-bottom:14px;">💡 思维导图：节点 = 板块，箭头 = 前置依赖。<strong>点击节点 = 打开学生学习任务卡</strong>（教师从学生入口看到，与学生体验一致）。</p>';
+    Object.keys(bySubject).forEach((subj, sidx) => {
+      const items = bySubject[subj];
+      html += '<details open style="background:white;border-radius:10px;padding:14px 18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:5px solid #00409A;">';
+      html += '<summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:16px;padding:6px 4px;">';
+      html += '🗺 ' + escapeHtml(subj) + ' · ' + items.length + ' 板块（点击展开 / 收起）';
+      html += '</summary>';
+      html += '<div class="mermaid" id="mindmap-' + sidx + '" style="margin-top:12px;background:#fafbfc;padding:14px;border-radius:8px;text-align:center;">';
+      html += generateMermaidGraph(items);
+      html += '</div>';
+      html += '</details>';
+    });
+    region.innerHTML = html;
+    if (window.mermaid) {
+      setTimeout(() => {
+        try {
+          mermaid.run({ querySelector: '.mermaid' });
+        } catch (e) { console.error("mermaid render error:", e); }
+      }, 100);
+    }
+  }
+
+  function renderStudentView() {
+    const m = loadManifest();
+    const region = document.getElementById("student-view-region");
+    if (!region) return;
+    if (m.length === 0) {
+      region.innerHTML = '<p style="font-size:13.5px;color:#95a5a6;padding:14px;background:#fafbfc;border-radius:6px;">板块清单为空 · 请到「📦 板块清单管理」种子化</p>';
+      return;
+    }
+    const bySubject = {};
+    m.forEach(e => {
+      const subj = e.subject || "其他";
+      if (!bySubject[subj]) bySubject[subj] = [];
+      bySubject[subj].push(e);
+    });
+    let html = '<p style="font-size:13.5px;color:#5a6c7d;margin-bottom:14px;">💡 思维导图：节点 = 板块，箭头 = 前置依赖。<strong>点击节点 = 打开学生学习任务卡</strong>（教师从学生入口看到，与学生体验一致 · 任务卡顶部 nav 可跳基础检测 / 熟练度检测 / 深度口试）。</p>';
+    Object.keys(bySubject).forEach((subj, sidx) => {
+      const items = bySubject[subj];
+      html += '<details open style="background:white;border-radius:10px;padding:14px 18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:5px solid #00409A;">';
+      html += '<summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:16px;padding:6px 4px;">';
+      html += '🗺 ' + escapeHtml(subj) + ' · ' + items.length + ' 板块（点击展开 / 收起）';
+      html += '</summary>';
+      html += '<div class="mermaid" id="mindmap-' + sidx + '" style="margin-top:12px;background:#fafbfc;padding:14px;border-radius:8px;text-align:center;">';
+      html += generateMermaidGraph(items);
+      html += '</div>';
+      html += '</details>';
+    });
+    region.innerHTML = html;
+    if (window.mermaid) {
+      setTimeout(() => {
+        try {
+          mermaid.run({ querySelector: '.mermaid' });
+        } catch (e) { console.error("mermaid render error:", e); }
+      }, 100);
+    }
+  }
+
+  function renderStudentView() {
+    const m = loadManifest();
+    const region = document.getElementById("student-view-region");
+    if (!region) return;
+    if (m.length === 0) {
+      region.innerHTML = '<p style="font-size:13.5px;color:#95a5a6;padding:14px;background:#fafbfc;border-radius:6px;">板块清单为空 · 请到「📦 板块清单管理」种子化</p>';
+      return;
+    }
+    const bySubject = {};
+    m.forEach(e => {
+      const subj = e.subject || "其他";
+      if (!bySubject[subj]) bySubject[subj] = [];
+      bySubject[subj].push(e);
+    });
+    let html = '<p style="font-size:13.5px;color:#5a6c7d;margin-bottom:14px;">💡 思维导图：节点 = 板块，箭头 = 前置依赖。<strong>点击节点 = 打开学生学习任务卡</strong>（教师从学生入口看到，与学生体验一致 · 任务卡顶部 nav 可跳基础检测 / 熟练度检测 / 深度口试）。</p>';
+    Object.keys(bySubject).forEach((subj, sidx) => {
+      const items = bySubject[subj];
+      html += '<details open style="background:white;border-radius:10px;padding:14px 18px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,0.05);border-left:5px solid #00409A;">';
+      html += '<summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:16px;padding:6px 4px;">';
+      html += '🗺 ' + escapeHtml(subj) + ' · ' + items.length + ' 板块（点击展开 / 收起）';
+      html += '</summary>';
+      html += '<div class="mermaid" id="mindmap-' + sidx + '" style="margin-top:12px;background:#fafbfc;padding:14px;border-radius:8px;text-align:center;">';
+      html += generateMermaidGraph(items);
+      html += '</div>';
+      html += '</details>';
+    });
+    region.innerHTML = html;
+    // 重新渲染 mermaid
+    if (window.mermaid) {
+      setTimeout(() => {
+        try {
+          mermaid.run({ querySelector: '.mermaid' });
+        } catch (e) { console.error("mermaid render error:", e); }
+      }, 100);
+    }
+  }
+
+  // ============ 🔍 教师工具卡片搜索 ============
+  window.filterToolCards = function() {
+    const q = document.getElementById("tool-search").value.trim().toLowerCase();
+    document.querySelectorAll(".tool-card").forEach(card => {
+      const title = card.querySelector(".tool-title");
+      if (!title) return;
+      const text = title.textContent.toLowerCase();
+      card.style.display = (!q || text.includes(q)) ? "" : "none";
+    });
+  };
+
+
+  // ============ 📚 历史口试记录 ============
+
+  const SLUG_TO_NAME = {
+    "basic": "热力学第一定律",
+    "molecular-kinetic-theory": "分子动理论",
+    "gas-liquid-solid": "理想气体状态方程",
+    "second-law-basic": "第二定律 · 基础",
+    "hess-law": "盖斯定律",
+    "combustion-neutralization-heat": "燃烧热与中和热",
+    "bond-energy-reaction-enthalpy": "键能与反应焓变",
+    "gibbs-free-energy-basic": "吉布斯自由能 · 基础",
+    "advanced": "理想气体内能的微观推导",
+    "entropy-meaning": "熵的物理意义",
+    "carnot-cycle": "卡诺循环",
+    "state-functions": "状态函数与非状态函数",
+    "enthalpy-meaning": "焓与焓变的意义",
+    "gibbs-free-energy-advanced": "吉布斯自由能 · 进阶",
+    "thermodynamics-application-physics": "热力学应用 · 物理",
+    "thermodynamics-application-chemistry": "热力学应用 · 化学"
+  };
+
+  const ACCOUNT_TO_NAME = {
+    "stu001": "演示账号 01", "stu002": "演示账号 02", "stu003": "演示账号 03",
+    "stu004": "演示账号 04", "stu005": "演示账号 05"
+  };
+
+  function loadAllReceipts() {
+    const all = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+      const m = key.match(/^oral-exam-(.+)-v0\.1\.3-(.+)$/);
+      if (!m) continue;
+      const slug = m[1];
+      const studentKey = m[2]; // 教师在教师页输入的"学生姓名"（可能是 stu001 或姓名）
+      try {
+        const data = JSON.parse(localStorage.getItem(key));
+        if (data && data.submissions && Array.isArray(data.submissions)) {
+          data.submissions.forEach(sub => {
+            all.push({ slug, studentKey, sub });
+          });
+        }
+      } catch (e) {}
+    }
+    return all;
+  }
+
+  function renderReceipts() {
+    let all = loadAllReceipts();
+    document.getElementById("receipts-count").textContent = all.length + " 份";
+    const query = document.getElementById("receipts-search").value.trim().toLowerCase();
+    if (query) {
+      all = all.filter(r => {
+        const moduleName = SLUG_TO_NAME[r.slug] || r.slug;
+        const accountName = ACCOUNT_TO_NAME[r.studentKey] || r.studentKey;
+        return r.slug.toLowerCase().includes(query)
+          || moduleName.toLowerCase().includes(query)
+          || r.studentKey.toLowerCase().includes(query)
+          || accountName.toLowerCase().includes(query)
+          || (r.sub.receiptId && r.sub.receiptId.toLowerCase().includes(query));
+      });
+    }
+    const region = document.getElementById("receipts-region");
+    if (all.length === 0) {
+      region.innerHTML = '<div style="padding:30px 20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">暂无历史口试记录（教师页提交判定后会出现在此处）<br><small style="color:#bdc3c7;">点击「🧪 注入测试记录」生成 mock 数据查看 UI</small></div>';
+      return;
+    }
+    // 按时间倒序
+    all = all.sort((a, b) => new Date(b.sub.submittedAt) - new Date(a.sub.submittedAt));
+    let html = "";
+    all.forEach((r, idx) => {
+      const sub = r.sub;
+      const verdict = sub.verdict;
+      const moduleName = SLUG_TO_NAME[r.slug] || r.slug;
+      const accountName = ACCOUNT_TO_NAME[r.studentKey] || r.studentKey;
+      const verdictLabel = { pass: "✅ 通过", defer: "⏸ 暂缓", fail: "❌ 不通过" }[verdict] || verdict;
+      const picked = (sub.snapshot && sub.snapshot.picked) || [];
+      // 抽中主问题渲染
+      const pickedStr = picked.length ? "主问题 " + picked.join("、") : "（无）";
+      html += '<div class="receipt-item ' + verdict + '">';
+      html += '<div class="ri-head">';
+      html += '<span class="ri-verdict-tag">' + verdictLabel + '</span>';
+      html += '<span class="ri-student">' + escapeHtml(accountName) + '</span>';
+      html += '<span class="ri-meta">账号 <code style="background:white;padding:1px 6px;border-radius:3px;font-size:11.5px;">' + escapeHtml(r.studentKey) + '</code> · ' + escapeHtml(moduleName) + ' · v' + sub.version + (sub.version > 1 ? "（修订）" : "") + '</span>';
+      html += '<span class="ri-id" style="margin-left:auto;">📄 ' + escapeHtml(sub.receiptId || "—") + '</span>';
+      html += '</div>';
+      html += '<details>';
+      html += '<summary style="cursor:pointer;font-size:13px;color:#5a6c7d;font-weight:500;">查看详细（抽中主问题 · 教师备注 · 修订原因）</summary>';
+      html += '<div class="ri-detail">';
+      html += '<div class="row"><strong>提交时间：</strong>' + new Date(sub.submittedAt).toLocaleString("zh-CN") + '</div>';
+      html += '<div class="row"><strong>抽中主问题：</strong>' + pickedStr + '</div>';
+      html += '<div class="row"><strong>判定结果：</strong>' + verdictLabel + '</div>';
+      html += '<div class="row"><strong>📝 在纸上写出核心公式：</strong>' + (sub.paperWritten ? "✓ 已勾选" : "✗ 未勾选") + '</div>';
+      if (sub.overall) html += '<div class="row"><strong>📝 总体备注：</strong>' + escapeHtml(sub.overall).replace(/\n/g, "<br>") + '</div>';
+      if (sub.revisionReason) html += '<div class="ri-revisions"><strong>📨 修订原因（学生申诉详情）：</strong><br>' + escapeHtml(sub.revisionReason).replace(/\n/g, "<br>") + '</div>';
+      // 每主线状态（如果 snapshot 含 statuses）
+      if (sub.snapshot && sub.snapshot.statuses) {
+        html += '<div class="row" style="margin-top:8px;"><strong>各主问题状态：</strong></div>';
+        html += '<ul style="margin-left:18px;font-size:12.5px;">';
+        Object.keys(sub.snapshot.statuses).forEach(k => {
+          html += '<li>主问题 ' + escapeHtml(k) + ' · ' + escapeHtml(sub.snapshot.statuses[k]) + '</li>';
+        });
+        html += '</ul>';
+      }
+      // 各主线备注（如果有）
+      if (sub.snapshot && sub.snapshot.notes) {
+        const noteKeys = Object.keys(sub.snapshot.notes);
+        if (noteKeys.length > 0) {
+          html += '<div class="row" style="margin-top:8px;"><strong>主问题备注：</strong></div>';
+          html += '<ul style="margin-left:18px;font-size:12.5px;">';
+          noteKeys.forEach(k => {
+            html += '<li>主问题 ' + escapeHtml(k) + '：' + escapeHtml(sub.snapshot.notes[k]).replace(/\n/g, "<br>") + '</li>';
+          });
+          html += '</ul>';
+        }
+      }
+      html += '<div class="row" style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap;">';
+      html += '<button onclick="copyReceipt(' + idx + ')" style="background:#e8f0fe;color:#0055B8;border:1px solid #0055B8;padding:5px 12px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">📋 复制完整口试单</button>';
+      html += '<a href="teacher-oral-exam-' + r.slug + '.html?student=' + encodeURIComponent(r.studentKey) + '" style="background:#fafbfc;color:#5a6c7d;border:1px solid #ccc;padding:5px 12px;border-radius:4px;text-decoration:none;font-size:12.5px;">🛠 打开该学生教师页</a>';
+      html += '</div>';
+      html += '</div></details></div>';
+    });
+    region.innerHTML = html;
+    // 把 all 缓存到 window 供 copyReceipt 用
+    window._cachedReceipts = all;
+  }
+
+  window.copyReceipt = function(idx) {
+    const r = (window._cachedReceipts || [])[idx];
+    if (!r) return;
+    const sub = r.sub;
+    const moduleName = SLUG_TO_NAME[r.slug] || r.slug;
+    const accountName = ACCOUNT_TO_NAME[r.studentKey] || r.studentKey;
+    const verdictLabel = { pass: "✅ 通过", defer: "⏸ 暂缓", fail: "❌ 不通过" }[sub.verdict] || sub.verdict;
+    let text = "【蓝色诺瓦学院 · 深度口试单】\n";
+    text += "板块：" + moduleName + "\n";
+    text += "学生：" + accountName + "（账号 " + r.studentKey + "）\n";
+    text += "口试单 ID：" + sub.receiptId + "\n";
+    text += "版本：v" + sub.version + (sub.version > 1 ? "（修订）" : "") + "\n";
+    text += "提交时间：" + new Date(sub.submittedAt).toLocaleString("zh-CN") + "\n";
+    text += "抽中主问题：" + ((sub.snapshot && sub.snapshot.picked) || []).join("、") + "\n\n";
+    text += "--- 教师最终判定 ---\n" + verdictLabel + "\n\n";
+    if (sub.revisionReason) text += "--- 修订原因 ---\n" + sub.revisionReason + "\n\n";
+    if (sub.overall) text += "--- 总体备注 ---\n" + sub.overall + "\n\n";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => alert("✓ 口试单已复制 · 可粘贴到微信/邮件发学生"), () => prompt("手动复制：", text));
+    } else {
+      prompt("手动复制：", text);
+    }
+  };
+
+  window.injectMockReceipts = function() {
+    const mock = {
+      "oral-exam-basic-v0.1.3-stu001": {
+        picked: [1, 3, 5],
+        usedHistory: [1, 3, 5],
+        listens: { "1-0": true, "1-1": true, "1-2": true, "3-0": true, "5-0": true, "5-1": true, "5-5": true },
+        miscs: {},
+        notes: { "3": "ΔU 状态量讲得很到位 · 路径无关讲通了" },
+        statuses: { "1": "pass", "3": "pass", "5": "stuck" },
+        verdict: "defer",
+        overall: "主问题 1、3 都讲得很好 · 主问题 5 等温段微观根据答不出，需要回看 Card 3 STEP 1 · 二试约下周三",
+        paperWritten: true,
+        submissions: [{
+          version: 1,
+          submittedAt: new Date(Date.now() - 86400000 * 3).toISOString(),
+          verdict: "defer",
+          overall: "主问题 1、3 都讲得很好 · 主问题 5 等温段微观根据答不出，需要回看 Card 3 STEP 1 · 二试约下周三",
+          paperWritten: true,
+          revisionReason: "",
+          receiptId: "OE-BASIC-20260610-160230-stu001",
+          snapshot: { picked: [1, 3, 5], notes: { "3": "ΔU 状态量讲得很到位" }, statuses: { "1": "pass", "3": "pass", "5": "stuck" }, verdict: "defer", overall: "主问题 1、3 都讲得很好...", paperWritten: true }
+        }]
+      },
+      "oral-exam-advanced-v0.1.3-stu002": {
+        submissions: [{
+          version: 1,
+          submittedAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+          verdict: "pass",
+          overall: "微观推导链非常清晰 · 4 假设 + 1/3 各向同性都讲明白 · 直接通过",
+          paperWritten: true,
+          revisionReason: "",
+          receiptId: "OE-ADVANCED-20260611-143015-stu002",
+          snapshot: { picked: [1, 2, 4], statuses: { "1": "pass", "2": "pass", "4": "pass" }, verdict: "pass", overall: "微观推导链非常清晰", paperWritten: true }
+        }]
+      },
+      "oral-exam-basic-v0.1.3-stu003": {
+        submissions: [{
+          version: 1,
+          submittedAt: new Date(Date.now() - 86400000 * 1).toISOString(),
+          verdict: "fail",
+          overall: "符号约定明显背诵 · 永动机概念混乱 · 第一类 / 第二类混淆 · 建议重学 Card 1 + 2",
+          paperWritten: false,
+          revisionReason: "",
+          receiptId: "OE-BASIC-20260612-100530-stu003",
+          snapshot: { picked: [1, 2, 4], statuses: { "1": "fail", "2": "fail", "4": "stuck" }, verdict: "fail", overall: "背诵型贯穿", paperWritten: false }
+        }, {
+          version: 2,
+          submittedAt: new Date(Date.now() - 3600000).toISOString(),
+          verdict: "defer",
+          overall: "学生申诉后重评 · 主问题 4 微观图像其实讲对了，只是没用「无序」「有序」这组词 · 主问题 1/2 仍混乱 · 改判暂缓",
+          paperWritten: true,
+          revisionReason: "学生申诉：当时讲了「热传导是分子碰撞，做功是活塞推分子」，意思就是无序 vs 有序，只是没用书上原词。希望重新评估。",
+          receiptId: "OE-BASIC-20260613-153012-stu003",
+          snapshot: { picked: [1, 2, 4], statuses: { "1": "fail", "2": "stuck", "4": "pass" }, verdict: "defer", overall: "重评后改判", paperWritten: true }
+        }]
+      }
+    };
+    Object.keys(mock).forEach(k => localStorage.setItem(k, JSON.stringify(mock[k])));
+    renderReceipts();
+    alert("已注入 3 份测试口试记录（含 1 份 v2 修订）");
+  };
+
+
+  window.switchTab = function(tab) {
+    document.querySelectorAll(".portal-tab").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".portal-pane").forEach(p => p.classList.remove("active"));
+    const tabBtn = document.querySelector('.portal-tab[data-tab="' + tab + '"]');
+    if (tabBtn) tabBtn.classList.add("active");
+    const pane = document.getElementById("tab-" + tab);
+    if (pane) pane.classList.add("active");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+
+  // 首次加载自动注入 2 条 demo 申请（静默 · 已有数据则跳过）
+  function autoSeedDemoTasks() {
+    const tasks = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    if (tasks.length > 0) return;
+    const demo = [
+      { id: "APP-DEMO-001", type: "oral-exam-apply", slug: "carnot-cycle", moduleName: "卡诺循环", account: "stu001", studentName: "演示账号 01", contact: "微信 demo-001", timeWindow: "周三 16:00", note: "已完成全部学习内容 + mock-check 通过 85 分 + fluency 88 分", submittedAt: new Date(Date.now() - 3 * 3600000).toISOString(), status: "pending" },
+      { id: "APL-DEMO-001", type: "oral-exam-appeal", slug: "basic", moduleName: "热力学第一定律", account: "stu002", studentName: "演示账号 02", receiptId: "OE-BASIC-20260613-160230-stu002", qnum: "主问题 3", reason: "当时我已经讲清楚 ΔU 是状态量（只看始末态）+ 循环过程 ΔU = 0 + Q = W，教师标的是「状态量 vs 过程量」核心听点缺失。我认为我的论证完整，希望教师重新评估。", want: "reassess", submittedAt: new Date(Date.now() - 1 * 3600000).toISOString(), status: "pending" }
+    ];
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(demo));
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    autoSeedDemoTasks();
+    autoSeedManifestSilent();
+    renderTodo();
+    renderReceipts();
+    renderManifest();
+    renderToolCards();
+    renderStudentView();
+  });
+})();
+</script>
+
+</body>
+</html>

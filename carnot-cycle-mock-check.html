@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡诺循环 · 基础检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #5A4BD1 0%, #6C5CE7 50%, #8B7CF0 100%); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(108,92,231,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.diagram { background: #f3e7fb; color: #6a1b9a; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .q-figure { margin: 14px 0; text-align: center; }
+  .q-figure svg { max-width: 100%; height: auto; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-blank { border: none; border-bottom: 2px solid #0055B8; background: transparent; padding: 2px 8px; margin: 0 4px; font-size: 15px; min-width: 80px; text-align: center; font-family: inherit; }
+  .q-blank:focus { outline: none; border-bottom-color: #006AD6; background: #f0f4f8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 卡诺循环(进阶) &raquo;
+  <strong>卡诺循环 · 基础检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习工具</strong> · 此处自动判分仅供反馈,真正的基础检测由教师组织<strong>纸笔形式 + 批改 + 签字</strong>。本练习的『通过 70 分』≈ 已具备纸笔检测的基础水平,可继续练习;『荣誉 90 分』≈ 掌握充分。学分由教师组织的真实检测决定,不在此处。
+</div>
+
+<header class="page-header">
+  <h1>卡诺循环 · 基础检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 进阶板块 · 题库版(28 题池, 每次随机抽 7 题) · 100 分 · 约 30-35 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>7</strong> 道题(每个考点 T1-T7 各随机抽 1 道, 共 28 题池)</li>
+    <li>分值: T1=12 / T2=14 / T3=14 / T4=14 / T5=14 / T6=16 / T7=16 = <strong>100</strong></li>
+    <li>通过 ≥ 70 分(已具备纸笔检测基础水平);荣誉 ≥ 90 分(掌握充分)</li>
+    <li>建议 30-35 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分);填空自动忽略空格与全角半角差异</li>
+    <li>简答按关键词命中率判分(全部命中=满分, 命中过半=半分), 提交后请自行对照解析自评</li>
+    <li>提交后展示标准答案 + 三段式解析(原理 / 逻辑 / 知识系统位置)+ 常见误区 + 扩展 + 锚回学习任务卡</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong>;可使用计算器</li>
+    <li>可点"重新抽题"再做, 抽到不同变体训练(防止背答案)</li>
+  </ul>
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 7</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-mock-check-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-mock-check-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="carnot-cycle-task-cards.html">📖 返回学习任务卡</a>
+  <a href="carnot-cycle-oral-exam.html">🎤 深度口试</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 卡诺循环(进阶) · 基础检测 · mock-check Skill v0.1.5(题库版 + 三段式 + 锚结论中文化)</footer>
+
+</div>
+
+<script>
+const EXPORT_NAMES = {
+  'IDEAL-HEAT-ENGINE':              '理想热机模型(高温热源 → 热机 → 低温热源 + 净功输出)',
+  'CARNOT-CYCLE-STRUCTURE':         '卡诺循环结构(2 段等温管热量进出 + 2 段绝热管温度切换)',
+  'INFINITE-RESERVOIR':             '无限大热源 / 冷源的理想化设定(温度恒定)',
+  'ISOTHERMAL-WORK':                '等温功 W = nRT·ln(V₂/V₁)',
+  'ISOTHERMAL-Q-EQUALS-W':          '等温过程 ΔU = 0 → Q = W',
+  'CYCLE-WORK-EQUALS-AREA':         'P-V 图闭环面积 = 循环净功',
+  'NET-WORK-FORMULA':               '净功公式 W_net = Q₁ − Q₂(循环一周 ΔU = 0)',
+  'CARNOT-EFFICIENCY':              '卡诺效率 η = 1 − T₂/T₁',
+  'HEAT-TEMPERATURE-RATIO':         '热温比关系 Q₂/T₂ = Q₁/T₁',
+  'ADIABATIC-TV-RELATION':          '绝热关系 T·V^(γ−1) = 常数',
+  'SIGN-QH-QC-POSITIVE':            '符号约定: Q₁、Q₂ 均取正值(表示大小), 方向另行描述',
+  'SIGN-T-INDICES':                 '角标约定: T₁ 高温在前(T₁ > T₂)',
+  'EFFICIENCY-CEILING-THINKING':    '「找效率上限」的思维方式',
+  'WORKING-SUBSTANCE-INDEPENDENCE': '工质无关性 → 温度的绝对意义',
+  '2ND-LAW-INTRODUCTION':           '第二定律两种表述的初步引入(开尔文 + 克劳修斯)',
+  'BOUNDARY-ENTROPY-DEFINITION':    '边界: 熵的具体定义不在本板块展开',
+  'BOUNDARY-2ND-LAW-FULL':          '边界: 第二定律的完整定量框架留给后续板块',
+  'BOUNDARY-MICRO-INTERPRETATION':  '边界: 微观(统计)解释留给熵的物理意义板块'
+};
+
+const CARNOT_PV_SVG = `<div class="q-figure"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="卡诺循环 P-V 图: 四段过程 A→B→C→D→A, 实线为等温, 虚线为绝热">
+  <defs>
+    <marker id="pv-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#5a6c7d"/></marker>
+  </defs>
+  <line x1="60" y1="330" x2="490" y2="330" stroke="#00409A" stroke-width="2"/>
+  <path d="M482,324 L494,330 L482,336 Z" fill="#00409A"/>
+  <line x1="60" y1="330" x2="60" y2="34" stroke="#00409A" stroke-width="2"/>
+  <path d="M54,42 L60,30 L66,42 Z" fill="#00409A"/>
+  <text x="40" y="48" font-size="15" fill="#00409A">P</text>
+  <text x="458" y="356" font-size="15" fill="#00409A">V</text>
+  <path d="M150,80 Q190,135 280,150" fill="none" stroke="#00409A" stroke-width="2.5" marker-end="url(#pv-arrow)"/>
+  <path d="M280,150 Q330,225 430,255" fill="none" stroke="#6a1b9a" stroke-width="2.5" stroke-dasharray="7,5" marker-end="url(#pv-arrow)"/>
+  <path d="M430,255 Q320,248 235,200" fill="none" stroke="#00409A" stroke-width="2.5" marker-end="url(#pv-arrow)"/>
+  <path d="M235,200 Q175,160 150,80" fill="none" stroke="#6a1b9a" stroke-width="2.5" stroke-dasharray="7,5" marker-end="url(#pv-arrow)"/>
+  <circle cx="150" cy="80" r="4" fill="#c0392b"/>
+  <circle cx="280" cy="150" r="4" fill="#c0392b"/>
+  <circle cx="430" cy="255" r="4" fill="#c0392b"/>
+  <circle cx="235" cy="200" r="4" fill="#c0392b"/>
+  <text x="136" y="68" font-size="14" fill="#c0392b" font-weight="bold">A</text>
+  <text x="292" y="142" font-size="14" fill="#c0392b" font-weight="bold">B</text>
+  <text x="442" y="270" font-size="14" fill="#c0392b" font-weight="bold">C</text>
+  <text x="214" y="222" font-size="14" fill="#c0392b" font-weight="bold">D</text>
+  <text x="208" y="98" font-size="14" fill="#5a6c7d" text-anchor="middle">①</text>
+  <text x="382" y="190" font-size="14" fill="#5a6c7d" text-anchor="middle">②</text>
+  <text x="332" y="278" font-size="14" fill="#5a6c7d" text-anchor="middle">③</text>
+  <text x="156" y="168" font-size="14" fill="#5a6c7d" text-anchor="middle">④</text>
+  <text x="275" y="368" font-size="12" fill="#7f8c8d" text-anchor="middle">实线 = 等温过程 · 虚线 = 绝热过程 · 箭头为循环运行方向</text>
+</svg></div>`;
+
+const CARNOT_PV_AREA_SVG = `<div class="q-figure"><svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="卡诺循环 P-V 图: 闭环内部为绿色阴影区域">
+  <defs>
+    <marker id="pv-arrow2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#5a6c7d"/></marker>
+  </defs>
+  <path d="M150,80 Q190,135 280,150 Q330,225 430,255 Q320,248 235,200 Q175,160 150,80 Z" fill="rgba(46,125,50,0.19)" stroke="none"/>
+  <line x1="60" y1="330" x2="490" y2="330" stroke="#00409A" stroke-width="2"/>
+  <path d="M482,324 L494,330 L482,336 Z" fill="#00409A"/>
+  <line x1="60" y1="330" x2="60" y2="34" stroke="#00409A" stroke-width="2"/>
+  <path d="M54,42 L60,30 L66,42 Z" fill="#00409A"/>
+  <text x="40" y="48" font-size="15" fill="#00409A">P</text>
+  <text x="458" y="356" font-size="15" fill="#00409A">V</text>
+  <path d="M150,80 Q190,135 280,150" fill="none" stroke="#00409A" stroke-width="2.5" marker-end="url(#pv-arrow2)"/>
+  <path d="M280,150 Q330,225 430,255" fill="none" stroke="#6a1b9a" stroke-width="2.5" stroke-dasharray="7,5" marker-end="url(#pv-arrow2)"/>
+  <path d="M430,255 Q320,248 235,200" fill="none" stroke="#00409A" stroke-width="2.5" marker-end="url(#pv-arrow2)"/>
+  <path d="M235,200 Q175,160 150,80" fill="none" stroke="#6a1b9a" stroke-width="2.5" stroke-dasharray="7,5" marker-end="url(#pv-arrow2)"/>
+  <circle cx="150" cy="80" r="4" fill="#c0392b"/>
+  <circle cx="280" cy="150" r="4" fill="#c0392b"/>
+  <circle cx="430" cy="255" r="4" fill="#c0392b"/>
+  <circle cx="235" cy="200" r="4" fill="#c0392b"/>
+  <text x="136" y="68" font-size="14" fill="#c0392b" font-weight="bold">A</text>
+  <text x="292" y="142" font-size="14" fill="#c0392b" font-weight="bold">B</text>
+  <text x="442" y="270" font-size="14" fill="#c0392b" font-weight="bold">C</text>
+  <text x="214" y="222" font-size="14" fill="#c0392b" font-weight="bold">D</text>
+  <text x="275" y="368" font-size="12" fill="#7f8c8d" text-anchor="middle">实线 = 等温过程 · 虚线 = 绝热过程 · 闭环内部为阴影区域</text>
+</svg></div>`;
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["IDEAL-HEAT-ENGINE","EFFICIENCY-CEILING-THINKING"],
+      stem:"19 世纪初, 卡诺研究热机时没有去改进某一台具体的蒸汽机, 而是构造了一个理想热机模型。这个模型最核心的目的是:",
+      options:{A:"精确描述真实蒸汽机每个零件的运作细节",B:"计算燃料燃烧时究竟放出多少热量",C:"回答「在给定的高温热源与低温热源之间, 热机效率的理论上限是多少」",D:"证明只要设计得足够好, 热机效率可以达到 100%"},
+      answer:"C",
+      explanation:{
+        principle:'理想模型是物理学处理复杂问题的核心武器: 剥离摩擦、漏热、材料强度等次要因素, 只保留「热从高温热源流向低温热源、途中输出功」这一主干结构。问题被洗干净之后, 「效率最高能到多少」才第一次成为一个可以被<strong>严格推导</strong>的问题。',
+        logic:'各选项分析:<br>· <strong>A 错</strong> — 卡诺刻意「不关心零件」, 模型与任何具体机器无关, 这正是它的力量所在;<br>· <strong>B 错</strong> — 燃烧放热是热源一侧的化学问题, 不属于循环本身;<br>· <strong>C 正确</strong> — 卡诺之问正是「上限在哪里」, 这把工程师的试错问题升级成了物理学问题;<br>· <strong>D 错</strong> — 模型最终给出的结论恰恰相反: 只要低温热源高于 0 K, 效率必定小于 100%。',
+        connection:'<strong>上游</strong>: 与理想气体、质点同属「理想化建模」家族。<strong>下游</strong>: 给这个模型装上具体的四个过程就得到卡诺循环, 其效率公式是本板块的终点, 也是通往热力学第二定律的桥。'
+      },
+      mistakes:'· 把理想模型当成「不真实所以没用」;<br>· 以为卡诺研究的是怎样造出更好的锅炉或零件。',
+      extension:'「先问上限、再谈改进」的思维方式后来在信息论(香农的信道容量)、计算理论(图灵机)中反复出现 — 卡诺是这一思维方式最早的典范之一。',
+      cardAnchor:"Card 1 历史与问题" },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["INFINITE-RESERVOIR","IDEAL-HEAT-ENGINE"],
+      stem:"卡诺的理想热机假设热源与冷源都是「无限大」的。这一理想化设定的作用是:",
+      options:{A:"让热机每个循环能输出更多的功",B:"保证吸热、放热进行时, 热源与冷源自身的温度始终保持恒定",C:"使气体的内能在整个循环中的每一时刻都保持恒定",D:"消除气缸与活塞之间的摩擦损耗"},
+      answer:"B",
+      explanation:{
+        principle:'「无限大」意味着热容量无穷大: 从它取走、或者向它注入任何有限的热量, 它自身的温度都纹丝不动。这样两段等温过程才各自有一个温度恒定的「靠山」, T₁ 与 T₂ 才能作为<strong>常数</strong>写进后续所有公式。',
+        logic:'各选项分析:<br>· <strong>A 错</strong> — 每个循环输出多少功由循环本身的参数决定, 与热源大小无关;<br>· <strong>B 正确</strong> — 这正是「无限大」的全部使命: 锁死 T₁ 和 T₂;<br>· <strong>C 错</strong> — 循环过程中气体内能随温度在两个值之间切换, 只是转完一整圈后回到原值;<br>· <strong>D 错</strong> — 无摩擦是另一条独立的理想化假设, 与热源大小无关。',
+        connection:'<strong>上游</strong>: 与「理想气体」「质点」同属理想化设定家族。<strong>下游</strong>: T₁、T₂ 恒定是等温功公式与效率公式能写成简洁闭式的前提 — 若热源温度会漂移, 整套推导都要推倒重来。'
+      },
+      mistakes:'· 把「无限大热源」理解成能输出无限多的功;<br>· 忽略它的真正使命是「温度恒定」而不是「热量管够」。',
+      extension:'现实中的近似无限大热源: 海洋、大气层、大型冷却水塔 — 对一台机器的吸放热而言, 它们的温度几乎不被扰动。',
+      cardAnchor:"Card 2 设计理想热机" },
+    { id:"T1-3", type:"multi", score:12, difficulty:"较难", exportIds:["IDEAL-HEAT-ENGINE","INFINITE-RESERVOIR","EFFICIENCY-CEILING-THINKING"],
+      stem:"关于卡诺热机模型中的「理想化」, 下列说法正确的是(多选):",
+      options:{A:"理想化模型脱离实际, 因此对工程实践没有指导意义",B:"理想化的目的是剥离次要因素, 让「效率上限」这类问题有清晰、普适的答案",C:"「无限大热源」「无摩擦」都属于该模型中的理想化假设",D:"卡诺热机是当时已经制造出来的一种高效率蒸汽机"},
+      answer:["B","C"],
+      explanation:{
+        principle:'理想化不是「偷懒造假」, 而是一种<strong>有意识的简化策略</strong>: 先在最干净的条件下找到规律的极限形态, 再回头评估真实世界离这个极限有多远。卡诺模型给出的上限对一切真实热机都构成「天花板」, 这正是它的工程价值。',
+        logic:'各选项分析:<br>· <strong>A 错</strong> — 恰恰相反: 知道天花板在哪, 工程师才知道改进空间还剩多少、什么时候该停手;<br>· <strong>B 正确</strong> — 剥离次要因素后, 答案只依赖两个热源温度, 普适于一切机器;<br>· <strong>C 正确</strong> — 两者都是为了让推导严格成立而引入的假设;<br>· <strong>D 错</strong> — 卡诺热机是纸上的思想模型, 当时没有(现在也没有)完全按它制造的机器。',
+        connection:'<strong>上游</strong>: 延续理想气体的建模传统。<strong>下游</strong>: 「上限思维」在卡诺定理处升级为对一切热机的普适论断。'
+      },
+      mistakes:'· 因为「造不出来」而否定模型价值;<br>· 漏选 C — 没意识到无摩擦也是假设清单的一员。',
+      extension:'判断一个理想化是否合理的标准: 被剥离的因素只是「定量修正」而不「定性改变」结论 — 摩擦让效率降低几个百分点, 但不改变「上限由温度决定」这个结构。',
+      cardAnchor:"Card 1 历史与问题" },
+    { id:"T1-4", type:"choice", score:12, difficulty:"中等", exportIds:["EFFICIENCY-CEILING-THINKING","IDEAL-HEAT-ENGINE","BOUNDARY-ENTROPY-DEFINITION"],
+      stem:"与同时代「不断试错、改进零件」的工程师相比, 卡诺研究路径最大的不同在于:",
+      options:{A:"他先追问「效率有没有理论上限」, 并用一个普适的理想模型回答了它",B:"他发明了能承受更高温度的锅炉材料",C:"他实测了上千台蒸汽机的数据, 归纳出经验公式",D:"他直接给出了熵的严格定义, 并以此分析热机"},
+      answer:"A",
+      explanation:{
+        principle:'试错式改进回答的是「这台机器还能不能再好一点」; 卡诺把问题换成了「<strong>一切机器</strong>最好能好到什么程度」。问题层级一变, 工具也随之从扳手换成了理想模型 — 这就是「找效率上限」的思维方式。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 先立上限之问, 再造模型作答, 是卡诺路径的全部精髓;<br>· <strong>B、C 错</strong> — 这两条仍是工程师路径(改材料、攒数据), 卡诺恰恰绕开了它们;<br>· <strong>D 错</strong> — 熵的严格定义出现在卡诺之后几十年(克劳修斯), 卡诺本人没有这个工具; 熵的定义也不在本板块展开, 留给后续板块。',
+        connection:'<strong>上游</strong>: Card 1 的蒸汽机效率困境是这个追问的出发点。<strong>下游</strong>: 上限之问的答案(效率只由两热源温度决定)直接催生卡诺定理与绝对温标。'
+      },
+      mistakes:'· 把后人的工具(熵)安到卡诺头上, 颠倒概念出现的历史顺序;<br>· 低估「换一个问题」本身的革命性。',
+      extension:'科学史上类似的「换问题」时刻: 伽利略不问「物体为什么动」而问「物体怎样动」; 香农不问「这句话什么意思」而问「传一句话最少要多少比特」。',
+      cardAnchor:"Card 1 历史与问题" }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:14, difficulty:"基础", exportIds:["CARNOT-CYCLE-STRUCTURE"],
+      stem:"卡诺循环从状态 A 出发, 沿 A→B→C→D→A 运行一周。四个过程的正确顺序是:",
+      options:{A:"等温膨胀 → 等温压缩 → 绝热膨胀 → 绝热压缩",B:"绝热膨胀 → 等温膨胀 → 绝热压缩 → 等温压缩",C:"等温膨胀 → 绝热膨胀 → 等温压缩 → 绝热压缩",D:"等温膨胀 → 绝热压缩 → 等温压缩 → 绝热膨胀"},
+      answer:"C",
+      explanation:{
+        principle:'卡诺循环的四个过程各司其职: <strong>两段等温管热量的进出</strong>(在 T₁ 吸热、在 T₂ 放热), <strong>两段绝热管温度的切换</strong>(在两个热源温度之间过渡)。要让「吸热 → 切换 → 放热 → 切换回来」闭合成圈, 顺序只能是等温膨胀 → 绝热膨胀 → 等温压缩 → 绝热压缩。',
+        logic:'排除法:<br>· <strong>A 错</strong> — 两段等温直接相连, 中间没有温度切换环节, 循环无法从 T₁ 过渡到 T₂;<br>· <strong>B 错</strong> — 从 A 出发先绝热膨胀, 则循环在吸热之前温度就离开了 T₁, 与「在 T₁ 等温吸热」的设计冲突;<br>· <strong>C 正确</strong> — 吸热、降温、放热、升温, 四步首尾相接;<br>· <strong>D 错</strong> — 等温膨胀后接绝热压缩, 温度回升, 永远到不了低温热源。',
+        connection:'<strong>上游</strong>: Card 2 的功能分析(哪种过程适合进出热量、哪种适合切换温度)是这个顺序的来源。<strong>下游</strong>: 四段的先后与方向决定了 P-V 图上闭环的走向, 进而决定净功为正。'
+      },
+      mistakes:'· 死记顺序而不理解「等温管热量、绝热管温度」的分工;<br>· 把「膨胀-压缩」交替当成判断标准(A 选项也交替, 但结构错误)。',
+      extension:'倒着跑这个循环(A→D→C→B→A)就是制冷机 / 热泵的原型: 外界输入功, 把热量从低温处搬往高温处。',
+      cardAnchor:"Card 2 设计理想热机" },
+    { id:"T2-2", type:"choice", score:14, difficulty:"中等", hasDiagram:true, exportIds:["CARNOT-CYCLE-STRUCTURE","SIGN-T-INDICES"],
+      figureSvg:CARNOT_PV_SVG,
+      stem:"上图为卡诺循环的 P-V 图: 实线段为等温过程, 虚线段为绝热过程, 循环沿 A→B→C→D→A 方向运行。属于「绝热膨胀」的是哪一段?",
+      options:{A:"①(A→B)",B:"②(B→C)",C:"③(C→D)",D:"④(D→A)"},
+      answer:"B",
+      explanation:{
+        principle:'读循环图的两步定位法: 第一步用<strong>线型</strong>挑出过程类型(虚线 = 绝热, 即 ② 与 ④); 第二步用<strong>体积变化方向</strong>挑出膨胀还是压缩(沿运行方向 V 增大 = 膨胀, V 减小 = 压缩)。',
+        logic:'逐段核对:<br>· ①(A→B): 实线, 是等温过程, 排除;<br>· <strong>②(B→C): 虚线 + 沿箭头方向体积增大 — 绝热膨胀, 正确</strong>;<br>· ③(C→D): 实线, 等温过程, 排除;<br>· ④(D→A): 虚线但沿箭头方向体积减小, 是绝热压缩。',
+        connection:'<strong>上游</strong>: 四段顺序(Card 2 的功能设计)落实到图上就是这四段曲线。<strong>下游</strong>: 认清每一段的身份, 是后面逐段写功与热、再组装净功公式的前提。'
+      },
+      mistakes:'· 只看线型不看方向, 在 ② 与 ④ 之间瞎选;<br>· 忘记「膨胀 = 体积增大」要沿循环运行方向判断。',
+      extension:'在同一张图上还能读出更多信息: 两条实线分属两个不同温度的等温线 — 离原点越远的等温线温度越高(同 V 下 P 更大)。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T2-3", type:"multi", score:14, difficulty:"较难", exportIds:["CARNOT-CYCLE-STRUCTURE","ADIABATIC-TV-RELATION"],
+      stem:"在 P-V 图上比较等温线与绝热线, 下列说法正确的是(多选):",
+      options:{A:"过同一状态点, 绝热线比等温线更陡",B:"绝热线与等温线本质上是同一族曲线, 只是画法约定不同",C:"卡诺循环中, 两段绝热过程把高温等温线与低温等温线连接起来",D:"循环沿运行方向经过绝热膨胀段后, 气体状态点落到了低温等温线上"},
+      answer:["A","C","D"],
+      explanation:{
+        principle:'等温线满足 PV = 常数; 绝热线满足 PV<sup>γ</sup> = 常数(γ > 1)。指数更大意味着体积变化时压强变化更剧烈 — 物理根源是: 绝热膨胀时没有热量补充, 气体靠消耗内能做功, 温度随之下降, 压强受「体积变大」与「温度下降」双重打压, 降得比等温时更快。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 双重打压 → 更陡;<br>· <strong>B 错</strong> — 两族曲线方程不同(PV = C 与 PV<sup>γ</sup> = C), 不是画法问题;<br>· <strong>C 正确</strong> — 这正是绝热段「温度切换器」的职责: 把循环从一条等温线送到另一条上;<br>· <strong>D 正确</strong> — 绝热膨胀结束时温度已切换到低温热源一侧, 状态点恰好落在低温等温线上, 等温压缩段才能接棒。',
+        connection:'<strong>上游</strong>: 绝热过程的第一定律分析(无热量补给、做功耗内能)。<strong>下游</strong>: 「更陡」保证闭环围出非零面积; 绝热线连接两条等温线的几何事实, 正是 T·V^(γ−1) = 常数 联立消去对数项的图像版本。'
+      },
+      mistakes:'· 以为绝热线与等温线平行或重合;<br>· 漏选 D — 没有意识到绝热膨胀的终点必须落在低温等温线上, 循环才能闭合。',
+      extension:'γ 的大小与分子自由度有关: 单原子气体 γ ≈ 1.67, 双原子 γ ≈ 1.4 — 绝热线「陡多少」因气体种类而异, 但「更陡」这件事对一切 γ > 1 的气体普适。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" },
+    { id:"T2-4", type:"fill", score:14, difficulty:"中等", exportIds:["SIGN-T-INDICES","CARNOT-CYCLE-STRUCTURE"],
+      stem:"本板块角标约定: T₁ 表示___温热源的温度(第 1 空, 填「高」或「低」); 卡诺循环一个周期由___个热力学过程组成(第 2 空, 填数字)。",
+      blanks:[{ answers:["高","高温"], score:7 },{ answers:["4","四","4个","四个"], score:7 }],
+      explanation:{
+        principle:'角标约定是<strong>高温在前</strong>: T₁ > T₂, 即 T₁ 是高温热源、T₂ 是低温热源(化学语境也常写 T_h > T_c, h = hot, c = cold)。结构上, 一个周期由四个过程组成: 两段等温 + 两段绝热, 交替衔接。',
+        logic:'第 1 空: 公式 η = 1 − T₂/T₁ 之所以必然小于 1 且为正, 正是因为约定了分子上的 T₂ 是较小的那个温度 — 角标记反, 效率会算出负数, 立即自相矛盾。第 2 空: 「把热取进来 — 把温度切过去 — 把热排出去 — 把温度切回来」四个职能各需一个过程, 缺一不可, 故为 4 个。',
+        connection:'<strong>上游</strong>: 角标约定贯穿 Card 2 至 Card 5 的所有公式。<strong>下游</strong>: 后续板块(熵、自由能)沿用同一约定, 现在记牢可避免将来代错公式。'
+      },
+      mistakes:'· 把 T₁ 当成「先遇到的温度」或「初始温度」而不是「高温」;<br>· 数过程个数时把「一周回到原点」也算成一个过程。',
+      extension:'为什么不干脆只用 T_h / T_c? 数字角标在长推导里书写更快, 但代价是必须全程记住「1 = 高温」这条约定 — 约定本身没有对错, 关键是前后一致。',
+      cardAnchor:"Card 4 组装卡诺循环" }
+  ],
+  T3: [
+    { id:"T3-1", type:"choice", score:14, difficulty:"基础", exportIds:["ISOTHERMAL-Q-EQUALS-W"],
+      stem:"卡诺循环的 A→B 段是温度 T₁ 下的等温膨胀: 气体从高温热源吸热 Q₁, 同时对外做功 W。对理想气体, Q₁ 与 W 的大小关系是:",
+      options:{A:"Q₁ &gt; W",B:"Q₁ = W",C:"Q₁ &lt; W",D:"条件不足, 无法比较"},
+      answer:"B",
+      explanation:{
+        principle:'理想气体的内能<strong>只由温度决定</strong>。等温过程温度不变 → 内能不变 → 由热力学第一定律 Q = ΔU + W = 0 + W = W。等温过程是「热 → 功」的全额中转站: 吸进多少热, 就原封不动做出多少功。',
+        logic:'若 Q₁ &gt; W, 多余的热量必须存进内能, 温度就会升高, 与「等温」矛盾; 若 Q₁ &lt; W, 差额要靠内能垫付, 温度会下降, 同样矛盾。唯一自洽的可能就是 Q₁ = W — 这不是巧合, 而是「等温 + 理想气体」两个条件联合锁死的结果。',
+        connection:'<strong>上游</strong>: 「内能只由温度决定」来自理想气体的微观图像(分子间势能可忽略)。<strong>下游</strong>: Q₁ = nRT₁·ln(V_B/V_A) 这一步直接用本题结论把吸热量换算成等温功, 是效率公式推导的第一块积木。'
+      },
+      mistakes:'· 凭直觉以为「吸了热总得留一点在气体里」, 忽略温度被热源锁定;<br>· 把该结论错误推广到非理想气体(真实气体内能还与体积有关)。',
+      extension:'这个「全额中转」性质使等温过程成为热功转换分析中最干净的环节 — 后续板块计算可逆过程的热量交换时, 等温段永远是最先被算清的。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" },
+    { id:"T3-2", type:"fill", score:14, difficulty:"中等", exportIds:["ISOTHERMAL-WORK"],
+      stem:"1 mol 理想气体在 T = 400 K 下做等温膨胀, 体积变为原来的 e ≈ 2.718 倍(即 ln(V₂/V₁) = 1)。取 R = 8.31 J/(mol·K), 该过程气体对外做的功 W = ___ J。",
+      blanks:[{ answers:["3324","3324J","约3324","≈3324","3324.0"], score:14 }],
+      explanation:{
+        principle:'等温功公式: W = nRT·ln(V₂/V₁)。它来自把 P = nRT/V 代入功的积分 W = ∫P dV, 而 ∫(1/V)dV = ln V — 对数不是凭空出现的, 是「压强一边膨胀一边减小」这一事实在积分里留下的痕迹。',
+        logic:'代入数值: W = 1 × 8.31 × 400 × ln(V₂/V₁) = 1 × 8.31 × 400 × 1 = <strong>3324 J</strong>。本题特意取体积比为 e, 让对数项等于 1 — 此时 W 数值上恰等于 nRT, 便于检验你是否真的在用对数而不是体积差。',
+        connection:'<strong>上游</strong>: 这是本板块唯一一处真正动用微积分的推导(Card 3)。<strong>下游</strong>: 把 W 写成 nRT·ln(比值) 后, 效率推导中两个对数项才有机会互相约去 — 没有这个公式形态, 后面的简洁结果不会出现。'
+      },
+      mistakes:'· 误用 W = PΔV(那是等压过程的公式, 等温过程压强一直在变);<br>· 忘记对数而直接用体积比乘 nRT;<br>· 单位混乱(R 用 8.31 时, 结果单位就是 J)。',
+      extension:'若体积翻倍(比值 2), 功是 nRT·ln2 ≈ 0.69nRT; 翻两倍(比值 4)也只有 ≈ 1.39nRT — 对数增长意味着「越膨胀, 继续膨胀赚的功越少」。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" },
+    { id:"T3-3", type:"choice", score:14, difficulty:"较难", exportIds:["ISOTHERMAL-Q-EQUALS-W","SIGN-QH-QC-POSITIVE"],
+      stem:"同学甲说:「卡诺循环的 C→D 段是等温过程, 等温就意味着什么都不变, 所以这一段既不做功、也不吸热放热。」对甲的说法, 评价正确的是:",
+      options:{A:"甲说得对, 等温过程中所有物理量都保持原值",B:"甲错了: 等温压缩时气体还要继续从冷源吸热",C:"甲基本正确, 只是结论要求气体必须是理想气体",D:"甲错了: 等温压缩时外界对气体做功, 气体同时向冷源放出等量的热"},
+      answer:"D",
+      explanation:{
+        principle:'「等温」只锁定一个量: 温度(从而锁定理想气体的内能)。P 在变、V 在变、热量与功都在交换 — 恰恰因为内能被锁死, 做功与传热必须<strong>一进一出、严格等量</strong>, 这是比「什么都不变」远为生动的图景。',
+        logic:'C→D 是压缩段: 沿运行方向体积减小, 外界对气体做功(气体对外做功为负)。若这些功无处可去, 内能会增加、温度会升高 — 但温度被冷源锁定, 所以气体必须同步把等量的能量以热的形式排给冷源。这正是 Q₂ 的来源。<strong>D 对</strong>; A 把「等温」夸大成「等一切」; B 方向反了; C 借「理想气体」给错误结论镀金。',
+        connection:'<strong>上游</strong>: 与 A→B 段的吸热分析完全对称, 只是方向反转。<strong>下游</strong>: 「必须向冷源排热」不是设计缺陷而是物理必然 — 这个事实将在效率上限与第二定律的讨论中反复登场。'
+      },
+      mistakes:'· 把「等温」错误等同于「无事发生」;<br>· 忘记压缩段的功由外界提供、热向冷源排出, 把方向搞反。',
+      extension:'放热段是循环「不得不付出的代价」: 没有它, 气体无法在低温侧被压回小体积, 循环就闭合不了 — 想完全省掉 Q₂, 正是第二定律宣判不可能的事。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" },
+    { id:"T3-4", type:"short", score:14, difficulty:"中等", exportIds:["ISOTHERMAL-Q-EQUALS-W","ISOTHERMAL-WORK"],
+      stem:"卡诺循环的 A→B 段中, 气体对外做了多少功, 就恰好从热源吸收了多少热(两者大小相等)。请解释这一相等关系为什么成立。(建议 60-120 字, 写出推理链条)",
+      keywords:["内能","温度","不变|为零|没有变化"],
+      explanation:{
+        principle:'推理链条共三环: ① A→B 是等温过程, 气体温度全程被高温热源锁定, 保持不变; ② 理想气体的内能只由温度决定, 温度不变 → 内能不变(ΔU = 0); ③ 由热力学第一定律 Q = ΔU + W, 得 Q = W — 吸热与做功必然等量。',
+        logic:'三环缺一不可: 只说「等温」而不提「内能只由温度决定」, 链条断在中间(真实气体等温膨胀时内能就会变); 只写第一定律而不说明 ΔU 为何是零, 等于没有解释。评分关键词对应的正是中间两环: 内能、温度、不变。',
+        connection:'<strong>上游</strong>: 「内能只由温度决定」是理想气体模型的核心性质。<strong>下游</strong>: 这一关系让吸热量可以直接用等温功公式表达, Q₁ = nRT₁·ln(V_B/V_A), 是效率公式推导的第一步。'
+      },
+      mistakes:'· 只答「因为是等温过程」就停笔, 缺少内能这一中间环节;<br>· 误以为吸热必然导致升温, 忽略热量可以全额转化为对外做的功。',
+      extension:'同样的三环链条反过来用在 C→D 段: 外界做功多少, 气体就放热多少 — 一条逻辑链, 覆盖循环里两段等温过程。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" }
+  ],
+  T4: [
+    { id:"T4-1", type:"choice", score:14, difficulty:"基础", exportIds:["ADIABATIC-TV-RELATION","CARNOT-CYCLE-STRUCTURE"],
+      stem:"卡诺循环的 B→C 段是绝热膨胀。这一过程中气体的温度将:",
+      options:{A:"升高",B:"降低",C:"保持原值",D:"条件不足, 无法判断"},
+      answer:"B",
+      explanation:{
+        principle:'绝热意味着 Q = 0: 气体与外界没有热量往来。但膨胀仍要对外做功, 这笔能量没有热源买单, 只能从气体自己的内能里支出 — 由第一定律 ΔU = Q − W = −W &lt; 0, 内能减少, 理想气体的温度随之下降。',
+        logic:'排除法: 升高(A)需要能量注入, 但 Q = 0 且气体还在花钱做功, 没有任何进项; 保持原值(C)要求做功的支出有热量补偿, 被「绝热」排除; D 不成立 — 「绝热 + 膨胀」两个条件已足够锁定方向。<strong>B 正确</strong>, 而且这正是循环设计的本意: 用这一段把气体温度从 T₁ 切换到 T₂。',
+        connection:'<strong>上游</strong>: 第一定律的直接应用。<strong>下游</strong>: 温度下降的定量版本就是 T·V^(γ−1) = 常数 — 它进一步告诉你体积膨胀多少倍、温度恰好降到多少。'
+      },
+      mistakes:'· 把「绝热」误解为「温度不变」(绝热锁的是热量通道, 不是温度);<br>· 忘记膨胀做功必须消耗内能。',
+      extension:'生活实例: 给自行车胎放气, 气流冲出时急速膨胀近似绝热, 阀门处明显变凉; 反过来打气时绝热压缩, 气筒发热。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" },
+    { id:"T4-2", type:"choice", score:14, difficulty:"中等", exportIds:["ADIABATIC-TV-RELATION","CARNOT-EFFICIENCY"],
+      stem:"把效率 1 − Q₂/Q₁ 化简成只含热源温度的形式时, 绝热关系 T·V<sup>γ−1</sup> = 常数 所起的关键作用是:",
+      options:{A:"证明等温膨胀阶段一定吸热",B:"用来计算整个循环运行所需的时间",C:"说明绝热过程中压强保持恒定",D:"把两段绝热过程联立, 得出两个体积比相等, 使 Q₁、Q₂ 中的对数项恰好约去"},
+      answer:"D",
+      explanation:{
+        principle:'推导的卡点在这里: Q₁ = nRT₁·ln(V_B/V_A), Q₂ = nRT₂·ln(V_C/V_D), 两个对数项看起来毫不相干。绝热关系是唯一能把它们勾连起来的桥 — 对两段绝热过程各写一条 T·V<sup>γ−1</sup> = 常数, 联立后得出两个体积比相等, 对数项相消, 比值 Q₂/Q₁ 干干净净只剩 T₂/T₁。',
+        logic:'各选项分析:<br>· <strong>A 错</strong> — 吸热结论来自等温段自身的第一定律分析, 不需要绝热关系;<br>· <strong>B 错</strong> — 整套推导从头到尾不涉及时间;<br>· <strong>C 错</strong> — 绝热过程压强变化剧烈, 恰恰不恒定;<br>· <strong>D 正确</strong> — 没有这一步, 效率只能停留在含四个体积的繁琐形式上。',
+        connection:'<strong>上游</strong>: T·V^(γ−1) = 常数 本身由第一定律加理想气体状态方程对绝热过程积分得到。<strong>下游</strong>: 对数项约去后效率只含温度 — 工质无关性与绝对温标的全部故事都从这一步的「干净」开始。'
+      },
+      mistakes:'· 知道结论却说不出绝热关系在推导链中的位置;<br>· 误以为对数项是「近似忽略」掉的, 而不是严格相消。',
+      extension:'推导中最值得回味的瞬间往往是「两个看似无关的部分突然咬合」 — 这里是两段绝热方程的联立; 在数学里, 这类瞬间常被称为结构的「合谋」。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T4-3", type:"choice", score:14, difficulty:"较难", exportIds:["ADIABATIC-TV-RELATION","CARNOT-EFFICIENCY"],
+      stem:"对卡诺循环的两段绝热过程 B→C 与 D→A, 分别写出 T₁·V<sub>B</sub><sup>γ−1</sup> = T₂·V<sub>C</sub><sup>γ−1</sup> 与 T₁·V<sub>A</sub><sup>γ−1</sup> = T₂·V<sub>D</sub><sup>γ−1</sup>。两式相除, 可以得到:",
+      options:{A:"V<sub>B</sub>/V<sub>A</sub> = V<sub>D</sub>/V<sub>C</sub>",B:"V<sub>B</sub>·V<sub>A</sub> = V<sub>C</sub>·V<sub>D</sub>",C:"V<sub>B</sub>/V<sub>A</sub> = V<sub>C</sub>/V<sub>D</sub>",D:"V<sub>B</sub> − V<sub>A</sub> = V<sub>C</sub> − V<sub>D</sub>"},
+      answer:"C",
+      explanation:{
+        principle:'两式相除时, 左边 T₁ 约去、右边 T₂ 约去, 剩下 (V<sub>B</sub>/V<sub>A</sub>)<sup>γ−1</sup> = (V<sub>C</sub>/V<sub>D</sub>)<sup>γ−1</sup>; 底数为正且指数相同非零, 故底数相等: V<sub>B</sub>/V<sub>A</sub> = V<sub>C</sub>/V<sub>D</sub>。',
+        logic:'注意分子分母的配对方向: 两条方程都是「T₁ 一侧 = T₂ 一侧」, 相除时 B 对 A、C 对 D, 得到的是<strong>膨胀比等于压缩比</strong>。选项 A 把 C、D 配反; B 把除法做成了乘法; D 的「差相等」从指数运算里根本推不出来。',
+        connection:'<strong>上游</strong>: 两条绝热方程分别描述循环里的「降温桥」与「升温桥」。<strong>下游</strong>: 这一比值相等让 Q₁、Q₂ 中的 ln(V_B/V_A) 与 ln(V_C/V_D) 严格相消, 效率立即化为 1 − T₂/T₁ — 本题就是推导的最后一块咬合齿轮。'
+      },
+      mistakes:'· 相除时配错对(把 V_C 放到分子、V_D 放到分母的位置弄混);<br>· 忘记从「(比值)^(γ−1) 相等」还需说明指数非零才能推出比值相等。',
+      extension:'几何解读: 这两条「桥」在 P-V 图上是平行的同族曲线, 它们把两条等温线截出的弧段比例锁定 — 代数上的比值相等, 就是几何上的「平行截割」。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T4-4", type:"short", score:14, difficulty:"中等", exportIds:["ADIABATIC-TV-RELATION"],
+      stem:"在 P-V 图上, 从同一个状态点出发分别画一条等温线和一条绝热线, 绝热线总是更陡。请从能量角度解释这是为什么。(建议 60-120 字)",
+      keywords:["内能|做功","温度","降低|下降|减小"],
+      explanation:{
+        principle:'比较两种膨胀: 等温膨胀有热源持续供热, 温度被托住不变, P 的下降只来自一个因素 — 体积增大; 绝热膨胀没有任何热量补给, 气体对外做功只能消耗自身内能, 温度随之下降。',
+        logic:'于是绝热膨胀时 P 受到<strong>双重打压</strong>: 体积增大摊薄了分子密度, 温度下降又削弱了每次碰撞的力度 — 两个因素同向叠加, P 比等温情形降得更快, 曲线自然更陡。反方向(压缩)同理: 绝热压缩时温度升高, P 上升也比等温更猛。',
+        connection:'<strong>上游</strong>: 「做功消耗内能 → 温度下降」是第一定律对绝热过程的直接结论。<strong>下游</strong>: 「更陡」保证了卡诺循环在 P-V 图上能围出非零面积 — 若两族线一样陡, 循环图形将退化, 净功为零。'
+      },
+      mistakes:'· 只背「PV^γ = C 指数更大」而给不出能量层面的原因;<br>· 漏掉「温度下降」这一关键中间环节, 只说「绝热所以更陡」。',
+      extension:'这个「双重打压」论证不依赖任何公式细节, 对一切气体成立 — 好的物理解释往往比公式更普适。',
+      cardAnchor:"Card 3 等温与绝热的物理本质" }
+  ],
+  T5: [
+    { id:"T5-1", type:"choice", score:14, difficulty:"基础", exportIds:["NET-WORK-FORMULA","SIGN-QH-QC-POSITIVE"],
+      stem:"卡诺循环运行一周: 气体从高温热源吸热 Q₁, 向低温热源放热 Q₂(两者均指大小), 对外输出净功 W<sub>net</sub> = Q₁ − Q₂。这个式子成立的根本依据是:",
+      options:{A:"循环一周后气体回到初始状态, ΔU = 0, 进出气体的能量必须收支平衡",B:"等温过程不吸收热量",C:"两段绝热过程吸收的热量恰好互相抵消",D:"Q₁ 与 Q₂ 的流动方向相同"},
+      answer:"A",
+      explanation:{
+        principle:'内能是<strong>状态量</strong>: 只看气体现在处于什么状态, 不问它走过什么路。循环一周回到出发点, 内能必然回到原值, 整圈的 ΔU = 0。于是第一定律对整圈说: 净流入的热(Q₁ − Q₂)必须恰好等于净流出的功(W<sub>net</sub>) — 收支平衡, 一分不差。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 「回到原点」是整个等式的全部依据;<br>· <strong>B 错</strong> — 等温段恰恰是吸热与放热的主战场;<br>· <strong>C 错</strong> — 绝热过程根本不交换热量(Q = 0), 谈不上「抵消」;<br>· <strong>D 错</strong> — 两者方向相反: Q₁ 流入气体, Q₂ 流出气体, 公式里的减号正源于此。',
+        connection:'<strong>上游</strong>: 「状态量绕一圈归零」的思想同样适用于压强、体积、温度。<strong>下游</strong>: W<sub>net</sub> = Q₁ − Q₂ 除以 Q₁ 就是效率定义式 η = 1 − Q₂/Q₁ — 本题等式是效率公式的母体。'
+      },
+      mistakes:'· 把依据错记成「能量守恒在每一段都成立」(对, 但用于整圈时关键是 ΔU 回零);<br>· 忽略 Q₂ 是「流出」的量, 在公式里把符号弄混。',
+      extension:'「绕一圈回零」是判断状态量的万能试金石 — 后续板块将用同样的办法检验一个新引入的量(如熵)究竟是不是状态量。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T5-2", type:"choice", score:14, difficulty:"中等", hasDiagram:true, exportIds:["CYCLE-WORK-EQUALS-AREA","NET-WORK-FORMULA"],
+      figureSvg:CARNOT_PV_AREA_SVG,
+      stem:"上图为卡诺循环的 P-V 图, 闭环内部画了阴影。阴影区域的面积所对应的物理量是:",
+      options:{A:"气体一个循环从高温热源吸收的总热量 Q₁",B:"气体一个循环中内能的总变化量",C:"气体一个循环对外输出的净功 W<sub>net</sub>",D:"低温热源在一个循环中得到的热量 Q₂"},
+      answer:"C",
+      explanation:{
+        principle:'P-V 图上「曲线下方的面积」= 该过程的功。循环的上半程(膨胀段)走高压路线, 曲线下面积大, 是气体对外做的功; 下半程(压缩段)走低压路线, 曲线下面积小, 是外界对气体做的功。两者相减, 剩下的恰是闭环围住的面积 — 即净功 W<sub>net</sub>。',
+        logic:'各选项分析:<br>· <strong>A 错</strong> — Q₁ 对应的是吸热段曲线下的面积, 比闭环面积大;<br>· <strong>B 错</strong> — 循环一周内能变化为零, 而阴影面积显然不为零;<br>· <strong>C 正确</strong> — 膨胀功减压缩功的几何余量;<br>· <strong>D 错</strong> — Q₂ 对应放热段曲线下的面积, 也不是闭环。',
+        connection:'<strong>上游</strong>: 「面积 = 功」继承自功的积分定义 W = ∫P dV。<strong>下游</strong>: 这给了循环优劣一个直观判据 — 闭环围得越「肥」, 每圈净功越多; 后续板块分析任何循环(不限卡诺)都沿用这把几何尺子。'
+      },
+      mistakes:'· 把闭环面积当成吸热量 Q₁;<br>· 忘记压缩段的功要从膨胀段的功里扣除, 误以为整条膨胀曲线下的面积就是净功。',
+      extension:'用这把尺子一眼可见: 在两条等温线给定后, 把循环画得「越宽」(体积比越大), 闭环越肥、每圈净功越多 — 但效率(净功 ÷ 吸热)反而保持不变, 面积与效率是两个独立的好坏指标。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T5-3", type:"multi", score:14, difficulty:"较难", exportIds:["SIGN-QH-QC-POSITIVE","NET-WORK-FORMULA"],
+      stem:"关于本板块对卡诺循环采用的符号约定, 下列说法正确的是(多选):",
+      options:{A:"Q₁ 与 Q₂ 都表示热量的大小, 取正值; 流入还是流出由文字方向另行说明",B:"W 表示气体对外界做的功, 气体膨胀时 W 为正",C:"在 W<sub>net</sub> = Q₁ − Q₂ 中, Q₂ 应当代入负数",D:"若某过程中外界对气体做功, 则该过程「气体对外做的功 W」记为负值"},
+      answer:["A","B","D"],
+      explanation:{
+        principle:'符号约定没有对错, 只有<strong>自洽</strong>。本板块的选择是: 热量 Q₁、Q₂ 一律记大小(正值), 方向交给文字描述; 功以「气体对外」为正方向。一旦选定, 所有公式的加减号都已替你记好方向, 代入时只管填大小。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 这正是「大小 + 方向分离」的约定;<br>· <strong>B 正确</strong> — 膨胀时气体推外界, 对外做功为正;<br>· <strong>C 错</strong> — 最经典的双重计负陷阱: 公式里的减号已经表达了「流出」, 再把 Q₂ 代成负数, 方向就被算反两次;<br>· <strong>D 正确</strong> — 外界做功即气体对外做负功, 这是同一约定的镜像表述。',
+        connection:'<strong>上游</strong>: 约定从 Card 4 推导开始全程生效。<strong>下游</strong>: 后续板块(熵、自由能)的公式继承同一套约定 — 现在不混, 将来不乱。'
+      },
+      mistakes:'· 双重计负: 公式已有减号, 又把数值代成负;<br>· 不同教材约定不同(有的以「外界对气体」为正), 混用两套约定互相打架。',
+      extension:'读任何教材先翻它的符号约定页 — 同一个物理事实, 在不同约定下公式的正负号可以完全相反, 但物理内容一字不差。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T5-4", type:"fill", score:14, difficulty:"中等", exportIds:["NET-WORK-FORMULA","SIGN-QH-QC-POSITIVE"],
+      stem:"某卡诺热机运行一个循环: 从高温热源吸热 Q₁ = 1000 J, 向低温热源放热 Q₂ = 600 J(均为大小)。该循环对外输出的净功 W<sub>net</sub> = ___ J。",
+      blanks:[{ answers:["400","400J","400焦","400焦耳"], score:14 }],
+      explanation:{
+        principle:'循环一周气体回到初态, ΔU = 0, 能量收支平衡: 流入的热量(1000 J)必须等于流出的热量(600 J)加上输出的净功。故 W<sub>net</sub> = Q₁ − Q₂ = 1000 − 600 = <strong>400 J</strong>。',
+        logic:'验算一致性: 这台热机的效率 η = W<sub>net</sub>/Q₁ = 400/1000 = 40%。能量三分账: 吸入 1000 J, 其中 400 J 变成了有用的功, 600 J 是为了让循环闭合而必须排给冷源的「过路费」。三个数严格满足 1000 = 400 + 600, 收支闭合。',
+        connection:'<strong>上游</strong>: 公式来自整圈 ΔU = 0 的第一定律分析。<strong>下游</strong>: 「三分账」图景(吸热 = 净功 + 排热)是理解效率上限的钥匙 — 排热那一份永远砍不到零, 这正是后续第二定律要解释的事。'
+      },
+      mistakes:'· 把 Q₂ 代成负数得出 1600 J(双重计负);<br>· 把 600 J 误当作净功(混淆「排出的热」与「输出的功」)。',
+      extension:'同样的收支账反着记就是制冷机: 外界输入功 W, 机器从低温处吸热 Q_c, 向高温处排热 Q_c + W — 公式同源, 方向全反。',
+      cardAnchor:"Card 4 组装卡诺循环" }
+  ],
+  T6: [
+    { id:"T6-1", type:"fill", score:16, difficulty:"基础", exportIds:["CARNOT-EFFICIENCY","SIGN-T-INDICES"],
+      stem:"一台卡诺热机工作在高温热源 500 K 与低温热源 350 K 之间。它的效率 η = ___ %(只填数字)。",
+      blanks:[{ answers:["30","30%","0.3","0.30"], score:16 }],
+      explanation:{
+        principle:'卡诺效率公式: η = 1 − T₂/T₁, 其中 T₁ 为高温热源、T₂ 为低温热源的温度, 且必须用绝对温度(K)。代入: η = 1 − 350/500 = 1 − 0.7 = 0.3 = <strong>30%</strong>。',
+        logic:'交叉验算: 由热温比关系, 每吸热 100 J 就必须向低温热源排出 100 × (350/500) = 70 J, 能变成净功的只有 30 J — 与公式结果一致。注意效率由两个温度的<strong>比值</strong>决定: 同样相差 150 K, 若热源是 1500 K 与 1350 K, 效率只有 10%。',
+        connection:'<strong>上游</strong>: 公式是四段过程逐段算账后约去对数项的最终结晶。<strong>下游</strong>: 它是一切真实热机的效率天花板, 也是绝对温标与第二定律讨论的起点。'
+      },
+      mistakes:'· 用摄氏度代入(公式只认 K);<br>· 把 T₂/T₁ 本身当成效率(算出 70% 的反向错误);<br>· 角标代反, 算出负值却不起疑。',
+      extension:'实际电厂蒸汽轮机两端温度约 800 K 与 300 K, 卡诺上限约 62%, 实际效率约 40% — 上限公式告诉工程师: 剩余的改进空间已经不大, 再砸钱要先掂量。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T6-2", type:"choice", score:16, difficulty:"中等", exportIds:["CARNOT-EFFICIENCY","EFFICIENCY-CEILING-THINKING"],
+      stem:"要提高一台卡诺热机的效率, 下列措施中有效的是:",
+      options:{A:"增加气缸中工作气体的量 n",B:"换用导热性能更好的气缸壁材料",C:"提高运转速度, 增加每分钟完成的循环数",D:"设法降低低温热源的温度 T₂"},
+      answer:"D",
+      explanation:{
+        principle:'效率公式 η = 1 − T₂/T₁ 里只有两个变量: 两个热源的温度。气体多少、缸壁材料、转速统统不出现在公式里 — 它们改变的是功率、成本、寿命, 唯独改变不了效率。',
+        logic:'各选项分析:<br>· <strong>A 错</strong> — n 在 Q₁ 与 W 中同比例放大, 相除后约去;<br>· <strong>B 错</strong> — 导热好坏影响循环快慢, 不影响每份热量的转化比例;<br>· <strong>C 错</strong> — 多转几圈, 每圈的效率依旧;<br>· <strong>D 正确</strong> — 减小 T₂/T₁ 这个比值只有两条路: 降低 T₂ 或升高 T₁, 这是公式允许的全部操作空间。',
+        connection:'<strong>上游</strong>: 「只由温度决定」正是工质无关性的体现。<strong>下游</strong>: 这解释了为什么动力工程的百年主线是「提高进汽温度 + 强化冷端冷却」 — 公式早已圈定了努力的方向。'
+      },
+      mistakes:'· 凭直觉认为「机器越好效率越高」, 忽略效率只认温度;<br>· 误以为转得快 = 效率高(那是功率, 不是效率)。',
+      extension:'升高 T₁ 与降低 T₂ 并不对称: T₂ 受环境温度托底(冷却水不可能比河水更冷), 而 T₁ 受材料耐温上限压顶 — 现实中两头都被夹住, 这正是效率提升步履维艰的原因。',
+      cardAnchor:"Card 5 卡诺定理 · 走向第二定律" },
+    { id:"T6-3", type:"fill", score:16, difficulty:"较难", exportIds:["HEAT-TEMPERATURE-RATIO","CARNOT-EFFICIENCY"],
+      stem:"某卡诺热机工作在 T₁ = 600 K 与 T₂ = 350 K 之间, 一个循环从高温热源吸热 Q₁ = 1200 J。它向低温热源放出的热量 Q₂ = ___ J。",
+      blanks:[{ answers:["700","700J","700焦","700焦耳"], score:16 }],
+      explanation:{
+        principle:'卡诺循环满足热温比关系: Q₂/T₂ = Q₁/T₁(它是效率公式的等价变形)。于是 Q₂ = Q₁ × T₂/T₁ = 1200 × 350/600 = <strong>700 J</strong>。',
+        logic:'第二条路验算: 先算效率 η = 1 − 350/600 = 250/600 ≈ 41.7%, 净功 W = ηQ₁ = 1200 × 250/600 = 500 J, 再由能量收支 Q₂ = Q₁ − W = 1200 − 500 = 700 J。两条路殊途同归, 答案可靠。',
+        connection:'<strong>上游</strong>: 热温比关系来自 Q₂/Q₁ = T₂/T₁ 的移项。<strong>下游</strong>: 把它改写成 Q₁/T₁ − Q₂/T₂ = 0, 就是「热量 ÷ 温度」绕一圈归零的雏形 — 后续板块将顺着这条线索发现一个新的状态量。'
+      },
+      mistakes:'· 误用 Q₂ = Q₁ × T₁/T₂ 把比值倒置(算出 2057 J, 比吸热还多, 应立即起疑);<br>· 跳过验算, 比值方向错了也没发现。',
+      extension:'判断比值方向的快捷法: 放给低温热源的热必定<strong>少于</strong>吸入的热(否则净功为负), 所以 Q₂ = Q₁ × (小温度/大温度), 乘的必须是小于 1 的比值。',
+      cardAnchor:"Card 4 组装卡诺循环" },
+    { id:"T6-4", type:"choice", score:16, difficulty:"中等", exportIds:["CARNOT-EFFICIENCY","HEAT-TEMPERATURE-RATIO","NET-WORK-FORMULA"],
+      stem:"关于两个效率表达式 η = 1 − Q₂/Q₁ 与 η = 1 − T₂/T₁, 下列说法正确的是:",
+      options:{A:"两式对任何热机都同时成立",B:"前者由效率定义加能量收支得到, 对任何热机成立; 后者只对卡诺(可逆)循环成立",C:"后者对任何热机成立, 前者只对卡诺循环成立",D:"两式互相矛盾, 实际使用时只能保留其中之一"},
+      answer:"B",
+      explanation:{
+        principle:'两个公式的「出身」不同: η = 1 − Q₂/Q₁ 只是效率定义 η = W<sub>net</sub>/Q₁ 加上收支平衡 W<sub>net</sub> = Q₁ − Q₂ 的改写, 对<strong>任何</strong>热机成立; 而把 Q₂/Q₁ 换成 T₂/T₁ 这一步, 用到了卡诺循环四段过程的具体推导 — 它只属于无摩擦、无限缓慢运行的理想(可逆)循环。',
+        logic:'真实热机中摩擦与快速运行造成额外耗散, 排往低温热源的热量比理想情形更多: Q₂/Q₁ &gt; T₂/T₁, 于是实际效率(按定义式算)低于温度式给出的值 — 温度式给出的是<strong>上限</strong>。两式不矛盾: 一个是「实际成绩」, 一个是「满分线」。',
+        connection:'<strong>上游</strong>: 温度式的成立条件正是 Card 4 推导中的全部理想化假设。<strong>下游</strong>: 「实际 Q₂/Q₁ 偏大」的量化, 正是后续板块引入不可逆性度量的切入口。'
+      },
+      mistakes:'· 把上限公式 1 − T₂/T₁ 套到一切真实热机头上, 高估效率;<br>· 看到两式数值不等就以为推导出了错。',
+      extension:'测一台真实热机的 Q₂/Q₁ 与 T₂/T₁ 的差距, 等于在测它「离理想有多远」 — 这个差距将来会被一个专门的物理量(熵的产生)精确接管。',
+      cardAnchor:"Card 4 组装卡诺循环" }
+  ],
+  T7: [
+    { id:"T7-1", type:"choice", score:16, difficulty:"基础", exportIds:["EFFICIENCY-CEILING-THINKING","WORKING-SUBSTANCE-INDEPENDENCE"],
+      stem:"卡诺定理的正确表述是:",
+      options:{A:"在相同的高温热源与相同的低温热源之间工作的所有热机中, 没有热机的效率超过卡诺热机",B:"卡诺循环是一切循环中效率最高的, 不需要任何附加条件",C:"任何热机的实际效率都恰好等于 1 − T₂/T₁",D:"只要工质选得足够好, 热机的效率就能达到 100%"},
+      answer:"A",
+      explanation:{
+        principle:'卡诺定理的灵魂在「<strong>相同的两个热源之间</strong>」这个限定语。效率上限由热源温度决定, 换一对温差更悬殊的热源, 一台普通热机完全可能比原来那台卡诺热机效率更高 — 去掉限定语的 A 因此不成立。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 同台竞技、无人超越, 这才是定理本义;<br>· <strong>B 错</strong> — 少了「相同热源之间」, 表述就从定理蜕变成流传甚广的误述;<br>· <strong>C 错</strong> — 1 − T₂/T₁ 是满分线不是人人的成绩单, 真实热机达不到它;<br>· <strong>D 错</strong> — 定理同时断言上限与工质无关, 「换好工质冲 100%」两头都错。',
+        connection:'<strong>上游</strong>: 定理是「找效率上限」之问的最终回答。<strong>下游</strong>: 「上限与工质无关」直接派生出绝对温标; 「上限小于 1」的普遍性直通第二定律。'
+      },
+      mistakes:'· 背成「卡诺循环效率最高」而丢掉热源限定条件;<br>· 把「效率上限」误读成「实际效率」。',
+      extension:'定理的经典证明是一则思想实验: 假设有热机超过卡诺热机, 让它驱动倒转的卡诺循环, 组合装置将凭空把热从低温搬往高温 — 与经验事实矛盾, 假设崩塌。',
+      cardAnchor:"Card 5 卡诺定理 · 走向第二定律" },
+    { id:"T7-2", type:"multi", score:16, difficulty:"中等", exportIds:["2ND-LAW-INTRODUCTION","BOUNDARY-2ND-LAW-FULL"],
+      stem:"热力学第二定律在本板块以两种表述初步引入。下列说法正确的是(多选):",
+      options:{A:"开尔文表述: 不可能从单一热源吸热并把它全部变为功, 而不产生其他影响",B:"克劳修斯表述: 热量可以自发地从低温物体传向高温物体",C:"两种表述实质等价: 违反其中一条, 就能构造出违反另一条的装置",D:"冰箱把热量从低温的箱内搬到高温的房间, 这违反了克劳修斯表述"},
+      answer:["A","C"],
+      explanation:{
+        principle:'两种表述各盯一类「做不到」: 开尔文表述禁止「吸热全变功而不留任何其他影响」(否则单一热源就是永动机的温床); 克劳修斯表述禁止「热量<strong>自发</strong>地从低温走向高温」。「自发」与「不产生其他影响」是各自的命门词, 丢了它们, 表述就从真理翻成谬误。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 关键限定语「不产生其他影响」在位;<br>· <strong>B 错</strong> — 恰好把「不能自发」说反了;<br>· <strong>C 正确</strong> — 两者可互相推出, 是同一条定律的两张面孔;<br>· <strong>D 错</strong> — 冰箱靠压缩机做功「押送」热量上行, 过程不是自发的, 与克劳修斯表述毫无冲突。',
+        connection:'<strong>上游</strong>: 卡诺循环「必须向冷源排热」的事实是第二定律最早的萌芽。<strong>下游</strong>: 本板块只引入两种文字表述; 完整的定量框架(包括不可逆性的度量)留给熵的物理意义板块建立。'
+      },
+      mistakes:'· 漏掉「自发」二字, 把克劳修斯表述理解成「热永远不能往高温走」;<br>· 把需要外界做功的制冷过程当成第二定律的反例。',
+      extension:'两种表述等价性的证明思路与卡诺定理如出一辙: 假设违反其一, 拼接一台卡诺装置, 立即制造出违反另一条的怪物 — 「归谬 + 组合装置」是这门学科的招牌证法。',
+      cardAnchor:"Card 5 卡诺定理 · 走向第二定律" },
+    { id:"T7-3", type:"choice", score:16, difficulty:"较难", exportIds:["WORKING-SUBSTANCE-INDEPENDENCE","BOUNDARY-MICRO-INTERPRETATION"],
+      stem:"卡诺效率 1 − T₂/T₁ 中完全不出现气体种类、分子细节等信息(工质无关性)。这一性质最深远的意义是:",
+      options:{A:"它让「温度」可以不依赖任何具体测温物质来定义 — 开尔文由此建立绝对温标",B:"它说明所有气体的微观结构其实都相同",C:"它说明效率与两个热源的温度也没有关系",D:"它只是数学上的巧合, 没有更深的物理含义"},
+      answer:"A",
+      explanation:{
+        principle:'此前一切测温都绑定具体物质(水银柱、气体体积), 物质不同, 刻度便有细微分歧。卡诺效率却给出一个与任何物质无关的、只由两个温度决定的比值 — 开尔文意识到: 可以反过来<strong>用这个比值来定义温度本身</strong>, 温标从此摆脱了对测温物质的依赖, 这就是绝对温标。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong> — 工质无关性 → 普适比值 → 温度的绝对定义, 环环相扣;<br>· <strong>B 错</strong> — 各种气体微观结构千差万别, 公式不含微观细节恰说明结论超越了这些差别; 至于为什么能超越, 其统计层面的解释不在本板块, 留给熵的物理意义板块;<br>· <strong>C 错</strong> — 公式里恰恰只剩温度, 怎会无关;<br>· <strong>D 错</strong> — 「巧合」一词低估了它: 这是温度概念的一次重铸。',
+        connection:'<strong>上游</strong>: 工质无关性由卡诺定理保证(若效率依赖工质, 两台不同工质的可逆热机将互相超越, 矛盾)。<strong>下游</strong>: 绝对温标是整座热力学大厦此后默认的坐标系。'
+      },
+      mistakes:'· 把「公式不含微观细节」误读成「微观细节不存在差别」;<br>· 只把工质无关性当成解题便利, 没看到它重新定义了温度。',
+      extension:'科学史上「从普适比值反向定义基本量」的再次上演: 光速对一切观察者相同 → 爱因斯坦反过来用光速重新定义了时间与空间的测量。',
+      cardAnchor:"Card 5 卡诺定理 · 走向第二定律" },
+    { id:"T7-4", type:"short", score:16, difficulty:"中等", exportIds:["EFFICIENCY-CEILING-THINKING","IDEAL-HEAT-ENGINE"],
+      stem:"卡诺热机的效率是同样两个热源之间一切热机的最高值, 但现实中没有任何汽车或电厂的发动机按完整的卡诺循环建造。请结合卡诺循环的运行方式解释原因。(建议 60-120 字)",
+      keywords:["慢|准静态|无限缓慢","功率|单位时间","可逆|平衡|摩擦|理想"],
+      explanation:{
+        principle:'卡诺循环的高效率有一个隐藏标价: 每一步都必须<strong>无限缓慢</strong>地、在近乎平衡的状态下进行(准静态 / 可逆), 任何加速、任何摩擦都会让效率跌离上限。',
+        logic:'无限缓慢意味着完成一个循环需要近乎无穷长的时间 — 每圈净功有限, 时间无穷, 则<strong>功率(单位时间输出的功)趋于零</strong>。一台「效率第一、功率为零」的发动机推不动任何汽车。实际工程于是反向取舍: 接受效率打折, 换取足够的功率。',
+        connection:'<strong>上游</strong>: 「无摩擦、无限缓慢」正是 Card 2 理想化假设清单里的成员 — 模型的力量与局限同源。<strong>下游</strong>: 效率与功率的权衡是真实热机设计的第一原理; 上限公式的价值不在「照着造」, 而在告诉工程师距离天花板还有多远。'
+      },
+      mistakes:'· 答成「因为造不出无摩擦的机器」 — 只触及次要原因, 漏掉功率为零这一致命伤;<br>· 混淆效率(每份热的转化率)与功率(每秒做功多少), 以为两者是一回事。',
+      extension:'有限时间热力学给出过著名的折中解: 在「最大功率」工作点上, 效率约为 1 − √(T₂/T₁) — 比卡诺上限低, 却更接近真实电厂的实测值。',
+      cardAnchor:"Card 5 卡诺定理 · 走向第二定律" }
+  ]
+};
+
+const SLUG = "carnot-cycle";
+const KEY_STATE = `mockcheck_${SLUG}_state`;
+let studentName = "student";
+let selectedQuestions = [];
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE)) || {}; } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+
+// 同案例互斥对: 防止同卷出现「一题题面 / 选项泄露另一题答案」或同一计算考两遍
+const EXCLUDE_PAIRS = [
+  ["T1-2","T3-4"],["T1-2","T4-4"],
+  ["T2-1","T4-1"],["T2-2","T4-3"],["T2-3","T4-1"],["T2-3","T4-4"],
+  ["T3-1","T4-4"],["T4-4","T6-2"],
+  ["T6-4","T7-1"],["T6-4","T7-4"]
+];
+function conflictsWithPicked(id, pickedIds) {
+  return EXCLUDE_PAIRS.some(p =>
+    (p[0] === id && pickedIds.includes(p[1])) || (p[1] === id && pickedIds.includes(p[0])));
+}
+function pickQuestions() {
+  selectedQuestions = [];
+  const pickedIds = [];
+  ["T1","T2","T3","T4","T5","T6","T7"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    const allowed = pool.filter(q => !conflictsWithPicked(q.id, pickedIds));
+    const pickPool = allowed.length ? allowed : pool;
+    const q = pickPool[Math.floor(Math.random() * pickPool.length)];
+    selectedQuestions.push(q);
+    pickedIds.push(q.id);
+  });
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: "instant" });
+  setTimeout(renderMath, 100);
+}
+
+function renderQuestions() {
+  const root = document.getElementById("question-list");
+  let html = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const diagTag = q.hasDiagram ? '<span class="q-meta diagram">📊 配图</span>' : '';
+    const typeLabel = q.type === "choice" ? "单选" : q.type === "multi" ? "多选" : q.type === "fill" ? "填空" : "简答";
+    html += `<div class="question" data-q-id="q${n}" data-q-type="${q.type}" data-q-original="${q.id}">
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeLabel}</span>
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        ${diagTag}
+        <span class="q-meta" style="background:#f8e7cf;color:#a35511;">${q.id}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      ${q.figureSvg || ""}
+      <div class="q-prompt">${q.stem}</div>
+      ${renderBody(q, n)}
+      <div class="q-feedback" hidden></div>
+    </div>`;
+  });
+  root.innerHTML = html;
+  attachListeners();
+}
+
+function renderBody(q, n) {
+  if (q.type === "choice") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "multi") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "fill") return `<div style="margin-top:10px;">${q.blanks.map((b, i) => `<span style="margin-right:18px;display:inline-block;">第 ${i+1} 空: <input type="text" class="q-blank" data-q-id="q${n}" data-blank-id="${i+1}" placeholder="数字或文字"></span>`).join("")}</div>`;
+  if (q.type === "short") return `<textarea class="q-short-input" rows="6" data-q-id="q${n}" placeholder="请分点作答(建议 80-180 字, 含必要的计算过程)"></textarea>`;
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "fill") document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`).forEach(el => el.addEventListener("input", updateAnsweredCount));
+    if (q.type === "short") { const el = document.querySelector(`textarea[data-q-id="${qid}"]`); if (el) el.addEventListener("input", updateAnsweredCount); }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "fill") return Array.from(document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x && x.length > 0)) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function normalizeFillin(s) {
+  return (s || "")
+    .replace(/[\s　]+/g, "")
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0))
+    .replace(/[₀-₉]/g, c => "0123456789"[c.charCodeAt(0) - 0x2080])
+    .replace(/[⁰-⁹]/g, c => "0123456789"[c.charCodeAt(0) - 0x2070])
+    .replace(/[−–—]/g, "-")
+    .toLowerCase();
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "fill") {
+    let total = 0;
+    q.blanks.forEach((blank, i) => {
+      const uv = normalizeFillin(ua?.[i]);
+      const ok = blank.answers.some(a => normalizeFillin(a) === uv);
+      if (ok) total += blank.score;
+    });
+    return { score: total, isCorrect: total === q.score };
+  }
+  if (q.type === "short") {
+    // E6: 比对前两侧都做空格归一化, 防止输入空格漏判
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => kw.split("|").some(k => text.includes(k.toLowerCase().replace(/\s+/g, ""))));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 1.0) score = q.score;
+    else if (ratio >= 0.5) score = q.score * 0.5;
+    return { score, isCorrect: ratio >= 1.0, hits };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x)) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 6) { if (!confirm(`已答 ${answered} / 7 题(< 85%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 掌握充分(90%+) — 推荐进入教师组织的真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔检测基础水平(70%+) — 可继续练习或申请真实检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回学习任务卡复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    const exportCounts = {};
+    wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
+    const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `<span class="q-export-label">${EXPORT_NAMES[id] || id}</span>(${n}题)`).join(" / ")}</small>` : "";
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
+  }
+
+  document.querySelectorAll(".question input, .question textarea").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const fbEl = document.querySelector(`[data-q-id="q${r.idx+1}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "fill") stdAns = q.blanks.map((b,i) => `第${i+1}空: ${b.answers[0]}`).join(" · ");
+  else if (q.type === "short") stdAns = `关键词: ${q.keywords.map(k => k.split("|").join(" 或 ")).join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})· 请对照解析自评`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-principle"><strong>🔬 涉及的核心原理</strong><div>${q.explanation.principle}</div></div>` +
+      `<div class="q-fb-row q-fb-logic"><strong>🧩 逻辑分析</strong><div>${q.explanation.logic}</div></div>` +
+      `<div class="q-fb-row q-fb-connection"><strong>🌐 知识系统中的位置</strong><div>${q.explanation.connection}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  fbEl.innerHTML = `
+    <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : (r.score > 0 ? '✗ 部分正确' : '✗ 答错')} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="carnot-cycle-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
+  `;
+  fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
+  fbEl.hidden = false;
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空, 通过记录保留(本练习不影响真实检测)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "carnot-cycle";
+  const MODULE_NAME = "卡诺循环";
+  const PRODUCT_TYPE = "mock-check";
+  const PRODUCT_LABEL = "基础检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitMock_checkApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitMock_checkAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

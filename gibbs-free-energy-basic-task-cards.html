@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吉布斯自由能 · 基础 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .deepening-recommendation {
+    background: linear-gradient(135deg, rgba(142, 68, 173, 0.06), rgba(142, 68, 173, 0.10));
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .deepening-recommendation .dr-title { font-size: 1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .deepening-recommendation .dr-title::before { content: '🔭'; font-size: 1.1rem; }
+  .deepening-recommendation strong { color: var(--accent-purple); }
+  .deepening-recommendation a { color: var(--accent-purple); text-decoration: underline; font-weight: 600; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>吉布斯自由能 · 基础 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>吉布斯自由能 · 基础</h1>
+    <div class="subtitle">把 ΔH 和 ΔS 合到一起 · 用一个统一判据预测任何反应的自发性</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>吉布斯自由能 · 基础（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>2-2.5 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>第二定律 · 基础</strong>（必读 —— 熵 S 的定性概念和自发方向的"统一判据 = 熵增"在本板块继续深化）<br><strong>盖斯定律</strong>（必读 —— 反应焓变 ΔH 的算法在本板块用作 ΔG 的一个组成部分）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；本板块用到的 ΔH 和 ΔS 数据可由前置板块的方法获得或从化学手册查表</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能陈述<strong>吉布斯自由能</strong>的定义 ΔG = ΔH − TΔS（等温等压条件下），并说出 ΔG 是状态量（由 ΔH、T、ΔS 都是状态量推出）</li>
+      <li>能用 <strong>ΔG 自发判据</strong>: ΔG &lt; 0 自发 / ΔG = 0 平衡 / ΔG &gt; 0 不自发（等温等压下）</li>
+      <li>能分析<strong>4 种 ΔH/ΔS 组合</strong>下的反应自发性：(a) ΔH&lt;0 ΔS&gt;0 任何温度自发 (b) ΔH&lt;0 ΔS&lt;0 低温自发 (c) ΔH&gt;0 ΔS&gt;0 高温自发 (d) ΔH&gt;0 ΔS&lt;0 任何温度不自发</li>
+      <li>能用<strong>转变温度 T<sub>转</sub> = ΔH/ΔS</strong> 找"自发与不自发的分界点"（ΔG = 0 处）</li>
+      <li>能在化学反应案例中应用（如 CaCO₃ 分解 / NH₄NO₃ 溶解 / 燃烧反应）分析自发性</li>
+      <li>能在物质相变案例中应用（如冰融化 / 水蒸发 / 水凝固）分析自发性，并解释为什么"0°C 是冰水转变临界点"</li>
+      <li>知道本板块到 ΔG = ΔH − TΔS <strong>公式应用</strong>为止：严格推导 + ΔG 与化学平衡常数 K 的关系（ΔG = −RT ln K）+ ΔG 与电池电动势 E 的关系（ΔG = −nFE）全部留给进阶 吉布斯自由能 板块</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>三个让"光看 ΔH"或"光看 ΔS"都答不上来的反常现象 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li><strong>同样吸热, 一个自发一个不自发</strong>: NH₄NO₃ 溶于水是<strong>吸热</strong>反应（ΔH &gt; 0, 约 +25.7 kJ/mol），室温下却自发；CaCO₃ 分解也是<strong>吸热</strong>反应（ΔH &gt; 0, +178.5 kJ/mol），但室温下完全不自发，必须烧到约 839°C 才发生。同是吸热, 为什么自发性完全相反？</li>
+      <li><strong>吸热却自发</strong>: 冰袋里的 NH₄NO₃ 溶于水时吸热（ΔH &gt; 0），按"放热才自发"的旧思维它不该自发溶解 —— 但实际上室温下一倒水就溶。为什么？</li>
+      <li><strong>临界点</strong>: 冰在 0°C 以下自发结成冰，0°C 以上自发融化成水。<strong>这个 0°C 是怎么从热力学算出来的</strong>？</li>
+    </ul>
+    <p style="margin-top: 6px;">这三个问题的共同点 —— <strong>单独看 ΔH 或单独看 ΔS 都不够</strong>。需要一个综合两者的判据。这就是<strong>吉布斯自由能 ΔG</strong>。</p>
+    <p class="hint">（提示: 系统倾向 ΔH &lt; 0（能量降低）+ 系统倾向 ΔS &gt; 0（熵增 / 无序度增大）。这两个倾向有时一致、有时冲突。冲突时谁说了算？温度 T 是调节二者权重的关键。）</p>
+  </div>
+
+  <div class="deepening-recommendation">
+    <div class="dr-title">本板块的"深化路径"推荐 — 学有余力的学生</div>
+    <p>本板块直接给出 ΔG = ΔH − TΔS 的公式应用，<strong>不做严格推导</strong>。如果你已掌握以下 <strong>3 个进阶板块</strong>（它们之间存在前置链 ——<strong>卡诺循环 → 状态函数 → 熵的物理意义</strong>），<strong>建议按顺序学完再回来读本板块</strong>，然后接着学进阶 吉布斯，你会从"公式应用"层升到"原理推导"层：</p>
+    <ol style="margin-left: 20px; margin-top: 4px;">
+      <li><a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a> —— 进阶链起点。严格推导卡诺效率 η = 1 − T₂/T₁</li>
+      <li><a href="state-functions-task-cards.html">状态函数与非状态函数（进阶）</a> —— 前置：卡诺循环。严格引入熵 S 的定义 dS = dQ<sub>可逆</sub>/T</li>
+      <li><a href="entropy-meaning-task-cards.html">熵的物理意义（进阶）</a> —— 前置：状态函数。玻尔兹曼公式 S = k<sub>B</sub> ln Ω + 熵增定律严格论证</li>
+    </ol>
+    <p style="margin-top: 6px;">在学完这 3 个进阶板块的基础上，<strong>吉布斯自由能 · 进阶</strong>（待建）会严格推 ΔG 的来源 + ΔG 与化学平衡常数 K（ΔG = −RT ln K）+ ΔG 与电池电动势 E（ΔG = −nFE）。</p>
+    <p style="margin-top: 6px;"><strong>没学进阶也完全可以学懂本板块</strong>（本板块自成体系，只要前置板块 第二定律基础 + 盖斯定律 学完即可）。深化是"扩展理解"，不是"必读前置"。</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>吉布斯自由能的定义 + ΔG 自发判据</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 引入 ΔG = ΔH − TΔS 的定义 → 理解 ΔG 综合 ΔH（能量）和 ΔS（熵）两个倾向的物理意义 → 掌握 ΔG 自发判据（&lt;0 自发 / =0 平衡 / &gt;0 不自发）<br>
+        <strong>建议时长</strong>: 50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>"放热反应一定自发" 这句话对吗？给出一个<strong>反例</strong>。</li>
+            <li>"熵增反应一定自发" 这句话对吗？给出一个<strong>反例</strong>。</li>
+            <li>既然 ΔH 和 ΔS 单独都不能判断自发性，那应该用什么综合？凭直觉猜一个形式。</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>先回顾（核心理论根基 ⭐）</strong>: 前置 <a href="second-law-basic-task-cards.html">第二定律 · 基础</a> 给出了"自发方向 = 熵增方向"的定性判据 ——但这个判据要求对<strong>孤立系统</strong>（不与外界交换能量）。<br>
+            实际化学反应通常发生在<strong>恒温恒压</strong>条件下（如大气压下、室温），系统与环境会换热、做体积功。这时<strong>系统自身的熵增不一定等于总熵增</strong>。本板块就是要给这个更现实场景下的<strong>统一判据</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">吉布斯自由能 ΔG = ΔH − TΔS</span></div>
+        <div class="step-content">
+          <p>对一个等温等压反应，定义<strong>吉布斯自由能变化</strong>:</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">吉布斯自由能定义 ΔG = ΔH − TΔS ⭐⭐</div>
+            <div class="step-line"><strong>形式</strong>: 把反应焓变 ΔH（系统能量变化，<a href="hess-law-task-cards.html">盖斯定律</a>给出算法）和系统熵变 ΔS（<a href="second-law-basic-task-cards.html">第二定律 · 基础</a>的定性概念）用<strong>温度 T 调节后</strong>组合: <strong>ΔG = ΔH − TΔS</strong>。</div>
+            <div class="step-line"><strong>为什么这样组合（物理图像）</strong>: 系统有两个"倾向" —— ① 能量降低（ΔH &lt; 0 偏好放热）+ ② 熵增加（ΔS &gt; 0 偏好无序度升）。温度 T 决定后者的"权重"。低温下能量项 ΔH 主导；高温下熵项 TΔS 主导。</div>
+            <div class="step-line"><strong>ΔG 也是状态量</strong>: 由 H、S 都是状态量 + T 是状态参数 → ΔG = ΔH − TΔS 只依赖始末态。</div>
+            <div class="step-line"><strong>本板块直接给定义</strong>: 严格推导（从第二定律 + 等温等压条件推出 ΔG ≤ 0 ⇔ 自发）留给 <a href="#deepening">进阶 吉布斯自由能</a> 板块。本板块用 ΔG 公式做反应自发性判断即可。</div>
+          </div>
+
+          <p><strong>物理意义</strong>: ΔG 是"<strong>系统在等温等压下能对外做的最大有用功</strong>"的变化量（对外做功为负 = 系统失去自由能 = 自发）。"自由"指的是"<strong>可以用来做有用功</strong>"的那部分能量。</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">ΔG = ΔH − TΔS（综合判据）</text>
+              <!-- ΔH 项 -->
+              <rect x="55" y="80" width="150" height="100" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="8"></rect>
+              <text x="130" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">ΔH</text>
+              <text x="130" y="132" text-anchor="middle" font-size="11" fill="#c0392b">能量项</text>
+              <text x="130" y="150" text-anchor="middle" font-size="9" fill="#34495e">系统偏好 ΔH &lt; 0</text>
+              <text x="130" y="165" text-anchor="middle" font-size="9" fill="#34495e">（能量降低 / 放热）</text>
+              <!-- "−" 符号 -->
+              <text x="225" y="135" text-anchor="middle" font-size="24" font-weight="700" fill="#34495e">−</text>
+              <!-- TΔS 项 -->
+              <rect x="245" y="80" width="150" height="100" fill="#eaf2fb" stroke="#0055B8" stroke-width="2" rx="8"></rect>
+              <text x="320" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#0055B8">TΔS</text>
+              <text x="320" y="132" text-anchor="middle" font-size="11" fill="#0055B8">熵项（带温度权重）</text>
+              <text x="320" y="150" text-anchor="middle" font-size="9" fill="#34495e">系统偏好 ΔS &gt; 0</text>
+              <text x="320" y="165" text-anchor="middle" font-size="9" fill="#34495e">（无序度升高）</text>
+              <!-- "=" 符号 -->
+              <text x="415" y="135" text-anchor="middle" font-size="24" font-weight="700" fill="#34495e">=</text>
+              <!-- ΔG 项 -->
+              <rect x="435" y="80" width="80" height="100" fill="#f5eafb" stroke="#8e44ad" stroke-width="2" rx="8"></rect>
+              <text x="475" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#8e44ad">ΔG</text>
+              <text x="475" y="138" text-anchor="middle" font-size="10" fill="#8e44ad">综合判据</text>
+              <text x="475" y="156" text-anchor="middle" font-size="9" fill="#34495e">ΔG &lt; 0</text>
+              <text x="475" y="170" text-anchor="middle" font-size="9" fill="#34495e">⇔ 自发</text>
+              <!-- 底部说明 -->
+              <text x="270" y="220" text-anchor="middle" font-size="11" fill="#34495e">温度 T 决定熵项的权重 —— 低温下 ΔH 主导，高温下 TΔS 主导</text>
+              <text x="270" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#8e44ad">ΔG = ΔH − TΔS</text>
+              <text x="270" y="258" text-anchor="middle" font-size="10" fill="#6e6e73">（等温等压下的自发判据）</text>
+            </svg>
+            <div class="diagram-caption">图 1 · ΔG = ΔH − TΔS 的结构图。左侧红色方框代表能量项 ΔH（系统偏好 ΔH &lt; 0，即放热）；中间蓝色方框代表熵项 TΔS（系统偏好 ΔS &gt; 0，即无序度增大），温度 T 在这里作为权重；右侧紫色方框代表综合判据 ΔG（ΔG &lt; 0 即自发）。三者由公式 ΔG = ΔH − TΔS 连接。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 为什么 ΔG 比单看 ΔH 或单看 ΔS 都好？</div>
+            <div class="tp-pause">驱动问题里的"同样吸热, 一个自发一个不自发"（NH₄NO₃ 溶解自发 vs CaCO₃ 分解不自发）—— 用 ΔG = ΔH − TΔS 重新分析它们，看 ΔG 怎么"修正"了单看 ΔH 的错误判断。</div>
+            <div class="tp-ask">两个反应都是 ΔH &gt; 0（吸热）+ ΔS &gt; 0（熵增）, 都属于组合 (c) <strong>高温自发</strong>。区别在 T<sub>转</sub> = ΔH / ΔS:<br>
+              ① <strong>NH₄NO₃ 溶于水</strong>: ΔH = +25.7 kJ/mol（吸热）+ ΔS = +108 J/(mol·K)（固态规则点阵 → 离子自由扩散, 熵增很大）。T<sub>转</sub> = +25.7×10³ / +108 ≈ <strong>238 K = −35°C</strong>。室温 298 K &gt; T<sub>转</sub> → TΔS ≈ +32.2 kJ/mol &gt; ΔH = +25.7 kJ/mol → ΔG &lt; 0 → 自发 ✓。<br>
+              ② <strong>CaCO₃ → CaO + CO₂</strong>: ΔH = +178.5 kJ/mol（强吸热）+ ΔS = +160.5 J/(mol·K)（1 mol 固体 → 1 mol 固体 + 1 mol 气体, 气体让熵大幅增）。T<sub>转</sub> = +178.5×10³ / +160.5 ≈ <strong>1112 K = 839°C</strong>。室温 298 K &lt; T<sub>转</sub> → TΔS ≈ +47.8 kJ/mol &lt; ΔH = +178.5 kJ/mol → ΔG &gt; 0 → 不自发 ✓; 必须烧到 839°C 以上才自发。<br>
+              <strong>核心收获</strong>: 同样吸热(组合 c) 的两个反应, 自发性的关键在 T 和 T<sub>转</sub> = ΔH/ΔS 的对比。ΔG 通过把 ΔH、ΔS 和 T 统一在一个公式里, 一举解决"光看 ΔH"无法判断的所有反常案例。</div>
+            <div class="tp-write">在纸上: ① 算两个反应各自的 T<sub>转</sub>；② 用 T &gt; T<sub>转</sub> 还是 T &lt; T<sub>转</sub> 判断室温自发性；③ 一句话总结"ΔG 比 ΔH 单独看的优势"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">ΔG 自发判据</span></div>
+        <div class="step-content">
+
+          <div class="quote-block" style="font-size: 1rem; padding: 16px;">
+            <strong>ΔG 自发判据（等温等压下）⭐⭐</strong><br>
+            <br>
+            · <strong>ΔG &lt; 0</strong> ⇔ 反应<strong>自发</strong>（正反应方向能发生）<br>
+            · <strong>ΔG = 0</strong> ⇔ 反应处于<strong>平衡</strong>（正逆反应速率相等 / 相变临界点）<br>
+            · <strong>ΔG &gt; 0</strong> ⇔ 反应<strong>不自发</strong>（正反应不能自发发生，但<strong>逆反应自发</strong>）<br>
+            <br>
+            （这里的"自发"和 <a href="second-law-basic-task-cards.html">第二定律 · 基础</a> 一致：不需要外力 / 不引起其他变化）
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · ΔG = 0 的物理意义</div>
+            <div class="tp-pause">"ΔG = 0 意味着反应处于平衡" —— 这是什么意思？反应是"停止了"还是"还在进行"？</div>
+            <div class="tp-ask">"平衡"<strong>不是反应停止</strong>，而是<strong>正逆反应速率相等</strong>，宏观上看不到净变化。<br>
+              · <strong>相变的平衡</strong>: 0°C 时水和冰共存（在隔绝外界下，固液比例不变，但实际上分子还在两相之间穿梭，只是数量相等）。<br>
+              · <strong>化学反应的平衡</strong>: 反应进行到一定程度后，[反应物] 和 [产物] 比例稳定（正反应消耗反应物 = 逆反应产生反应物，净变化为 0）。化学平衡的定量描述（平衡常数 K）<strong>留给后续板块</strong>。<br>
+              · <strong>"平衡"对应 ΔG = 0 是热力学最深的结论之一</strong>: 系统达到"最大化稳定性"的状态。</div>
+            <div class="tp-write">在纸上: ① 用"正逆速率相等"解释平衡 ≠ 停止；② 一句话总结"为什么 ΔG = 0 对应平衡"。</div>
+            <div class="tp-hint">本板块对"平衡"只到定性 ΔG = 0 这一层。严格的 ΔG° = −RT ln K（标准吉布斯自由能与平衡常数 K 的关系）+ 反应商 Q 与 ΔG 的关系留给进阶。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 · 完整的热力学判据体系</span></div>
+        <div class="step-content">
+          <p>到本板块为止，热力学有了<strong>完整的判据体系</strong>：</p>
+          <table class="compare-table">
+            <tr><th>定律</th><th>判据</th><th>管什么</th></tr>
+            <tr><td>第一定律</td><td>ΔU = Q − W（能量守恒）</td><td>能量"数量"是否守恒（能不能）</td></tr>
+            <tr><td>第二定律</td><td>孤立系统 ΔS ≥ 0（熵不减）</td><td>过程"方向"（会不会）</td></tr>
+            <tr><td><strong>本板块（吉布斯自由能）</strong></td><td><strong>等温等压下 ΔG &lt; 0 ⇔ 自发</strong></td><td><strong>现实条件下（等温等压）的统一判据</strong></td></tr>
+          </table>
+          <p>这就是为什么吉布斯自由能被称为<strong>化学反应自发性的"最终判据"</strong> —— 它对应于<strong>现实中最常见的反应条件</strong>（等温等压），并把第一定律的能量观、第二定律的熵增观<strong>统一</strong>到一个公式里。</p>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="g1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立写出吉布斯自由能定义 ΔG = ΔH − TΔS（等温等压条件下）</span></label>
+        <label data-key="g1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出 ΔG 是状态量（由 ΔH、T、ΔS 都是状态量推出）</span></label>
+        <label data-key="g1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写 ΔG 自发判据：ΔG &lt; 0 自发 / ΔG = 0 平衡 / ΔG &gt; 0 不自发（等温等压）</span></label>
+        <label data-key="g1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 ΔG 解释"放热但不自发"和"吸热却自发"两个反常现象</span></label>
+        <label data-key="g1c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"ΔG = 0 对应平衡"的物理意义（正逆反应速率相等）</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：物理判据 · 综合分析 · 自然观（自发性的统一描述）</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>4 种 ΔH/ΔS 组合 + 转变温度</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 按 ΔH 和 ΔS 的正负号分 4 种组合，分析各组合下的自发性 → 引入<strong>转变温度</strong>概念（ΔG = 0 时分界）→ 学会从 ΔH、ΔS 数据直接判断"任何温度自发 / 低温自发 / 高温自发 / 任何温度不自发"<br>
+        <strong>建议时长</strong>: 35-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">4 种组合分析</span></div>
+        <div class="step-content">
+          <p>用 ΔG = ΔH − TΔS，按 ΔH（+/−）和 ΔS（+/−）的<strong>4 种组合</strong>分析自发性：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 360" xmlns="http://www.w3.org/2000/svg">
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">4 种 ΔH/ΔS 组合 — 自发性分析</text>
+              <!-- 坐标轴 -->
+              <text x="270" y="65" text-anchor="middle" font-size="10" fill="#34495e">↑ ΔS（熵变）</text>
+              <text x="510" y="190" text-anchor="middle" font-size="10" fill="#34495e">→ ΔH</text>
+              <!-- 4 象限分割线(纵线在底部注释前终止) -->
+              <line x1="50" y1="190" x2="490" y2="190" stroke="#1d1d1f" stroke-width="1.5"></line>
+              <line x1="270" y1="80" x2="270" y2="300" stroke="#1d1d1f" stroke-width="1.5"></line>
+              <text x="40" y="200" text-anchor="end" font-size="10" fill="#6e6e73">O</text>
+              <!-- 象限 II: ΔH<0, ΔS>0 (左上) -->
+              <rect x="55" y="85" width="210" height="100" fill="#d4f1e0" stroke="#27ae60" stroke-width="2" rx="6"></rect>
+              <text x="160" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#27ae60">(a) ΔH &lt; 0, ΔS &gt; 0</text>
+              <text x="160" y="125" text-anchor="middle" font-size="10" fill="#27ae60">放热 + 熵增</text>
+              <text x="160" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#27ae60">✓ 任何温度自发</text>
+              <text x="160" y="160" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (−) − T(+) = 始终 &lt; 0</text>
+              <text x="160" y="175" text-anchor="middle" font-size="9" fill="#34495e">例: 2H₂ + O₂ → 2H₂O 部分情况</text>
+              <!-- 象限 I: ΔH>0, ΔS>0 (右上) -->
+              <rect x="275" y="85" width="210" height="100" fill="#fff5d6" stroke="#e67e22" stroke-width="2" rx="6"></rect>
+              <text x="380" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#e67e22">(c) ΔH &gt; 0, ΔS &gt; 0</text>
+              <text x="380" y="125" text-anchor="middle" font-size="10" fill="#e67e22">吸热 + 熵增</text>
+              <text x="380" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#e67e22">高温自发</text>
+              <text x="380" y="160" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (+) − T(+), T 大时 &lt; 0</text>
+              <text x="380" y="175" text-anchor="middle" font-size="9" fill="#34495e">例: CaCO₃ → CaO + CO₂</text>
+              <!-- 象限 III: ΔH<0, ΔS<0 (左下) -->
+              <rect x="55" y="195" width="210" height="100" fill="#e0e8f5" stroke="#0055B8" stroke-width="2" rx="6"></rect>
+              <text x="160" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#0055B8">(b) ΔH &lt; 0, ΔS &lt; 0</text>
+              <text x="160" y="235" text-anchor="middle" font-size="10" fill="#0055B8">放热 + 熵减</text>
+              <text x="160" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#0055B8">低温自发</text>
+              <text x="160" y="270" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (−) − T(−), T 小时 &lt; 0</text>
+              <text x="160" y="285" text-anchor="middle" font-size="9" fill="#34495e">例: H₂O(液) → H₂O(冰)（低温下）</text>
+              <!-- 象限 IV: ΔH>0, ΔS<0 (右下) -->
+              <rect x="275" y="195" width="210" height="100" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="6"></rect>
+              <text x="380" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">(d) ΔH &gt; 0, ΔS &lt; 0</text>
+              <text x="380" y="235" text-anchor="middle" font-size="10" fill="#c0392b">吸热 + 熵减</text>
+              <text x="380" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">✗ 任何温度不自发</text>
+              <text x="380" y="270" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (+) − T(−) = 始终 &gt; 0</text>
+              <text x="380" y="285" text-anchor="middle" font-size="9" fill="#34495e">逆反应(d→a)任何温度自发</text>
+              <!-- 底部注释 -->
+              <text x="270" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#34495e">(b) 和 (c) 存在"转变温度" T<tspan font-size="9" dy="3">转</tspan><tspan dy="-3"></tspan> = ΔH/ΔS（ΔG = 0 处）</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 按 ΔH（横轴）和 ΔS（纵轴）的正负号分 4 个象限，每个象限标注 (a)(b)(c)(d) 4 种组合。绿色 (a) 左上："放热 + 熵增"双重有利，任何温度自发。橙色 (c) 右上："吸热 + 熵增"，高温自发。蓝色 (b) 左下："放热 + 熵减"，低温自发。红色 (d) 右下："吸热 + 熵减"双重不利，任何温度不自发（但逆反应任何温度自发）。(b) 和 (c) 这两组合存在"转变温度" T<sub>转</sub> = ΔH/ΔS，是 ΔG = 0 自发与不自发的分界点。</div>
+          </div>
+
+          <table class="compare-table">
+            <tr><th>组合</th><th>ΔH</th><th>ΔS</th><th>自发性</th><th>例子</th></tr>
+            <tr><td>(a)</td><td>&lt; 0</td><td>&gt; 0</td><td>✓ 任何温度自发</td><td>2H₂ + O₂ → 2H₂O(g)（高温下还成立, 但 ΔS 会随温度变化, 简化分析）</td></tr>
+            <tr><td>(b)</td><td>&lt; 0</td><td>&lt; 0</td><td>低温自发（T &lt; T<sub>转</sub>）</td><td>水 → 冰（−ΔH 凝固放热, −ΔS 液态→固态熵减）</td></tr>
+            <tr><td>(c)</td><td>&gt; 0</td><td>&gt; 0</td><td>高温自发（T &gt; T<sub>转</sub>）</td><td>CaCO₃ → CaO + CO₂（+ΔH 分解吸热, +ΔS 1 mol 固体 → 1 mol 固体 + 1 mol 气体, 熵增）</td></tr>
+            <tr><td>(d)</td><td>&gt; 0</td><td>&lt; 0</td><td>✗ 任何温度不自发（但逆反应自发）</td><td>2NO → N₂ + O₂ 部分情况（吸热 + 熵减），逆反应 N₂ + O₂ → 2NO 才自发</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">转变温度 T<sub>转</sub> = ΔH/ΔS</span></div>
+        <div class="step-content">
+          <p>对组合 (b) 和 (c) —— ΔH 和 ΔS <strong>同号</strong>的情况，存在一个临界温度，让 ΔG 在这个温度恰好等于 0：</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">转变温度推导</div>
+            <div class="step-line"><strong>设 ΔG = 0</strong>: ΔH − TΔS = 0</div>
+            <div class="step-line"><strong>解 T</strong>: T<sub>转</sub> = ΔH / ΔS ⭐</div>
+            <div class="step-line"><strong>物理意义</strong>: 在 T<sub>转</sub> 时反应处于<strong>平衡</strong>。<br>
+              · 对组合 (b)（ΔH &lt; 0, ΔS &lt; 0）: T &lt; T<sub>转</sub> 时 ΔG &lt; 0（自发）, T &gt; T<sub>转</sub> 时 ΔG &gt; 0（不自发）<br>
+              · 对组合 (c)（ΔH &gt; 0, ΔS &gt; 0）: T &lt; T<sub>转</sub> 时 ΔG &gt; 0（不自发）, T &gt; T<sub>转</sub> 时 ΔG &lt; 0（自发）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 冰水转变 — 经典的 0°C</div>
+            <div class="tp-pause">水→冰的相变: ΔH = −6.01 kJ/mol（凝固放热）, ΔS = −22.0 J/(mol·K)（液→固熵减）。用 T<sub>转</sub> 公式算转变温度 T<sub>转</sub>。</div>
+            <div class="tp-ask">T<sub>转</sub> = ΔH / ΔS = −6.01 × 10³ J/mol / (−22.0 J/(mol·K)) = <strong>273.2 K = 0.05°C ≈ 0°C</strong>。<br>
+              <strong>物理意义</strong>: <br>
+              · T &lt; 0°C: 水→冰 ΔG &lt; 0, 自发结冰 ✓<br>
+              · T = 0°C: ΔG = 0, 冰水共存（"冻雨"的平衡态; 实验室中 0°C 的水和冰可以稳定共存而不变化）<br>
+              · T &gt; 0°C: 水→冰 ΔG &gt; 0, 不自发结冰; 反过来冰→水 ΔG &lt; 0, 冰自发融化 ✓<br>
+              <strong>0°C 不是一个"任意约定"</strong> —— 它是 ΔH 和 ΔS 的<strong>热力学算出来的</strong>转变温度 ⭐⭐。</div>
+            <div class="tp-write">在纸上: ① 算 T<sub>转</sub> = ΔH / ΔS（注意单位换算）；② 验证算出来 ≈ 273 K = 0°C；③ 一句话总结"为什么 0°C 是冰水转变临界点"。</div>
+            <div class="tp-hint">单位换算: 1 kJ = 1000 J。所以 ΔH = −6.01 kJ/mol = −6010 J/mol。然后 T<sub>转</sub> = −6010 / −22.0 = 273.2 K ≈ 273 K = 0°C ✓。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · CaCO₃ 分解 — 工业上为何要高温？</div>
+            <div class="tp-pause">水泥工业的关键反应: CaCO₃(s) → CaO(s) + CO₂(g)。给定 ΔH = +178.5 kJ/mol（吸热分解）, ΔS = +160.5 J/(mol·K)（1 mol 固体 → 1 mol 固体 + 1 mol 气体，气体让熵大幅增加）。算 T<sub>转</sub>，并解释工业上为什么必须高温烧 CaCO₃。</div>
+            <div class="tp-ask">T<sub>转</sub> = ΔH / ΔS = +178.5 × 10³ / +160.5 = <strong>1112 K ≈ 839°C</strong>。<br>
+              <strong>物理意义</strong>: <br>
+              · T &lt; 839°C: ΔG &gt; 0, 分解不自发 → CaCO₃ 稳定<br>
+              · T = 839°C: ΔG = 0, 反应在平衡点<br>
+              · T &gt; 839°C: ΔG &lt; 0, 分解自发 ✓<br>
+              所以水泥窑必须烧到 1000°C 以上（实际工业操作 1400-1500°C，部分是为了让反应充分快），让 CaCO₃ 自发分解 → 得到 CaO 作为水泥主成分。<br>
+              <strong>这就是 ΔG 在工业中的直接应用</strong>: 算 T<sub>转</sub> 可以给"反应需要多高温度才能进行"提供准确预测。</div>
+            <div class="tp-write">在纸上: ① 算 T<sub>转</sub>，验证 ≈ 1100 K；② 解释为什么工业生产温度高于 T<sub>转</sub>；③ 一句话总结"T<sub>转</sub> 在化工设计中的工程价值"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="g2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立画"ΔH 横轴 / ΔS 纵轴" 4 象限图，并在每个象限标注 4 种组合的自发性</span></label>
+        <label data-key="g2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写 4 种组合的判断：(a) ΔH&lt;0 ΔS&gt;0 任何温度自发 (b) ΔH&lt;0 ΔS&lt;0 低温自发 (c) ΔH&gt;0 ΔS&gt;0 高温自发 (d) ΔH&gt;0 ΔS&lt;0 任何温度不自发</span></label>
+        <label data-key="g2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 T<sub>转</sub> = ΔH/ΔS 算具体的转变温度（含单位换算 kJ → J）</span></label>
+        <label data-key="g2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能算冰水转变 T<sub>转</sub> ≈ 0°C 和 CaCO₃ 分解 T<sub>转</sub> ≈ 839°C 这两个经典例子</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：定量分析 · 工业应用 · 自然规律的数学化</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>综合应用 — 化学反应 + 物质相变 + 边界</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 将 ΔG 公式应用到多种实际场景 → 巩固 4 种组合 + 转变温度的判断 → 明确本板块的边界（不引入 ΔG = −RT ln K / ΔG = −nFE 等进阶内容）<br>
+        <strong>建议时长</strong>: 30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">化学反应自发性综合案例</span></div>
+        <div class="step-content">
+          <table class="compare-table">
+            <tr><th>反应</th><th>ΔH (kJ/mol)</th><th>ΔS (J/(mol·K))</th><th>组合 / 自发性 / T<sub>转</sub></th></tr>
+            <tr><td>2H₂(g) + O₂(g) → 2H₂O(l)</td><td>−571.6（强放热）</td><td>−327 (气→液, 熵减)</td><td>(b) 低温自发；T<sub>转</sub> ≈ 1748 K（≈ 1475°C）—— 室温（298 K）远低于 T<sub>转</sub>, ΔG 远小于 0, 强自发 ✓（"放热"是 ΔH 主导, 几乎压倒所有温度范围）</td></tr>
+            <tr><td>CaCO₃(s) → CaO(s) + CO₂(g)</td><td>+178.5（吸热）</td><td>+160.5（生气体, 熵增）</td><td>(c) 高温自发；T<sub>转</sub> ≈ 1112 K（≈ 839°C）—— 需要烧</td></tr>
+            <tr><td>NH₄NO₃(s) → NH₄⁺(aq) + NO₃⁻(aq)</td><td>+25.7（吸热）</td><td>+108（固→溶液, 熵增）</td><td>(c) 高温自发；T<sub>转</sub> ≈ 238 K（≈ −35°C）—— 室温下完全自发 ✓</td></tr>
+            <tr><td>N₂(g) + 3H₂(g) → 2NH₃(g)（合成氨）</td><td>−92.4（放热）</td><td>−198（4 mol 气 → 2 mol 气）</td><td>(b) 低温自发；T<sub>转</sub> ≈ 467 K（≈ 194°C）—— 工业反应需控温</td></tr>
+            <tr><td>金刚石 → 石墨</td><td>−1.9（微放热）</td><td>+3.4（结构差异）</td><td>(a) 任何温度自发 ✓ —— 但反应极慢（动力学屏障，常温下金刚石"稳定"）</td></tr>
+          </table>
+
+          <div class="quote-block">
+            <strong>"自发"≠ "马上发生"</strong>: ΔG &lt; 0 只意味着<strong>热力学上允许</strong>反应自发。但反应实际能否进行（多快、要多大活化能），由<strong>反应动力学</strong>决定 —— 这是另一回事。<br>
+            例: 金刚石 → 石墨 ΔG &lt; 0（自发），但室温下需要 <strong>10⁵⁰ 年以上</strong>才能感受到（动力学屏障）。这就是为什么"<strong>钻石恒久远</strong>"在人类观察尺度上成立 —— 热力学说"应该发生"，但动力学说"需要无穷长时间"。<br>
+            反应动力学（速率方程 / 活化能）留给后续的<strong>化学反应速率与化学平衡</strong>板块。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">物质相变综合案例</span></div>
+        <div class="step-content">
+          <table class="compare-table">
+            <tr><th>相变</th><th>ΔH (kJ/mol)</th><th>ΔS (J/(mol·K))</th><th>T<sub>转</sub></th></tr>
+            <tr><td>冰 → 水（融化）</td><td>+6.01（吸热）</td><td>+22.0（固→液, 熵增）</td><td>273 K = 0°C（标准大气压下）</td></tr>
+            <tr><td>水 → 冰（凝固）</td><td>−6.01（放热）</td><td>−22.0（液→固, 熵减）</td><td>273 K = 0°C（同上, 互为逆反应）</td></tr>
+            <tr><td>水 → 水蒸气（蒸发）</td><td>+40.7（吸热）</td><td>+109（液→气, 熵大幅增）</td><td>373.4 K ≈ 100.4°C（标准大气压下）</td></tr>
+            <tr><td>水蒸气 → 水（凝结）</td><td>−40.7（放热）</td><td>−109（气→液, 熵大幅减）</td><td>373.4 K ≈ 100°C（同上）</td></tr>
+            <tr><td>CO₂(s, 干冰) → CO₂(g)（升华）</td><td>+25.2（吸热）</td><td>+143（固→气, 熵大幅增）</td><td>≈ 176 K = −97°C（1 atm 下）</td></tr>
+          </table>
+
+          <p><strong>读表小结</strong>: 物质相变的 T<sub>转</sub> 都是日常熟悉的"<strong>沸点 / 熔点 / 升华温度</strong>"。这些不是任意约定 —— 都是热力学按 T<sub>转</sub> = ΔH/ΔS 算出来的。这就是为什么<strong>沸点 / 熔点是物质的固有性质</strong>。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 综合应用 — N₂ + 3H₂ → 2NH₃ 工业合成氨</div>
+            <div class="tp-pause">工业合成氨反应: N₂(g) + 3H₂(g) → 2NH₃(g), ΔH = −92.4 kJ/mol（放热）, ΔS = −198 J/(mol·K)（4 mol 气体 → 2 mol 气体, 熵减）。<br>
+              (a) 这是哪种组合？<br>
+              (b) 算 T<sub>转</sub>。<br>
+              (c) 按 T<sub>转</sub> 结果，理论上工业上应该用什么温度？<br>
+              (d) 但实际合成氨工业用约 450°C（723 K）的"<strong>中等</strong>温度"——为什么不用更低温（让 ΔG 更负）？
+            </div>
+            <div class="tp-ask">(a) ΔH &lt; 0, ΔS &lt; 0 → 组合 (b)，<strong>低温自发</strong>。<br>
+              (b) T<sub>转</sub> = ΔH / ΔS = −92400 / −198 = <strong>467 K = 194°C</strong>。<br>
+              (c) 理论上 T &lt; 194°C 时 ΔG &lt; 0，反应自发。低温越好。<br>
+              (d) <strong>这就是热力学 + 动力学 + 压力三重约束的拉锯战</strong>:<br>
+              · 热力学（ΔG &lt; 0）说: 低温好。但低温下反应速率极慢（动力学屏障），等不及反应完成。<br>
+              · 动力学说: 升温能让反应快（活化能容易越过）, 但 ΔG 会变正。<br>
+              · 工业实际: 450°C = 723 K &gt; T<sub>转</sub> = 467 K → 按 ΔG = ΔH − TΔS 严格算 ΔG ≈ +51 kJ/mol &gt; 0, <strong>表面上不自发</strong>。<br>
+              · 但工业还用<strong>高压(150-300 atm)</strong>! 反应方程 N₂ + 3H₂ → 2NH₃ 是 4 mol 气体 → 2 mol 气体（ΔS &lt; 0 = 气体减少）, 高压让气体减少方向有利（吕沙特列原理）, 把"严格 ΔG &gt; 0"重新拉回 ΔG &lt; 0。<br>
+              · 加上催化剂（铁）大幅降低活化能让反应快达平衡。<br>
+              <strong>三重组合</strong>: 中温(让动力学可行)+ 高压(让 ΔG 重新 &lt; 0)+ 催化剂(让反应快)。这是合成氨工业的精髓 —— 单看 ΔG 公式不够, 需要"<strong>压力对 ΔG 的修正</strong>"（本板块只到等温等压下的 ΔG 公式; 高压下 ΔG = ΔG° + RT ln Q 修正留给进阶 吉布斯）。<br>
+              <strong>(关于催化剂)</strong>: 催化剂不改变 ΔH、ΔS、ΔG 任何一个 —— 只降低活化能让反应快。这是反应动力学的内容（留给后续板块）。</div>
+            <div class="tp-write">在纸上: ① 算 T<sub>转</sub> = 467 K；② 解释为什么工业不用更低温度；③ 一句话总结"ΔG 给上限, 动力学给速度, 工业找妥协"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">边界 — 本板块到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: ΔG 从第二定律 + 等温等压条件的<strong>严格推导</strong> —— 留给进阶 吉布斯自由能 板块</li>
+            <li><strong>不引入</strong>: ΔG° = −RT ln K（标准吉布斯自由能与化学平衡常数 K 的定量关系）—— 留给进阶 吉布斯 + 待建化学平衡板块</li>
+            <li><strong>不引入</strong>: ΔG = −nFE（吉布斯自由能与电池电动势的关系）—— 留给进阶 吉布斯 + 待建电化学大主题</li>
+            <li><strong>不引入</strong>: 反应商 Q 与 ΔG 的关系 / 非标准 ΔG 表达 / 化学势 μ 的概念 —— 大学物化内容</li>
+            <li><strong>不引入</strong>: 反应动力学 / 速率方程 / 活化能 / 催化机制 —— 待建"化学反应速率与化学平衡"板块</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游连接</strong>: 本板块的 ΔG = ΔH − TΔS 是热力学大主题的<strong>判据收口</strong>。后续:
+            <ul style="margin-top: 6px;">
+              <li><strong>键能与反应焓变（基础, 待建）</strong>: 给 ΔH 的另一种算法（用键能数据），扩展本板块的输入</li>
+              <li><strong>燃烧热与中和热（基础, 待建）</strong>: ΔH 的两种特殊形式（完全燃烧 / 中和），扩展本板块在实验中的应用</li>
+              <li><strong>进阶 吉布斯自由能</strong>: 严格推导 + ΔG = −RT ln K + ΔG = −nFE，连接化学平衡和电化学</li>
+              <li><strong>化学反应速率与化学平衡（待建）</strong>: 用 K 描述平衡定量；用速率方程描述动力学</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="g3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 ΔG = ΔH − TΔS 分析 5 个化学反应（H₂ 燃烧 / CaCO₃ 分解 / NH₄NO₃ 溶解 / 合成氨 / 金刚石→石墨）的自发性</span></label>
+        <label data-key="g3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 T<sub>转</sub> 公式解释为什么"冰水转变在 0°C / 水沸腾在 100°C / 干冰升华在 −78°C"</span></label>
+        <label data-key="g3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"热力学自发（ΔG &lt; 0）"和"动力学可行（活化能小、反应快）"两个不同概念</span></label>
+        <label data-key="g3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用合成氨工业为例，解释"ΔG 给方向，动力学给速度，工业找妥协"的全图</span></label>
+        <label data-key="g3c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出本板块的边界 —— 不引入 ΔG 严格推导 / ΔG = −RT ln K / ΔG = −nFE，这些留给进阶板块</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：综合应用 · 工业判断 · 自然律与工程实践的链接</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 3 件事：(1) Card 1 思考点 1：用 ΔG = ΔH − TΔS 重新分析"放热不自发"（N₂ + O₂ → 2NO 常温）和"吸热自发"（NH₄NO₃ 溶解）两个反常案例；(2) Card 2 思考点 3 + 4：算冰水转变 T<sub>转</sub> ≈ 0°C 和 CaCO₃ 分解 T<sub>转</sub> ≈ 839°C 的完整推导（含单位换算）；(3) Card 3 思考点 5：合成氨工业的 T<sub>转</sub> + 动力学 + 催化剂的综合分析。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答：① 热力学体系到本板块为止有了"完整的判据三件套"（第一定律管能量、第二定律管方向、吉布斯管现实条件） —— 这种"用三个独立判据看世界"的体系性体验给你的物理思维有什么启发？② "0°C 不是任意约定，而是 ΔH/ΔS 算出来的转变温度" —— 这个认识是怎么改变你对"日常熟知的物理常数（沸点 / 熔点）"的看法的？</td></tr>
+      <tr><td>自评清单</td><td>所有 3 张卡的 checkpoint 都勾完。重点确认 Card 1（ΔG 自发判据）和 Card 2（4 种组合 + 转变温度）—— 这是化学反应自发性分析的核心。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15-20 分钟口试，准备用 <strong>3 分钟</strong> 清晰说出"吉布斯自由能 ΔG 为什么是化学反应自发性的最终判据"。</td></tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>: 本板块是热力学大主题的<strong>判据收口</strong>。ΔG = ΔH − TΔS 是化学反应分析的<strong>核心工具</strong> —— 必须熟记、会用、有手感。后续所有化学反应自发性问题都会用到。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="gibbs-free-energy-basic-mock-check.html">📝 基础检测</a>
+    <a href="gibbs-free-energy-basic-fluency-test.html">📈 熟练度检测</a>
+    <a href="gibbs-free-energy-basic-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 吉布斯自由能 · 基础（基础模块 · 2026-06-09 新立）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-gibbs-free-energy-basic-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

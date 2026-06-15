@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>卡诺循环 · 学习任务卡</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.85; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+
+  .section-title {
+    font-size: 1.15rem; font-weight: 700; color: var(--primary-blue);
+    margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--secondary-blue);
+  }
+
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 64, 154,0.06));
+    border-left: 4px solid var(--secondary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number {
+    background: rgba(255,255,255,0.2);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 700; flex-shrink: 0;
+  }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge {
+    background: var(--secondary-blue);
+    color: #fff;
+    font-size: 0.72rem; font-weight: 700;
+    padding: 2px 8px; border-radius: 4px;
+    white-space: nowrap; letter-spacing: 0.5px;
+  }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(142, 68, 173, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title {
+    font-size: 0.85rem; font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  .derivation-block .step-line {
+    margin: 8px 0;
+    padding-left: 14px;
+    border-left: 2px solid rgba(0, 64, 154, 0.2);
+  }
+  .derivation-block .step-line strong {
+    color: var(--secondary-blue);
+  }
+
+  /* 思考点：自己先想 + AI 对话 + 自己写 */
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title {
+    font-weight: 700;
+    color: var(--accent-orange);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .thinking-point .tp-pause {
+    background: rgba(255,255,255,0.7);
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: 8px 0;
+    font-size: 0.86rem;
+  }
+  .thinking-point .tp-pause::before {
+    content: '🤔 ';
+    margin-right: 4px;
+  }
+  .thinking-point .tp-ask {
+    background: rgba(0, 64, 154, 0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin: 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+  }
+  .thinking-point .tp-ask::before {
+    content: '💬 问 AI：';
+    font-weight: 700;
+    color: var(--secondary-blue);
+    margin-right: 4px;
+  }
+  .thinking-point .tp-write {
+    background: rgba(39, 174, 96, 0.06);
+    border-left: 3px solid var(--accent-green);
+    padding: 8px 12px;
+    border-radius: 0 6px 6px 0;
+    margin: 8px 0;
+    font-size: 0.86rem;
+  }
+  .thinking-point .tp-write::before {
+    content: '✍️ 自己写：';
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-right: 4px;
+  }
+  .thinking-point .tp-hint {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin: 6px 0 2px 0;
+  }
+
+  /* 示意图容器 */
+  .diagram-block {
+    margin: 18px 0;
+    text-align: center;
+  }
+  .diagram-block svg {
+    max-width: 100%;
+    height: auto;
+    background: #fafbff;
+    border-radius: 10px;
+    padding: 12px 8px;
+    border: 1px solid var(--border-color);
+  }
+  .diagram-caption {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    font-style: italic;
+  }
+
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 0.85rem; margin-bottom: 8px;
+    cursor: pointer; line-height: 1.5;
+  }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] {
+    margin-top: 4px; flex-shrink: 0;
+    accent-color: var(--accent-green);
+    width: 16px; height: 16px;
+  }
+  .checkpoint label.checked span {
+    text-decoration: line-through; color: var(--text-secondary);
+  }
+
+  .literacy-tag {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border-color);
+  }
+
+  .preview-card {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.04), rgba(142,68,173,0.06));
+    border: 1px solid rgba(142,68,173,0.15);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+  }
+  .preview-card .preview-title {
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--accent-purple);
+    margin-bottom: 12px;
+  }
+  .preview-card p { font-size: 0.9rem; margin-bottom: 10px; line-height: 1.7; }
+  .preview-card p:last-child { margin-bottom: 0; }
+  .preview-card .formula-highlight {
+    text-align: center; font-size: 1.2rem; margin: 16px 0;
+    color: var(--primary-blue); font-weight: 600;
+  }
+
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+    color: var(--secondary-blue); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500;
+    padding: 8px 14px; border-radius: 8px;
+    transition: background 0.2s;
+  }
+
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .derivation-block { padding: 14px 14px; font-size: 0.85rem; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>卡诺循环 · 学习任务卡</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>卡诺循环 · 学习任务卡</h1>
+    <div class="subtitle">从热机的能量浪费到效率上限</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>卡诺循环（Carnot Cycle）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>4&ndash;6 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td>热力学第一定律（基础）+ 理想气体内能的微观推导（进阶）；推荐先学完 第二定律 · 基础</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；建议手边备一张 P-V 图</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>理解蒸汽机时代的工程困境与卡诺为什么提出"理想热机"模型，区分"理想化"和"简单化"</li>
+      <li>掌握等温过程（Isothermal）与绝热过程（Adiabatic）的物理特征，能用第一定律分析每种过程的 \(Q\)、\(W\)、\(\Delta U\)</li>
+      <li>能从 \(PV=nRT\) 出发，用积分推导等温过程的功 \(W = nRT\ln(V_2/V_1)\)</li>
+      <li>理解卡诺循环的四个过程（A→B 等温吸热、B→C 绝热膨胀、C→D 等温放热、D→A 绝热压缩），能在 P-V 图上识别</li>
+      <li>能用 \(\sum\Delta U = 0\) 推导循环净功 \(W_{net} = Q_1 - Q_2\)</li>
+      <li>能推导卡诺效率公式 \(\eta = 1 - T_2/T_1\)，理解为什么效率上限与工质无关</li>
+      <li>理解卡诺定理的革命性意义，看见它如何引出热力学第二定律</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p><strong>为什么蒸汽机会浪费这么多能量？</strong></p>
+    <p>19 世纪初，蒸汽机改变了世界。但工程师们发现一个令人困惑的事实 —— 无论如何改进结构、选择何种工质，蒸汽机总会"浪费"掉大量燃料的能量。这浪费是工程问题，还是物理规律？</p>
+    <p>1824 年，一位法国年轻人卡诺（Sadi Carnot, 28 岁）提出了一个看似"无用"的理论 —— 他构造了一台<strong>不存在的</strong>理想热机，并用它推出了所有热机效率的上限。这台不存在的机器，奠定了整个热力学第二定律的基础。</p>
+    <p style="margin-top: 12px;">更深的问题：如果效率有上限，那个上限到底由什么决定？</p>
+    <p class="hint">（提示：你以为它会和"工质"、"结构"有关，但答案可能让你意外。）</p>
+    <p style="margin-top: 12px;">带着这些问题，开始下面的 5 张任务卡。</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>历史与问题：蒸汽机为什么浪费能量？</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解卡诺面对的真实工程问题；理解为什么物理学需要"理想化模型"；建立"找效率上限"这一思维方式<br>
+        <strong>建议时长</strong>：30-45 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>真实蒸汽机的能量去向大致是这样 —— 大部分燃料能量变成了"浪费"（散热 / 摩擦 / 排气），只有一小部分变成了有用功：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-loss" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#777"/></marker>
+                <marker id="ar-out" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"/></marker>
+              </defs>
+              <!-- Fuel input (left) -->
+              <rect x="40" y="90" width="100" height="60" fill="#fcebd2" stroke="#e67e22" stroke-width="2" rx="5"/>
+              <text x="90" y="116" text-anchor="middle" font-size="13" font-weight="bold" fill="#a45a0d">燃料能量</text>
+              <text x="90" y="135" text-anchor="middle" font-size="11" fill="#777">100%</text>
+              <!-- Engine in middle -->
+              <rect x="200" y="80" width="120" height="80" fill="#E6EEFF" stroke="#0055B8" stroke-width="2" rx="5"/>
+              <text x="260" y="115" text-anchor="middle" font-size="14" font-weight="bold" fill="#00409A">蒸汽机</text>
+              <text x="260" y="135" text-anchor="middle" font-size="10" fill="#555">(能量转换)</text>
+              <!-- Useful work output (right) -->
+              <rect x="380" y="60" width="100" height="40" fill="#d5f0dc" stroke="#27ae60" stroke-width="2" rx="5"/>
+              <text x="430" y="78" text-anchor="middle" font-size="12" font-weight="bold" fill="#1b6e3b">有用功 W</text>
+              <text x="430" y="92" text-anchor="middle" font-size="10" fill="#555">~20-40%</text>
+              <!-- Wasted heat (right, bottom) -->
+              <rect x="380" y="130" width="100" height="60" fill="#eaeaea" stroke="#888" stroke-width="2" rx="5"/>
+              <text x="430" y="155" text-anchor="middle" font-size="12" font-weight="bold" fill="#555">"浪费"的能量</text>
+              <text x="430" y="172" text-anchor="middle" font-size="10" fill="#777">~60-80%</text>
+              <text x="430" y="185" text-anchor="middle" font-size="9" fill="#777">(散热 / 排气 / 摩擦)</text>
+              <!-- Arrows -->
+              <line x1="142" y1="120" x2="198" y2="120" stroke="#e67e22" stroke-width="2.5" marker-end="url(#ar-loss)"/>
+              <line x1="322" y1="100" x2="378" y2="80" stroke="#27ae60" stroke-width="2.5" marker-end="url(#ar-out)"/>
+              <line x1="322" y1="140" x2="378" y2="160" stroke="#888" stroke-width="2.5" marker-end="url(#ar-loss)"/>
+              <!-- Question mark -->
+              <text x="260" y="220" text-anchor="middle" font-size="13" fill="#c0392b" font-weight="bold">为什么"浪费"这么多？是工程局限还是物理规律？</text>
+            </svg>
+            <div class="diagram-caption">真实蒸汽机的能量去向：只有 20-40% 变成有用功；其余以"散热、排气、摩擦"形式损失</div>
+          </div>
+
+          <p>在和 AI 对话之前，拿出纸笔，写下你的猜想：</p>
+          <ul>
+            <li>蒸汽机把煤的化学能变成机械能。你觉得这个过程能 100% 高效吗？为什么？</li>
+            <li>如果不能，被"浪费"的能量去哪儿了？（提示：用第一定律的视角想）</li>
+            <li>"理想化模型"和"简单化"有什么区别？为什么物理学家喜欢研究"不存在的理想热机"？</li>
+          </ul>
+          <div class="quote-block">
+            先自己想，哪怕想得很粗 —— 这个思考过程比直接听答案有用 10 倍。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 卡诺面对的工程困境</span></div>
+        <div class="step-content">
+          <p>把你写的东西发给 AI，依次问：</p>
+          <ol>
+            <li>"我对蒸汽机浪费能量的理解对吗？被浪费的能量在物理上去了哪里？"</li>
+            <li>"19 世纪初的工程师为什么<strong>不能</strong>通过优化结构把蒸汽机做到 100% 高效？这是工程局限还是物理定律？"</li>
+            <li>"卡诺为什么要构造一台'不存在的'理想热机？这个研究方法在物理学中叫什么？"</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键概念</strong>：理想化模型不是"近似的现实"，而是"找出极限"的工具。研究理想热机的目的不是用它，而是用它<strong>定义所有真实热机的上限</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">批判性思考 —— 找出 AI 回答里的不严谨</span></div>
+        <div class="step-content">
+          <p>AI 的回答里，有没有以下问题？</p>
+          <ul>
+            <li>AI 有没有把"低效"和"故障"混为一谈？真实蒸汽机就算没坏，效率也远低于 100%</li>
+            <li>AI 有没有解释清楚"为什么必须有热量散失到冷源"？还是只说"因为不可能 100% 高效"循环论证？</li>
+          </ul>
+          <div class="quote-block">
+            提示：第二个问题非常重要。这正是后面任务卡 4、卡 5 要回答的物理本质。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="c1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用自己的话解释为什么蒸汽机不可能 100% 高效</span></label>
+        <label data-key="c1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我理解"理想化模型"是用来定义上限的工具，不是近似现实</span></label>
+        <label data-key="c1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出卡诺研究"不存在的"理想热机的意义</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ③思辨力（批判 AI 回答） · ⑤学习力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>设计理想热机：需要哪几种过程？</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：自己推理出"理想热机必须有等温 + 绝热两种过程"的组合；理解"无限大热源"的理想化设定<br>
+        <strong>建议时长</strong>：40-60 分钟（STEP 1 要花足够时间自己想）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（10 分钟）</span></div>
+        <div class="step-content">
+          <p>一台热机要做的事 —— 从高温处吸热、做功、回到起点（"循环"才能持续工作）。下面是它的能量流图：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+                <marker id="ar-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"/></marker>
+                <marker id="ar-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"/></marker>
+              </defs>
+              <rect x="50" y="20" width="400" height="42" fill="#fef5dc" stroke="#b8860b" stroke-width="2" rx="4"/>
+              <text x="250" y="46" text-anchor="middle" font-size="14" fill="#8B6914" font-weight="bold">高温热源 T₁</text>
+              <rect x="180" y="115" width="140" height="80" fill="#E6EEFF" stroke="#0055B8" stroke-width="2" rx="6"/>
+              <text x="250" y="148" text-anchor="middle" font-size="15" font-weight="bold" fill="#00409A">热 机</text>
+              <text x="250" y="170" text-anchor="middle" font-size="11" fill="#555">（循环工作）</text>
+              <rect x="50" y="220" width="400" height="42" fill="#dee6f5" stroke="#0055B8" stroke-width="2" rx="4"/>
+              <text x="250" y="246" text-anchor="middle" font-size="14" fill="#00409A" font-weight="bold">低温冷源 T₂</text>
+              <line x1="250" y1="65" x2="250" y2="113" stroke="#c0392b" stroke-width="2.5" marker-end="url(#ar-red)"/>
+              <text x="265" y="95" font-size="13" fill="#c0392b" font-weight="bold">Q₁ 吸热</text>
+              <line x1="250" y1="197" x2="250" y2="217" stroke="#0055B8" stroke-width="2.5" marker-end="url(#ar-blue)"/>
+              <text x="265" y="215" font-size="13" fill="#0055B8" font-weight="bold">Q₂ 放热</text>
+              <line x1="320" y1="155" x2="420" y2="155" stroke="#27ae60" stroke-width="3" marker-end="url(#ar-green)"/>
+              <text x="370" y="145" text-anchor="middle" font-size="13" fill="#27ae60" font-weight="bold">W 净功</text>
+            </svg>
+            <div class="diagram-caption">热机的能量流：从高温热源吸 Q₁，对外做功 W，向低温冷源放 Q₂</div>
+          </div>
+
+          <p>不看任何参考资料，自己尝试设计 ——</p>
+          <ul>
+            <li>一个完整循环必须回到起点（同一个 P、V、T 状态）。你能想到几种"基本过程"组合成循环？</li>
+            <li>如果想让热机效率最高（每次吸的热尽可能多地变成功），哪几种过程最合适？</li>
+            <li>"等温过程"和"绝热过程"分别有什么特征？为什么这两种过程在热机里很重要？</li>
+          </ul>
+          <div class="quote-block">
+            <strong>脚手架</strong>：你已经学过四种基本过程 —— 等容（V 不变）、等压（P 不变）、等温（T 不变）、绝热（Q=0）。从效率角度想一想：哪两种最有用？为什么？<br><br>
+            这一步是整张任务卡里最难的"思考工作"。即使你想不全也没关系 —— 重点是你<strong>试图自己推</strong>，而不是直接看答案。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 引导式推理</span></div>
+        <div class="step-content">
+          <p>把你的设计草图发给 AI，<strong>不要让 AI 直接给答案</strong>。按以下顺序追问：</p>
+          <ol>
+            <li>"我设计了 [你的方案]。这个方案能持续工作吗？哪里有问题？" —— 让 AI 先评价你的方案</li>
+            <li>"如果一个过程中温度变化了，从能量角度看会发生什么？" —— 引导 AI 谈到 \(\Delta U\) 和功</li>
+            <li>"假设我希望从一个'高温热源'吸热的过程中温度<strong>不变</strong>，物理上要怎么实现？需要什么条件？" —— 引出"无限大热源"的概念</li>
+            <li>"假设我希望让气体的温度<strong>下降</strong>而不损失能量给外界，物理上要怎么实现？" —— 引出绝热过程</li>
+          </ol>
+          <div class="quote-block">
+            <strong>AI 协作风格说明</strong>：每一步都先<strong>说出你的猜测</strong>，再问 AI 验证。如果 AI 直接给答案（比如直接说"用等温+绝热"），请提醒它"我希望自己先推，请只用反问引导"。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">归纳 —— 为什么是"等温 + 绝热"的组合？</span></div>
+        <div class="step-content">
+          <p>等你和 AI 推到这个结论时，写下你自己的话来回答：</p>
+          <ul>
+            <li>为什么吸热和放热必须用<strong>等温</strong>过程？（用第一定律说出 \(Q\) 和 \(\Delta U\) 的关系）</li>
+            <li>为什么温度"切换"（从高温到低温、或反过来）必须用<strong>绝热</strong>过程？</li>
+            <li>"无限大热源"是什么意思？为什么我们需要这个理想化设定？</li>
+          </ul>
+          <div class="derivation-block">
+            <div class="derivation-title">关键推理（你应该能说出）</div>
+            <div class="step-line">等温吸热：\(T\) 不变 → 内能不变 \(\Rightarrow \Delta U = 0 \Rightarrow Q = W\)（吸的热<strong>全部</strong>用来做功）</div>
+            <div class="step-line">绝热切换：\(Q = 0\) → \(\Delta U = -W\)（系统对外做功，靠"消耗自己的内能" \(\Rightarrow T\downarrow\)）</div>
+            <div class="step-line"><strong>结论</strong>：等温段处理"热的进出"；绝热段处理"温度的切换"。两者必须组合 —— 缺一不可。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="c2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么"吸热/放热"用等温过程（\(\Delta U = 0\)，吸的热全做功）</span></label>
+        <label data-key="c2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么"温度切换"用绝热过程（\(Q=0\)，靠内能变化）</span></label>
+        <label data-key="c2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我理解"无限大热源"这个理想化设定的物理意义</span></label>
+        <label data-key="c2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我尝试自己设计过循环（不论对错），才看 AI 的引导</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ②创造力（自己设计循环） · ③思辨力 · ⑤学习力
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>等温与绝热过程的物理本质 · 等温功的微积分推导</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从 \(PV=nRT\) 出发，用积分推导等温过程的功 \(W = nRT\ln(V_2/V_1)\)；理解绝热过程的能量分析；这是后续推卡诺效率的<strong>数学基础</strong><br>
+        <strong>建议时长</strong>：60-90 分钟（STEP 2 推导耐心走完最重要 · 可分两次完成）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>想象一个带活塞的气缸 —— 气体在里面，活塞可以上下移动。下面是<strong>等温膨胀</strong>的过程示意（左：膨胀前；右：膨胀后）：</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e67e22"/></marker>
+                <marker id="ar-up" viewBox="0 0 10 12" refX="5" refY="0" markerWidth="9" markerHeight="11" orient="auto"><path d="M0,12 L5,0 L10,12 z" fill="#e67e22"/></marker>
+              </defs>
+              <!-- Cylinder 1 (initial · piston LOW · small gas volume) -->
+              <g transform="translate(70, 40)">
+                <!-- Cylinder body -->
+                <rect x="0" y="0" width="80" height="160" fill="#f0f7fb" stroke="#0055B8" stroke-width="2"/>
+                <!-- Piston rod sticking out top（短）-->
+                <rect x="32" y="78" width="16" height="22" fill="#888"/>
+                <!-- Piston bar at low position -->
+                <rect x="-4" y="100" width="88" height="6" fill="#666"/>
+                <!-- Gas molecules below piston (smaller region) -->
+                <circle cx="22" cy="120" r="4" fill="#00409A"/>
+                <circle cx="42" cy="115" r="4" fill="#00409A"/>
+                <circle cx="60" cy="125" r="4" fill="#00409A"/>
+                <circle cx="30" cy="140" r="4" fill="#00409A"/>
+                <circle cx="55" cy="148" r="4" fill="#00409A"/>
+                <circle cx="40" cy="135" r="4" fill="#00409A"/>
+                <text x="40" y="180" text-anchor="middle" font-size="13" font-weight="bold">V₁（小）</text>
+                <text x="40" y="198" text-anchor="middle" font-size="11" fill="#555">温度 T · 压强 P₁</text>
+              </g>
+              <!-- Arrow + label between cylinders -->
+              <line x1="170" y1="140" x2="290" y2="140" stroke="#e67e22" stroke-width="2.5" marker-end="url(#ar-orange)"/>
+              <text x="230" y="128" text-anchor="middle" font-size="13" fill="#e67e22" font-weight="bold">等温膨胀</text>
+              <text x="230" y="155" text-anchor="middle" font-size="11" fill="#777">活塞被推高 · 吸热 Q</text>
+              <!-- Cylinder 2 (final · piston HIGH · large gas volume · SAME cylinder dimensions) -->
+              <g transform="translate(310, 40)">
+                <!-- Cylinder body (SAME width and height as Cylinder 1) -->
+                <rect x="0" y="0" width="80" height="160" fill="#f0f7fb" stroke="#0055B8" stroke-width="2"/>
+                <!-- Piston rod sticking out top (long, because piston was pushed up) -->
+                <rect x="32" y="-30" width="16" height="50" fill="#888"/>
+                <!-- Piston bar at high position -->
+                <rect x="-4" y="20" width="88" height="6" fill="#666"/>
+                <!-- Up arrow above piston rod indicating motion -->
+                <text x="68" y="40" font-size="13" fill="#e67e22" font-weight="bold">↑</text>
+                <!-- Gas molecules below piston (larger region, more spread out) -->
+                <circle cx="20" cy="50" r="4" fill="#00409A"/>
+                <circle cx="55" cy="60" r="4" fill="#00409A"/>
+                <circle cx="35" cy="85" r="4" fill="#00409A"/>
+                <circle cx="60" cy="100" r="4" fill="#00409A"/>
+                <circle cx="25" cy="125" r="4" fill="#00409A"/>
+                <circle cx="50" cy="145" r="4" fill="#00409A"/>
+                <text x="40" y="180" text-anchor="middle" font-size="13" font-weight="bold">V₂ &gt; V₁</text>
+                <text x="40" y="198" text-anchor="middle" font-size="11" fill="#555">温度 T（不变）· P₂ &lt; P₁</text>
+              </g>
+            </svg>
+            <div class="diagram-caption">等温膨胀：气缸不变，活塞被推高 → 气体体积变大、压强变小，温度保持不变；过程中气体吸热并对外做功</div>
+          </div>
+
+          <p>试着回答：</p>
+          <ul>
+            <li>等温线（\(T\) 不变）在 P-V 图上是什么形状？为什么？</li>
+            <li>等温膨胀中，气体对外做功多少？吸的热多少？两者关系？</li>
+            <li>绝热膨胀（与外界没有热交换）中，温度会变吗？压强变化和等温有什么不同？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">自己推导 —— 等温过程的功</span></div>
+        <div class="step-content">
+          <p>这是本任务卡的核心推导。重点不是<strong>看到</strong>公式，而是<strong>自己推出来</strong>。下面 4 个思考点 —— 每一点先自己想 1 分钟，再与 AI 对话引导，再自己把推导写到纸上。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 等温条件下，P 能写成 V 的函数吗？</div>
+            <div class="tp-pause">把 \(PV = nRT\) 写出来。等温条件下，哪些是常量？哪些是变量？</div>
+            <div class="tp-ask">"等温条件下，\(PV = nRT\) 中哪些量是常量？我能不能把 \(P\) 表示成 \(V\) 的函数？请<strong>不要直接给公式</strong>，用反问引导我。"</div>
+            <div class="tp-write">基于 AI 的引导，把 \(P\) 写成 \(V\) 的函数。</div>
+            <div class="tp-hint">提示：\(n\)、\(R\) 是常数；\(T\) 等温条件下是常数；只有 \(P\) 和 \(V\) 在变。所以 \(P\) 可以解出来作为 \(V\) 的函数。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-axis-iso" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+              </defs>
+              <line x1="60" y1="280" x2="450" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-iso)"/>
+              <line x1="60" y1="280" x2="60" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-iso)"/>
+              <text x="460" y="285" font-size="14" font-weight="bold">V</text>
+              <text x="55" y="25" font-size="14" font-weight="bold">P</text>
+              <!-- Shaded area -->
+              <path d="M 110,280 L 110,90 Q 170,150 270,210 Q 330,245 360,255 L 360,280 Z" fill="rgba(0,64,154,0.15)"/>
+              <!-- Isotherm curve -->
+              <path d="M 90,70 Q 170,150 270,210 Q 330,245 420,260" stroke="#00409A" stroke-width="2.5" fill="none"/>
+              <!-- Points -->
+              <circle cx="110" cy="90" r="5" fill="#c0392b"/>
+              <text x="80" y="85" font-size="13" font-weight="bold" fill="#c0392b">P₁</text>
+              <circle cx="360" cy="255" r="5" fill="#c0392b"/>
+              <text x="370" y="252" font-size="13" font-weight="bold" fill="#c0392b">P₂</text>
+              <!-- Dashed projections -->
+              <line x1="110" y1="280" x2="110" y2="90" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+              <line x1="360" y1="280" x2="360" y2="255" stroke="#888" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="110" y="298" text-anchor="middle" font-size="12">V₁</text>
+              <text x="360" y="298" text-anchor="middle" font-size="12">V₂</text>
+              <!-- Labels -->
+              <text x="280" y="118" font-size="13" fill="#00409A" font-weight="bold">等温线（T 不变）</text>
+              <text x="280" y="135" font-size="11" fill="#555">P = nRT / V（反比双曲线）</text>
+              <text x="225" y="245" text-anchor="middle" font-size="13" fill="#0055B8" font-weight="bold">W = ∫P dV</text>
+              <text x="225" y="262" text-anchor="middle" font-size="10" fill="#555">（曲线下面积）</text>
+            </svg>
+            <div class="diagram-caption">等温过程在 P-V 图上是反比双曲线；功 W 等于曲线下面积</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 把功的定义和你刚才得到的 P(V) 结合</div>
+            <div class="tp-pause">功的定义是 \(W = \int_{V_1}^{V_2} P\,dV\)（这是力学里学过的，在 P-V 图上是曲线下面积）。你刚才得到的 \(P(V)\) 代进去会变成什么？</div>
+            <div class="tp-ask">"我把 P(V) 代入 \(W = \int P\,dV\)。常数能不能从积分里提出来？为什么？"</div>
+            <div class="tp-write">写出 \(W\) 的积分表达式 —— 它应该简化成一个常数乘以 \(\int \frac{1}{V}\,dV\) 的形式。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 计算这个积分</div>
+            <div class="tp-pause">你还记得 \(\int \frac{1}{V}\,dV\) 等于什么吗？</div>
+            <div class="tp-ask">"\(\int \frac{1}{V}\,dV\) 的原函数是什么？" （这是纯数学事实，AI 可以直接答）</div>
+            <div class="tp-write">用定积分的形式写出 \(W = \int_{V_1}^{V_2} \frac{1}{V}\,dV\) 的结果，再代回常数项。最终用 \(\ln\) 的形式表达。</div>
+            <div class="tp-hint">提示：定积分等于 \([\text{原函数}]_{V_1}^{V_2}\)。两个 \(\ln\) 相减可以合并成一个 \(\ln\) 的比。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 关键物理意义 —— Q 和 W 在等温过程中的关系</div>
+            <div class="tp-pause">你已经推出了 \(W\) 的表达式。但等温过程中 \(Q\) 和 \(W\) 是什么关系？回到第一定律：\(\Delta U = Q - W\)。等温过程的 \(\Delta U\) 是多少？</div>
+            <div class="tp-ask">"等温过程中，理想气体的内能 \(U\) 会变化吗？理由是什么？请<strong>不要直接说结果</strong>，用反问引导我从 \(U = \frac{3}{2}nRT\) 推出来。"</div>
+            <div class="tp-write">基于 AI 引导，自己推出 \(\Delta U = 0\)。然后用第一定律得到 \(Q\) 和 \(W\) 的关系。把最终公式完整写在纸上。</div>
+            <div class="tp-hint">这一步是整个推导的"灵魂" —— 数学推出了 \(W\)，但物理告诉我们 \(Q = W\)。两者合起来才是完整公式。<br><br>如果你不记得或没学过 \(U = \frac{3}{2}nRT\)（理想气体内能只与温度有关），先问 AI："请帮我推一下理想气体的内能为什么只和温度有关，并写出 \(U\) 关于 T 的公式"，再回到本思考点。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>整理</strong>：在纸上把【思考点 1-4】完整写一遍 —— 从 \(PV=nRT\) 到最终结论。然后用<strong>一句你自己的话</strong>解释这个公式的物理意义。<br><br>
+            如果你哪一步卡住了，问 AI 时记住格式："我推到 [写出你的当前状态]，下一步我该怎么想？" —— 不要问 "答案是什么"。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">绝热过程的能量分析</span></div>
+        <div class="step-content">
+          <p>绝热过程不像等温那么容易推完整公式（涉及 \(\gamma = C_p/C_v\)），但能量关系很清晰：</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">绝热过程的核心关系</div>
+            <div class="step-line"><strong>定义</strong>：与外界没有热交换 \(\Rightarrow Q = 0\)</div>
+            <div class="step-line"><strong>第一定律</strong>：\(\Delta U = Q - W = -W\)</div>
+            <div class="step-line"><strong>物理意义</strong>：系统对外做的功，<strong>全部</strong>来自内能的减少。
+              <ul>
+                <li>绝热膨胀（系统对外做功，\(W > 0\)）\(\Rightarrow \Delta U < 0 \Rightarrow T\downarrow\)</li>
+                <li>绝热压缩（外界对系统做功，\(W < 0\)）\(\Rightarrow \Delta U > 0 \Rightarrow T\uparrow\)</li>
+              </ul>
+            </div>
+            <div class="step-line"><strong>绝热曲线 vs 等温曲线</strong>：在 P-V 图上，绝热线比等温线更"陡" —— 因为膨胀时温度同时下降，压强下降得更快。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-axis-cmp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+              </defs>
+              <line x1="60" y1="280" x2="450" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-cmp)"/>
+              <line x1="60" y1="280" x2="60" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-cmp)"/>
+              <text x="460" y="285" font-size="14" font-weight="bold">V</text>
+              <text x="55" y="25" font-size="14" font-weight="bold">P</text>
+              <!-- Common starting point -->
+              <circle cx="110" cy="70" r="5" fill="#c0392b"/>
+              <text x="80" y="65" font-size="13" font-weight="bold" fill="#c0392b">起点</text>
+              <!-- Isotherm (less steep) -->
+              <path d="M 110,70 Q 200,160 290,225 Q 350,260 420,270" stroke="#0055B8" stroke-width="2.5" fill="none"/>
+              <text x="350" y="240" font-size="13" fill="#0055B8" font-weight="bold">等温</text>
+              <text x="350" y="256" font-size="10" fill="#555">T 不变</text>
+              <!-- Adiabat (steeper) -->
+              <path d="M 110,70 Q 160,200 230,255 Q 280,275 350,280" stroke="#8e44ad" stroke-width="2.5" fill="none" stroke-dasharray="6,3"/>
+              <text x="200" y="195" font-size="13" fill="#8e44ad" font-weight="bold">绝热</text>
+              <text x="200" y="212" font-size="10" fill="#555">温度下降</text>
+              <!-- Comparison note -->
+              <text x="240" y="310" text-anchor="middle" font-size="11" fill="#666">从相同起点出发膨胀，绝热曲线下降得更快</text>
+            </svg>
+            <div class="diagram-caption">等温 vs 绝热：同样膨胀到更大体积，绝热过程因为温度下降，压强降得比等温更快</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">批判性审查 —— 检验自己的理解</span></div>
+        <div class="step-content">
+          <p>问自己 ——</p>
+          <ul>
+            <li>等温过程中，"温度不变"的物理保证是什么？（提示：无限大热源）</li>
+            <li>如果一个过程既不是等温也不是绝热（比如等压加热），第一定律还能用吗？</li>
+            <li>\(W = nRT\ln(V_2/V_1)\) 这个公式，\(V_2 > V_1\) 时 \(W>0\) 表示什么？\(V_2 < V_1\) 时 \(W<0\) 又表示什么？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="c3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>独立</strong>推导 \(W = nRT\ln(V_2/V_1)\)（不看答案、闭眼能写出 5 步）</span></label>
+        <label data-key="c3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我理解为什么 \(Q = W\)（等温过程中 \(\Delta U = 0\)）</span></label>
+        <label data-key="c3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释绝热过程的核心：\(Q=0\)，靠内能变化做功</span></label>
+        <label data-key="c3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能在 P-V 图上画出等温线和绝热线，并说出哪条更陡</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：④数学建模（PV=nRT 转化为可积分形式） · ⑤学习力（独立推导）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 4 ==================== -->
+  <div class="task-card" id="task4">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">4</div>
+      <h3>组装卡诺循环 · 推导净功与效率公式</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把等温 + 绝热组装成卡诺循环的四个过程；推导循环净功 \(W_{net} = Q_1 - Q_2\)；推导卡诺效率 \(\eta = 1 - T_2/T_1\)<br>
+        <strong>建议时长</strong>：60-90 分钟（STEP 3 推导难度最高 · 可分两次完成）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">把四个过程组装起来</span></div>
+        <div class="step-content">
+          <p>把任务卡 2、3 学到的两种过程组合成<strong>一个完整循环</strong>：</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">卡诺循环的四个过程</div>
+            <div class="step-line"><strong>A → B</strong>：等温膨胀，温度 \(T_1\)（高温热源），气体从体积 \(V_A\) 膨胀到 \(V_B\)，<strong>吸热 \(Q_1\)</strong></div>
+            <div class="step-line"><strong>B → C</strong>：绝热膨胀，气体继续膨胀，但与热源隔绝；温度从 \(T_1\) <strong>下降到 \(T_2\)</strong></div>
+            <div class="step-line"><strong>C → D</strong>：等温压缩，温度 \(T_2\)（低温冷源），气体从 \(V_C\) 压缩到 \(V_D\)，<strong>放热 \(Q_2\)</strong> 给冷源</div>
+            <div class="step-line"><strong>D → A</strong>：绝热压缩，气体被进一步压缩，与冷源隔绝；温度从 \(T_2\) <strong>升回 \(T_1\)</strong>，回到起点 A</div>
+          </div>
+
+          <p>在 P-V 图上画出这四段，标出 A、B、C、D 四个点。每段标出：等温（\(T\) 不变）或绝热（\(Q=0\)），方向（膨胀 / 压缩），\(Q\) 或 \(W\) 的正负。</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-axis-c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker>
+              </defs>
+
+              <!-- Axes -->
+              <line x1="60" y1="330" x2="500" y2="330" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-c)"/>
+              <line x1="60" y1="330" x2="60" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#ar-axis-c)"/>
+              <text x="510" y="335" font-size="14" font-weight="bold">V</text>
+              <text x="55" y="25" font-size="14" font-weight="bold">P</text>
+
+              <!-- ① 闭环面积 = W_net 阴影（textbook 风格：清晰可见的 lens 形状）-->
+              <path d="M 110,70 C 167,155 223,158 280,175 C 333,212 387,253 440,280 C 360,275 240,267 190,215 C 163,170 137,150 110,70 Z"
+                    fill="rgba(39,174,96,0.20)" stroke="none"/>
+
+              <!-- ② P 轴参考线 -->
+              <line x1="60" y1="70" x2="110" y2="70" stroke="#ddd" stroke-width="1" stroke-dasharray="2,3"/>
+              <text x="55" y="73" text-anchor="end" font-size="10" fill="#666">P<tspan font-size="9" dy="3">A</tspan><tspan dy="-3"></tspan></text>
+              <line x1="60" y1="280" x2="440" y2="280" stroke="#ddd" stroke-width="1" stroke-dasharray="2,3"/>
+              <text x="55" y="283" text-anchor="end" font-size="10" fill="#666">P<tspan font-size="9" dy="3">C</tspan><tspan dy="-3"></tspan></text>
+
+              <!-- ③ 四段曲线（重画为标准教科书形态：D 明显低于 B，两条等温线清晰分离）-->
+              <!-- A → B (T_h isotherm)：双曲线，开始陡、结束缓 -->
+              <path d="M 110,70 C 167,155 223,158 280,175" stroke="#c0392b" stroke-width="2.8" fill="none"/>
+              <!-- B → C (adiabat)：比等温更陡 -->
+              <path d="M 280,175 C 333,212 387,253 440,280" stroke="#8e44ad" stroke-width="2.8" fill="none" stroke-dasharray="6,3"/>
+              <!-- C → D (T_c isotherm)：双曲线，开始近水平，逐渐加陡 -->
+              <path d="M 440,280 C 360,275 240,267 190,215" stroke="#0055B8" stroke-width="2.8" fill="none"/>
+              <!-- D → A (adiabat)：陡峭压缩 -->
+              <path d="M 190,215 C 163,170 137,150 110,70" stroke="#8e44ad" stroke-width="2.8" fill="none" stroke-dasharray="6,3"/>
+
+              <!-- ④ 四个状态点（textbook 标准排布：A 上左，B 右上，C 右下，D 中间偏下与 A 之间）-->
+              <circle cx="110" cy="70" r="6" fill="#c0392b"/>
+              <text x="92" y="63" font-size="17" font-weight="bold" fill="#c0392b">A</text>
+              <circle cx="280" cy="175" r="6" fill="#c0392b"/>
+              <text x="289" y="170" font-size="17" font-weight="bold" fill="#c0392b">B</text>
+              <circle cx="440" cy="280" r="6" fill="#0055B8"/>
+              <text x="449" y="285" font-size="17" font-weight="bold" fill="#0055B8">C</text>
+              <circle cx="190" cy="215" r="6" fill="#0055B8"/>
+              <text x="170" y="231" font-size="17" font-weight="bold" fill="#0055B8">D</text>
+
+              <!-- ⑤ T_h / T_c 标签直接标在等温线旁（textbook 经典做法）-->
+              <text x="210" y="130" font-size="14" fill="#c0392b" font-weight="bold" font-style="italic">T<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan></text>
+              <text x="335" y="298" font-size="14" fill="#0055B8" font-weight="bold" font-style="italic">T<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan></text>
+
+              <!-- ⑥ W_net 标签（清晰右上区域）+ 引线指向闭环中央 · v0.1.10 引线终点改到闭环重心 (320,220) 远离 B 点 -->
+              <text x="425" y="55" text-anchor="middle" font-size="15" fill="#1b6e3b" font-weight="bold">W<tspan font-size="9" dy="3">net</tspan><tspan dy="-3"></tspan></text>
+              <text x="425" y="72" text-anchor="middle" font-size="10" fill="#1b6e3b">= 闭环面积</text>
+              <line x1="400" y1="80" x2="320" y2="220" stroke="#1b6e3b" stroke-width="1.2" stroke-dasharray="3,2"/>
+
+              <!-- ⑦ Q_h 吸热箭头（A→B 段上方，从外界流入）· v0.1.10 标签移至顶部空白槽避免压曲线 -->
+              <line x1="170" y1="85" x2="190" y2="115" stroke="#c0392b" stroke-width="2" marker-end="url(#ar-axis-c)"/>
+              <text x="180" y="62" text-anchor="middle" font-size="11" fill="#c0392b" font-weight="bold">Q<tspan font-size="9" dy="3">h</tspan><tspan dy="-3"></tspan> 吸热</text>
+
+              <!-- ⑧ Q_c 放热箭头（C→D 段下方，从系统流出）· v0.1.10 标签左移并 anchor=end 避开箭头本体 -->
+              <line x1="370" y1="305" x2="390" y2="285" stroke="#0055B8" stroke-width="2" marker-end="url(#ar-axis-c)" transform="rotate(180 380 295)"/>
+              <text x="355" y="312" text-anchor="end" font-size="11" fill="#0055B8" font-weight="bold">Q<tspan font-size="9" dy="3">c</tspan><tspan dy="-3"></tspan> 放热</text>
+
+              <!-- ⑨ 循环方向 -->
+              <text x="65" y="180" font-size="12" fill="#27ae60" font-weight="bold">↻ 循环方向</text>
+              <text x="65" y="196" font-size="10" fill="#27ae60">A → B → C → D → A</text>
+
+              <!-- ⑩ V 轴参考线和标签 -->
+              <line x1="110" y1="330" x2="110" y2="70" stroke="#ddd" stroke-width="1" stroke-dasharray="2,3"/>
+              <line x1="190" y1="330" x2="190" y2="215" stroke="#ddd" stroke-width="1" stroke-dasharray="2,3"/>
+              <line x1="280" y1="330" x2="280" y2="175" stroke="#ddd" stroke-width="1" stroke-dasharray="2,3"/>
+              <line x1="440" y1="330" x2="440" y2="280" stroke="#ddd" stroke-width="1" stroke-dasharray="2,3"/>
+              <text x="110" y="348" text-anchor="middle" font-size="11" fill="#666">V<tspan font-size="9" dy="3">A</tspan><tspan dy="-3"></tspan></text>
+              <text x="190" y="348" text-anchor="middle" font-size="11" fill="#666">V<tspan font-size="9" dy="3">D</tspan><tspan dy="-3"></tspan></text>
+              <text x="280" y="348" text-anchor="middle" font-size="11" fill="#666">V<tspan font-size="9" dy="3">B</tspan><tspan dy="-3"></tspan></text>
+              <text x="440" y="348" text-anchor="middle" font-size="11" fill="#666">V<tspan font-size="9" dy="3">C</tspan><tspan dy="-3"></tspan></text>
+            </svg>
+            <div class="diagram-caption">卡诺循环 P-V 图（textbook 标准形态）：T<sub>h</sub>（红）和 T<sub>c</sub>（蓝）两条等温线清晰分离；紫色虚线为两条绝热线（比等温更陡）；闭环阴影面积 = 净功 W<sub>net</sub>；顺时针 A→B→C→D→A</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>关键观察</strong>：A→B 和 C→D 是两条等温线（分别在 \(T_1\) 和 \(T_2\)）；B→C 和 D→A 是两条绝热线。整个循环在 P-V 图上像一个"扁的眼睛"或"叶片"。围出的面积就是循环的<strong>净功</strong> \(W_{net}\)。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">自己推导 —— 循环净功</span></div>
+        <div class="step-content">
+          <p>跟着 3 个思考点走，自己推出 \(W_{net} = Q_1 - Q_2\)。每一点先自己想，再与 AI 对话，再自己写。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 整个循环的内能变化是多少？</div>
+            <div class="tp-pause">你在任务卡 3 学过：内能 \(U\) 是状态函数。循环最终回到起点 A，意味着什么？</div>
+            <div class="tp-ask">"内能是不是状态函数？如果一个系统经过一个闭合循环回到原状态，\(\sum \Delta U\) 是多少？请反问引导我得出结论。"</div>
+            <div class="tp-write">自己说出：\(\sum \Delta U = \Delta U_{AB} + \Delta U_{BC} + \Delta U_{CD} + \Delta U_{DA} = 0\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 每段的第一定律 + 加起来</div>
+            <div class="tp-pause">用第一定律 \(\Delta U = Q - W\) 写出 4 段，再把它们加起来。注意每段的 \(Q\) 和 \(W\) 的正负号 —— 哪些是吸热？哪些是放热？哪些是膨胀做功？哪些是压缩被做功？</div>
+            <div class="tp-ask">"我先把 4 段的第一定律列出来：<br>A→B 等温吸热 \(Q_1\)：\(\Delta U_{AB} = ?\)<br>B→C 绝热（\(Q=0\)）：\(\Delta U_{BC} = ?\)<br>C→D 等温放热 \(Q_2\)（注意 Q 的符号约定）：\(\Delta U_{CD} = ?\)<br>D→A 绝热（\(Q=0\)）：\(\Delta U_{DA} = ?\)<br>请帮我检查每段的 \(Q\)、\(W\) 符号约定，但<strong>不要直接给出最后结果</strong>。"</div>
+            <div class="tp-write">把 4 段 \(\Delta U\) 加起来令其等于 0，整理出 \(Q_1 - Q_2 = W_{net}\)。<br>提示：\(W_{net} = W_{AB} + W_{BC} + W_{CD} + W_{DA}\)（注意 \(W_{CD}\)、\(W_{DA}\) 是负值，因为压缩）。</div>
+            <div class="tp-hint">符号约定提示：本文用 \(W\) 代表系统<strong>对外</strong>做的功；膨胀 \(W>0\)，压缩 \(W<0\)。\(Q\) 代表系统<strong>吸收</strong>的热；吸热 \(Q>0\)，放热 \(Q<0\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 这个结论的物理意义</div>
+            <div class="tp-pause">你推出了 \(W_{net} = Q_1 - Q_2\)。这意味着什么？尝试自己说出 3 件事 ——</div>
+            <ul>
+              <li>"如果 \(Q_2 = 0\)（不放热），循环还能闭合吗？"</li>
+              <li>"为什么循环必须消耗外界能量？"</li>
+              <li>"100% 高效在物理上为什么不可能？"</li>
+            </ul>
+            <div class="tp-ask">"如果一台热机不向冷源放热（\(Q_2=0\)），物理上能闭合循环吗？为什么不能？请用反问引导我想清楚。"</div>
+            <div class="tp-write">用 2-3 句你自己的话写下"为什么循环必有放热，效率不能 100%"。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>整理</strong>：在纸上完整写一遍 \(W_{net} = Q_1 - Q_2\) 的推导（从 \(\sum \Delta U = 0\) 到最终结论）。这个结论是任务卡 5 "走向第二定律"的伏笔。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">自己推导 —— 卡诺效率 \(\eta = 1 - T_2/T_1\)</span></div>
+        <div class="step-content">
+          <p>你已经推出 \(W_{net} = Q_1 - Q_2\)。再走 4 个思考点就能得到效率公式 \(\eta = 1 - T_2/T_1\)。</p>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 定义效率</div>
+            <div class="tp-pause">"效率"是什么意思？热机的"输入"和"输出"分别是什么？</div>
+            <div class="tp-ask">"热机的效率定义是什么？是 \(W_{net}\) 除以哪个量？为什么不是除以 \(Q_2\)？"</div>
+            <div class="tp-write">自己写出 \(\eta = W_{net} / Q_1\)，代入 \(W_{net} = Q_1 - Q_2\) 化简成 \(\eta = 1 - Q_2/Q_1\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 用任务卡 3 的等温功公式算 Q₁ 和 Q₂</div>
+            <div class="tp-pause">A→B 是等温过程，温度 \(T_1\)。Q₁ 等于什么？（提示：用任务卡 3 推过的 \(Q = nRT\ln(V_2/V_1)\)）<br>C→D 是等温压缩，温度 \(T_2\)。Q₂ 等于什么？（注意取绝对值，因为 Q₂ 在我们的符号约定里代表"放热的量"）</div>
+            <div class="tp-ask">"任务卡 3 的等温功公式是 \(W = nRT\ln(V_2/V_1)\)。等温吸热 \(Q = W\)。我能不能用这个分别表达 Q₁ 和 Q₂？请帮我检查体积比的方向是否正确。"</div>
+            <div class="tp-write">自己写出：<br>\(Q_1 = nRT_1\ln(V_B/V_A)\)<br>\(Q_2 = nRT_2\ln(V_C/V_D)\)<br>计算比值 \(Q_2/Q_1 = \dfrac{T_2}{T_1} \cdot \dfrac{\ln(V_C/V_D)}{\ln(V_B/V_A)}\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 准备 —— 列出两段绝热过程的关系式</div>
+            <div class="tp-pause">现在的卡点是：体积比 \(\ln(V_C/V_D) / \ln(V_B/V_A)\) 是什么？我们要找到 V 之间的关系。线索：B→C 和 D→A 都是绝热过程，它们必有某个数学关系连接 \(T\) 和 \(V\)。</div>
+            <div class="tp-ask">"绝热过程中 \(T\) 和 \(V\) 满足什么关系式？请告诉我 \(TV^{\gamma-1} = \text{const}\) 这个公式（这一步可以直接给 —— 因为推导它需要微分方程，超出当前水平）。然后告诉我 \(\gamma\) 是什么（热容比，理想气体的常数）。"</div>
+            <div class="tp-write">把这两段绝热过程的关系分别写出来：<br>B→C 绝热（\(T_1 \to T_2\)）：\(T_1 V_B^{\gamma-1} = T_2 V_C^{\gamma-1}\)<br>D→A 绝热（\(T_2 \to T_1\)）：\(T_2 V_D^{\gamma-1} = T_1 V_A^{\gamma-1}\)</div>
+            <div class="tp-hint">注意：左边是起点的 \(TV^{\gamma-1}\)，右边是终点的 \(TV^{\gamma-1}\)。两段绝热过程，两个等式。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 用两个等式得出 V<sub>B</sub>/V<sub>A</sub> = V<sub>C</sub>/V<sub>D</sub></div>
+            <div class="tp-pause">现在你有两个等式：<br>① \(T_1 V_B^{\gamma-1} = T_2 V_C^{\gamma-1}\)<br>② \(T_2 V_D^{\gamma-1} = T_1 V_A^{\gamma-1}\)<br>你想消去 \(T_1\) 和 \(T_2\)，只留下 V 之间的关系。<strong>用什么代数操作？</strong>（提示：相除可以约掉相同因子）</div>
+            <div class="tp-ask">"我有两个绝热关系等式。如果我把它们相除（① 除以 ②，或反过来），\(T_1\) 和 \(T_2\) 能不能约掉？我会得到什么样的等式？请反问引导我尝试，不要直接给结果。"</div>
+            <div class="tp-write">把 ① 除以 ②（或 ② 除以 ①）。会得到 \(V_B^{\gamma-1}/V_A^{\gamma-1} = V_C^{\gamma-1}/V_D^{\gamma-1}\)。<br>两边同时开 \(\gamma-1\) 次方根（即两边同时乘以 \(1/(\gamma-1)\) 次方），得到：<br><strong>\(V_B/V_A = V_C/V_D\)</strong><br>这意味着 \(\ln(V_C/V_D) = \ln(V_B/V_A)\)，那个比值就约掉了。</div>
+            <div class="tp-hint">代数操作可能让人晕。如果你卡住了，问 AI："请展示一遍 \(\frac{V_B^{\gamma-1}}{V_A^{\gamma-1}} = \frac{V_C^{\gamma-1}}{V_D^{\gamma-1}}\) 怎么化简到 \(\frac{V_B}{V_A} = \frac{V_C}{V_D}\)，我自己跟着推一遍。"</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 化简到最终公式</div>
+            <div class="tp-pause">既然 \(V_B/V_A = V_C/V_D\)，那 \(\ln(V_B/V_A) = \ln(V_C/V_D)\)。回到思考点 2 的 \(Q_2/Q_1\) 比值，这个 \(\ln\) 的比就约掉了，剩下什么？</div>
+            <div class="tp-ask">"如果两个 \(\ln\) 相等，它们的比是 1。代回我的 \(Q_2/Q_1\) 表达式，化简之后是什么？我能不能进一步代回 \(\eta = 1 - Q_2/Q_1\)？"</div>
+            <div class="tp-write">自己写出最终公式：\(\eta = 1 - T_2/T_1\)。<br>整理：在纸上完整写一遍从思考点 1 到 5 的推导，<strong>不查任何资料</strong>。</div>
+          </div>
+
+          <div class="quote-block">
+            <strong>这个公式的革命性</strong> —— 请你在写完推导后，自己思考并回答以下三个问题（先自己想，再让 AI 验证）：
+            <ul style="margin-top: 8px;">
+              <li>效率公式只跟 \(T_1\) 和 \(T_2\) 有关，这意味着什么？</li>
+              <li>"与工质无关" —— 不管用水蒸气还是氨气，结果一样。为什么这件事很反常识？</li>
+              <li>\(T_2 = 0\)（绝对零度）才能 \(\eta = 1\)。但绝对零度不可达 —— 这告诉了我们什么？</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="c4c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能在 P-V 图上画出卡诺循环的四段，标出每段是等温还是绝热</span></label>
+        <label data-key="c4c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>独立</strong>推导 \(W_{net} = Q_1 - Q_2\)（用 \(\sum\Delta U = 0\)）</span></label>
+        <label data-key="c4c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能<strong>独立</strong>推导 \(\eta = 1 - T_2/T_1\)（包括用绝热关系证 \(V_B/V_A = V_C/V_D\)）</span></label>
+        <label data-key="c4c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释为什么这个公式与工质无关</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：④数学建模 · ⑤学习力（多步推理） · ③思辨力（理解"上限"的物理意义）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 5 ==================== -->
+  <div class="task-card" id="task5">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">5</div>
+      <h3>卡诺定理 · 走向第二定律</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：理解卡诺定理的革命性意义（效率上限与工质无关）；看见它如何引出热力学第二定律；理解温度的"绝对意义"<br>
+        <strong>建议时长</strong>：45-60 分钟（本卡多为概念思辨，无重数学）
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>回到任务卡 4 末尾的结论：\(\eta = 1 - T_2/T_1\)，这个公式只跟 \(T_1\) 和 \(T_2\) 有关。停下来想：</p>
+          <ul>
+            <li>"与工质无关"意味着什么？为什么这件事很<strong>反常识</strong>？</li>
+            <li>这个公式告诉我们，提高热机效率有几种方式？哪种最有效？</li>
+            <li>如果 \(T_2 = T_1\)（高温热源等于低温冷源），效率会怎么样？这意味着什么？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">与 AI 对话 —— 卡诺定理</span></div>
+        <div class="step-content">
+          <p>把你的猜想发给 AI，依次问：</p>
+          <ol>
+            <li>"卡诺定理(Carnot's Theorem)的完整表述是什么？它和卡诺效率公式是什么关系？"</li>
+            <li>"为什么<strong>任何</strong>真实热机的效率都不会超过卡诺效率？这个'不超过'是物理规律还是工程经验？"</li>
+            <li>"卡诺定理证明的关键思路是什么？（提示：反证法 —— 假设有比卡诺效率高的热机会推出什么矛盾？）"</li>
+          </ol>
+          <div class="quote-block">
+            <strong>关键概念</strong>：卡诺定理不是说"卡诺循环是最高效的"—— 它说的是"任何在两个温度 \(T_1\) 和 \(T_2\) 之间工作的热机，效率都不超过 \(1 - T_2/T_1\)"。这是一个<strong>普适</strong>结论，不依赖于热机的具体设计。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">温度的绝对意义</span></div>
+        <div class="step-content">
+          <p>继续问 AI：</p>
+          <ol>
+            <li>"卡诺效率公式中的 \(T_1\) 和 \(T_2\) 是绝对温度（开尔文）。为什么不能用摄氏度？"</li>
+            <li>"既然效率只与温度比有关，那温度本身的'零点'有什么物理意义？是任意定义的吗？"</li>
+            <li>"如果 \(T = 0\) 意味着 \(\eta = 1\)（100% 效率），但<strong>绝对零度不可达</strong>，这两件事如何相互印证？"</li>
+          </ol>
+          <div class="quote-block">
+            提示：这一连串问题指向了一个深刻的事实 —— <strong>热力学定义了一个绝对的温度尺度</strong>（基于热机效率），它独立于任何特定的物质（水的冰点、沸点之类）。这正是 1848 年开尔文（Lord Kelvin）从卡诺工作中推出绝对温标的依据。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">走向第二定律</span></div>
+        <div class="step-content">
+          <p>卡诺循环和卡诺定理引出了热力学第二定律的两条表述 ——</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ar-allow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#27ae60"/></marker>
+                <marker id="ar-forbid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"/></marker>
+              </defs>
+              <!-- Left: heat from hot to cold (allowed) -->
+              <g transform="translate(20, 0)">
+                <text x="120" y="20" text-anchor="middle" font-size="13" fill="#1b6e3b" font-weight="bold">✓ 自发：热从高温 → 低温</text>
+                <rect x="40" y="40" width="160" height="40" fill="#fef5dc" stroke="#b8860b" stroke-width="2" rx="4"/>
+                <text x="120" y="64" text-anchor="middle" font-size="13" fill="#8B6914" font-weight="bold">高温物体 T₁</text>
+                <line x1="120" y1="85" x2="120" y2="160" stroke="#27ae60" stroke-width="3" marker-end="url(#ar-allow)"/>
+                <text x="135" y="125" font-size="13" fill="#27ae60" font-weight="bold">Q（自发）</text>
+                <rect x="40" y="170" width="160" height="40" fill="#dee6f5" stroke="#0055B8" stroke-width="2" rx="4"/>
+                <text x="120" y="194" text-anchor="middle" font-size="13" fill="#00409A" font-weight="bold">低温物体 T₂</text>
+                <text x="120" y="240" text-anchor="middle" font-size="11" fill="#666">一杯热水放在凉桌上会冷下来</text>
+                <text x="120" y="258" text-anchor="middle" font-size="11" fill="#666">—— 不需要任何外力</text>
+              </g>
+              <!-- Right: heat from cold to hot (forbidden without external work) -->
+              <g transform="translate(280, 0)">
+                <text x="120" y="20" text-anchor="middle" font-size="13" fill="#922222" font-weight="bold">✗ 反向：热从低温 → 高温</text>
+                <rect x="40" y="40" width="160" height="40" fill="#fef5dc" stroke="#b8860b" stroke-width="2" rx="4"/>
+                <text x="120" y="64" text-anchor="middle" font-size="13" fill="#8B6914" font-weight="bold">高温物体 T₁</text>
+                <line x1="120" y1="160" x2="120" y2="85" stroke="#c0392b" stroke-width="3" stroke-dasharray="5,3" marker-end="url(#ar-forbid)"/>
+                <text x="135" y="125" font-size="13" fill="#c0392b" font-weight="bold">Q（不自发）</text>
+                <rect x="40" y="170" width="160" height="40" fill="#dee6f5" stroke="#0055B8" stroke-width="2" rx="4"/>
+                <text x="120" y="194" text-anchor="middle" font-size="13" fill="#00409A" font-weight="bold">低温物体 T₂</text>
+                <text x="120" y="240" text-anchor="middle" font-size="11" fill="#666">凉桌上的水不会"自发"变热</text>
+                <text x="120" y="258" text-anchor="middle" font-size="11" fill="#666">—— 除非外界做功（冰箱、空调）</text>
+              </g>
+            </svg>
+            <div class="diagram-caption">第二定律的直觉版本：热"自发"只能从高温流向低温；反向必须靠外界做功</div>
+          </div>
+
+          <div class="derivation-block">
+            <div class="derivation-title">第二定律的两种表述（都从卡诺工作推出）</div>
+            <div class="step-line"><strong>开尔文表述</strong>：不可能制造一种循环工作的热机，从单一热源吸热，使之完全转化为有用功而不引起其他变化。
+              <ul>
+                <li>翻译：不可能 100% 效率。必须有 \(Q_2 > 0\) 给冷源。</li>
+              </ul>
+            </div>
+            <div class="step-line"><strong>克劳修斯表述</strong>：不可能把热量从低温物体传到高温物体而不引起其他变化。
+              <ul>
+                <li>翻译：热量"自发地"只能从高温流向低温，反向必须靠外界做功（如冰箱、空调）。</li>
+              </ul>
+            </div>
+            <div class="step-line"><strong>这两条表述是等价的</strong> —— 可以从卡诺定理出发证明它们相互推出。这是热力学第二定律的核心。</div>
+          </div>
+          <p>问自己：</p>
+          <ul>
+            <li>第二定律解释了"为什么蒸汽机不可能 100% 高效"—— 你能用自己的话说出原因吗？</li>
+            <li>第二定律预言了"为什么时间有方向"（热量自发从高温流向低温，不会反向）—— 这个深远的物理意义你能感受到吗？</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">批判性审查</span></div>
+        <div class="step-content">
+          <p>AI 的回答中，有没有以下问题？</p>
+          <ul>
+            <li>AI 有没有把"效率"和"功率"混为一谈？（效率是 \(W/Q_1\)，功率是 \(W/t\)，完全不同）</li>
+            <li>AI 有没有把卡诺定理表述错？常见错误：说"卡诺循环是效率最高的循环"。正确表述应该是"在两个固定温度之间，没有循环效率超过卡诺"。</li>
+            <li>AI 有没有解释清"为什么真实热机效率<strong>低于</strong>卡诺效率"？真实热机有摩擦、有限速度、有限温差，所有这些让它接近不了理想极限。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">检查点（自评清单）</div>
+        <label data-key="c5c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用自己的话说清卡诺定理（"两个温度之间任何热机效率不超过卡诺"）</span></label>
+        <label data-key="c5c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我理解为什么温度必须用绝对温标（开尔文）而不是摄氏度</span></label>
+        <label data-key="c5c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出第二定律的两种表述（开尔文 & 克劳修斯）并理解它们的等价性</span></label>
+        <label data-key="c5c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能从卡诺工作看到"时间有方向"这个深层物理意义</span></label>
+      </div>
+
+      <div class="literacy-tag">
+        对应素养：①好奇心 · ③思辨力（理解"上限"和"等价性"） · ⑤学习力 · ⑦人文素养（科学史中的革命性时刻）
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== Output Requirements ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <p style="font-size: 0.9rem; margin-bottom: 12px;">本模块学习完成后，请提交以下产出物作为模块通过的依据：</p>
+    <table class="info-table">
+      <tr>
+        <td>手写推导稿</td>
+        <td>A4 纸手写：①等温功 \(W = nRT\ln(V_2/V_1)\) 完整 4 步推导<br>②循环净功 \(W_{net} = Q_1 - Q_2\) 推导<br>③卡诺效率 \(\eta = 1 - T_2/T_1\) 完整推导（含绝热关系简化）</td>
+      </tr>
+      <tr>
+        <td>学习反思日志</td>
+        <td>手写或打字，200-300 字。回答：「这个模块最让我意外的一件事是什么？我对'效率上限与工质无关'的理解是什么？」</td>
+      </tr>
+      <tr>
+        <td>自评清单</td>
+        <td>5 张任务卡末尾的检查点全部勾完</td>
+      </tr>
+      <tr>
+        <td>深度口试预约</td>
+        <td>与学科导师约定 15-20 分钟深度口试时间</td>
+      </tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：手写推导稿是这一模块的关键产出 —— 推导过程<strong>必须自己写</strong>，不能让 AI 代写。学习反思必须是<strong>你自己的思考</strong>。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="carnot-cycle-mock-check.html">📝 基础检测</a>
+    <a href="carnot-cycle-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 卡诺循环
+  </div>
+
+</div>
+
+<script>
+// ===== KaTeX Auto-Render =====
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+
+var STORAGE_KEY = 'task-cards-carnot-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

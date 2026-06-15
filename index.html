@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>蓝色诺瓦学院 · 热力学课程</title>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 60px; }
+
+  .header {
+    text-align: center;
+    padding: 50px 24px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 2.1rem; margin-bottom: 12px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .subtitle { font-size: 1.05rem; opacity: 0.92; margin-bottom: 6px; }
+  .header .meta { font-size: 0.88rem; opacity: 0.75; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.08); }
+  .hero-decoration:nth-of-type(1) { width: 80px; height: 80px; top: 20%; left: 12%; }
+  .hero-decoration:nth-of-type(2) { width: 50px; height: 50px; top: 60%; right: 18%; }
+  .hero-decoration:nth-of-type(3) { width: 100px; height: 100px; bottom: 15%; left: 65%; }
+
+  .intro-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 26px 28px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-sm);
+    border-left: 5px solid var(--primary-blue);
+  }
+  .intro-card h2 { font-size: 1.2rem; color: var(--primary-blue); margin-bottom: 12px; font-weight: 700; }
+  .intro-card p { font-size: 0.92rem; margin-bottom: 10px; line-height: 1.75; color: var(--text-primary); }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card .path-hint { background: var(--light-blue); padding: 12px 16px; border-radius: 10px; font-size: 0.88rem; color: var(--primary-blue); margin-top: 12px; }
+  .intro-card strong { color: var(--primary-blue); }
+
+  .section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin: 36px 0 18px 4px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid var(--secondary-blue);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .section-num { background: var(--primary-blue); color: #fff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; font-weight: 700; }
+  .section-title .section-meta { margin-left: auto; font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; }
+
+  .module-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .module-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    box-shadow: 0 2px 10px rgba(0, 64, 154, 0.06);
+    transition: var(--transition);
+    border-left: 4px solid var(--secondary-blue);
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .module-card.advanced { border-left-color: var(--accent-purple); }
+  .module-card.mock-check { border-left-color: var(--accent-green); }
+  .module-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+  .module-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; flex-wrap: wrap; }
+  .module-num { background: var(--light-blue); color: var(--primary-blue); width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; flex-shrink: 0; }
+  .module-card.advanced .module-num { background: rgba(142, 68, 173, 0.12); color: var(--accent-purple); }
+  .module-card.mock-check .module-num { background: rgba(39, 174, 96, 0.12); color: var(--accent-green); }
+  .module-title { font-size: 1.02rem; font-weight: 700; color: var(--primary-blue); flex-grow: 1; }
+  .module-card.advanced .module-title { color: var(--accent-purple); }
+  .module-card.mock-check .module-title { color: var(--accent-green); }
+
+  .module-tag { font-size: 0.72rem; padding: 3px 10px; border-radius: 12px; font-weight: 600; background: var(--light-blue); color: var(--primary-blue); }
+  .module-tag.adv { background: rgba(142, 68, 173, 0.12); color: var(--accent-purple); }
+  .module-tag.mc { background: rgba(39, 174, 96, 0.12); color: var(--accent-green); }
+  .module-tag.exam { background: rgba(230, 126, 34, 0.12); color: var(--accent-orange); }
+
+  .module-desc { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.6; margin-left: 40px; }
+  .module-extra { font-size: 0.78rem; color: var(--text-light); margin-left: 40px; margin-top: 6px; }
+  .module-extra a { color: var(--accent-green); text-decoration: none; font-weight: 600; }
+  .module-extra a:hover { text-decoration: underline; }
+  .module-deepening { font-size: 0.78rem; color: var(--accent-purple); margin-left: 40px; margin-top: 6px; opacity: 0.85; }
+  .module-deepening::before { content: '🔭 '; opacity: 0.7; }
+  .module-deepening strong { color: var(--accent-purple); }
+  .module-deepening a { color: var(--accent-purple); text-decoration: none; }
+  .module-deepening a:hover { text-decoration: underline; }
+  .module-prereq-required { font-size: 0.78rem; color: var(--accent-orange); margin-left: 40px; margin-top: 6px; opacity: 0.9; }
+  .module-prereq-required::before { content: '📋 '; opacity: 0.7; }
+  .module-prereq-required strong { color: var(--accent-orange); }
+  .module-card.experiment { border-left-color: var(--accent-orange); }
+  .module-card.experiment .module-num { background: rgba(230, 126, 34, 0.12); color: var(--accent-orange); }
+  .module-card.experiment .module-title { color: var(--accent-orange); }
+
+  .footer {
+    text-align: center;
+    padding: 32px 16px 12px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
+  }
+  .footer .version { font-size: 0.78rem; color: var(--text-light); margin-top: 6px; }
+
+  @media (max-width: 600px) {
+    .header h1 { font-size: 1.6rem; }
+    .header { padding: 36px 18px; }
+    .container { padding: 16px 12px 40px; }
+    .intro-card { padding: 20px 18px; }
+    .module-card { padding: 14px 16px; }
+    .module-desc, .module-extra { margin-left: 0; margin-top: 8px; }
+    .section-title { font-size: 1.15rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <h1>蓝色诺瓦学院 · 热力学</h1>
+    <div class="subtitle">物理 + 化学融合主题 · 学习任务卡</div>
+    <div class="meta">8 个基础板块 · 6 个进阶板块 · 2 个融合模块 · 1 个跨学科实验</div>
+  </div>
+
+  <div class="intro-card">
+    <h2>关于本主题</h2>
+    <p>热力学是<strong>物理与化学两个学科的交汇点</strong>。本主题用 14 个板块完整呈现热力学的核心思想 —— 从微观分子运动 → 宏观能量 / 焓 / 熵 / 自由能 → 化学反应能量 / 自发性 / 平衡常数。</p>
+    <p>每个板块是一份"学习任务卡"，含 3-5 张 Card、若干思考点、SVG 示意图、检查点。</p>
+    <div class="path-hint">
+      💡 <strong>学习路径建议</strong>: 按基础链 1-8 顺序学习, 每个基础板块都<strong>自成体系</strong>(不必先学进阶就能学懂)。<br>
+      🔭 <strong>推荐前置</strong> (标在基础板块下): 若想从"基础结论"升到"严格原理"层, 建议<strong>按顺序学完对应的进阶板块, 然后回来重读本基础板块</strong> — 你会获得新的理解层次。这些是<strong>可选</strong>的, 不是必读前置。
+    </div>
+  </div>
+
+  <h2 class="section-title">
+    <span class="section-num">A</span>
+    基础链
+    <span class="section-meta">必修 · 自成体系 · 按序学习</span>
+  </h2>
+  <div class="module-grid">
+
+    <a class="module-card" href="molecular-kinetic-theory-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">1</span>
+        <span class="module-title">分子动理论</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">微观入门: 分子运动、压强 / 温度的微观图像、扩散与碰撞</div>
+    </a>
+
+    <a class="module-card" href="gas-liquid-solid-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">2</span>
+        <span class="module-title">理想气体的状态方程</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">什么是"理想气体" + 2 个核心假设 + 气体三定律综合为 PV = nRT;并简介液体表面张力与固体晶体的微观图像</div>
+    </a>
+
+    <a class="module-card" href="basic-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">3</span>
+        <span class="module-title">热力学第一定律</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">系统视角能量守恒 ΔU = Q − W、4 种典型过程(等容 / 等压 / 等温 / 绝热)、热 vs 做功的微观区分</div>
+    </a>
+
+    <a class="module-card" href="second-law-basic-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">4</span>
+        <span class="module-title">第二定律 · 基础</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">熵增定律定性 ΔS<sub>universe</sub> ≥ 0、自发方向、混乱度</div>
+      <div class="module-deepening">推荐前置: <strong>卡诺循环</strong> → <strong>状态函数与非状态函数</strong> → <strong>熵的物理意义</strong>(进阶 2/3/4)</div>
+    </a>
+
+    <a class="module-card" href="hess-law-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">5</span>
+        <span class="module-title">盖斯定律</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">ΔH 是状态函数、路径无关、用标准生成焓 ΔHf° 表算任意反应 ΔH</div>
+      <div class="module-deepening">推荐前置: <strong>卡诺循环</strong> → <strong>状态函数与非状态函数</strong> → <strong>焓与焓变的意义</strong>(进阶 2/3/5)</div>
+    </a>
+
+    <a class="module-card" href="combustion-neutralization-heat-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">6</span>
+        <span class="module-title">燃烧热与中和热</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">实验测 ΔH 入口: 弹式量热计 / 简易量热计、Q = mcΔT</div>
+      <div class="module-deepening">推荐前置: <strong>卡诺循环</strong> → <strong>状态函数与非状态函数</strong> → <strong>焓与焓变的意义</strong>(进阶 2/3/5)</div>
+    </a>
+
+    <a class="module-card" href="bond-energy-reaction-enthalpy-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">7</span>
+        <span class="module-title">键能与反应焓变</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">键能算 ΔH 第三种方法 · ΔH ≈ Σ(反应物键能) − Σ(产物键能)</div>
+      <div class="module-deepening">推荐前置: <strong>卡诺循环</strong> → <strong>状态函数与非状态函数</strong> → <strong>焓与焓变的意义</strong>(进阶 2/3/5)</div>
+    </a>
+
+    <a class="module-card" href="gibbs-free-energy-basic-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">8</span>
+        <span class="module-title">吉布斯自由能 · 基础</span>
+        <span class="module-tag">基础</span>
+      </div>
+      <div class="module-desc">ΔG = ΔH − TΔS 自发判据、4 组合分析、转折温度 T<sub>转</sub></div>
+      <div class="module-deepening">推荐前置: <strong>卡诺循环</strong> → <strong>状态函数与非状态函数</strong> → <strong>熵的物理意义</strong> → <strong>吉布斯自由能 · 进阶</strong>(进阶 2/3/4/6)</div>
+    </a>
+
+  </div>
+
+  <h2 class="section-title">
+    <span class="section-num">B</span>
+    进阶链
+    <span class="section-meta">深化 · 学有余力 · 可选</span>
+  </h2>
+  <div class="module-grid">
+
+    <a class="module-card advanced" href="advanced-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">1</span>
+        <span class="module-title">理想气体内能的微观推导</span>
+        <span class="module-tag adv">进阶</span>
+      </div>
+      <div class="module-desc">从分子动理论 + PV = nRT 严格推出 U = (3/2)nRT — 理想气体内能只与温度有关</div>
+      <div class="module-prereq-required">必读前置: <strong>分子动理论</strong> + <strong>理想气体的状态方程</strong>(基础 1/2)</div>
+    </a>
+
+    <a class="module-card advanced" href="carnot-cycle-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">2</span>
+        <span class="module-title">卡诺循环</span>
+        <span class="module-tag adv">进阶</span>
+      </div>
+      <div class="module-desc">第二定律数学化、卡诺效率 η = 1 − T₂/T₁、可逆 vs 不可逆</div>
+      <div class="module-prereq-required">必读前置: <strong>热力学第一定律</strong>(基础 3) + <strong>理想气体内能的微观推导</strong>(进阶 1); 推荐先学完 第二定律 · 基础(基础 4)</div>
+    </a>
+
+    <a class="module-card advanced" href="state-functions-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">3</span>
+        <span class="module-title">状态函数与非状态函数</span>
+        <span class="module-tag adv">进阶</span>
+      </div>
+      <div class="module-desc">严格定义状态函数、熵 dS 的 Clausius 定义、状态函数代数闭合</div>
+      <div class="module-prereq-required">必读前置: <strong>热力学第一定律</strong>(基础 3) + <strong>卡诺循环</strong>(进阶 2)</div>
+    </a>
+
+    <a class="module-card advanced" href="entropy-meaning-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">4</span>
+        <span class="module-title">熵的物理意义</span>
+        <span class="module-tag adv">进阶</span>
+      </div>
+      <div class="module-desc">玻尔兹曼公式 S = k ln Ω、熵增定律的微观本质</div>
+      <div class="module-prereq-required">必读前置: <strong>状态函数与非状态函数</strong>(进阶 3, 含熵的定义) + <strong>卡诺循环</strong>(进阶 2) + <strong>热力学第一定律</strong>(基础 3)</div>
+    </a>
+
+    <a class="module-card advanced" href="enthalpy-meaning-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">5</span>
+        <span class="module-title">焓与焓变的意义</span>
+        <span class="module-tag adv">进阶</span>
+      </div>
+      <div class="module-desc">严格推 H ≡ U + PV、ΔH = Q<sub>p</sub>(等压热定理)、ΔHf° 完整体系</div>
+      <div class="module-prereq-required">必读前置: <strong>理想气体内能的微观推导</strong>(进阶 1) + <strong>卡诺循环</strong>(进阶 2) + <strong>状态函数与非状态函数</strong>(进阶 3)</div>
+    </a>
+
+    <a class="module-card advanced" href="gibbs-free-energy-advanced-task-cards.html">
+      <div class="module-header">
+        <span class="module-num">6</span>
+        <span class="module-title">吉布斯自由能 · 进阶</span>
+        <span class="module-tag adv">进阶</span>
+      </div>
+      <div class="module-desc">由 ΔS<sub>universe</sub> ≥ 0 严格推 ΔG ≤ 0、最大有用功 ΔG = −W<sub>max</sub>、平衡常数桥 ΔG° = −RT ln K</div>
+      <div class="module-prereq-required">必读前置: <strong>熵的物理意义</strong>(进阶 4) + <strong>焓与焓变的意义</strong>(进阶 5) + <strong>盖斯定律</strong>(基础 5) + <strong>吉布斯自由能 · 基础</strong>(基础 8); ⚠️ 跨主题前置: 平衡常数 K(页内有最小简介)</div>
+    </a>
+
+  </div>
+
+  <h2 class="section-title">
+    <span class="section-num">C</span>
+    融合应用
+    <span class="section-meta">高考综合题对标 · 多板块联动 · 例题讲解 + 熟练度检测</span>
+  </h2>
+  <div class="module-grid">
+
+    <a class="module-card experiment" href="thermodynamics-application-physics-example-cards.html">
+      <div class="module-header">
+        <span class="module-num">1</span>
+        <span class="module-title">热力学应用 · 物理</span>
+        <span class="module-tag exam">融合</span>
+      </div>
+      <div class="module-desc">分子动理论 + 气体定律 + 第一定律的高考综合题型: 例题讲解集 + 配套熟练度检测(页内入口)</div>
+      <div class="module-prereq-required">必读前置: <strong>分子动理论</strong> + <strong>气体液体固体</strong> + <strong>热力学第一定律</strong> + <strong>热力学第二定律 · 基础</strong>(基础 1/2/3/4)</div>
+    </a>
+
+    <a class="module-card experiment" href="thermodynamics-application-chemistry-example-cards.html">
+      <div class="module-header">
+        <span class="module-num">2</span>
+        <span class="module-title">热力学应用 · 化学</span>
+        <span class="module-tag exam">融合</span>
+      </div>
+      <div class="module-desc">盖斯 + 燃烧热 + 键能 + 吉布斯的高考综合题型: 例题讲解集 + 配套熟练度检测(页内入口)</div>
+      <div class="module-prereq-required">必读前置: <strong>盖斯定律</strong> + <strong>燃烧热与中和热</strong> + <strong>键能与反应焓变</strong> + <strong>吉布斯自由能 · 基础</strong>(基础 5/6/7/8)</div>
+    </a>
+
+  </div>
+
+  <h2 class="section-title">
+    <span class="section-num">D</span>
+    跨学科实验
+    <span class="section-meta">物理 + 化学 + 工程 · 综合应用</span>
+  </h2>
+  <div class="module-grid">
+
+    <a class="module-card experiment" href="experiment-bubble-fruit.html">
+      <div class="module-header">
+        <span class="module-num">1</span>
+        <span class="module-title">气泡水果跨学科探究实验</span>
+        <span class="module-tag exam">实验</span>
+      </div>
+      <div class="module-desc">用所学热力学知识设计 + 实施一个综合性实验, 综合应用第一定律 / 气体定律 / 分子运动</div>
+      <div class="module-prereq-required">必读前置: <strong>分子动理论</strong> + <strong>气体液体固体</strong> + <strong>热力学第一定律</strong>(基础 1/2/3)</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 热力学课程 · 2026-06-10
+    <div class="version">14 板块 + 2 融合模块 + 1 实验 · 学生测试包 v0.1</div>
+  </div>
+
+</div>
+</body>
+</html>

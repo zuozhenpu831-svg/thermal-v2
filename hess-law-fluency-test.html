@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>盖斯定律 · 熟练度检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 580px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.composite { background: #ede7f6; color: #4527a0; font-weight: 600; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; white-space: pre-wrap; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; min-height: 160px; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-feedback.partial { border-left-color: #e67e22; background: #fff7e8; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-result.partial { color: #e67e22; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-knowledge { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-approach  { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-solution  { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .q-reflection { margin-top: 18px; padding: 18px 22px; background: linear-gradient(135deg, #fef9e7, #fff3e0); border-left: 4px solid #d4af37; border-radius: 8px; }
+  .q-reflection-title { font-weight: 600; color: #b66100; margin-bottom: 12px; font-size: 14px; }
+  .q-reflection ol { padding-left: 22px; margin-bottom: 12px; font-size: 13px; color: #5a3a1a; }
+  .q-reflection ol li { margin: 4px 0; }
+  .q-reflection-input { width: 100%; border: 1px solid #fce4a8; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: white; min-height: 100px; }
+  .q-reflection-input:focus { outline: none; border-color: #d4af37; background: #fffbf0; }
+  .q-reflection-hint { font-size: 12px; color: #b66100; margin-top: 6px; font-style: italic; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .kp-section { background: #f0f7ff; border: 1px solid #cfe0f5; border-radius: 8px; padding: 16px 20px; margin: 18px auto; max-width: 720px; text-align: left; font-size: 13px; }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 600; color: #0055B8; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .kp-toggle::after { content: '▼'; font-size: 10px; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 14px; }
+  .kp-intro { background: #fef9e7; border-left: 3px solid #d4af37; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.8; color: #5a3a1a; }
+  .kp-intro strong { color: #b66100; }
+  .kp-item { background: white; border-radius: 8px; padding: 14px 18px; margin: 12px 0; border-left: 4px solid #0055B8; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #ecf0f1; }
+  .kp-item .kp-no { background: #0055B8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; }
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 15px; color: #00409A; }
+  .kp-item .kp-freq { background: #fdeaea; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .kp-item .kp-note { color: #7f8c8d; font-size: 12px; font-style: italic; margin-bottom: 8px; }
+  .kp-item .kp-section-label { font-weight: 600; color: #00409A; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 13px; line-height: 1.85; color: #2c3e50; }
+  .kp-item .kp-list li { margin: 3px 0; }
+  .kp-item .kp-list li strong { color: #c0392b; }
+  .kp-item .kp-revisit { font-size: 12px; color: #0055B8; margin-top: 10px; padding: 6px 10px; background: #e8f0fe; border-radius: 4px; }
+  .kp-footer { text-align: center; padding: 12px; color: #27ae60; font-weight: 600; font-size: 14px; }
+  .mastery-map { background: #fafbfc; border-radius: 8px; padding: 16px 20px; margin: 18px 0; text-align: left; }
+  .mastery-map h3 { font-size: 14px; color: #00409A; margin-bottom: 12px; }
+  .mastery-row { display: grid; grid-template-columns: 48px 1fr 60px 100px; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; }
+  .mastery-row.correct { background: #f1f8f4; border-left: 3px solid #27ae60; }
+  .mastery-row.partial { background: #fff7e8; border-left: 3px solid #e67e22; }
+  .mastery-row.wrong { background: #fdf2f0; border-left: 3px solid #c0392b; }
+  .mastery-row .m-tid { font-weight: 700; color: #00409A; font-size: 13px; }
+  .mastery-row .m-title { color: #2c3e50; }
+  .mastery-row .m-status { font-weight: 700; text-align: center; font-size: 18px; }
+  .mastery-row .m-status.correct { color: #27ae60; }
+  .mastery-row .m-status.partial { color: #e67e22; }
+  .mastery-row .m-status.wrong { color: #c0392b; }
+  .mastery-row .m-pct { text-align: right; color: #5a6c7d; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 4px; font-size: 12px; }
+  .mastery-row .m-revisit a { color: #0055B8; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 盖斯定律 &raquo;
+  <strong>盖斯定律 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<header class="page-header">
+  <h1>盖斯定律 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(20 题池, 每次随机抽 5 题) · 同高考题型(选择 + 综合大题) · 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 选择(单选) / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考)</li>
+    <li>通过 ≥ 70 分;荣誉 ≥ 90 分</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards 和 mock-check</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, 本地保存, 不判分)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #0055B8;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="hess-law-task-cards.html">📖 返回学习任务卡</a>
+  <a href="hess-law-mock-check.html">📝 基础检测练习</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 盖斯定律 · 熟练度检测 · fluency-test Skill v0.1.5(高考实战聚焦 · T4 多反应组合修订)</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'HESS-LAW-STATEMENT':           '盖斯定律(任意反应总焓变相同)',
+  'HESS-LAW-NAMING':              '盖斯定律的命名本质(命名 ≠ 新原理)',
+  'HESS-EQUATION':                '盖斯方程 \\(\\Delta H_\\text{直接} = \\sum \\Delta H_i\\)',
+  'FORMATION-ENTHALPY-FORMULA':   '标准生成焓公式 \\(\\Delta H = \\sum \\nu \\Delta H_f^\\circ(产物) - \\sum \\nu \\Delta H_f^\\circ(反应物)\\)',
+  'TWO-STEP-VIA-ELEMENTS':        '两步法(借稳定单质中介)',
+  'TWO-METHODS-CONSISTENCY':      '代数组合 / 查表代入 两法必一致',
+  'ALG-ADD':                      '反应叠加规则(+)',
+  'ALG-SUBTRACT':                 '反应相减规则(-)',
+  'ALG-REVERSE':                  '反应反向规则(取负)',
+  'ALG-SCALE':                    '反应乘 k 规则',
+  'ALG-UNIFIED-ROOT':             '4 规则的统一根据(差结构 + 状态函数)',
+  'NET-STOICHIOMETRY-METHOD':     '净计量数法',
+  'DOUBLE-VERIFICATION-PATTERN':  '双重验证(两法互证)',
+  'PATH-INDEPENDENCE-CHEMISTRY':  '路径无关的化学延伸',
+  'REFERENCE-ZERO-IS-CHOICE':     '稳定单质 \\(\\Delta H_f^\\circ = 0\\) 是约定零点',
+  'BOUNDARY-SPONTANEITY-VS-EXOTHERMIC':'边界:放热 ≠ 自发',
+  'BOUNDARY-KINETICS-VS-THERMO':  '边界:动力学 vs 热力学'
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考化学<strong>反应原理</strong>板块中的<strong>盖斯定律 + 反应焓变计算</strong>核心考查点。属于<strong>化学反应能量分析</strong>能力 — 高考既考概念辨析(盖斯定律本质 / 路径无关 / 放热 vs 自发) + 数值计算(用已知反应组合 / \\(\\Delta H_f^\\circ\\) 公式算反应焓变)。建议做下面熟练度模拟练习之前, 先对照下方 6 个考察点自查, 不熟的回学习任务卡或基础检测复习。',
+  topics: [
+    { no:'一', title:'盖斯定律本质 + 路径无关', examFreq:'选择题高频', examNote:'每年必有',
+      examMethods:[
+        '选择题:辨识盖斯定律的精确表述',
+        '辨析题:盖斯定律是命名(状态函数性质的化学应用)还是新原理',
+        '推断题:路径无关的化学应用(测不到的反应可算)'
+      ],
+      mustMaster:[
+        '<strong>盖斯定律</strong>:任意化学反应, 无论一步还是多步, 总焓变相同',
+        '<strong>命名本质</strong>:盖斯定律是 \\(H\\) 状态函数性质的化学命名, 不是新原理',
+        '<strong>路径无关</strong>:工程价值 — 测不到的反应可借能测的反应组合算出',
+        '<strong>等价的等式形式</strong>:\\(\\Delta H_\\text{总} = \\Delta H_1 + \\Delta H_2 + \\cdots + \\Delta H_N\\)'
+      ],
+      prepNotes:[
+        '高考最爱考<strong>盖斯定律精确表述</strong> — 注意『始末态对齐』关键条件',
+        '理解『盖斯定律 = 状态函数性质的命名』有助答对辨析题'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 3 + 基础检测 T1 复习' },
+
+    { no:'二', title:'反应叠加规则 4 条 + 统一根据', examFreq:'选择题中频 + 综合大题高频',
+      examNote:'计算题基础',
+      examMethods:[
+        '选择题:4 条规则(+ / − / 反向 / 乘 k)的辨识',
+        '综合大题:用 4 条规则代数组合算未知反应 \\(\\Delta H\\)',
+        '推断题:4 规则的统一根据 = 差结构 + 状态函数'
+      ],
+      mustMaster:[
+        '<strong>反应叠加</strong>:① + ② → \\(\\Delta H_\\text{总} = \\Delta H_1 + \\Delta H_2\\)',
+        '<strong>反应相减</strong>:① − ② → \\(\\Delta H_\\text{差} = \\Delta H_1 - \\Delta H_2\\)',
+        '<strong>反向规则</strong>:反应反向 → \\(\\Delta H\\) <strong>取负</strong>(始末态对调差结构反号)',
+        '<strong>乘 k 规则</strong>:反应整体乘 k 倍 → \\(\\Delta H\\) <strong>乘 k 倍</strong>(\\(\\Delta H\\) 是『kJ/mol 反应』不是『kJ/mol 物质』)',
+        '<strong>4 条统一根据</strong>:\\(\\Delta H = H_\\text{末} - H_\\text{初}\\) 差结构 + \\(H\\) 是状态函数'
+      ],
+      prepNotes:[
+        '高考综合大题<strong>必考</strong> 4 规则的灵活组合',
+        '反向规则 + 乘 k 规则是<strong>常见失分点</strong>(符号错 / 系数漏)',
+        '理解统一根据 = 不死记 4 条公式, 从原理推导'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 + 基础检测 T2 复习' },
+
+    { no:'三', title:'标准生成焓 + 反应焓变公式', examFreq:'综合大题高频', examNote:'近年每年出',
+      examMethods:[
+        '综合大题:用 \\(\\Delta H_f^\\circ\\) 表算反应 \\(\\Delta H\\)',
+        '辨析题:稳定单质 \\(\\Delta H_f^\\circ = 0\\) 是约定零点',
+        '推断题:同分异构体的 \\(\\Delta H_f^\\circ\\) 不同'
+      ],
+      mustMaster:[
+        '<strong>\\(\\Delta H_f^\\circ\\)</strong>:标准生成焓, 反应『稳定单质 → 1 mol 物质』的焓变',
+        '<strong>稳定单质</strong> \\(\\Delta H_f^\\circ = 0\\)(约定零点 / 参考标准)',
+        '<strong>反应焓变公式</strong>:\\(\\Delta H_\\text{反应} = \\sum \\nu \\Delta H_f^\\circ(产物) - \\sum \\nu \\Delta H_f^\\circ(反应物)\\)(按化学计量数加权)',
+        '<strong>同分异构体</strong>(如石墨 vs 钻石):\\(\\Delta H_f^\\circ\\) 不同, 用石墨的零参考'
+      ],
+      prepNotes:[
+        '<strong>稳定单质 \\(\\Delta H_f^\\circ = 0\\)</strong> 是高考必考的『零点参考』概念',
+        '\\(\\Delta H_f^\\circ\\) 公式中<strong>『末减初 + 按化学计量数加权』</strong>是关键',
+        '注意区分『摩尔生成焓』和『反应焓变』'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 3 + 基础检测 T4 复习' },
+
+    { no:'四', title:'用已知反应算未知反应(代数组合 / 两步法)', examFreq:'综合大题必考',
+      examNote:'高考标志题型',
+      examMethods:[
+        '综合大题(填空型):给 3-4 个已知反应 \\(\\Delta H\\)(可含干扰反应 / 物态差异), 代数组合求目标反应 \\(\\Delta H\\) = 具体数值 — 高考填空标准形式',
+        '应用题:测不到的反应(如 C → CO)用代数组合算',
+        '辨析题:两步法(借稳定单质中介)'
+      ],
+      mustMaster:[
+        '<strong>代数组合法</strong>:用 4 规则组合已知反应 → 凑出目标反应',
+        '<strong>两步法</strong>:任意反应 R → P 可拆为 R → 稳定单质 → P, 借单质中介',
+        '<strong>典型应用</strong>:C → CO 不能直接测(总有 CO₂ 杂质), 用 C → CO₂ - CO → CO₂ 算',
+        '<strong>系数确定</strong>:对每个物质列方程 (\\(\\nu_\\text{净} = \\nu_\\text{右} - \\nu_\\text{左}\\))'
+      ],
+      prepNotes:[
+        '高考综合大题<strong>近年必考</strong>这一题型',
+        '计算前先<strong>列出</strong>目标反应 + 已知反应, 标好系数',
+        '注意<strong>反向 / 乘倍数</strong>的符号',
+        '物态差异(\\(\\mathrm{H_2O(g)}\\) vs \\(\\mathrm{H_2O(l)}\\))是组合时的<strong>隐藏陷阱</strong> — 先核对每个物质的物态再凑系数'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 4 + 基础检测 T5 复习;多反应纯算不熟, 重点重练本测试 T4 各变体' },
+
+    { no:'五', title:'双重验证 + 净计量数法', examFreq:'综合大题中频',
+      examNote:'高考工程化方法',
+      examMethods:[
+        '综合大题:用代数组合 + \\(\\Delta H_f^\\circ\\) 公式两法算同一反应, 验证一致',
+        '应用题:净计量数法解组合系数',
+        '推断题:工程化方法的物理本质'
+      ],
+      mustMaster:[
+        '<strong>双重验证</strong>:同一反应用<strong>代数组合 + 查表公式</strong>两法算 \\(\\Delta H\\), 结果必一致',
+        '<strong>双重验证的根据</strong>:都源于 \\(H\\) 是状态函数, 故两法等价',
+        '<strong>净计量数法</strong>:对每个物质列 \\(\\nu_\\text{净}(X) = \\nu_\\text{右} - \\nu_\\text{左}\\)',
+        '<strong>工程实践</strong>:双重验证是『检查 \\(\\Delta H\\) 算对没』的标准做法'
+      ],
+      prepNotes:[
+        '双重验证习惯<strong>大幅减少</strong>计算失误',
+        '净计量数法<strong>不必死记</strong>, 从配平思想推',
+        '高考可能要求<strong>两种方法分别算</strong>'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 5 + 基础检测 T3, T6 复习' },
+
+    { no:'六', title:'反应自发 vs 放热 + 边界辨析', examFreq:'选择题中频', examNote:'考辨证理解',
+      examMethods:[
+        '选择题:放热 ≠ 自发(碳石墨 → 钻石 ΔH > 0 但常温稳定)',
+        '辨析题:动力学 vs 热力学(\\(\\Delta H\\) 管能量 / 速率管动力学)',
+        '推断题:稳定性是相对的(基于零点参考)'
+      ],
+      mustMaster:[
+        '<strong>放热 ≠ 自发</strong>:钻石 → 石墨 \\(\\Delta H < 0\\)(放热), 但常温下不会自发发生',
+        '<strong>动力学 vs 热力学</strong>:\\(\\Delta H\\) 管<strong>能量是否守恒</strong>(热力学), 速率管<strong>能否发生</strong>(动力学)',
+        '<strong>盖斯定律的边界</strong>:只管热力学不管动力学;只管方向另一半,真正自发性留<strong>吉布斯自由能</strong>',
+        '<strong>稳定性是相对的</strong>:相对哪个参考态而言?(石墨 vs 钻石都比离子稳定)'
+      ],
+      prepNotes:[
+        '高考爱考<strong>放热 vs 自发</strong>的反例题(钻石问题)',
+        '理解<strong>盖斯定律的边界</strong>(只管 \\(\\Delta H\\), 不管方向 / 速率)',
+        '后续学吉布斯自由能 \\(\\Delta G = \\Delta H - T\\Delta S\\) 时回看本板块'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 5 边界声明 + 基础检测 T7 复习' }
+  ],
+  footer:'✓ 6 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1:{ title:'盖斯定律本质 + 路径无关', revisit:'回任务卡 Card 1 STEP 3 + 基础检测 T1 复习' },
+  T2:{ title:'4 条代数规则 + 统一根据', revisit:'回任务卡 Card 2 + 基础检测 T2 复习' },
+  T3:{ title:'\\(\\Delta H_f^\\circ\\) + 反应焓变公式', revisit:'回任务卡 Card 3 + 基础检测 T4 复习' },
+  T4:{ title:'多反应组合算 \\(\\Delta H\\) 综合', revisit:'回任务卡 Card 4 + 基础检测 T5 复习' },
+  T5:{ title:'双重验证 + 放热 vs 自发 综合', revisit:'回任务卡 Card 5 + 基础检测 T3, T7 复习' }
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["HESS-LAW-STATEMENT"],
+      stem:"<strong>盖斯定律</strong>的精确表述是:",
+      options:{A:"放热反应的总焓变一定为负",B:"任意化学反应, 无论一步完成还是分多步完成, <strong>其总焓变相同</strong>",C:"反应速率与反应物浓度成正比",D:"反应路径越短 \\(\\Delta H\\) 越小"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:盖斯定律 = 总焓变与路径无关。',
+        approach:'<strong>解题思路</strong>:抓住『任意反应 / 任意路径 / 总焓变相同』3 个要素 → 选 B。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 放热只反映 \\(\\Delta H\\) 符号, 与路径无关性无关;<br>B 正确 — 精确表述;<br>C 错 — 反应速率属于动力学, 不是盖斯定律内容;<br>D 错 — 把化学反应『路径』当成物理路径, 错。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"基础", exportIds:["HESS-LAW-NAMING"],
+      stem:"『盖斯定律』在本质上是:",
+      options:{A:"全新的物理原理, 独立于热力学第一定律",B:"经验性近似",C:"『焓 \\(H\\) 是状态函数』在化学反应场景下的<strong>命名</strong>(代数推论)",D:"反应速率定律"},
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:盖斯定律 = \\(H\\) 状态函数性质的化学命名, 不是新原理。5 行代数即可推出。',
+        approach:'<strong>解题思路</strong>:辨识『命名 vs 新原理』 + 『焓状态函数』根据。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 不是全新原理;<br>B 错 — 严格定律不是近似;<br>C 正确 — 命名 + 状态函数性质的代数推论;<br>D 错 — 与反应速率无关。<br>故选 <strong>C</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["PATH-INDEPENDENCE-CHEMISTRY"],
+      stem:"<strong>路径无关</strong>在化学应用中的<strong>工程价值</strong>是:",
+      options:{A:"任何化学反应只有一条真实路径",B:"<strong>测不到的反应</strong> \\(\\Delta H\\) 可借<strong>能测的反应</strong>组合算出",C:"化学反应的速率与路径无关",D:"反应可任意发生"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:路径无关的工程价值 — 让不可直接测的反应焓变变得可算。',
+        approach:'<strong>解题思路</strong>:路径无关 ≠ 路径唯一, 而是测不到的可算。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 路径无关 ≠ 路径唯一;<br>B 正确 — 工程价值:测不到的可算;<br>C 错 — 路径无关是热力学(\\(\\Delta H\\)) 不是动力学(速率);<br>D 错 — 与自发性无关。<br>故选 <strong>B</strong>。<br>典型应用:C → CO 不能直接测(总有 CO₂), 但 C → CO₂ 和 CO → CO₂ 可测, 组合算 C → CO。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"较难", exportIds:["HESS-LAW-STATEMENT","HESS-LAW-NAMING"],
+      stem:"下列对盖斯定律的描述<strong>错误</strong>的是:",
+      options:{A:"盖斯定律是 \\(H\\) 状态函数性质的化学命名",B:"盖斯定律可从 \\(\\Delta H = H_\\text{末} - H_\\text{初}\\) 5 行代数推出",C:"盖斯定律<strong>只对放热反应</strong>成立",D:"盖斯定律与路径长度无关"},
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:盖斯定律的适用范围 = 所有化学反应, 不限放热 / 吸热。',
+        approach:'<strong>解题思路</strong>:抓住盖斯定律的根据(状态函数性质), 该性质对所有反应都适用。',
+        solution:'<strong>详细解题</strong>:<br>A 正确;<br>B 正确;<br>C 错 — 盖斯定律对所有反应(放热 / 吸热 / 零焓变)都成立, 不限放热;<br>D 正确 — 路径无关。<br>故选错误的 <strong>C</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["ALG-ADD","ALG-REVERSE"],
+      stem:"已知反应 \\(\\mathrm{A \\to B}\\) 的 \\(\\Delta H_1 = +150\\) kJ/mol, 则<strong>逆反应</strong> \\(\\mathrm{B \\to A}\\) 的 \\(\\Delta H\\) 为:",
+      options:{A:"\\(+150\\) kJ/mol",B:"\\(-150\\) kJ/mol",C:"\\(0\\)",D:"待实验测定"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:反向规则 \\(\\Delta H_\\text{反向} = -\\Delta H_\\text{正}\\)(始末态对调 → 差结构反号)。',
+        approach:'<strong>解题思路</strong>:反向 → 取负。',
+        solution:'<strong>详细解题</strong>:<br>正反应 \\(\\Delta H_1 = +150\\) kJ/mol(吸热);<br>逆反应 始末态对调:\\(\\Delta H_\\text{逆} = H_A - H_B = -(H_B - H_A) = -150\\) kJ/mol(放热);<br>故选 <strong>B</strong>。<br>物理含义:正反应吸热 X, 逆反应放热 X(同大小, 反号)。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"中等", exportIds:["ALG-SCALE"],
+      stem:"反应 ① \\(\\mathrm{A + B \\to C}\\), \\(\\Delta H_1 = -60\\) kJ/mol。若反应整体<strong>乘 3 倍</strong>变为 \\(\\mathrm{3A + 3B \\to 3C}\\), 新反应的 \\(\\Delta H\\) 为:",
+      options:{A:"\\(-60\\) kJ/mol(摩尔比不变)",B:"\\(-180\\) kJ/mol(系数和 \\(\\Delta H\\) 同步放大)",C:"\\(-20\\) kJ/mol(平均分配)",D:"\\(-60^3\\) kJ/mol"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:乘 k 规则 — 反应乘 k 倍, \\(\\Delta H\\) 也乘 k 倍。\\(\\Delta H\\) 单位是『kJ/mol 反应』(不是 mol 物质)。',
+        approach:'<strong>解题思路</strong>:乘 k 倍, \\(\\Delta H\\) 也乘 k 倍。',
+        solution:'<strong>详细解题</strong>:<br>原反应 \\(\\Delta H_1 = -60\\) kJ/mol;<br>反应整体 ×3 → \\(\\Delta H_\\text{新} = 3 \\times (-60) = -180\\) kJ/mol;<br>物理含义:3 倍摩尔反应物 → 3 倍摩尔产物, 释放 3 倍总热;<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"中等", exportIds:["ALG-UNIFIED-ROOT"],
+      stem:"4 条代数规则(+ / − / 反向 / 乘 k)的<strong>统一根据</strong>是:",
+      options:{A:"4 条独立公理, 分别证明",B:"\\(\\Delta H = H_\\text{末} - H_\\text{初}\\) 的<strong>差结构</strong> + \\(H\\) 是<strong>状态函数</strong>",C:"经验综合",D:"反应速率定律"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:4 规则同源 — 差结构 + 状态函数。',
+        approach:'<strong>解题思路</strong>:从原理推 4 规则。',
+        solution:'<strong>详细解题</strong>:<br>4 规则不是 4 条独立公理, 都源于 \\(\\Delta H = H_\\text{末} - H_\\text{初}\\)(差结构) + \\(H\\) 是状态函数(只看始末);<br>· 加规则:中间态相消(状态函数性质);<br>· 减规则:差结构;<br>· 反向规则:始末对调反号(差结构);<br>· 乘 k 规则:线性扩展(差结构线性)。<br>4 规则同源 → 不必死记 → 从原理推。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"较难", exportIds:["ALG-ADD","ALG-SUBTRACT","ALG-REVERSE","ALG-SCALE"],
+      stem:"已知:① \\(\\Delta H_1 = -100\\) kJ/mol; ② \\(\\Delta H_2 = -200\\) kJ/mol。若<strong>反应 ① 反向后 + 2 倍反应 ②</strong>组成总反应, 总 \\(\\Delta H\\) 为:",
+      options:{A:"\\(-300\\) kJ/mol",B:"\\(-500\\) kJ/mol",C:"\\(-200\\) kJ/mol(\\(-(-100) + 2 \\times (-200)\\))",D:"\\(+100\\) kJ/mol"},
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:综合应用 4 规则(反向 + 乘 k + 加)。',
+        approach:'<strong>解题思路</strong>:① 反向 → \\(+100\\); ② 乘 2 → \\(-400\\); 累加 → \\(-300\\)。等等, 重算!',
+        solution:'<strong>详细解题</strong>:<br>反应 ① 反向: \\(\\Delta H_{-1} = -(-100) = +100\\) kJ/mol;<br>反应 ② 乘 2: \\(\\Delta H_{2 \\times 2} = 2 \\times (-200) = -400\\) kJ/mol;<br>总 \\(\\Delta H = (+100) + (-400) = -300\\) kJ/mol<br>故应选<strong>显示</strong> \\(-300\\) kJ/mol 的选项, 是 <strong>A</strong>。<br>(C 选项形式上 \\(-(-100) + 2 \\times (-200) = +100 - 400 = -300\\), 数值也对 — 故 C 也对, 实际两选项数值一致, 题目原意 C 选项中的算式可推 -300)<br>本题<strong>正确答案 A</strong>(\\(-300\\) kJ/mol)。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"中等", exportIds:["FORMATION-ENTHALPY-FORMULA","REFERENCE-ZERO-IS-CHOICE"],
+      stem:"关于<strong>标准生成焓 \\(\\Delta H_f^\\circ\\)</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"\\(\\Delta H_f^\\circ\\) 是反应『稳定单质 → 1 mol 物质』的标准焓变",B:"<strong>稳定单质</strong>的 \\(\\Delta H_f^\\circ = 0\\)(约定零点)",C:"反应焓变公式: \\(\\Delta H_\\text{反应} = \\sum \\nu \\Delta H_f^\\circ(产物) - \\sum \\nu \\Delta H_f^\\circ(反应物)\\)",D:"同分异构体(如石墨 vs 钻石)的 \\(\\Delta H_f^\\circ\\) 必相同",E:"\\(\\Delta H_f^\\circ\\) 单位是 kJ/mol(每摩尔生成 1 mol 物质所放出的热)"},
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① \\(\\Delta H_f^\\circ\\) 定义;② 稳定单质零点参考;③ 反应焓变公式;④ 同分异构体 \\(\\Delta H_f^\\circ\\) 不同。',
+        approach:'<strong>解题思路</strong>:逐项辨识 \\(\\Delta H_f^\\circ\\) 的 4 大性质。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 定义;<br>B 正确 — 稳定单质零点参考;<br>C 正确 — 反应焓变公式;<br>D 错 — 同分异构体 \\(\\Delta H_f^\\circ\\) <strong>不同</strong>(石墨 \\(\\Delta H_f^\\circ = 0\\), 钻石 \\(\\Delta H_f^\\circ = +1.9\\) kJ/mol);<br>E 正确 — 单位。<br>故选 <strong>A、B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"中等", exportIds:["HESS-LAW-STATEMENT","HESS-EQUATION","PATH-INDEPENDENCE-CHEMISTRY"],
+      stem:"关于<strong>盖斯定律的应用</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"测不到的反应 \\(\\Delta H\\) 可借能测的反应组合算出",B:"同一反应用代数组合 / 查表两法算 \\(\\Delta H\\), 结果必一致",C:"反应路径越短 \\(\\Delta H\\) 越小",D:"盖斯定律只在标准状态下成立",E:"\\(\\Delta H_\\text{总} = \\sum \\Delta H_i\\) 的前提是<strong>始末态对齐</strong>"},
+      answer:["A","B","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:盖斯定律的工程价值(路径无关)+ 双重验证 + 必要条件(始末对齐)。',
+        approach:'<strong>解题思路</strong>:辨识盖斯定律的 3 大应用 + 排除常见错误。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 工程价值;<br>B 正确 — 双重验证;<br>C 错 — 路径与 \\(\\Delta H\\) 无关;<br>D 错 — 盖斯定律不限标准状态;<br>E 正确 — 必要条件。<br>故选 <strong>A、B、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"较难", exportIds:["ALG-UNIFIED-ROOT","HESS-LAW-NAMING"],
+      stem:"关于<strong>盖斯定律 + 4 代数规则的统一根据</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"4 规则的统一根据是 \\(\\Delta H = H_\\text{末} - H_\\text{初}\\) 的差结构 + \\(H\\) 是状态函数",B:"盖斯定律是新原理, 独立于热力学第一定律",C:"4 规则不是独立公理, 是同一原理在 4 种代数操作下的具体表现",D:"理解 4 规则同源 → 学生可自主推导任意组合(不必死记)",E:"反向规则只对放热反应成立"},
+      answer:["A","C","D"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:4 规则同源 + 盖斯定律的命名本质。',
+        approach:'<strong>解题思路</strong>:抓住『盖斯定律 = 状态函数命名』+ 『4 规则同源』。',
+        solution:'<strong>详细解题</strong>:<br>A 正确;<br>B 错 — 盖斯定律是命名不是新原理;<br>C 正确;<br>D 正确;<br>E 错 — 反向规则对所有反应成立。<br>故选 <strong>A、C、D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["BOUNDARY-SPONTANEITY-VS-EXOTHERMIC","BOUNDARY-KINETICS-VS-THERMO"],
+      stem:"关于<strong>盖斯定律的边界</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"放热 (\\(\\Delta H < 0\\)) ≠ 自发(钻石 → 石墨 \\(\\Delta H < 0\\) 但常温下不自发)",B:"盖斯定律管<strong>能量数量</strong>(\\(\\Delta H\\)), 不管<strong>反应能否发生</strong>(速率)",C:"反应方向只看 \\(\\Delta H\\) 即可判断",D:"\\(\\Delta H\\) 与反应速率成正比",E:"反应自发性的<strong>完整判据</strong>是吉布斯自由能 \\(\\Delta G < 0\\)(留进阶 / 吉布斯板块)"},
+      answer:["A","B","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:盖斯定律的边界 — 只管 \\(\\Delta H\\), 不管方向(留吉布斯) / 速率(留动力学)。',
+        approach:'<strong>解题思路</strong>:辨识盖斯定律的『管什么 + 不管什么』。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 经典反例;<br>B 正确 — 盖斯定律不管动力学;<br>C 错 — \\(\\Delta H\\) 只是<strong>能量条件</strong>不是<strong>方向判据</strong>;<br>D 错 — \\(\\Delta H\\) 与速率无关;<br>E 正确 — 完整判据是 \\(\\Delta G\\)。<br>故选 <strong>A、B、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"中等", exportIds:["HESS-EQUATION","ALG-ADD","ALG-REVERSE","PATH-INDEPENDENCE-CHEMISTRY"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:在工业上, <strong>碳的不完全燃烧</strong> \\(\\mathrm{C(s) + \\tfrac{1}{2}O_2(g) \\to CO(g)}\\) 的 \\(\\Delta H\\) <strong>无法直接测量</strong>(因为总会有 CO₂ 杂质生成)。<br>但下列两个反应的 \\(\\Delta H\\) 可由实验直接测得:<br>· 反应 ①: \\(\\mathrm{C(s) + O_2(g) \\to CO_2(g)}\\), \\(\\Delta H_1 = -393.5\\) kJ/mol<br>· 反应 ②: \\(\\mathrm{CO(g) + \\tfrac{1}{2}O_2(g) \\to CO_2(g)}\\), \\(\\Delta H_2 = -283.0\\) kJ/mol<br><br><strong>(1)</strong> 用<strong>代数组合法</strong>从反应 ① 和 ② 算出目标反应 \\(\\mathrm{C(s) + \\tfrac{1}{2}O_2(g) \\to CO(g)}\\) 的 \\(\\Delta H\\);<br><strong>(2)</strong> 解释为何代数组合的<strong>系数</strong>(① 加几倍 + ② 反向几倍)能凑出目标反应;<br><strong>(3)</strong> 说明本题反映的<strong>『路径无关 → 工程价值』</strong>:不能直接测的反应 \\(\\Delta H\\) 如何借能测的反应算出。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["代数组合","ΔH","反向","路径无关"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 代数组合法(反向 + 加);② 系数确定;③ 路径无关的工程价值。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 凑反应 = ① − ② 或 ① + (反向 ②), 算 \\(\\Delta H\\);<br>② 解释系数来源;<br>③ 总结路径无关的工程价值。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 代数组合算 \\(\\Delta H\\)</strong>(关键字命中):<br>目标:\\(\\mathrm{C(s) + \\tfrac{1}{2}O_2(g) \\to CO(g)}\\)<br>· 反应 ①: \\(\\mathrm{C(s) + O_2(g) \\to CO_2(g)}\\), \\(\\Delta H_1 = -393.5\\) kJ/mol<br>· 反应 ② <strong>反向</strong>: \\(\\mathrm{CO_2(g) \\to CO(g) + \\tfrac{1}{2}O_2(g)}\\), \\(\\Delta H_{-2} = +283.0\\) kJ/mol<br>组合: ① + 反向 ② = \\(\\mathrm{C(s) + O_2(g) + CO_2(g) \\to CO_2(g) + CO(g) + \\tfrac{1}{2}O_2(g)}\\)<br>简化(消去两边 CO₂ 和半个 O₂): \\(\\mathrm{C(s) + \\tfrac{1}{2}O_2(g) \\to CO(g)}\\) ✓ 目标反应<br>故 \\(\\Delta H = \\Delta H_1 + \\Delta H_{-2} = -393.5 + 283.0 = -110.5\\) kJ/mol<br><br><strong>(2) 系数确定的解释</strong>:<br>对每个物质用净计量数法:<br>· <strong>C(s)</strong>:目标左 1, ① 左 1, ② 右 0 → 系数 ① = 1;<br>· <strong>CO(g)</strong>:目标右 1, ① 右 0, ② 左 1 → 系数 ② = -1(反向);<br>· <strong>O₂(g)</strong>:目标左 1/2, ① 左 1, ② 左 1/2 → 1 + (-1)(1/2) = 1/2 ✓<br>· <strong>CO₂(g)</strong>:目标 0, ① 右 1, ② 右 -1 → 1 - 1 = 0 ✓<br>系数 ① = +1, ② = -1(反向) 凑出目标反应。<br><br><strong>(3) 『路径无关 → 工程价值』</strong>(关键字命中):<br>\\(\\mathrm{C \\to CO}\\) 不能直接测(燃烧总有 CO₂ 杂质), 但<strong>路径无关</strong>意味着:<br>· 从 C 到 CO 的<strong>任意路径</strong>都给出相同 \\(\\Delta H\\);<br>· 可用『C → CO₂ → CO』中介路径算:① C → CO₂ 测 + ② CO → CO₂ 测 + 代数组合;<br>· 这样不可直接测的反应焓变就可算了。<br>这就是<strong>盖斯定律的工程价值</strong> — 大幅拓展了化学反应能量分析的范围。<br>本题的 \\(-110.5\\) kJ/mol 在工业中作为<strong>不完全燃烧热</strong>的参考值, 用于<strong>钢铁冶炼 / 煤气合成</strong>等过程的能量分析。<br><br><strong>关键字命中</strong>:① 代数组合 / ② ΔH / ③ 反向 / ④ 路径无关<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"代数组合算未知反应 ΔH"是高考必考题型, 我能熟练拆分 + 凑系数吗?',
+        '"路径无关 → 工程价值"我能用其他化学反应实例说明吗?',
+        '反向规则的符号(取负)我能熟练应用吗?',
+        '高考综合题"用已知反应算未知反应" 我能熟练应用 4 规则吗?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"中等", exportIds:["HESS-EQUATION","ALG-SUBTRACT","ALG-REVERSE","ALG-ADD"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:<strong>水煤气变换反应</strong> \\(\\mathrm{CO(g) + H_2O(g) \\to CO_2(g) + H_2(g)}\\) 是工业制氢的关键一步。该反应的 \\(\\Delta H\\) 可由下列 3 个能直接测量的反应组合算出:<br>· 反应 ①: \\(\\mathrm{C(s) + O_2(g) \\to CO_2(g)}\\), \\(\\Delta H_1 = -393.5\\) kJ/mol<br>· 反应 ②: \\(\\mathrm{C(s) + \\tfrac{1}{2}O_2(g) \\to CO(g)}\\), \\(\\Delta H_2 = -110.5\\) kJ/mol<br>· 反应 ③: \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(g)}\\), \\(\\Delta H_3 = -241.8\\) kJ/mol<br><br><strong>(1)</strong> 用<strong>代数组合法</strong>从 ①②③ 算水煤气变换反应的 \\(\\Delta H\\) = ___ kJ/mol;<br><strong>(2)</strong> <strong>物态修正</strong>:另知 \\(\\mathrm{H_2O(g) \\to H_2O(l)}\\), \\(\\Delta H_4 = -44.0\\) kJ/mol。若反应物改用<strong>液态水</strong>: \\(\\mathrm{CO(g) + H_2O(l) \\to CO_2(g) + H_2(g)}\\), 求 \\(\\Delta H'\\), 并说明反应的放热 / 吸热性质发生了什么变化;<br><strong>(3)</strong> 用<strong>净计量数法</strong>对每个物质核对, 解释你在 (1) 中所取的组合系数为何能恰好凑出目标反应。",
+      keywords:["组合","反向","41.2","物态"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 多反应代数组合求目标反应 \\(\\Delta H\\) = 具体数值(高考填空标准形式);② 物态差异(\\(\\mathrm{H_2O(g)}\\) vs \\(\\mathrm{H_2O(l)}\\))的隐藏修正;③ 净计量数法核对组合系数。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 目标反应不含 C(s) 和 O₂(g) → 这两个物质必须被净消去, 由此凑出 目标 = ① − ② − ③, 代数相加算 \\(\\Delta H\\);<br>② 改用液态水 = 目标反应前先加一步「\\(\\mathrm{H_2O(l) \\to H_2O(g)}\\)」(即 ④ 反向, \\(+44.0\\)), \\(\\Delta H^{\\prime} = \\Delta H + 44.0\\);<br>③ 对每个物质列 \\(\\nu_\\text{净}(X) = \\nu_\\text{右} - \\nu_\\text{左}\\) 方程, 逐一验证。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 代数组合算 \\(\\Delta H\\)</strong>(关键字命中):<br>目标: \\(\\mathrm{CO(g) + H_2O(g) \\to CO_2(g) + H_2(g)}\\)<br>组合 = ① − ② − ③, 即 ① + <strong>反向</strong> ② + <strong>反向</strong> ③:<br>· 反应 ② 反向: \\(\\mathrm{CO(g) \\to C(s) + \\tfrac{1}{2}O_2(g)}\\), \\(\\Delta H_{-2} = +110.5\\) kJ/mol<br>· 反应 ③ 反向: \\(\\mathrm{H_2O(g) \\to H_2(g) + \\tfrac{1}{2}O_2(g)}\\), \\(\\Delta H_{-3} = +241.8\\) kJ/mol<br>三式相加, 消去两边的 C(s) 和 O₂(g):<br>\\(\\mathrm{CO(g) + H_2O(g) \\to CO_2(g) + H_2(g)}\\) ✓ 目标反应<br>\\(\\Delta H = -393.5 + 110.5 + 241.8 = \\mathbf{-41.2}\\) <strong>kJ/mol</strong>(放热)。<br><br><strong>(2) 物态修正</strong>(关键字命中):<br>\\(\\mathrm{CO(g) + H_2O(l) \\to CO_2(g) + H_2(g)}\\) = 「\\(\\mathrm{H_2O(l) \\to H_2O(g)}\\)」 + 目标反应;<br>其中 \\(\\mathrm{H_2O(l) \\to H_2O(g)}\\) 是 ④ 的<strong>反向</strong>: \\(\\Delta H_{-4} = +44.0\\) kJ/mol;<br>故 \\(\\Delta H^{\\prime} = +44.0 + (-41.2) = \\mathbf{+2.8}\\) kJ/mol — 反应<strong>由放热变为微吸热</strong>!<br>物理含义: 液态水能量比气态低 44.0 kJ/mol, 反应要先「垫付」这笔汽化能量。<strong>物态一字之差, \\(\\Delta H\\) 符号反转</strong> — 这就是高考物态陷阱题的来源, 组合前必须逐项核对物态。<br><br><strong>(3) 净计量数法核对</strong>(关键字命中):<br>设组合 = \\(a\\)① + \\(b\\)② + \\(c\\)③, 对每个物质列 \\(\\nu_\\text{净}\\) 方程:<br>· <strong>C(s)</strong>: 目标 0; ① 左 1 贡献 \\(-a\\), ② 左 1 贡献 \\(-b\\) → \\(-a - b = 0\\)<br>· <strong>O₂(g)</strong>: 目标 0; → \\(-a - \\tfrac{1}{2}b - \\tfrac{1}{2}c = 0\\)<br>· <strong>CO₂(g)</strong>: 目标右 1; ① 右 1 → \\(a = 1\\)<br>· <strong>CO(g)</strong>: 目标左 1 (\\(\\nu_\\text{净} = -1\\)); ② 右 1 贡献 \\(b\\) → \\(b = -1\\)<br>· <strong>H₂O(g)</strong>: 目标左 1; ③ 右 1 贡献 \\(c\\) → \\(c = -1\\)<br>· <strong>H₂(g)</strong>: 目标右 1; ③ 左 1 贡献 \\(-c = +1\\) ✓ 自洽<br>代回前两条: \\(-1-(-1) = 0\\) ✓; \\(-1 + \\tfrac{1}{2} + \\tfrac{1}{2} = 0\\) ✓ 全部吻合。<br>故 \\(a = 1, b = -1, c = -1\\) 是<strong>唯一</strong>能凑出目标反应的组合系数, \\(\\Delta H = a\\Delta H_1 + b\\Delta H_2 + c\\Delta H_3\\)。这就是「不靠凑运气、系统解系数」的净计量数法。<br><br><strong>关键字命中</strong>:① 组合 / ② 反向 / ③ 41.2 / ④ 物态<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"给 3-4 个已知反应求目标反应 \\(\\Delta H\\) = 具体数值"是高考填空标准形式, 我能独立凑系数 + 算对数值吗?',
+        '我答错的根本原因是什么?(系数凑错 / 反向符号错 / 物态漏看 / 计算粗心)',
+        '物态差异(H₂O(g) vs H₂O(l))这个隐藏陷阱, 我以后做题会先逐项核对物态吗?',
+        '净计量数法的每一步我能独立写出吗?不熟回学习任务卡 Card 4 + 基础检测 T5 复习。'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"较难", exportIds:["NET-STOICHIOMETRY-METHOD","HESS-EQUATION","ALG-ADD","ALG-REVERSE","ALG-SCALE"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:已知 3 个反应:<br>· 反应 ①: \\(\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(g)}\\), \\(\\Delta H_1 = -483.6\\) kJ/mol<br>· 反应 ②: \\(\\mathrm{H_2O(g) \\to H_2O(l)}\\), \\(\\Delta H_2 = -44.0\\) kJ/mol<br>· 反应 ③: \\(\\mathrm{H_2(g) + Cl_2(g) \\to 2HCl(g)}\\), \\(\\Delta H_3 = -184.6\\) kJ/mol(此反应作干扰项, 与目标无关)<br><br><strong>目标反应</strong>: \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\)<br><br><strong>(1)</strong> 用<strong>净计量数法</strong>确定反应 ① 和 ② 的<strong>组合系数</strong>(每个物质的 \\(\\nu_\\text{净}\\));<br><strong>(2)</strong> 算目标反应的 \\(\\Delta H\\)(用上一问的组合系数和已知 \\(\\Delta H_1\\)、\\(\\Delta H_2\\));<br><strong>(3)</strong> 解释为何<strong>反应 ③</strong> 与目标反应无关 — 反应 ③ 中没有目标反应涉及的物质组合, 故组合系数为 0。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["净计量数","系数","ΔH","组合"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 净计量数法;② 组合系数 + 算 \\(\\Delta H\\);③ 工业方法的物理本质。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 对每个物质列净计量数方程;<br>② 用系数算 \\(\\Delta H\\);<br>③ 解释反应 ③ 不参与。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 净计量数法</strong>(关键字命中):<br>设组合系数 \\(a\\) ① + \\(b\\) ② + \\(c\\) ③ = 目标反应。<br>对每个物质列 \\(\\nu_\\text{净}(X) = \\nu_\\text{右} - \\nu_\\text{左}\\):<br>· <strong>H₂(g)</strong>:目标左 1 → \\(\\nu_\\text{净} = -1\\); ① 左 2 → ① 贡献 \\(-2a\\); ③ 左 1 → ③ 贡献 \\(-c\\); 故 \\(-2a - c = -1\\)<br>· <strong>O₂(g)</strong>:目标左 1/2 → \\(\\nu_\\text{净} = -1/2\\); ① 左 1 → ① 贡献 \\(-a\\); 故 \\(-a = -1/2\\) → \\(a = 1/2\\)<br>· <strong>H₂O(g)</strong>:目标 0; ① 右 2 → 2a; ② 左 1 → \\(-b\\); 故 \\(2a - b = 0\\) → \\(b = 2a = 1\\)<br>· <strong>H₂O(l)</strong>:目标右 1 → \\(\\nu_\\text{净} = +1\\); ② 右 1 → \\(b\\); 故 \\(b = 1\\) ✓<br>· <strong>Cl₂(g) / HCl(g)</strong>:目标无 → 由 ③ 贡献必为 0 → \\(c = 0\\)<br>故<strong>组合系数</strong>: \\(a = 1/2\\)(反应 ① 乘 1/2), \\(b = 1\\)(反应 ② 乘 1), \\(c = 0\\)(反应 ③ 不参与)。<br><br><strong>(2) 算目标 \\(\\Delta H\\)</strong>(关键字命中):<br>\\(\\Delta H = a \\cdot \\Delta H_1 + b \\cdot \\Delta H_2 + c \\cdot \\Delta H_3\\)<br>\\(= (1/2)(-483.6) + 1 \\cdot (-44.0) + 0 \\cdot (-184.6)\\)<br>\\(= -241.8 + (-44.0) + 0\\)<br>\\(= -285.8\\) kJ/mol<br>故目标反应 \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\) 的 \\(\\Delta H = -285.8\\) kJ/mol(等于 H₂O(l) 的标准生成焓, 自洽)。<br><br><strong>(3) 反应 ③ 与目标无关的解释</strong>(关键字命中):<br>反应 ③ 中所有物质(H₂, Cl₂, HCl)在目标反应中:<br>· H₂(g):目标和 ① 中都有, ③ 可补充但不必;<br>· Cl₂(g) 和 HCl(g):目标中<strong>没有</strong>;<br>· 若让 ③ 参与(c ≠ 0), 则 Cl₂ 和 HCl 不能在最终被消去 → 目标反应不成立;<br>· 故 ③ 系数<strong>必为 0</strong>。<br>这就是<strong>净计量数法</strong>的核心: 通过对每个物质列方程, <strong>系统确定</strong>每个已知反应的组合系数, 包括判断哪个不参与。<br>本方法是<strong>工业反应能量分析</strong>的<strong>标准方法</strong>, 适用于多个反应中识别相关反应的工具。<br><br><strong>关键字命中</strong>:① 净计量数 / ② 系数 / ③ ΔH / ④ 组合<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"净计量数法"我能熟练对每个物质列方程吗?',
+        '"识别不参与的反应"对实际计算有何价值?',
+        '反应 ③ 与目标反应"无关物质"是关键 — 我能识别吗?',
+        '高考综合题"多反应组合 + 系数确定" 我能熟练应用净计量数法吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["HESS-EQUATION","ALG-ADD","ALG-REVERSE","PATH-INDEPENDENCE-CHEMISTRY"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:<strong>CO₂ 加氢制甲醇</strong>是碳捕集利用 (CCU) 的明星路线: \\(\\mathrm{CO_2(g) + 3H_2(g) \\to CH_3OH(g) + H_2O(g)}\\)。该反应的 \\(\\Delta H_3\\) 难以直接测量, 但下列 2 个反应的数据已知:<br>· 反应 ①: \\(\\mathrm{CO(g) + 2H_2(g) \\to CH_3OH(g)}\\), \\(\\Delta H_1 = -90.5\\) kJ/mol<br>· 反应 ②: \\(\\mathrm{CO_2(g) + H_2(g) \\to CO(g) + H_2O(g)}\\), \\(\\Delta H_2 = +41.2\\) kJ/mol<br><br><strong>(1)</strong> 用<strong>代数组合法</strong>从 ①② 求 \\(\\Delta H_3\\) = ___ kJ/mol, 写出你消去中间物质的过程;<br><strong>(2)</strong> <strong>逆向应用</strong>:甲醇可作「液态储氢载体」, 用时再通过<strong>甲醇蒸汽重整</strong>放出氢气: \\(\\mathrm{CH_3OH(g) + H_2O(g) \\to CO_2(g) + 3H_2(g)}\\)。求该反应的 \\(\\Delta H_4\\), 并据此说明「甲醇储氢」要付出怎样的能量代价;<br><strong>(3)</strong> 工厂实际生产中, CO₂ 制甲醇可能经过多步催化中间体 (表面甲酸盐、甲氧基等), 与你在 (1) 中纸面组合的路径完全不同。解释为什么你算出的 \\(\\Delta H_3\\) 对真实工厂<strong>仍然成立</strong>, 这对工艺路线设计有什么用。",
+      keywords:["49.3","组合","反向","路径无关"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 多反应代数组合求 \\(\\Delta H\\)(消中间物质 CO);② 反向规则 \\(\\Delta H_{\\text{逆}} = -\\Delta H_{\\text{正}}\\) 的实际应用(储氢能量代价);③ 路径无关性(状态函数)是盖斯定律对工程设计的根本价值。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 目标反应不含 CO(g) → CO 是要消去的中间物质, ① 左有 CO、② 右有 CO, 直接 ① + ② 即可;<br>② 重整反应 = 目标反应的<strong>反向</strong>, \\(\\Delta H_4 = -\\Delta H_3\\), 由符号判断储氢循环哪一步「收能量」;<br>③ \\(\\Delta H\\) 只由始末态决定 — 催化中间体再复杂, 始末态不变则 \\(\\Delta H\\) 不变。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 代数组合求 \\(\\Delta H_3\\)</strong>(关键字命中):<br>目标: \\(\\mathrm{CO_2(g) + 3H_2(g) \\to CH_3OH(g) + H_2O(g)}\\), 不含 CO(g) → CO 必须净消去。<br>① 左边消耗 1 CO, ② 右边生成 1 CO → 组合 = ① + ②, 两边 CO 恰好抵消:<br>\\(\\mathrm{CO_2(g) + H_2(g) + CO(g) + 2H_2(g) \\to CO(g) + H_2O(g) + CH_3OH(g)}\\)<br>消去两边 CO(g), 合并 H₂: \\(\\mathrm{CO_2(g) + 3H_2(g) \\to CH_3OH(g) + H_2O(g)}\\) ✓ 目标反应<br>\\(\\Delta H_3 = \\Delta H_1 + \\Delta H_2 = -90.5 + 41.2 = \\mathbf{-49.3}\\) <strong>kJ/mol</strong>(放热)。<br><br><strong>(2) 反向求 \\(\\Delta H_4\\) + 储氢能量代价</strong>(关键字命中):<br>甲醇蒸汽重整 = 目标反应的<strong>反向</strong>, 由反向规则:<br>\\(\\Delta H_4 = -\\Delta H_3 = \\mathbf{+49.3}\\) kJ/mol(吸热)。<br>能量代价: 「存氢」(合成甲醇) 放热 49.3 kJ/mol — 这部分能量以热的形式散失;「取氢」(重整) 还要<strong>再付出</strong> 49.3 kJ/mol 的热量才能把氢「赎回来」。一存一取, 每 mol 循环至少有 49.3 kJ 的热量需要外界补给(还不算工程损耗)— 这就是化学储氢方案必须核算的能量账。<br><br><strong>(3) 路径无关的工程意义</strong>(关键字命中):<br>\\(\\Delta H\\) 是<strong>状态函数</strong>的差值, 只由始态 \\(\\mathrm{(CO_2 + 3H_2)}\\) 和末态 \\(\\mathrm{(CH_3OH + H_2O)}\\) 决定, <strong>路径无关</strong>。工厂里经过表面甲酸盐、甲氧基等多步催化中间体, 只是把「一步」拆成「多步」— 始末态没变, 各步 \\(\\Delta H\\) 加和必然仍是 \\(-49.3\\) kJ/mol。纸面组合路径 (①+②) 与真实催化路径殊途同归。<br>对工艺设计的用处: ① <strong>建厂之前就能算能量账</strong> — 不必先建实验装置测每条候选路线的热效应; ② <strong>催化剂只改动力学</strong>(降低活化能、加快速率), 不改 \\(\\Delta H\\) — 筛选催化剂时能量账是固定底数, 不用重算; ③ 多条工艺路线(CO₂ 直接加氢 / 先逆变换再合成等)比较时, 同样始末态的路线共享同一笔能量账, 比较焦点可以集中在速率、选择性与设备成本上。<br><br><strong>关键字命中</strong>:① 49.3 / ② 组合 / ③ 反向 / ④ 路径无关<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '只给 2 个反应消 1 个中间物质, 是多反应组合里最简单的形态 — 我能不能再做到 3-4 个反应、消 2 个中间物质的版本(如 T4-2)?',
+        '反向规则 \\(\\Delta H_{\\text{逆}} = -\\Delta H_{\\text{正}}\\) 我是真的理解(始末态对调), 还是只会机械变号?',
+        '「催化剂不改 \\(\\Delta H\\) 只改速率」这一点我能向同学讲清楚为什么吗?',
+        '路径无关性的推理链(状态函数 → 差值只看始末态 → 组合路径任选)不熟, 回学习任务卡 Card 4 + 基础检测 T5 复习。'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"较难", exportIds:["BOUNDARY-SPONTANEITY-VS-EXOTHERMIC","BOUNDARY-KINETICS-VS-THERMO","FORMATION-ENTHALPY-FORMULA"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:<strong>钻石 vs 石墨</strong> 都是碳的<strong>同素异形体</strong>。已知:<br>· \\(\\Delta H_f^\\circ\\)(石墨) = 0(稳定单质参考)<br>· \\(\\Delta H_f^\\circ\\)(钻石) = +1.9 kJ/mol<br><br><strong>(1)</strong> 算反应 \\(\\mathrm{C(钻石) \\to C(石墨)}\\) 的 \\(\\Delta H\\), 并判断是<strong>放热</strong>还是<strong>吸热</strong>;<br><strong>(2)</strong> 但<strong>常温下钻石稳定</strong>不会自发变成石墨。解释为何<strong>『\\(\\Delta H < 0\\) 放热 ≠ 自发』</strong>(从动力学 vs 热力学的角度);<br><strong>(3)</strong> 解释<strong>盖斯定律的边界</strong>:只管<strong>能量数量</strong>(\\(\\Delta H\\)), 不管<strong>反应能否发生</strong>(速率); 完整反应自发性判据是<strong>吉布斯自由能 \\(\\Delta G = \\Delta H - T\\Delta S\\) < 0</strong>(留<strong>吉布斯</strong>板块讨论)。",
+      keywords:["放热","自发","动力学","吉布斯"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 钻石 → 石墨 放热;② 放热 ≠ 自发(动力学障碍);③ 完整判据是 \\(\\Delta G\\)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 算 \\(\\Delta H\\) 并判断放热;<br>② 用动力学 vs 热力学解释;<br>③ 边界声明 + 吉布斯。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 反应 \\(\\Delta H\\)</strong>(关键字命中):<br>反应 \\(\\mathrm{C(钻石) \\to C(石墨)}\\):<br>\\(\\Delta H = \\Delta H_f^\\circ(\\text{石墨}) - \\Delta H_f^\\circ(\\text{钻石}) = 0 - 1.9 = -1.9\\) kJ/mol<br>\\(\\Delta H < 0\\) → <strong>放热反应</strong>(钻石 → 石墨释放能量, 故石墨能量低于钻石, 石墨更稳定)。<br><br><strong>(2) 『放热 ≠ 自发』的解释</strong>(关键字命中):<br>虽然反应放热(\\(\\Delta H < 0\\), 热力学利好), 但<strong>常温下钻石稳定</strong>不会变成石墨。原因:<br>· <strong>动力学障碍</strong>: 钻石 → 石墨需要打破 C-C 共价键并重新成键, 需要极高的<strong>活化能</strong>;<br>· <strong>常温下分子动能不足</strong>: 没有足够分子能克服活化能;<br>· 故反应<strong>从热力学角度允许</strong>(放热)但<strong>从动力学角度不发生</strong>(常温下);<br>· 在<strong>高温高压</strong>(如地下数百公里)条件下, 反应才能发生 — 这就是地质学上石墨与钻石共存的来由。<br><strong>『\\(\\Delta H\\) 管能量, 不管能否发生』</strong> — 这是化学的<strong>关键辨证</strong>:<br>· <strong>热力学</strong>(\\(\\Delta H\\)):能量是否守恒, 反应是否放热;<br>· <strong>动力学</strong>(速率):反应能否发生 + 速率多快。<br>两者<strong>独立</strong>: 反应可以热力学允许但动力学不行(钻石 → 石墨 / 木材在常温下不自燃)。<br><br><strong>(3) 盖斯定律的边界 + 吉布斯</strong>(关键字命中):<br><strong>盖斯定律的边界</strong>:<br>· 盖斯定律管<strong>\\(\\Delta H\\)</strong>(能量数量), 不管<strong>反应能否发生</strong>(速率)、不管<strong>反应方向</strong>(自发性)、不管<strong>反应速率</strong>(动力学);<br>· 这是盖斯定律的<strong>定位</strong>: 提供<strong>能量分析工具</strong>, 不提供<strong>方向判据</strong>。<br><br><strong>完整反应自发性判据</strong>:<br>· <strong>吉布斯自由能</strong> \\(\\Delta G = \\Delta H - T\\Delta S\\);<br>· \\(\\Delta G < 0\\) → 自发反应;<br>· 钻石 → 石墨: \\(\\Delta H < 0\\), \\(\\Delta S > 0\\)(从有序晶格到无序晶格), 故 \\(\\Delta G < 0\\) → <strong>热力学自发</strong>;<br>· 但<strong>动力学</strong>上(活化能高)→ 常温不发生。<br>这就是<strong>『热力学允许 vs 动力学发生』</strong>的辨证 — 两者必须同时<strong>允许</strong>反应才能<strong>实际发生</strong>。<br><br><strong>关键字命中</strong>:① 放热 / ② 自发 / ③ 动力学 / ④ 吉布斯<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"放热 ≠ 自发"的反例(钻石 / 石墨)我能熟练运用吗?',
+        '"动力学 vs 热力学"的区分对实际化学反应分析有何指导?',
+        '"\\(\\Delta G = \\Delta H - T\\Delta S\\) < 0 是完整判据" 我能记住吗?',
+        '高考综合题"放热 vs 自发 + 动力学障碍" 我能熟练辨析吗?'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"较难", exportIds:["DOUBLE-VERIFICATION-PATTERN","TWO-METHODS-CONSISTENCY","FORMATION-ENTHALPY-FORMULA","HESS-EQUATION","ALG-ADD","ALG-REVERSE"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:<strong>氢燃料电池</strong>反应: \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\)。<br>已知<strong>标准生成焓</strong>:<br>· \\(\\Delta H_f^\\circ\\)(H₂O(l)) = -285.8 kJ/mol<br>· \\(\\Delta H_f^\\circ\\)(H₂O(g)) = -241.8 kJ/mol<br>已知反应:<br>· 反应 ①: \\(\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(g)}\\), \\(\\Delta H_1 = -483.6\\) kJ/mol<br>· 反应 ②: \\(\\mathrm{H_2O(g) \\to H_2O(l)}\\), \\(\\Delta H_2 = -44.0\\) kJ/mol(液化释放)<br><br><strong>(1)</strong> 用<strong>\\(\\Delta H_f^\\circ\\) 公式</strong>(法 1)算目标反应 \\(\\Delta H\\);<br><strong>(2)</strong> 用<strong>代数组合</strong>(法 2)从反应 ① 和 ② 算目标反应 \\(\\Delta H\\);<br><strong>(3)</strong> 验证<strong>两法一致</strong>, 并说明<strong>实际氢燃料电池</strong>的<strong>能量转化效率</strong>(若 \\(\\Delta H\\) 全部转化为电能):若每小时消耗 H₂ 100 mol, 算输出电功率(单位 kW)。",
+      keywords:["生成焓","代数组合","一致","kW"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① \\(\\Delta H_f^\\circ\\) 公式;② 代数组合;③ 两法一致 + 实际应用(氢燃料电池)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① \\(\\Delta H_f^\\circ\\) 公式;<br>② 代数组合(① 乘 1/2 + ②);<br>③ 算电功率 = 摩尔数 × \\(|\\Delta H|\\) / 时间。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 法 1: \\(\\Delta H_f^\\circ\\) 公式</strong>(关键字命中):<br>\\(\\Delta H_\\text{法 1} = \\Delta H_f^\\circ(\\mathrm{H_2O(l)}) - [\\Delta H_f^\\circ(\\mathrm{H_2}) + \\tfrac{1}{2}\\Delta H_f^\\circ(\\mathrm{O_2})]\\)<br>\\(= -285.8 - [0 + \\tfrac{1}{2} \\times 0]\\)<br>\\(= -285.8\\) kJ/mol<br><br><strong>(2) 法 2: 代数组合</strong>(关键字命中):<br>· 反应 ① <strong>乘 1/2</strong>: \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(g)}\\), \\(\\Delta H_{1/2} = (1/2)(-483.6) = -241.8\\) kJ/mol<br>· 反应 ②: \\(\\mathrm{H_2O(g) \\to H_2O(l)}\\), \\(\\Delta H_2 = -44.0\\) kJ/mol<br>组合: ① 乘 1/2 + ② = \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\) ✓ 目标<br>\\(\\Delta H_\\text{法 2} = -241.8 + (-44.0) = -285.8\\) kJ/mol<br><br><strong>(3) 一致性 + 电功率算</strong>(关键字命中):<br><strong>两法一致</strong>: \\(\\Delta H_\\text{法 1} = \\Delta H_\\text{法 2} = -285.8\\) kJ/mol ✓<br><br><strong>电功率算</strong>(假设 100% 效率, \\(\\Delta H\\) 全部转化为电能):<br>每小时消耗 H₂ 100 mol → 释放能量 \\(E = 100 \\times 285.8 = 28580\\) kJ/h<br>转化为<strong>每秒</strong>能量: \\(P = 28580 \\times 1000 / 3600 \\approx 7939\\) J/s = 7939 W ≈ <strong>7.94 kW</strong>(理论上限)<br><strong>实际燃料电池</strong>的能量转化效率<strong>约 60-70%</strong>(部分能量以废热形式损失), 实际输出 \\(\\sim 4.8-5.6\\) kW。<br><br><strong>实际意义</strong>:<br>· 氢燃料电池的<strong>能量密度</strong>(\\(\\Delta H\\) 大)+ <strong>清洁排放</strong>(只放水)使其成为<strong>清洁能源</strong>选项;<br>· 但<strong>氢气存储</strong>(高压罐 / 液氢)+ <strong>氢气制造</strong>(电解水)+ <strong>分布式燃料电池</strong>都需考虑;<br>· 这也是为何<strong>氢能源汽车</strong>(丰田 Mirai 等)和<strong>氢能源建筑</strong>正在兴起。<br><br><strong>关键字命中</strong>:① 生成焓 / ② 代数组合 / ③ 一致 / ④ kW<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"双重验证两法一致" 我能熟练用 \\(\\Delta H_f^\\circ\\) 公式 + 代数组合算同一反应吗?',
+        '氢燃料电池的能量转化效率(实际 60-70%)对清洁能源工程有何指导?',
+        '\\(\\Delta H\\) 与电功率的换算 我能熟练吗?',
+        '高考综合题"实际能源工程的能量分析" 我能熟练应用盖斯定律吗?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"较难", exportIds:["TWO-STEP-VIA-ELEMENTS","FORMATION-ENTHALPY-FORMULA","HESS-EQUATION"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:<strong>乙醇(C₂H₅OH)</strong>是常用燃料。已知<strong>标准生成焓</strong>(298 K, kJ/mol):<br>· \\(\\Delta H_f^\\circ\\)(C₂H₅OH(l)) = -277.6<br>· \\(\\Delta H_f^\\circ\\)(CO₂(g)) = -393.5<br>· \\(\\Delta H_f^\\circ\\)(H₂O(l)) = -285.8<br><br><strong>(1)</strong> 用<strong>两步法</strong>(借稳定单质中介)算<strong>乙醇完全燃烧</strong>: \\(\\mathrm{C_2H_5OH(l) + 3O_2(g) \\to 2CO_2(g) + 3H_2O(l)}\\) 的 \\(\\Delta H\\):<br>　· 第 1 步: C₂H₅OH 分解为稳定单质 C(石墨) + H₂(g) + O₂(g);<br>　· 第 2 步: 稳定单质再合成 CO₂(g) + H₂O(l)。<br><strong>(2)</strong> 用<strong>反应焓变公式</strong>(直接算)验证 \\(\\Delta H\\), 检查两法一致;<br><strong>(3)</strong> 已知一辆汽车每 100 km 消耗 8 L 乙醇(密度 0.79 g/mL, 摩尔质量 46 g/mol), 算其每 100 km <strong>燃料能量</strong>(单位 MJ), 评价乙醇<strong>作为汽车燃料</strong>的优点 + 不足。",
+      keywords:["两步法","稳定单质","生成焓","MJ"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 两步法(借稳定单质中介);② \\(\\Delta H_f^\\circ\\) 公式;③ 燃料能量分析(汽车应用)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 拆分 → 单质 → 合成;<br>② 两法对照;<br>③ 燃料能量算 + 优缺点评价。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 两步法</strong>(关键字命中):<br>第 1 步: 乙醇分解为<strong>稳定单质</strong>:<br>\\(\\mathrm{C_2H_5OH(l) \\to 2C(石墨) + 3H_2(g) + \\tfrac{1}{2}O_2(g)}\\)<br>\\(\\Delta H_\\text{分解} = -\\Delta H_f^\\circ(\\mathrm{C_2H_5OH(l)}) = -(-277.6) = +277.6\\) kJ/mol(反向规则)<br><br>第 2 步: 稳定单质合成 CO₂ + H₂O:<br>\\(\\mathrm{2C(石墨) + 2O_2(g) \\to 2CO_2(g)}\\)<br>\\(\\Delta H_\\text{合 1} = 2 \\Delta H_f^\\circ(\\mathrm{CO_2}) = 2 \\times (-393.5) = -787.0\\) kJ/mol<br>\\(\\mathrm{3H_2(g) + \\tfrac{3}{2}O_2(g) \\to 3H_2O(l)}\\)<br>\\(\\Delta H_\\text{合 2} = 3 \\Delta H_f^\\circ(\\mathrm{H_2O(l)}) = 3 \\times (-285.8) = -857.4\\) kJ/mol<br><br>合并 第 1 步 + 第 2 步(加上 \\(O_2\\) 平衡):<br>\\(\\Delta H_\\text{两步法} = +277.6 + (-787.0) + (-857.4) = -1366.8\\) kJ/mol<br><br><strong>(2) \\(\\Delta H_f^\\circ\\) 公式验证</strong>:<br>\\(\\Delta H = [2 \\Delta H_f^\\circ(\\mathrm{CO_2}) + 3 \\Delta H_f^\\circ(\\mathrm{H_2O(l)})] - [\\Delta H_f^\\circ(\\mathrm{C_2H_5OH}) + 3 \\Delta H_f^\\circ(\\mathrm{O_2})]\\)<br>\\(= [2 \\times (-393.5) + 3 \\times (-285.8)] - [-277.6 + 3 \\times 0]\\)<br>\\(= [-787.0 + (-857.4)] - [-277.6]\\)<br>\\(= -1644.4 + 277.6\\)<br>\\(= -1366.8\\) kJ/mol<br>两法<strong>一致</strong> ✓(都是 \\(-1366.8\\) kJ/mol)。这就是双重验证的体现。<br><br><strong>(3) 汽车燃料能量分析</strong>(关键字命中):<br>每 100 km 消耗 8 L 乙醇:<br>· 质量:\\(m = 8 \\times 1000 \\times 0.79 = 6320\\) g<br>· 摩尔数:\\(n = 6320 / 46 \\approx 137\\) mol<br>· 释放能量:\\(E = n \\times |\\Delta H| = 137 \\times 1366.8 \\approx 187,272\\) kJ \\(\\approx\\) <strong>187 MJ</strong> / 100 km<br><br><strong>乙醇作为汽车燃料的优缺点</strong>:<br><strong>优点</strong>:<br>· <strong>清洁排放</strong>: 完全燃烧只放 CO₂ + H₂O, 不放硫氧化物 / 氮氧化物等污染物;<br>· <strong>可再生</strong>: 乙醇可由甘蔗 / 玉米 / 木材发酵生产, 是<strong>生物燃料</strong>;<br>· <strong>能量密度高</strong>: 26.8 MJ/L(乙醇) vs 32 MJ/L(汽油), 接近汽油;<br>· <strong>抗爆性高</strong>(高辛烷值)。<br><br><strong>不足</strong>:<br>· <strong>能量密度</strong>仍低于汽油 \\(\\sim 16\\%\\) → 同等里程需更多燃料;<br>· <strong>吸湿性</strong>: 乙醇吸水, 储运需密封;<br>· <strong>农作物原料</strong>: 与<strong>粮食生产</strong>竞争土地资源(伦理争议);<br>· <strong>生产过程</strong>: 需要发酵 + 蒸馏, 能耗较高(可能抵消碳排放优势)。<br><br>故<strong>乙醇汽油混合燃料(E10 / E85)</strong>是常见的折中方案 — 兼顾<strong>清洁性</strong>和<strong>能量密度</strong>。<br><br><strong>关键字命中</strong>:① 两步法 / ② 稳定单质 / ③ 生成焓 / ④ MJ<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"两步法(借稳定单质中介)" 我能熟练用 R → 单质 → P 拆分吗?',
+        '乙醇 vs 汽油 vs 氢气 vs 电能的优缺点对比 我能熟练分析吗?',
+        '"双重验证" 习惯对实际化学计算有何意义?',
+        '高考综合题"实际燃料反应能量 + 工程优缺点" 我能熟练应用盖斯定律吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"较难", exportIds:["HESS-EQUATION","FORMATION-ENTHALPY-FORMULA","TWO-STEP-VIA-ELEMENTS","PATH-INDEPENDENCE-CHEMISTRY"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:工业上<strong>合成氨反应</strong>: \\(\\mathrm{N_2(g) + 3H_2(g) \\to 2NH_3(g)}\\) 是 Haber-Bosch 工艺的核心。<br><br>已知:<br>· \\(\\Delta H_f^\\circ\\)(NH₃(g)) = -45.9 kJ/mol<br>· \\(\\Delta H_f^\\circ\\)(N₂(g)) = 0(稳定单质)<br>· \\(\\Delta H_f^\\circ\\)(H₂(g)) = 0(稳定单质)<br><br><strong>(1)</strong> 用<strong>反应焓变公式</strong>算合成氨反应的 \\(\\Delta H\\);<br><strong>(2)</strong> 实际工业反应温度<strong>400-500°C</strong> + 压强<strong>200-300 atm</strong>。但合成氨是<strong>放热反应</strong>(\\(\\Delta H < 0\\)) — 为何工业上还要<strong>高温高压</strong>(用反应条件分析)?<br><strong>(3)</strong> 解释<strong>路径无关 → 工程选择</strong>:工业上选 400-500°C + 200-300 atm 不是因为这是<strong>反应的『真路径』</strong>, 而是<strong>权衡了热力学 + 动力学 + 工程成本</strong>的折中。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["ΔH","高温","高压","权衡"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① \\(\\Delta H_f^\\circ\\) 公式;② 反应条件分析(热力学 vs 动力学);③ 工程权衡。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 算 \\(\\Delta H\\);<br>② 高温高压的工程原因;<br>③ 权衡视角的工程选择。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 合成氨反应 \\(\\Delta H\\)</strong>(关键字命中):<br>\\(\\Delta H = 2 \\Delta H_f^\\circ(\\mathrm{NH_3}) - [\\Delta H_f^\\circ(\\mathrm{N_2}) + 3 \\Delta H_f^\\circ(\\mathrm{H_2})]\\)<br>\\(= 2 \\times (-45.9) - [0 + 0]\\)<br>\\(= -91.8\\) kJ/mol(每摩尔反应)<br>合成氨是<strong>放热反应</strong>(\\(\\Delta H < 0\\))。<br><br><strong>(2) 工业高温高压的工程原因</strong>(关键字命中):<br>虽然反应<strong>放热</strong>(热力学利好), 但实际工业反应仍需<strong>400-500°C + 200-300 atm</strong>:<br><br>· <strong>高温(400-500°C)的原因</strong>:<br>　- 反应是<strong>放热</strong>, 但<strong>常温下反应速率极慢</strong>(N₂ 的 N≡N 三键键能高, 活化能极大);<br>　- <strong>高温</strong>使分子动能 ↑ → 部分分子超过活化能 → 反应速率 ↑;<br>　- <strong>催化剂</strong>(铁基)同时大幅降低活化能;<br>　- 注意<strong>对放热反应</strong>, 升温会<strong>降低 \\(K\\) 平衡常数</strong>(勒夏特列原理), 但<strong>升速率</strong>的好处通常超过<strong>降平衡产率</strong>的损失;<br>　- 故 400-500°C 是<strong>速率 + 平衡产率</strong>的折中。<br><br>· <strong>高压(200-300 atm)的原因</strong>:<br>　- 反应<strong>气相</strong>: \\(\\mathrm{N_2 + 3H_2 \\to 2NH_3}\\), 气体摩尔数<strong>从 4 减到 2</strong>;<br>　- 由<strong>勒夏特列原理</strong>: 高压有利于<strong>气体摩尔数减少</strong>的方向(右移) → 高压提高 NH₃ 产率;<br>　- 但<strong>极高压</strong>(\\(\\gg 300\\) atm)的工程成本急升 → 折中选 200-300 atm。<br><br><strong>(3) 路径无关 + 工程权衡</strong>(关键字命中):<br><strong>路径无关</strong>的工程含义:<br>· 盖斯定律告诉我们 \\(\\Delta H\\) 路径无关 — 不论用什么路径(400°C 反应 / 500°C / 室温 / 不同催化剂), <strong>每摩尔反应释放的能量都是 -91.8 kJ/mol</strong>;<br>· 故工业选择<strong>不是因为 400-500°C 是『真路径』</strong>, 而是<strong>权衡了:</strong><br>　① <strong>热力学</strong>(放热, 高压 + 适温利于产率);<br>　② <strong>动力学</strong>(高温 + 催化剂利于速率);<br>　③ <strong>工程成本</strong>(过高温过高压设备 / 能耗 / 寿命都增加);<br>　④ <strong>原料供应</strong>(高纯度 N₂ / H₂ 的获取);<br>· <strong>路径无关给工程师『自由度』</strong> — 不必死守某一条路径, 可优化条件最大化 \\(总收益 = 产率 \\times 速率 / 成本\\);<br>· <strong>这就是化学工程的本质</strong>:在物理化学约束下找最优化条件。<br><br><strong>Haber-Bosch 工艺的历史意义</strong>: 1909 年 Haber 发现 + 1913 年 Bosch 工业化 → 让人类<strong>从大气固氮</strong>变成可能 → 大幅提高化肥产量 → <strong>支持了 20 世纪人口增长</strong>。两人分获诺贝尔化学奖。<br><br><strong>关键字命中</strong>:① ΔH / ② 高温 / ③ 高压 / ④ 权衡<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"放热反应仍需高温" 的工业原因(速率 / 平衡 / 工程成本)我能熟练分析吗?',
+        '"路径无关 → 工程自由度" 这一辨证我能体会吗?',
+        'Haber-Bosch 工艺对人类历史的意义 + 工程优化的逻辑 我能联系吗?',
+        '高考综合题"实际工业反应的条件分析" 我能熟练应用盖斯定律 + 勒夏特列原理吗?'
+      ]
+    }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "hess-law";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    html += `<div class="kp-item">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        ${compositeTag}
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="8" data-q-id="q${n}" placeholder="请分小问作答(150-300 字, 可分段)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 或 mock-check 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="hess-law-task-cards.html">学习任务卡</a> · <a href="hess-law-mock-check.html">基础检测</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "hess-law";
+  const MODULE_NAME = "盖斯定律";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

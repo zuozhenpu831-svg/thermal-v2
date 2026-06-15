@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>燃烧热与中和热 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .deepening-recommendation {
+    background: linear-gradient(135deg, rgba(142, 68, 173, 0.06), rgba(142, 68, 173, 0.10));
+    border-left: 4px solid var(--accent-purple);
+    border-radius: 0 12px 12px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+  }
+  .deepening-recommendation .dr-title { font-size: 1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .deepening-recommendation .dr-title::before { content: '🔭'; font-size: 1.1rem; }
+  .deepening-recommendation strong { color: var(--accent-purple); }
+  .deepening-recommendation a { color: var(--accent-purple); text-decoration: underline; font-weight: 600; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>燃烧热与中和热 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>燃烧热与中和热</h1>
+    <div class="subtitle">两类特殊形式的反应焓变 · 用实验直接测 ΔH 的标准 2 板斧</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>燃烧热与中和热（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>2.5-3 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>热力学第一定律</strong>（必读 —— 反应焓变 ΔH 与 Q<sub>p</sub> 的关系是本板块定义的基础）<br><strong>盖斯定律</strong>（必读 —— 燃烧热 / 中和热都是盖斯定律算 ΔH 的特殊形式 / 高频输入数据）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；化学手册或 NIST WebBook 上的标准燃烧热和中和热数据；对水的比热容 c = 4.18 J/(g·K) 的熟练度</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能陈述<strong>燃烧热</strong>的严格定义（25°C、1 atm 下，<strong>1 mol 可燃物完全燃烧</strong>生成<strong>稳定氧化物</strong>时放出的热量，\(\Delta H_燃 &lt; 0\)）</li>
+      <li>能陈述<strong>中和热</strong>的严格定义（25°C、1 atm 下，强酸强碱稀溶液中和生成 <strong>1 mol 液态水</strong>时放出的热量，\(\Delta H_中 \approx -57.3\) kJ/mol）</li>
+      <li>能解释"完全燃烧"、"稳定氧化物"、"生成 1 mol H₂O" 等限定词的物理意义（为什么必须这么规约才不歧义）</li>
+      <li>能用 <strong>Q = mcΔT</strong> 算实验测得的反应热（简易量热计的核心算式）</li>
+      <li>能比较强酸强碱 vs 弱酸弱碱中和热的差异（数值 + 物理原因：弱电解质先吸热电离再中和）</li>
+      <li>能把燃烧热 / 中和热看作<strong>盖斯定律算 ΔH 的特殊形式 / 高频输入数据</strong>，二者本质同根（都建立在 H 是状态量上）</li>
+      <li>知道本板块不深入：弹式量热计的等容 \(Q_V\) vs 等压 \(Q_p\) 的修正 / 量热计工程设计 / 弱电解质电离热定量分析 —— 这些留给进阶板块或大学物理化学</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>三个化学反应能量的核心问题 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li><strong>燃料热值比较</strong>：厨房煤气（甲烷 CH₄）vs 木炭（碳 C）vs 汽油（约 C₈H₁₈），哪个"热值"更大？用什么物理量比较？单位是什么？</li>
+      <li><strong>同种反应不同热量</strong>：同样是中和反应，HCl + NaOH 和 CH₃COOH（乙酸）+ NaOH 放出的热量一样吗？为什么？</li>
+      <li><strong>实验直接测 ΔH</strong>：盖斯定律给了我们"用已知反应算未知反应 ΔH"的方法 —— 但<strong>已知反应的 ΔH 又是怎么测来的</strong>？实验室里如何<strong>直接</strong>测一个反应的 ΔH？</li>
+    </ul>
+    <p style="margin-top: 6px;">本板块的任务，是把<strong>两类最常用的"实验直接测 ΔH" 的形式</strong> —— 燃烧热和中和热 —— 讲清。它们是化学手册里 ΔH 数据的<strong>主要来源</strong>，也是高频考点。</p>
+    <p class="hint">（提示：盖斯定律给"计算方法"，本板块给"实验测量方法"。两者互补：算 ΔH 时需要查数据，而数据本身是由燃烧热 / 中和热等实验测出来的。）</p>
+  </div>
+
+  <div class="deepening-recommendation">
+    <div class="dr-title">本板块的"深化路径"推荐 — 学有余力的学生</div>
+    <p>本板块只到燃烧热 / 中和热的<strong>定义 + 实验原理 + 应用</strong>为止，<strong>不深入</strong>等容 vs 等压热的修正、量热计的工程优化、弱电解质电离热的定量。如果你已掌握以下 3 个进阶板块（它们之间存在前置链 —— <strong>卡诺循环 → 状态函数与非状态函数 → 焓与焓变</strong>），<strong>建议按顺序学完再回来读本板块</strong>，你会从"实验测量层"升到"理论框架层"：</p>
+    <ol style="margin-left: 20px; margin-top: 4px;">
+      <li><a href="carnot-cycle-task-cards.html">卡诺循环（进阶）</a> —— 第二定律的数学化起点。严格推导卡诺效率 η = 1 − T₂/T₁，引出"存在一个新的状态量"的隐含线索（即熵）</li>
+      <li><a href="state-functions-task-cards.html">状态函数与非状态函数（进阶）</a> —— 前置：卡诺循环。严格定义"状态函数"概念，论证"组合状态量得到的量也是状态量"（这是 H = U + PV 是状态量的形式化版本）</li>
+      <li><a href="enthalpy-meaning-task-cards.html">焓与焓变的意义（进阶）</a> —— 前置：状态函数。严格推导 ΔH = Q<sub>p</sub>（等压热与焓变的关系）+ 标准生成焓 ΔHf° 的完整体系，理解为什么"燃烧热"是 ΔH 的一种特殊形式</li>
+    </ol>
+    <p style="margin-top: 6px;"><strong>没学进阶也完全可以学懂本板块</strong>（本板块自成体系，所有需要的概念在 Card 1 STEP 1 prereq-recap 自包含给出）。深化是"扩展理解"，不是"必读前置"。</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>燃烧热 ΔH<sub>燃</sub> — 定义 + 实验测量</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 严格陈述燃烧热定义（含 4 个关键限定词）→ 理解弹式量热计的实验原理 → 学会查表算具体反应的燃烧热<br>
+        <strong>建议时长</strong>: 40-50 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>燃烧反应都放热（ΔH &lt; 0）。但"放多少热"和什么<strong>变量</strong>有关？反应物的<strong>量</strong>？反应物的<strong>种类</strong>？产物的<strong>状态</strong>（CO 还是 CO₂、H₂O 液态还是气态）？</li>
+            <li>"煤气热值高"是什么意思？这里"热值"的单位是什么？</li>
+            <li>如果你要在实验室<strong>测一个燃料的"热值"</strong>，怎么测？需要什么设备？</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>先回顾（核心理论根基）</strong>：<br>
+            前置 <a href="basic-task-cards.html">热力学第一定律</a> 板块讲过 —— 在<strong>恒压</strong>条件下（实验室空气压力下反应），系统吸收的热量恰好等于焓变：<strong>Q<sub>p</sub> = ΔH</strong>。<br>
+            所以化学反应在标准实验条件（25°C、1 atm）下测得的"放热量"就是 −ΔH（注意符号：放热时系统失去热量，Q<sub>p</sub> &lt; 0，对应 ΔH &lt; 0）。<br>
+            前置 <a href="hess-law-task-cards.html">盖斯定律</a> 板块讲过 —— 反应焓变 ΔH 是<strong>状态量</strong>，只依赖始末态，与路径无关。所以"测某反应的 ΔH" = 找一个能控制的实验路径让始末态明确。<br>
+            本板块的<strong>燃烧热和中和热</strong>，就是两类最容易控制始末态的实验测量方法。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">燃烧热的严格定义</span></div>
+        <div class="step-content">
+
+          <div class="quote-block" style="font-size: 1rem; padding: 16px;">
+            <strong>燃烧热定义 ⭐⭐</strong><br>
+            <br>
+            在<strong>标准条件</strong>（25°C、1 atm）下，<strong>1 mol 可燃物完全燃烧</strong>生成<strong>稳定氧化物</strong>时放出的热量，称为该可燃物的<strong>燃烧热</strong>，记作 \(\Delta H_燃\)（单位：kJ/mol），数值<strong>始终为负</strong>（因为燃烧总是放热）。
+          </div>
+
+          <p><strong>定义里的 4 个关键限定词</strong>:</p>
+          <table class="compare-table">
+            <tr><th>限定词</th><th>含义</th><th>不这么规约会怎样？</th></tr>
+            <tr><td><strong>标准条件 25°C/1 atm</strong></td><td>规定测量温度和压力的"基准点"</td><td>温度 / 压强不同 ΔH 会有微小差异，没有统一标准就没法对比</td></tr>
+            <tr><td><strong>1 mol 可燃物</strong></td><td>归一化到"每摩尔可燃物"</td><td>不规定 mol 数, 数值随反应量变化, 没法比较</td></tr>
+            <tr><td><strong>完全燃烧</strong></td><td>所有可氧化的元素都被氧化到<strong>最稳定的形式</strong>(碳 → CO₂ 不是 CO; 氢 → H₂O 不是 H₂O₂; 硫 → SO₂ 不是 SO₃)</td><td>"不完全燃烧"放热少, 没法区分是燃料种类不同还是燃烧程度不同</td></tr>
+            <tr><td><strong>稳定氧化物</strong></td><td>产物用"标准条件下最稳定的形式": CO₂(g) / H₂O(<strong>液态</strong>) / SO₂(g)</td><td>H₂O 液态 vs 气态相差约 +44 kJ/mol(蒸发吸热), 不约定就有 ±44 kJ/mol 误差</td></tr>
+          </table>
+
+          <div class="quote-block">
+            <strong>特别注意 H₂O 是液态</strong>: 燃烧热约定生成 <strong>H₂O(l) 液态</strong>，不是 H₂O(g) 气态。<br>
+            · 高位热值（HHV，按 H₂O 液态算）= 化学手册中的"燃烧热"<br>
+            · 低位热值（LHV，按 H₂O 气态算）= 实际工程中的"可用热值"<br>
+            两者差 = 燃料中氢生成的水的<strong>蒸发热</strong>。本板块用高位热值（即标准燃烧热）。
+          </div>
+
+          <p><strong>典型燃烧热数据（标准燃烧热 ΔH<sub>燃</sub>, kJ/mol, 25°C/1 atm）</strong>:</p>
+          <table class="compare-table">
+            <tr><th>可燃物</th><th>反应方程式</th><th>ΔH<sub>燃</sub> (kJ/mol)</th><th>说明</th></tr>
+            <tr><td>碳（石墨）</td><td>C(s) + O₂(g) → CO₂(g)</td><td>−393.5</td><td>木炭的核心反应</td></tr>
+            <tr><td>氢气</td><td>H₂(g) + ½O₂(g) → H₂O(l)</td><td>−285.8</td><td>注意 H₂O 是液态</td></tr>
+            <tr><td>甲烷</td><td>CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l)</td><td>−890.3</td><td>厨房煤气 / 天然气主成分</td></tr>
+            <tr><td>乙醇（液态）</td><td>C₂H₅OH(l) + 3O₂(g) → 2CO₂(g) + 3H₂O(l)</td><td>−1366.8</td><td>生物燃料</td></tr>
+            <tr><td>乙炔</td><td>C₂H₂(g) + 5/2 O₂(g) → 2CO₂(g) + H₂O(l)</td><td>−1299.6</td><td>焊接用气</td></tr>
+            <tr><td>辛烷</td><td>C₈H₁₈(l) + 25/2 O₂(g) → 8CO₂(g) + 9H₂O(l)</td><td>−5470</td><td>汽油主成分（约值）</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">弹式量热计 — 怎么实验测燃烧热</span></div>
+        <div class="step-content">
+          <p>要直接测一个燃料的燃烧热，标准实验装置是<strong>弹式量热计</strong>(bomb calorimeter):</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">弹式量热计示意</text>
+              <!-- 主图形(集中在中部, 所有标签外置 + 引线) -->
+              <!-- 保温外壳 -->
+              <rect x="195" y="65" width="190" height="210" fill="none" stroke="#7f8c8d" stroke-width="2.5" rx="10"></rect>
+              <!-- 水浴 -->
+              <rect x="210" y="110" width="160" height="150" fill="#cfe9f8" stroke="#3498db" stroke-width="1.5" rx="6"></rect>
+              <!-- 钢弹 -->
+              <rect x="245" y="160" width="90" height="80" fill="#6e6e73" stroke="#1d1d1f" stroke-width="2" rx="4"></rect>
+              <!-- 温度计 (玻璃管 + 水银柱) -->
+              <rect x="225" y="80" width="12" height="90" fill="#fff" stroke="#34495e" stroke-width="1"></rect>
+              <rect x="225" y="160" width="12" height="6" fill="#c0392b"></rect>
+              <!-- 搅拌器 (杆 + 螺旋叶片) -->
+              <line x1="345" y1="80" x2="345" y2="180" stroke="#34495e" stroke-width="2"></line>
+              <line x1="335" y1="180" x2="355" y2="180" stroke="#34495e" stroke-width="2"></line>
+              <line x1="338" y1="188" x2="352" y2="188" stroke="#34495e" stroke-width="2"></line>
+              <!-- 电极 (从顶部入钢弹) -->
+              <line x1="265" y1="160" x2="265" y2="90" stroke="#27ae60" stroke-width="1.5"></line>
+              <line x1="315" y1="160" x2="315" y2="90" stroke="#27ae60" stroke-width="1.5"></line>
+
+              <!-- 外置标签 + 引线 (左侧 3 个) -->
+              <line x1="195" y1="90" x2="170" y2="90" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="165" y="88" text-anchor="end" font-size="10" font-weight="700" fill="#7f8c8d">保温外壳</text>
+              <text x="165" y="103" text-anchor="end" font-size="9" fill="#7f8c8d">减少热损失</text>
+              <line x1="225" y1="130" x2="170" y2="130" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="165" y="128" text-anchor="end" font-size="10" font-weight="700" fill="#c0392b">温度计</text>
+              <text x="165" y="143" text-anchor="end" font-size="9" fill="#c0392b">测 ΔT</text>
+              <line x1="210" y1="210" x2="170" y2="210" stroke="#2980b9" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="165" y="208" text-anchor="end" font-size="10" font-weight="700" fill="#2980b9">水浴</text>
+              <text x="165" y="223" text-anchor="end" font-size="9" fill="#2980b9">已知 m, c</text>
+
+              <!-- 外置标签 + 引线 (右侧 3 个) -->
+              <line x1="315" y1="100" x2="410" y2="100" stroke="#27ae60" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="415" y="98" font-size="10" font-weight="700" fill="#27ae60">电极</text>
+              <text x="415" y="113" font-size="9" fill="#27ae60">电火花引燃</text>
+              <line x1="355" y1="140" x2="410" y2="140" stroke="#34495e" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="415" y="138" font-size="10" font-weight="700" fill="#34495e">搅拌器</text>
+              <text x="415" y="153" font-size="9" fill="#34495e">均温</text>
+              <line x1="335" y1="200" x2="410" y2="200" stroke="#1d1d1f" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="415" y="198" font-size="10" font-weight="700" fill="#1d1d1f">钢弹</text>
+              <text x="415" y="213" font-size="9" fill="#34495e">耐高压</text>
+              <text x="415" y="225" font-size="9" fill="#34495e">内: 可燃物 + 过量 O₂</text>
+
+              <!-- 底部公式 -->
+              <text x="270" y="300" text-anchor="middle" font-size="13" font-weight="700" fill="#00409A">Q<tspan font-size="9" dy="3">燃</tspan><tspan dy="-3"></tspan> = m × c × ΔT + C<tspan font-size="9" dy="3">弹</tspan><tspan dy="-3"></tspan> × ΔT</text>
+            </svg>
+            <div class="diagram-caption">图 1 · 弹式量热计核心结构。中心由内到外三层：深灰色矩形为钢弹（厚壁耐高压钢制容器，标注在右侧），内放可燃物 + 过量 O₂；浅蓝色矩形为水浴（标注在左侧, 已知质量 m 和比热 c）；最外层灰色边框为保温外壳（标注在左上, 减少热损失）。温度计（左侧细白色矩形 + 底部红色水银柱, 标注在左侧）插入水浴测温升 ΔT；搅拌器（右侧灰色杆 + 螺旋叶片, 标注在右侧）保持水温均匀；电极（绿色 2 根, 从顶部进入钢弹）通过电火花引燃可燃物。底部蓝色公式 Q<sub>燃</sub> = m × c × ΔT + C<sub>弹</sub> × ΔT 表示水吸热与钢弹吸热之和。整个反应是<strong>等容过程</strong>（钢弹体积不变），测得的是 Q<sub>V</sub>；严格说 Q<sub>V</sub> 与 ΔH(Q<sub>p</sub>) 有微小修正(留给进阶板块)，但对大多数燃料修正很小，可近似 Q<sub>燃</sub> ≈ ΔH<sub>燃</sub>。</div>
+          </div>
+
+          <p><strong>测量原理</strong>:</p>
+          <ol>
+            <li>把已知质量 \(m_可燃\) 的可燃物 + 过量 O₂ 装进钢弹</li>
+            <li>钢弹放入水浴，记录初始水温 \(T_1\)</li>
+            <li>电火花引燃可燃物，可燃物完全燃烧释放热量给水浴和钢弹</li>
+            <li>搅拌均匀后记录最高水温 \(T_2\)（ΔT = T<sub>2</sub> - T<sub>1</sub>）</li>
+            <li>算: 热量 = 水吸热 + 钢弹吸热 = \(m \cdot c \cdot \Delta T + C_弹 \cdot \Delta T\)</li>
+            <li>除以可燃物摩尔数得每摩尔放热 = 燃烧热</li>
+          </ol>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 为什么燃烧热是"1 mol 可燃物"而不是"1 mol O₂"？</div>
+            <div class="tp-pause">燃烧反应是<strong>可燃物 + O₂</strong>。为什么定义燃烧热按"1 mol 可燃物"归一化, 而不是"1 mol O₂"？</div>
+            <div class="tp-ask">关键: <strong>O₂ 是所有燃烧反应共有的反应物, 但可燃物种类不同</strong>。我们关心的是"不同燃料的能量密度", 所以应该按<strong>可燃物</strong>归一化才便于对比。<br>
+              另一个原因: 不同可燃物的化学计量数中 O₂ 系数不同(CH₄ 需 2 O₂, C 需 1 O₂, 乙醇需 3 O₂...), 按"1 mol O₂"算反而是变量, 不像"1 mol 可燃物"那么干净。<br>
+              这就是为什么燃烧热的方程式总是写成"1 mol 可燃物 + 配平所需 O₂ → 产物"的形式, 而 O₂ 的系数可以是 1, 2, 3, 甚至分数(如 ½, 5/2)。</div>
+            <div class="tp-write">在纸上: ① 写"为什么按可燃物归一化"的两个理由; ② 用 CH₄、C、C₂H₅OH 三个燃烧方程的 O₂ 系数说明"O₂ 系数不固定"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 算 CH₄ 燃烧热（用 ΔHf° 数据验证）</div>
+            <div class="tp-pause">用盖斯定律 + 标准生成焓 ΔHf° 数据算 CH₄ 的燃烧热, 看与表格 -890.3 kJ/mol 是否一致。给定数据：ΔHf°(CH₄) = -74.8, ΔHf°(O₂) = 0（稳定单质）, ΔHf°(CO₂) = -393.5, ΔHf°(H₂O,l) = -285.8 kJ/mol。</div>
+            <div class="tp-ask">反应: CH₄(g) + 2O₂(g) → CO₂(g) + 2H₂O(l)。<br>
+              用盖斯定律的"反应焓变 = Σν·ΔHf°(产物) − Σν·ΔHf°(反应物)" 公式:<br>
+              ΔH<sub>燃</sub> = [1×(-393.5) + 2×(-285.8)] − [1×(-74.8) + 2×0]<br>
+              = [(-393.5) + (-571.6)] − [(-74.8) + 0]<br>
+              = -965.1 - (-74.8)<br>
+              = <strong>-890.3 kJ/mol</strong> ✓<br>
+              与表格完全一致!<br>
+              <strong>核心收获</strong>: 燃烧热不是新原理, 它是<strong>盖斯定律算 ΔH 的特殊情形</strong>(始态 = 可燃物 + O₂, 末态 = 完全燃烧产物)。手册上的燃烧热数据可以由 ΔHf° 数据算出, 也可以由实验测得 —— 两种来源互相验证。</div>
+            <div class="tp-write">在纸上: ① 写出 CH₄ 燃烧的方程式; ② 用 ΔHf° 公式算; ③ 验证与表格 -890.3 一致; ④ 一句话总结"燃烧热与盖斯定律的关系"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界 — 本板块对燃烧热到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: 弹式量热计的<strong>等容 Q<sub>V</sub> 与等压 Q<sub>p</sub></strong> 严格修正(ΔH = Q<sub>p</sub> = Q<sub>V</sub> + RTΔn<sub>g</sub>, 修正约几 kJ/mol)—— 留给进阶 焓与焓变 板块</li>
+            <li><strong>不引入</strong>: 量热计的<strong>工程优化</strong>(钢弹耐压设计, 热损失修正系数, 水当量校准)—— 留给大学物理化学实验</li>
+            <li><strong>不引入</strong>: 高位热值 vs 低位热值的工程使用规范(本板块只用化学手册的"标准燃烧热", 即高位热值)—— 留给工程热力学</li>
+            <li><strong>本板块完成</strong>: 燃烧热的严格定义 + 实验测量原理 + 与盖斯定律的连接 + 化学手册查表使用</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="cn1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立陈述燃烧热的严格定义（25°C/1 atm + 1 mol 可燃物 + 完全燃烧 + 稳定氧化物）</span></label>
+        <label data-key="cn1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释 4 个限定词（标准条件 / 1 mol 可燃物 / 完全燃烧 / 稳定氧化物）的物理意义</span></label>
+        <label data-key="cn1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写 4-5 种典型燃料的燃烧热数值（甲烷 -890.3 / 碳 -393.5 / 氢 -285.8 / 乙醇 -1366.8 kJ/mol）</span></label>
+        <label data-key="cn1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能画弹式量热计的核心结构（钢弹 / 水浴 / 温度计 / 搅拌器 / 保温外壳）并说出测量步骤</span></label>
+        <label data-key="cn1c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用盖斯定律 + ΔHf° 数据算 CH₄ 燃烧热 = -890.3 kJ/mol, 验证与实验值一致</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：实验测量原理 · 概念严格化 · 化学手册的使用</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>中和热 ΔH<sub>中</sub> — 定义 + 实验测量</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 严格陈述中和热定义（含"强酸强碱"、"生成 1 mol 液态水"两个关键约定）→ 理解强酸强碱中和热 ≈ -57.3 kJ/mol 的本质（H⁺ + OH⁻ → H₂O）→ 解释弱电解质对中和热的影响 → 学会简易量热计 Q = mcΔT<br>
+        <strong>建议时长</strong>: 40-50 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>酸碱中和反应"放热"的根本原因是什么？反应中<strong>哪一步</strong>真正在放热？</li>
+            <li>HCl + NaOH → NaCl + H₂O 和 H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O 这两个反应的"中和热"应该<strong>一样</strong>吗？</li>
+            <li>如果换成<strong>弱酸</strong>(如乙酸 CH₃COOH)和强碱 NaOH 中和，放出的热量会和强酸强碱一样吗？</li>
+          </ul>
+
+          <p>给一个核心猜测：<strong>中和反应的本质是 H⁺ + OH⁻ → H₂O，所以中和热应该按"生成 1 mol 水"归一化</strong>。强酸强碱的中和热基本相同；弱酸弱碱因为先要"电离"才能参与反应，所以净放热会少一些。Card 2 把这点讲清。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">中和热的严格定义</span></div>
+        <div class="step-content">
+
+          <div class="quote-block" style="font-size: 1rem; padding: 16px;">
+            <strong>中和热定义 ⭐⭐</strong><br>
+            <br>
+            在<strong>标准条件</strong>（25°C、1 atm）下，<strong>强酸强碱稀溶液</strong>发生中和反应生成 <strong>1 mol 液态水</strong>时放出的热量，称为<strong>中和热</strong>，记作 \(\Delta H_中\)。<br>
+            <br>
+            <strong>关键数值</strong>: 对所有强酸强碱稀溶液，\(\Delta H_中 \approx -57.3\) kJ/mol。
+          </div>
+
+          <p><strong>定义里的 3 个关键约定</strong>:</p>
+          <table class="compare-table">
+            <tr><th>约定</th><th>含义</th><th>为什么这么规定？</th></tr>
+            <tr><td><strong>强酸强碱稀溶液</strong></td><td>强酸 = HCl / H₂SO₄ / HNO₃ 等完全电离; 强碱 = NaOH / KOH / Ba(OH)₂ 等完全电离; "稀"= 浓度 ≤ 1 mol/L</td><td>强电解质 100% 电离, 反应本质是 H⁺ + OH⁻ → H₂O, 不需要先电离吸热</td></tr>
+            <tr><td><strong>生成 1 mol 液态水</strong></td><td>归一化到"每摩尔生成水"</td><td>所有酸碱中和的化学计量不同(1 H₂SO₄ + 2 NaOH 生成 2 mol H₂O), 按"水的 mol"归一化才统一</td></tr>
+            <tr><td><strong>液态水</strong></td><td>产物 H₂O 是液态(实验在水溶液中)</td><td>实验温度 25°C 远低于沸点 100°C, 水必然是液态; 与燃烧热"H₂O 液态"约定一致</td></tr>
+          </table>
+
+          <p><strong>本质 — 离子方程式 ⭐</strong>:</p>
+          <div class="quote-block" style="font-size: 1rem; text-align: center; padding: 16px;">
+            <strong>H⁺(aq) + OH⁻(aq) → H₂O(l)</strong>　　\(\Delta H = -57.3\) kJ/mol
+          </div>
+          <p>这是所有强酸强碱中和反应的<strong>共同本质</strong>。所以无论反应是 HCl + NaOH 还是 H₂SO₄ + 2NaOH 还是 HNO₃ + KOH，<strong>归一化到"每生成 1 mol 水"</strong>放出的热量都是 -57.3 kJ/mol(在常温稀溶液下)。</p>
+
+          <p><strong>典型例 — H₂SO₄ + 2NaOH</strong>: 反应方程式 H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O, ΔH = 2 × (-57.3) = -114.6 kJ/mol H₂SO₄(因为生成 2 mol 水)。<strong>中和热 ΔH<sub>中</sub> 仍是 -57.3 kJ/mol (按 mol H₂O 算)</strong>。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">弱酸弱碱的中和热 — 电离吸热的修正</span></div>
+        <div class="step-content">
+          <p>如果换成<strong>弱酸</strong>(如乙酸 CH₃COOH, 简写 HAc)或<strong>弱碱</strong>(如氨水 NH₃·H₂O), 中和热会和强酸强碱一样吗？</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">弱酸弱碱中和反应的"两步走"分析</div>
+            <div class="step-line"><strong>强酸强碱(参考)</strong>: HCl + NaOH → NaCl + H₂O。HCl 和 NaOH 在水中已经 100% 电离 → 反应本质就是 H⁺ + OH⁻ → H₂O 放热 57.3 kJ/mol。</div>
+            <div class="step-line"><strong>弱酸 + 强碱 (HAc + NaOH)</strong>: 反应可看作两步 ——<br>
+              · 步骤 ①: 弱酸先<strong>电离</strong> HAc → H⁺ + Ac⁻ (微吸热, ΔH₁ ≈ +0.4 ~ +2 kJ/mol)<br>
+              · 步骤 ②: 然后 H⁺ + OH⁻ → H₂O (放热 57.3 kJ/mol)<br>
+              · 总反应 ΔH = ΔH₁ + (-57.3) ≈ <strong>-55 ~ -57 kJ/mol</strong>(略小于 57.3 的绝对值)</div>
+            <div class="step-line"><strong>结论 ⭐</strong>: 弱酸弱碱中和热的<strong>绝对值 &lt; 57.3 kJ/mol</strong>。差额 = 弱电解质电离吸热 ΔH<sub>电离</sub>。</div>
+            <div class="step-line">这就是为什么<strong>实验测中和热必须用强酸强碱</strong> —— 排除弱电解质电离的"干扰", 让数值准确反映 H⁺ + OH⁻ → H₂O 的本质放热。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 为什么中和热按"生成 1 mol H₂O" 而不是"1 mol 酸"？</div>
+            <div class="tp-pause">用 H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O 这个例子。如果按"1 mol 酸"算 ΔH = -114.6 kJ/mol, 按"1 mol 水"算 ΔH = -57.3 kJ/mol。为什么标准约定是"1 mol 水"？</div>
+            <div class="tp-ask">关键: 中和反应的<strong>本质是 H⁺ + OH⁻ → H₂O</strong>, 每生成 1 mol 水放热 57.3 kJ。这是<strong>普遍规律</strong>(对所有强酸强碱都成立)。<br>
+              如果按"1 mol 酸"算, H₂SO₄ 是 -114.6, HCl 是 -57.3, HCl + H₂SO₄ 混合时数值各异 —— 不便于比较和综合。<br>
+              按"1 mol H₂O"算, 所有强酸强碱中和热都 ≈ -57.3 kJ/mol —— <strong>统一一个数</strong>, 反映 H⁺ + OH⁻ → H₂O 的<strong>本质</strong>。<br>
+              这就是为什么化学手册中"中和热"按"每摩尔生成水"列, 而不是"每摩尔酸"。</div>
+            <div class="tp-write">在纸上: ① 写"为什么按生成水归一化"; ② 用 H₂SO₄ + 2NaOH 计算 "按 mol 酸" vs "按 mol 水" 的数值, 看哪个更合理。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · HCl + NaOH vs HAc + NaOH 哪个放热多？</div>
+            <div class="tp-pause">取等量的 NaOH(过量), 分别用 1 mol 的 HCl 和 1 mol 的 HAc(乙酸)中和。两种情况放出的热量一样吗？哪个多？为什么？</div>
+            <div class="tp-ask">不一样, <strong>HCl 中和放热更多</strong>。<br>
+              · HCl + NaOH → NaCl + H₂O, ΔH ≈ -57.3 kJ/mol (强酸 + 强碱, 直接 H⁺ + OH⁻ → H₂O 反应)。<br>
+              · HAc + NaOH → NaAc + H₂O, ΔH ≈ -55.6 kJ/mol(数值近似估算; 弱酸先电离吸热, 净放热略少)<br>
+              差额约 +1.7 kJ/mol = HAc 电离的吸热消耗了一部分能量。<br>
+              <strong>实验验证</strong>: 实测确实是 HCl + NaOH 放热略多于 HAc + NaOH —— 这是判断"是否强酸"的一个间接方法(虽然不如电导率法准确)。</div>
+            <div class="tp-write">在纸上: ① 用"两步走"分析 HAc + NaOH 的总 ΔH; ② 解释为什么 HCl 中和放热更多; ③ 一句话总结"中和热数值差异 = 弱电解质电离吸热"。</div>
+            <div class="tp-hint">弱电解质电离吸热的<strong>定量分析</strong>(电离平衡常数 Ka, 电离度 α 等)留给"水溶液化学"板块(待建)。本板块只用定性"|ΔH<sub>弱</sub>| &lt; |ΔH<sub>强</sub>|"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">简易量热计 — Q = mcΔT 直接测中和热</span></div>
+        <div class="step-content">
+          <p>中和反应在水溶液中进行, 比燃烧热实验<strong>简单得多</strong> —— 用一个保温杯就能测:</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">简易量热计 — 直接测中和热</text>
+              <!-- 保温杯外壁(内缩, 给标签留外部空间) -->
+              <rect x="195" y="75" width="220" height="170" fill="#f5f5f5" stroke="#7f8c8d" stroke-width="2.5" rx="6"></rect>
+              <!-- 溶液 -->
+              <rect x="205" y="135" width="200" height="100" fill="#cfe9f8" stroke="#3498db" stroke-width="1.5" rx="4"></rect>
+              <text x="305" y="170" text-anchor="middle" font-size="11" font-weight="700" fill="#2980b9">酸碱混合溶液</text>
+              <text x="305" y="190" text-anchor="middle" font-size="9" fill="#2980b9">质量 m</text>
+              <text x="305" y="205" text-anchor="middle" font-size="9" fill="#2980b9">比热 c ≈ 4.18 J/(g·K)</text>
+              <text x="305" y="225" text-anchor="middle" font-size="9" fill="#2980b9">读 ΔT = T₂ − T₁</text>
+              <!-- 温度计(垂直插入溶液) -->
+              <rect x="245" y="90" width="14" height="130" fill="#fff" stroke="#34495e" stroke-width="1"></rect>
+              <rect x="245" y="200" width="14" height="8" fill="#c0392b"></rect>
+              <!-- 搅拌器 -->
+              <line x1="355" y1="90" x2="355" y2="180" stroke="#34495e" stroke-width="2"></line>
+              <line x1="345" y1="180" x2="365" y2="180" stroke="#34495e" stroke-width="2"></line>
+              <!-- 外部标签 + 引线: 温度计(左侧) -->
+              <line x1="180" y1="100" x2="245" y2="100" stroke="#c0392b" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="175" y="103" text-anchor="end" font-size="10" font-weight="700" fill="#c0392b">温度计</text>
+              <!-- 外部标签 + 引线: 搅拌器(右侧) -->
+              <line x1="430" y1="100" x2="365" y2="100" stroke="#34495e" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="435" y="103" font-size="10" fill="#34495e">搅拌器</text>
+              <!-- 外部标签: 保温杯(左侧, 无引线避免重叠) -->
+              <text x="190" y="163" text-anchor="end" font-size="10" font-weight="700" fill="#7f8c8d">保温杯</text>
+              <text x="190" y="178" text-anchor="end" font-size="9" fill="#7f8c8d">减少热损失</text>
+              <!-- 公式标签(右侧) -->
+              <rect x="435" y="170" width="100" height="60" fill="#fff" stroke="#00409A" stroke-width="1.5" rx="5"></rect>
+              <text x="485" y="190" text-anchor="middle" font-size="11" font-weight="700" fill="#00409A">Q = m·c·ΔT</text>
+              <text x="485" y="208" text-anchor="middle" font-size="9" fill="#34495e">中和热 =</text>
+              <text x="485" y="222" text-anchor="middle" font-size="9" fill="#34495e">Q / n<tspan font-size="9" dy="3">H</tspan><tspan dy="-3"></tspan>₂O</text>
+              <!-- 底部说明 -->
+              <text x="270" y="262" text-anchor="middle" font-size="9" fill="#6e6e73">n<tspan font-size="9" dy="3">H</tspan><tspan dy="-3"></tspan>₂O = 生成液态水的摩尔数</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 简易量热计核心结构。中间灰色矩形为保温杯（玻璃 / 塑料 / 不锈钢真空保温），用引线标注"减少热损失"。保温杯内浅蓝色为酸碱混合反应溶液（标注质量 m / 比热 c ≈ 4.18 J/(g·K) / 温升 ΔT = T₂ − T₁）。垂直白色矩形为温度计（左侧引线标注），底部红色为温度计水银柱。深灰色直线为搅拌器（右侧引线标注）。右侧白色公式盒标注核心算式 Q = m·c·ΔT 和"中和热 = Q / n<sub>H</sub>₂O"。底部小字注明 n<sub>H</sub>₂O = 生成液态水的摩尔数。</div>
+          </div>
+
+          <p><strong>测量原理（核心算式 Q = mcΔT）⭐</strong>:</p>
+          <ol>
+            <li>取已知体积 + 已知浓度的<strong>强酸</strong>(如 50 mL 1 mol/L HCl)和<strong>强碱</strong>(如 50 mL 1 mol/L NaOH), 温度都是 T₁</li>
+            <li>快速混合, 测最高温度 T₂, 算 <strong>ΔT = T₂ − T₁</strong></li>
+            <li>溶液总质量 \(m \approx 100\) g(稀溶液近似为水, 密度 1 g/mL)</li>
+            <li>溶液比热 \(c \approx 4.18\) J/(g·K)(近似水的比热)</li>
+            <li>反应总放热 \(Q = m \times c \times \Delta T\)</li>
+            <li>生成的水的摩尔数 \(n_{H_2O} = 0.05\) mol(因为 50 mL × 1 mol/L = 0.05 mol H⁺ 完全中和 0.05 mol OH⁻ 生成 0.05 mol H₂O)</li>
+            <li>中和热 = \(-Q / n_{H_2O}\)(负号: 系统放热 → ΔH &lt; 0)</li>
+          </ol>
+
+          <div class="quote-block">
+            <strong>实验典型结果</strong>: 用 50 mL 1 mol/L HCl + 50 mL 1 mol/L NaOH, ΔT 约 6.85 K (从 25°C 升到 31.85°C)。<br>
+            算: \(Q = 100 \times 4.18 \times 6.85 = 2863\) J = 2.863 kJ; <br>
+            中和热 = \(-2.863 / 0.05 = -57.3\) kJ/mol ✓ 与理论值吻合。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="cn2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立陈述中和热的严格定义（25°C/1 atm + 强酸强碱稀溶液 + 生成 1 mol 液态水）</span></label>
+        <label data-key="cn2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出中和反应的本质 = H⁺ + OH⁻ → H₂O(l), 放热约 -57.3 kJ/mol</span></label>
+        <label data-key="cn2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"两步走"分析弱酸弱碱中和热（电离吸热 + H⁺OH⁻ 放热）, 解释 |ΔH<sub>弱</sub>| &lt; 57.3 kJ/mol</span></label>
+        <label data-key="cn2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能画简易量热计核心结构（保温杯 / 温度计 / 搅拌器）+ 默写 Q = mcΔT 算式</span></label>
+        <label data-key="cn2c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 50 mL 1 mol/L HCl + 50 mL 1 mol/L NaOH 实验数据(ΔT ≈ 6.85 K)算出中和热 ≈ -57.3 kJ/mol</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：实验测量 · 离子方程式 · 强弱电解质对反应热的影响</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>综合应用 — 燃烧热 / 中和热与盖斯定律的连接</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 把燃烧热 / 中和热放到盖斯定律的"大图"里 — 它们是 ΔH 的特殊形式 + 化学手册数据的主要来源 — 学会用燃烧热数据反算其他反应 ΔH<br>
+        <strong>建议时长</strong>: 25-35 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">燃烧热 / 中和热与盖斯定律的关系</span></div>
+        <div class="step-content">
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-link" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">实验测量 → 盖斯定律 → 任意反应 ΔH</text>
+              <!-- 实验测量 (左侧) -->
+              <rect x="40" y="80" width="160" height="120" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="8"></rect>
+              <text x="120" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">实验直接测量</text>
+              <text x="120" y="128" text-anchor="middle" font-size="10" fill="#c0392b">弹式量热计 → 燃烧热</text>
+              <text x="120" y="145" text-anchor="middle" font-size="10" fill="#c0392b">简易量热计 → 中和热</text>
+              <text x="120" y="162" text-anchor="middle" font-size="9" fill="#34495e">(本板块 Card 1 + 2)</text>
+              <text x="120" y="180" text-anchor="middle" font-size="9" fill="#34495e">+ ΔHf° 数据(进阶)</text>
+              <!-- 箭头到中间 -->
+              <line x1="200" y1="140" x2="240" y2="140" stroke="#0055B8" stroke-width="2.5" marker-end="url(#arrow-link)"></line>
+              <text x="220" y="130" text-anchor="middle" font-size="10" fill="#0055B8">输入</text>
+              <!-- 盖斯定律 (中间) -->
+              <rect x="245" y="80" width="160" height="120" fill="#fff5d6" stroke="#e67e22" stroke-width="2" rx="8"></rect>
+              <text x="325" y="105" text-anchor="middle" font-size="12" font-weight="700" fill="#e67e22">盖斯定律</text>
+              <text x="325" y="128" text-anchor="middle" font-size="10" fill="#e67e22">ΔH 路径无关</text>
+              <text x="325" y="145" text-anchor="middle" font-size="10" fill="#e67e22">代数加减乘反向</text>
+              <text x="325" y="162" text-anchor="middle" font-size="10" fill="#e67e22">查表公式</text>
+              <text x="325" y="180" text-anchor="middle" font-size="9" fill="#34495e">(算法)</text>
+              <!-- 箭头到右侧 -->
+              <line x1="405" y1="140" x2="445" y2="140" stroke="#0055B8" stroke-width="2.5" marker-end="url(#arrow-link)"></line>
+              <text x="425" y="130" text-anchor="middle" font-size="10" fill="#0055B8">输出</text>
+              <!-- 任意反应 ΔH (右侧) -->
+              <rect x="450" y="80" width="80" height="120" fill="#d4f1e0" stroke="#27ae60" stroke-width="2" rx="8"></rect>
+              <text x="490" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#27ae60">任意反应</text>
+              <text x="490" y="135" text-anchor="middle" font-size="10" fill="#27ae60">的 ΔH</text>
+              <text x="490" y="155" text-anchor="middle" font-size="9" fill="#34495e">(测不到的)</text>
+              <text x="490" y="170" text-anchor="middle" font-size="9" fill="#34495e">(应用)</text>
+              <!-- 底部说明 -->
+              <text x="270" y="235" text-anchor="middle" font-size="11" fill="#34495e">本板块的燃烧热 / 中和热是<tspan font-weight="700">"输入"</tspan>; 盖斯定律是<tspan font-weight="700">"算法"</tspan>; 任意反应的 ΔH 是<tspan font-weight="700">"输出"</tspan></text>
+              <text x="270" y="258" text-anchor="middle" font-size="10" fill="#6e6e73">三者一起构成完整的"反应焓变 ΔH 体系"</text>
+            </svg>
+            <div class="diagram-caption">图 3 · 燃烧热 / 中和热与盖斯定律的关系。左侧红色方框为"实验直接测量"（本板块提供 ΔH 数据的实验来源：弹式量热计测燃烧热, 简易量热计测中和热）；中间橙色方框为"盖斯定律"（已学板块提供算法：用已知 ΔH 算未知 ΔH）；右侧绿色方框为"任意反应的 ΔH"（应用：包括无法直接测的反应）。三者构成完整的反应焓变 ΔH 体系: 输入 → 算法 → 输出。</div>
+          </div>
+
+          <p><strong>关键认识</strong>:</p>
+          <ul>
+            <li>燃烧热 / 中和热<strong>都是 ΔH 的特殊形式</strong>(始末态明确, 易于实验测量)</li>
+            <li>它们是化学手册中 ΔH 数据的<strong>主要来源</strong></li>
+            <li>盖斯定律的"算 ΔH"工作 <strong>必须有数据输入</strong> — 这些数据要么是 ΔHf°(进阶板块讲), 要么是燃烧热, 要么是中和热</li>
+            <li>所以本板块和盖斯定律是<strong>互补</strong>的: 一个给"数据", 一个给"算法"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">综合应用 — 用燃烧热反算其他反应 ΔH</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 用燃烧热数据算 CH₄ → CO + 2H₂ 的 ΔH</div>
+            <div class="tp-pause">考虑工业上的"甲烷蒸汽重整反应"的简化版: CH₄(g) + ½O₂(g) → CO(g) + 2H₂(g) (合成气制取的核心反应之一)。<br>
+              给定<strong>燃烧热</strong>数据(都是 kJ/mol):<br>
+              · ΔH<sub>燃</sub>(CH₄) = −890.3 (生成 CO₂ + 2H₂O(l))<br>
+              · ΔH<sub>燃</sub>(CO) = −283.0 (生成 CO₂)<br>
+              · ΔH<sub>燃</sub>(H₂) = −285.8 (生成 H₂O(l))<br>
+              用<strong>盖斯定律</strong>算 CH₄ + ½O₂ → CO + 2H₂ 这个反应的 ΔH。
+            </div>
+            <div class="tp-ask">把目标反应"凑"出来的代数:<br>
+              ① CH₄ 燃烧: CH₄ + 2O₂ → CO₂ + 2H₂O(l), ΔH₁ = -890.3<br>
+              ② CO 燃烧(反向): CO₂ → CO + ½O₂, ΔH₂ = +283.0<br>
+              ③ 2H₂ 燃烧(反向): 2H₂O(l) → 2H₂ + O₂, ΔH₃ = 2 × (+285.8) = +571.6<br>
+              <br>
+              加 ①+②+③: <br>
+              · 反应物侧 CH₄ + 2O₂ + CO₂ + 2H₂O(l)<br>
+              · 产物侧 CO₂ + 2H₂O(l) + CO + ½O₂ + 2H₂ + O₂<br>
+              · 消去两侧相同的 CO₂、2H₂O(l) → 反: CH₄ + 2O₂; 产: CO + ½O₂ + 2H₂ + O₂ = CO + 3/2 O₂ + 2H₂<br>
+              · 再消去两侧 O₂: CH₄ + (2 - 3/2) O₂ → CO + 2H₂ → <strong>CH₄ + ½O₂ → CO + 2H₂</strong> ✓ (得到目标反应)<br>
+              <br>
+              ΔH<sub>目标</sub> = ΔH₁ + ΔH₂ + ΔH₃ = -890.3 + 283.0 + 571.6 = <strong>-35.7 kJ/mol</strong>(微放热)<br>
+              <br>
+              <strong>核心收获</strong>: 用"3 个燃烧反应的代数组合"算出目标反应 — 这是盖斯定律的标准应用。这种"用燃烧热反算其他反应 ΔH"的技巧, 是高中化学反应能量计算的核心方法之一。</div>
+            <div class="tp-write">在纸上: ① 写 3 个燃烧反应; ② 调整方向 + 系数让它们相加得目标反应; ③ 加上 3 个 ΔH 得 -35.7 kJ/mol; ④ 一句话总结"燃烧热数据 + 盖斯定律 = 算任意 ΔH"。</div>
+            <div class="tp-hint">这个反应叫"甲烷部分氧化"(partial oxidation), 是工业生产合成气(syngas = CO + H₂)的方法之一, 比"完全燃烧到 CO₂"对化工更有用(合成气进一步合成甲醇 / 氨等)。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">实验设计的关键问题 — 误差来源</span></div>
+        <div class="step-content">
+          <p>无论是弹式量热计还是简易量热计, 实验测量都有<strong>误差</strong>。常见误差来源:</p>
+          <ul>
+            <li><strong>热损失</strong>: 反应放出的热量没全部加热水, 有部分散到杯外 / 容器壁 / 空气中 → 测得的 ΔT 偏小 → 测得的 ΔH 绝对值偏小</li>
+            <li><strong>仪器吸热</strong>: 容器壁 / 温度计 / 搅拌器本身也会吸热 → 测得的 ΔT 偏小</li>
+            <li><strong>反应不完全 / 副反应</strong>: 如燃料没完全燃烧, 产生 CO 而不是 CO₂; 中和反应有副离子反应等</li>
+            <li><strong>温度读数延迟</strong>: 温度计需要一段时间达到溶液温度</li>
+            <li><strong>溶液比热不严格 = 水的比热</strong>: 稀溶液近似为水, 浓溶液偏差较大</li>
+          </ul>
+          <p>为了减小误差: 用<strong>保温好的容器</strong>(真空保温瓶 / 双层保温杯) + <strong>快速混合</strong> + <strong>多次实验取平均</strong>。</p>
+          <p>误差的<strong>定量分析</strong>(校准系数 / 水当量 / 卡列度量等)留给大学物理化学实验。本板块只需<strong>定性</strong>理解误差来源。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界 — 本板块到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: 等容热 \(Q_V\) 和等压热 \(Q_p\) 的严格修正(ΔH = Q<sub>p</sub>, Q<sub>V</sub> = ΔU; ΔH - ΔU = RTΔn<sub>g</sub>)— 留给进阶 焓与焓变 板块</li>
+            <li><strong>不引入</strong>: 量热计的<strong>工程优化</strong>(水当量校准 / 卡氏热值仪 / 微量热分析等专业实验技术)— 留给大学物理化学实验</li>
+            <li><strong>不引入</strong>: 弱电解质<strong>电离热</strong>的定量分析(电离平衡常数 Ka 等)— 留给水溶液化学板块(待建)</li>
+            <li><strong>本板块完成</strong>: 燃烧热 + 中和热的严格定义 + 实验测量 + 与盖斯定律的整合应用</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游连接</strong>: 本板块给"<strong>实验直接测 ΔH 的两板斧</strong>", 与<strong>盖斯定律</strong>的"算法"和<strong>键能与反应焓变</strong>(待建, 用键能数据算 ΔH 的第三种方法)互补。<br>
+            <br>
+            综合下游路径:
+            <ul style="margin-top: 6px;">
+              <li><strong>键能与反应焓变</strong>(基础, 待建): 给第三种 ΔH 算法(用键能数据)</li>
+              <li><strong>吉布斯自由能 · 基础</strong>(已建): 把 ΔH(本板块、盖斯、键能算的)+ ΔS 合到 ΔG 自发判据</li>
+              <li><strong>焓与焓变 · 进阶</strong>(待建): 严格推导 ΔH = Q<sub>p</sub>, ΔHf° 体系</li>
+              <li><strong>化学反应速率与化学平衡</strong>(待建大主题): 反应快慢 + 平衡常数</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="cn3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能画"实验测量 → 盖斯定律 → 任意反应 ΔH" 的关系图, 解释燃烧热 / 中和热是 ΔH 数据的实验来源</span></label>
+        <label data-key="cn3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 3 个燃烧热数据 + 盖斯定律算 CH₄ + ½O₂ → CO + 2H₂ 的 ΔH = -35.7 kJ/mol</span></label>
+        <label data-key="cn3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能列举量热计实验的 3-5 个主要误差来源(热损失 / 仪器吸热 / 反应不完全等)</span></label>
+        <label data-key="cn3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出本板块在热力学大主题中的位置: 燃烧热 / 中和热是"ΔH 输入数据", 盖斯定律是"算法", 一起构成 ΔH 计算体系</span></label>
+        <label data-key="cn3c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出本板块的边界 — 不引入 Q<sub>V</sub> vs Q<sub>p</sub> 修正 / 量热计工程 / 弱电解质电离热定量, 这些留给进阶或大学物化</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：方法论(实验 + 算法互补) · 综合应用 · 误差分析</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 3 件事: (1) Card 1 思考点 2: 用 ΔHf° 数据 + 盖斯定律公式算 CH₄ 燃烧热 = -890.3 kJ/mol 的完整推导; (2) Card 2 思考点 4: 用"两步走"分析 HAc + NaOH 中和热 ≈ -55.6 kJ/mol 的完整论证(电离吸热 + H⁺ + OH⁻ → H₂O 放热); (3) Card 3 思考点 5: 用 3 个燃烧热数据 + 盖斯定律算 CH₄ + ½O₂ → CO + 2H₂ 的 ΔH = -35.7 kJ/mol 的完整代数推导(3 个反应方程 + 调整 + 加和)。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答: ① "实验直接测 ΔH"(本板块) 和 "用盖斯定律算 ΔH"(前置板块) 是 ΔH 计算体系的<strong>两个不同入口</strong>; 这种"实验测 + 算法算"互补的视角对你的物理化学思维有什么启发? ② 弱酸 / 弱碱中和热绝对值小于强酸 / 强碱 — 这个现象告诉你"<strong>反应的能量变化反映了反应的微观本质</strong>"是怎么样的体验?</td></tr>
+      <tr><td>自评清单</td><td>所有 3 张卡的 checkpoint 都勾完。重点确认 Card 1(燃烧热定义)和 Card 2(中和热定义 + Q = mcΔT)— 这两条是高频考点。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15-20 分钟口试, 准备用 <strong>3 分钟</strong> 清晰说出"燃烧热 / 中和热是 ΔH 的实验测量入口, 与盖斯定律的算法入口互补, 一起构成完整的反应焓变 ΔH 体系"。</td></tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>: 本板块是<strong>实验和算法的交汇点</strong>。手写推导稿的 3 件事覆盖了三个核心方法: (1) 燃烧热的 ΔHf° 公式算法; (2) 中和热的两步走分析; (3) 综合应用 — 燃烧热数据算其他反应。掌握这三类计算, 应对绝大多数反应焓变问题就足够了。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="combustion-neutralization-heat-mock-check.html">📝 基础检测</a>
+    <a href="combustion-neutralization-heat-fluency-test.html">📈 熟练度检测</a>
+    <a href="combustion-neutralization-heat-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 燃烧热与中和热（基础模块 · 2026-06-09 新立）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-combustion-neutralization-heat-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

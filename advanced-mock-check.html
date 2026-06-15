@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想气体内能的微观推导 · 基础检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #5A4BD1 0%, #6C5CE7 50%, #8B7CF0 100%); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(108,92,231,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.diagram { background: #f3e7fb; color: #6a1b9a; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .q-figure { margin: 14px 0; text-align: center; }
+  .q-figure svg { max-width: 100%; height: auto; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-blank { border: none; border-bottom: 2px solid #0055B8; background: transparent; padding: 2px 8px; margin: 0 4px; font-size: 15px; min-width: 80px; text-align: center; font-family: inherit; }
+  .q-blank:focus { outline: none; border-bottom-color: #006AD6; background: #f0f4f8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 理想气体内能的微观推导(进阶) &raquo;
+  <strong>理想气体内能的微观推导 · 基础检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习工具</strong> · 此处自动判分仅供反馈,真正的基础检测由教师组织<strong>纸笔形式 + 批改 + 签字</strong>。本练习的『通过 70 分』≈ 已具备纸笔检测的基础水平,可继续练习;『荣誉 90 分』≈ 掌握充分。学分由教师组织的真实检测决定,不在此处。
+</div>
+
+<header class="page-header">
+  <h1>理想气体内能的微观推导 · 基础检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 进阶板块 · 题库版(28 题池, 每次随机抽 7 题) · 100 分 · 约 30-35 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>7</strong> 道题(每个考点 T1-T7 各随机抽 1 道, 共 28 题池)</li>
+    <li>分值: T1=12 / T2=14 / T3=14 / T4=14 / T5=14 / T6=16 / T7=16 = <strong>100</strong></li>
+    <li>通过 ≥ 70 分(已具备纸笔检测基础水平);荣誉 ≥ 90 分(掌握充分)</li>
+    <li>建议 30-35 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分);填空自动忽略空格与全角半角差异</li>
+    <li>简答按关键词命中率判分(全部命中=满分, 命中过半=半分), 提交后请自行对照解析自评</li>
+    <li>提交后展示标准答案 + 三段式解析(原理 / 逻辑 / 知识系统位置)+ 常见误区 + 扩展 + 锚回学习任务卡</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong>;可使用计算器</li>
+    <li>可点"重新抽题"再做, 抽到不同变体训练(防止背答案)</li>
+  </ul>
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 7</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-mock-check-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-mock-check-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="advanced-task-cards.html">📖 返回学习任务卡</a>
+  <a href="advanced-oral-exam.html">🎤 深度口试</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 理想气体内能的微观推导(进阶) · 基础检测 · mock-check Skill v0.1.5(题库版 + 三段式 + 锚结论中文化)</footer>
+
+</div>
+
+<script>
+const EXPORT_NAMES = {
+  'IDEAL-GAS-MICRO-MODEL':        '理想气体微观模型四大假设(H1-H4)',
+  'CUBIC-CONTAINER-MODEL':        '立方体容器模型(V=x³, 形状不影响结论)',
+  'SINGLE-PARTICLE-PRESSURE':     '单粒子碰壁链(Δp→Δt→F→P₁)',
+  'ISOTROPY-ONE-THIRD':           '各向同性 1/3 因子(v̄ₓ²=v̄²/3)',
+  'PRESSURE-MICRO-FORMULA':       '压强微观公式 P=Nmv̄²/(3V)',
+  'MEAN-KINETIC-ENERGY-MEANING':  '½mv̄² 的含义(单粒子平均平动动能)',
+  'U-EQUALS-3-2-PV':              'U=(3/2)PV(单原子理想气体)',
+  'IDEAL-GAS-INTERNAL-ENERGY':    '核心结论 U=(3/2)nRT(单原子理想气体)',
+  'DELTA-U-TEMPERATURE-ONLY':     'ΔU=(3/2)nRΔT(只看温度变化)',
+  'SYMBOL-N-VS-LOWERCASE-N':      '大写 N(粒子数)vs 小写 n(物质的量)',
+  'SYMBOL-MEAN-SQUARE-SPEED':     'v̄² = 速度平方的平均值(均方速度)',
+  'U-DEPENDS-ON-T-ONLY':          '理想气体内能只与温度有关(根在 H4)',
+  'TEMPERATURE-MICRO-MEANING':    '温度的微观意义(宏观温度↔平均动能)',
+  'ASSUMPTION-AUDIT-THINKING':    '假设审查思维(每步标注用了哪个假设)',
+  'STATISTICAL-AVERAGING-BRIDGE': '统计平均桥梁(单粒子→N 粒子→宏观)',
+  'BOUNDARY-MONATOMIC-ONLY':      '边界: 仅单原子分子严格成立',
+  'BOUNDARY-REAL-GAS':            '边界: 真实气体偏离不展开',
+  'BOUNDARY-KT-FORM':             '边界: 全程用 nR 宏观形式',
+  'BOUNDARY-MAXWELL-DISTRIBUTION':'边界: 速率分布不展开, 只用均方速度'
+};
+
+const CUBE_SVG = `<div class="q-figure"><svg viewBox="0 0 320 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="立方体容器中一个粒子沿 x 方向碰壁前后的示意图">
+  <polygon points="80,70 200,70 200,190 80,190" fill="#eef2ff" stroke="#6366f1" stroke-width="1.5"/>
+  <polygon points="80,70 120,40 240,40 200,70" fill="#c7d2fe" stroke="#6366f1" stroke-width="1.5"/>
+  <polygon points="200,70 240,40 240,160 200,190" fill="#ddd6fe" stroke="#6366f1" stroke-width="1.5"/>
+  <line x1="80" y1="205" x2="200" y2="205" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="140" y="222" font-size="12" fill="#64748b" text-anchor="middle">边长 x</text>
+  <circle cx="110" cy="130" r="6" fill="#ef4444"/>
+  <path d="M120,130 L182,130 M172,124 L186,130 L172,136" fill="none" stroke="#ef4444" stroke-width="2"/>
+  <path d="M186,144 L124,144 M134,138 L120,144 L134,150" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="5,4"/>
+  <line x1="200" y1="130" x2="262" y2="110" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="284" y="108" font-size="11" fill="#64748b" text-anchor="middle">右壁</text>
+  <text x="152" y="120" font-size="11" fill="#ef4444" text-anchor="middle">碰壁前</text>
+  <text x="152" y="162" font-size="11" fill="#3b82f6" text-anchor="middle">碰壁后</text>
+</svg></div>`;
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["IDEAL-GAS-MICRO-MODEL","ASSUMPTION-AUDIT-THINKING"],
+      stem:"理想气体微观模型有四大假设(H1 大量粒子 / H2 随机运动 / H3 完全弹性碰撞 / H4 无分子间作用力)。下列对这四条假设的理解, <strong>正确</strong> 的是:",
+      options:{A:"H1 要求粒子数量大, 是为了让容器里的压强更大",B:"H2 随机运动指各方向运动等概率, 没有哪个方向被特殊优待",C:"H3 完全弹性碰撞指粒子碰壁后速度方向不变、大小减半",D:"H4 指粒子之间存在微弱的吸引力, 但可以测量出来"},
+      answer:"B",
+      explanation:{
+        principle:'四大假设各管一段: <strong>H1 大量粒子</strong>让统计平均有意义; <strong>H2 随机运动</strong>保证各方向等概率(没有特殊方向); <strong>H3 完全弹性碰撞</strong>保证碰壁不损失动能; <strong>H4 无分子间作用力</strong>保证系统没有势能。它们不是装饰, 推导的每一步都要点名用到其中某条。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — H1 的目的不是「压强大」, 而是让「平均值」这种统计语言成立: 粒子太少时涨落巨大, 谈平均没有意义;<br>· <strong>B 正确</strong>: 随机运动 = 各方向等概率, 这是后面 1/3 因子的根;<br>· <strong>C</strong>: 错 — 完全弹性碰撞是<strong>速率不变、方向反转</strong>(动能无损失), 「大小减半」恰恰违反弹性;<br>· <strong>D</strong>: 错 — H4 是「无」分子间作用力, 是直接忽略, 不是「微弱但可测」。',
+        connection:'<strong>上游</strong>: 这套假设是把真实气体「理想化」的建模动作(分子动理论板块的延伸)。<strong>下游</strong>: H2 → 各向同性 1/3 因子; H3 → 碰壁动量变化 2mvₓ; H4 → 内能只剩动能 → U 只依赖 T。每个假设都有一条专属的「下游产权」。'
+      },
+      mistakes:'· 把「完全弹性」误解成「碰一次少一点能量」;<br>· 背得出四条假设, 但说不出每条在推导中的具体用途;<br>· 把 H1 的统计意义误解成「数量多压强大」。',
+      extension:'假设审查是科学推导的「记账习惯」: 每写一步就标注「此处用了 Hx」。这样一旦结论与实验不符, 能立刻定位是哪条假设失效 — 真实气体偏离理想行为时, 第一个被怀疑的就是 H4。',
+      cardAnchor:"Card A1 STEP 1-2" },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["IDEAL-GAS-MICRO-MODEL","ASSUMPTION-AUDIT-THINKING","SINGLE-PARTICLE-PRESSURE"],
+      stem:"推导单粒子碰壁的动量变化时, 我们写下「粒子以速率 vₓ 撞上右壁, 又以同样速率 vₓ 弹回」。这一步 <strong>直接依赖</strong> 四大假设中的哪一条?",
+      options:{A:"H1 大量粒子",B:"H2 随机运动",C:"H3 完全弹性碰撞",D:"H4 无分子间作用力"},
+      answer:"C",
+      explanation:{
+        principle:'<strong>完全弹性碰撞(H3)</strong>= 碰撞前后动能不变。对碰壁来说就是: 速率大小不变、方向反转。只有这样, 动量变化的大小才是「出发动量 + 返回动量」= 2mvₓ, 而且粒子可以永远以同样的节奏来回撞击 — 周期 2x/vₓ 才成立。',
+        logic:'排除法走一遍:<br>· H1(大量粒子)管的是「平均值有意义」, 出现在从单粒子推广到 N 粒子那一步, 不在这里;<br>· H2(随机运动)管的是「各方向等概率」, 出现在 1/3 因子那一步;<br>· <strong>H3 正确</strong>: 「以同样速率弹回」就是动能无损失的直接翻译;<br>· H4(无作用力)管的是「没有势能」, 出现在「总动能 = 内能」那一步。',
+        connection:'这道题是<strong>假设审查思维</strong>的标准操作: 不是问「假设有哪些」, 而是问「这一步花的是哪条假设的钱」。整条推导链上, 四条假设各自的「消费记录」: H3 → Δp=2mvₓ; H2 → 1/3; H1 → 统计平均; H4 → U=总动能。'
+      },
+      mistakes:'· 四条假设都背得出, 却对不上推导步骤(死记 vs 理解的分水岭);<br>· 误选 H4 — 「碰壁」和「分子间作用力」是两回事, 碰壁是粒子与器壁的相互作用;<br>· 误以为弹回速率不变是「理所当然」, 意识不到它是一条需要声明的假设。',
+      extension:'如果把 H3 拿掉 — 比如壁是「黏性」的, 每次碰撞损失一点动能 — 气体会持续降温, 压强持续衰减, 不存在稳定的平衡态。所以 H3 实质上是在说: 器壁与气体已经达到热平衡, 平均而言不交换能量。',
+      cardAnchor:"Card A2 STEP 1" },
+    { id:"T1-3", type:"choice", score:12, difficulty:"较难", exportIds:["IDEAL-GAS-MICRO-MODEL","ASSUMPTION-AUDIT-THINKING","U-DEPENDS-ON-T-ONLY"],
+      stem:"做一个思想实验: 保留 H1-H3, 单独去掉 H4(即允许分子之间存在相互作用力)。对「内能」最直接的冲击是:",
+      options:{A:"粒子不再做随机运动, 各方向不再等概率",B:"碰壁的动量变化公式 Δp=2mvₓ 不再成立",C:"粒子总数 N 会随时间减少",D:"系统出现分子间势能, 内能不再只由动能构成, 也就不再只由温度决定"},
+      answer:"D",
+      explanation:{
+        principle:'<strong>H4(无分子间作用力)的专属产权是「无势能」</strong>。内能 = 动能 + 势能; H4 把势能一笔勾销, 内能才坍缩成纯动能, 而平均动能又只由温度标定 — 这就是 U 只依赖 T 的全部来历。去掉 H4, 势能复活, 这条结论立刻松动。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 随机运动是 H2 的产权, 与 H4 无关;<br>· <strong>B</strong>: 不是最直接的冲击 — 碰壁动量变化由 H3 保证, 分子间作用力对它只有间接影响;<br>· <strong>C</strong>: 错 — 粒子数守恒与四大假设无关, 没有谁会消灭粒子;<br>· <strong>D 正确</strong>: 势能与分子间距离有关, 距离又与体积有关 — 所以去掉 H4 后, U 不仅看 T, 还要看 V。',
+        connection:'这正是<strong>真实气体</strong>与理想气体的分水岭: 真实气体分子间有作用力, 内能含势能项, 压缩或膨胀(改变分子间距)本身就改变内能。「U 中不含 V 和 P」在理想模型里是必然而非巧合 — 根就扎在 H4 上。'
+      },
+      mistakes:'· 把各假设的「产权」张冠李戴(H4 管势能, 不管随机性、不管碰壁);<br>· 以为去掉 H4 整个推导全部作废 — 其实压强公式部分受冲击较小, 最致命的是内能构成;<br>· 说不清「势能与体积挂钩」的链条(势能↔分子间距↔V)。',
+      extension:'范德瓦尔斯方程就是沿这条思路修真实气体的账: 引力修正压强项、分子体积修正容积项。本板块不展开它, 但你已经拿到了入口 — 知道「该修哪条假设」, 比记住修正公式更根本。',
+      cardAnchor:"Card A4 STEP 2 + Card A1 检查点" },
+    { id:"T1-4", type:"choice", score:12, difficulty:"中等", exportIds:["CUBIC-CONTAINER-MODEL","IDEAL-GAS-MICRO-MODEL"],
+      stem:"整条推导都在「边长 x 的立方体容器」里进行(V=x³, 壁面积 A=x²)。关于这个选择, 下列说法 <strong>正确</strong> 的是:",
+      options:{A:"立方体只是为了计算方便, 最终结论 P=Nmv̄²/(3V) 中只剩 V, 与容器形状无关",B:"结论只对立方体容器成立, 球形容器中的气体压强公式不同",C:"必须选立方体, 因为只有立方体的壁才能发生完全弹性碰撞",D:"立方体边长 x 必须取 1 米, 否则推导失败"},
+      answer:"A",
+      explanation:{
+        principle:'<strong>模型选择 ≠ 结论的适用范围</strong>。立方体让「来回飞行周期 2x/vₓ」「壁面积 x²」这些中间量最干净; 但推导走到终点时, x 全部被打包进 V=x³, 公式里只剩下与形状无关的体积 V — 脚手架拆掉, 大楼不依赖脚手架。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 中间量(x、x²)只是过程变量, 终式 P=Nmv̄²/(3V) 只含 V, 对任何形状的容器都成立;<br>· <strong>B</strong>: 错 — 压强是气体的状态属性, 不随容器形状变化(否则把气瓶捏扁压强公式就得换, 显然荒谬);<br>· <strong>C</strong>: 错 — 弹性碰撞是对碰撞性质的假设(H3), 与壁的几何形状无关;<br>· <strong>D</strong>: 错 — x 是任意的, 推导从头到尾没有给 x 赋值。',
+        connection:'「挑一个最方便的特例算, 再论证结论与特例无关」是理论物理的惯用策略。本板块里它配合<strong>假设审查</strong>使用: 假设(H1-H4)是物理内容, 立方体是数学便利 — 分清哪些是「真承诺」、哪些是「脚手架」, 是读懂一切推导的基本功。'
+      },
+      mistakes:'· 把「在立方体里推导」误解成「只对立方体成立」;<br>· 分不清模型假设(物理内容)与计算技巧(数学便利);<br>· 误以为某个具体数值(如 x=1)被偷偷使用了。',
+      extension:'想检验「形状无关」? 可以用细长盒子(a×b×c)重推一遍: x 方向周期变 2a/vₓ, 壁面积变 b×c, 最后 a·b·c 仍打包成 V, 结论分毫不差 — 这是一次极好的自我验证练习。',
+      cardAnchor:"Card A1 STEP 3 + Card A3 STEP 2" }
+  ],
+  T2: [
+    { id:"T2-1", type:"fill", score:14, difficulty:"基础", exportIds:["SINGLE-PARTICLE-PRESSURE","CUBIC-CONTAINER-MODEL"], hasDiagram:true, figureSvg:CUBE_SVG,
+      stem:"为了让算术不挡路, 取一个放大版模型粒子: 质量 m = 2 kg, 沿 x 方向分速度 vₓ = 4 m/s, 在边长 x = 2 m 的立方体容器中来回弹射(完全弹性碰壁)。求: 第 1 空, 它每次撞击右壁的动量变化大小 |Δp| = ___ kg·m/s; 第 2 空, 它单独贡献给右壁的平均压强 P₁ = mvₓ²/V = ___ Pa。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位; vₓ 读作「v 下标 x」, 指 x 方向分速度。</em>",
+      blanks:[{ answers:["16"], score:7 },{ answers:["4"], score:7 }],
+      explanation:{
+        principle:'<strong>单粒子碰壁链</strong>四步: ① 弹性碰壁 → 动量变化 |Δp| = 2mvₓ(出发 +mvₓ, 弹回 −mvₓ, 改变量 2mvₓ); ② 两次撞同一壁的间隔 Δt = 2x/vₓ(来回飞一趟); ③ 平均力 F = |Δp|/Δt = mvₓ²/x; ④ 压强 P₁ = F/x² = mvₓ²/x³ = mvₓ²/V。',
+        logic:'代入: |Δp| = 2 × 2 × 4 = <strong>16</strong> kg·m/s(第 1 空 ✓)。再走完链条: Δt = 2×2/4 = 1 s; F = 16/1 = 16 N; 壁面积 x² = 4 m²; P₁ = 16/4 = <strong>4</strong> Pa(第 2 空 ✓)。或直接用终式: V = 2³ = 8 m³, P₁ = 2×16/8 = 4 Pa, 两条路殊途同归。',
+        connection:'这条链是整座大厦的<strong>第一根承重柱</strong>: 它把「微观碰撞」翻译成「宏观压强」。下一步(统计平均 + 各向同性)把单粒子的 vₓ² 换成 N 个粒子的 v̄²/3, 就得到 P = Nmv̄²/(3V) — 真实分子的 m 极小、N 极大, 但链条的逻辑一字不改。'
+      },
+      mistakes:'· |Δp| 算成 mvₓ(忘了方向反转, 动量改变量是两倍);<br>· Δt 用 x/vₓ(忘了要来回飞一整趟才会再撞同一面壁);<br>· P₁ 用 F 除以 V 而不是除以壁面积 x²。',
+      extension:'为什么敢用「平均力」? 真实碰撞是瞬间脉冲, 但我们关心的是壁长期感受到的效果 — 把一次次脉冲摊平到整个周期上。这种「冲量摊平」的处理与测量仪器的工作方式一致: 压强计读到的本来就是大量脉冲的时间平均。',
+      cardAnchor:"Card A2 STEP 1-3" },
+    { id:"T2-2", type:"fill", score:14, difficulty:"中等", exportIds:["SINGLE-PARTICLE-PRESSURE","CUBIC-CONTAINER-MODEL"], hasDiagram:true, figureSvg:CUBE_SVG,
+      stem:"放大版模型粒子: 质量 m = 3 kg, 沿 x 方向分速度 vₓ = 4 m/s, 在边长 x = 2 m 的立方体容器中来回弹射(完全弹性碰壁)。求: 第 1 空, 它相邻两次撞击右壁的时间间隔 Δt = ___ s; 第 2 空, 它对右壁的平均作用力 F = ___ N。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位; vₓ 读作「v 下标 x」, 指 x 方向分速度。</em>",
+      blanks:[{ answers:["1"], score:7 },{ answers:["24"], score:7 }],
+      explanation:{
+        principle:'链条中段的两步: <strong>Δt = 2x/vₓ</strong> — 粒子撞完右壁要飞到左壁再飞回来, 走过 2x 的路程才会再次撞击右壁; <strong>F = |Δp|/Δt</strong> — 把每次碰撞的动量变化摊平到整个周期上, 得到壁感受到的平均力。',
+        logic:'代入: Δt = 2×2/4 = <strong>1</strong> s(第 1 空 ✓)。|Δp| = 2mvₓ = 2×3×4 = 24 kg·m/s; F = 24/1 = <strong>24</strong> N(第 2 空 ✓)。化简看本质: F = 2mvₓ/(2x/vₓ) = mvₓ²/x — 分子分母里的「2」恰好相消, 这是链条里最漂亮的一步。',
+        connection:'注意 F = mvₓ²/x 中 vₓ 以<strong>平方</strong>出现: 速度快一倍, 单次撞击狠一倍(Δp 翻倍)、撞击还密一倍(Δt 减半), 两个效应相乘。这个平方正是后面压强公式连接动能(½mv̄²)、进而连接温度的根本原因。',
+      },
+      mistakes:'· Δt 写成 x/vₓ 或 4x/vₓ(对「来回一趟」的几何想象出错);<br>· F 用 mvₓ/Δt(忘了动量变化是 2mvₓ);<br>· 误以为粒子在途中会被其他粒子撞偏 — 在本模型中粒子间碰撞不影响统计结果, 单粒子链照常成立。',
+      extension:'真实数字感受一下: 常温氮分子 vₓ 数百 m/s, 容器 0.1 m, 每秒撞同一面壁数千次 — 难怪壁感受到的是平滑的恒定压强, 而不是「咚、咚」的离散敲击。',
+      cardAnchor:"Card A2 STEP 1-3" },
+    { id:"T2-3", type:"fill", score:14, difficulty:"中等", exportIds:["SINGLE-PARTICLE-PRESSURE","CUBIC-CONTAINER-MODEL"], hasDiagram:true, figureSvg:CUBE_SVG,
+      stem:"放大版模型粒子: 质量 m = 2 kg, 沿 x 方向分速度 vₓ = 10 m/s, 在边长 x = 5 m 的立方体容器中来回弹射(完全弹性碰壁)。求: 第 1 空, 它对右壁的平均作用力 F = mvₓ²/x = ___ N; 第 2 空, 它单独贡献的压强 P₁ = ___ Pa。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位, 第 2 空允许小数; vₓ 读作「v 下标 x」, 指 x 方向分速度。</em>",
+      blanks:[{ answers:["40"], score:7 },{ answers:["1.6","8/5"], score:7 }],
+      explanation:{
+        principle:'链条末两步: <strong>F = mvₓ²/x</strong>(由 |Δp| = 2mvₓ 与 Δt = 2x/vₓ 相除, 2 相消); <strong>P₁ = F/x² = mvₓ²/x³ = mvₓ²/V</strong> — 力摊到壁面积上成为压强, 三个 x 合体成体积 V。',
+        logic:'代入: F = 2×10²/5 = 200/5 = <strong>40</strong> N(第 1 空 ✓)。壁面积 x² = 25 m²; P₁ = 40/25 = <strong>1.6</strong> Pa(第 2 空 ✓)。验算另一条路: V = 125 m³, P₁ = mvₓ²/V = 2×100/125 = 1.6 Pa ✓。',
+        connection:'P₁ = mvₓ²/V 是单粒子版的「状态方程雏形」: 压强 ∝ 1/V 的反比关系在这里已经现身 — 容器越大, 撞击越稀疏(Δt ∝ x)且摊的面积越大(x²), 压强自然按 1/V 稀释。宏观玻意耳定律的微观影子, 在单粒子层面就能看见。'
+      },
+      mistakes:'· F 的公式里漏掉平方(写成 mvₓ/x);<br>· P₁ 除错量纲 — 除以 x(边长)或 x³ 用了错误的幂次;<br>· 1.6 写成 16(小数点滑掉, 提交前值得代回验算一次)。',
+      extension:'把第 2 空结果乘个思想实验: 若容器里有 N = 100 个这样的粒子且全部沿 x 方向飞, 壁上压强就是 160 Pa。但真实气体的粒子方向是随机的 — 「随机方向打几折」正是下一张卡(各向同性 1/3 因子)要回答的问题。',
+      cardAnchor:"Card A2 STEP 2-3" },
+    { id:"T2-4", type:"fill", score:14, difficulty:"较难", exportIds:["SINGLE-PARTICLE-PRESSURE","CUBIC-CONTAINER-MODEL","ASSUMPTION-AUDIT-THINKING"], hasDiagram:true, figureSvg:CUBE_SVG,
+      stem:"放大版模型粒子: 质量 m = 4 kg, 沿 x 方向分速度 vₓ = 5 m/s, 在边长 x = 2 m 的立方体容器中来回弹射(完全弹性碰壁)。求: 第 1 空, 每次撞击右壁的动量变化大小 |Δp| = ___ kg·m/s; 第 2 空, 它单独贡献的压强 P₁ = ___ Pa。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位, 第 2 空允许小数; vₓ 读作「v 下标 x」, 指 x 方向分速度。</em>",
+      blanks:[{ answers:["40"], score:7 },{ answers:["12.5","25/2"], score:7 }],
+      explanation:{
+        principle:'完整走一遍四步链: ① |Δp| = 2mvₓ(弹性碰壁, 方向反转); ② Δt = 2x/vₓ(来回一趟); ③ F = |Δp|/Δt = mvₓ²/x; ④ P₁ = F/x² = mvₓ²/V。每一步消耗的假设: ① 用 H3 弹性碰撞; ②③ 用匀速直线飞行(粒子间无作用力, H4 的运动学侧面); ④ 只是几何摊平。',
+        logic:'代入: |Δp| = 2×4×5 = <strong>40</strong> kg·m/s(第 1 空 ✓)。Δt = 2×2/5 = 0.8 s; F = 40/0.8 = 50 N; 壁面积 4 m²; P₁ = 50/4 = <strong>12.5</strong> Pa(第 2 空 ✓)。终式验算: V = 8 m³, P₁ = 4×25/8 = 12.5 ✓。',
+        connection:'本变体的 Δt = 0.8 s 不是整数 — 故意的: 链条对任何数值都成立, 不依赖凑巧的整除。把「对特殊数字成立」与「对结构成立」区分开, 正是从「会算例题」走向「懂推导」的台阶。'
+      },
+      mistakes:'· Δt = 0.8 s 算成 0.4 s(只算单程)导致 F 翻倍;<br>· |Δp| 与 F 数值碰巧接近时抄串行;<br>· 只背终式 mvₓ²/V 而走不通中间三步 — 本题两空恰好一头一尾, 专查链条是否完整。',
+      extension:'链条的输出还可以反向使用: 实验测得压强和体积, 反推 v̄² 的量级 — 19 世纪物理学家正是这样在「看不见分子」的年代算出了分子速度数百 m/s, 这是分子动理论最早的胜利之一。',
+      cardAnchor:"Card A2 STEP 1-3" }
+  ],
+  T3: [
+    { id:"T3-1", type:"choice", score:14, difficulty:"中等", exportIds:["ISOTROPY-ONE-THIRD","STATISTICAL-AVERAGING-BRIDGE","IDEAL-GAS-MICRO-MODEL"],
+      stem:"推导中有关键一步: \\(\\bar{v_x^2} = \\bar{v^2}/3\\)。这个「1/3」的来源是:",
+      options:{A:"实验测量发现 x 方向的速度恰好是总速度的三分之一",B:"立方体有 6 个面, 每个面分到 1/6, 一对面合计 1/3",C:"由 v² = vx² + vy² + vz² 取平均, 而随机运动(H2)使三个方向的均方值相等, 故每个方向各占 1/3",D:"粒子有三分之一的时间沿 x 方向飞行"},
+      answer:"C",
+      explanation:{
+        principle:'两块拼图缺一不可: ① <strong>勾股定理的三维版</strong> v² = vx² + vy² + vz², 对所有粒子取平均后等式仍成立(平均运算保持加法); ② <strong>各向同性(H2 随机运动)</strong>: 没有哪个方向被优待, 所以三个方向的均方值必须相等。两者联立: v̄² = 3v̄ₓ², 即 v̄ₓ² = v̄²/3。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 这是纯推理结论, 不需要实验输入; 而且「x 方向速度 = 总速度的 1/3」说的是速度本身, 与「均方值占 1/3」完全不是一回事;<br>· <strong>B</strong>: 错 — 数面数凑出的 1/3 是巧合式的伪解释, 推导里从未用「6 个面」分摊任何东西;<br>· <strong>C 正确</strong>: 对称性 + 平方和分解, 干净利落;<br>· <strong>D</strong>: 错 — 粒子任意时刻同时具有三个分速度, 不存在「轮流沿某方向飞」。',
+        connection:'这是<strong>对称性论证</strong>的教科书级范例: 不算任何具体数, 只凭「三个方向地位平等」就锁定了系数。同样的手法后面反复出现 — 统计物理里大量系数都来自对称性而非硬算。1/3 也直接进入终式 P = Nmv̄²/(3V), 与 U=(3/2)nRT 里的 3/2 一脉相承。'
+      },
+      mistakes:'· 用「6 个面」「三维空间」等数字巧合代替真正的对称性论证;<br>· 把「均方值相等」误说成「每个粒子的 vx = vy = vz」(单个粒子完全可以斜着飞, 相等的是全体的统计平均);<br>· 忘记声明这一步用了 H2。',
+      extension:'如果气体被放进强外场(比如沿 x 方向的强电场拉一群带电粒子), 各向同性破缺, vx 方向的均方值会大于另两个方向, 1/3 就失效了 — 「等概率假设何时被破坏」是检验你是否真懂这一步的试金石。',
+      cardAnchor:"Card A3 STEP 1" },
+    { id:"T3-2", type:"choice", score:14, difficulty:"基础", exportIds:["SYMBOL-MEAN-SQUARE-SPEED","STATISTICAL-AVERAGING-BRIDGE"],
+      stem:"公式 P = Nmv̄²/(3V) 中的 \\(\\bar{v^2}\\)(读作「v 平方的平均」), 它的准确含义是:",
+      options:{A:"所有粒子速度大小的平均值, 再取平方",B:"先把每个粒子的速度大小平方, 再对所有粒子求平均(均方速度)",C:"速度最大的粒子与速度最小的粒子的平方的平均",D:"某一个典型粒子的速度的平方"},
+      answer:"B",
+      explanation:{
+        principle:'<strong>运算顺序就是定义</strong>: v̄² 表示「先平方、后平均」 — 把每个粒子的 v² 加起来除以 N。它与「先平均、后平方」(平均速度的平方)是两个不同的数: 平方是凸函数, 一般有 先平方后平均 ≥ 先平均后平方, 两者只在所有粒子速率全同时才相等。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 顺序颠倒, 这是「平均速度的平方」;<br>· <strong>B 正确</strong>: 逐粒子平方、再统计平均, 正是「均方速度」;<br>· <strong>C</strong>: 错 — 只取两个极端粒子不构成统计平均;<br>· <strong>D</strong>: 错 — 不存在「典型粒子」这种单点代表, 平均是对全体取的。',
+        connection:'为什么推导偏偏选「均方」而不是「平均速度」? 因为压强源于动量传递, 公式里天然出现 vₓ 的<strong>平方</strong>(撞得狠 × 撞得密); 而动能 ½mv² 也是平方量 — 均方速度是把「压强」与「动能」焊在一起的那枚螺栓, 选它不是品味问题, 是物理结构决定的。'
+      },
+      mistakes:'· 把 v̄² 读成「平均速度的平方」(最常见的符号误读);<br>· 以为两种顺序算出来一样(只有全体同速时才相等);<br>· 顺带提醒: 粒子速度的矢量平均其实接近 0(各方向相消), 所以「先平均后平方」在这里还会直接荒谬。',
+      extension:'「先平方后平均 ≥ 先平均后平方」, 两者之差正是统计学里的<strong>方差</strong>: v̄² − (v 的平均)² = 速率的方差。气体分子速率有宽阔的分布, 方差远非零 — 这扇门通向速率分布(本板块边界外的统计力学方向)。',
+      cardAnchor:"Card A3 STEP 1 + 符号约定表" },
+    { id:"T3-3", type:"choice", score:14, difficulty:"中等", exportIds:["STATISTICAL-AVERAGING-BRIDGE","IDEAL-GAS-MICRO-MODEL","ASSUMPTION-AUDIT-THINKING"],
+      stem:"从「单个粒子贡献 P₁ = mvₓ²/V」推广到「N 个粒子合计 P = Nm·v̄ₓ²/V」时, 我们用各粒子的 vₓ² 之和 = N × (vₓ² 的平均值)。「用平均值代表全体」之所以可靠, 首先依赖哪条假设?",
+      options:{A:"H1 大量粒子 — 粒子数足够多, 统计平均才有意义、涨落才可忽略",B:"H3 完全弹性碰撞 — 碰撞不损失动能",C:"H4 无分子间作用力 — 系统没有势能",D:"立方体容器假设 — 必须是规则形状"},
+      answer:"A",
+      explanation:{
+        principle:'「Σvₓᵢ² = N·v̄ₓ²」在代数上是平均值的定义, 永远成立; 真正需要假设撑腰的是<strong>用这个平均值描述宏观稳定的压强</strong>: 粒子要足够多(H1), 个体的快慢差异才会在求和中互相抹平, 壁上的压强才是一个稳定值而不是上蹿下跳的随机数。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 统计平均的合法性直接由「大量」保证 — 这正是 H1 在整条推导里唯一但致命的出场;<br>· <strong>B</strong>: H3 早在单粒子那一步已经消费过(Δp=2mvₓ), 与「平均代表全体」无关;<br>· <strong>C</strong>: H4 的产权在内能构成(无势能), 不在统计步;<br>· <strong>D</strong>: 立方体只是计算脚手架, 而且它根本不是四大假设之一。',
+        connection:'<strong>统计平均是「微观 → 宏观」的唯一桥梁</strong>: 单粒子的行为没法直接对应任何宏观可测量, 必须先平均。这座桥在本板块走了两次 — 一次把 vₓ² 换成 v̄ₓ²(本题), 一次把 ½mv̄² 升格为「平均动能」对接温度(Card A4)。'
+      },
+      mistakes:'· 把四条假设的分工混在一起, 哪步都答 H4;<br>· 以为「取平均」是纯数学操作不花物理假设(平均的定义不花, 但「平均值有代表性」花 H1);<br>· 把立方体当成第五条假设。',
+      extension:'「大量」到底多大? 1 mol 有 6×10²³ 个粒子, 相对涨落按 1/√N 衰减, 约 10⁻¹² 量级 — 这就是为什么宏观仪器永远读不到压强的抖动。反过来, 若容器里只有 10 个粒子, 「压强」这个词本身都将失去意义。',
+      cardAnchor:"Card A3 全卡" },
+    { id:"T3-4", type:"choice", score:14, difficulty:"较难", exportIds:["ISOTROPY-ONE-THIRD","IDEAL-GAS-MICRO-MODEL","ASSUMPTION-AUDIT-THINKING"],
+      stem:"思想实验: 若容器中所有粒子都恰好只沿 x 方向来回飞(其余条件不变), 此时 x 方向那对壁感受到的压强是多少?(正常的随机运动气体为 P = Nmv̄²/(3V))",
+      options:{A:"仍为 Nmv̄²/(3V), 与方向分布无关",B:"变为 Nmv̄²/(6V)",C:"变为 0",D:"变为 Nmv̄²/V, 是随机情形的 3 倍"},
+      answer:"D",
+      explanation:{
+        principle:'1/3 因子不是天生的, 它是<strong>随机运动(H2)的账单</strong>: 随机情形下总速度平方摊给三个方向, x 方向只分到 1/3。若全部粒子只沿 x 飞, 则 vₓ² = v², 即 v̄ₓ² = v̄²(不再除 3), 单壁压强 P = Nmv̄ₓ²/V = Nmv̄²/V。',
+        logic:'对比两种情形:<br>· 随机: v̄ₓ² = v̄²/3 → P = Nmv̄²/(3V);<br>· 全沿 x: v̄ₓ² = v̄² → P = Nmv̄²/V, 正好是随机情形的 <strong>3 倍</strong> → <strong>D 正确</strong>。<br>· A 错在把 1/3 当成与方向分布无关的常数; B 的 1/6 无来源; C 显然不对 — 粒子撞壁更专注了, 压强只会更大。<br>顺带一提: 此时 y、z 方向的壁反而完全没人撞, 压强为 0 — 「压强各向同性」这一宏观常识本身就是 H2 的产物。',
+        connection:'这类「拆掉一条假设看结论怎么变」的操作, 就是<strong>假设审查思维</strong>的实战: 它让你看清 1/3 因子与 H2 之间的专属对应。激光、分子束等「定向粒子流」的动量传递正是按不除 3 的公式算的 — 假设变了, 系数就得跟着变。'
+      },
+      mistakes:'· 把 P = Nmv̄²/(3V) 当万能公式套用, 不检查其假设前提;<br>· 误以为「只沿 x 飞」压强变小(直觉混淆「方向单一」与「强度变弱」);<br>· 忽略 y、z 壁压强归零这个更刺眼的反常 — 它说明这套状态根本不是平衡态气体。',
+      extension:'真实气体如何「自动回到」随机分布? 粒子间偶然碰撞会迅速把任何定向运动打散成各方向均摊 — 这正是统计力学里「趋向平衡」的雏形, 与热力学第二定律的方向性遥相呼应。',
+      cardAnchor:"Card A3 STEP 1-2" }
+  ],
+  T4: [
+    { id:"T4-1", type:"multi", score:14, difficulty:"中等", exportIds:["PRESSURE-MICRO-FORMULA","SYMBOL-N-VS-LOWERCASE-N","MEAN-KINETIC-ENERGY-MEANING"],
+      stem:"关于压强的微观公式 \\(P = \\dfrac{Nm\\bar{v^2}}{3V}\\), 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"其他条件不变时, 粒子数 N 越多, 压强越大",B:"公式中的 N 是物质的量, 单位为 mol",C:"它可以等价地写成 3PV = Nmv̄²",D:"公式表明压强与粒子的平均速度(矢量平均)成正比",E:"利用 ½mv̄² 可把它改写为 PV = (2/3)·N·(½mv̄²), 压强与粒子平均平动动能直接挂钩"},
+      answer:["A","C","E"],
+      explanation:{
+        principle:'P = Nmv̄²/(3V) 是微观推导的<strong>第一座里程碑</strong>: 左边全是宏观可测量(P、V), 右边全是微观量(N、m、v̄²)。三个代数变形最常用: ① 3PV = Nmv̄²; ② PV = (2/3)·N·(½mv̄²) — 把动能 ½mv̄² 显式拎出来; ③ 后续联立 PV = nRT。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: P ∝ N, 撞壁的粒子多, 压强自然大;<br>· <strong>B</strong>: 错 — 大写 N 是<strong>粒子总数</strong>(无量纲个数), 物质的量是小写 n(mol), 两者差一个阿伏伽德罗常数, 混用会让数值错 6×10²³ 倍;<br>· <strong>C 正确</strong>: 两边同乘 3V 即得;<br>· <strong>D</strong>: 错 — 公式里是<strong>均方速度</strong> v̄²(先平方后平均), 不是矢量平均速度 — 后者因方向相消接近 0;<br>· <strong>E 正确</strong>: Nmv̄² = 2N·(½mv̄²), 代入即 PV = (2/3)N·(½mv̄²), 这一步是通向内能的转轴。',
+        connection:'<strong>上游</strong>: 它由单粒子链 × 统计平均 × 1/3 因子三件套组装而成。<strong>下游</strong>: E 选项的改写正是 Card A4 的起点 — 把 PV 与总动能 N·(½mv̄²) 挂钩, 再借 H4(无势能)宣布总动能就是内能 U, 即 U = (3/2)PV。'
+      },
+      mistakes:'· N 与 n 混用(本板块符号约定的第一杀手);<br>· 把 v̄² 当平均速度的平方;<br>· 不会做 E 选项那一步「凑动能」的代数变形 — 它是后续一切内能结论的入口, 值得亲手推一遍。',
+      extension:'公式还能反着读: m 和 v̄² 以乘积出现, 说明同温同压下轻分子跑得快、重分子跑得慢, 恰好让 mv̄² 持平 — 这一观察将来在「同温下不同气体平均动能相同」的论证里再次登场。',
+      cardAnchor:"Card A3 STEP 2 + Card A4 STEP 1" },
+    { id:"T4-2", type:"multi", score:14, difficulty:"基础", exportIds:["SYMBOL-N-VS-LOWERCASE-N","PRESSURE-MICRO-FORMULA"],
+      stem:"本板块严格区分大写 N 与小写 n。下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"N 与 n 是同一个量的两种写法, 可以随意互换",B:"大写 N 是粒子总数(一个个数出来的数目), 小写 n 是物质的量(单位 mol)",C:"1 mol 气体的 N = 1",D:"压强微观公式 P = Nmv̄²/(3V) 用大写 N, 状态方程 PV = nRT 用小写 n",E:"对同一份气体, N 比 n 大约小 6×10²³ 倍"},
+      answer:["B","D"],
+      explanation:{
+        principle:'两个符号背后是<strong>微观与宏观两套计数体系</strong>: 大写 N 按「个」数粒子(微观语言); 小写 n 按「mol」称分量(宏观语言), N = n × N_A(阿伏伽德罗常数 ≈ 6.02×10²³ /mol)。微观公式说 N, 宏观方程说 n, 联立两者时必须自觉换算。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 差 23 个数量级的两个量, 互换是灾难;<br>· <strong>B 正确</strong>: 标准定义;<br>· <strong>C</strong>: 错 — 1 mol 气体的 N = 6.02×10²³, 不是 1;<br>· <strong>D 正确</strong>: 这正是两套语言各守地盘的体现 — 也是为什么推导内能时联立这两条公式能把微观量 v̄² 消掉;<br>· <strong>E</strong>: 错 — 方向反了, N 比 n <strong>大</strong>约 6×10²³ 倍。',
+        connection:'符号纪律不是洁癖: Card A4 联立 3PV = Nmv̄² 与 PV = nRT 时, 等式两边一个挂 N、一个挂 n, 正是 N = n·N_A 这座换算桥让「每个粒子的平均动能」与「每 mol 的能量 (3/2)RT」对上账。符号一乱, 这步联立必错。',
+      },
+      mistakes:'· 书写时大小写随手乱切换;<br>· 把「1 mol」与「1 个」混淆;<br>· 联立微观公式与状态方程时忘记两边计数单位不同。',
+      extension:'本板块全程使用 nR 的宏观形式, 刻意不引入「每个粒子摊多少能量」的单粒子常数 — 那是玻尔兹曼常数 k 的地盘, 留给统计力学方向。但你可以先猜一猜: k 大概等于 R 除以什么?',
+      cardAnchor:"符号约定表 + Card A4 STEP 1" },
+    { id:"T4-3", type:"multi", score:14, difficulty:"中等", exportIds:["MEAN-KINETIC-ENERGY-MEANING","PRESSURE-MICRO-FORMULA","STATISTICAL-AVERAGING-BRIDGE"],
+      stem:"关于 \\(\\tfrac{1}{2}m\\bar{v^2}\\) 与 \\(N\\cdot\\tfrac{1}{2}m\\bar{v^2}\\) 这两个量, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"½mv̄² 是单个粒子的平均平动动能",B:"N·½mv̄² 是系统中所有粒子的总平动动能",C:"½mv̄² 是跑得最快的那个粒子的动能",D:"由 3PV = Nmv̄² 可得 PV = (2/3)·N·(½mv̄²), 即 PV 是总动能的 2/3",E:"每个粒子在任意时刻的动能都精确等于 ½mv̄²"},
+      answer:["A","B","D"],
+      explanation:{
+        principle:'½mv̄² 的身份是<strong>平均量</strong>: 把全体粒子的动能 ½mv² 求平均, 由于 m 相同, 平均落在 v̄² 上 — 它代表「摊到每个粒子头上」的平动动能, 乘 N 就是全系统的总平动动能。它是连接「压强公式」与「内能」的中间人。',
+        logic:'各选项分析:<br>· <strong>A、B 正确</strong>: 一个是人均, 一个是总账;<br>· <strong>C</strong>: 错 — 平均值不是最大值, 快慢粒子都被摊平在内;<br>· <strong>D 正确</strong>: Nmv̄² = 2·N·(½mv̄²), 代入 3PV = Nmv̄² 即得 — 系数 2/3(或倒过来 3/2)就是这么来的;<br>· <strong>E</strong>: 错 — 个体动能千差万别且随碰撞不断变化, 与平均值精确相等纯属巧合瞬间。',
+        connection:'<strong>下游一步之遥</strong>: 总平动动能 N·½mv̄² 在 H4(无势能)之下就是内能 U, 于是 D 选项立即升级为 U = (3/2)PV — 单原子理想气体内能的 PV 形式。「平均动能」这个概念同时也是温度微观意义的载体(Card A4 STEP 2)。'
+      },
+      mistakes:'· 把平均动能当成某个真实粒子的动能;<br>· 系数 2/3 与 3/2 在变形中写倒;<br>· 漏掉「平动」二字 — 单原子分子只有平动, 这个限定词在双原子情形会变得性命攸关(见边界类问题)。',
+      extension:'「人均 GDP 不是任何一个人的收入」 — 平均量描述整体而不描述个体。统计物理的全部宏观量(温度、压强、内能)都是这类「人均 / 总账」量, 这正是它们平滑、稳定、可测的原因。',
+      cardAnchor:"Card A4 STEP 1" },
+    { id:"T4-4", type:"multi", score:14, difficulty:"较难", exportIds:["PRESSURE-MICRO-FORMULA","ISOTROPY-ONE-THIRD","SYMBOL-MEAN-SQUARE-SPEED","STATISTICAL-AVERAGING-BRIDGE"],
+      stem:"回看 P = Nmv̄²/(3V) 的整条组装线, 下列对各「零件」来源的归因 <strong>正确</strong> 的有(多选):",
+      options:{A:"分母里的 3 来自立方体有 6 个面、两两相对",B:"分子里的 N 来自「6×10²³ 个粒子贡献逐个相加」这种逐项硬算, 与统计无关",C:"分母里的 3 来自各向同性: v̄ₓ² = v̄²/3",D:"v̄² 必须是「先平方后平均」, 因为压强物理上源于动量传递, 天然携带速度的平方",E:"分母里的 V 由单粒子结果 P₁ = mvₓ²/V 一路继承而来, 体现「容器越大压强越稀」"},
+      answer:["C","D","E"],
+      explanation:{
+        principle:'终式的每个零件都有<strong>唯一的出生证明</strong>: V ← 单粒子碰壁链(几何摊平); 3 ← 各向同性(H2); N 与「平均」← 统计平均桥(H1); 平方 ← 动量传递的物理(撞得狠 × 撞得密)。能逐件归因, 才算真正拥有这个公式。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 「6 个面」从未进入推导, 数字巧合不是来源;<br>· <strong>B</strong>: 错 — 恰恰相反, N 进入公式靠的是「和 = N × 平均」这步统计语言, 没有人逐个加 6×10²³ 项;<br>· <strong>C 正确</strong>: 1/3 的唯一来源;<br>· <strong>D 正确</strong>: Δp = 2mvₓ(撞击强度)与撞击频率 ∝ vₓ/2x 相乘, vₓ² 由此而生;<br>· <strong>E 正确</strong>: P₁ = mvₓ²/V 中的 V 一路带到终式, 反比关系是玻意耳定律的微观影子。',
+        connection:'这道题是对整条推导链的<strong>总装检查</strong>: Card A2(单粒子)→ Card A3(统计 + 各向同性)→ 终式。它训练的不是记公式, 而是「公式考古」能力 — 任何后续板块拿到新公式, 都该这样问一遍: 每个因子从哪来、花了哪条假设。'
+      },
+      mistakes:'· 用数字巧合(6 个面、3 维空间)冒充推导来源;<br>· 以为统计平均 = 偷懒, 不明白它是把 10²³ 项求和压缩成一个平均值的合法桥梁;<br>· 各零件来源张冠李戴(把 3 归给容器形状、把 V 归给统计)。',
+      extension:'「公式考古」再进一步: 试着对 PV = nRT 做同样的事 — 它的每个字母背后是哪些实验定律(玻意耳 / 查理 / 阿伏伽德罗)? 微观推导与实验归纳两条路在 Card A4 会师, 正是这次会师让 v̄² 变成了可计算的量。',
+      cardAnchor:"Card A2-A3 全链 + Card A4 STEP 1" }
+  ],
+  T5: [
+    { id:"T5-1", type:"fill", score:14, difficulty:"基础", exportIds:["U-EQUALS-3-2-PV","IDEAL-GAS-INTERNAL-ENERGY","MEAN-KINETIC-ENERGY-MEANING"],
+      stem:"某单原子理想气体, 压强 P = 2×10⁵ Pa, 体积 V = 3×10⁻³ m³。第 1 空: 它的内能 U = ___ J。第 2 空: 保持体积不变, 将热力学温度升高到原来的 2 倍, 此时内能变为 ___ J。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位。</em>",
+      blanks:[{ answers:["900"], score:7 },{ answers:["1800"], score:7 }],
+      explanation:{
+        principle:'单原子理想气体内能的两副面孔: <strong>U = (3/2)PV</strong>(由 3PV = Nmv̄² 与「总动能即内能」直接得到)与 <strong>U = (3/2)nRT</strong>(再联立 PV = nRT)。两者等价, 看题目给什么量就用哪副。',
+        logic:'第 1 空: U = (3/2) × 2×10⁵ × 3×10⁻³ = (3/2) × 600 = <strong>900</strong> J ✓。第 2 空: U = (3/2)nRT 表明 U ∝ T(n 不变), T 翻倍则 U 翻倍 = <strong>1800</strong> J ✓。也可走 PV 路线验证: 等容下 T 翻倍 → P 翻倍(查理定律), U = (3/2)·(2P)·V = 1800 J, 两条路一致。',
+        connection:'U = (3/2)PV 是<strong>不需要知道温度和摩尔数</strong>就能算内能的捷径 — P、V 都是直接可测的宏观量, 这正是微观推导送给宏观热力学的厚礼。后续第一定律里凡是「PV 换算 ΔU」的场合, 用的都是它。'
+      },
+      mistakes:'· 系数 3/2 与 2/3 写倒(U = 900 错算成 400);<br>· 第 2 空只敢套公式不敢用正比关系(U ∝ T 是更快的路);<br>· 10 的幂次相乘出错(10⁵ × 10⁻³ = 10²)。',
+      extension:'量级感受: 900 J 大约是把一壶 1 kg 的水加热 0.2 °C 的能量 — 3 升常压气体「肚子里」的能量其实不小。气体内能的量级直觉, 在发动机与大气物理里都用得上。',
+      cardAnchor:"Card A4 STEP 1" },
+    { id:"T5-2", type:"fill", score:14, difficulty:"中等", exportIds:["IDEAL-GAS-INTERNAL-ENERGY","DELTA-U-TEMPERATURE-ONLY"],
+      stem:"n = 2 mol 单原子理想气体(取 R = 8.3 J/(mol·K))。第 1 空: 温度 T = 300 K 时, 内能 U = ___ J。第 2 空: 温度升至 400 K 时, 内能增加了 ΔU = ___ J。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位。</em>",
+      blanks:[{ answers:["7470"], score:7 },{ answers:["2490"], score:7 }],
+      explanation:{
+        principle:'核心结论 <strong>U = (3/2)nRT</strong> 与它的增量形式 <strong>ΔU = (3/2)nRΔT</strong>: n、R 是常数, U 与 T 成正比, 算变化量时只需要温差 ΔT, 不需要知道过程怎么走。',
+        logic:'第 1 空: U = (3/2) × 2 × 8.3 × 300 = 3 × 8.3 × 300 = <strong>7470</strong> J ✓。第 2 空: ΔU = (3/2) × 2 × 8.3 × (400−300) = 3 × 8.3 × 100 = <strong>2490</strong> J ✓。验算: U(400 K) = 9960 J, 9960 − 7470 = 2490 ✓。',
+        connection:'ΔU = (3/2)nRΔT 是第一定律 ΔU = Q + W 里那个 ΔU 的<strong>标准供货商</strong>: 不管气体经历等压、等容还是任意弯路, 只要知道首末温度, ΔU 一口报出。「内能是状态量」的全部实用价值都浓缩在这一格。'
+      },
+      mistakes:'· 第 2 空用 400 K 整体代入算成 9960(求的是增量, 该用 ΔT = 100 K);<br>· 漏乘 n = 2;<br>· 3/2 × 2 没有先约简, 中途算错(顺手化简能少踩坑)。',
+      extension:'同样升温 100 K, 1 mol 单原子气体要收 1245 J — 这个「每 mol 每 K 收 (3/2)R」的固定汇率, 将来有个专名叫等容摩尔热容。它是常数这件事本身, 就是「内能只看温度」的直接后果。',
+      cardAnchor:"Card A4 STEP 1 第 4-5 步" },
+    { id:"T5-3", type:"fill", score:14, difficulty:"中等", exportIds:["U-EQUALS-3-2-PV","U-DEPENDS-ON-T-ONLY","IDEAL-GAS-INTERNAL-ENERGY"],
+      stem:"某单原子理想气体, 压强 P = 1×10⁵ Pa, 体积 V = 2×10⁻² m³。第 1 空: 内能 U = ___ J。第 2 空: 对它做<strong>等温</strong>压缩, 体积减为原来的一半, 内能将 ___(填「增大」「减小」或「不变」)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数值, 不带单位; 第 2 空填「增大」「减小」或「不变」, 可从本提示中复制。</em>",
+      blanks:[{ answers:["3000"], score:7 },{ answers:["不变"], score:7 }],
+      explanation:{
+        principle:'第 1 空用 <strong>U = (3/2)PV</strong>; 第 2 空用本板块的灵魂结论: <strong>理想气体内能只由温度决定</strong> — 等温, 则 U 纹丝不动, 体积怎么折腾都与它无关。',
+        logic:'第 1 空: U = (3/2) × 1×10⁵ × 2×10⁻² = (3/2) × 2000 = <strong>3000</strong> J ✓。第 2 空: 等温 → ΔT = 0 → ΔU = (3/2)nRΔT = 0 → <strong>不变</strong> ✓。用 PV 形式交叉验证: 等温压缩 V 减半, 玻意耳定律使 P 翻倍, PV 乘积不变 → U = (3/2)PV 不变, 完全自洽。',
+        connection:'「等温过程 ΔU = 0」是第一定律应用中的高频起手式: 它意味着等温压缩时外界做的功必须原数变成放热 Q = −W。这个看似奇怪的「左手进右手出」, 根源全在 H4 → 无势能 → U 只认温度。'
+      },
+      mistakes:'· 直觉认为「压缩 = 挤紧 = 内能升高」 — 对真实气体(有分子间势能)有几分道理, 对理想气体是错的;<br>· 第 2 空想对了「不变」却说不出双路验证(ΔT = 0 与 PV 不变);<br>· 第 1 空幂次算错(10⁵ × 10⁻² = 10³)。',
+      extension:'被压缩的气体「吸收」的功去哪了? 全部以热的形式流出容器。反过来等温膨胀时, 气体对外做的功全部由吸热买单 — 等温过程是「热 ↔ 功」的纯转换器, 这个角色在热机效率的讨论里至关重要。',
+      cardAnchor:"Card A4 STEP 1-2" },
+    { id:"T5-4", type:"fill", score:14, difficulty:"较难", exportIds:["DELTA-U-TEMPERATURE-ONLY","IDEAL-GAS-INTERNAL-ENERGY"],
+      stem:"n = 1 mol 单原子理想气体(取 R = 8.3 J/(mol·K))经历某过程, 温度从 300 K 升到 500 K(中间压强体积如何变化未知)。第 1 空: ΔU = ___ J。第 2 空: 若它改走一条<strong>等温</strong>路线(始末温度都是 300 K, 但体积翻倍), 则该等温过程的 ΔU = ___ J。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数值, 不带单位。</em>",
+      blanks:[{ answers:["2490"], score:7 },{ answers:["0"], score:7 }],
+      explanation:{
+        principle:'<strong>ΔU = (3/2)nRΔT — 只看温差, 不看路径</strong>。第 1 空里「中间怎么变化未知」是故意的: 内能是状态量, 首末温度一定, ΔU 就定了。第 2 空是同一句话的极端情形: ΔT = 0, 则 ΔU = 0, 体积翻倍也无济于事。',
+        logic:'第 1 空: ΔU = (3/2) × 1 × 8.3 × (500−300) = (3/2) × 8.3 × 200 = <strong>2490</strong> J ✓。第 2 空: ΔT = 0 → ΔU = <strong>0</strong> J ✓ — 不需要任何关于压强体积的补充信息, 这正是公式的力量。',
+        connection:'「过程未知却能算 ΔU」与「等温必有 ΔU = 0」是同一枚硬币的两面, 都铸自 U = (3/2)nRT 的<strong>状态量身份</strong>。第一定律的解题套路 — 先用温度锁死 ΔU, 再用 Q、W 拆账 — 从此处发源。'
+      },
+      mistakes:'· 看到「过程未知」就以为题目缺条件无法作答;<br>· 第 2 空被「体积翻倍」带偏, 误以为膨胀必降内能(那是绝热膨胀的剧情, 等温膨胀有吸热补偿);<br>· ΔT 用 500 而非 200。',
+      extension:'状态量 vs 过程量的分野是热力学的第一座哲学山头: U 像海拔(只看你站在哪), Q 和 W 像走过的路程(看你怎么走)。把这对区分内化, 第一定律的一切「悖论题」都会瞬间祛魅。',
+      cardAnchor:"Card A4 STEP 1 第 5 步 + STEP 2" }
+  ],
+  T6: [
+    { id:"T6-1", type:"short", score:16, difficulty:"中等", exportIds:["U-DEPENDS-ON-T-ONLY","IDEAL-GAS-INTERNAL-ENERGY","IDEAL-GAS-MICRO-MODEL"],
+      stem:"理想气体的内能表达式 U = (3/2)nRT 中不含体积 V、也不含压强 P。请从微观模型的四大假设出发, 解释为什么理想气体的内能只由温度决定。(建议 80-150 字, 写清因果链条)",
+      keywords:["势能","动能"],
+      explanation:{
+        principle:'因果链条三步走: ① <strong>H4 无分子间作用力 → 系统没有分子间势能</strong>, 内能里通常的「动能 + 势能」只剩下动能一项; ② 总动能 = N × 平均平动动能, 而推导表明平均动能由温度唯一标定; ③ 所以 U 只随 T 走 — V、P 不出现在表达式里是<strong>必然, 不是巧合</strong>。',
+        logic:'为什么体积「管不着」内能? 势能才与分子间距离(从而与体积)挂钩; 势能被 H4 清零后, 体积失去了影响内能的唯一通道。压缩或膨胀理想气体, 只要温度没变, 每个粒子的平均动能就没变, 内能分毫不动。满分答案应包含: 无作用力 → 无势能 → 只剩动能 → 动能由温度决定, 四环相扣。',
+        connection:'这是整个板块的<strong>灵魂结论</strong>: 它向下支撑「等温过程 ΔU = 0」「ΔU = (3/2)nRΔT 只看温差」等一切应用; 向上则标记了理想模型的边界 — 真实气体的分子间力不为零, 势能复活, U 就重新与 V 有关(真实气体方向, 本板块不展开)。'
+      },
+      mistakes:'· 只背「内能只与温度有关」却给不出微观因果链;<br>· 把原因错安在 H2 或 H3 头上(产权在 H4);<br>· 漏掉「势能与分子间距离 / 体积挂钩」这一环, 说不清为什么 V 被排除。',
+      extension:'焦耳曾做过气体向真空自由膨胀的实验: 理想气体膨胀后温度不变 — 没有外界做功、没有吸放热, 内能不变且温度不变, 恰好印证「U 只认 T」。真实气体在此实验中温度会微降, 降幅正是分子间引力的「指纹」。',
+      cardAnchor:"Card A4 STEP 1-2 + Card A1 检查点" },
+    { id:"T6-2", type:"short", score:16, difficulty:"基础", exportIds:["DELTA-U-TEMPERATURE-ONLY","U-DEPENDS-ON-T-ONLY"],
+      stem:"一定量单原子理想气体经历等温膨胀, 体积增大为原来的 2 倍。它的内能如何变化? 请写出判断依据(公式或微观推理皆可, 建议 60-120 字)。",
+      keywords:["温度","不变"],
+      explanation:{
+        principle:'判断的总开关只有一个: <strong>理想气体内能只由温度决定</strong>。等温 → 温度不变 → 内能<strong>不变</strong>(ΔU = 0)。公式路线: ΔU = (3/2)nRΔT, ΔT = 0 故 ΔU = 0; 微观路线: 温度没变 → 粒子平均动能没变 → 总动能(即内能)没变。',
+        logic:'「体积翻倍」是题目设下的干扰项: 直觉里「膨胀 = 变稀 = 该损失点什么」, 但体积只通过势能这条路影响内能, 而理想气体没有势能, 这条路是断的。满分答案应明确说出「内能不变」并给出依据(温度不变 / ΔT = 0); 只答结论不给依据, 在纸笔检测中拿不到满分。',
+        connection:'本题是灵魂结论的<strong>最短应用题</strong>。它与第一定律连用时会逼出一个有趣账目: 等温膨胀对外做功, 而 ΔU = 0, 所以做的功必须全部由吸热垫付 — 「等温过程是热功转换器」的说法由此而来。'
+      },
+      mistakes:'· 答「减小」 — 被「膨胀」直觉带偏, 忘了等温这个前提;<br>· 只答「不变」两个字, 不给任何依据;<br>· 依据写成「体积变大压强变小所以抵消」 — 结论碰巧对, 但论证路径绕开了温度, 不是本板块希望你建立的因果链。',
+      extension:'若把「等温」换成「绝热」(不吸不放热), 膨胀做功的能量只能从内能里扣, 温度就会实实在在地下降 — 打气筒放气口发凉就是这个机制。对比两种膨胀, 能看清「温度才是内能的唯一仪表盘」。',
+      cardAnchor:"Card A4 STEP 1 第 5 步 + STEP 2" },
+    { id:"T6-3", type:"short", score:16, difficulty:"中等", exportIds:["TEMPERATURE-MICRO-MEANING","MEAN-KINETIC-ENERGY-MEANING","IDEAL-GAS-INTERNAL-ENERGY"],
+      stem:"在 U = (3/2)nRT 出现之前, 温度只是「温度计读出来的数」。这个公式让宏观温度第一次与微观世界接上了头。请说明: 温度这个宏观量, 在微观上对应粒子的什么?(建议 60-120 字)",
+      keywords:["平均","动能"],
+      explanation:{
+        principle:'<strong>温度的微观意义: 它是粒子平均(平动)动能的标尺</strong>。由 U = (3/2)nRT 且 U = N × (½mv̄²), 可知每个粒子的平均动能与 T 严格成正比 — 温度高一倍, 平均动能大一倍。温度计测的宏观「冷热」, 本质是分子运动剧烈程度的统计读数。',
+        logic:'答案的关键词必须落在「<strong>平均</strong>」与「<strong>动能</strong>」两点上: ① 不是某个粒子的动能 — 个体千差万别, 温度对应的是统计平均; ② 不是速度本身 — 同温下轻分子快、重分子慢, 速度不统一, 统一的是 m 与 v̄² 的乘积即动能。两个限定词缺一个, 理解就缺一角。',
+        connection:'这是「微观 — 宏观」大桥的<strong>合龙处</strong>: 压强(宏观)↔ 碰壁动量传递(微观), 温度(宏观)↔ 平均动能(微观), 两组对应齐了, 整个热学的宏观词汇表都获得了微观释义。后续凡说「升温」, 你都可以在脑内自动翻译成「平均动能上调」。'
+      },
+      mistakes:'· 答「温度对应分子运动速度」 — 差一层: 同温下不同气体速度不同, 对应的是动能;<br>· 漏掉「平均」 — 温度是统计概念, 单个粒子谈不上温度;<br>· 把内能与温度划等号(内能还要乘粒子数 / 摩尔数, 温度只对应人均)。',
+      extension:'按这个对应, 「绝对零度」就有了微观画像: 平均平动动能趋于零、分子平动趋于停摆的极限。也因为温度对应「人均」而非「总量」, 一杯 30 °C 的水温度低于一壶 80 °C 的水, 内能总量却可能反超 — 人均与总账不可混淆。',
+      cardAnchor:"Card A4 STEP 2-3" },
+    { id:"T6-4", type:"short", score:16, difficulty:"较难", exportIds:["U-DEPENDS-ON-T-ONLY","MEAN-KINETIC-ENERGY-MEANING","U-EQUALS-3-2-PV"],
+      stem:"两份气体 A、B 各为 1 mol 单原子理想气体: A 体积大、压强小; B 体积小、压强大; 两者都处于 300 K。谁的内能更大? 请从内能的微观构成说明理由。(建议 60-120 字)",
+      keywords:["动能","温度|相同|相等|一样"],
+      explanation:{
+        principle:'结论: <strong>一样大</strong>。微观构成上, 理想气体内能 = 全体粒子动能之和(无势能项); 平均动能由温度唯一标定 — 两份气体温度同为 300 K、摩尔数相同, 粒子平均动能相同、粒子数相同, 内能必然相等。体积与压强的差异根本插不上手。',
+        logic:'满分答案的链条: 内能只含<strong>动能</strong> → 平均动能由<strong>温度</strong>决定 → 同温同量 → 内能相等。可再用宏观公式互验: U = (3/2)nRT, 两者 n、T 全同, U 自然相同; 或 U = (3/2)PV — A 的 V 大 P 小、B 的 V 小 P 大, 同温下 PV = nRT 相等, 乘积一致。三条路同一个终点。',
+        connection:'本题是「内能只认温度」的<strong>对照实验版</strong>: 把 V、P 故意拉开差距, 检验你是否还会被它们牵着走。它同时演示了状态方程的协调作用 — PV 乘积被 nRT 锁死, 所以 (3/2)PV 与 (3/2)nRT 永远口径一致。'
+      },
+      mistakes:'· 答「B 内能大, 因为压强大、分子撞得猛」 — 压强大是因为体积小撞得密, 单粒子平均动能并没有更大;<br>· 答「A 内能大, 因为体积大装的能量多」 — 摩尔数相同, 体积不装能量;<br>· 结论对但理由只写宏观公式, 没有按题目要求落到微观构成(动能、无势能)。',
+      extension:'如果 A、B 是真实气体, 答案就会松动: 体积小的 B 分子间距更近、引力势能更负, 同温下内能反而略低 — 「同温同量必同内能」是理想模型专属的整洁, 真实世界要为势能另开账本。',
+      cardAnchor:"Card A4 STEP 1-2" }
+  ],
+  T7: [
+    { id:"T7-1", type:"multi", score:16, difficulty:"中等", exportIds:["BOUNDARY-MONATOMIC-ONLY","IDEAL-GAS-INTERNAL-ENERGY"],
+      stem:"关于结论 U = (3/2)nRT 的适用范围, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"它对一切气体都严格成立",B:"它只对单原子理想气体严格成立",C:"双原子分子像「哑铃」, 除平动外还能转动, 能量有更多去处, 同温下内能比 (3/2)nRT 大",D:"双原子分子的内能比 (3/2)nRT 小, 因为两个原子互相拖累",E:"限制的来源在推导内部: 「总动能 = 平动动能」这一步默认了粒子是没有内部结构的质点"},
+      answer:["B","C","E"],
+      explanation:{
+        principle:'每个结论都该随身携带<strong>适用范围标签</strong>。U = (3/2)nRT 的标签是「单原子理想气体」: 整条推导只数了<strong>平动</strong>动能(粒子被当成质点); 单原子分子恰好只有平动这一种运动方式, 账目刚好齐; 多原子分子还能转动(乃至振动), 那些能量没被数进来。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 连「理想气体」内部都不通吃, 更不用说一切气体;<br>· <strong>B 正确</strong>: 范围声明的标准表述;<br>· <strong>C 正确</strong>: 转动是额外的能量去处, 同温下双原子气体「藏」的能量更多;<br>· <strong>D</strong>: 错 — 方向反了, 是更大不是更小;<br>· <strong>E 正确</strong>: 找到限制的<strong>出生地</strong> — 不是结论抄漏了, 而是建模时就把粒子简化成了质点。',
+        connection:'「能量有多少个去处」有个专名叫<strong>自由度</strong>, 它的定量展开(双原子为什么是 5/2 而不是 3/2)不在本板块, 留给后续方向。但定性的方向感 — 去处越多、同温下内能越大 — 你现在就该带走。'
+      },
+      mistakes:'· 把 U = (3/2)nRT 当万能公式给一切气体套用;<br>· 记反双原子的方向(以为转动「分摊」掉能量使内能变小 — 实际是「多装」);<br>· 说不出限制来自推导中的哪一步(质点假设)。',
+      extension:'常温空气主要是 N₂、O₂(双原子), 所以给空气算内能时若直接用 3/2, 会系统性偏小约 40%。工程上的空气热容数据正是 5/2 档 — 一个系数的差别, 来源是分子「会不会转」。',
+      cardAnchor:"Card A5 STEP 2 拓展" },
+    { id:"T7-2", type:"multi", score:16, difficulty:"中等", exportIds:["BOUNDARY-REAL-GAS","U-DEPENDS-ON-T-ONLY","IDEAL-GAS-MICRO-MODEL"],
+      stem:"把目光从理想模型移向真实气体, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"真实气体分子间存在作用力, 内能中会出现势能项",B:"真实气体的内能仍严格只与温度有关",C:"真实气体在任何条件下都与理想模型相差极远, 理想模型没有实用价值",D:"真实气体偏离理想行为, 根源之一是假设 H4(无分子间作用力)不再成立",E:"真实气体的内能与体积无关"},
+      answer:["A","D"],
+      explanation:{
+        principle:'理想 → 真实的<strong>第一道裂缝在 H4</strong>: 真实分子间有引力与斥力, 势能项重新入账。势能随分子间距变化, 间距又随体积变化 — 于是真实气体的内能<strong>同时挂在 T 和 V 上</strong>, 「只认温度」的整洁被打破。',
+        logic:'各选项分析:<br>· <strong>A、D 正确</strong>: 一个说后果(势能入账), 一个说根源(H4 失效), 合起来正是「假设审查」给出的完整诊断;<br>· <strong>B</strong>: 错 — 势能入账后, 体积也开始影响内能;<br>· <strong>C</strong>: 错 — 高温、低压、稀薄的真实气体与理想模型符合得相当好, 模型的实用价值正在于此;<br>· <strong>E</strong>: 错 — 与 B 同根, 势能 ↔ 间距 ↔ 体积这条链已经接通。',
+        connection:'本板块对真实气体<strong>只开门、不进屋</strong>: 知道偏离存在、知道根在 H4、知道修正的思路(范德瓦尔斯方向)即可, 定量展开留给后续。「知道自己结论的失效边界」本身就是这次推导训练的一部分。'
+      },
+      mistakes:'· 非黑即白: 要么认为理想模型处处精确, 要么认为它一无是处(C 选项的两个极端);<br>· 知道真实气体「不理想」, 却定位不到具体是哪条假设失效;<br>· 漏掉「势能 → 体积」那一环, 说不清为什么 E 错。',
+      extension:'什么时候理想模型够用? 经验口径: 常温常压的空气、常见气体实验, 偏差通常在百分之一量级以下; 高压(分子被压近)或低温(动能不足以无视引力)时偏差迅速放大 — 液化正是 H4 彻底破产的标志性事件。',
+      cardAnchor:"Card A5 STEP 1 拓展 + Card A1 STEP 2" },
+    { id:"T7-3", type:"multi", score:16, difficulty:"较难", exportIds:["BOUNDARY-MAXWELL-DISTRIBUTION","BOUNDARY-KT-FORM","STATISTICAL-AVERAGING-BRIDGE","SYMBOL-MEAN-SQUARE-SPEED"],
+      stem:"容器里的粒子有快有慢, 但我们的推导从头到尾没有讨论「有多少粒子快、有多少粒子慢」。关于这一点, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"推导全程只用到 v̄² 这一个平均量, 不需要知道速率的具体分布",B:"推导必须先测出每个粒子的具体速度才能进行, 否则不严谨",C:"本板块结论全部用 n 和 R 的宏观形式表达, 「单个粒子平均摊多少能量」的微观常数形式留给统计力学方向",D:"「速率到底怎么分布」是一个真实存在但更深的问题, 本推导对它保持沉默且不受其影响",E:"因为没用速率分布, U = (3/2)nRT 只是个粗糙近似, 不可信"},
+      answer:["A","C","D"],
+      explanation:{
+        principle:'这是一次漂亮的<strong>信息节俭</strong>: 压强与内能恰好只依赖速度平方的<strong>平均值</strong>, 于是推导只需 v̄² 一个数, 对分布的全部细节(快慢粒子各占多少)合法地保持沉默。不知道细节 ≠ 结论近似 — 只要用到的量是严格的平均量, 结论就是严格的。',
+        logic:'各选项分析:<br>· <strong>A、D 正确</strong>: 一体两面 — 只用平均量, 故不依赖分布; 分布问题本身真实存在(它有自己的名字和形状), 但属于更深的层次;<br>· <strong>B</strong>: 错 — 统计方法的要义恰恰是绕开「逐粒子追踪」这种不可能任务;<br>· <strong>C 正确</strong>: 本板块的两条边界声明之一 — 全程 nR 宏观形式, 单粒子常数形式(以及它背后的统计力学体系)留给后续方向;<br>· <strong>E</strong>: 错 — 与 A 矛盾, 平均量进、平均量出, 严格无损。',
+        connection:'两条边界在此合流: <strong>速率分布不展开</strong>(只用均方速度)与<strong>单粒子能量常数不引入</strong>(只用 nR)。它们都是同一种克制 — 推导只动用「刚好够用」的概念, 把更深的问题原样留给统计力学方向, 这是科学写作中划定边界的示范动作。'
+      },
+      mistakes:'· 把「没讨论分布」误当成推导的漏洞(E 选项的心态);<br>· 反向迷信: 以为统计方法能回答一切 — 分布形状、涨落大小等问题确实需要更多工具;<br>· 忘了 v̄² 是严格定义的平均量, 不是「大概其」。',
+      extension:'那「更深的问题」长什么样? 速率分布有确定的钟形偏右曲线, 峰位随温度右移 — 它能回答「多大比例的分子超过逃逸速度」这类问题(大气为什么留得住氮气、留不住氢气)。等你进入统计力学方向, 这条曲线会是第一站。',
+      cardAnchor:"Card A3 STEP 1 + Card A5 拓展" },
+    { id:"T7-4", type:"multi", score:16, difficulty:"基础", exportIds:["BOUNDARY-MONATOMIC-ONLY","PRESSURE-MICRO-FORMULA","ASSUMPTION-AUDIT-THINKING"],
+      stem:"把容器里的单原子气体换成双原子气体(其余条件不变), 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"同温同摩尔数下, 双原子气体的内能比 (3/2)nRT 小",B:"压强的微观公式从此完全作废, 双原子气体的压强无法用碰壁图像解释",C:"分子的转动让能量有了额外去处, 同温同摩尔数下内能大于 (3/2)nRT",D:"双原子分子的平动动能与温度无关",E:"「能量去处」的定量清点不在本板块展开, 本板块的严格结论止步于单原子"},
+      answer:["C","E"],
+      explanation:{
+        principle:'换成双原子分子, 推导链条要<strong>分段验伤</strong>: 压强部分(碰壁、动量传递)只关心质心的平动, 双原子分子照样适用; 真正受伤的是内能部分 — 「总动能 = 平动动能」不再成立, 转动动能成了账外资产, 实际内能比 (3/2)nRT <strong>多</strong>。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 方向反了, 能量去处更多, 同温下装得更多;<br>· <strong>B</strong>: 错 — 碰壁产生压强的图像不依赖分子内部结构, P = Nmv̄²/(3V) 中 v̄² 取质心速度即可继续服役;<br>· <strong>C 正确</strong>: 「哑铃」可以一边飞一边转, 转动也要占一份能量 — 同温下整体账本更厚;<br>· <strong>D</strong>: 错 — 平动动能与温度的对应关系恰恰对各种分子都保持;<br>· <strong>E 正确</strong>: 自由度的定量清点是后续方向, 本板块结论的严格地盘只到单原子。',
+        connection:'这道题示范了<strong>边界声明的正确打开方式</strong>: 不是「整套理论作废」, 而是逐段检查哪些步骤仍然健在(压强公式)、哪些需要扩建(内能账本)。模型升级从来是局部施工, 不是推倒重来。'
+      },
+      mistakes:'· 一刀切地认为「换了分子全部公式重推」;<br>· 内能修正的方向记反;<br>· 不知道压强公式的幸存理由(它只数质心平动, 与内部结构无关)。',
+      extension:'低温下还有反转剧情: 温度足够低时双原子分子的转动会「冻结」, 内能表现退回单原子档 — 这个无法用本板块工具解释的现象, 是通往量子统计的著名路标之一。',
+      cardAnchor:"Card A5 STEP 2 拓展 + Card A3 STEP 2" }
+  ]
+};
+const SLUG = "advanced";
+const KEY_STATE = `mockcheck_${SLUG}_state`;
+let studentName = "student";
+let selectedQuestions = [];
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE)) || {}; } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+
+// 同卷互斥对: 防止「一题题面 / 选项泄露另一题答案」或同一结论同卷考两遍
+const EXCLUDE_PAIRS = [
+  ["T1-3","T6-1"],["T1-3","T6-4"],["T1-3","T7-2"],
+  ["T6-1","T7-2"],["T6-4","T7-2"],
+  ["T5-3","T6-2"],["T5-4","T6-2"]
+];
+function conflictsWithPicked(id, pickedIds) {
+  return EXCLUDE_PAIRS.some(p =>
+    (p[0] === id && pickedIds.includes(p[1])) || (p[1] === id && pickedIds.includes(p[0])));
+}
+function pickQuestions() {
+  selectedQuestions = [];
+  const pickedIds = [];
+  ["T1","T2","T3","T4","T5","T6","T7"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    const allowed = pool.filter(q => !conflictsWithPicked(q.id, pickedIds));
+    const pickPool = allowed.length ? allowed : pool;
+    const q = pickPool[Math.floor(Math.random() * pickPool.length)];
+    selectedQuestions.push(q);
+    pickedIds.push(q.id);
+  });
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: "instant" });
+  setTimeout(renderMath, 100);
+}
+
+function renderQuestions() {
+  const root = document.getElementById("question-list");
+  let html = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const diagTag = q.hasDiagram ? '<span class="q-meta diagram">📊 配图</span>' : '';
+    const typeLabel = q.type === "choice" ? "单选" : q.type === "multi" ? "多选" : q.type === "fill" ? "填空" : "简答";
+    html += `<div class="question" data-q-id="q${n}" data-q-type="${q.type}" data-q-original="${q.id}">
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeLabel}</span>
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        ${diagTag}
+        <span class="q-meta" style="background:#f8e7cf;color:#a35511;">${q.id}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      ${q.figureSvg || ""}
+      <div class="q-prompt">${q.stem}</div>
+      ${renderBody(q, n)}
+      <div class="q-feedback" hidden></div>
+    </div>`;
+  });
+  root.innerHTML = html;
+  attachListeners();
+}
+
+function renderBody(q, n) {
+  if (q.type === "choice") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "multi") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "fill") return `<div style="margin-top:10px;">${q.blanks.map((b, i) => `<span style="margin-right:18px;display:inline-block;">第 ${i+1} 空: <input type="text" class="q-blank" data-q-id="q${n}" data-blank-id="${i+1}" placeholder="数字或文字"></span>`).join("")}</div>`;
+  if (q.type === "short") return `<textarea class="q-short-input" rows="6" data-q-id="q${n}" placeholder="请分点作答(建议 60-150 字, 写清因果链条)"></textarea>`;
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "fill") document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`).forEach(el => el.addEventListener("input", updateAnsweredCount));
+    if (q.type === "short") { const el = document.querySelector(`textarea[data-q-id="${qid}"]`); if (el) el.addEventListener("input", updateAnsweredCount); }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "fill") return Array.from(document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x && x.length > 0)) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function normalizeFillin(s) {
+  return (s || "")
+    .replace(/[\s　]+/g, "")
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0))
+    .replace(/[₀-₉]/g, c => "0123456789"[c.charCodeAt(0) - 0x2080])
+    .replace(/[⁰-⁹]/g, c => "0123456789"[c.charCodeAt(0) - 0x2070])
+    .replace(/[−–—]/g, "-")
+    .toLowerCase();
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "fill") {
+    let total = 0;
+    q.blanks.forEach((blank, i) => {
+      const uv = normalizeFillin(ua?.[i]);
+      const ok = blank.answers.some(a => normalizeFillin(a) === uv);
+      if (ok) total += blank.score;
+    });
+    return { score: total, isCorrect: total === q.score };
+  }
+  if (q.type === "short") {
+    // E6: 比对前两侧都做空格归一化, 防止输入空格漏判
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => kw.split("|").some(k => text.includes(k.toLowerCase().replace(/\s+/g, ""))));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 1.0) score = q.score;
+    else if (ratio >= 0.5) score = q.score * 0.5;
+    return { score, isCorrect: ratio >= 1.0, hits };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x)) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 6) { if (!confirm(`已答 ${answered} / 7 题(< 85%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 掌握充分(90%+) — 推荐进入教师组织的真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔检测基础水平(70%+) — 可继续练习或申请真实检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回学习任务卡复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    const exportCounts = {};
+    wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
+    const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `<span class="q-export-label">${EXPORT_NAMES[id] || id}</span>(${n}题)`).join(" / ")}</small>` : "";
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
+  }
+
+  document.querySelectorAll(".question input, .question textarea").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const fbEl = document.querySelector(`[data-q-id="q${r.idx+1}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "fill") stdAns = q.blanks.map((b,i) => `第${i+1}空: ${b.answers[0]}`).join(" · ");
+  else if (q.type === "short") stdAns = `关键词: ${q.keywords.map(k => k.split("|").join(" 或 ")).join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})· 请对照解析自评`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-principle"><strong>🔬 涉及的核心原理</strong><div>${q.explanation.principle}</div></div>` +
+      `<div class="q-fb-row q-fb-logic"><strong>🧩 逻辑分析</strong><div>${q.explanation.logic}</div></div>` +
+      `<div class="q-fb-row q-fb-connection"><strong>🌐 知识系统中的位置</strong><div>${q.explanation.connection}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  fbEl.innerHTML = `
+    <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : (r.score > 0 ? '✗ 部分正确' : '✗ 答错')} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="./advanced-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
+  `;
+  fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
+  fbEl.hidden = false;
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空, 通过记录保留(本练习不影响真实检测)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "advanced";
+  const MODULE_NAME = "理想气体内能的微观推导";
+  const PRODUCT_TYPE = "mock-check";
+  const PRODUCT_LABEL = "基础检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitMock_checkApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitMock_checkAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

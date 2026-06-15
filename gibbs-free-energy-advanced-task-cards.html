@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>吉布斯自由能 · 进阶 · 学习任务卡（进阶模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>吉布斯自由能 · 进阶 · 学习任务卡</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>吉布斯自由能 · 进阶</h1>
+    <div class="subtitle">G 的严格推导 · 最大有用功 · 平衡常数桥</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>吉布斯自由能 · 进阶（进阶模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>3-4 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>熵的物理意义（进阶）</strong>（必读 —— 熵增定律 ΔS<sub>universe</sub> ≥ 0 是 ΔG ≤ 0 推导的起点）<br><strong>焓与焓变的意义（进阶）</strong>（必读 —— H = U + PV 的严格定义 + ΔH = Q<sub>p</sub> 等压热定理是 G = H − TS 引入的前提）<br><strong>盖斯定律（基础）</strong>（必读 —— ΔH 的计算与 ΔG 输入紧密结合）<br><strong>吉布斯自由能 · 基础</strong>（必读 —— ΔG = ΔH − TΔS 公式 + 4 组合 + 应用是本进阶板块的对照基线）<br><strong>⚠️ 跨主题前置：平衡常数 K</strong>（来自<strong>化学反应速率与化学平衡</strong>大主题 —— 本板块 Card 3 涉及 ΔG° = -RT ln K<sub>eq</sub> 平衡常数桥, 需要先理解"反应商 Q / 平衡常数 K<sub>eq</sub>"的化学定义。严格学习见该大主题相关板块）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；化学手册或 NIST WebBook 上的标准生成焓 ΔHf° / 标准熵 S° 数据；对气体常数 R = 8.314 J/(mol·K) 与 自然对数 ln 的熟练度</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能严格证明 <strong>G ≡ H − TS</strong> 是<strong>状态函数</strong>（由 H、T、S 均为状态量推出），并解释引入这个组合的物理动机</li>
+      <li>能由<strong>熵增定律</strong> \(\Delta S_{universe} \geq 0\) <strong>严格推导</strong>等温等压下 \(\Delta G \leq 0\) 是自发判据（含"乘 −T 反转不等号"的代数与物理含义）</li>
+      <li>能解释 G 的物理意义 —— 在等温等压条件下，<strong>ΔG 的负值 = 系统能提取的最大非膨胀有用功</strong>（\(\Delta G = -W_{max,非膨胀}\)），并推导其原型 dG = −δW<sub>非膨胀,可逆</sub></li>
+      <li>能推导<strong>电化学桥</strong>公式 \(\Delta G = -nFE\)（n 为转移电子数 / F 为法拉第常数 / E 为电池电动势），并理解这是 G 作为"有用功"的电化学具体形式</li>
+      <li>能推导 \(\Delta G = \Delta G^\circ + RT \ln Q\)（反应商公式），并由平衡条件 ΔG = 0 推出<strong>平衡常数桥</strong> \(\Delta G^\circ = -RT \ln K_{eq}\)</li>
+      <li>能用 \(\Delta G^\circ = -RT \ln K\) 算具体反应的平衡常数（如合成氨 \(N_2 + 3H_2 \rightleftharpoons 2NH_3\)），并解释 K 与 ΔG° 符号的对应（\(K&gt;1 \Leftrightarrow \Delta G^\circ &lt; 0\)）</li>
+      <li>能用<strong>范特霍夫方程</strong>（简化版）\(\frac{d \ln K}{dT} = \frac{\Delta H^\circ}{RT^2}\) 定性判断温度对 K 的影响：吸热反应 T↑ → K↑，放热反应 T↑ → K↓</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>基础板块给了 ΔG = ΔH − TΔS + 4 个组合的自发判据。进阶板块要回答 4 个更深的问题 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li><strong>ΔG ≤ 0 自发判据从哪里来？</strong>"宇宙总是朝熵增方向变化"(ΔS<sub>universe</sub> ≥ 0) 是热力学第二定律的核心。这两个不等号方向相反，是怎么转换的？基础板块直接给了 ΔG ≤ 0，但没说推导过程。</li>
+      <li><strong>G 的物理意义是什么？</strong>"自由能" 这个名字暗示了"自由的能量"。但什么意义上"自由"？为什么不直接用 ΔH 或 ΔS 而要引入这个新组合 G = H − TS？</li>
+      <li><strong>ΔG 和电池电动势有什么关系？</strong>电化学告诉我们"电池能做电功 = nFE"。但 nFE 与热力学 ΔG 有什么定量关系？这两个看似不同的"功"是同一物理量吗？</li>
+      <li><strong>ΔG 和化学平衡常数 K 有什么关系？</strong>"平衡常数 K" 在化学课上常作为经验量直接给出。但 K 与 ΔG° 有什么深层的热力学联系？为什么 K 随温度变化的方向由 ΔH° 的符号决定？</li>
+    </ul>
+    <p style="margin-top: 6px;">本板块用 3 个 Card 严格回答这 4 个问题，并把 G 整合成<strong>热力学与化学平衡 / 电化学的核心桥梁</strong>。</p>
+    <p class="hint">（提示：基础板块给了"工程化判据"; 进阶板块给"严格推导 + 物理意义 + 桥梁连接"。两者互补，进阶不是"重新讲一遍"。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>G 是状态函数 + 由 ΔS<sub>universe</sub> ≥ 0 严格推 ΔG ≤ 0</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 严格证明 G ≡ H − TS 是状态函数 → 由熵增定律严格推 ΔG ≤ 0 自发判据 → 理解"乘 −T 反转不等号"的代数与物理含义<br>
+        <strong>建议时长</strong>: 50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>基础板块给 ΔG = ΔH − TΔS, 你能<strong>从更基本的物理原理</strong>(如熵增定律)推出这个公式吗？</li>
+            <li>"乘 −T" 在代数上 = "把不等号反向 + 乘正数"。这步操作对应什么物理? 为什么 T 必须是<strong>正</strong>的(绝对温度)?</li>
+            <li>G = H − TS 这种"焓减温度乘熵"的<strong>组合形式</strong>能保证 G 是状态函数吗? 为什么?</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>先回顾（核心理论根基 · 4 个前置板块）</strong>：<br>
+            前置 <a href="entropy-meaning-task-cards.html">熵的物理意义（进阶）</a> 板块讲过 —— 熵增定律: 任何自发过程中 <strong>ΔS<sub>universe</sub> = ΔS<sub>sys</sub> + ΔS<sub>环</sub> ≥ 0</strong>(等号成立于可逆过程)。这是第二定律的最严格表述。<br>
+            前置 <a href="enthalpy-meaning-task-cards.html">焓与焓变的意义（进阶）</a> 板块讲过 —— 焓 H ≡ U + PV 是<strong>状态函数</strong>(因 U, P, V 都是状态量)，且等压条件下 <strong>Q<sub>p</sub> = ΔH</strong>(等压热定理)。<br>
+            前置 <a href="hess-law-task-cards.html">盖斯定律（基础）</a> 板块讲过 —— ΔH 的计算工具(代数加减 + ΔHf° 表)是本板块"求 ΔG"的输入。<br>
+            前置 <a href="gibbs-free-energy-basic-task-cards.html">吉布斯自由能 · 基础</a> 板块讲过 —— 公式 ΔG = ΔH − TΔS + 4 组合(ΔH × ΔS 的符号组合)+ 应用判据 ΔG ≤ 0 自发。本进阶板块要<strong>严格推导这个公式的来源</strong>。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">G ≡ H − TS 的引入动机 + 状态函数证明</span></div>
+        <div class="step-content">
+
+          <div class="quote-block" style="font-size: 0.95rem; padding: 14px;">
+            <strong>吉布斯自由能 G 的严格定义 ⭐⭐</strong><br>
+            <br>
+            \[ G \equiv H - TS \]
+            <br>
+            其中 H 是焓, T 是绝对温度, S 是熵。所有量都是<strong>状态函数</strong>。
+          </div>
+
+          <p><strong>为什么是 G = H − TS 而不是别的组合？</strong></p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">G 引入的物理动机</div>
+            <div class="step-line"><strong>动机 ①</strong>: 我们想找一个量, 在<strong>等温等压</strong>条件下(化学反应最常见的条件), 该量的变化方向 = 反应自发方向。</div>
+            <div class="step-line"><strong>动机 ②</strong>: 已知 ΔS<sub>universe</sub> ≥ 0 是自发判据, 但 ΔS<sub>universe</sub> = ΔS<sub>sys</sub> + ΔS<sub>env</sub> 涉及环境, 实际算不方便(环境太大)。我们想<strong>把它转化成只涉及系统</strong>的量。</div>
+            <div class="step-line"><strong>关键观察</strong>: 等压条件下, 环境从系统吸热 = -Q<sub>p,sys</sub> = -ΔH<sub>sys</sub>。环境是大热库(温度恒定 T), 它的熵变 = ΔS<sub>env</sub> = -Q<sub>p,sys</sub> / T = -ΔH<sub>sys</sub> / T。</div>
+            <div class="step-line"><strong>代入熵增定律</strong>: ΔS<sub>universe</sub> = ΔS<sub>sys</sub> + ΔS<sub>env</sub> = ΔS<sub>sys</sub> − ΔH<sub>sys</sub> / T ≥ 0</div>
+            <div class="step-line"><strong>两端乘 −T</strong> (T > 0, 不等号反转): −T·ΔS<sub>universe</sub> = −T·ΔS<sub>sys</sub> + ΔH<sub>sys</sub> ≤ 0</div>
+            <div class="step-line"><strong>定义</strong>: ΔG ≡ ΔH<sub>sys</sub> − T·ΔS<sub>sys</sub> = -T·ΔS<sub>universe</sub> → <strong>ΔG ≤ 0 ⟺ ΔS<sub>universe</sub> ≥ 0</strong> ✓</div>
+            <div class="step-line"><strong>核心收获</strong>: G = H − TS 不是"凭空定义", 它是<strong>把熵增定律从"宇宙视角"翻译成"系统视角"的桥梁</strong>。两者完全等价(等温等压下), 但 ΔG 只涉及系统, 实际算更方便。</div>
+          </div>
+
+          <div class="derivation-block">
+            <div class="derivation-title">G 是状态函数 — 严格证明</div>
+            <div class="step-line"><strong>已知</strong>: H 是状态函数(由前置 焓与焓变进阶); T 是状态量(温度由系统当前态决定); S 是状态函数(由前置 熵进阶, Clausius 不等式定义)。</div>
+            <div class="step-line"><strong>原理</strong>: 状态量的<strong>组合(代数运算: 加减乘除)</strong>得到的量也是状态量, 因为状态量只依赖系统当前态。</div>
+            <div class="step-line"><strong>结论</strong>: G ≡ H − TS = (状态量) − (状态量)·(状态量) = 状态量 ✓</div>
+            <div class="step-line"><strong>推论</strong>: ΔG = G<sub>末</sub> − G<sub>初</sub> 只依赖始末态, 与路径无关。这意味着可以用<strong>盖斯定律的精神</strong>处理 G —— 任何反应的 ΔG 可分步算。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">由 ΔS<sub>universe</sub> ≥ 0 严格推 ΔG ≤ 0 的完整链</span></div>
+        <div class="step-content">
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-chain" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"></path></marker>
+              </defs>
+              <text x="270" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">ΔS<tspan font-size="10" dy="3">universe</tspan><tspan dy="-3"> ≥ 0 → ΔG ≤ 0 严格推导链</tspan></text>
+
+              <!-- Step 1 -->
+              <rect x="40" y="55" width="460" height="40" fill="#fff5d6" stroke="#e67e22" stroke-width="1.5" rx="8"></rect>
+              <text x="50" y="72" font-size="11" font-weight="700" fill="#e67e22">① 熵增定律(前置)</text>
+              <text x="50" y="90" font-size="11" fill="#34495e">ΔS<tspan font-size="8" dy="3">universe</tspan><tspan dy="-3"> = ΔS</tspan><tspan font-size="8" dy="3">sys</tspan><tspan dy="-3"> + ΔS</tspan><tspan font-size="8" dy="3">env</tspan><tspan dy="-3"> ≥ 0</tspan></text>
+
+              <!-- arrow -->
+              <line x1="270" y1="100" x2="270" y2="115" stroke="#0055B8" stroke-width="2" marker-end="url(#arrow-chain)"></line>
+
+              <!-- Step 2 -->
+              <rect x="40" y="120" width="460" height="40" fill="#eef2f7" stroke="#0055B8" stroke-width="1.5" rx="8"></rect>
+              <text x="50" y="137" font-size="11" font-weight="700" fill="#0055B8">② 等压条件 + 大热库假设</text>
+              <text x="50" y="154" font-size="11" fill="#34495e">ΔS<tspan font-size="8" dy="3">env</tspan><tspan dy="-3"> = -Q</tspan><tspan font-size="8" dy="3">p,sys</tspan><tspan dy="-3"> / T = -ΔH</tspan><tspan font-size="8" dy="3">sys</tspan><tspan dy="-3"> / T</tspan></text>
+
+              <!-- arrow -->
+              <line x1="270" y1="165" x2="270" y2="180" stroke="#0055B8" stroke-width="2" marker-end="url(#arrow-chain)"></line>
+
+              <!-- Step 3 -->
+              <rect x="40" y="185" width="460" height="40" fill="#eef2f7" stroke="#0055B8" stroke-width="1.5" rx="8"></rect>
+              <text x="50" y="202" font-size="11" font-weight="700" fill="#0055B8">③ 代入 ① — 只涉及系统</text>
+              <text x="50" y="219" font-size="11" fill="#34495e">ΔS<tspan font-size="8" dy="3">universe</tspan><tspan dy="-3"> = ΔS</tspan><tspan font-size="8" dy="3">sys</tspan><tspan dy="-3"> - ΔH</tspan><tspan font-size="8" dy="3">sys</tspan><tspan dy="-3"> / T ≥ 0</tspan></text>
+
+              <!-- arrow -->
+              <line x1="270" y1="230" x2="270" y2="245" stroke="#0055B8" stroke-width="2" marker-end="url(#arrow-chain)"></line>
+
+              <!-- Step 4 -->
+              <rect x="40" y="250" width="460" height="40" fill="#fbeaea" stroke="#c0392b" stroke-width="1.5" rx="8"></rect>
+              <text x="50" y="267" font-size="11" font-weight="700" fill="#c0392b">④ 两端乘 -T (T > 0, 不等号反转)</text>
+              <text x="50" y="284" font-size="11" fill="#34495e">-T·ΔS<tspan font-size="8" dy="3">universe</tspan><tspan dy="-3"> = ΔH</tspan><tspan font-size="8" dy="3">sys</tspan><tspan dy="-3"> - T·ΔS</tspan><tspan font-size="8" dy="3">sys</tspan><tspan dy="-3"> ≡ ΔG ≤ 0 ✓</tspan></text>
+
+              <!-- bottom conclusion -->
+              <text x="270" y="310" text-anchor="middle" font-size="12" font-weight="700" fill="#00409A">ΔG ≤ 0 ⟺ ΔS<tspan font-size="9" dy="3">universe</tspan><tspan dy="-3"> ≥ 0 (等温等压下完全等价)</tspan></text>
+            </svg>
+            <div class="diagram-caption">图 1 · 由 ΔS<sub>universe</sub> ≥ 0 严格推 ΔG ≤ 0 的 4 步推导链。① 熵增定律(橙色, 起点); ② 等压条件下环境熵变 = −Q<sub>p</sub> / T = −ΔH / T (蓝色); ③ 代入 ① 得只涉及系统的不等式 ΔS<sub>sys</sub> − ΔH/T ≥ 0 (蓝色); ④ 两端乘 −T(T > 0, 不等号反转), 得 ΔG = ΔH − T·ΔS ≤ 0(红色, 终点)。底部蓝色结论: 两个不等式完全等价, ΔG 是 ΔS<sub>universe</sub> 的"系统视角翻译"。</div>
+          </div>
+
+          <p><strong>关键观察 ⭐</strong>:</p>
+          <ul>
+            <li><strong>不等号方向反转</strong>: ΔS<sub>universe</sub> ≥ 0 和 ΔG ≤ 0 一个朝上一个朝下, 这是"乘 −T(负数)"导致的代数反转, 不是物理矛盾。</li>
+            <li><strong>T > 0 是必要条件</strong>: 推导中"两端乘 −T 反转不等号"成立要求 T 必须是正数。绝对温度 T 始终 > 0(零度 = 0 K 不可达, 第三定律), 所以这步永远合法。</li>
+            <li><strong>"自由"的物理意义</strong>: G 的"自由" = 自由<strong>朝</strong>负方向变化的能量(在等温等压下); ΔG 越负, 反应越自发, 系统能"提取"的有用功越多(Card 2 推)。</li>
+          </ul>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · "乘 −T 反转不等号"的物理含义是什么？</div>
+            <div class="tp-pause">推导中"两端乘 −T(T>0) 反转不等号"是关键代数步。它的<strong>物理含义</strong>是什么？为什么这个步骤把"宇宙朝熵增方向"翻译成了"系统朝 G 减小方向"?</div>
+            <div class="tp-ask">物理上理解 ——<br>
+              · "宇宙熵增" = ΔS<sub>universe</sub> ↑ = 自发方向<br>
+              · "−T·ΔS<sub>universe</sub>" = -T × ↑ = ↓ (T > 0 不改变趋势, 但符号反了) = ΔG ↓ = 自发方向<br>
+              · 同一物理事件("宇宙熵增")用<strong>两个等价语言</strong>描述: "宇宙视角"是 ΔS<sub>universe</sub> 升, "系统视角"是 ΔG 降。<br>
+              <br>
+              <strong>为什么用"系统视角"?</strong> 因为算"宇宙熵变"需要算"环境熵变", 但环境是无限大的, 不可能直接测。而 ΔG = ΔH − TΔS 只涉及系统(系统的焓变和熵变都能测), 所以更实用。<br>
+              <br>
+              <strong>类比</strong>: 像 "海平面上升" vs "陆地下降" — 两个等价描述, 视参考系而定。物理事件是同一个(海陆相对距离变化), 只是参考系换了。"乘 −T" 就是"换参考系"的操作, 不改变物理。</div>
+            <div class="tp-write">在纸上: ① 写"宇宙视角"和"系统视角"两个不等式; ② 用"海平面 vs 陆地"类比解释参考系切换; ③ 一句话总结"为什么 G 更实用"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 严格证明 ΔG 与路径无关 + 推论(任何反应 ΔG 可拆步算)</div>
+            <div class="tp-pause">G ≡ H − TS 是状态函数, 所以 ΔG 路径无关。具体说: 对一个化学反应 R → P, ΔG = G<sub>P</sub> − G<sub>R</sub>, 不管反应经过什么中间步, 答案一样。<br>
+              用这个性质, 你能想象一个"盖斯定律 for G"吗?
+            </div>
+            <div class="tp-ask">证明: H 是状态量(由 H = U + PV, U/P/V 都是状态量), T 是状态量, S 是状态量。由"状态量的代数组合仍是状态量"原理, G = H − TS 是状态量。所以 ΔG<sub>总</sub> = ΔG<sub>步1</sub> + ΔG<sub>步2</sub> + ...<br>
+              <br>
+              <strong>盖斯定律 for G</strong>: 任何反应的 ΔG 可以拆成已知反应 ΔG 的代数组合。<br>
+              · 反应反向 → ΔG 变号<br>
+              · 反应乘 k → ΔG 乘 k<br>
+              · 反应叠加 → ΔG 相加<br>
+              <br>
+              <strong>应用</strong>: 用<strong>标准生成自由能 ΔGf°</strong> 表(化学手册中)+ 盖斯定律 → 算任意反应的 ΔG°:<br>
+              ΔG°_反应 = Σν·ΔGf°(产物) − Σν·ΔGf°(反应物)<br>
+              <br>
+              这与基础板块 ΔG = ΔH − TΔS 是<strong>两种等价计算方法</strong>: 前者用 ΔGf° 表查, 后者用 ΔH + S 数据算。</div>
+            <div class="tp-write">在纸上: ① 证明 G 是状态量; ② 写"盖斯定律 for G"的 3 条规则; ③ 写"用 ΔGf° 表算 ΔG°"的公式。</div>
+            <div class="tp-hint">ΔGf° 表是化学手册的另一个高频数据, 与 ΔHf° 表平行。用 ΔGf° 表能直接算反应 ΔG°, 不必先算 ΔH 和 ΔS。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界 — 本板块到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: <strong>Helmholtz 自由能 A ≡ U − TS</strong> 的完整体系(等容等温的对应自由能 + 与 G 的对比)— 留给大学物理化学(广义热力学势的体系化讨论)</li>
+            <li><strong>不引入</strong>: <strong>化学势 μ</strong>(偏导数 μ ≡ (∂G/∂n)<sub>T,P</sub>) 的完整定义 + 多组分系统的 Gibbs-Duhem 方程 — 留给大学物理化学</li>
+            <li><strong>不引入</strong>: 标准状态的<strong>严格定义</strong>(IUPAC 标准压力 1 bar / 标准浓度 1 mol/L / 标准态选择的依赖性) — 本板块用"约定标准态"即可</li>
+            <li><strong>本板块完成</strong>: G 严格定义 + 由熵增定律推 ΔG ≤ 0 + G 是状态函数 + 盖斯定律 for G</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="ga1c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写 G 的严格定义 G ≡ H − TS, 并说明为什么是"焓减温度乘熵"这个组合(物理动机)</span></label>
+        <label data-key="ga1c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能完整推导由 ΔS<sub>universe</sub> ≥ 0 → ΔG ≤ 0 的 4 步链(熵增定律 → 等压环境熵变 → 代入 → 乘 −T 反转)</span></label>
+        <label data-key="ga1c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"乘 −T 反转不等号"的物理含义(宇宙视角 ↔ 系统视角的等价语言切换)</span></label>
+        <label data-key="ga1c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能证明 G 是状态函数(由 H, T, S 都是状态量推出), 并推出"盖斯定律 for G"的 3 条规则</span></label>
+        <label data-key="ga1c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能写出用 ΔGf° 表算反应 ΔG° 的公式 ΔG°_反应 = Σν·ΔGf°(产物) − Σν·ΔGf°(反应物)</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：严格推导 · 视角切换(宇宙 ↔ 系统) · 状态函数的代数闭合性</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>ΔG = W<sub>max,非膨胀</sub> — 自由能的"有用功"意义</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 推导 dG = -δW<sub>非膨胀,可逆</sub> → 理解 ΔG 的物理意义 = 等温等压下系统能提取的最大非膨胀有用功 → 推出 ΔG = -nFE 电化学桥<br>
+        <strong>建议时长</strong>: 50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>"自由能" 的名字暗示了"自由的能量"。你能猜什么意义上"自由"吗?</li>
+            <li>系统的<strong>总能量</strong>分两部分: 等压条件下, 一部分变成 PV 膨胀功(体积变化), 一部分能做"<strong>其他用</strong>"(电功 / 力学功 / 等)。后者是"自由能"吗?</li>
+            <li>"可逆过程"和"不可逆过程"哪个能提取更多功? 为什么?</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>先回顾(第一定律 + 熵进阶)</strong>:<br>
+            前置 <a href="basic-task-cards.html">热力学第一定律</a> 板块讲过 —— <strong>功的分类</strong>: 总功 W 可分<strong>膨胀功</strong> W<sub>膨</sub> = ∫p<sub>外</sub> dV(体积变化抵抗外压做的功)+ <strong>非膨胀功</strong> W<sub>非膨</sub>(其他形式的功, 如电功 / 表面张力做功 / 浓度梯度做功等)。<br>
+            前置 <a href="entropy-meaning-task-cards.html">熵的物理意义</a> 板块讲过 —— <strong>可逆过程提取最大功</strong>: 任何过程, 可逆路径能提取 / 输入的功 ≥ 不可逆路径(可逆是极限)。这是从 Clausius 不等式 + 第二定律推出的核心结论。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">推导 dG = -δW<sub>非膨胀,可逆</sub></span></div>
+        <div class="step-content">
+
+          <div class="derivation-block">
+            <div class="derivation-title">从第一 + 第二定律推 dG = -δW<sub>非膨胀,可逆</sub></div>
+            <div class="step-line"><strong>第一定律</strong>: dU = δQ − δW = δQ − δW<sub>膨</sub> − δW<sub>非膨</sub></div>
+            <div class="step-line"><strong>可逆过程 + 第二定律</strong>: δQ<sub>rev</sub> = T·dS</div>
+            <div class="step-line"><strong>等压条件</strong>: δW<sub>膨</sub> = p·dV</div>
+            <div class="step-line"><strong>代入</strong>: dU = T·dS − p·dV − δW<sub>非膨,rev</sub></div>
+            <div class="step-line"><strong>焓定义 dH = dU + d(pV) = dU + p·dV + V·dp</strong></div>
+            <div class="step-line"><strong>等压 dp = 0</strong>: dH = dU + p·dV = (T·dS − p·dV − δW<sub>非膨,rev</sub>) + p·dV = <strong>T·dS − δW<sub>非膨,rev</sub></strong></div>
+            <div class="step-line"><strong>G 定义 dG = dH − d(TS) = dH − T·dS − S·dT</strong></div>
+            <div class="step-line"><strong>等温 dT = 0</strong>: dG = dH − T·dS = (T·dS − δW<sub>非膨,rev</sub>) − T·dS = <strong>−δW<sub>非膨,rev</sub></strong> ✓</div>
+            <div class="step-line"><strong>积分</strong>: <strong>ΔG = −W<sub>非膨胀,可逆</sub> = −W<sub>max,非膨胀</sub></strong>(可逆给出最大功)</div>
+          </div>
+
+          <div class="quote-block" style="font-size: 0.95rem; padding: 14px;">
+            <strong>核心物理意义 ⭐⭐</strong><br>
+            <br>
+            在<strong>等温等压</strong>条件下:<br>
+            <br>
+            \[ \Delta G = -W_{max, 非膨胀} \]
+            <br>
+            <strong>ΔG 的负值</strong>(若 ΔG < 0)= 系统能提取的<strong>最大非膨胀有用功</strong>(电功 / 表面张力做功 / 等其他形式)。<br>
+            <br>
+            "自由"的含义: ΔG 是"可被自由用作有用功"的那部分焓变(其余 TΔS 部分被"熵增"消耗, 不能做有用功)。
+          </div>
+
+          <p><strong>关键观察</strong>:</p>
+          <ul>
+            <li><strong>可逆 = 最大功</strong>: 不可逆过程提取的 W<sub>非膨</sub> &lt; |ΔG|(部分能量耗散为熵增)。只有可逆过程能<strong>等号成立</strong>提取 |ΔG|。</li>
+            <li><strong>"等温等压"是约束</strong>: 这个 ΔG = -W<sub>max</sub> 的公式只在等温等压下严格成立。其他条件下(等容等温)用 Helmholtz 自由能 A 而不是 G(留给大学物化)。</li>
+            <li><strong>"非膨胀"是约束</strong>: 膨胀功 p·dV 已经被"内置"在 ΔH 中(因为 dH = dU + p·dV 已经把 p·dV 加进去了), 所以 ΔG 只剩下"其他功"的潜力。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">电化学桥 ΔG = −nFE</span></div>
+        <div class="step-content">
+          <p>最重要的"非膨胀功"应用 — <strong>电化学电池</strong>。</p>
+
+          <div class="derivation-block">
+            <div class="derivation-title">电池的非膨胀功 = 电功 → ΔG = −nFE</div>
+            <div class="step-line"><strong>电池可逆运行(理想电池, 无电阻发热)</strong>: 当电池放电时, 通过外电路 n mol 电子(电荷量 = n·F, F = 96485 C/mol 是法拉第常数)。</div>
+            <div class="step-line"><strong>外电路做功</strong>: 电功 W<sub>电</sub> = (电荷)×(电压) = nF·E, 其中 E 是电池电动势(电池两极电势差, 单位 V)。</div>
+            <div class="step-line"><strong>电池对外做的非膨胀功</strong>: W<sub>非膨</sub> = W<sub>电</sub> = nF·E</div>
+            <div class="step-line"><strong>用 ΔG = -W<sub>非膨</sub>,可逆</strong>: ΔG = -nF·E ✓</div>
+          </div>
+
+          <div class="quote-block" style="font-size: 0.95rem; padding: 14px;">
+            <strong>电化学桥公式 ⭐⭐</strong><br>
+            <br>
+            \[ \Delta G = -nFE \]
+            <br>
+            n: 反应转移的电子摩尔数<br>
+            F: 法拉第常数 = 96485 C/mol<br>
+            E: 电池电动势(可逆条件下), 单位 V<br>
+            <br>
+            <strong>意义</strong>: 这是<strong>热力学 ↔ 电化学的核心桥梁</strong>。可通过测电池电动势 E 直接推算反应 ΔG(精度高于其他方法), 也可通过 ΔG 数据预测电池电动势。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 为什么"可逆 = 最大功"?</div>
+            <div class="tp-pause">推导得 ΔG = -W<sub>非膨</sub>,<strong>可逆</strong>。不可逆过程提取的非膨胀功会比 |ΔG| 小。这背后的<strong>物理原因</strong>是什么? 用第二定律解释。</div>
+            <div class="tp-ask">关键: 第二定律的 Clausius 不等式 δQ ≤ T·dS(等号成立于可逆过程)。<br>
+              · 可逆过程: δQ<sub>rev</sub> = T·dS, 能量"全部用尽" 不浪费<br>
+              · 不可逆过程: δQ<sub>irrev</sub> < T·dS, 部分能量被熵增<strong>"消耗掉"</strong>(转化为环境的低品质热能, 无法再做功)<br>
+              <br>
+              在等温等压下, 这"被消耗的部分" = T·dS<sub>额外</sub> = T(dS<sub>irrev</sub> − dS<sub>rev</sub>) — 是不可逆过程的"额外熵产生"乘以温度。<br>
+              <br>
+              <strong>物理图像</strong>: 想象一个反应能放出 100 kJ 总能量(ΔG = -100 kJ)。<br>
+              · 可逆电池: 慢慢放电, 几乎全部 100 kJ 变成电功(W<sub>max</sub> = 100 kJ)<br>
+              · 不可逆电池(短路, 内阻发热): 部分能量变内阻热(不能做有用功), 比如只剩 70 kJ 变电功 + 30 kJ 变废热<br>
+              <br>
+              这 30 kJ 就是"<strong>熵产生</strong>"的代价。可逆过程的"理想性"在于零熵产生, 100% 能量都能做有用功。
+            </div>
+            <div class="tp-write">在纸上: ① 写 Clausius 不等式 δQ ≤ T·dS 及其等号条件; ② 用"可逆电池 vs 不可逆电池"的例子说明"额外熵产生"的物理意义; ③ 一句话总结"为什么可逆 = 最大功"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 用 ΔG = -nFE 算甲醇燃料电池的电动势</div>
+            <div class="tp-pause">甲醇燃料电池反应: CH₃OH(l) + 3/2 O₂(g) → CO₂(g) + 2H₂O(l)<br>
+              ΔG° ≈ -702 kJ/mol(25°C, 标准态)<br>
+              反应转移电子数 n = 6 (CH₃OH 的 C 由 -2 价升到 +4 价, 转移 6 个电子)<br>
+              F = 96485 C/mol<br>
+              <br>
+              算电池的<strong>理论(可逆)电动势 E°</strong>。
+            </div>
+            <div class="tp-ask">用 ΔG = -nFE → E = -ΔG / (nF)<br>
+              <br>
+              · E° = -ΔG° / (nF)<br>
+              · = -(-702 × 1000 J/mol) / (6 × 96485 C/mol)<br>
+              · = 702000 / 578910<br>
+              · ≈ <strong>1.21 V</strong><br>
+              <br>
+              这是甲醇燃料电池在<strong>可逆条件</strong>下的理论电动势。实际电池由于不可逆(内阻 + 电极极化 + 燃料未完全反应), 工作电压通常约 0.7-0.9 V, 能量转化效率约 60-75%。<br>
+              <br>
+              <strong>核心收获</strong>: ΔG 不是抽象的"热力学量", 它<strong>直接决定一个反应能做的最大有用功</strong>。在燃料电池 / 电池 / 燃烧的"热机效率"分析中, ΔG 是关键参数。
+            </div>
+            <div class="tp-write">在纸上: ① 写 ΔG = -nFE 公式; ② 代入数据算 E° = 1.21 V; ③ 说明实际工作电压低于此值的原因(不可逆); ④ 一句话总结"ΔG 与电池电动势的关系"。</div>
+            <div class="tp-hint">这是"待建电化学大主题"的核心入口。本板块只到 ΔG = -nFE 公式的推导和单一电池电动势计算, Nernst 方程 / 浓差电池 / 复杂电极反应等留给电化学板块。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界 — 本板块到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: <strong>Nernst 方程</strong>(电池电动势随浓度的变化 E = E° − (RT/nF)·ln Q)— 留给电化学板块</li>
+            <li><strong>不引入</strong>: <strong>电极电势体系</strong>(标准还原电势表 / 氢电极参考 / 电极反应 Nernst 推导)— 留给电化学板块</li>
+            <li><strong>不引入</strong>: 非膨胀功的<strong>其他形式</strong>(表面张力做功 / 磁化功 / 弹性功等)的完整热力学体系 — 留给大学物理化学专题</li>
+            <li><strong>本板块完成</strong>: dG = -δW<sub>非膨,rev</sub> 推导 + ΔG 物理意义 + ΔG = -nFE 电化学桥(简单形式)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="ga2c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能完整推导 dG = -δW<sub>非膨胀,可逆</sub>(从第一定律 + 第二定律 + 焓与 G 定义出发)</span></label>
+        <label data-key="ga2c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释 ΔG 的物理意义 — 等温等压下系统能提取的最大非膨胀有用功(ΔG = −W<sub>max</sub>,非膨)</span></label>
+        <label data-key="ga2c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"可逆 = 最大功"的物理原因(不可逆过程的额外熵产生消耗能量)</span></label>
+        <label data-key="ga2c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写电化学桥公式 ΔG = -nFE, 解释 n / F / E 各代表什么</span></label>
+        <label data-key="ga2c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 ΔG° = -nFE° 算甲醇燃料电池 E° ≈ 1.21 V, 并说明实际电压低于此值的原因(不可逆)</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：物理意义的严格推导 · 可逆 vs 不可逆的能量代价 · 跨学科桥梁(热力学 ↔ 电化学)</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>ΔG° + 化学平衡常数 K + 温度对 K 的影响</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>: 推导 ΔG = ΔG° + RT ln Q 反应商公式 → 由平衡条件 ΔG = 0 推 ΔG° = -RT ln K<sub>eq</sub> 平衡常数桥 → 用范特霍夫方程定性判断温度对 K 的影响<br>
+        <strong>建议时长</strong>: 50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>"化学平衡常数 K" 在化学课中常作为<strong>经验量</strong>给出。但 K 与<strong>热力学量 ΔG°</strong> 有什么定量关系?</li>
+            <li>当反应"未到平衡"时, 反应有方向(向产物 or 反应物方向移动)。这个方向<strong>怎么由 ΔG 判断</strong>?</li>
+            <li>K 随温度变化的方向(吸热反应 T↑K↑, 放热反应 T↑K↓) — 这个经验规律的<strong>热力学根</strong>是什么?</li>
+          </ul>
+
+          <div class="prereq-recap">
+            <strong>⚠️ 跨主题前置 — 化学反应速率与化学平衡大主题</strong>:<br>
+            本 Card 涉及的"反应商 Q / 平衡常数 K<sub>eq</sub>"属于<strong>化学反应速率与化学平衡</strong>大主题, 不在热力学主题内。严格定义见该大主题; 此处只给出<strong>最小自包含简介</strong>以使本 Card 能进行下去 ——<br>
+            对一个一般反应 \(aA + bB \rightleftharpoons cC + dD\), 定义<strong>反应商</strong> \(Q = \frac{[C]^c [D]^d}{[A]^a [B]^b}\)(气相用分压 / 溶液用浓度)。<br>
+            反应达到<strong>平衡</strong>时, 反应商等于<strong>平衡常数 K<sub>eq</sub></strong>: K<sub>eq</sub> = Q<sub>eq</sub>。<br>
+            K<sub>eq</sub> 是反应的特征量, 只依赖<strong>温度</strong>(不依赖初始浓度)。<br>
+            <em>本板块直接使用此结论作为"跨主题输入"; 详细学习见化学反应速率与化学平衡大主题。</em>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">推导 ΔG = ΔG° + RT ln Q + 平衡常数桥</span></div>
+        <div class="step-content">
+
+          <div class="derivation-block">
+            <div class="derivation-title">反应商公式 ΔG = ΔG° + RT ln Q 的来源</div>
+            <div class="step-line"><strong>背景</strong>: 在标准态(气体 1 bar / 溶液 1 mol/L) 下定义的 ΔG° 是反应的<strong>标准自由能变化</strong>。但实际反应物 / 产物浓度通常非标准, 需要"修正"。</div>
+            <div class="step-line"><strong>关键事实(自包含)</strong>: 理想气体 / 稀溶液的化学势 μ<sub>i</sub> = μ<sub>i</sub>° + RT·ln(c<sub>i</sub>/c°)(由统计力学推出, 本板块直接用)。对反应 aA + bB → cC + dD:</div>
+            <div class="step-line">ΔG = Σν·μ<sub>产物</sub> − Σν·μ<sub>反应物</sub> = Σν·(μ° + RT·ln c) ⇒ ΔG = ΔG° + RT·(c·ln[C] + d·ln[D] − a·ln[A] − b·ln[B])</div>
+            <div class="step-line">= ΔG° + RT·ln([C]^c [D]^d / [A]^a [B]^b) = <strong>ΔG° + RT·ln Q</strong> ✓</div>
+            <div class="step-line"><strong>用法</strong>: 已知 ΔG°(查表 ΔGf°)和当前反应商 Q(从初始浓度算), 立即推出当前 ΔG。</div>
+            <div class="step-line">· ΔG < 0 → 反应向<strong>产物</strong>方向自发(Q 太小 → 朝增大 Q 方向走 → 平衡时 Q = K)</div>
+            <div class="step-line">· ΔG > 0 → 反应向<strong>反应物</strong>方向自发(Q 太大 → 朝减小 Q 方向走)</div>
+            <div class="step-line">· ΔG = 0 → 达到<strong>平衡</strong>(Q = K<sub>eq</sub>)</div>
+          </div>
+
+          <div class="derivation-block">
+            <div class="derivation-title">由平衡条件推 ΔG° = -RT·ln K<sub>eq</sub></div>
+            <div class="step-line"><strong>平衡条件</strong>: ΔG = 0, Q = K<sub>eq</sub></div>
+            <div class="step-line"><strong>代入 ΔG° + RT·ln Q = 0</strong>: 0 = ΔG° + RT·ln K<sub>eq</sub></div>
+            <div class="step-line"><strong>整理</strong>: <strong>ΔG° = -RT·ln K<sub>eq</sub></strong> ✓</div>
+          </div>
+
+          <div class="quote-block" style="font-size: 0.95rem; padding: 14px;">
+            <strong>平衡常数桥公式 ⭐⭐</strong><br>
+            <br>
+            \[ \Delta G^\circ = -RT \ln K_{eq} \]
+            <br>
+            或等价地: \( K_{eq} = e^{-\Delta G^\circ / (RT)} \)<br>
+            <br>
+            <strong>意义</strong>: 这是<strong>热力学 ↔ 化学平衡的核心桥梁</strong>。可通过 ΔG° 数据(化学手册查 ΔGf° 算)直接算 K<sub>eq</sub>, 也可通过测得 K<sub>eq</sub> 反推 ΔG°。
+          </div>
+
+          <p><strong>关键对应关系 ⭐</strong>:</p>
+          <table class="compare-table">
+            <tr><th>ΔG° 符号</th><th>K<sub>eq</sub> 值</th><th>反应在标准态下的方向</th></tr>
+            <tr><td>ΔG° = 0</td><td>K<sub>eq</sub> = 1</td><td>反应物 ↔ 产物等量(标准态平衡)</td></tr>
+            <tr><td>ΔG° &lt; 0</td><td>K<sub>eq</sub> &gt; 1</td><td>产物主导(反应向右进行较多)</td></tr>
+            <tr><td>ΔG° &gt; 0</td><td>K<sub>eq</sub> &lt; 1</td><td>反应物主导(反应向右较难, 平衡时产物少)</td></tr>
+            <tr><td>ΔG° 越负</td><td>K<sub>eq</sub> 越大(指数关系)</td><td>反应越"彻底"地朝产物方向</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">具体例题 — 算合成氨 K<sub>eq</sub></span></div>
+        <div class="step-content">
+          <p><strong>反应</strong>: \(N_2(g) + 3H_2(g) \rightleftharpoons 2NH_3(g)\)</p>
+          <p><strong>已知数据</strong>(25°C, 标准态 1 bar):</p>
+          <ul>
+            <li>ΔHf°(NH₃, g) = -45.9 kJ/mol</li>
+            <li>S°(N₂, g) = 191.6 J/(mol·K), S°(H₂, g) = 130.7 J/(mol·K), S°(NH₃, g) = 192.8 J/(mol·K)</li>
+          </ul>
+
+          <div class="derivation-block">
+            <div class="derivation-title">3 步算 K<sub>eq</sub></div>
+            <div class="step-line"><strong>① 算 ΔH°</strong>: ΔH° = 2 × ΔHf°(NH₃) − [ΔHf°(N₂) + 3 × ΔHf°(H₂)] = 2 × (-45.9) − [0 + 0] = <strong>-91.8 kJ/mol</strong></div>
+            <div class="step-line"><strong>② 算 ΔS°</strong>: ΔS° = 2 × S°(NH₃) − [S°(N₂) + 3 × S°(H₂)] = 2 × 192.8 − [191.6 + 3 × 130.7] = 385.6 − 583.7 = <strong>-198.1 J/(mol·K)</strong></div>
+            <div class="step-line"><strong>③ 算 ΔG° = ΔH° − T·ΔS°</strong>(T = 298 K): ΔG° = -91800 − 298 × (-198.1) = -91800 + 59034 = <strong>-32766 J/mol ≈ -32.8 kJ/mol</strong></div>
+            <div class="step-line"><strong>用 ΔG° = -RT·ln K<sub>eq</sub> 反解</strong>: ln K<sub>eq</sub> = -ΔG° / (RT) = -(-32766) / (8.314 × 298) = 32766 / 2477.6 ≈ <strong>13.22</strong></div>
+            <div class="step-line"><strong>K<sub>eq</sub> = e^13.22 ≈ 5.5 × 10⁵</strong></div>
+          </div>
+
+          <p><strong>结论</strong>: 25°C 下合成氨反应的 K<sub>eq</sub> ≈ 5.5 × 10⁵, <strong>远大于 1</strong>, 意味着在标准态下产物 NH₃ 占绝对主导。</p>
+
+          <div class="quote-block">
+            <strong>但实际工业上为什么需要"高温高压"?</strong><br>
+            尽管 K<sub>eq</sub> 在 25°C 下很大(热力学上有利), 但<strong>反应速率太慢</strong>(N≡N 945 kJ/mol 键能太强, 活化能很高)。所以工业 Haber-Bosch 工艺用 400-500°C(加速)+ 200-400 atm(进一步推平衡向右)+ 铁基催化剂(降活化能)。但温度升高会让 K<sub>eq</sub> <strong>下降</strong>(本反应是放热, Card 3 STEP 4 范特霍夫方程会解释)。所以高温是<strong>速率 - 平衡常数</strong>的折中。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">温度对 K 的影响 — 范特霍夫方程</span></div>
+        <div class="step-content">
+
+          <div class="derivation-block">
+            <div class="derivation-title">范特霍夫方程简化版的来源</div>
+            <div class="step-line"><strong>从 ΔG° = -RT·ln K<sub>eq</sub> 出发</strong>: ln K<sub>eq</sub> = -ΔG° / (RT) = -(ΔH° − T·ΔS°) / (RT) = -ΔH°/RT + ΔS°/R</div>
+            <div class="step-line"><strong>对 T 求导</strong>(假设 ΔH° 与 ΔS° 不随 T 变, 这是近似): d(ln K<sub>eq</sub>) / dT = ΔH° / (R·T²)</div>
+            <div class="step-line"><strong>这就是范特霍夫方程简化版</strong>: <strong>\(\frac{d \ln K_{eq}}{dT} = \frac{\Delta H^\circ}{RT^2}\)</strong></div>
+            <div class="step-line"><strong>定性结论 ⭐</strong>:<br>
+              · ΔH° &gt; 0(吸热反应): T↑ → d(ln K<sub>eq</sub>)/dT &gt; 0 → K<sub>eq</sub> <strong>升高</strong>(温度升高有利产物形成)<br>
+              · ΔH° &lt; 0(放热反应): T↑ → d(ln K<sub>eq</sub>)/dT &lt; 0 → K<sub>eq</sub> <strong>下降</strong>(温度升高不利产物形成)</div>
+            <div class="step-line"><strong>用合成氨验证</strong>: ΔH° = -91.8 kJ/mol &lt; 0(放热)→ T↑ K↓ ✓ 与上面"工业用高温降低 K 的折中"一致。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#34495e"></path></marker>
+              </defs>
+              <text x="270" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">ΔG° vs T 线性图 — 合成氨示例</text>
+
+              <!-- 坐标轴 (主图集中左下区域 x=60-330) -->
+              <line x1="60" y1="265" x2="335" y2="265" stroke="#34495e" stroke-width="1.5" marker-end="url(#arrow-axis)"></line>
+              <line x1="60" y1="265" x2="60" y2="70" stroke="#34495e" stroke-width="1.5" marker-end="url(#arrow-axis)"></line>
+              <text x="343" y="269" font-size="11" font-weight="700" fill="#34495e">T (K)</text>
+              <text x="40" y="68" font-size="11" font-weight="700" fill="#34495e">ΔG°</text>
+
+              <!-- 0 轴线 (虚线水平) -->
+              <line x1="60" y1="175" x2="335" y2="175" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"></line>
+              <text x="55" y="179" text-anchor="end" font-size="10" fill="#7f8c8d">0</text>
+
+              <!-- ΔG° 直线: T 范围 0-600. x_axis 60→335, T_per_pix=275/600=0.458. y_axis 175(ΔG°=0). 1 kJ=0.97 pix. T=0→y=264; T=600→y=149 -->
+              <line x1="60" y1="264" x2="335" y2="149" stroke="#c0392b" stroke-width="2.5"></line>
+
+              <!-- T_转 点 (T=463, x=60+463*275/600=60+212=272, y=175) -->
+              <circle cx="272" cy="175" r="5" fill="#27ae60"></circle>
+
+              <!-- Legend block (右侧空白 x=370-530, y=85-260) -->
+              <rect x="370" y="85" width="160" height="175" fill="#ffffff" stroke="#00409A" stroke-width="1.5" rx="8"></rect>
+              <text x="450" y="108" text-anchor="middle" font-size="11" font-weight="700" fill="#00409A">图例</text>
+
+              <!-- 红线说明 -->
+              <line x1="385" y1="128" x2="410" y2="128" stroke="#c0392b" stroke-width="2.5"></line>
+              <text x="415" y="131" font-size="10" font-weight="700" fill="#c0392b">ΔG° 直线</text>
+              <text x="385" y="148" font-size="9" fill="#34495e">截距 ΔH° = -91.8 kJ/mol</text>
+              <text x="385" y="162" font-size="9" fill="#34495e">斜率 -ΔS° = +0.198</text>
+
+              <!-- 绿点说明 -->
+              <circle cx="395" cy="190" r="5" fill="#27ae60"></circle>
+              <text x="415" y="193" font-size="10" font-weight="700" fill="#27ae60">T<tspan font-size="8" dy="2">转</tspan><tspan dy="-2"> ≈ 463 K</tspan></text>
+              <text x="385" y="210" font-size="9" fill="#34495e">ΔG° = 0 自发性反转</text>
+              <text x="385" y="224" font-size="9" fill="#34495e">T &lt; 463 K → K &gt; 1</text>
+              <text x="385" y="238" font-size="9" fill="#34495e">T &gt; 463 K → K &lt; 1</text>
+
+              <!-- 底部公式 -->
+              <text x="270" y="300" text-anchor="middle" font-size="12" font-weight="700" fill="#00409A">ΔG° = ΔH° − T·ΔS° = -91.8 + 0.198·T (kJ/mol)</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 合成氨反应 (ΔH° = -91.8 kJ/mol, ΔS° = -198.1 J/(mol·K)) 的 ΔG° vs T 线性图。左侧主图: 红色实线为 ΔG° vs T 关系, 与 0 轴(灰色虚线)交于绿色 T<sub>转</sub> 点。右侧"图例"框列出参数 — 红线截距 ΔH° < 0(放热)、斜率 -ΔS° > 0(因 ΔS° < 0)、T<sub>转</sub> ≈ 463 K 是 ΔG° = 0 反转处, 左侧低温区 ΔG° < 0 产物主导(K > 1), 右侧高温区 ΔG° > 0 反应物主导(K < 1)。这条直线的 x 截距(与 0 轴交点)即基础板块的 T<sub>转</sub> = ΔH°/ΔS° 概念。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 合成氨为什么要"低温高压"? 用 ΔG° + 范特霍夫综合解释</div>
+            <div class="tp-pause">合成氨反应 N₂ + 3H₂ ⇌ 2NH₃ 是<strong>放热(ΔH° &lt; 0)</strong> + <strong>气体分子数减少(ΔS° &lt; 0)</strong>。"低温有利平衡向右(K↑) + 高压推平衡向右"是经典工业经验。<br>
+              用本板块的 ΔG° + 范特霍夫定量解释这两个条件 — 为什么是低温(不是高温)? 为什么是高压(不是常压)?
+            </div>
+            <div class="tp-ask">两个条件 ——<br>
+              <br>
+              <strong>① 低温(对平衡常数 K<sub>eq</sub> 有利)</strong>:<br>
+              · 用范特霍夫: d(ln K<sub>eq</sub>) / dT = ΔH° / (R·T²)<br>
+              · ΔH° = -91.8 kJ/mol &lt; 0 → d(ln K<sub>eq</sub>) / dT &lt; 0 → T 升高 K<sub>eq</sub> 下降<br>
+              · 25°C(298 K): K<sub>eq</sub> ≈ 5.5 × 10⁵ (上面算过)<br>
+              · 工业 450°C(723 K): K<sub>eq</sub> 由直线推 ≈ 0.5(粗估; ΔG° ≈ -91.8 + 0.198 × 723 = +51.4 kJ/mol → ln K = -51400/6010 = -8.55 → K ≈ 2 × 10⁻⁴, 实际值与此近, 仅 0.0001 量级)<br>
+              · 所以从纯<strong>平衡</strong>角度看, 应该<strong>低温</strong>有利 K↑。<br>
+              <br>
+              <strong>② 高压(推动平衡向右)</strong>:<br>
+              · K<sub>p</sub> = p(NH₃)² / [p(N₂) × p(H₂)³] (反应商 Q 的平衡形式)<br>
+              · 总压力增加 N 倍 → 各分压增加 N 倍<br>
+              · 分母变 N × N³ = N⁴; 分子变 N²<br>
+              · Q 变化 = (N²) / (N⁴) = 1/N²<br>
+              · 即压力增加, Q &lt; K, 反应向<strong>右</strong>移动直到 Q 重新等于 K → 平衡时 NH₃ 浓度增加<br>
+              · 这是<strong>气体分子数减少的反应</strong>对压力敏感的本质。<br>
+              <br>
+              <strong>实际工业折中</strong>: 低温利好 K, 但<strong>反应速率太慢</strong>(N≡N 945 kJ/mol 键能太强)。工业上选 400-500°C: 速率高 + 用铁催化剂降活化能, 同时高压(200-400 atm)弥补 K 在高温下的下降。这是<strong>热力学(K) vs 动力学(速率) 的经典权衡</strong>。<br>
+              <br>
+              <strong>核心收获</strong>: 化学工业不仅看"反应是否自发(ΔG &lt; 0)", 还要看"K 多大 + 速率多快 + 经济成本"。本板块给的工具(ΔG° = -RT ln K + 范特霍夫)是<strong>热力学侧的核心</strong>, 与动力学侧(活化能 + 催化剂)配合才能设计真实工艺。
+            </div>
+            <div class="tp-write">在纸上: ① 用范特霍夫定量解释低温有利 K(d ln K/dT 符号 + 25°C vs 450°C 数值估算); ② 用 Q vs K 解释高压推平衡(N⁴ 分母 vs N² 分子); ③ 一句话总结"热力学(K) + 动力学(速率) + 经济(成本) 的工业折中"。</div>
+            <div class="tp-hint">真实合成氨工艺的详细设计(温度梯度 + 多级反应器 + 循环未反应气)留给化学工程, 本板块只给热力学侧的"K 与温度"分析。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">边界 — 本板块到哪里为止 + 下游应用</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: <strong>活度系数 γ</strong> 和非理想体系的修正(实际气体 / 浓溶液 / 离子溶液)— 留给大学物理化学</li>
+            <li><strong>不引入</strong>: <strong>多反应体系</strong>的耦合平衡(如生物代谢路径中的 ATP-ADP 耦合)— 留给生物化学</li>
+            <li><strong>不引入</strong>: 范特霍夫方程的<strong>积分形式</strong> ln(K<sub>2</sub>/K<sub>1</sub>) = -(ΔH°/R)(1/T<sub>2</sub> − 1/T<sub>1</sub>) — 本板块只用微分形式做定性判断, 积分形式定量计算留给大学物化</li>
+            <li><strong>本板块完成</strong>: ΔG° + RT ln Q 推导 + 平衡常数桥 ΔG° = -RT ln K + 范特霍夫定性 + 综合应用例(合成氨)</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游应用</strong> — 本板块作为热力学"<strong>判据 + 桥梁</strong>"层的终点, 接通多个下游大主题:<br>
+            <ul style="margin-top: 6px;">
+              <li><strong>化学反应速率与化学平衡</strong>(待建大主题): 本板块的 K<sub>eq</sub> + ΔG° 是平衡定量分析的核心; 范特霍夫方程进一步引出 Le Chatelier 原理与平衡移动</li>
+              <li><strong>电化学</strong>(待建大主题): 本板块的 ΔG = -nFE 是电极电势体系的入口; Nernst 方程 + 标准电极电势表 + 浓差电池等留给电化学板块深化</li>
+              <li><strong>水溶液化学</strong>(待建): 弱电解质平衡 Ka / Kb / Ksp / 水的离子积 K<sub>w</sub> 都是 ΔG° = -RT ln K 的具体应用</li>
+              <li><strong>生物化学</strong>(应用领域): 代谢路径中的能量耦合(ATP 水解 ΔG° ≈ -30.5 kJ/mol, 与其他不利反应耦合驱动)是本板块"ΔG 加和性"的核心应用</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="ga3c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能推导 ΔG = ΔG° + RT ln Q(反应商公式), 并解释 ΔG 符号与反应方向的对应</span></label>
+        <label data-key="ga3c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能由平衡条件 ΔG = 0 推 ΔG° = -RT ln K<sub>eq</sub>(平衡常数桥), 并说出 ΔG° 符号与 K<sub>eq</sub> 数值的对应(K&gt;1 ⟺ ΔG°&lt;0)</span></label>
+        <label data-key="ga3c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 ΔH° = -91.8 / ΔS° = -198.1 算合成氨 25°C 的 ΔG° ≈ -32.8 kJ/mol, K<sub>eq</sub> ≈ 5.5 × 10⁵</span></label>
+        <label data-key="ga3c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写范特霍夫方程(简化版)d ln K<sub>eq</sub> / dT = ΔH° / (RT²) 并定性判断温度对 K 的影响(吸热 T↑K↑ / 放热 T↑K↓)</span></label>
+        <label data-key="ga3c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 ΔG° + 范特霍夫综合解释合成氨为什么要"低温高压"+ 热力学 vs 动力学 vs 经济的工业折中</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：跨学科桥梁(热力学 ↔ 化学平衡) · 工业化学设计的折中思维 · 范特霍夫方程的定性应用</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 5 件事: (1) Card 1 STEP 2: G ≡ H − TS 的引入动机 + 由 ΔS<sub>universe</sub> ≥ 0 推 ΔG ≤ 0 的完整 4 步链(含"乘 −T 反转"的代数与物理含义); (2) Card 2 STEP 2: 从第一定律 + 第二定律 + 焓与 G 定义推 dG = -δW<sub>非膨</sub>,可逆 的完整 8 步; (3) Card 2 思考点 4: 用 ΔG = -nFE 算甲醇燃料电池 E° ≈ 1.21 V 的完整推导; (4) Card 3 STEP 2: 推 ΔG = ΔG° + RT ln Q 和 ΔG° = -RT ln K<sub>eq</sub> 的完整逻辑链; (5) Card 3 STEP 3: 用 ΔHf° + S° 数据算合成氨 25°C 的 ΔG° + K<sub>eq</sub> 的完整 5 步推导。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答: ① 学完进阶后, G 的"严格推导"(由 ΔS<sub>universe</sub> ≥ 0)和"物理意义"(最大有用功)对你理解物理化学的"为什么是这个公式"这件事有什么新启发? 与基础板块的"工程化判据"视角有何互补? ② ΔG° 桥接了 3 个学科 — 热力学(ΔH° / ΔS°)、化学平衡(K<sub>eq</sub>)、电化学(电池电动势 E°)。这种"一个量统一多个学科"对你理解物理化学的"统一性"有何启发?</td></tr>
+      <tr><td>自评清单</td><td>所有 3 张卡的 checkpoint 都勾完。重点确认 Card 1(严格推导)+ Card 3(平衡常数桥) — 这是进阶板块最核心的两个推导。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15-20 分钟口试, 准备用 <strong>3 分钟</strong> 清晰说出"G ≡ H − TS 是状态函数 + ΔG ≤ 0 由熵增定律严格推 + ΔG = -W<sub>max</sub> 给物理意义 + ΔG° = -RT ln K 桥接化学平衡 + ΔG = -nFE 桥接电化学" 的 5 条主线。</td></tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>: 本板块的核心不是"多记几个公式", 而是看清<strong>一个量(G)如何统一 3 个学科</strong>(热力学 / 化学平衡 / 电化学)。掌握后, 你看任何反应都能用 ΔG 切入分析 — 这是进阶物理化学的"内功"。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="gibbs-free-energy-advanced-mock-check.html">📝 基础检测</a>
+    <a href="gibbs-free-energy-advanced-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 吉布斯自由能 · 进阶（进阶模块 · 2026-06-10 新立）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-gibbs-free-energy-advanced-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

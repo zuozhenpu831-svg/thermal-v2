@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想气体内能的微观推导 · 深度口试 · 教师工具页 · 蓝色诺瓦学院</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.65; }
+  .container { max-width: 1080px; margin: 0 auto; padding: 20px; padding-bottom: 60px; }
+  .breadcrumb { font-size: 12.5px; color: #7f8c8d; margin-bottom: 12px; }
+  .teacher-banner { background: linear-gradient(90deg, #fdecea, #fadbd8); border: 2px solid #c0392b; border-radius: 10px; padding: 12px 16px; margin-bottom: 14px; font-size: 13.5px; color: #78281f; }
+  .teacher-banner strong { color: #c0392b; }
+  header.page-header { background: linear-gradient(135deg, #5A4BD1, #6C5CE7, #8B7CF0); color: white; padding: 22px 26px; border-radius: 12px; margin-bottom: 14px; box-shadow: 0 4px 16px rgba(90,75,209,0.18); }
+  header.page-header h1 { margin: 0 0 4px; font-size: 22px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 13px; opacity: 0.92; }
+
+  /* ===== Stepper ===== */
+  .stepper { display: flex; gap: 0; background: white; border-radius: 12px; padding: 10px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); position: sticky; top: 8px; z-index: 50; }
+  .stepper .step { flex: 1; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 13.5px; color: #95a5a6; cursor: pointer; transition: all 0.2s; }
+  .stepper .step.done { color: #27ae60; }
+  .stepper .step.active { background: linear-gradient(135deg, #00409A, #0055B8); color: white; font-weight: 600; }
+  .stepper .step.disabled { cursor: not-allowed; opacity: 0.5; }
+  .stepper .step .num { width: 22px; height: 22px; border-radius: 50%; background: #ecf0f1; color: #7f8c8d; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .stepper .step.active .num { background: white; color: #0055B8; }
+  .stepper .step.done .num { background: #27ae60; color: white; }
+  .stepper .sep { width: 16px; flex-shrink: 0; align-self: center; color: #bdc3c7; }
+
+  .stage { display: none; }
+  .stage.active { display: block; }
+
+  /* ===== 共用 section-card ===== */
+  .section-card { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section-card h2 { color: #00409A; font-size: 18px; margin-bottom: 12px; }
+  .section-card h2 .tag { font-size: 12px; background: #e8f0fe; color: #0055B8; border-radius: 10px; padding: 2px 10px; vertical-align: middle; margin-left: 8px; font-weight: 500; }
+
+  /* ===== 阶段操作行（下一步 / 上一步） ===== */
+  .stage-nav { display: flex; gap: 12px; justify-content: space-between; align-items: center; margin-top: 14px; padding: 14px 18px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .stage-nav .hint { font-size: 13px; color: #7f8c8d; flex: 1; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 10px 22px; font-size: 14px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .btn-primary:disabled { background: #bdc3c7; cursor: not-allowed; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 9px 18px; font-size: 13.5px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .btn-warning { background: white; color: #b66100; border: 1.5px solid #e67e22; padding: 9px 18px; font-size: 13.5px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-warning:hover { background: #fdf6ec; }
+  .btn-danger { background: white; color: #c0392b; border: 1.5px solid #c0392b; padding: 9px 18px; font-size: 13.5px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+
+  /* ===== 阶段 1：开始 ===== */
+  .name-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+  .name-row input[type="text"] { padding: 10px 14px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 15px; width: 220px; font-family: inherit; }
+  .name-row input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .student-info { font-size: 13.5px; color: #5a6c7d; margin-top: 8px; }
+  .student-info strong { color: #0055B8; }
+  .used-lines { font-size: 13px; color: #b66100; margin-top: 6px; padding: 8px 12px; background: #fdf6ec; border-radius: 6px; }
+
+  /* ===== 阶段 2：抽题 ===== */
+  .pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 720px) { .pick-grid { grid-template-columns: 1fr; } }
+  .pick-card { border: 2px solid #ecf0f1; border-radius: 8px; padding: 12px 14px; cursor: pointer; transition: all 0.2s; background: white; }
+  .pick-card:hover { border-color: #b3c6e3; background: #fafbfc; }
+  .pick-card.selected { border-color: #e67e22; background: #fff8ed; box-shadow: 0 0 0 3px rgba(230,126,34,0.15); }
+  .pick-card.was-used { border-style: dashed; opacity: 0.65; }
+  .pick-card .pc-head { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+  .pick-card .pc-num { background: #00409A; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 600; }
+  .pick-card.selected .pc-num { background: #e67e22; }
+  .pick-card .pc-title { font-size: 14px; font-weight: 600; color: #2c3e50; flex: 1; }
+  .pick-card .pc-was { font-size: 11px; color: #b66100; background: #fdf6ec; padding: 1px 6px; border-radius: 3px; }
+  .pick-card .pc-preview { font-size: 12.5px; color: #5a6c7d; line-height: 1.5; }
+
+  /* ===== 阶段 3：进行 ===== */
+  .timer-bar { position: sticky; top: 70px; background: white; border-radius: 10px; padding: 12px 18px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); margin-bottom: 14px; z-index: 40; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .timer-bar .timer-lbl { font-size: 13px; color: #5a6c7d; }
+  .timer-bar .timer { font-size: 22px; font-weight: 700; color: #00409A; font-variant-numeric: tabular-nums; }
+  .timer-bar .timer.warning { color: #e67e22; }
+  .timer-bar .timer.danger { color: #c0392b; }
+  .timer-bar button { font-size: 12px; padding: 6px 12px; }
+  .timer-bar .global-flag { margin-left: auto; font-size: 13px; color: #5a6c7d; }
+  .timer-bar .global-flag label { display: flex; gap: 6px; align-items: center; cursor: pointer; }
+
+  .run-card { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-left: 5px solid #0055B8; }
+  .run-card.status-pass { border-left-color: #27ae60; }
+  .run-card.status-stuck { border-left-color: #e67e22; }
+  .run-card.status-fail { border-left-color: #c0392b; }
+  .rc-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid #ecf0f1; }
+  .rc-head .rc-num { background: #00409A; color: white; border-radius: 6px; padding: 4px 12px; font-size: 13px; font-weight: 600; }
+  .rc-head .rc-title { font-size: 17px; font-weight: 600; color: #00409A; flex: 1; min-width: 220px; }
+  .rc-head .rc-timer { font-size: 16px; font-weight: 700; color: #0055B8; font-variant-numeric: tabular-nums; padding: 3px 10px; background: #e8f0fe; border-radius: 6px; }
+  .rc-head .rc-timer.warning { color: #e67e22; background: #fdf6ec; }
+  .rc-head .rc-status { font-size: 12.5px; padding: 4px 10px; border-radius: 12px; font-weight: 600; }
+  .rc-head .rc-status[data-st="auto"] { background: #ecf0f1; color: #5a6c7d; }
+  .rc-head .rc-status[data-st="pass"] { background: #d8eedc; color: #1e8449; }
+  .rc-head .rc-status[data-st="stuck"] { background: #fdf6ec; color: #b66100; }
+  .rc-head .rc-status[data-st="fail"] { background: #fadbd8; color: #c0392b; }
+
+  .main-q { background: linear-gradient(90deg, #e8f0fe, #f0f6ff); border-left: 4px solid #0055B8; border-radius: 8px; padding: 14px 18px; font-size: 15.5px; margin-bottom: 14px; line-height: 1.7; }
+  .main-q .mq-tag { font-weight: 600; color: #00409A; margin-right: 4px; }
+
+  .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 12px; }
+  @media (max-width: 720px) { .check-grid { grid-template-columns: 1fr; } }
+  .check-col { background: #fafbfc; border-radius: 8px; padding: 12px 14px; }
+  .check-col h4 { font-size: 13.5px; margin-bottom: 8px; color: #2c3e50; }
+  .check-col.listen h4 { color: #2e7d32; }
+  .check-col.misc h4 { color: #b66100; }
+  .check-col label { display: flex; gap: 8px; align-items: flex-start; padding: 6px 4px; cursor: pointer; font-size: 13.5px; border-radius: 4px; }
+  .check-col label:hover { background: #ecf0f1; }
+  .check-col input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; transform: scale(1.15); accent-color: #0055B8; }
+  .check-col .core-2 { color: #c8a300; font-weight: 700; }
+  .check-col .core-1 { color: #d4af37; }
+  .check-col .recite { color: #c0392b; font-weight: 600; }
+  .check-col label.checked { background: #f1f8f4; }
+  .check-col.misc label.checked { background: #fdf6ec; }
+
+  details.aux { border: 1px solid #ecf0f1; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; background: #fafbfc; font-size: 13px; }
+  details.aux summary { cursor: pointer; font-weight: 600; color: #5a6c7d; font-size: 13.5px; padding: 4px 0; }
+  details.aux summary:hover { color: #0055B8; }
+  details.aux[open] { background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  details.aux .qtree { margin: 8px 0; }
+  details.aux .qtree .branch { border-radius: 6px; padding: 9px 12px; margin-bottom: 6px; font-size: 13px; }
+  details.aux .qtree .branch.good { background: #f1f8f4; border-left: 3px solid #27ae60; }
+  details.aux .qtree .branch.stuck { background: #fdf6ec; border-left: 3px solid #e67e22; }
+  details.aux .qtree .branch .bt { font-weight: 600; }
+  details.aux .qtree .branch.good .bt { color: #1e8449; }
+  details.aux .qtree .branch.stuck .bt { color: #b66100; }
+  details.aux .qtree .lv { margin: 4px 0 0 12px; font-size: 12.5px; }
+  details.aux .qtree .lv .lvt { font-weight: 600; color: #00409A; }
+  details.aux .rescue-block { background: #f5f6f7; border-left: 3px solid #95a5a6; border-radius: 6px; padding: 8px 12px; font-size: 12.5px; color: #4a5b6c; margin: 8px 0; }
+  details.aux .rescue-block .rb-title { font-weight: 600; color: #5a6c7d; margin-right: 4px; }
+  details.aux .boundary-note { background: #f6f4fb; border: 1px dashed #9b8bc4; border-radius: 6px; padding: 8px 12px; font-size: 12.5px; color: #4a3a6a; margin-top: 6px; }
+  details.aux .boundary-note strong { color: #6a1b9a; }
+
+  .rc-foot { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding-top: 12px; border-top: 1px solid #ecf0f1; }
+  .rc-foot label { font-size: 13.5px; color: #5a6c7d; }
+  .rc-foot select { padding: 6px 10px; border-radius: 6px; border: 1.5px solid #ecf0f1; font-family: inherit; font-size: 13.5px; }
+  .rc-foot textarea { width: 100%; min-height: 50px; border: 1.5px solid #ecf0f1; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 13px; margin-top: 8px; }
+  .rc-foot textarea:focus { outline: none; border-color: #0055B8; }
+
+  /* ===== 阶段 4：评分 ===== */
+  .verdict-suggest { padding: 18px 22px; border-radius: 12px; margin-bottom: 14px; }
+  .verdict-suggest.pass { background: linear-gradient(135deg, #d4efdf, #abebc6); border: 2px solid #27ae60; }
+  .verdict-suggest.defer { background: linear-gradient(135deg, #fdebd0, #fad7a0); border: 2px solid #e67e22; }
+  .verdict-suggest.fail { background: linear-gradient(135deg, #fadbd8, #f5b7b1); border: 2px solid #c0392b; }
+  .verdict-suggest .vs-tag { font-size: 13px; font-weight: 600; opacity: 0.8; margin-bottom: 4px; }
+  .verdict-suggest .vs-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+  .verdict-suggest.pass .vs-title { color: #1e8449; }
+  .verdict-suggest.defer .vs-title { color: #b66100; }
+  .verdict-suggest.fail .vs-title { color: #c0392b; }
+  .verdict-suggest .vs-reasons { font-size: 13.5px; line-height: 1.7; }
+  .verdict-suggest .vs-reasons ul { margin-left: 18px; }
+  .makeup-card { background: #fff3e0; border: 1px solid #e67e22; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+  .makeup-card h4 { color: #b66100; font-size: 14px; margin-bottom: 8px; }
+  .makeup-card ul { margin-left: 20px; font-size: 13.5px; }
+  .makeup-card li { margin: 4px 0; }
+  .makeup-card a { color: #0055B8; }
+  .verdict-final { padding: 16px 20px; background: #fafbfc; border-radius: 10px; margin-bottom: 14px; }
+  .verdict-final h3 { font-size: 15px; margin-bottom: 10px; color: #2c3e50; }
+  .verdict-final .vf-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+  .verdict-final .vf-row label { display: flex; gap: 6px; align-items: center; cursor: pointer; font-size: 14px; padding: 6px 10px; border-radius: 6px; }
+  .verdict-final .vf-row label:hover { background: #ecf0f1; }
+  .verdict-final .vf-row label.sel { background: #e8f0fe; font-weight: 600; }
+  .verdict-final textarea { width: 100%; min-height: 70px; border: 1.5px solid #ecf0f1; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 13.5px; }
+  .verdict-final textarea:focus { outline: none; border-color: #0055B8; }
+
+  .sign-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 14px 18px; background: linear-gradient(135deg, #00409A, #0055B8); color: white; border-radius: 10px; margin-top: 14px; }
+  .sign-row strong { color: #fff; }
+  .sign-row button { background: white; color: #00409A; border: none; padding: 9px 16px; font-size: 13.5px; border-radius: 6px; cursor: pointer; font-family: inherit; font-weight: 500; }
+  .sign-row button:hover { background: #ecf0f1; }
+  .sign-row .sign-tip { font-size: 12.5px; opacity: 0.92; flex-basis: 100%; margin-top: 4px; }
+
+  /* 提交状态 banner */
+  .state-banner { padding: 14px 18px; border-radius: 10px; margin-bottom: 14px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+  .state-banner.submitted { background: linear-gradient(90deg, #d4efdf, #abebc6); border: 2px solid #27ae60; color: #1e5a30; }
+  .state-banner.submitted strong { color: #1e8449; }
+  .state-banner.revision { background: linear-gradient(90deg, #ebdef0, #d2b4de); border: 2px solid #8e44ad; color: #4a235a; }
+  .state-banner.revision strong { color: #6c3483; }
+  .state-banner .sb-icon { font-size: 22px; }
+  .state-banner .sb-meta { margin-left: auto; font-size: 12.5px; opacity: 0.85; }
+
+  /* 锁定输入样式 */
+  .verdict-final.locked .vf-opt { opacity: 0.7; cursor: not-allowed; }
+  .verdict-final.locked textarea { background: #f8f9fb; color: #5a6c7d; }
+  .verdict-final.locked input[type="radio"] { cursor: not-allowed; }
+
+  /* 修订原因输入 */
+  .revision-reason { background: #faf4fc; border: 1.5px solid #d2b4de; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+  .revision-reason h4 { color: #6c3483; font-size: 14px; margin-bottom: 8px; }
+  .revision-reason textarea { width: 100%; min-height: 60px; border: 1.5px solid #d2b4de; border-radius: 6px; padding: 8px 10px; font-family: inherit; font-size: 13.5px; background: white; }
+  .revision-reason textarea:focus { outline: none; border-color: #8e44ad; }
+
+  /* 口试单显示 */
+  .exam-receipt { background: #fafbfc; border: 1.5px dashed #95a5a6; border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; white-space: pre-wrap; color: #2c3e50; line-height: 1.65; }
+  .exam-receipt-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 13px; color: #5a6c7d; }
+  .exam-receipt-head strong { color: #00409A; }
+
+  /* 版本时间线 */
+  .timeline { background: white; border-radius: 10px; padding: 14px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  .timeline-item { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #ecf0f1; }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-item .ti-ver { background: #00409A; color: white; border-radius: 6px; padding: 4px 10px; font-size: 13px; font-weight: 600; min-width: 50px; text-align: center; flex-shrink: 0; }
+  .timeline-item.v-defer .ti-ver { background: #e67e22; }
+  .timeline-item.v-fail .ti-ver { background: #c0392b; }
+  .timeline-item .ti-body { flex: 1; }
+  .timeline-item .ti-verdict { font-size: 14px; font-weight: 600; color: #2c3e50; margin-bottom: 4px; }
+  .timeline-item .ti-time { font-size: 12.5px; color: #7f8c8d; }
+  .timeline-item .ti-reason { font-size: 13px; color: #5a6c7d; margin-top: 6px; padding: 6px 10px; background: #faf4fc; border-left: 3px solid #8e44ad; border-radius: 4px; }
+
+  /* TODO 占位（待后端） */
+  .todo-card { background: #fdf6ec; border: 1px dashed #e67e22; border-radius: 8px; padding: 12px 16px; margin-top: 14px; font-size: 12.5px; color: #7d4e10; }
+  .todo-card strong { color: #b66100; }
+
+  /* ===== 参考资料（折叠） ===== */
+  .ref-section { margin-top: 24px; }
+  .ref-section details { background: white; border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+  .ref-section details summary { cursor: pointer; font-weight: 600; color: #00409A; font-size: 14.5px; }
+  .ref-section details[open] summary { margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #ecf0f1; }
+  .listen-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  .listen-table th, .listen-table td { border: 1px solid #e3e8ee; padding: 6px 9px; text-align: left; vertical-align: top; }
+  .listen-table th { background: #e8f0fe; color: #00409A; font-weight: 600; }
+  .listen-table td.cat { background: #f8f9fb; font-weight: 600; color: #5a6c7d; white-space: nowrap; }
+  .lp { background: #e8f5e9; color: #2e7d32; padding: 1px 7px; border-radius: 4px; font-size: 11.5px; margin: 1px 2px; display: inline-block; }
+  .lp.core { background: #d8eedc; font-weight: 600; border: 1px solid #2e7d32; }
+  .lp.boundary-lp { background: #f0f0f5; color: #6a1b9a; border: 1px dashed #9b8bc4; }
+  .rubric-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+  .rubric-col { flex: 1; min-width: 240px; border-radius: 8px; padding: 12px 14px; font-size: 12.5px; }
+  .rubric-col h4 { font-size: 14px; margin-bottom: 6px; }
+  .rubric-col ul { margin-left: 16px; }
+  .rubric-col.pass { background: #f1f8f4; border: 2px solid #27ae60; }
+  .rubric-col.pass h4 { color: #1e8449; }
+  .rubric-col.defer { background: #fdf6ec; border: 2px solid #e67e22; }
+  .rubric-col.defer h4 { color: #b66100; }
+  .rubric-col.fail { background: #fdf2f0; border: 2px solid #c0392b; }
+  .rubric-col.fail h4 { color: #c0392b; }
+
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 16px; }
+
+  /* ===== 打印 ===== */
+  @media print {
+    body { background: white; }
+    .stepper, .teacher-banner, .stage-nav, .timer-bar, .ref-section, .btn-primary, .btn-secondary, .btn-warning, .btn-danger { display: none !important; }
+    .stage { display: block !important; }
+    .section-card, .run-card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    header.page-header { background: #00409A !important; -webkit-print-color-adjust: exact; }
+    details.aux { display: none; }
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">蓝色诺瓦学院 · 教师工具 &raquo; 物理 · 物化融合 &raquo; 热力学 · 进阶 &raquo; <strong>理想气体内能的微观推导 · 深度口试 · 教师工具页</strong></nav>
+
+<div class="teacher-banner">
+  🔒 <strong>教师工具页 · 请勿向学生展示或投屏本页。</strong>
+  含追问树、误区识别、救场话术、判定 rubric；学生题库版见 <a href="advanced-oral-exam.html" style="color:#c0392b;text-decoration:underline;">advanced-oral-exam.html</a>（仅含开放主问 + 考查锚点）。
+</div>
+
+<header class="page-header">
+  <h1>理想气体内能的微观推导 · 深度口试 · 教师工具页</h1>
+  <div class="subtitle">进阶板块 · 15-20 分钟 · 4 步流程（开始 → 抽题 → 进行 → 评分）· 评分驱动 UI · oral-exam Skill v0.1.3</div>
+</header>
+
+<!-- ============ Stepper ============ -->
+<div class="stepper">
+  <div class="step active" data-step="1" onclick="goStep(1)"><span class="num">1</span><span>开始口试</span></div>
+  <span class="sep">›</span>
+  <div class="step disabled" data-step="2" onclick="goStep(2)"><span class="num">2</span><span>抽 3 条主问题</span></div>
+  <span class="sep">›</span>
+  <div class="step disabled" data-step="3" onclick="goStep(3)"><span class="num">3</span><span>进行口试</span></div>
+  <span class="sep">›</span>
+  <div class="step disabled" data-step="4" onclick="goStep(4)"><span class="num">4</span><span>评分 + 签字</span></div>
+</div>
+
+<!-- ============ 阶段 1：开始 ============ -->
+<div class="stage active" id="stage-1">
+  <section class="section-card">
+    <h2>① 开始口试 <span class="tag">输入学生姓名 · 载入或新建记录</span></h2>
+    <div class="name-row">
+      <input type="text" id="student-name" placeholder="学生姓名" maxlength="20" oninput="onNameInput()">
+      <button class="btn-primary" onclick="loadStudent()">载入 / 新建记录</button>
+      <button class="btn-danger" onclick="clearStudent()" id="btn-clear" style="display:none;">清空本生记录</button>
+    </div>
+    <div class="student-info" id="student-info"></div>
+    <div class="used-lines" id="used-display" style="display:none;"></div>
+  </section>
+  <div class="stage-nav">
+    <span class="hint">载入或新建记录后 → 进入抽题。学生记录按姓名本地保存（localStorage）。</span>
+    <button class="btn-primary" id="btn-to-2" disabled onclick="goStep(2)">→ 抽 3 条主问题</button>
+  </div>
+</div>
+
+<!-- ============ 阶段 2：抽题 ============ -->
+<div class="stage" id="stage-2">
+  <section class="section-card">
+    <h2>② 抽 3 条主问题 <span class="tag">点卡片手动勾选 · 或随机抽取 · 已用过的主问题虚线标记</span></h2>
+    <div style="margin-bottom: 12px;">
+      <button class="btn-warning" onclick="randomPick()">🎲 随机抽 3 条（避开已用）</button>
+      <button class="btn-secondary" onclick="clearPicks()">清空选择</button>
+      <span style="margin-left: 12px; font-size: 13.5px; color: #5a6c7d;">当前选中：<strong id="picked-count" style="color: #e67e22;">0</strong> / 3 条</span>
+    </div>
+    <div class="pick-grid" id="pick-grid"></div>
+  </section>
+  <div class="stage-nav">
+    <button class="btn-secondary" onclick="goStep(1)">← 返回</button>
+    <span class="hint">必须选满 3 条才能进入口试阶段。二试请尽量避开已用过的主问题（虚线标记）。</span>
+    <button class="btn-primary" id="btn-to-3" disabled onclick="startRun()">→ 开始口试</button>
+  </div>
+</div>
+
+<!-- ============ 阶段 3：进行 ============ -->
+<div class="stage" id="stage-3">
+  <div class="timer-bar">
+    <span class="timer-lbl">整场计时</span>
+    <span class="timer" id="global-timer">20:00</span>
+    <button class="btn-secondary" id="btn-timer-toggle" onclick="toggleGlobalTimer()">▶ 开始计时</button>
+    <button class="btn-secondary" onclick="resetGlobalTimer()">⟲ 重置</button>
+    <div class="global-flag">
+      <label><input type="checkbox" id="flag-paper-write" onchange="saveStudent()"> 📝 学生在纸上写出 U = (3/2)nRT（或 (3/2)PV）并指认（通过条件之一）</label>
+    </div>
+  </div>
+
+  <div id="run-region"></div>
+
+  <div class="stage-nav">
+    <button class="btn-secondary" onclick="goStep(2)">← 返回抽题</button>
+    <span class="hint">在每张卡片上勾选「听到的核心听点」+「触发的误区信号」+ 备注。完成后进入评分。</span>
+    <button class="btn-primary" onclick="goStep(4)">→ 评分 + 签字</button>
+  </div>
+</div>
+
+<!-- ============ 阶段 4：评分 ============ -->
+<div class="stage" id="stage-4">
+  <section class="section-card">
+    <h2>④ 系统评分建议 + 教师判定 <span class="tag">人决定，机器辅助 · 提交后锁定 · 申诉可修订</span></h2>
+
+    <!-- 状态 banner（动态：未提交 / 已提交 / 修订中） -->
+    <div id="state-banner-region"></div>
+
+    <!-- 修订原因输入区（仅修订模式可见） -->
+    <div id="revision-reason-region" style="display:none;">
+      <div class="revision-reason">
+        <h4>📨 修订原因（学生申诉详情 / 重评依据）</h4>
+        <textarea id="revision-reason-input" placeholder="例如：学生申诉 — 主问题 3 中已经讲清楚 v̄_x² = v̄²/3 的推导，且现场写了 v² = v_x²+v_y²+v_z² 的拆分；要求重评判定。"></textarea>
+      </div>
+    </div>
+
+    <div id="verdict-suggest-region"></div>
+    <div id="makeup-region"></div>
+
+    <div class="verdict-final" id="verdict-final-block">
+      <h3>教师最终判定（可覆盖系统建议）</h3>
+      <div class="vf-row" id="vf-row">
+        <label class="vf-opt" data-v="pass"><input type="radio" name="verdict" value="pass" onchange="saveStudent();refreshVerdictUI()"> ✅ 通过（当场签字）</label>
+        <label class="vf-opt" data-v="defer"><input type="radio" name="verdict" value="defer" onchange="saveStudent();refreshVerdictUI()"> ⏸ 暂缓（补学 + 二试）</label>
+        <label class="vf-opt" data-v="fail"><input type="radio" name="verdict" value="fail" onchange="saveStudent();refreshVerdictUI()"> ❌ 不通过（重学）</label>
+      </div>
+      <label style="font-size: 13px; font-weight: 600; color: #5a6c7d;">总体备注（错题联动表现 / 补学清单 / 二试约定时间等）：</label>
+      <textarea id="overall-note" oninput="saveStudent()" placeholder="例如：推导手稿联动讲清了「为什么 1/3」一步；补学 Card A4 STEP 1 第 4 步；二试约下周三..."></textarea>
+    </div>
+
+    <!-- 操作行（动态切换：未提交=提交按钮 / 已提交=复制+打印+修订 / 修订中=提交修订+取消） -->
+    <div id="action-row-region"></div>
+
+    <!-- 口试单显示（已提交后） -->
+    <div id="receipt-region"></div>
+
+    <!-- 版本时间线（≥1 个 submission 时显示） -->
+    <div id="timeline-region"></div>
+
+    <!-- TODO 占位：学生设备永久查看 + 学生申诉接口（待 starmap 后端） -->
+    <div class="todo-card">
+      <strong>🚧 待后端实现（已记录路线，归 starmap 长期）：</strong>
+      ① 学生在自己设备永久查看历史口试反馈 ② 学生直接在题库页发起申诉（自动通知教师）。
+      当前临时方案：教师复制口试单文本 → 通过微信 / 邮件 / 纸面发学生；学生申诉走线下渠道（口头 / 微信）→ 教师在本页点「📨 修改判定（因申诉）」。
+    </div>
+  </section>
+</div>
+
+<!-- ============ 参考资料（折叠） ============ -->
+<div class="ref-section">
+  <details>
+    <summary>📋 听点总表（全部 17 锚 · ⭐ = 核心听点 · 4 项板块边界守门）</summary>
+    <table class="listen-table">
+      <tr><th style="width:90px;">类别</th><th style="width:240px;">听点</th><th>学生说到位时，话里应包含什么</th></tr>
+      <tr><td class="cat" rowspan="2">定义 / 模型</td><td><span class="lp core">⭐ 微观模型四大假设</span></td><td>H1 大量粒子 / H2 随机运动各方向等概率 / H3 弹性碰壁 / H4 无分子间作用力 ⇒ 无势能。</td></tr>
+      <tr><td><span class="lp">立方体容器模型</span></td><td>V = x³、A = x²；形状不影响结论，只是推导脚手架。</td></tr>
+      <tr><td class="cat" rowspan="7">关键公式</td><td><span class="lp core">⭐ 单粒子碰壁链</span></td><td>Δp = 2mv_x → Δt = 2x/v_x → F = mv_x²/x → P₁ = mv_x²/V，逐步指认假设。</td></tr>
+      <tr><td><span class="lp core">⭐ 各向同性 1/3</span></td><td>v² = v_x²+v_y²+v_z²；由 H2 ⇒ v̄_x² = v̄²/3。</td></tr>
+      <tr><td><span class="lp core">⭐⭐ 压强微观公式</span></td><td>P = Nmv̄²/(3V)；本板块核心枢纽公式。</td></tr>
+      <tr><td><span class="lp">平均动能含义</span></td><td>½mv̄² = 单粒子平均（平动）动能；N·½mv̄² = 系统总动能。</td></tr>
+      <tr><td><span class="lp core">⭐ U = (3/2)PV</span></td><td>由 H4（无势能）⇒ 内能 = 总动能 ⇒ 改写 3PV = Nmv̄² 得 U = (3/2)PV。</td></tr>
+      <tr><td><span class="lp core">⭐⭐ U = (3/2)nRT</span></td><td>核心结论：联立 PV = nRT；能在纸上写出并指认 n、R、T。</td></tr>
+      <tr><td><span class="lp">ΔU = (3/2)nRΔT</span></td><td>推论：ΔU 只与 ΔT 有关 ⇒ 等温 ΔU = 0；自由膨胀理想气体 T 不变。</td></tr>
+      <tr><td class="cat" rowspan="2">符号约定</td><td><span class="lp">N vs n</span></td><td>大写 N = 粒子总数 / 小写 n = 物质的量（mol），严格区分。</td></tr>
+      <tr><td><span class="lp">v̄² 读法</span></td><td>速度平方的平均，不是平均速度的平方。</td></tr>
+      <tr><td class="cat" rowspan="4">思维方式</td><td><span class="lp core">⭐ U 只与 T 有关</span></td><td>U 表达式不含 V、P 不是巧合，根在 H4（无分子间作用力 ⇒ 无势能）。</td></tr>
+      <tr><td><span class="lp core">⭐ 温度的微观意义</span></td><td>U = (3/2)nRT ⇒ 温度本质 = 平均动能的度量（对单原子理想气体）。</td></tr>
+      <tr><td><span class="lp">假设审查思维</span></td><td>每步标注用到哪条 H1–H4；能讨论「去掉 H? ⇒ 结论怎么变」。</td></tr>
+      <tr><td><span class="lp">统计平均的桥梁</span></td><td>从单粒子到 N 粒子靠统计平均（依赖 H1 + H2）。</td></tr>
+      <tr><td class="cat" rowspan="4">边界守门<br><small>不展开</small></td><td><span class="lp boundary-lp">不展开双原子 / 多原子自由度</span></td><td>(3/2) 系数只对单原子；双原子定量留给后续 / 大学。</td></tr>
+      <tr><td><span class="lp boundary-lp">不展开真实气体 / 范德瓦尔斯</span></td><td>方向肯定但不推方程数值。</td></tr>
+      <tr><td><span class="lp boundary-lp">不写玻尔兹曼 (3/2)kT 形式</span></td><td>本板块全程用 nR 宏观形式，单分子动能形式留给统计力学。</td></tr>
+      <tr><td><span class="lp boundary-lp">不展开麦克斯韦速率分布</span></td><td>只用「均方速度 v̄²」一个平均量，分布形式留给统计力学。</td></tr>
+    </table>
+  </details>
+
+  <details>
+    <summary>📊 判定 rubric 三档详细</summary>
+    <div class="rubric-grid">
+      <div class="rubric-col pass"><h4>✅ 通过 → 当场签字</h4>
+        <ul>
+          <li>抽中 3 条主问题里 <strong>≥ 2 条「⭐ 核心听点全中 + 教师勾选状态为「✅ 通过」」</strong>。</li>
+          <li>整场至少一次完成「在纸上写出 U = (3/2)nRT 或 (3/2)PV 并指认每项含义与适用前提」（顶部 📝 勾选）。</li>
+          <li>无未化解的致命误区：背诵型信号 ≤ 1 条主问题触发。</li>
+        </ul>
+      </div>
+      <div class="rubric-col defer"><h4>⏸ 暂缓 → 补学 + 预约二试</h4>
+        <ul>
+          <li>恰 1 条主问题核心听点缺失，或某条主问题<strong>两级台阶后仍卡壳</strong>。</li>
+          <li>按系统列出的补学清单交给学生，预约二试。</li>
+          <li><strong>二试必须换未用过的主问题</strong>（抽题区已自动标记）。</li>
+        </ul>
+      </div>
+      <div class="rubric-col fail"><h4>❌ 不通过 → 重学</h4>
+        <ul>
+          <li>≥ 2 条主问题核心听点严重缺失。</li>
+          <li><strong>背诵型信号在 ≥ 2 条主问题贯穿</strong>（系统会自动提示）。</li>
+          <li>不签字，约定重学路径完成后再约口试。</li>
+        </ul>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>🔗 教师参考资源</summary>
+    <p style="font-size: 13.5px; line-height: 1.7;">
+      📖 <a href="advanced-task-cards.html" style="color:#0055B8;">学习任务卡（补学清单指向）</a>　·
+      📝 <a href="advanced-mock-check.html" style="color:#0055B8;">基础检测模拟（错型参照）</a>　·
+      👁 <a href="advanced-oral-exam.html" style="color:#0055B8;">学生题库版（用于查看学生看到什么）</a>
+    </p>
+  </details>
+</div>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 进阶 · 理想气体内能的微观推导 · 深度口试教师工具页 · oral-exam Skill v0.1.3</footer>
+
+</div>
+
+<script>
+// =========================================================
+// LINES：6 主问题完整数据（评分配置 + 富文本辅助）
+// =========================================================
+var LINES = [
+  {
+    num: 1,
+    title: "四大假设的角色分工",
+    timeMin: 4,
+    mainQ: "理想气体微观模型有四条假设 H1–H4。请逐条说出它们是什么；然后挑你印象最深的一条，告诉我：如果把它去掉，后面的推导会在哪一步「卡住」？为什么？",
+    listens: [
+      { id: "IDEAL-GAS-MICRO-MODEL", name: "四大假设 H1–H4 逐条说全（大量粒子 / 随机运动各方向等概率 / 弹性碰壁 / 无分子间作用力）", coreLevel: 2 },
+      { id: "ASSUMPTION-AUDIT-THINKING", name: "演示一次「去掉一条 ⇒ 哪一步推不下去」反演（如去掉 H4 ⇒ U 还得加势能项；去掉 H3 ⇒ 碰壁动能丢，单粒子链废）", coreLevel: 1 },
+      { id: "U-DEPENDS-ON-T-ONLY", name: "（前瞻）说出 H4 是「U 表达式不含 V、P」的真正根据", coreLevel: 1 }
+    ],
+    miscs: [
+      { sig: "「假设有 4 条，记住就行」直接背名词，问角色分工答不出", reason: "把假设当口诀而非工具", recite: true },
+      { sig: "把 H4「无分子间作用力」和 H3「弹性碰壁」混为一谈", reason: "弹性碰壁针对碰壁动能；H4 针对分子之间，二者不是一回事", recite: false },
+      { sig: "「假设 H1 大量粒子是为了符合实际」（缺了「统计平均才有意义」这一层）", reason: "未抓住 H1 的推导作用", recite: false }
+    ],
+    rescue: "「这条假设是为了让推导链的哪一步合法？」 / 「把它删掉，第几步会写不下去？」 / 「H4 守护的是 U 里有没有势能项 —— 不是守护别的」 —— 给指路，不替学生说出「H4 ⇒ 无势能 ⇒ U 全是动能」这条结论本身。",
+    qtree: {
+      good: [
+        { lvt: "深追 L1（为什么）", body: "「H1 大量粒子和 H2 随机运动，缺一可以吗？为什么这两条要绑在一起？」—— 听「统计平均要有意义，必须粒子多 + 方向无偏」。" },
+        { lvt: "深追 L2（迁移）", body: "「真实气体常温常压下基本满足 H1–H3；H4 是最容易被破坏的。能否举一种「H4 失效」的常见情形？」（高压 / 低温 ⇒ 分子间作用力不可忽略；范德瓦尔斯气体）" }
+      ],
+      stuck: [
+        { lvt: "台阶 1（提示锚点）", body: "「先别背四条。我说一句：『粒子之间互相不吸引也不排斥』—— 这是哪条假设？它保护的是 U 里的哪一项不出现？」" },
+        { lvt: "台阶 2（具体化）", body: "「U = 动能 + 势能。如果有分子间作用力，势能项还消得掉吗？这就是 H4 的工作。其他三条各自守护一步推导，慢慢回忆。」" }
+      ]
+    },
+    boundary: "学生若主动提双原子分子自由度（U = (5/2)nRT）→ 记为亮点不展开；本板块只覆盖单原子。"
+  },
+  {
+    num: 2,
+    title: "单粒子碰壁链",
+    timeMin: 5,
+    mainQ: "一个粒子在边长 x 的立方体容器里来回撞同一面壁。请你从「这一次碰壁的动量变化」开始，一步一步推到「这个粒子对这面壁的平均压强 P₁」。每写一步说一句：这一步用到了哪条假设？",
+    listens: [
+      { id: "SINGLE-PARTICLE-PRESSURE", name: "完整链 Δp = 2mv_x → Δt = 2x/v_x → F = mv_x²/x → P₁ = mv_x²/V，每步指认假设（H3 弹性、立方体模型）", coreLevel: 2 },
+      { id: "CUBIC-CONTAINER-MODEL", name: "V = x³、A = x²，并说出立方体只是脚手架（结论与形状无关）", coreLevel: 1 },
+      { id: "SYMBOL-N-VS-LOWERCASE-N", name: "（前瞻意识）说出这是「单粒子」P₁，后面还要乘 N 才到全体粒子的 P", coreLevel: 0 }
+    ],
+    miscs: [
+      { sig: "「Δp = mv_x」（漏掉因子 2）", reason: "未抓「反弹」⇒ 动量从 +mv_x 到 −mv_x", recite: false },
+      { sig: "「Δt = x/v_x」（漏掉来回 2x）", reason: "粒子要走到对面再回来才再撞这面壁", recite: false },
+      { sig: "「碰撞过程时间不为零，F 没法算」", reason: "把单次冲击力与平均冲力混淆", recite: false },
+      { sig: "公式背得飞快、问「这一步用了哪条假设」答不上来", reason: "背诵型 · 推导链与假设没挂钩", recite: true }
+    ],
+    rescue: "「碰壁前后速度怎么变？动量变化是多少？」 / 「来回一趟走多远？花多长时间？」 / 「F = Δp/Δt 这个时间窗取多长？」 —— 给步骤路径，不替学生写出 2mv_x 或 mv_x²/V 这两个结果本身。",
+    qtree: {
+      good: [
+        { lvt: "深追 L1（为什么）", body: "「为什么可以把『碰一次的冲击力』平均成『连续作用的力』？这一步合法吗？」—— 听「时间窗取得长 ⇒ 大量碰撞 ⇒ 平均化（统计意义）」。" },
+        { lvt: "深追 L2（迁移）", body: "「换一个球形容器，结论会变吗？答案是『不会』—— 你能说一句为什么吗？」（容器形状只是推导脚手架，最终公式只含 N、m、v̄²、V） " }
+      ],
+      stuck: [
+        { lvt: "台阶 1（提示锚点）", body: "「先画一个一维来回 ←→。粒子撞壁前速度是 +v_x，撞壁后呢？两个速度差是多少？」" },
+        { lvt: "台阶 2（具体化）", body: "「假设它撞这面壁、跑到对面、再回来 —— 总共跑了多远？花了多久？这个时间段里它对这面壁的『平均冲量』除以『时间』就是平均力。」" }
+      ]
+    },
+    boundary: "学生若用动能定理 / 能量法绕路推出同样结果 → 记为亮点；本板块标准链以动量 - 冲量为主线。"
+  },
+  {
+    num: 3,
+    title: "各向同性 1/3 与统计平均",
+    timeMin: 4,
+    mainQ: "从单粒子的 P₁ = mv_x²/V 到全体粒子的 P = Nmv̄²/(3V)，中间发生了什么？请讲清楚那个「1/3」是怎么来的 —— 不是背公式，是从假设出发推出来。",
+    listens: [
+      { id: "ISOTROPY-ONE-THIRD", name: "v² = v_x²+v_y²+v_z²；由 H2 三方向地位等价 ⇒ v̄_x² = v̄_y² = v̄_z² = v̄²/3", coreLevel: 2 },
+      { id: "STATISTICAL-AVERAGING-BRIDGE", name: "N 个粒子各自 v_x² 不同 → 求和 → 平均 ⇒ Nmv̄_x²/V；依赖 H1 大量粒子 + H2 随机运动", coreLevel: 1 },
+      { id: "SYMBOL-MEAN-SQUARE-SPEED", name: "主动澄清：v̄² = 速度平方的平均值，不是平均速度的平方", coreLevel: 1 },
+      { id: "PRESSURE-MICRO-FORMULA", name: "（顺势复现）合起来得到 P = Nmv̄²/(3V)", coreLevel: 0 }
+    ],
+    miscs: [
+      { sig: "「三个方向，所以除以 3」（缺中间步：v² 拆分 + 各方向等概率）", reason: "结论对，但推导链断", recite: false },
+      { sig: "「v̄² = (v̄)²」（把均方速度当平均速度的平方）", reason: "符号约定不清", recite: false },
+      { sig: "「N 个粒子的 v_x 各不相同，没法平均」", reason: "未识统计平均的作用", recite: false },
+      { sig: "结论背得熟，但「为什么 H2 才能保证 v̄_x² = v̄_y² = v̄_z²」答不出", reason: "背诵型 · 假设角色没挂上", recite: true }
+    ],
+    rescue: "「先把 v² 拆开成三个分量平方相加」 / 「这三个方向有什么对称性？」 / 「平均之后哪几项相等？」 —— 指向拆分 + 对称性，不替学生说「v̄²/3」这个结果。",
+    qtree: {
+      good: [
+        { lvt: "深追 L1（为什么）", body: "「为什么 H2『随机运动各方向等概率』才能保证 v̄_x² = v̄_y² = v̄_z²？如果只有 H1 大量粒子但都沿 x 方向运动，1/3 还成立吗？」（不成立，必须有方向均匀）" },
+        { lvt: "深追 L2（迁移）", body: "「同样的逻辑能用在『压强不是各向同性』的场景吗？比如外部强磁场使粒子优先沿某方向运动 —— 这时 1/3 会怎么变？」（沿不同方向压强不等；属于扩展，肯定方向不展开）" }
+      ],
+      stuck: [
+        { lvt: "台阶 1（提示锚点）", body: "「先看一个粒子 v² 等于什么？写出来 —— 是 v_x²+v_y²+v_z² 还是别的？」" },
+        { lvt: "台阶 2（具体化）", body: "「现在把『各方向等概率』这句话翻译成 v̄_x²、v̄_y²、v̄_z² 三者之间的关系。再让 v_x²+v_y²+v_z² 取平均，看 1/3 怎么蹦出来。」" }
+      ]
+    },
+    boundary: "学生若提麦克斯韦速率分布（要算 ⟨v²⟩ 具体值）→ 速率分布不在本板块，告知留给统计力学方向。"
+  },
+  {
+    num: 4,
+    title: "从压强微观公式跨到内能",
+    timeMin: 5,
+    mainQ: "已经有 P = Nmv̄²/(3V)。请你从这条公式出发，把它改写成内能的表达式 U = (3/2)PV。每一步告诉我：你在用哪条假设、哪个物理量代表什么？",
+    listens: [
+      { id: "PRESSURE-MICRO-FORMULA", name: "起点：写出 3PV = Nmv̄²，指认 N、m、v̄²、V 各是什么", coreLevel: 2 },
+      { id: "MEAN-KINETIC-ENERGY-MEANING", name: "Nmv̄² = 2·(N·½mv̄²) = 2 × 系统总动能；½mv̄² = 单粒子平均（平动）动能", coreLevel: 1 },
+      { id: "U-EQUALS-3-2-PV", name: "主动援引 H4（无分子间作用力 ⇒ 无势能）⇒ 内能 = 总动能 ⇒ U = (3/2)PV", coreLevel: 2 },
+      { id: "U-DEPENDS-ON-T-ONLY", name: "（前瞻）说出这一步结论里已经看不到 V、P 是「U 只看 T」的伏笔", coreLevel: 0 }
+    ],
+    miscs: [
+      { sig: "「U = Nmv̄²」（漏掉 1/2 系数）", reason: "动能公式 ½mv² 没用对", recite: false },
+      { sig: "「U = (3/2)PV 是定义」", reason: "未识它是从压强公式 + H4 推出来的", recite: false },
+      { sig: "用 U = (3/2)PV 时没说「只对单原子理想气体」", reason: "边界没声明，结论被错用", recite: false },
+      { sig: "「内能 = 总动能 + 总势能 + 化学能 ...」（搬大学教材定义）然后直接跳到 (3/2)PV", reason: "背诵型 · 没用 H4 把势能消掉", recite: true }
+    ],
+    rescue: "「3PV 等于什么？把它改写成『2 倍的某个东西』」 / 「N 个粒子的动能加起来怎么写？」 / 「为什么内能只有动能没有势能？哪条假设？」 —— 引导改写，不替学生说出 U = (3/2)PV。",
+    qtree: {
+      good: [
+        { lvt: "深追 L1（为什么）", body: "「U = (3/2)PV 是『定义』还是『推论』？如果是推论，它背后真正的物理是什么？」（推论；物理是「内能 = 总动能（由 H4）+ 三方向各贡献 ½」）" },
+        { lvt: "深追 L2（迁移）", body: "「双原子分子还能用 U = (3/2)PV 吗？为什么不能？」（不能；双原子有转动自由度，单粒子平均能量 > (3/2)kT；边界，肯定不展开）" }
+      ],
+      stuck: [
+        { lvt: "台阶 1（提示锚点）", body: "「N 个粒子的总动能等于什么？把它和 Nmv̄² 比一比 —— 中间差几倍？」" },
+        { lvt: "台阶 2（具体化）", body: "「Nmv̄² = 2·总动能；3PV = Nmv̄²；两边换一下 ⇒ 总动能 = (3/2)PV。最后一步：哪条假设让你能说『总动能就是内能』？」" }
+      ]
+    },
+    boundary: "学生若推到 (3/2)kT（玻尔兹曼形式）→ 本板块全程用 nR 宏观形式，记亮点不要求。"
+  },
+  {
+    num: 5,
+    title: "U = (3/2)nRT 与温度的微观意义",
+    timeMin: 5,
+    mainQ: "请你在纸上写出本板块的核心结论 U = (3/2)nRT，然后告诉我：① 它是怎么从 U = (3/2)PV 来的？② 它没有出现 V 和 P 这件事告诉我们什么物理？③ 这条结论对「温度」这个概念意味着什么？",
+    listens: [
+      { id: "IDEAL-GAS-INTERNAL-ENERGY", name: "联立 PV = nRT 把 (3/2)PV 换成 (3/2)nRT；写出公式 + 指认 n、R、T", coreLevel: 2 },
+      { id: "U-DEPENDS-ON-T-ONLY", name: "V、P 不出现 ⇒ 理想气体 U 只看 T；根据是 H4（无势能）—— 不是巧合", coreLevel: 1 },
+      { id: "TEMPERATURE-MICRO-MEANING", name: "T 与粒子平均动能直接挂钩 ⇒ 温度本质 = 平均动能的度量（对单原子理想气体）", coreLevel: 1 },
+      { id: "SYMBOL-N-VS-LOWERCASE-N", name: "区分 N（粒子总数）和 n（物质的量 mol），公式中不混", coreLevel: 0 }
+    ],
+    miscs: [
+      { sig: "「U = (3/2)nRT 是定义」（缺联立过程）", reason: "未抓「PV = nRT 这一步代入」", recite: false },
+      { sig: "「V、P 不出现是巧合 / 是因为消掉了」", reason: "没识 H4 是根，错以为代数巧合", recite: false },
+      { sig: "「温度反映分子运动剧烈」（对，但没说挂钩公式）", reason: "停在直觉层，没回到 U = (3/2)nRT 这条桥", recite: false },
+      { sig: "公式背得熟，问「这里的 n 是粒子数还是物质的量」答错或迟疑", reason: "背诵型 · N/n 概念没区分", recite: true }
+    ],
+    rescue: "「(3/2)PV 里的 PV 等于什么？还有别的等价形式吗？」 / 「公式里看不到 V、P 是因为代数巧合还是物理原因？」 / 「温度和谁挂钩了？挂钩的桥是哪条公式？」 —— 给指路，不替学生说出「联立 PV = nRT」或「温度 = 平均动能」。",
+    qtree: {
+      good: [
+        { lvt: "深追 L1（为什么）", body: "「『温度 = 平均动能』这句话有个隐含的『对谁』—— 对什么样的气体严格成立？换成水（液体），还能说『温度 = 平均动能』吗？」（只对单原子理想气体严格；液体有势能，定义需修正）" },
+        { lvt: "深追 L2（迁移）", body: "「同温下，氦气和氩气（都单原子）的平均动能一样吗？同温下，氢气（双原子）和氦气（单原子）的总内能呢？」（平均平动动能一样；总内能氢气更大，因为有转动自由度 —— 边界，肯定不展开）" }
+      ],
+      stuck: [
+        { lvt: "台阶 1（提示锚点）", body: "「U = (3/2)PV 已经有了。气体的状态方程 PV = ? 是什么？把它替换掉 PV 这一项。」" },
+        { lvt: "台阶 2（具体化）", body: "「替换后 U 的表达式里还有 V 和 P 吗？只剩下哪几个量？这件事 —— 『U 与 V、P 无关』—— 是为什么？哪条假设决定的？」" }
+      ]
+    },
+    boundary: "学生若主动写出 ⟨½mv̄²⟩ = (3/2)kT（玻尔兹曼形式）→ 不在本板块要求，肯定方向不展开。"
+  },
+  {
+    num: 6,
+    title: "ΔU = (3/2)nRΔT · 等温 ΔU = 0 · 绝热自由膨胀",
+    timeMin: 5,
+    mainQ: "有了 U = (3/2)nRT，请你用它解释两件事：① 等温过程中为什么 ΔU = 0？② 绝热自由膨胀（容器突然扩大，对外不做功、绝热不交换热）中，理想气体温度会变吗？真实气体（如范德瓦尔斯气体）会不会变？为什么？",
+    listens: [
+      { id: "DELTA-U-TEMPERATURE-ONLY", name: "主动写 ΔU = (3/2)nRΔT；ΔU 只看 ΔT；等温 ⇒ ΔT = 0 ⇒ ΔU = 0", coreLevel: 2 },
+      { id: "U-DEPENDS-ON-T-ONLY", name: "自由膨胀对外不做功 + 绝热不交换热 ⇒ ΔU = 0；又因为 U 只看 T ⇒ 理想气体 T 不变", coreLevel: 1 },
+      { id: "ASSUMPTION-AUDIT-THINKING", name: "真实气体 H4 失效 ⇒ U 还含势能项 ⇒ 自由膨胀 V↑ ⇒ 分子平均距离变 ⇒ 势能改变 ⇒ T 会变", coreLevel: 1 },
+      { id: "BOUNDARY-REAL-GAS", name: "（边界）若主动写范德瓦尔斯方程或推数值 → 教师肯定但不展开", coreLevel: 0 }
+    ],
+    miscs: [
+      { sig: "「自由膨胀有做功，T 会降」（混淆「自由膨胀对真空」与「准静态膨胀推活塞」）", reason: "未识自由膨胀 W = 0", recite: false },
+      { sig: "「等温 ΔU = 0 是因为 Q = W 抵消」（绕开 U 只看 T）", reason: "未抓微观根据", recite: false },
+      { sig: "「真实气体也不会变 T，因为绝热 Q = 0」（忽略 U 不再只看 T）", reason: "未识 H4 失效后 U 含势能", recite: false },
+      { sig: "ΔU = (3/2)nRΔT 公式背得熟，问「等温 ΔU = 0 凭啥」答「凭 ΔT = 0」但说不出 U 只看 T 的根", reason: "背诵型 · 因果方向反", recite: true }
+    ],
+    rescue: "「U 只跟谁有关？等温意味着谁不变？」 / 「自由膨胀里 Q = ? W = ?」 / 「真实气体的 U 还只看 T 吗？」 —— 指向「U-T 关系」与「H4 是不是还成立」，不替学生说「T 不变 / T 会降」。",
+    qtree: {
+      good: [
+        { lvt: "深追 L1（为什么）", body: "「为什么自由膨胀里 W = 0？气体不是膨胀了吗？」（自由膨胀对的是真空，没有反向推力 ⇒ pΔV 不是对外做的功）" },
+        { lvt: "深追 L2（迁移）", body: "「换两个绝热过程对比：① 自由膨胀（对真空），② 缓慢推活塞做功（绝热准静态）。两次理想气体的 T 各怎么变？」（① T 不变；② T 降；区别在 W 是否为 0）" }
+      ],
+      stuck: [
+        { lvt: "台阶 1（提示锚点）", body: "「先看 U = (3/2)nRT 这条公式，ΔU 只跟谁挂钩？等温意味着 ΔT 等于几？」" },
+        { lvt: "台阶 2（具体化）", body: "「自由膨胀：气体冲进真空，活塞那边没有反向压力 —— 气体对谁做功？做了多少？再绝热 ⇒ Q = 0；ΔU = ? 然后用 ΔU 反推 T 怎么变。」" }
+      ]
+    },
+    boundary: "学生若写出范德瓦尔斯气体的 (P + a/V²)(V − b) = nRT 或焦耳 - 汤姆孙效应 → 真实气体方程定量不要求，记亮点不展开。"
+  }
+];
+
+// 补学清单（缺的锚 ID → 补学指向）
+var MAKEUP_MAP = {
+  "IDEAL-GAS-MICRO-MODEL":         "Card A1 STEP 1 四大假设表 H1–H4",
+  "CUBIC-CONTAINER-MODEL":         "Card A1 背景 + STEP 3 立方体容器模型",
+  "SINGLE-PARTICLE-PRESSURE":      "Card A2 STEP 1 单粒子碰壁链推导 + 基础检测 T2 组",
+  "ISOTROPY-ONE-THIRD":            "Card A3 STEP 1 各向同性 + 基础检测 T3 组",
+  "PRESSURE-MICRO-FORMULA":        "Card A3 STEP 2 压强微观公式 + 基础检测 T4 组",
+  "MEAN-KINETIC-ENERGY-MEANING":   "Card A4 STEP 1 第 2 步 平均动能含义",
+  "U-EQUALS-3-2-PV":               "Card A4 STEP 1 第 3 步 + 基础检测 T5 组",
+  "IDEAL-GAS-INTERNAL-ENERGY":     "Card A4 STEP 1 第 4 步 boxed 公式 + 基础检测 T6 组",
+  "DELTA-U-TEMPERATURE-ONLY":      "Card A4 STEP 1 第 5 步 + 基础检测 T7 组",
+  "SYMBOL-N-VS-LOWERCASE-N":       "符号约定表（开篇）",
+  "SYMBOL-MEAN-SQUARE-SPEED":      "符号约定表 + Card A3 v̄² 读法",
+  "U-DEPENDS-ON-T-ONLY":           "Card A4 STEP 2 追问 + Card A1 检查点",
+  "TEMPERATURE-MICRO-MEANING":     "Card A4 STEP 2-3 温度的微观意义",
+  "ASSUMPTION-AUDIT-THINKING":     "Card A1 STEP 2 + 推导手稿产出物要求",
+  "STATISTICAL-AVERAGING-BRIDGE":  "Card A3 全卡 统计平均桥梁",
+  "BOUNDARY-MONATOMIC-ONLY":       "Card A5 STEP 2 拓展（自由度方向）—— 仅了解",
+  "BOUNDARY-REAL-GAS":             "Card A5 STEP 1 拓展（真实气体方向）—— 仅了解"
+};
+
+// =========================================================
+// 全局状态
+// =========================================================
+var KEY_PREFIX = "oral-exam-advanced-v0.1.3-";
+var currentName = "";
+var currentStep = 1;
+var picked = [];
+var usedHistory = [];
+var submissions = []; // 提交历史：[{version, submittedAt, verdict, overall, paperWritten, revisionReason, snapshot}, ...]
+var inRevision = false; // 修订模式 flag
+
+// 计时器
+var globalTimerInterval = null;
+var globalTimerSec = 20 * 60;
+var globalTimerRunning = false;
+var lineTimers = {};
+
+function storageKey() { return KEY_PREFIX + currentName; }
+
+// =========================================================
+// 阶段切换
+// =========================================================
+function goStep(n) {
+  if (n === 2 && !currentName) { alert("请先输入学生姓名并载入记录"); return; }
+  if (n === 3 && picked.length !== 3) { alert("请先选满 3 条主问题"); return; }
+  if (n === 4 && picked.length !== 3) { alert("请先完成口试进行阶段"); return; }
+  currentStep = n;
+  var stages = document.querySelectorAll(".stage");
+  for (var i = 0; i < stages.length; i++) stages[i].classList.remove("active");
+  document.getElementById("stage-" + n).classList.add("active");
+  var steps = document.querySelectorAll(".stepper .step");
+  for (var j = 0; j < steps.length; j++) {
+    var sn = parseInt(steps[j].getAttribute("data-step"), 10);
+    steps[j].classList.remove("active", "done", "disabled");
+    if (sn < n) steps[j].classList.add("done");
+    else if (sn === n) steps[j].classList.add("active");
+    else if ((sn === 2 && !currentName) || (sn === 3 && picked.length !== 3) || (sn === 4 && picked.length !== 3)) steps[j].classList.add("disabled");
+  }
+  if (n === 2) renderPickGrid();
+  if (n === 3) renderRunCards();
+  if (n === 4) renderVerdict();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// =========================================================
+// 阶段 1：开始
+// =========================================================
+function onNameInput() {
+  var v = document.getElementById("student-name").value.trim();
+  document.getElementById("btn-to-2").disabled = !currentName || currentName !== v;
+}
+
+function loadStudent() {
+  var v = document.getElementById("student-name").value.trim();
+  if (!v) { alert("请输入学生姓名"); return; }
+  currentName = v;
+  var raw = localStorage.getItem(storageKey());
+  var data = raw ? JSON.parse(raw) : null;
+  picked = (data && data.picked) ? data.picked.slice() : [];
+  usedHistory = (data && data.usedHistory) ? data.usedHistory.slice() : [];
+  submissions = (data && data.submissions) ? data.submissions.slice() : [];
+  inRevision = !!(data && data.inRevision);
+  document.getElementById("student-info").innerHTML = "👤 学生：<strong>" + escapeHtml(currentName) + "</strong>　·　口试日期：" + new Date().toLocaleDateString("zh-CN");
+  var extraInfo = "";
+  if (submissions.length) {
+    var last = submissions[submissions.length - 1];
+    var lbl = { pass: "✅ 通过", defer: "⏸ 暂缓", fail: "❌ 不通过" }[last.verdict];
+    extraInfo = "<div style=\"margin-top:8px;padding:8px 12px;background:#e8f0fe;border-radius:6px;font-size:13px;color:#0055B8;\">📜 该学生已有 " + submissions.length + " 个判定版本，最新 v" + last.version + " · " + lbl + "（" + formatDateTime(last.submittedAt) + "）" + (inRevision ? " · <strong style=\"color:#8e44ad;\">⚙ 修订未完成，可继续</strong>" : "") + "</div>";
+  }
+  document.getElementById("student-info").innerHTML += extraInfo;
+  if (usedHistory.length) {
+    document.getElementById("used-display").style.display = "block";
+    document.getElementById("used-display").innerHTML = "📌 「" + escapeHtml(currentName) + "」历史已用主问题：" + usedHistory.join("、") + " —— 本次二试请尽量换未用过的。";
+  } else {
+    document.getElementById("used-display").style.display = "none";
+  }
+  document.getElementById("btn-clear").style.display = "inline-block";
+  document.getElementById("btn-to-2").disabled = false;
+  if (data) restoreRecord(data);
+}
+
+function clearStudent() {
+  if (!currentName) return;
+  if (!confirm("确认清空「" + currentName + "」的全部口试记录（含已提交判定的全部历史版本）？此操作不可恢复。")) return;
+  localStorage.removeItem(storageKey());
+  picked = []; usedHistory = []; submissions = []; inRevision = false;
+  document.getElementById("used-display").style.display = "none";
+  document.getElementById("student-info").innerHTML = "";
+}
+
+// =========================================================
+// 阶段 2：抽题
+// =========================================================
+function renderPickGrid() {
+  var grid = document.getElementById("pick-grid");
+  var html = "";
+  for (var i = 0; i < LINES.length; i++) {
+    var L = LINES[i];
+    var sel = picked.indexOf(L.num) !== -1;
+    var was = usedHistory.indexOf(L.num) !== -1;
+    html += "<div class=\"pick-card " + (sel ? "selected" : "") + " " + (was ? "was-used" : "") + "\" onclick=\"togglePick(" + L.num + ")\">";
+    html += "<div class=\"pc-head\"><span class=\"pc-num\">主线 " + L.num + "</span><span class=\"pc-title\">" + L.title + "</span>";
+    if (was) html += "<span class=\"pc-was\">历史已用</span>";
+    html += "</div>";
+    html += "<div class=\"pc-preview\">" + L.mainQ.slice(0, 60) + "…</div>";
+    html += "</div>";
+  }
+  grid.innerHTML = html;
+  document.getElementById("picked-count").textContent = picked.length;
+  document.getElementById("btn-to-3").disabled = picked.length !== 3;
+}
+
+function togglePick(n) {
+  var i = picked.indexOf(n);
+  if (i === -1) {
+    if (picked.length >= 3) { alert("每次口试 3 条主问题。请先取消一条再勾选。"); return; }
+    picked.push(n);
+  } else {
+    picked.splice(i, 1);
+  }
+  picked.sort(function (a, b) { return a - b; });
+  renderPickGrid();
+  saveStudent();
+}
+
+function clearPicks() { picked = []; renderPickGrid(); saveStudent(); }
+
+function randomPick() {
+  var pool = [];
+  for (var i = 1; i <= 6; i++) { if (usedHistory.indexOf(i) === -1) pool.push(i); }
+  if (pool.length < 3) {
+    if (!confirm("未用过的主问题不足 3 条，是否在全部 6 条中随机抽？")) return;
+    pool = [1, 2, 3, 4, 5, 6];
+  }
+  picked = [];
+  while (picked.length < 3) {
+    var idx = Math.floor(Math.random() * pool.length);
+    picked.push(pool.splice(idx, 1)[0]);
+  }
+  picked.sort(function (a, b) { return a - b; });
+  renderPickGrid();
+  saveStudent();
+}
+
+// =========================================================
+// 阶段 3：进行
+// =========================================================
+function startRun() {
+  goStep(3);
+}
+
+function renderRunCards() {
+  var region = document.getElementById("run-region");
+  var html = "";
+  for (var i = 0; i < picked.length; i++) {
+    var L = LINES[picked[i] - 1];
+    html += renderRunCard(L);
+  }
+  region.innerHTML = html;
+  // 初始化各主线计时器显示
+  for (var j = 0; j < picked.length; j++) {
+    var n = picked[j];
+    if (!lineTimers[n]) lineTimers[n] = { sec: LINES[n - 1].timeMin * 60, running: false, interval: null };
+    updateLineTimerDisplay(n);
+  }
+  restoreRunUI();
+}
+
+function renderRunCard(L) {
+  var html = "<div class=\"run-card\" id=\"run-line-" + L.num + "\" data-line=\"" + L.num + "\">";
+  // 头部
+  html += "<div class=\"rc-head\">";
+  html += "<span class=\"rc-num\">主线 " + L.num + "</span>";
+  html += "<span class=\"rc-title\">" + L.title + "</span>";
+  html += "<span class=\"rc-timer\" id=\"line-timer-" + L.num + "\">" + formatTime(L.timeMin * 60) + "</span>";
+  html += "<button class=\"btn-secondary\" style=\"font-size:11px;padding:4px 10px;\" onclick=\"toggleLineTimer(" + L.num + ")\" id=\"line-timer-btn-" + L.num + "\">▶</button>";
+  html += "<span class=\"rc-status\" id=\"line-status-badge-" + L.num + "\" data-st=\"auto\">自动判定</span>";
+  html += "</div>";
+  // 主问
+  html += "<div class=\"main-q\"><span class=\"mq-tag\">🎤 开放主问：</span>" + L.mainQ + "</div>";
+  // 勾选区
+  html += "<div class=\"check-grid\">";
+  // 听点
+  html += "<div class=\"check-col listen\"><h4>👂 听点（勾选听到的）</h4>";
+  for (var i = 0; i < L.listens.length; i++) {
+    var lp = L.listens[i];
+    var coreMark = "";
+    if (lp.coreLevel === 2) coreMark = "<span class=\"core-2\">⭐⭐ </span>";
+    else if (lp.coreLevel === 1) coreMark = "<span class=\"core-1\">⭐ </span>";
+    html += "<label data-line=\"" + L.num + "\" data-listen-idx=\"" + i + "\"><input type=\"checkbox\" class=\"rec-listen\" data-line=\"" + L.num + "\" data-idx=\"" + i + "\" data-core=\"" + lp.coreLevel + "\" onchange=\"onCheckChange(this)\">" + coreMark + escapeHtml(lp.name) + "</label>";
+  }
+  html += "</div>";
+  // 误区
+  html += "<div class=\"check-col misc\"><h4>⚠️ 误区信号（勾选触发的）</h4>";
+  for (var j = 0; j < L.miscs.length; j++) {
+    var mc = L.miscs[j];
+    var rec = mc.recite ? "<span class=\"recite\">[背诵型] </span>" : "";
+    html += "<label data-line=\"" + L.num + "\" data-misc-idx=\"" + j + "\"><input type=\"checkbox\" class=\"rec-misc\" data-line=\"" + L.num + "\" data-idx=\"" + j + "\" data-recite=\"" + (mc.recite ? "1" : "0") + "\" onchange=\"onCheckChange(this)\">" + rec + escapeHtml(mc.sig) + "<span style=\"color:#7f8c8d;font-size:12px;\"> · " + escapeHtml(mc.reason) + "</span></label>";
+  }
+  html += "</div>";
+  html += "</div>"; // check-grid
+  // 追问树 + 救场 + 边界（折叠）
+  html += "<details class=\"aux\"><summary>💡 追问树 + 救场话术 + 边界守门（需要时点开）</summary>";
+  html += "<div class=\"qtree\">";
+  html += "<div class=\"branch good\"><span class=\"bt\">✅ 答到位 →</span>";
+  for (var k = 0; k < L.qtree.good.length; k++) {
+    html += "<div class=\"lv\"><span class=\"lvt\">" + L.qtree.good[k].lvt + "：</span>" + L.qtree.good[k].body + "</div>";
+  }
+  html += "</div>";
+  html += "<div class=\"branch stuck\"><span class=\"bt\">🪜 卡壳 →</span>";
+  for (var m = 0; m < L.qtree.stuck.length; m++) {
+    html += "<div class=\"lv\"><span class=\"lvt\">" + L.qtree.stuck[m].lvt + "：</span>" + L.qtree.stuck[m].body + "</div>";
+  }
+  html += "<div class=\"lv\"><span class=\"lvt\">仍不行 →</span> 记录误区，转下一主问题。</div>";
+  html += "</div>";
+  html += "</div>"; // qtree
+  html += "<div class=\"rescue-block\"><span class=\"rb-title\">🛟 救场话术：</span>" + L.rescue + "</div>";
+  if (L.boundary) html += "<div class=\"boundary-note\"><strong>🚧 边界守门：</strong>" + L.boundary + "</div>";
+  html += "</details>";
+  // 状态 select + 备注
+  html += "<div class=\"rc-foot\">";
+  html += "<label>本主问题判定：</label>";
+  html += "<select class=\"rc-status-sel\" data-line=\"" + L.num + "\" onchange=\"onStatusChange(this)\">";
+  html += "<option value=\"auto\">⚙ 系统自动（按勾选计算）</option>";
+  html += "<option value=\"pass\">✅ 通过（核心听点全中 + 深追接得住）</option>";
+  html += "<option value=\"stuck\">⏸ 卡壳（台阶后修正 / 核心听点缺 1）</option>";
+  html += "<option value=\"fail\">❌ 不通过（核心听点严重缺 / 背诵型贯穿）</option>";
+  html += "</select>";
+  html += "<span style=\"margin-left:8px;font-size:12.5px;color:#7f8c8d;\" id=\"auto-tag-" + L.num + "\"></span>";
+  html += "<textarea class=\"rc-note\" data-line=\"" + L.num + "\" oninput=\"saveStudent()\" placeholder=\"本主问题备注（台阶用到第几级 / 修正过程 / 亮点）...\"></textarea>";
+  html += "</div>";
+  html += "</div>"; // run-card
+  return html;
+}
+
+function onCheckChange(box) {
+  var lab = box.parentNode;
+  if (box.checked) lab.classList.add("checked"); else lab.classList.remove("checked");
+  updateLineStatus(parseInt(box.getAttribute("data-line"), 10));
+  saveStudent();
+}
+
+function onStatusChange(sel) {
+  updateLineStatus(parseInt(sel.getAttribute("data-line"), 10));
+  saveStudent();
+}
+
+function computeLineAutoStatus(n) {
+  var line = LINES[n - 1];
+  var coreTotal = 0, coreHit = 0;
+  var allListens = document.querySelectorAll(".rec-listen[data-line=\"" + n + "\"]");
+  for (var i = 0; i < allListens.length; i++) {
+    var c = parseInt(allListens[i].getAttribute("data-core"), 10);
+    if (c >= 1) {
+      coreTotal++;
+      if (allListens[i].checked) coreHit++;
+    }
+  }
+  var allMiscs = document.querySelectorAll(".rec-misc[data-line=\"" + n + "\"]");
+  var reciteFired = false;
+  for (var j = 0; j < allMiscs.length; j++) {
+    if (allMiscs[j].checked && allMiscs[j].getAttribute("data-recite") === "1") reciteFired = true;
+  }
+  var rate = coreTotal === 0 ? 0 : coreHit / coreTotal;
+  var status;
+  if (reciteFired && rate < 0.8) status = "fail";
+  else if (rate >= 0.8) status = "pass";
+  else if (rate >= 0.5) status = "stuck";
+  else status = "fail";
+  return { status: status, coreHit: coreHit, coreTotal: coreTotal, recite: reciteFired };
+}
+
+function updateLineStatus(n) {
+  var card = document.getElementById("run-line-" + n);
+  var sel = card.querySelector(".rc-status-sel");
+  var auto = computeLineAutoStatus(n);
+  var status;
+  if (sel.value === "auto") status = auto.status;
+  else status = sel.value;
+  var badge = document.getElementById("line-status-badge-" + n);
+  var label = { pass: "✅ 通过", stuck: "⏸ 卡壳", fail: "❌ 不通过", auto: "自动判定" };
+  badge.setAttribute("data-st", status);
+  badge.textContent = label[status];
+  card.classList.remove("status-pass", "status-stuck", "status-fail");
+  card.classList.add("status-" + status);
+  document.getElementById("auto-tag-" + n).textContent = "（核心听点 " + auto.coreHit + "/" + auto.coreTotal + (auto.recite ? " · ⚠ 触发背诵型" : "") + "）";
+}
+
+// 计时
+function formatTime(sec) {
+  if (sec < 0) sec = 0;
+  var m = Math.floor(sec / 60), s = sec % 60;
+  return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
+}
+
+function toggleGlobalTimer() {
+  if (globalTimerRunning) {
+    clearInterval(globalTimerInterval);
+    globalTimerRunning = false;
+    document.getElementById("btn-timer-toggle").textContent = "▶ 继续";
+  } else {
+    globalTimerInterval = setInterval(function () {
+      globalTimerSec--;
+      var el = document.getElementById("global-timer");
+      el.textContent = formatTime(globalTimerSec);
+      el.classList.remove("warning", "danger");
+      if (globalTimerSec <= 60) el.classList.add("danger");
+      else if (globalTimerSec <= 300) el.classList.add("warning");
+      if (globalTimerSec <= 0) { clearInterval(globalTimerInterval); globalTimerRunning = false; }
+    }, 1000);
+    globalTimerRunning = true;
+    document.getElementById("btn-timer-toggle").textContent = "⏸ 暂停";
+  }
+}
+
+function resetGlobalTimer() {
+  clearInterval(globalTimerInterval);
+  globalTimerSec = 20 * 60;
+  globalTimerRunning = false;
+  document.getElementById("global-timer").textContent = "20:00";
+  document.getElementById("global-timer").classList.remove("warning", "danger");
+  document.getElementById("btn-timer-toggle").textContent = "▶ 开始计时";
+}
+
+function toggleLineTimer(n) {
+  var t = lineTimers[n];
+  if (t.running) {
+    clearInterval(t.interval);
+    t.running = false;
+    document.getElementById("line-timer-btn-" + n).textContent = "▶";
+  } else {
+    t.interval = setInterval(function () {
+      t.sec--;
+      updateLineTimerDisplay(n);
+      if (t.sec <= 0) { clearInterval(t.interval); t.running = false; document.getElementById("line-timer-btn-" + n).textContent = "▶"; }
+    }, 1000);
+    t.running = true;
+    document.getElementById("line-timer-btn-" + n).textContent = "⏸";
+  }
+}
+
+function updateLineTimerDisplay(n) {
+  var el = document.getElementById("line-timer-" + n);
+  if (!el) return;
+  var t = lineTimers[n];
+  el.textContent = formatTime(t.sec);
+  el.classList.remove("warning");
+  if (t.sec <= 30) el.classList.add("warning");
+}
+
+// =========================================================
+// 阶段 4：评分
+// =========================================================
+function computeOverallVerdict() {
+  var statuses = [];
+  var missingCoreIds = [];
+  var reciteCount = 0;
+  for (var i = 0; i < picked.length; i++) {
+    var n = picked[i];
+    var card = document.getElementById("run-line-" + n);
+    var sel = card ? card.querySelector(".rc-status-sel") : null;
+    var auto = computeLineAutoStatus(n);
+    var status = (sel && sel.value !== "auto") ? sel.value : auto.status;
+    statuses.push({ n: n, status: status, auto: auto });
+    if (auto.recite) reciteCount++;
+    // 收集缺的⭐ 听点
+    var line = LINES[n - 1];
+    var boxes = document.querySelectorAll(".rec-listen[data-line=\"" + n + "\"]");
+    for (var j = 0; j < boxes.length; j++) {
+      var c = parseInt(boxes[j].getAttribute("data-core"), 10);
+      if (c >= 1 && !boxes[j].checked) {
+        var idx = parseInt(boxes[j].getAttribute("data-idx"), 10);
+        missingCoreIds.push({ line: n, listen: line.listens[idx] });
+      }
+    }
+  }
+  var passCount = 0, stuckCount = 0, failCount = 0;
+  for (var k = 0; k < statuses.length; k++) {
+    if (statuses[k].status === "pass") passCount++;
+    else if (statuses[k].status === "stuck") stuckCount++;
+    else if (statuses[k].status === "fail") failCount++;
+  }
+  var paperWritten = document.getElementById("flag-paper-write").checked;
+
+  var verdict, title, reasons = [];
+  if (reciteCount >= 2) {
+    verdict = "fail";
+    title = "❌ 不通过（背诵型贯穿）";
+    reasons.push("背诵型信号在 " + reciteCount + " 条主问题中触发（≥2 即自动归 fail）。");
+  } else if (failCount >= 2) {
+    verdict = "fail";
+    title = "❌ 不通过";
+    reasons.push(failCount + " 条主问题核心听点严重缺失。");
+  } else if (passCount >= 2 && paperWritten) {
+    verdict = "pass";
+    title = "✅ 通过 → 当场签字";
+    reasons.push(passCount + " 条主问题判定通过（≥2 条 + 已在纸上写出 U = (3/2)nRT 或 (3/2)PV）。");
+  } else if (passCount >= 2 && !paperWritten) {
+    verdict = "defer";
+    title = "⏸ 暂缓 → 补「在纸上写公式」即可重判";
+    reasons.push(passCount + " 条主问题通过，但顶部未勾选「📝 学生在纸上写出 U = (3/2)nRT 或 (3/2)PV」—— 这是通过条件之一。");
+  } else if (stuckCount + passCount >= 2) {
+    verdict = "defer";
+    title = "⏸ 暂缓 → 补学 + 预约二试";
+    reasons.push("通过 " + passCount + " 条 + 卡壳 " + stuckCount + " 条；补学后约二试，二试换未用主问题。");
+  } else {
+    verdict = "fail";
+    title = "❌ 不通过";
+    reasons.push("通过 " + passCount + " 条 / 卡壳 " + stuckCount + " 条 / 不通过 " + failCount + " 条，整体未达通过线。");
+  }
+  for (var p = 0; p < statuses.length; p++) {
+    reasons.push("主问题 " + statuses[p].n + "：" + statuses[p].auto.coreHit + " / " + statuses[p].auto.coreTotal + " 核心听点中，状态 " + ({ pass: "✅ 通过", stuck: "⏸ 卡壳", fail: "❌ 不通过" }[statuses[p].status]) + (statuses[p].auto.recite ? " · ⚠ 背诵型触发" : ""));
+  }
+  return { verdict: verdict, title: title, reasons: reasons, missingCoreIds: missingCoreIds, paperWritten: paperWritten };
+}
+
+function renderVerdict() {
+  var r = computeOverallVerdict();
+  var region = document.getElementById("verdict-suggest-region");
+  var html = "<div class=\"verdict-suggest " + r.verdict + "\">";
+  html += "<div class=\"vs-tag\">系统建议</div>";
+  html += "<div class=\"vs-title\">" + r.title + "</div>";
+  html += "<div class=\"vs-reasons\"><ul>";
+  for (var i = 0; i < r.reasons.length; i++) html += "<li>" + escapeHtml(r.reasons[i]) + "</li>";
+  html += "</ul></div>";
+  html += "</div>";
+  region.innerHTML = html;
+
+  var makeup = document.getElementById("makeup-region");
+  if (r.missingCoreIds.length === 0) {
+    makeup.innerHTML = "";
+  } else {
+    var mh = "<div class=\"makeup-card\"><h4>📋 补学清单（按缺的核心听点自动生成）</h4><ul>";
+    for (var k = 0; k < r.missingCoreIds.length; k++) {
+      var miss = r.missingCoreIds[k];
+      var dir = MAKEUP_MAP[miss.listen.id] || "查 exports/advanced.md";
+      mh += "<li>主问题 " + miss.line + " · <strong>" + escapeHtml(miss.listen.name) + "</strong> → " + escapeHtml(dir) + "</li>";
+    }
+    mh += "</ul></div>";
+    makeup.innerHTML = mh;
+  }
+
+  // 默认带入：未提交 → 系统建议；已提交 / 修订 → 最后一版判定
+  var current = document.querySelector("input[name=verdict]:checked");
+  var defaultV = (submissions.length && !inRevision) ? submissions[submissions.length - 1].verdict
+                : (inRevision ? submissions[submissions.length - 1].verdict : r.verdict);
+  if (!current || inRevision) {
+    var radio = document.querySelector("input[name=verdict][value=\"" + defaultV + "\"]");
+    if (radio) radio.checked = true;
+  }
+
+  renderStateBanner();
+  renderRevisionReason();
+  renderActionRow();
+  renderReceipt();
+  renderTimeline();
+  applyLockState();
+  refreshVerdictUI();
+}
+
+function isLocked() { return submissions.length > 0 && !inRevision; }
+
+function applyLockState() {
+  var block = document.getElementById("verdict-final-block");
+  var radios = document.querySelectorAll("input[name=verdict]");
+  var note = document.getElementById("overall-note");
+  if (isLocked()) {
+    block.classList.add("locked");
+    for (var i = 0; i < radios.length; i++) radios[i].disabled = true;
+    note.readOnly = true;
+  } else {
+    block.classList.remove("locked");
+    for (var j = 0; j < radios.length; j++) radios[j].disabled = false;
+    note.readOnly = false;
+  }
+}
+
+function renderStateBanner() {
+  var region = document.getElementById("state-banner-region");
+  if (inRevision) {
+    var prev = submissions[submissions.length - 1];
+    region.innerHTML = "<div class=\"state-banner revision\">"
+      + "<span class=\"sb-icon\">⚙</span>"
+      + "<span><strong>修订模式 · v" + (submissions.length + 1) + "</strong>（在原 v" + prev.version + " 基础上重评）—— 可重新勾选听点 / 误区 / 状态 / 备注 / 判定，填好下方申诉原因后点「提交修订」生成新口试单。</span>"
+      + "<span class=\"sb-meta\">原 v" + prev.version + " 提交于 " + formatDateTime(prev.submittedAt) + "</span>"
+      + "</div>";
+  } else if (isLocked()) {
+    var last = submissions[submissions.length - 1];
+    var lbl = { pass: "✅ 通过", defer: "⏸ 暂缓", fail: "❌ 不通过" }[last.verdict];
+    region.innerHTML = "<div class=\"state-banner submitted\">"
+      + "<span class=\"sb-icon\">🔒</span>"
+      + "<span><strong>已提交 · v" + last.version + " · " + lbl + "</strong> —— 判定已锁定，避免误改。如学生申诉，点下方「📨 修改判定 (因申诉)」启动修订。</span>"
+      + "<span class=\"sb-meta\">口试单 ID: " + last.receiptId + " · 提交于 " + formatDateTime(last.submittedAt) + "</span>"
+      + "</div>";
+  } else {
+    region.innerHTML = "";
+  }
+}
+
+function renderRevisionReason() {
+  var region = document.getElementById("revision-reason-region");
+  region.style.display = inRevision ? "block" : "none";
+}
+
+function renderActionRow() {
+  var region = document.getElementById("action-row-region");
+  var html = "";
+  if (inRevision) {
+    html = "<div class=\"sign-row\" style=\"background:linear-gradient(135deg,#6c3483,#8e44ad);\">"
+      + "<strong>📨 修订流程</strong>"
+      + "<button onclick=\"submitRevision()\">✍️ 提交修订 v" + (submissions.length + 1) + "</button>"
+      + "<button onclick=\"cancelRevision()\" style=\"color:#6c3483;\">✖ 取消修订（回到 v" + submissions[submissions.length - 1].version + "）</button>"
+      + "<div class=\"sign-tip\">修订原因必填 —— 用于追溯。提交后生成新口试单，原 v" + submissions[submissions.length - 1].version + " 保留在版本时间线。</div>"
+      + "</div>";
+  } else if (isLocked()) {
+    html = "<div class=\"sign-row\">"
+      + "<strong>✅ 已提交</strong>"
+      + "<button onclick=\"copyExamReport()\">📋 复制口试单</button>"
+      + "<button onclick=\"window.print()\">🖨 打印</button>"
+      + "<button onclick=\"startRevision()\" style=\"color:#6c3483;\">📨 修改判定（因申诉）</button>"
+      + "<div class=\"sign-tip\">复制口试单后通过微信 / 邮件 / 纸面发学生。学生申诉时点「修改判定」启动修订流程。</div>"
+      + "</div>";
+  } else {
+    html = "<div class=\"sign-row\">"
+      + "<strong>✍️ 提交判定</strong>"
+      + "<button onclick=\"submitVerdict()\">提交并锁定（生成口试单）</button>"
+      + "<button onclick=\"goStep(3)\" style=\"color:#5a6c7d;\">← 返回修改记录</button>"
+      + "<div class=\"sign-tip\">确认教师最终判定无误后点「提交」—— 时间戳和判定将锁定，避免误改。提交后可复制口试单、打印、或发起修订。</div>"
+      + "</div>";
+  }
+  region.innerHTML = html;
+}
+
+function renderReceipt() {
+  var region = document.getElementById("receipt-region");
+  if (!submissions.length) { region.innerHTML = ""; return; }
+  var last = submissions[submissions.length - 1];
+  var text = buildReceiptText(last);
+  region.innerHTML = "<div class=\"exam-receipt-head\"><strong>📄 当前口试单（v" + last.version + "）</strong><span>口试单 ID: " + last.receiptId + "</span></div>"
+    + "<div class=\"exam-receipt\">" + escapeHtml(text) + "</div>";
+}
+
+function renderTimeline() {
+  var region = document.getElementById("timeline-region");
+  if (submissions.length === 0) { region.innerHTML = ""; return; }
+  var html = "<details open style=\"margin-top:14px;\"><summary style=\"cursor:pointer;font-weight:600;color:#00409A;font-size:14px;padding:6px 0;\">🗂 版本时间线（" + submissions.length + " 个版本）</summary>";
+  html += "<div class=\"timeline\">";
+  for (var i = submissions.length - 1; i >= 0; i--) {
+    var sub = submissions[i];
+    var lbl = { pass: "✅ 通过", defer: "⏸ 暂缓", fail: "❌ 不通过" }[sub.verdict];
+    html += "<div class=\"timeline-item v-" + sub.verdict + "\">"
+      + "<span class=\"ti-ver\">v" + sub.version + "</span>"
+      + "<div class=\"ti-body\">"
+      + "<div class=\"ti-verdict\">" + lbl + " · 口试单 ID " + sub.receiptId + "</div>"
+      + "<div class=\"ti-time\">提交于 " + formatDateTime(sub.submittedAt) + "　·　抽中主问题 " + (sub.snapshot.picked || []).join("、") + "</div>";
+    if (sub.revisionReason) html += "<div class=\"ti-reason\"><strong>修订原因：</strong>" + escapeHtml(sub.revisionReason) + "</div>";
+    if (sub.overall) html += "<div style=\"font-size:12.5px;color:#5a6c7d;margin-top:6px;\"><strong>总体备注：</strong>" + escapeHtml(sub.overall) + "</div>";
+    html += "</div></div>";
+  }
+  html += "</div></details>";
+  region.innerHTML = html;
+}
+
+function refreshVerdictUI() {
+  var opts = document.querySelectorAll(".vf-opt");
+  for (var i = 0; i < opts.length; i++) {
+    var r = opts[i].querySelector("input");
+    if (r.checked) opts[i].classList.add("sel"); else opts[i].classList.remove("sel");
+  }
+}
+
+// ====== 提交 / 修订 状态机 ======
+function submitVerdict() {
+  if (!currentName) { alert("缺少学生姓名，无法提交"); return; }
+  var fv = document.querySelector("input[name=verdict]:checked");
+  if (!fv) { alert("请先选择最终判定"); return; }
+  if (!confirm("确认提交本次口试判定？提交后判定将锁定，如需修改请通过「修改判定（因申诉）」流程。")) return;
+  var snap = collectSnapshot();
+  var receiptId = makeReceiptId();
+  submissions.push({
+    version: 1,
+    submittedAt: new Date().toISOString(),
+    verdict: fv.value,
+    overall: document.getElementById("overall-note").value,
+    paperWritten: document.getElementById("flag-paper-write").checked,
+    revisionReason: "",
+    receiptId: receiptId,
+    snapshot: snap
+  });
+  saveStudent();
+  renderVerdict();
+  alert("✅ 已提交并锁定 · 口试单 ID " + receiptId + "\n下一步：点「📋 复制口试单」发给学生。");
+}
+
+function startRevision() {
+  if (!isLocked()) return;
+  if (!confirm("启动修订流程（v" + (submissions.length + 1) + "）？\n所有勾选 / 状态 / 判定 / 备注将解锁，可重新评估。原 v" + submissions[submissions.length - 1].version + " 会保留在时间线。")) return;
+  inRevision = true;
+  // 复制最后一版的 snapshot 到当前 UI
+  var last = submissions[submissions.length - 1];
+  if (last.snapshot) applySnapshot(last.snapshot);
+  saveStudent();
+  goStep(4);
+  // 等 stage 渲染完再 renderVerdict
+  renderVerdict();
+}
+
+function submitRevision() {
+  if (!inRevision) return;
+  var reason = document.getElementById("revision-reason-input").value.trim();
+  if (!reason) { alert("请填写修订原因（学生申诉详情 / 重评依据）"); return; }
+  var fv = document.querySelector("input[name=verdict]:checked");
+  if (!fv) { alert("请选择新的最终判定"); return; }
+  if (!confirm("确认提交 v" + (submissions.length + 1) + " 修订？此操作不可撤销，旧版会保留在时间线。")) return;
+  var snap = collectSnapshot();
+  var receiptId = makeReceiptId();
+  submissions.push({
+    version: submissions.length + 1,
+    submittedAt: new Date().toISOString(),
+    verdict: fv.value,
+    overall: document.getElementById("overall-note").value,
+    paperWritten: document.getElementById("flag-paper-write").checked,
+    revisionReason: reason,
+    receiptId: receiptId,
+    snapshot: snap
+  });
+  inRevision = false;
+  document.getElementById("revision-reason-input").value = "";
+  saveStudent();
+  renderVerdict();
+  alert("✅ 修订 v" + submissions[submissions.length - 1].version + " 已提交 · 口试单 ID " + receiptId + "\n下一步：复制新口试单发给学生。");
+}
+
+function cancelRevision() {
+  if (!inRevision) return;
+  if (!confirm("取消修订并回到锁定状态？已修改的勾选 / 状态 / 判定将丢弃。")) return;
+  inRevision = false;
+  document.getElementById("revision-reason-input").value = "";
+  // 恢复最后一版 snapshot 到 UI
+  var last = submissions[submissions.length - 1];
+  if (last.snapshot) applySnapshot(last.snapshot);
+  saveStudent();
+  renderVerdict();
+}
+
+function collectSnapshot() {
+  var d = collectRecord();
+  // snapshot 不含 submissions 自身（防递归）
+  delete d.submissions;
+  return d;
+}
+
+function applySnapshot(snap) {
+  picked = (snap.picked || []).slice();
+  // 重新渲染卡片然后回填
+  renderRunCards();
+  var paper = document.getElementById("flag-paper-write");
+  if (paper) paper.checked = !!snap.paperWritten;
+  var on = document.getElementById("overall-note");
+  if (on) on.value = snap.overall || "";
+  if (snap.verdict) {
+    var r = document.querySelector("input[name=verdict][value=\"" + snap.verdict + "\"]");
+    if (r) r.checked = true;
+  }
+}
+
+function makeReceiptId() {
+  var d = new Date();
+  var pad = function (n) { return (n < 10 ? "0" : "") + n; };
+  var stamp = d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + "-" + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds());
+  var slug = currentName.slice(0, 6);
+  return "OE-ADV-" + stamp + "-" + slug;
+}
+
+function formatDateTime(iso) {
+  try { var d = new Date(iso); return d.toLocaleString("zh-CN", { hour12: false }); }
+  catch (e) { return iso; }
+}
+
+function buildReceiptText(sub) {
+  var lines = [];
+  lines.push("【蓝色诺瓦学院 · 深度口试单】");
+  lines.push("板块：理想气体内能的微观推导（advanced）");
+  lines.push("学生：" + currentName);
+  lines.push("口试单 ID：" + sub.receiptId);
+  lines.push("版本：v" + sub.version + (sub.version > 1 ? "（修订）" : ""));
+  lines.push("提交时间：" + formatDateTime(sub.submittedAt));
+  lines.push("抽中主问题：" + ((sub.snapshot && sub.snapshot.picked) || []).join("、"));
+  lines.push("");
+  lines.push("--- 教师最终判定 ---");
+  lines.push({ pass: "✅ 通过 —— 请在纸面口试单上签字（日期 + 教师名）", defer: "⏸ 暂缓 —— 按下方备注补学后预约二试", fail: "❌ 不通过 —— 回到学习阶段重学" }[sub.verdict]);
+  lines.push("");
+  if (sub.revisionReason) {
+    lines.push("--- 修订原因（含学生申诉详情） ---");
+    lines.push(sub.revisionReason);
+    lines.push("");
+  }
+  if (sub.overall) {
+    lines.push("--- 总体备注 ---");
+    lines.push(sub.overall);
+    lines.push("");
+  }
+  lines.push("--- 申诉通道 ---");
+  lines.push("如对本次判定有异议，请在 5 个工作日内通过班级渠道（微信 / 当面）向教师提出申诉。");
+  lines.push("教师将重新评估并出具新口试单（版本递增），原版本保留在记录中可追溯。");
+  return lines.join("\n");
+}
+
+function copyExamReport() {
+  if (!submissions.length) { alert("请先提交判定再复制口试单"); return; }
+  var text = buildReceiptText(submissions[submissions.length - 1]);
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function () { alert("口试单已复制到剪贴板"); }, function () { promptCopy(text); });
+  } else {
+    promptCopy(text);
+  }
+}
+
+function promptCopy(text) { prompt("请手动复制以下口试单：", text); }
+
+// =========================================================
+// 保存 / 恢复
+// =========================================================
+function collectRecord() {
+  var data = { picked: picked.slice(), listens: {}, miscs: {}, notes: {}, statuses: {}, verdict: "", overall: "", paperWritten: false, usedHistory: usedHistory.slice(), submissions: submissions.slice(), inRevision: inRevision };
+  var ls = document.querySelectorAll(".rec-listen");
+  for (var i = 0; i < ls.length; i++) { if (ls[i].checked) data.listens[ls[i].getAttribute("data-line") + "-" + ls[i].getAttribute("data-idx")] = true; }
+  var ms = document.querySelectorAll(".rec-misc");
+  for (var j = 0; j < ms.length; j++) { if (ms[j].checked) data.miscs[ms[j].getAttribute("data-line") + "-" + ms[j].getAttribute("data-idx")] = true; }
+  var ns = document.querySelectorAll(".rec-note");
+  for (var k = 0; k < ns.length; k++) { if (ns[k].value) data.notes[ns[k].getAttribute("data-line")] = ns[k].value; }
+  var ss = document.querySelectorAll(".rc-status-sel");
+  for (var m = 0; m < ss.length; m++) { data.statuses[ss[m].getAttribute("data-line")] = ss[m].value; }
+  var v = document.querySelector("input[name=verdict]:checked");
+  if (v) data.verdict = v.value;
+  var pw = document.getElementById("flag-paper-write");
+  if (pw) data.paperWritten = pw.checked;
+  var on = document.getElementById("overall-note");
+  if (on) data.overall = on.value;
+  var rr = document.getElementById("revision-reason-input");
+  if (rr) data.revisionReasonDraft = rr.value;
+  return data;
+}
+
+function restoreRecord(data) {
+  if (data.paperWritten !== undefined) {
+    var pw = document.getElementById("flag-paper-write");
+    if (pw) pw.checked = !!data.paperWritten;
+  }
+  var on = document.getElementById("overall-note");
+  if (on && data.overall) on.value = data.overall;
+  var rr = document.getElementById("revision-reason-input");
+  if (rr && data.revisionReasonDraft) rr.value = data.revisionReasonDraft;
+}
+
+function restoreRunUI() {
+  var raw = localStorage.getItem(storageKey());
+  if (!raw) return;
+  var data = JSON.parse(raw);
+  var ls = document.querySelectorAll(".rec-listen");
+  for (var i = 0; i < ls.length; i++) {
+    if (data.listens[ls[i].getAttribute("data-line") + "-" + ls[i].getAttribute("data-idx")]) {
+      ls[i].checked = true;
+      ls[i].parentNode.classList.add("checked");
+    }
+  }
+  var ms = document.querySelectorAll(".rec-misc");
+  for (var j = 0; j < ms.length; j++) {
+    if (data.miscs[ms[j].getAttribute("data-line") + "-" + ms[j].getAttribute("data-idx")]) {
+      ms[j].checked = true;
+      ms[j].parentNode.classList.add("checked");
+    }
+  }
+  var ns = document.querySelectorAll(".rec-note");
+  for (var k = 0; k < ns.length; k++) {
+    var v = data.notes[ns[k].getAttribute("data-line")];
+    if (v) ns[k].value = v;
+  }
+  var ss = document.querySelectorAll(".rc-status-sel");
+  for (var p = 0; p < ss.length; p++) {
+    var s = data.statuses ? data.statuses[ss[p].getAttribute("data-line")] : null;
+    if (s) ss[p].value = s;
+  }
+  for (var q = 0; q < picked.length; q++) updateLineStatus(picked[q]);
+}
+
+function saveStudent() {
+  if (!currentName) return;
+  var data = collectRecord();
+  // 更新 usedHistory：本次抽中的主问题加入
+  for (var i = 0; i < picked.length; i++) {
+    if (usedHistory.indexOf(picked[i]) === -1) usedHistory.push(picked[i]);
+  }
+  data.usedHistory = usedHistory.slice();
+  localStorage.setItem(storageKey(), JSON.stringify(data));
+}
+
+function escapeHtml(s) {
+  if (s === null || s === undefined) return "";
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+</script>
+
+<script>
+// 从 URL query 自动加载学生（来自 teacher-portal 跳转）
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.has("student")) return;
+  document.addEventListener("DOMContentLoaded", function() {
+    const inp = document.getElementById("student-name");
+    if (!inp) return;
+    inp.value = params.get("student");
+    if (typeof onNameInput === "function") onNameInput();
+    setTimeout(function() {
+      if (typeof loadStudent === "function") loadStudent();
+      if (params.has("studentName")) {
+        const infoEl = document.getElementById("student-info");
+        if (infoEl && infoEl.innerHTML) {
+          // 在 student-info 上方加 portal 跳转提示
+          const banner = document.createElement("div");
+          banner.style.cssText = "background:#fdf6ec;border-left:4px solid #e67e22;border-radius:6px;padding:8px 14px;margin:8px 0;font-size:13px;color:#7d4e10;";
+          banner.innerHTML = '📥 从教师 portal 待办跳转 · 学生姓名 <strong>' + params.get("studentName") + '</strong>（账号 ' + params.get("student") + '）已自动载入';
+          infoEl.parentNode.insertBefore(banner, infoEl);
+        }
+      }
+      if (params.has("appealId")) {
+        // 申诉跳转 · 提示教师启动修订流程
+        setTimeout(function() {
+          alert("📨 申诉跳转 · 学生 " + params.get("student") + " 的记录已载入。\n如要驳回，请回 portal 用「❌ 驳回」按钮。\n如要重判，请进 ④ 评分阶段点「📨 修改判定」启动修订模式。");
+        }, 500);
+      }
+    }, 100);
+  });
+})();
+</script>
+</body>
+</html>

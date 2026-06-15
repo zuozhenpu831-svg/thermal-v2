@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>焓与焓变的意义 · 基础检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #5A4BD1 0%, #6C5CE7 50%, #8B7CF0 100%); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(108,92,231,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.diagram { background: #f3e7fb; color: #6a1b9a; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+  .q-figure { margin: 14px 0; text-align: center; }
+  .q-figure svg { max-width: 100%; height: auto; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-blank { border: none; border-bottom: 2px solid #0055B8; background: transparent; padding: 2px 8px; margin: 0 4px; font-size: 15px; min-width: 80px; text-align: center; font-family: inherit; }
+  .q-blank:focus { outline: none; border-bottom-color: #006AD6; background: #f0f4f8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 焓与焓变的意义(进阶) &raquo;
+  <strong>焓与焓变的意义 · 基础检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习工具</strong> · 此处自动判分仅供反馈,真正的基础检测由教师组织<strong>纸笔形式 + 批改 + 签字</strong>。本练习的『通过 70 分』≈ 已具备纸笔检测的基础水平,可继续练习;『荣誉 90 分』≈ 掌握充分。学分由教师组织的真实检测决定,不在此处。
+</div>
+
+<header class="page-header">
+  <h1>焓与焓变的意义 · 基础检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 进阶板块 · 题库版(28 题池, 每次随机抽 7 题) · 100 分 · 约 30-35 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>7</strong> 道题(每个考点 T1-T7 各随机抽 1 道, 共 28 题池)</li>
+    <li>分值: T1=12 / T2=14 / T3=14 / T4=14 / T5=14 / T6=16 / T7=16 = <strong>100</strong></li>
+    <li>通过 ≥ 70 分(已具备纸笔检测基础水平);荣誉 ≥ 90 分(掌握充分)</li>
+    <li>建议 30-35 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分);填空自动忽略空格与全角半角差异</li>
+    <li>简答按关键词命中率判分(全部命中=满分, 命中过半=半分), 提交后请自行对照解析自评</li>
+    <li>提交后展示标准答案 + 三段式解析(原理 / 逻辑 / 知识系统位置)+ 常见误区 + 扩展 + 锚回学习任务卡</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong>;可使用计算器</li>
+    <li>可点"重新抽题"再做, 抽到不同变体训练(防止背答案)</li>
+  </ul>
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 7</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-mock-check-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-mock-check-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="enthalpy-meaning-task-cards.html">📖 返回学习任务卡</a>
+  <a href="enthalpy-meaning-oral-exam.html">🎤 深度口试</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 焓与焓变的意义(进阶) · 基础检测 · mock-check Skill v0.1.5(题库版 + 三段式 + 锚结论中文化)</footer>
+
+</div>
+
+<script>
+const EXPORT_NAMES = {
+  'H-DEFINITION':               '焓的定义 H ≡ U + PV(任意状态都成立)',
+  'DELTA-H-AS-DIFFERENCE':      '焓变 ΔH = H_f − H_i(状态函数之差)',
+  'QP-CONDITION':               'Q_p 的下标 p = 恒压条件',
+  'STANDARD-FORMATION-ENTHALPY':'标准生成焓 ΔH_f° 的定义(标准条件 · 稳定单质 · 1 mol)',
+  'STABLE-ELEMENT-ZERO':        '稳定单质 ΔH_f° = 0(参考零点约定)',
+  'H-IS-STATE-FUNCTION':        '焓是状态函数(U、P、V 都是状态量)',
+  'DELTA-H-EQUALS-QP':          '恒压下 ΔH = Q_p',
+  'Q-NOT-STATE-FN-VIA-HC':      '「假想热含量 HC」反例: Q 不是状态函数',
+  'DELTA-H-SIGN':               'ΔH < 0 放热 / ΔH > 0 吸热',
+  'EXOTHERMIC-LOWER-H':         '放热反应产物焓更低(能量上更稳定, 不等于自发)',
+  'REVERSE-REACTION-DH':        '逆反应 ΔH_逆 = −ΔH_正',
+  'H-IS-TABLEABLE':             '焓可查表(实验量 → 查表量的革命)',
+  'STABILITY-IS-RELATIVE':      '稳定性是相对的(看跟谁比)',
+  'SIGN-QP-INFLOW-POSITIVE':    'Q_p 流入系统为正(吸热 > 0)',
+  'SIGN-DELTA-H':               'ΔH 与 Q_p 同号',
+  'NOTATION-PLUS-74KJ':         '方程式「+74 kJ」(环境视角)与「ΔH = −74 kJ/mol」(系统视角)符号相反、物理相同',
+  'DELTA-HF-SUBSCRIPTS':        '下标 f = formation / 上标 ° = 标准条件 / 单位 kJ/mol',
+  'REVERSE-ENGINEER-FROM-NEED': '反向设计: 从「恒压下恰好等于 Q」的需求倒推出 H',
+  'FROM-THEORY-TO-ENGINEERING': '从理论到工程: 物理造工具 → 化学表格化',
+  'REFERENCE-ZERO-POINT':       '零点参考约定(海平面思路)',
+  'BOUNDARY-SPONTANEITY':       '边界: 自发与否不只看焓(留给吉布斯自由能)',
+  'BOUNDARY-HOW-TO-COMPUTE-DH': '边界: 怎么算未知反应的 ΔH(留给盖斯定律)',
+  'BOUNDARY-ENTROPY-CONNECTION':'边界: 焓与熵的组合判据(留给吉布斯自由能)'
+};
+
+const LADDER_SVG = `<div class="q-figure"><svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="能量阶梯图: 两条水平能级线, 右侧一条低于左侧一条, 虚线箭头标 ΔH">
+  <line x1="60" y1="30" x2="60" y2="230" stroke="#5a6c7d" stroke-width="2"/>
+  <path d="M60,30 L54,44 M60,30 L66,44" fill="none" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="40" y="50" font-size="13" fill="#5a6c7d" text-anchor="middle">H</text>
+  <line x1="100" y1="80" x2="270" y2="80" stroke="#00409A" stroke-width="3"/>
+  <line x1="330" y1="190" x2="500" y2="190" stroke="#c0392b" stroke-width="3"/>
+  <text x="185" y="68" font-size="13" fill="#00409A" text-anchor="middle">反应物</text>
+  <text x="415" y="216" font-size="13" fill="#c0392b" text-anchor="middle">产物</text>
+  <path d="M290,86 L310,180 M301,166 L312,184 L313,164" fill="none" stroke="#5a6c7d" stroke-width="2" stroke-dasharray="5,4"/>
+  <text x="330" y="130" font-size="13" fill="#5a6c7d">ΔH(方向如虚线箭头)</text>
+</svg></div>`;
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["Q-NOT-STATE-FN-VIA-HC"],
+      stem:"为检验「每个状态都自带一个热含量 HC」的设想, 我们做了一个思想实验: 给气体规定初始 HC = 5, 每吸收 1 单位热就 +1。让气体沿某条循环路线走一圈回到<strong>完全相同</strong>的初始状态(P、V、T 全部复原), 发现 HC 变成了 7; 再走一圈, 变成 9。这个结果说明:",
+      options:{A:"实验有误差, 重新测一次 HC 就会回到 5",B:"同一个状态对应了多个不同的 HC 读数, 「热含量」根本不是由状态决定的量, 这套记账方式破产",C:"气体的状态其实没有完全复原, 否则 HC 必然回到 5",D:"HC 需要换一个更合理的初始值, 比如从 0 开始记"},
+      answer:"B",
+      explanation:{
+        principle:'状态量的资格标准: <strong>只要状态定了, 数值就唯一定了</strong>。P、V、T 全部复原 = 状态完全相同, 此时任何合格的状态量都必须回到原值。HC 却一圈一个数(5 → 7 → 9), 说明它记录的不是「状态拥有什么」, 而是「过程中累计吸了多少热」 — 是路径量。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 这是思想实验, 按定义精确记账, 没有测量误差可言;<br>· <strong>B 正确</strong>: 一个状态对应多个读数, 直接违反状态量的唯一性要求;<br>· <strong>C</strong>: 错 — 题设已声明 P、V、T 全部复原, 对理想气体这就是状态完全相同;<br>· <strong>D</strong>: 错 — 初始值取多少都救不了它, 问题出在「每走一圈读数就涨」的增量上, 不在起点上。',
+        connection:'<strong>上游</strong>: 「状态函数 vs 路径量」的判别标准来自状态函数板块(循环判据: 走一圈回原点, 状态函数变化必为零)。<strong>下游</strong>: 正因为 Q 当不成状态的标签, 才需要反向设计一个真正的状态函数, 让它在恒压下恰好等于测得的热 — 这就是本板块主角 H 的出场动机。'
+      },
+      mistakes:'· 以为是实验做得不够准(混淆思想实验与真实测量);<br>· 用「换初始值」来修补(没看出问题在增量不在起点);<br>· 说不出「同一状态多个读数」这条致命伤, 只会背「Q 不是状态函数」的结论。',
+      extension:'同样的循环判据可以检验任何候选量: 让系统走一圈, 回原点后读数归零的才有资格当状态函数。内能 U 通过了这个检验(循环一圈 ΔU = 0), 这正是热力学第一定律能把 U 立为状态函数的根据。',
+      cardAnchor:"Card 1 STEP 2" },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["Q-NOT-STATE-FN-VIA-HC","REVERSE-ENGINEER-FROM-NEED"],
+      stem:"在上面那类循环实验里, 气体每走一圈都净吸收了 2 单位热, 状态却完全复原(循环过程 \\(\\Delta U = 0\\))。这 2 单位热去了哪里? 最准确的说法是:",
+      options:{A:"以「热含量」的形式储存在气体内部, 所以 HC 才会增加",B:"凭空消失了, 循环过程不需要满足能量守恒",C:"转化成了气体的温度升高",D:"全部变成了气体在循环中对外做的净功 — 热穿堂而过, 系统里什么也没留下"},
+      answer:"D",
+      explanation:{
+        principle:'热力学第一定律: \\(\\Delta U = Q_{in} - W_{out}\\)。循环回到原状态 ⇒ \\(\\Delta U = 0\\) ⇒ \\(Q_{in} = W_{out}\\): 净吸收的热<strong>一分不剩</strong>地变成了对外做的净功。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 状态复原意味着系统内部<strong>什么都没多</strong>, 「储存在内部」与 ΔU = 0 直接矛盾;<br>· <strong>B</strong>: 错 — 能量守恒任何过程都必须满足, 循环也不例外;<br>· <strong>C</strong>: 错 — 状态复原包括温度复原, T 没有变;<br>· <strong>D 正确</strong>: 热从系统「穿堂而过」转手变成了功, 系统只是个中转站。',
+        connection:'<strong>上游</strong>: 这正是热机的工作原理(卡诺循环板块) — 循环吸热做功, 系统自身不变。<strong>下游</strong>: 「热可以只过手、不留痕」解释了为什么任何「热含量」式的记账注定失败, 也解释了为什么我们只能退而求其次 — 造一个<strong>在特定条件下</strong>(恒压)与热挂钩的状态函数。'
+      },
+      mistakes:'· 以为吸的热必然「存」在系统里(忽略了功这条出口);<br>· 把吸热与升温划等号(循环里温度照样复原);<br>· 知道 ΔU = 0 却写不出 Q 与 W 相等的推论。',
+      extension:'「穿堂而过」这个画面值得记住: 热机每循环一圈, 系统状态不变, 却完成了热到功的转化。「转化效率能不能到 100%」是另一条故事线 — 热力学第二定律对此另有限制, 与本板块的状态函数问题相互独立。',
+      cardAnchor:"Card 1 STEP 2 + STEP 3" },
+    { id:"T1-3", type:"choice", score:12, difficulty:"基础", exportIds:["Q-NOT-STATE-FN-VIA-HC"],
+      stem:"用汽车类比热力学量: 「你现在在哪个城市」好比状态, 「里程表读数」则随开车的路线不断累积。下面哪一组对应关系是<strong>正确</strong>的:",
+      options:{A:"内能 U 像里程表读数, 吸收的热 Q 像所在城市",B:"内能 U 与吸收的热 Q 都像所在城市, 只是单位不同",C:"内能 U 像所在城市(由状态决定), 吸收的热 Q 像里程表读数(由走过的路决定)",D:"内能 U 与吸收的热 Q 都像里程表读数, 都随过程累积"},
+      answer:"C",
+      explanation:{
+        principle:'状态量 vs 路径量的本质区分: <strong>「在哪」是状态, 「怎么来的」是路径</strong>。所在城市只看当前位置, 与路线无关; 里程表读数取决于绕了多远的路, 同一城市可以对应无数种读数。',
+        logic:'U 由系统当前状态唯一决定(对理想气体, 温度定了 U 就定了), 像所在城市; Q 是过程中流入的热的累计, 走不同路径数值不同, 像里程表 — 所以 <strong>C 正确</strong>。A 恰好说反; B 把 Q 也抬成了状态量(正是 HC 思想实验否定掉的); D 把 U 也贬成了路径量(否定了热力学第一定律对 U 的定位)。',
+        connection:'<strong>上游</strong>: 这个类比是状态函数板块的核心意象, 本板块直接沿用。<strong>下游</strong>: 化学家想要的是「查地图」式的工作方式 — 只看起点和终点两个城市就知道答案, 不用管路线。焓表(每个化合物一个标准值)正是这张地图, 而它能成立的前提是 H 必须是「城市」型的量。'
+      },
+      mistakes:'· 把 U 和 Q 混为一谈(都叫「能量」, 但一个是存量、一个是流量);<br>· 类比只会背、不会迁移(换成新的量如体积 V、做的功 W 就分不清谁是城市谁是里程);<br>· 误以为「单位相同的量性质就相同」 — U 和 Q 都用焦耳, 却一个是状态量一个是路径量。',
+      extension:'同样单位、不同身份的现象在物理里很常见: 力矩和能量都是 N·m, 却完全是两种东西。判断一个量的身份, 看的不是单位, 而是它<strong>由什么决定</strong> — 这正是「状态函数」概念的全部要义。',
+      cardAnchor:"Card 1 STEP 2" },
+    { id:"T1-4", type:"choice", score:12, difficulty:"中等", exportIds:["REVERSE-ENGINEER-FROM-NEED","Q-NOT-STATE-FN-VIA-HC"],
+      stem:"既然思想实验已经证明「反应放出的热」依赖路径、当不成状态的标签, 化学家为什么不就此作罢, 反而要专门发明一个新的量? 他们真实的需求是:",
+      options:{A:"想找一个由状态决定的量, 但又要求它在化学实验最常见的条件下恰好等于量热计测得的热 — 两头都要占",B:"想证明量热计的测量原理有误, 需要新理论替代",C:"想把所有路径量都改造成状态量, Q 只是第一个目标",D:"纯粹出于数学兴趣, 与实验测量无关"},
+      answer:"A",
+      explanation:{
+        principle:'这是一次典型的<strong>按需求设计</strong>: 化学家的痛点是 — 反应热是最有用的实验数据, 但 Q 依赖路径、没法造表。理想的解决方案要同时满足两条: ① 是状态函数(可造表、可加减); ② 在常见实验条件下数值恰好等于测得的热(表上的数字才有实验意义)。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 「两头都要占」正是设计目标 — 状态函数的身份 + 实验热的数值;<br>· <strong>B</strong>: 错 — 量热计测得很准, 问题不在测量, 在 Q 自身的路径依赖性;<br>· <strong>C</strong>: 错 — 路径量改不成状态量(身份由定义决定), 能做的只是<strong>另造</strong>一个状态量去对接它;<br>· <strong>D</strong>: 错 — 动机完全来自实验和工程需求, 不是数学游戏。',
+        connection:'<strong>上游</strong>: 「需求 → 倒推定义」的反向设计思路, 在定义内能 U 时已经用过一次。<strong>下游</strong>: 沿着这个需求倒推 — 化学实验最常见的条件是敞口容器(压强恒定), 在该条件下凑出「恰好等于 Q 的状态量组合」, 就得到本板块的主角。设计的具体过程是后续推导类题目的考点。'
+      },
+      mistakes:'· 以为发明新概念是「先有定义再找用途」(顺序恰好相反: 先有需求, 定义是倒推出来的);<br>· 以为路径量可以被「修正」成状态量;<br>· 漏掉需求的第二半 — 只要状态函数的话, U 现成就是, 何必再造一个?',
+      extension:'「U 现成就是状态函数, 为什么还不够?」 — 因为敞口容器里气体会膨胀、要对大气做功, 测得的热并不等于 ΔU, 总差着一笔体积膨胀的开销。怎么把这笔开销自动算进去, 正是新量设计的精髓所在。',
+      cardAnchor:"Card 2 STEP 1 + STEP 3" }
+  ],
+  T2: [
+    { id:"T2-1", type:"multi", score:14, difficulty:"基础", exportIds:["H-DEFINITION","H-IS-STATE-FUNCTION","DELTA-H-AS-DIFFERENCE"],
+      stem:"关于焓 \\(H \\equiv U + PV\\), 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"任何状态下 H 都有定义、都可计算, 不限于恒压过程",B:"U、P、V 都由状态唯一决定, 所以它们的组合 H 也由状态唯一决定",C:"只有恒压过程中系统才「拥有」焓, 其他过程焓不存在",D:"焓变 ΔH = H(末态) − H(初态), 只看两端, 不问中间经历",E:"H 的数值等于系统在任何过程中吸收的热量"},
+      answer:["A","B","D"],
+      explanation:{
+        principle:'定义与适用条件要分开: \\(H \\equiv U + PV\\) 是<strong>定义</strong>, 任何状态都成立、任何状态都算得出 H; 「ΔH 恰好等于吸收的热」才是<strong>有条件的结论</strong>(只在恒压下成立)。H 的状态函数身份来自构件: U、P、V 全是状态量, 状态量的代数组合仍是状态量。',
+        logic:'各选项分析:<br>· <strong>A、B 正确</strong>: 定义无条件 + 构件论证;<br>· <strong>D 正确</strong>: 状态函数之差只由两端决定, 这正是「焓变」可造表、可加减的根基;<br>· <strong>C</strong>: 错 — 把「ΔH = Q 需要恒压」误读成「H 的存在需要恒压」, 是本板块最典型的混淆;<br>· <strong>E</strong>: 错 — 去掉「恒压」限定的版本是错的, 任意过程中吸收的热与 ΔH 没有必然关系。',
+        connection:'<strong>上游</strong>: 「状态量的组合仍是状态量」沿用状态函数板块的判别法。<strong>下游</strong>: D 选项的「只看两端」就是盖斯定律的全部底气 — 设计任意中间路径去算 ΔH, 结果都一样。C、E 两个错误选项对应的混淆, 会在恒压推导类题目里被正面拆解。'
+      },
+      mistakes:'· 把「恒压」错误地前移到定义上(C 型错误);<br>· 把「ΔH = 吸收的热」当成无条件恒等式(E 型错误);<br>· 说不清 H 为什么是状态函数, 只会背结论。',
+      extension:'为什么偏偏是 U + PV、而不是 U + 2PV 或 U − PV? 这不是审美选择: 只有 U + PV 这个组合在恒压下的变化量恰好把体积膨胀的开销自动抵消、剩下纯粹的热。组合是被需求<strong>唯一锁定</strong>的 — 这正是反向设计的妙处。',
+      cardAnchor:"Card 2 STEP 2 + STEP 3" },
+    { id:"T2-2", type:"multi", score:14, difficulty:"中等", exportIds:["H-IS-STATE-FUNCTION","H-DEFINITION"],
+      stem:"一定量理想气体经历某过程从状态 1 变到状态 2。下列各量中, 数值<strong>只由初末两个状态决定、与中间路径无关</strong>的有(多选):",
+      options:{A:"内能的变化 ΔU",B:"焓的变化 ΔH",C:"过程中气体对外做的功 W",D:"温度的变化 ΔT",E:"压强与体积乘积的变化 Δ(PV)"},
+      answer:["A","B","D","E"],
+      explanation:{
+        principle:'判别标准只有一条: 这个量是不是<strong>状态函数之差</strong>。U、H、T、P、V 都是状态量, 它们(及其组合 PV)的「Δ」都只由两端决定; 功 W 是过程中累积的路径量, 走不同路径做功不同。',
+        logic:'各选项分析:<br>· <strong>A、B、D 正确</strong>: U、H、T 都是状态函数, Δ 值只看两端;<br>· <strong>E 正确</strong>: P、V 是状态量, PV 乘积也是状态量, 它的变化同样路径无关 — 这正是 H = U + PV 能当状态函数的核心一环;<br>· <strong>C</strong>: 错 — W 等于 P-V 图上过程曲线下的面积, 同样的两端点, 曲线不同面积就不同, 是典型路径量。',
+        connection:'<strong>上游</strong>: 「P-V 图面积 = 做功」来自热力学第一定律板块, 是判断 W 路径依赖最直观的工具。<strong>下游</strong>: E 选项是隐藏的主角 — 正因为 Δ(PV) 路径无关、且在恒压下化简为 PΔV, H 才能既是状态函数、又能在恒压下与测得的热对上号。'
+      },
+      mistakes:'· 把 W 也当成状态函数之差(忘了同两端可以有无数条曲线);<br>· 不敢选 E(没想到状态量的乘积仍是状态量);<br>· 把「理想气体 ΔU 只与 ΔT 有关」误用为判别标准 — 路径无关性来自状态函数身份, 不依赖理想气体这个特例。',
+      extension:'练一个迁移: U − PV、U + 2PV、PV/T 是不是状态函数? 全是 — 状态量的任何代数组合都是。但其中只有 U + PV 获得了专名和专表, 因为只有它在恒压下恰好等于吸收的热。<strong>身份靠定义, 地位靠用途</strong>。',
+      cardAnchor:"Card 2 STEP 2" },
+    { id:"T2-3", type:"multi", score:14, difficulty:"中等", exportIds:["DELTA-H-AS-DIFFERENCE","H-IS-STATE-FUNCTION","REVERSE-REACTION-DH"],
+      stem:"已知某化学反应(恒温恒压下)的焓变为 ΔH。关于 ΔH = H(产物) − H(反应物) 这个写法所蕴含的性质, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"反应一步完成或分多步完成, 只要起点终点相同, ΔH 相同",B:"ΔH 的数值必须通过实际让反应发生一次才能确定, 没有别的途径",C:"把反应方向倒过来写, 新的焓变等于 −ΔH",D:"ΔH 只取决于产物和反应物各自的焓值, 与反应机理无关",E:"同一反应的 ΔH 一定是负数, 因为反应总要放出能量"},
+      answer:["A","C","D"],
+      explanation:{
+        principle:'「状态函数之差」一个身份派生三条性质: ① 路径无关(只看两端); ② 方向翻转则差值变号(末减初对调); ③ 差值由两端各自的焓值决定, 与中间怎么走(机理、步数)无关。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 一步走与多步走是不同路径, 两端相同则 ΔH 相同;<br>· <strong>C 正确</strong>: 倒过来写 = 初末态互换, H(反应物) − H(产物) = −ΔH;<br>· <strong>D 正确</strong>: 机理只是路径的微观版本, 同样不影响两端之差;<br>· <strong>B</strong>: 错 — 正因为路径无关, 才可以不做这个反应、改用别的反应组合算出它的 ΔH(具体算法是下一板块的内容);<br>· <strong>E</strong>: 错 — ΔH 有正有负, 吸热反应 ΔH &gt; 0 完全合法。',
+        connection:'<strong>上游</strong>: 三条性质全部由「H 是状态函数」一条派生, 论证模式与状态函数板块一脉相承。<strong>下游</strong>: A 和 B 合起来正是盖斯定律的预告片 — 「换条路径算同一个 ΔH」将从性质升级为系统化的计算方法。'
+      },
+      mistakes:'· 以为 ΔH 必须实测(B 型错误, 低估了状态函数的威力);<br>· 以为反应都放热(E 型错误);<br>· 承认 A 却否认 D — 没意识到「机理」也是一种路径。',
+      extension:'制药工业常遇到「目标反应太慢、太危险、做不了量热实验」的窘境, 解法正是 B 选项否定掉的那条路: 用几个容易测的反应拼出目标反应的两端, 焓差照算不误。这套拼接术的规则, 下一板块(盖斯定律)正式展开。',
+      cardAnchor:"Card 2 STEP 4 + Card 4 思考点 2" },
+    { id:"T2-4", type:"multi", score:14, difficulty:"较难", exportIds:["H-DEFINITION","REVERSE-ENGINEER-FROM-NEED","H-IS-STATE-FUNCTION"],
+      stem:"回看 \\(H \\equiv U + PV\\) 这个定义的「设计图纸」。下列关于<strong>为什么偏偏是这个组合</strong>的说法, 正确的有(多选):",
+      options:{A:"U + PV 代表系统内所有分子动能与势能的总和, 比 U 更全面",B:"这个组合在恒压条件下的变化量恰好等于系统吸收的热, 满足化学家的核心需求",C:"PV 项的作用是自动补上恒压过程中体积变化带来的那笔能量开销",D:"组合里每个成员都是状态量, 保证了 H 继承状态函数身份",E:"PV 项是系统整体运动的动能"},
+      answer:["B","C","D"],
+      explanation:{
+        principle:'H 的设计要同时锁定两个目标: <strong>状态函数身份</strong>(构件全是状态量 → D)与<strong>恒压下对接实验热</strong>(变化量自动吸收体积膨胀的开销 → A、B)。PV 项不是某种新能量, 而是一个精心挑选的「记账修正项」。',
+        logic:'各选项分析:<br>· <strong>B 正确</strong>: 这正是反向设计的出发点;<br>· <strong>C 正确</strong>: 恒压下系统膨胀要付出 PΔV 的开销, 把 PV 并入 H, 这笔开销在做差时被自动计入;<br>· <strong>D 正确</strong>: U、P、V 均为状态量, 组合仍是;<br>· <strong>A</strong>: 错 — 「所有分子动能与势能的总和」是 U 自己的定义, PV 不在其中; H 并不是「更全面的能量」, 它根本不必有直观的能量图像;<br>· <strong>E</strong>: 错 — 讨论的系统整体静止, PV 不是动能, 它只是压强乘体积这个状态量组合。',
+        connection:'<strong>上游</strong>: 「为目标凑组合」的思路接在「Q 不是状态函数 ⇒ 需要一个两头都占的新量」这条动机链之后(Card 1-2)。<strong>下游</strong>: 接受「H 不必有直观图像、好用就行」这个观念, 后面接受熵、吉布斯自由能这类更抽象的构造量时会顺利得多 — 热力学的高级工具大多是这样设计出来的。'
+      },
+      mistakes:'· 给 H 强行编一个「物理实体」解释(A、E 型错误) — H 是工具量, 不是某种藏在系统里的新能量;<br>· 只记定义不记动机, 被问「为什么不是 U − PV」时答不上来;<br>· 漏选 D, 忘了状态函数身份本身也是设计目标之一。',
+      extension:'科学史上这类「先有需求、后凑定义」的构造量并不少见: 它们的合法性不靠直观, 靠<strong>好用</strong> — 能造表、能预言实验、能简化计算。焓表传承至今仍在化工设计中天天被翻, 就是这张设计图纸的最好辩护。',
+      cardAnchor:"Card 2 STEP 3 思考点 4" }
+  ],
+  T3: [
+    { id:"T3-1", type:"choice", score:14, difficulty:"基础", exportIds:["DELTA-H-EQUALS-QP","QP-CONDITION","FROM-THEORY-TO-ENGINEERING"],
+      stem:"化学反应大多在敞口容器(烧杯、试管、工业反应釜的常压工况)中进行。「化学家偏爱用 ΔH 描述反应热」与这个实验现实之间的逻辑关系是:",
+      options:{A:"敞口容器与 ΔH 没有关系, 偏爱 ΔH 只是学科传统",B:"敞口容器中温度恒定, 而 ΔH 只在恒温下才有定义",C:"敞口容器始终与大气相通、压强恒等于大气压, 而恒压下量热计测得的热恰好就是 ΔH — 测出来直接进表, 不需要任何换算",D:"敞口容器中气体不会膨胀, 所以吸收的热全部变成 ΔH"},
+      answer:"C",
+      explanation:{
+        principle:'ΔH 的「专属舞台」是恒压过程: 恒压下系统吸收的热 \\(Q_p\\) 恰好等于 \\(\\Delta H\\)(下标 p 就是恒压的标记)。而化学实验的默认环境 — 敞口于大气 — 天然就是恒压条件。工具的设计条件与使用场景严丝合缝, 这正是它被偏爱的理由。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 这不是传统惯性, 是条件匹配;<br>· <strong>B</strong>: 错 — 敞口不保证恒温(反应自己会放热升温), 且 ΔH 的定义也不需要恒温;<br>· <strong>C 正确</strong>: 恒压(大气压不变)→ 测得的热 = ΔH → 实验值可直接造表;<br>· <strong>D</strong>: 错 — 敞口容器中气体<strong>恰恰可以自由膨胀</strong>, 膨胀开销是真实存在的, 只是 ΔH 的定义已经把这笔账自动包含了。',
+        connection:'<strong>上游</strong>: 「恒压下测得的热 = ΔH」的完整推导见学习任务卡 Card 3 STEP 2, 本题只用它的结论。<strong>下游</strong>: 「实验条件 → 直接可查表的数据」是物理工具被化学工程化的关键一跃 — 千千万万个反应在恒压量热计里测一次, 焓表就此建成, 供后续盖斯定律加减调用。'
+      },
+      mistakes:'· 把「恒压」误记成「恒温」或「恒容」;<br>· 以为敞口容器里气体不膨胀(方向恰好反了);<br>· 知道结论却讲不出「为什么是 ΔH 而不是 ΔU 被造表」 — 因为化学实验的默认条件配的是前者。',
+      extension:'如果化学家的默认装置是刚性密闭高压釜, 历史可能会改写 — 恒容下测得的热对应的是另一个量, 被造表的可能就是它。<strong>工具跟着场景走</strong>: 概念的「地位」从来不是天生的, 是使用环境投票选出来的。',
+      cardAnchor:"Card 3 STEP 3" },
+    { id:"T3-2", type:"choice", score:14, difficulty:"中等", exportIds:["DELTA-H-EQUALS-QP","QP-CONDITION"],
+      stem:"从定义出发推导: \\(\\Delta H = \\Delta U + \\Delta(PV)\\)。要想继续走到「\\(\\Delta H\\) 等于系统吸收的热」, 必须把 \\(\\Delta(PV)\\) 化简成 \\(P\\Delta V\\)。「恒压」这个条件<strong>恰恰是在哪一步、以什么理由</strong>被用上的?",
+      options:{A:"在写 H = U + PV 时就用了恒压, 否则 H 没有定义",B:"在 Δ(PV) = PΔV 这一步: 只有 P 全程不变, 才能把 P 当公因子提出来; 若 P 也在变, Δ(PV) 会多出 V 与 P 共同变化的交叉项",C:"在 ΔU 上用的: 恒压下 ΔU 自动为零",D:"恒压条件其实可有可无, 任何过程都有 Δ(PV) = PΔV"},
+      answer:"B",
+      explanation:{
+        principle:'\\(\\Delta(PV) = P_2V_2 - P_1V_1\\)。一般情况下 P 和 V 都在变, 这个差展不成单一的 \\(P\\Delta V\\)。<strong>只有 P 全程恒定</strong>(\\(P_1 = P_2 = P\\))时, \\(\\Delta(PV) = P(V_2 - V_1) = P\\Delta V\\) — 恒压条件的全部作用就发生在这一行。',
+        logic:'各选项分析:<br>· <strong>A</strong>: 错 — 定义 H = U + PV 任何状态都成立, 不需要恒压(把条件错误前移是本板块最高频的混淆);<br>· <strong>B 正确</strong>: 这是推导链条上唯一用到恒压的关节, 也是整个结论的「保险丝」 — 条件不满足, 链条就在这里断;<br>· <strong>C</strong>: 错 — 恒压下 ΔU 一般不为零(温度、内能照样可以变);<br>· <strong>D</strong>: 错 — 反例随手可举: 恒温压缩理想气体, PV 不变(Δ(PV) = 0)但 PΔV ≠ 0。',
+        connection:'<strong>上游</strong>: 「Δ 作用在乘积上要小心」是代数事实, 与状态函数板块「先后次序: 先定状态量, 再谈差值」呼应。<strong>下游</strong>: 找到「条件用在哪一步」就找到了结论的适用边界 — 恒容时这一步走不通, 反应热改由 ΔU 接管。读任何推导都该问一句: 条件消耗在哪一行?',
+        },
+      mistakes:'· 把恒压条件错装到定义上(A 型);<br>· 背会了结论却定位不了条件的位置, 一遇恒容情境就误用;<br>· 想不到「P 提出来」这个动作本身就需要 P 是常数。',
+      extension:'用微小变化的语言看更清楚: d(PV) = P dV + V dP。恒压 ⇒ dP = 0, 第二项消失。那个被恒压「杀掉」的 V dP 项并非废物 — 在化工的流动体系分析里它会以另一个身份复活, 这是更后面的故事。',
+      cardAnchor:"Card 3 STEP 2" },
+    { id:"T3-3", type:"choice", score:14, difficulty:"中等", exportIds:["DELTA-H-EQUALS-QP","QP-CONDITION"],
+      stem:"同一个放热反应分别在两种装置中进行: 装置甲是敞口烧杯(与大气相通), 装置乙是刚性密闭容器(体积完全固定)。关于两装置中「测得的反应热对应哪个热力学量」, 正确的是:",
+      options:{A:"甲、乙测得的热都等于 ΔH, 因为反应是同一个",B:"甲测得的热等于 ΔU, 乙测得的热等于 ΔH",C:"甲、乙测得的热都等于 ΔU, 因为内能才是真正的能量",D:"甲(恒压)测得的热等于 ΔH; 乙(恒容)中体积不变、系统不对外做功, 测得的热等于 ΔU"},
+      answer:"D",
+      explanation:{
+        principle:'两条对应关系各管一种条件: <strong>恒压</strong> ⇒ 测得的热 = ΔH(膨胀开销已被 PV 项自动记账); <strong>恒容</strong> ⇒ ΔV = 0 ⇒ 系统不对外做体积功(W = 0)⇒ 由 \\(\\Delta U = Q - W\\) 得测得的热 = ΔU。',
+        logic:'各选项分析:<br>· <strong>D 正确</strong>: 甲敞口 = 恒压 → ΔH; 乙刚性 = 恒容 → W = 0 → ΔU;<br>· <strong>A</strong>: 错 — 反应相同, 但<strong>测量条件不同, 测得的热本身就不同</strong>(数值上差一笔膨胀功的账);<br>· <strong>B</strong>: 把两条对应关系装反了;<br>· <strong>C</strong>: 错 — 「内能才是真正的能量」不构成测量上的对应关系, 恒压下测得的热确实不等于 ΔU。',
+        connection:'<strong>上游</strong>: 恒容 ⇒ W = 0 ⇒ Q = ΔU 直接来自热力学第一定律。<strong>下游</strong>: 两装置测得的热相差多少? 对有气体增减的反应, 差额约为 Δn·RT(气体摩尔数变化 × RT) — 这个换算公式在盖斯定律与燃烧热的精确对账中登场。',
+        },
+      mistakes:'· 以为「同一反应测出的热必然相同」(忽略测量条件);<br>· 两条对应关系记反(B 型);<br>· 忘了刚性容器 W = 0 的推理来源, 只会硬背「恒容对 ΔU」。',
+      extension:'实验室真实存在这两种仪器: 敞口的杯式量热计(测 ΔH)与刚性的弹式量热计(测 ΔU, 常用于燃烧热)。弹式测完还要经 Δn·RT 修正才能进焓表 — 表上那些数字背后, 都有这一步换算的功劳。',
+      cardAnchor:"Card 3 STEP 2 + 思考点" },
+    { id:"T3-4", type:"choice", score:14, difficulty:"较难", exportIds:["REVERSE-ENGINEER-FROM-NEED","H-DEFINITION","DELTA-H-EQUALS-QP"],
+      stem:"恒压下气体吸热膨胀, 能量账本为: \\(Q_{in} = \\Delta U + P\\Delta V\\)(吸收的热一部分存为内能, 一部分付给膨胀)。化学家想找一个状态函数 X, 使恒压下 \\(\\Delta X = Q_{in}\\)。从这本账<strong>倒推</strong> X 的过程, 正确的是:",
+      options:{A:"恒压下 PΔV = Δ(PV), 于是 Q_in = ΔU + Δ(PV) = Δ(U + PV), 整个右边恰好是「某个量的变化」, 这个量 U + PV 就是要找的 X",B:"直接令 X = Q, 因为需求就是 ΔX = Q",C:"令 X = U, 因为内能已经是状态函数, 不需要再加任何项",D:"令 X = PV, 因为膨胀的开销就是 PΔV"},
+      answer:"A",
+      explanation:{
+        principle:'倒推的关键一步是把 \\(P\\Delta V\\) <strong>改写</strong>成 \\(\\Delta(PV)\\)(恒压下合法), 让等式右边变成「Δ 某 + Δ 某」= Δ(某 + 某)的形式 — 右边一旦整体写成单一的 Δ, 括号里的组合就自动浮出水面: \\(X = U + PV\\)。定义不是猜出来的, 是被需求<strong>挤</strong>出来的。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 完整重现了设计路线: 账本 → 改写 → 合并 → 命名;<br>· <strong>B</strong>: 错 — Q 自己不是状态函数, 「令 X = Q」等于什么都没解决;<br>· <strong>C</strong>: 错 — 恒压下 Q_in = ΔU + PΔV ≠ ΔU(差一笔膨胀开销), U 不满足需求;<br>· <strong>D</strong>: 错 — Δ(PV) 只覆盖膨胀那一半, 丢了存入内能的另一半。',
+        connection:'<strong>上游</strong>: 能量账本 \\(Q_{in} = \\Delta U + P\\Delta V\\) 来自热力学第一定律在恒压气缸上的应用(大气压住活塞的图景)。<strong>下游</strong>: 「把右边凑成单一 Δ」这个代数动作, 在吉布斯自由能的构造里会再次上演(那次凑的是 H − TS) — 学会这一手, 等于拿到热力学构造新量的通用模板。'
+      },
+      mistakes:'· 以为定义是天才的灵感闪现(其实是代数必然);<br>· B 型短路: 直接拿需求当答案;<br>· 漏掉「PΔV 改写成 Δ(PV) 需要恒压背书」这个前提, 误以为倒推对任何过程都成立。',
+      extension:'练一个迁移: 若某种实验场景下账本变成 Q = ΔU + Δ(aX)(a 恒定), 你立刻可以构造状态函数 U + aX 来对接它。构造量的生产线是通用的 — 这正是「反向设计」作为思维方式而非孤立知识点的价值。',
+      cardAnchor:"Card 2 STEP 3 + Card 3 STEP 2" }
+  ],
+  T4: [
+    { id:"T4-1", type:"choice", score:14, difficulty:"中等", exportIds:["NOTATION-PLUS-74KJ","DELTA-H-SIGN","SIGN-DELTA-H"],
+      stem:"同一个反应有两种书写: 写法一 \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)} + 74\\ \\mathrm{kJ}\\); 写法二 \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)}, \\ \\Delta H = -74\\ \\mathrm{kJ/mol}\\)。一个 +74、一个 −74, 关于这对「矛盾」, 正确的解读是:",
+      options:{A:"两种写法必有一个是错的, 数值符号不可能相反",B:"写法一表示吸热, 写法二表示放热, 描述的是两个不同条件下的反应",C:"两种写法都对且物理内容完全相同: 写法一站在环境视角(环境收到 74 kJ), 写法二站在系统视角(系统的焓下降了 74 kJ), 视角相反所以符号相反",D:"+74 是实验值, −74 是理论修正值, 二者本来就允许有出入"},
+      answer:"C",
+      explanation:{
+        principle:'同一笔能量转移, 两本账: <strong>环境的进账</strong>(方程式末尾 +74 kJ, 像商品清单 — 产物加上送出来的热)与<strong>系统的出账</strong>(ΔH = −74 kJ/mol, 系统自身的焓下降)。一进一出, 符号必然相反, 物理事实只有一个: 反应放热 74 kJ。',
+        logic:'各选项分析:<br>· <strong>C 正确</strong>: 视角不同 → 符号相反 → 物理相同;<br>· <strong>A</strong>: 错 — 「符号必须一致」的前提是同一视角, 这里恰恰是两个视角;<br>· <strong>B</strong>: 错 — 两种写法描述的是同一个放热反应, 不存在「一个吸热一个放热」;<br>· <strong>D</strong>: 错 — 二者不是实验与理论的差异, 是记账立场的差异, 数值大小完全一致。',
+        connection:'<strong>上游</strong>: 「流入系统为正」的符号约定与热力学第一定律的 Q 约定一脉相承 — ΔH 与恒压下的 Q 同号, 都站系统视角。<strong>下游</strong>: 后续板块(盖斯定律、吉布斯自由能)全部默认系统视角的 ΔH 记号; 读懂老式「+74 kJ」写法, 是为了能无障碍地查阅不同年代、不同体例的资料。'
+      },
+      mistakes:'· 见符号相反就断定必有一错;<br>· 把方程式末尾的 +74 误读成「ΔH = +74」进而判成吸热;<br>· 换算时只改符号忘了视角含义, 解释不出「谁收到了 74 kJ」。',
+      extension:'记账视角的对偶在物理中无处不在: 你付出的功 = 对方收到的功的相反数; 系统放出的热 = 环境吸收的热。约定本身无所谓对错, <strong>要命的是混用</strong> — 一道题里只准站一个立场, 这是符号约定的第一纪律。',
+      cardAnchor:"Card 4 STEP 2" },
+    { id:"T4-2", type:"choice", score:14, difficulty:"基础", exportIds:["DELTA-H-SIGN","SIGN-DELTA-H","SIGN-QP-INFLOW-POSITIVE"],
+      stem:"恒压下某反应的 \\(\\Delta H = -286\\ \\mathrm{kJ/mol}\\)。仅凭这个信息, 下列推断 <strong>正确</strong> 的是:",
+      options:{A:"该反应放热: 系统的焓下降, 恒压下向环境放出 286 kJ/mol 的热",B:"该反应吸热: 负号表示系统从环境吸收能量",C:"该反应使容器温度一定下降 286 度",D:"该反应一定无法逆向进行"},
+      answer:"A",
+      explanation:{
+        principle:'符号约定链: ΔH 与恒压下的热 \\(Q_p\\) <strong>相等且同号</strong>, 而 \\(Q_p\\) 以流入系统为正。于是 ΔH &lt; 0 ⇔ \\(Q_p\\) &lt; 0 ⇔ 热从系统流出 ⇔ <strong>放热</strong>; ΔH &gt; 0 ⇔ 吸热。一张两行的严格对照表, 不需要任何记忆技巧, 全由「流入为正」推出。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 负号 = 焓下降 = 热流出系统 = 放热, 数值 286 kJ/mol 即放热量;<br>· <strong>B</strong>: 恰好反了 — 「负号 = 吸收」是把环境视角的直觉错套到了系统视角的符号上;<br>· <strong>C</strong>: 错 — kJ/mol 是能量单位不是温度单位, 放出的热也可能被环境带走而不升降温度;<br>· <strong>D</strong>: 错 — 放热只说明正向在能量上下坡, 逆向(上坡)在合适条件下完全可能发生, 「会不会发生」不归 ΔH 单独管。',
+        connection:'<strong>上游</strong>: 「流入为正」直接继承热力学第一定律对 Q 的约定, ΔH 因恒压下等于 \\(Q_p\\) 而自动继承同一符号系统。<strong>下游</strong>: D 选项的陷阱是通往吉布斯自由能的路标 — 方向判断还缺一块拼图(熵), 这是本板块明确不展开的边界。'
+      },
+      mistakes:'· 负号与「失去/坏事」的日常直觉绑定, 误判为吸热;<br>· 把焓变单位当温度变化;<br>· 由「放热」越权推出「必然自发 / 不可逆向」。',
+      extension:'为什么放热反应「感觉上」更常见? 能量下坡确实是有利因素之一, 但自然界照样有大量自发的吸热过程(冰袋里的硝酸铵溶解就是)。能量之外那只看不见的手是什么 — 这正是吉布斯自由能板块要回答的问题。',
+      cardAnchor:"Card 4 STEP 2" },
+    { id:"T4-3", type:"choice", score:14, difficulty:"中等", exportIds:["SIGN-QP-INFLOW-POSITIVE","SIGN-DELTA-H","QP-CONDITION"],
+      stem:"关于 \\(Q_p\\) 这个记号(下标 p 表示恒压条件), 下列说法 <strong>正确</strong> 的是:",
+      options:{A:"Q_p > 0 表示系统向环境放热",B:"Q_p 的符号与 ΔH 的符号在恒压下可能相反, 需要分别判断",C:"Q_p 以「流出系统为正」, 与内能账本里的 Q 约定相反",D:"Q_p > 0 表示热流入系统(系统吸热); 恒压下 Q_p 与 ΔH 不仅同号而且相等"},
+      answer:"D",
+      explanation:{
+        principle:'\\(Q_p\\) 沿用热力学第一定律中 Q 的统一约定: <strong>流入系统为正</strong>。下标 p 只是在备注测量条件(恒压), 不改变符号立场。而恒压下 \\(\\Delta H = Q_p\\) 是数值相等的恒等关系 — 相等的量当然同号。',
+        logic:'各选项分析:<br>· <strong>D 正确</strong>: 流入为正 + 恒压下两者相等;<br>· <strong>A</strong>: 把约定写反了;<br>· <strong>B</strong>: 错 — 相等的两个量不可能异号, 「分别判断」是多余的;<br>· <strong>C</strong>: 错 — \\(Q_p\\) 与第一定律的 Q 是<strong>同一个</strong>符号系统, 下标只标条件、不换立场。',
+        connection:'<strong>上游</strong>: 符号统一性是刻意设计的 — 全套热力学量(Q、W、ΔU、ΔH)共用「系统视角、流入为正」, 换板块不换立场。<strong>下游</strong>: 化学习惯把「放热」挂在嘴边而把负号写在纸上, 两套语言的换算枢纽就是这条约定; 盖斯定律里大量的加减运算, 符号纪律全系于此。'
+      },
+      mistakes:'· 「放热是好事所以记正号」的直觉污染(必须以系统为立场);<br>· 误以为下标 p 带来了新的符号规则;<br>· 在 Q_p 与 ΔH 之间人为制造区别(恒压下它们是同一个数)。',
+      extension:'为什么科学界最终统一到「流入为正」? 立场选系统, 像记银行账户: 进账为正、出账为负, 账本自动平衡。历史上工程界曾用「对外做功为正」的蒸汽机视角记 W, 两套约定并存造成的混乱, 正是今天教材反复强调符号立场的原因。',
+      cardAnchor:"Card 4 STEP 2" },
+    { id:"T4-4", type:"choice", score:14, difficulty:"较难", exportIds:["NOTATION-PLUS-74KJ","DELTA-H-SIGN","SIGN-DELTA-H"],
+      stem:"某分解反应在恒压下进行, 需要从环境<strong>吸收</strong> 58 kJ/mol 的热才能完成。要把它分别写成「方程式末尾热量项」与「ΔH 记号」两种体例, 正确的一组是:",
+      options:{A:"方程式末尾写 +58 kJ; ΔH = +58 kJ/mol",B:"方程式末尾写 −58 kJ(环境付出了 58 kJ); ΔH = +58 kJ/mol(系统的焓上升)",C:"方程式末尾写 −58 kJ; ΔH = −58 kJ/mol",D:"方程式末尾写 +58 kJ(产物一侧多出热); ΔH = −58 kJ/mol"},
+      answer:"B",
+      explanation:{
+        principle:'两种体例各自的立场: 方程式末尾热量项站<strong>环境视角</strong>(环境收到热写正、付出热写负); ΔH 站<strong>系统视角</strong>(流入系统为正)。吸热反应: 环境付出 58(写 −58 kJ), 系统进账 58(ΔH = +58 kJ/mol)。两体例符号永远相反。',
+        logic:'各选项分析:<br>· <strong>B 正确</strong>: 环境 −58 与系统 +58, 一付一收, 自洽;<br>· <strong>A、C</strong>: 错 — 两种体例符号写成了一样, 等于有一边站错了立场;<br>· <strong>D</strong>: 恰好把两边全写反了, 描述的是一个放热反应。',
+        connection:'<strong>上游</strong>: 与放热例子(末尾 +74 / ΔH = −74)正反成对, 两例合起来才算真正掌握「视角相反 ⇒ 符号相反」的完整规则。<strong>下游</strong>: 高温分解、电解水这类吸热过程在能量阶梯图上产物层更高 — 「ΔH &gt; 0 ⇔ 产物在上」的图像对应在能量阶梯图(Card 4 STEP 3)中展开。'
+      },
+      mistakes:'· 只背过放热的例子, 一换吸热方向就两边符号乱配;<br>· 「+号 = 加热它」之类的口诀式联想(必须回到视角立场判断);<br>· 漏写单位差异: 末尾热量项是总量 kJ, ΔH 是每摩尔 kJ/mol。',
+      extension:'检验自己是否真懂的最快办法: 任取一个反应, 分别用环境和系统两种立场各写一遍, 再互相核对符号是否相反、数值是否一致。能在两套语言间无损互译, 符号约定才算从「背下来」升级成「用得动」。',
+      cardAnchor:"Card 4 STEP 2" }
+  ],
+  T5: [
+    { id:"T5-1", type:"multi", score:14, difficulty:"基础", exportIds:["EXOTHERMIC-LOWER-H","DELTA-H-SIGN","BOUNDARY-SPONTANEITY"],
+      stem:"把化学反应画成「能量阶梯」: 纵轴为焓 H, 反应物与产物各占一层。对一个<strong>放热</strong>反应, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"产物层位于反应物层的上方",B:"产物层位于反应物层的下方, 层差的大小就是放出热量的多少",C:"从能量角度看, 产物比反应物更稳定(位置更低、更「踏实」)",D:"ΔH < 0, 与「产物层更低」是同一件事的代数与几何两种说法",E:"既然能量下坡, 这个反应必然会自动发生"},
+      answer:["B","C","D"],
+      explanation:{
+        principle:'能量阶梯图的读法: <strong>层高 = 焓值, 层差 = ΔH</strong>。放热 ⇒ 系统的焓下降 ⇒ 产物层在下; 下降的高度差 = 放出的热(恒压下)。「位置低 = 能量上更稳定」沿用了重力势能的直觉: 球停在坑底比停在坡上踏实。',
+        logic:'各选项分析:<br>· <strong>B、D 正确</strong>: 「产物在下」「ΔH &lt; 0」「放热」三位一体, 图、代数、热效应互为翻译;<br>· <strong>C 正确</strong>: 能量层面的稳定性比较, 注意限定词「从能量角度看」;<br>· <strong>A</strong>: 画反了, 那是吸热反应的图;<br>· <strong>E</strong>: 错 — 能量下坡只是「有利因素」, 不是「发生保证」: 室温下的一张纸对氧气是能量下坡的, 却安静地放了一百年。',
+        connection:'<strong>上游</strong>: 阶梯图是 ΔH 符号表的可视化版本, 两者必须能互相翻译。<strong>下游</strong>: E 选项的破绽正是本板块的边界声明 — 「会不会自动发生」还有能量之外的因素参与裁决, 完整判据在吉布斯自由能板块揭晓。'
+      },
+      mistakes:'· 把放热反应的产物层画在上方;<br>· 把「能量上更稳定」夸大成「绝对稳定 / 不再反应」;<br>· E 型越权: 从 ΔH 的符号直接宣判反应必然发生。',
+      extension:'「下坡却不滚」的纸与氧气, 卡住它的是反应速率(动力学)的高门槛, 而不是方向(热力学)不允许 — 热力学说「可以走」, 动力学说「走多快」, 两者是完全独立的两套裁判。划清这两条线, 是化学思维成熟的标志之一。',
+      cardAnchor:"Card 4 STEP 3" },
+    { id:"T5-2", type:"multi", score:14, difficulty:"中等", exportIds:["REVERSE-REACTION-DH","H-IS-STATE-FUNCTION","DELTA-H-SIGN"],
+      stem:"合成氨反应 \\(\\mathrm{N_2(g) + 3H_2(g) \\to 2NH_3(g)}\\) 的 \\(\\Delta H = -92\\ \\mathrm{kJ/mol}\\)。关于它的<strong>逆反应</strong>(氨分解), 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"逆反应的 ΔH = +92 kJ/mol",B:"逆反应的 ΔH 数值需要重新做实验才能知道, 不能直接推出",C:"逆反应是吸热反应",D:"能直接写出逆反应 ΔH 的根据是: 焓由状态决定, 把初末态对调, 焓差只需换个符号",E:"逆反应的 ΔH 仍为 −92 kJ/mol, 因为是同一组物质"},
+      answer:["A","C","D"],
+      explanation:{
+        principle:'\\(\\Delta H_{逆} = -\\Delta H_{正}\\) 不是新规则, 而是状态函数身份的直接推论: ΔH = H(末) − H(初), 反应方向对调 = 初末互换 = 差值变号。台阶还是那两级, 只是上行变下行。',
+        logic:'各选项分析:<br>· <strong>A、C 正确</strong>: −(−92) = +92 &gt; 0, 吸热 — 工业上氨分解制氢确实需要持续供热;<br>· <strong>D 正确</strong>: 这是 A 的理论根据, 也是本题真正考的东西;<br>· <strong>B</strong>: 错 — 状态函数的威力恰恰是「不必重做实验」;<br>· <strong>E</strong>: 错 — 「同一组物质」不等于「同一个变化」, 方向反了焓差就反号。',
+        connection:'<strong>上游</strong>: 「初末互换 ⇒ 差值变号」对任何状态函数都成立(ΔU、ΔT 同理), 是状态函数板块的通用性质。<strong>下游</strong>: 「反应翻转, ΔH 反号」是盖斯定律方程组运算的两大基本操作之一(另一个是按系数缩放), 下一板块将高频使用。'
+      },
+      mistakes:'· E 型错误: 以为物质相同则 ΔH 相同(忽略方向);<br>· 会写 +92 却给不出 D 的根据(知其然不知其所以然);<br>· 把「逆反应吸热」误解成「逆反应不可能进行」 — 吸热反应在高温等条件下大量存在。',
+      extension:'一对正逆反应的 ΔH 互为相反数, 意味着循环一圈(正完逆)焓变恰好归零 — 这正是状态函数的循环判据在化学反应上的体现。任何「循环一圈还能净赚能量」的设计都过不了这一关, 永动机的化学版本就死在这里。',
+      cardAnchor:"Card 4 思考点 2" },
+    { id:"T5-3", type:"multi", score:14, difficulty:"中等", hasDiagram:true, figureSvg:LADDER_SVG,
+      exportIds:["EXOTHERMIC-LOWER-H","DELTA-H-SIGN","REVERSE-REACTION-DH","BOUNDARY-SPONTANEITY"],
+      stem:"上图是某反应的能量阶梯图(纵轴为焓 H, 图中只画出两层的相对高低, 未标注任何热效应结论)。根据图中产物层与反应物层的位置关系, 下列判断 <strong>正确</strong> 的有(多选):",
+      options:{A:"该反应是放热反应",B:"该反应的 ΔH < 0",C:"把该反应反向进行, 则需要吸热, 且焓变与原反应大小相等、符号相反",D:"图中两层的高度差没有物理含义",E:"仅凭该图可以断定: 把反应物放在一起, 反应必然自动发生"},
+      answer:["A","B","C"],
+      explanation:{
+        principle:'读图三步: ① 找层 — 产物层低于反应物层; ② 翻译 — 焓下降 ⇒ ΔH &lt; 0 ⇒ 放热; ③ 量化 — 两层的<strong>高度差就是 |ΔH|</strong>(恒压下即放出的热量)。图上不标结论, 结论要自己从位置关系里读出来。',
+        logic:'各选项分析:<br>· <strong>A、B 正确</strong>: 产物在下 = 焓下降 = 放热 = ΔH &lt; 0;<br>· <strong>C 正确</strong>: 逆向 = 沿阶梯上行, 吸热, 焓变反号、大小不变;<br>· <strong>D</strong>: 错 — 高度差正是 |ΔH| 本身, 是图上信息量最大的要素;<br>· <strong>E</strong>: 错 — 阶梯图只报告能量的高低, 不裁决「会不会发生」; 方向判断还缺能量之外的拼图。',
+        connection:'<strong>上游</strong>: 这张图是 ΔH 符号严格表(Card 4 STEP 2)的几何化身。<strong>下游</strong>: 在盖斯定律里, 多个反应的阶梯图可以首尾拼接成多级楼梯 — 各级层差代数相加 = 总反应的 ΔH; 而 E 选项留下的悬念由吉布斯自由能板块接手。'
+      },
+      mistakes:'· 读图只看箭头方向不看层的高低;<br>· 忽视高度差的定量含义(D 型);<br>· E 型越权: 把能量图当成方向判决书。',
+      extension:'科学图像的纪律: 图本身只陈述位置事实, 结论是读者用规则推出来的。养成「图上有什么 / 我推出什么」分开陈述的习惯, 在读文献中的能量面、相图时尤其救命 — 多少误读都源于把自己的推断当成了图的标注。',
+      cardAnchor:"Card 4 STEP 3" },
+    { id:"T5-4", type:"multi", score:14, difficulty:"较难", exportIds:["STABILITY-IS-RELATIVE","EXOTHERMIC-LOWER-H","STABLE-ELEMENT-ZERO"],
+      stem:"甲烷的生成焓为负(由石墨与氢气化合时放热), 但甲烷遇氧又能燃烧并大量放热。关于「甲烷到底稳定不稳定」, 下列说法 <strong>正确</strong> 的有(多选):",
+      options:{A:"稳定性是<strong>相对</strong>的: 必须先指明「跟谁比 / 相对哪条变化路线」, 这个问题才有确定答案",B:"相对于石墨 + 氢气这组单质, 甲烷位置更低、更稳定",C:"甲烷的稳定性自相矛盾, 说明焓的理论有缺陷",D:"相对于燃烧产物(二氧化碳 + 水)那一层, 甲烷位置更高、不稳定",E:"一种物质要么稳定要么不稳定, 这是它的固有属性"},
+      answer:["A","B","D"],
+      explanation:{
+        principle:'能量阶梯上的「稳定」只是<strong>比较级</strong>: 同一物质可以同时比一层高、比另一层低。甲烷比「石墨 + 氢气」低(生成时放热), 又比「二氧化碳 + 水」高(燃烧时放热) — 两个判断各自成立, 互不矛盾, 因为参照层不同。',
+        logic:'各选项分析:<br>· <strong>A 正确</strong>: 「稳定」是双目运算, 缺参照对象的提问本身不完整;<br>· <strong>B、D 正确</strong>: 两个方向的比较各有实验事实背书(生成放热 / 燃烧放热);<br>· <strong>C</strong>: 错 — 矛盾感来自提问方式省略了参照, 不是理论缺陷;<br>· <strong>E</strong>: 错 — 把比较级当成了固有属性, 正是 A 否定的那种问法。',
+        connection:'<strong>上游</strong>: 与「位置的高低必须选参考点」一脉相承 — 稳定性的参照层与生成焓的参考零点(稳定单质层)是同一种思想的两次出场。<strong>下游</strong>: 「比上不足比下有余」的中间层物质(如甲烷)正是燃料的本质 — 它们与氧组合后还有很深的能量台阶可下, 这是燃烧热板块的开场白。'
+      },
+      mistakes:'· 追问「甲烷究竟稳定吗」却不指明参照(问题本身不成立);<br>· 把生成焓为负误读成「绝对稳定、不会再反应」;<br>· 见两个相反的比较结果就怀疑理论自相矛盾。',
+      extension:'金刚石的生成焓是个小正数(相对石墨略高), 所以「钻石恒久远」在热力学账本上其实站不住 — 它理应慢慢变成石墨。救了钻石的是极慢的转化速率: 又一次, 热力学的方向与动力学的快慢是两位互不通气的裁判。',
+      cardAnchor:"Card 5 思考点 2" }
+  ],
+  T6: [
+    { id:"T6-1", type:"fill", score:16, difficulty:"中等", exportIds:["STANDARD-FORMATION-ENTHALPY","STABLE-ELEMENT-ZERO","REFERENCE-ZERO-POINT"],
+      stem:"补全生成焓 \\(\\Delta H_f^\\circ\\) 的定义: 在 25°C、1 atm 的条件下, 由<strong>第 1 空</strong> ___(填一类起点物质, 四个字)直接化合生成 <strong>1 mol</strong> 某化合物时的焓变。按约定, 这类起点物质自身的 \\(\\Delta H_f^\\circ\\) 等于<strong>第 2 空</strong> ___(填一个数)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空填中文(物质类别); 第 2 空只填一个数字, 不带单位。</em>",
+      blanks:[{ answers:["稳定单质","稳定的单质","最稳定单质"], score:8 },{ answers:["0","零"], score:8 }],
+      explanation:{
+        principle:'生成焓定义的三要素一个不能少: ① <strong>起点 = 稳定单质</strong>(每种元素选其最稳定的形态); ② <strong>终点 = 1 mol 该化合物</strong>(统一计量); ③ <strong>条件 = 25°C、1 atm</strong>(统一环境)。而「稳定单质自身记零」是整张表的<strong>参考零点约定</strong> — 不是测出来的, 是规定出来的。',
+        logic:'为什么起点必须统一? 焓的绝对值无法测量, 能测的只有差值 — 要让所有化合物的数值<strong>可以互相比较</strong>, 就必须让它们都从同一条起跑线出发。把起跑线(稳定单质层)记为零, 每个化合物的生成焓就是它相对这条线的「海拔」: 负值在线下、正值在线上, 第 2 空因此填 0。',
+        connection:'<strong>上游</strong>: 「只有差值可测、零点靠约定」与重力势能选海平面、电势选接地完全同构 — 这是物理学处理「无绝对值的量」的标准手法。<strong>下游</strong>: 全体化合物共享同一零点, 任意两个状态的焓差才能用各自的生成焓相减得到 — 下一板块(盖斯定律)的加减运算全部架在这条零线上。'
+      },
+      mistakes:'· 起点写成「任意单质」(漏掉「稳定」二字: 同一元素的不同形态只有一个记零);<br>· 漏掉「1 mol 化合物」的计量限定;<br>· 以为零是实验测出来的(它是约定, 改约定整张表平移但所有差值不变)。',
+      extension:'如果把零点改设在「气态原子层」, 表会怎样? 所有数值整体平移, 但任意两态之差纹丝不动 — 可测的物理(差值)不依赖零点选择。科学里凡是「只有差才有意义」的量, 零点都是为了方便而非真理: 海平面如此, 接地电位如此, 生成焓亦然。',
+      cardAnchor:"Card 5 STEP 2" },
+    { id:"T6-2", type:"fill", score:16, difficulty:"基础", exportIds:["DELTA-HF-SUBSCRIPTS","STANDARD-FORMATION-ENTHALPY"],
+      stem:"拆解记号 \\(\\Delta H_f^\\circ\\): 下标 f 是英文单词<strong>第 1 空</strong> ___ 的缩写(填英文单词); 上标 ° 表示数据在 25°C、1 atm 这一约定环境下测定, 这个环境的中文名称是「<strong>第 2 空</strong> ___条件」(两个字)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空填英文小写单词即可, 自动忽略大小写; 第 2 空填两个汉字。</em>",
+      blanks:[{ answers:["formation"], score:8 },{ answers:["标准"], score:8 }],
+      explanation:{
+        principle:'记号是压缩的定义: <strong>f = formation(生成)</strong>, 宣告这是「从稳定单质生成化合物」这一特定过程的焓变; <strong>° = 标准条件</strong>(25°C、1 atm), 宣告测定环境已统一。单位 kJ/mol 则对应「每生成 1 mol」的计量约定。',
+        logic:'三个附件各锁定义的一个要素: 下标锁<strong>过程类型</strong>(生成, 而非燃烧、溶解等其他过程), 上标锁<strong>环境</strong>, 单位锁<strong>计量</strong>。会拆记号, 等于把定义随身携带 — 看到 \\(\\Delta H_f^\\circ(\\mathrm{CO_2}) = -393.5\\ \\mathrm{kJ/mol}\\), 一眼读出: 标准条件下, 稳定单质生成 1 mol 二氧化碳, 放热 393.5 kJ。',
+        connection:'<strong>上游</strong>: 「下标备注条件」的记号习惯与 \\(Q_p\\)(下标 p = 恒压)同一传统 — 热力学的下标从来不是装饰, 是适用条件的封条。<strong>下游</strong>: 手册里还会遇到燃烧焓等同族记号(下标换字母, 规则不变), 拆记号的能力可以直接迁移; 盖斯定律的计算里, 认错下标 = 用错数据。'
+      },
+      mistakes:'· f 误拆成 final(末态)或 free(自由) — 都是真实存在的高频误读;<br>· 忽略上标 °, 拿非标准条件的数据混用;<br>· 漏看单位里的 /mol, 把每摩尔的量当成总量。',
+      extension:'科学记号的设计哲学: <strong>把使用条件写进名字里</strong>, 让数据自带「使用说明书」。工程图纸的公差标注、药品的储存条件标签都是同一思路 — 信息跟着对象走, 而不是指望使用者去翻另一本手册。',
+      cardAnchor:"Card 5 STEP 2" },
+    { id:"T6-3", type:"fill", score:16, difficulty:"基础", exportIds:["STABLE-ELEMENT-ZERO","REFERENCE-ZERO-POINT","STANDARD-FORMATION-ENTHALPY"],
+      stem:"「稳定单质记零」是一种参考零点约定, 地理学里的同款做法是把海拔零点定在<strong>第 1 空</strong> ___(三个字); 化学里碳元素有多种形态, 被选为参考零点的那一种是<strong>第 2 空</strong> ___(填「石墨」或「金刚石」)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空填三个汉字的地理名词; 第 2 空可从题面给出的两个选项中选一个复制。</em>",
+      blanks:[{ answers:["海平面"], score:8 },{ answers:["石墨"], score:8 }],
+      explanation:{
+        principle:'海拔的逻辑与生成焓完全平行: 高度本无绝对零点, 人们约定<strong>海平面 = 0</strong>, 山峰记正、盆地记负; 焓也无绝对零点, 约定<strong>稳定单质 = 0</strong>, 化合物按相对位置记正负。同一元素多种形态时, 只有<strong>最稳定的那种</strong>(碳选石墨)有资格当零点。',
+        logic:'为什么是石墨不是金刚石? 因为零点必须<strong>唯一且可靠</strong> — 选每种元素在标准条件下能量最低、最稳定的形态, 表才不会出现两个零点打架。金刚石比石墨的焓略高约 1.9 kJ/mol, 所以金刚石自己的生成焓是个小正数, 而石墨记零。',
+        connection:'<strong>上游</strong>: 与重力势能选地面、电路选接地一样, 都是「差值才可测」的量在工程化时的标准动作。<strong>下游</strong>: 零点选定后, 整张生成焓表的数字才有统一含义 — 负值 = 比单质组合低(生成时放热), 正值 = 比单质组合高。读表先认零点, 是使用任何「相对量表格」的第一守则。'
+      },
+      mistakes:'· 以为零点是大自然规定的(它是人为约定, 为的是全表可比);<br>· 以为同一元素的所有形态都记零(只有最稳定形态记零);<br>· 把「金刚石生成焓为小正数」误读成数据错误。',
+      extension:'珠峰高 8848 m 这个数字, 离开「相对海平面」的约定就毫无意义; 同理, 任何生成焓数值离开「相对稳定单质」的约定也无从谈起。<strong>报数值必须连同参考系一起报</strong> — 这是相对量的通用纪律, 在焓、势能、电位上反复适用。',
+      cardAnchor:"Card 5 STEP 2 + 思考点 1" },
+    { id:"T6-4", type:"fill", score:16, difficulty:"中等", exportIds:["STABLE-ELEMENT-ZERO","H-IS-TABLEABLE","FROM-THEORY-TO-ENGINEERING","DELTA-H-SIGN"],
+      stem:"查表得 \\(\\Delta H_f^\\circ(\\mathrm{CH_4, g}) = -74\\ \\mathrm{kJ/mol}\\)。在以「稳定单质层」为零线的能量图上, 这个负值说明 CH₄ 的位置在零线的<strong>第 1 空</strong> ___方(填「上」或「下」); 这张人人可查的数据表, 把化学计算的起点从「每个反应都亲手测一次」变成了「直接<strong>第 2 空</strong> ___」(两个字)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空从「上」「下」中选一个; 第 2 空填两个汉字的动作(本题第二句已出现过这个动作)。</em>",
+      blanks:[{ answers:["下","下方"], score:8 },{ answers:["查表","查阅"], score:8 }],
+      explanation:{
+        principle:'读数两步: ① <strong>定位</strong> — 生成焓为负 = 生成该化合物时体系焓下降 = 化合物比单质组合层<strong>低</strong>, 画在零线下方; ② <strong>用途</strong> — 每个化合物一个标准值, 意味着焓从「实验量」升级为「<strong>查表量</strong>」: 数据测一次, 全世界复用。',
+        logic:'第 1 空: 负号的几何翻译 — 零线下方 74 kJ/mol 处(若为正值则在上方, 如金刚石的小正值)。第 2 空: 表的革命性在于<strong>复用</strong> — 千万种反应共享几千个化合物数据, 不再需要对每个反应单独动手; 「查表」二字正是本板块「从理论到工程」的落点。',
+        connection:'<strong>上游</strong>: 能定位、能比较, 全靠零点约定(稳定单质记零)与 H 的状态函数身份(数值只随状态, 不随来路)。<strong>下游</strong>: 「查表之后怎么算」 — 用几个生成焓加加减减拼出任意反应的 ΔH — 正是下一板块盖斯定律的全部内容, 本板块只建表、不动算。'
+      },
+      mistakes:'· 负值画到零线上方(符号与高低的翻译出错);<br>· 以为表里每个数都要重新测(忽略状态函数带来的复用性);<br>· 把「能查表」与「会计算」混为一谈 — 后者还差盖斯定律这最后一步。',
+      extension:'工程手册文化是现代技术的隐形地基: 蒸汽表、材料强度表、生成焓表……物理学负责把量定义成「可造表的」(状态函数), 工程界负责把表造出来。一张好表 = 一代代实验者的劳动被压缩成随手可查的两列数字。',
+      cardAnchor:"Card 5 STEP 4" }
+  ],
+  T7: [
+    { id:"T7-1", type:"short", score:16, difficulty:"中等", exportIds:["BOUNDARY-SPONTANEITY","EXOTHERMIC-LOWER-H","DELTA-H-SIGN","BOUNDARY-ENTROPY-CONNECTION"],
+      stem:"甲烷燃烧的 \\(\\Delta H = -890\\ \\mathrm{kJ/mol}\\), 放热可观。有人据此提出一个普遍规律: 「凡是放热反应, 把反应物放在一起就一定会自动发生」。请判断这个推断是否成立并说明理由; 再指出: 完整判断一个反应会不会自动发生, 除了焓变之外还需要考虑哪一类因素(点出名字即可, 本板块不展开)。",
+      keywords:["不能|不成立|不行|不可以|不一定|不对","熵|混乱|无序|吉布斯"],
+      explanation:{
+        principle:'ΔH &lt; 0 只说明反应在<strong>能量上走下坡</strong>(产物层更低、能量上更稳定), 这是有利因素, 但<strong>不是发生保证</strong>。「会不会自动发生」是另一个问题, 焓变没有单独裁决它的权力 — 这正是本板块开头就立下的边界声明。',
+        logic:'推断不成立, 反例信手拈来: 纸张、木材与空气中的氧组合都是大幅放热的下坡反应, 却可以常温共处百年不动。完整的方向判据除焓(能量)外, 还需要<strong>熵</strong>(系统混乱程度)参与 — 两者组合成统一判据的方式, 由吉布斯自由能板块给出。另注意把「不发生」与「发生得极慢」区分开: 速率问题(动力学)又是独立的第三件事。',
+        connection:'<strong>上游</strong>: 「放热 = 产物层更低 = 能量上有利」是能量阶梯图的标准读法, 本题考它的<strong>适用边界</strong>。<strong>下游</strong>: 「焓 + 熵 → 组合判据」是吉布斯自由能板块的主线; 在那之前, 凡遇「自发性」一律保持克制 — 知道自己暂时只有半张判决书, 是比背结论更重要的素养。'
+      },
+      mistakes:'· 把「能量有利」直接等同「必然发生」;<br>· 答出「不成立」却举不出反例、说不出缺的是哪类因素;<br>· 把速率慢(动力学受阻)与方向不利(热力学不利)混为一谈。',
+      extension:'也存在反方向的惊奇: 有些吸热反应(ΔH &gt; 0)居然能自动发生 — 化学冰袋里硝酸铵的溶解吸热降温, 却自发完成。能量上坡还能自动走, 推它上去的那只手正是熵 — 这个悬念是进入吉布斯自由能板块最好的门票。',
+      cardAnchor:"Card 4 STEP 3 + Card 1 STEP 1" },
+    { id:"T7-2", type:"short", score:16, difficulty:"中等", exportIds:["REVERSE-REACTION-DH","H-IS-STATE-FUNCTION","DELTA-HF-SUBSCRIPTS"],
+      stem:"已知 \\(\\Delta H_f^\\circ(\\mathrm{CH_4, g}) = -74\\ \\mathrm{kJ/mol}\\)(即 \\(\\mathrm{C(石墨) + 2H_2(g) \\to CH_4(g)}\\) 的焓变)。(a) 写出分解过程 \\(\\mathrm{CH_4(g) \\to C(石墨) + 2H_2(g)}\\) 的 ΔH(带符号和单位); (b) 你没有做任何新实验就写出了这个数 — 凭什么可以这样做? 请给出依据。",
+      keywords:["+74|正74|74kj","状态","反号|相反|变号|对调|互换|取负"],
+      explanation:{
+        principle:'(a) ΔH(分解) = <strong>+74 kJ/mol</strong>。(b) 依据是<strong>焓是状态函数</strong>: 焓值只由状态本身决定, 与怎么到达无关。ΔH = H(末) − H(初), 把过程方向倒过来 = 初末两端对调, 差值大小不变、符号相反 — 不需要任何新实验。',
+        logic:'完整的论证链: ① H 由状态决定(U、P、V 都是状态量, 其组合也是); ② 焓差只依赖两端 ⇒ 同样两个状态之间, 正向与逆向的焓差互为相反数; ③ 代入: 正向 −74 ⇒ 逆向 +74 kJ/mol(吸热, 与「分解需要供能」的化学直觉一致)。只答 +74 而给不出 ②, 等于只会按计算器。',
+        connection:'<strong>上游</strong>: 「方向对调 ⇒ 差值变号」是任何状态函数的通用性质, 与位移、高度差的行为完全相同。<strong>下游</strong>: 这正是盖斯定律工具箱里的第一件工具(反应翻转, ΔH 变号), 下一板块将与「按系数缩放」搭配, 拼装出任意未知反应的焓变。'
+      },
+      mistakes:'· 只给数值不带正号或单位(吸热的 + 号是信息, 不是装饰);<br>· (b) 答成「因为能量守恒」 — 守恒只保证能量不凭空增减, 给不出「数值可直接对调变号」的结论, 真正的依据是状态函数身份;<br>· 把「逆反应吸热」误解为「逆反应无法进行」。',
+      extension:'这个 +74 在工业上真实有用: 甲烷高温裂解制氢与炭黑, 每摩尔吸热约 74 kJ 是工艺设计的耗能底数。一张生成焓表正着读是「合成放多少」, 倒着读是「拆解要付多少」 — 一份数据, 双向变现, 全靠状态函数身份背书。',
+      cardAnchor:"Card 4 思考点 2 + Card 5 STEP 2" },
+    { id:"T7-3", type:"short", score:16, difficulty:"较难", exportIds:["DELTA-H-EQUALS-QP","QP-CONDITION","SIGN-QP-INFLOW-POSITIVE"],
+      stem:"同一个吸热反应分别在两套装置中各做一次量热: 装置甲是敞口烧杯, 全程与大气相通, 测得吸热 \\(Q_1\\); 装置乙是刚性密闭容器, 体积始终固定, 测得吸热 \\(Q_2\\)。(a) \\(Q_1\\)、\\(Q_2\\) 中哪一个等于该反应的 ΔH? (b) 另一个等于哪个热力学量? 请说明 (b) 的理由(提示: 从那套装置「不允许发生什么」想起)。",
+      keywords:["内能|Δu|du","功"],
+      explanation:{
+        principle:'(a) <strong>Q₁ = ΔH</strong>: 敞口 = 压强恒为大气压 = 恒压, 而 ΔH 这个量被设计出来的全部目的, 就是在恒压下与测得的热相等。(b) <strong>Q₂ = ΔU</strong>: 刚性容器体积固定 ⇒ ΔV = 0 ⇒ 系统无法对外做体积功(W = 0), 第一定律 ΔU = Q − W 退化为 ΔU = Q₂。',
+        logic:'两套装置各「禁止」了一件事: 甲禁止压强变化(恒压 → 走 ΔH 的剧本), 乙禁止体积变化(恒容 → 膨胀功这条能量出口被焊死, 吸进的热只能全部存为内能)。同一反应、两个读数, Q₁ 与 Q₂ 一般并不相等 — 差额恰是恒压装置里那笔体积功的账。',
+        connection:'<strong>上游</strong>: (b) 的推理就是热力学第一定律在 W = 0 特例下的直接应用; (a) 则回扣 H 的设计动机(反向设计)。<strong>下游</strong>: 实验室的杯式量热计与弹式量热计正是甲、乙的真身; 弹式数据要换算成焓表数据, 桥梁公式涉及气体摩尔数变化, 在燃烧热的精确对账中出场。'
+      },
+      mistakes:'· 两条对应关系记反(把刚性容器的读数当 ΔH);<br>· (b) 只背「恒容对内能」却说不出「体积固定 ⇒ 无体积功 ⇒ 热全存入内能」的因果链;<br>· 以为同一反应两装置读数必然相同(忽略测量条件对「热」这个路径量的影响)。',
+      extension:'「路径量的读数由装置条件决定」是本题最深的一层: 热 Q 没有「该反应的 Q」这种说法, 只有「该反应在某条件下的 Q」。状态函数(ΔU、ΔH)才有资格脱离装置谈数值 — 这正是全板块从 HC 反例一路走来的中心思想。',
+      cardAnchor:"Card 3 STEP 2 + Card 1 STEP 2" },
+    { id:"T7-4", type:"short", score:16, difficulty:"较难", exportIds:["BOUNDARY-HOW-TO-COMPUTE-DH","H-IS-TABLEABLE","FROM-THEORY-TO-ENGINEERING","BOUNDARY-ENTROPY-CONNECTION"],
+      stem:"化学手册的生成焓数据页给出: \\(\\Delta H_f^\\circ(\\mathrm{CO_2,g}) = -393.5\\)、\\(\\Delta H_f^\\circ(\\mathrm{H_2O,l}) = -285.8\\)、\\(\\Delta H_f^\\circ(\\mathrm{CH_4,g}) = -74.8\\)(单位均为 kJ/mol)。(a) 本板块是否已经教过「用这几个数据具体算出甲烷燃烧 ΔH」的方法? 该方法留给哪个板块? (b) 这页数据被称为化学计算方式的一场革命: 它把获取反应热的方式从「对每个反应做一次什么」变成了「对几千个化合物各做一次、此后人人共享」? 请说明这场革命的内容。",
+      keywords:["盖斯","实验|测"],
+      explanation:{
+        principle:'(a) <strong>还没教</strong> — 本板块只完成了三件事: 证明 H 是状态函数、说明恒压下 ΔH 可测、建立可查的生成焓零点体系; 「把几个生成焓加加减减拼出任意反应的 ΔH」这个具体算法, 是<strong>盖斯定律</strong>板块(下一板块)的正题。(b) 革命的内容: 反应热从「每个反应都要亲手做一次<strong>实验</strong>的量」变成「测好存表、按需查用的量」。',
+        logic:'账可以算清: 化合物只有几千上万种, 反应却有无穷多种组合。逐反应实验 = 永远做不完; 逐化合物建表 = 一次劳动、无限复用 — 任何反应的两端都由化合物组成, 而 H 是状态函数, 两端定了焓差就定了。表是「无穷对有穷」的降维打击, 这就是革命的全部内容。',
+        connection:'<strong>上游</strong>: 可造表的资格链条 — H 是状态函数(数值随状态不随来路)+ 零点统一(稳定单质记零)+ 恒压可测(数据有实验来源), 三环缺一不可。<strong>下游</strong>: 盖斯定律提供「查表之后怎么算」的运算规则; 再往后, 同样的「建表 + 运算」模式会在吉布斯自由能上复刻一遍(那张表多了熵的参与)。'
+      },
+      mistakes:'· 在本板块就试图动手「算出」甲烷燃烧的 ΔH(越界 — 板块边界明确把算法留给了下一站);<br>· 说不清革命点, 只答「查表方便」(关键是从无穷的反应空间压缩到有穷的化合物空间);<br>· 忘了表的合法性靠状态函数身份背书, 以为只是数据整理的功劳。',
+      extension:'知识工程的通用范式: 把无穷的问题空间, 映射到有穷的「基元数据 + 组合规则」。生成焓表是基元数据, 盖斯定律是组合规则; 字母表 + 拼写规则、单位制 + 量纲运算, 都是同一范式。识别这个范式, 比记住任何一张表都更长久。',
+      cardAnchor:"Card 5 STEP 4 + STEP 5" }
+  ]
+};
+const SLUG = "enthalpy-meaning";
+const KEY_STATE = `mockcheck_${SLUG}_state`;
+let studentName = "student";
+let selectedQuestions = [];
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE)) || {}; } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+
+// 同卷防剧透互斥对: 防止「一题题面 / 选项泄露另一题答案」或同一结论考两遍
+const EXCLUDE_PAIRS = [
+  ["T1-2","T7-3"],["T2-2","T7-3"],["T3-1","T7-3"],["T3-3","T7-3"],
+  ["T2-3","T7-2"],["T5-2","T7-2"],["T4-1","T7-2"],
+  ["T5-4","T6-3"],["T5-4","T6-4"]
+];
+function conflictsWithPicked(id, pickedIds) {
+  return EXCLUDE_PAIRS.some(p =>
+    (p[0] === id && pickedIds.includes(p[1])) || (p[1] === id && pickedIds.includes(p[0])));
+}
+function pickQuestions() {
+  selectedQuestions = [];
+  const pickedIds = [];
+  ["T1","T2","T3","T4","T5","T6","T7"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    const allowed = pool.filter(q => !conflictsWithPicked(q.id, pickedIds));
+    const pickPool = allowed.length ? allowed : pool;
+    const q = pickPool[Math.floor(Math.random() * pickPool.length)];
+    selectedQuestions.push(q);
+    pickedIds.push(q.id);
+  });
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  window.scrollTo({ top: 0, behavior: "instant" });
+  setTimeout(renderMath, 100);
+}
+
+function renderQuestions() {
+  const root = document.getElementById("question-list");
+  let html = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const diagTag = q.hasDiagram ? '<span class="q-meta diagram">📊 配图</span>' : '';
+    const typeLabel = q.type === "choice" ? "单选" : q.type === "multi" ? "多选" : q.type === "fill" ? "填空" : "简答";
+    html += `<div class="question" data-q-id="q${n}" data-q-type="${q.type}" data-q-original="${q.id}">
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeLabel}</span>
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        ${diagTag}
+        <span class="q-meta" style="background:#f8e7cf;color:#a35511;">${q.id}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      ${q.figureSvg || ""}
+      <div class="q-prompt">${q.stem}</div>
+      ${renderBody(q, n)}
+      <div class="q-feedback" hidden></div>
+    </div>`;
+  });
+  root.innerHTML = html;
+  attachListeners();
+}
+
+function renderBody(q, n) {
+  if (q.type === "choice") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "multi") return `<ul class="q-options">${Object.entries(q.options).map(([k,v]) => `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`).join("")}</ul>`;
+  if (q.type === "fill") return `<div style="margin-top:10px;">${q.blanks.map((b, i) => `<span style="margin-right:18px;display:inline-block;">第 ${i+1} 空: <input type="text" class="q-blank" data-q-id="q${n}" data-blank-id="${i+1}" placeholder="数字或文字"></span>`).join("")}</div>`;
+  if (q.type === "short") return `<textarea class="q-short-input" rows="6" data-q-id="q${n}" placeholder="请分点作答(建议 80-180 字, 含必要的推理依据)"></textarea>`;
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "fill") document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`).forEach(el => el.addEventListener("input", updateAnsweredCount));
+    if (q.type === "short") { const el = document.querySelector(`textarea[data-q-id="${qid}"]`); if (el) el.addEventListener("input", updateAnsweredCount); }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "fill") return Array.from(document.querySelectorAll(`.q-blank[data-q-id="${qid}"]`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x && x.length > 0)) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function normalizeFillin(s) {
+  return (s || "")
+    .replace(/[\s　]+/g, "")
+    .replace(/[Ａ-Ｚａ-ｚ０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0))
+    .replace(/[₀-₉]/g, c => "0123456789"[c.charCodeAt(0) - 0x2080])
+    .replace(/[⁰-⁹]/g, c => "0123456789"[c.charCodeAt(0) - 0x2070])
+    .replace(/[−–—]/g, "-")
+    .toLowerCase();
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "fill") {
+    let total = 0;
+    q.blanks.forEach((blank, i) => {
+      const uv = normalizeFillin(ua?.[i]);
+      const ok = blank.answers.some(a => normalizeFillin(a) === uv);
+      if (ok) total += blank.score;
+    });
+    return { score: total, isCorrect: total === q.score };
+  }
+  if (q.type === "short") {
+    // E6: 比对前两侧都做空格归一化; 管道 | 表示同义关键词组, 命中其一即可
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => kw.split("|").some(k => text.includes(k.toLowerCase().replace(/\s+/g, ""))));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 1.0) score = q.score;
+    else if (ratio >= 0.5) score = q.score * 0.5;
+    return { score, isCorrect: ratio >= 1.0, hits };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "fill" && Array.isArray(a) && a.some(x => x)) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 6) { if (!confirm(`已答 ${answered} / 7 题(< 85%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 掌握充分(90%+) — 推荐进入教师组织的真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔检测基础水平(70%+) — 可继续练习或申请真实检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回学习任务卡复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    const exportCounts = {};
+    wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
+    const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `<span class="q-export-label">${EXPORT_NAMES[id] || id}</span>(${n}题)`).join(" / ")}</small>` : "";
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
+  }
+
+  document.querySelectorAll(".question input, .question textarea").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const fbEl = document.querySelector(`[data-q-id="q${r.idx+1}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "fill") stdAns = q.blanks.map((b,i) => `第${i+1}空: ${b.answers[0]}`).join(" · ");
+  else if (q.type === "short") stdAns = `关键词: ${q.keywords.map(k => k.split("|").join(" 或 ")).join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})· 请对照解析自评`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-principle"><strong>🔬 涉及的核心原理</strong><div>${q.explanation.principle}</div></div>` +
+      `<div class="q-fb-row q-fb-logic"><strong>🧩 逻辑分析</strong><div>${q.explanation.logic}</div></div>` +
+      `<div class="q-fb-row q-fb-connection"><strong>🌐 知识系统中的位置</strong><div>${q.explanation.connection}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  fbEl.innerHTML = `
+    <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : (r.score > 0 ? '✗ 部分正确' : '✗ 答错')} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="./enthalpy-meaning-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
+  `;
+  fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
+  fbEl.hidden = false;
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空, 通过记录保留(本练习不影响真实检测)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "enthalpy-meaning";
+  const MODULE_NAME = "焓与焓变的意义";
+  const PRODUCT_TYPE = "mock-check";
+  const PRODUCT_LABEL = "基础检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitMock_checkApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitMock_checkAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

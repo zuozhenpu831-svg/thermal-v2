@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学第一定律 · 学习任务卡（基础模块）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  :root {
+    --primary-blue: #00409A;
+    --secondary-blue: #0055B8;
+    --bright-blue: #006AD6;
+    --light-blue: #E6EEFF;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f7fa;
+    --bg-light: #fafbfc;
+    --border-color: #e5e5e7;
+    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
+    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
+    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --accent-orange: #e67e22;
+    --accent-purple: #8e44ad;
+    --accent-green: #27ae60;
+    --success: #27ae60;
+    --danger: #c0392b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .header {
+    text-align: center;
+    padding: 36px 20px;
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
+  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
+  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
+  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
+  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
+  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
+  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    transition: var(--transition);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
+  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
+  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
+  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+  .driving-question {
+    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
+    border-left: 4px solid var(--primary-blue);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
+  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    color: #fff;
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer; user-select: none; transition: opacity 0.2s;
+  }
+  .task-card-header:hover { opacity: 0.92; }
+  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
+  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body.collapsed { display: none; }
+  .task-objective {
+    background: rgba(0, 64, 154,0.06);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .step { margin-bottom: 20px; }
+  .step:last-of-type { margin-bottom: 16px; }
+  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
+  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
+  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+  .step-content { font-size: 0.9rem; padding-left: 4px; }
+  .step-content p { margin-bottom: 8px; }
+  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
+  .step-content li { margin-bottom: 4px; }
+  .quote-block {
+    background: rgba(0, 64, 154,0.05);
+    border-left: 3px solid var(--secondary-blue);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.85rem;
+    color: #34495e;
+    line-height: 1.65;
+  }
+  .prereq-recap {
+    background: #eef2f7;
+    border-left: 4px solid var(--primary-blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.86rem;
+    color: #2c3e50;
+    line-height: 1.65;
+  }
+  .prereq-recap strong { color: var(--primary-blue); }
+  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .derivation-block {
+    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
+    border: 1px solid rgba(0, 64, 154, 0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
+  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
+  .derivation-block .step-line strong { color: var(--secondary-blue); }
+  .thinking-point {
+    background: rgba(230, 126, 34, 0.04);
+    border-left: 4px solid var(--accent-orange);
+    border-radius: 0 10px 10px 0;
+    padding: 14px 16px;
+    margin: 14px 0;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
+  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
+  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
+  .diagram-block { margin: 18px 0; text-align: center; }
+  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
+  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
+  .checkpoint {
+    background: rgba(39,174,96,0.06);
+    border: 1px solid rgba(39,174,96,0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 16px;
+  }
+  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
+  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
+  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
+  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  @media (max-width: 480px) {
+    .header h1 { font-size: 1.25rem; }
+    .header { padding: 28px 16px; }
+    .task-card-header h3 { font-size: 0.95rem; }
+    .task-card-body { padding: 16px; }
+    .card { padding: 18px 14px; }
+    .info-table td:first-child { width: auto; }
+    .driving-question { padding: 16px 18px; }
+    .thinking-point { padding: 12px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>热力学</span>
+    <span class="sep">&gt;</span>
+    <span>热力学第一定律 · 学习任务卡（基础）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>热力学第一定律</h1>
+    <div class="subtitle">能量守恒在热力学系统的形式 · 用 \(\Delta U = Q - W\) 把"热"和"功"算在一起</div>
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>热力学第一定律（基础模块）</td></tr>
+      <tr><td>所属大主题</td><td>热力学 · 物理化学融合主题</td></tr>
+      <tr><td>预计学习时间</td><td>2.5-3 小时（按自己的节奏）</td></tr>
+      <tr><td>前置板块</td><td><strong>分子动理论</strong>（必读 —— 内能的微观定义 \(U =\) 总动能 + 总势能 来自前置板块）<br><strong>气体液体固体</strong>（推荐 —— 理想气体方程 \(PV = nRT\) 在 4 过程分析中常用）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；对前置板块"内能微观定义""分子总动能 ∝ N·T"的熟练度</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li>能用一句话陈述<strong>热力学第一定律 \(\Delta U = Q - W\)</strong>，并说清符号约定（系统视角：\(Q\) 吸热为正、\(W\) 系统对外做功为正）</li>
+      <li>能解释为什么第一定律就是"<strong>能量守恒</strong>"在热力学系统的具体形式 —— 不是新原理，而是能量守恒的一种说法</li>
+      <li>能区分<strong>热传导 Q</strong> 与<strong>做功 W</strong> 两种"外界给系统能量"的方式，并从分子层面解释二者的微观图像差异（无序传能 vs 有序定向）</li>
+      <li>会用 \(\Delta U = Q - W\) 在 4 种典型过程下分析: <strong>等容</strong>（\(V\) 不变）/ <strong>等压</strong>（\(P\) 不变）/ <strong>等温</strong>（\(T\) 不变）/ <strong>绝热</strong>（\(Q = 0\)）</li>
+      <li>能在简单案例中（气体压缩 / 加热水 / 摩擦生热 / 自由膨胀）识别 \(Q\)、\(W\)、\(\Delta U\) 的符号与数值关系</li>
+      <li>能用第一定律论证<strong>第一类永动机不可能</strong>（凭空生能违反 \(\Delta U = Q - W\)）；同时知道本板块<strong>不涉及</strong>反应方向 / 可逆性 / 熵 —— 这些留给第二定律基础及后续进阶板块</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>三个看上去无关的现象 ——</p>
+    <ul style="margin-left: 20px; margin-top: 4px; font-size: 0.9rem;">
+      <li><strong>摩擦双手</strong>会发热；<strong>烧水</strong>也会发热。这两件事<strong>微观上</strong>做的是同一件事吗？还是两种不同的传能方式？</li>
+      <li>一团气体<strong>被压缩</strong>（外界对它做功）<strong>+ 同时被加热</strong>（外界给它热量），最后它的<strong>内能</strong>变化怎么算？两个效应加在一起吗？</li>
+      <li>"<strong>永动机</strong>"为什么不可能？这和"能量守恒"到底有什么严格的逻辑关系？</li>
+    </ul>
+    <p style="margin-top: 6px;">本板块的任务，是用一个简洁的等式 <strong>\(\Delta U = Q - W\)</strong> 把"热"和"功"这两件看似不同的事情<strong>统一到内能变化</strong>这一件事上 —— 并由此理解为什么"能量守恒"在热力学场景里的具体形式就是它。</p>
+    <p class="hint">（提示：先承认"热"和"功"都是"能量传递的方式"，本身都<strong>不是</strong>"系统的某个状态"。内能 \(U\) 是状态，\(Q\) 与 \(W\) 是过程 —— 这个区分是本板块的关键。）</p>
+  </div>
+
+  <!-- ==================== Task Card 1 ==================== -->
+  <div class="task-card" id="task1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>第一定律的陈述 —— \(\Delta U = Q - W\)</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：从能量守恒的角度引出第一定律 \(\Delta U = Q - W\) → 理解符号约定（系统视角）→ 把它看作能量守恒在热力学系统的具体形式 → 由此论证第一类永动机不可能<br>
+        <strong>建议时长</strong>：50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-content">
+          <p>不查笔记，先答 ——</p>
+          <ul>
+            <li>一团气体（系统）和它周围的环境（外界）之间，能量可以通过<strong>哪些方式</strong>互相传递？</li>
+            <li>"内能" \(U\) 是<strong>系统当前状态</strong>的一个量。如果系统的状态变了（温度变了 / 体积变了），\(U\) 应该会怎么变？这个变化 \(\Delta U\) 应该<strong>来源于哪里</strong>？</li>
+            <li>常识告诉我们"能量不会凭空产生 / 凭空消失"。把这句话翻译到"系统 + 外界"这个模型，应该怎么说？</li>
+          </ul>
+          <div class="prereq-recap">
+            <strong>先回顾（核心理论根基 ⭐⭐）</strong>：上一板块 <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> Card 5 给出了内能的微观定义 ——<br>
+            <strong>\(U = \) 分子总动能 \(E_\text{动}\) \(+\) 分子总势能 \(E_\text{势}\)</strong>（其中 \(E_\text{动} \propto N \cdot T\)，\(E_\text{势}\) 取决于分子间距 / 三态结构）<br>
+            而且 \(U\) 是<strong>状态量</strong>（只依赖系统当前的 \(N, T, V, \) 三态等，与到达这个状态的路径无关）。<br>
+            正因为 \(U\) 是状态量，<strong>\(\Delta U = U_\text{末} - U_\text{初}\)</strong> 的差才有意义 —— 本板块的核心追问就是 \(\Delta U\) 由什么决定。如果对内能的微观定义不熟，先翻回去复习 5 分钟再回来。
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">第一定律的陈述 + 符号约定</span></div>
+        <div class="step-content">
+          <p>把上一步的直觉用一个等式精确化 ——</p>
+          <div class="derivation-block">
+            <div class="derivation-title">第一定律 — 从"能量守恒"到 ΔU = Q - W</div>
+            <div class="step-line"><strong>系统视角</strong>：把研究对象（如一团气体）框出来当作"<strong>系统</strong>"，框外面的一切叫"<strong>外界</strong>"。</div>
+            <div class="step-line"><strong>外界给系统能量的两种方式</strong>：① <strong>热量 \(Q\)</strong>（通过温度差驱动的能量流）；② <strong>做功 \(W\)</strong>（通过有方向的力作用驱动的能量流）。</div>
+            <div class="step-line"><strong>能量守恒</strong>：外界给系统的总能量 \(=\) 系统内能的变化 \(\Delta U\)。<br>但<strong>约定 \(W\) 是系统对外做的功</strong>（系统输出 → 外界），所以外界给系统的功是 \(-W\)。</div>
+            <div class="step-line"><strong>合起来</strong>: 内能变化 = 外界给的热 + 外界给的功 = \(Q + (-W) = Q - W\)。<br><strong>\(\boxed{\,\Delta U = Q - W\,}\)</strong> ⭐⭐ — 这就是<strong>热力学第一定律</strong>。</div>
+          </div>
+
+          <p><strong>符号约定（系统视角，本板块统一）</strong>:</p>
+          <table class="compare-table">
+            <tr><th>量</th><th>正方向（"+"）</th><th>负方向（"−"）</th></tr>
+            <tr><td>\(Q\) 热量</td><td>系统<strong>吸热</strong>（外界 → 系统）</td><td>系统<strong>放热</strong>（系统 → 外界）</td></tr>
+            <tr><td>\(W\) 做功</td><td>系统对外做功（系统 → 外界）<br>例：气体膨胀推活塞</td><td>外界对系统做功（外界 → 系统）<br>例：活塞压缩气体</td></tr>
+            <tr><td>\(\Delta U\) 内能变化</td><td>系统内能增大（\(U_\text{末} \gt U_\text{初}\)）</td><td>系统内能减小（\(U_\text{末} \lt U_\text{初}\)）</td></tr>
+          </table>
+
+          <div class="quote-block">
+            <strong>关于另一种符号约定</strong>：有的资料用 <strong>\(\Delta U = Q + W\)</strong>（约定 \(W\) 为外界对系统做的功）。两种约定在物理上完全等价，只是"\(W\)"指代的对象不同。<strong>本板块统一用 \(\Delta U = Q - W\)，\(W\) 是系统对外做的功</strong> —— 后续板块全部沿用。换约定时切记换 \(W\) 的符号。
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-q" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker>
+                <marker id="arrow-w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">第一定律能量流向：ΔU = Q − W</text>
+              <!-- 系统盒子 -->
+              <rect x="200" y="100" width="140" height="120" fill="#fafbff" stroke="#00409A" stroke-width="2.5" rx="10"></rect>
+              <text x="270" y="140" text-anchor="middle" font-size="13" font-weight="700" fill="#00409A">系统</text>
+              <text x="270" y="170" text-anchor="middle" font-size="14" font-weight="700" fill="#1d1d1f">U</text>
+              <text x="270" y="195" text-anchor="middle" font-size="10" fill="#34495e">（内能 = 状态量）</text>
+              <!-- Q 箭头(红, 自左指向系统, 吸热) -->
+              <line x1="80" y1="160" x2="190" y2="160" stroke="#c0392b" stroke-width="3" marker-end="url(#arrow-q)"></line>
+              <text x="135" y="148" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">Q (吸热为 +)</text>
+              <text x="135" y="180" text-anchor="middle" font-size="10" fill="#c0392b">外界 → 系统</text>
+              <!-- W 箭头(蓝, 自系统指向右, 系统对外做功) -->
+              <line x1="350" y1="160" x2="460" y2="160" stroke="#0055B8" stroke-width="3" marker-end="url(#arrow-w)"></line>
+              <text x="405" y="148" text-anchor="middle" font-size="12" font-weight="700" fill="#0055B8">W (系统对外做功为 +)</text>
+              <text x="405" y="180" text-anchor="middle" font-size="10" fill="#0055B8">系统 → 外界</text>
+              <!-- ΔU 等式 -->
+              <text x="270" y="260" text-anchor="middle" font-size="14" font-weight="700" fill="#8e44ad">ΔU = Q − W</text>
+              <text x="270" y="280" text-anchor="middle" font-size="10" fill="#6e6e73">(内能变化 = 外界给的热 − 系统对外做的功)</text>
+            </svg>
+            <div class="diagram-caption">图 1 · 第一定律的能量流向示意。中间蓝色方框为"系统"（内能为 U）；红色箭头表示外界传给系统的热量 Q（吸热为正）；蓝色箭头表示系统对外做功 W（系统对外做功为正）。三者由等式 ΔU = Q − W 连接。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 1 · 从能量守恒推 ΔU = Q − W</div>
+            <div class="tp-pause">"能量不会凭空产生 / 凭空消失"是一句很泛的话。用<strong>"系统 + 外界"</strong>的模型把它<strong>精确</strong>地写下来 —— 它应该长什么样？为什么具体形式是 \(\Delta U = Q - W\) 而不是 \(\Delta U = Q + W\)？</div>
+            <div class="tp-ask">能量守恒在系统视角下：外界传入系统的能量总和 = 系统内能增量。外界传入有 ① 热（量 \(Q\)）+ ② 做功（量 \(-W\)，因为我们约定 \(W\) 是<strong>系统对外</strong>做的功 → 外界对系统的功是 \(-W\)）。故 \(\Delta U = Q + (-W) = Q - W\)。如果换约定 \(W'\) 为<strong>外界对系统</strong>做的功，那等式就是 \(\Delta U = Q + W'\)。两种写法物理等价。</div>
+            <div class="tp-write">在纸上：① 画"系统 + 外界 + 两种能量流"的方框图；② 把"能量守恒"翻译成"外界给的总和 = 系统增量"；③ 代入 \(Q\) 和 \(-W\)（按本板块约定），推出 \(\Delta U = Q - W\)；④ 一句话总结"为什么 \(W\) 前面是减号"。</div>
+            <div class="tp-hint">卡住时：想"如果 \(W\) 是系统给外界做的功，那这部分能量是<strong>离开</strong>系统的。系统内能要因此<strong>减少</strong> —— 所以 \(W\) 前应该是负号。"</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">第一定律 = 能量守恒 + 第一类永动机不可能</span></div>
+        <div class="step-content">
+          <p>第一定律的<strong>真正深刻之处</strong>不是它"看上去是个公式"，而是它<strong>不是新原理</strong> —— 它是<strong>能量守恒</strong>在热力学系统场景下的具体形式。</p>
+          <ul>
+            <li>力学已经有"能量守恒"（动能 + 势能 + ... = const），但这是<strong>不带热</strong>的形式</li>
+            <li>"热"是 19 世纪初新加入物理的能量传递方式（焦耳的热功当量实验：摩擦把功转成等量的热）</li>
+            <li>热力学第一定律 = "能量守恒"<strong>把热也包含进来后</strong>的形式 —— \(\Delta U = Q - W\)</li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>"第一类永动机"为什么不可能</strong> —— 第一类永动机指"<strong>不消耗任何能量、却能持续对外做功</strong>"的机器。<br>
+            按第一定律：系统对外做功 \(W \gt 0\)，又"不消耗能量"意味着 \(Q = 0\) 且系统内能不变 \(\Delta U = 0\)。<br>
+            代入 \(\Delta U = Q - W\) → \(0 = 0 - W\) → \(W = 0\) —— 矛盾。<br>
+            所以<strong>第一类永动机违反热力学第一定律</strong>，物理上不可能。⭐
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 2 · 永动机的两种"不可能"</div>
+            <div class="tp-pause">第一类永动机违反第一定律。但还有"第二类永动机"，它<strong>不</strong>违反第一定律。它是什么？为什么也不可能？（不需要现在答全，留个引子）</div>
+            <div class="tp-ask">第二类永动机：从单一热源吸热<strong>全部</strong>转化为功（满足能量守恒：\(Q = W, \Delta U = 0\)）。它<strong>满足</strong>第一定律 → 第一定律拦不住它。但它违反<strong>第二定律</strong>（不可逆性 / 自发方向），故也不可能。这正是为什么需要第二定律 —— 第一定律只关心"能不能在数量上守恒"，不关心"<strong>朝哪个方向走</strong>"。后续第二定律基础板块会展开。</div>
+            <div class="tp-write">在纸上：① 写"第一类永动机"违反第一定律的逻辑链；② 写"第二类永动机"满足第一定律但还是不可能 → 故需要第二定律；③ 一句话：第一定律负责<strong>能量数量</strong>，第二定律负责<strong>能量方向</strong>。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">批判性审查（5 分钟）</span></div>
+        <div class="step-content">
+          <ul>
+            <li>第一定律里 \(U, Q, W\) 各是<strong>状态量</strong>还是<strong>过程量</strong>？为什么这个区分重要？</li>
+            <li>如果一个系统的内能 \(U\) 不变（\(\Delta U = 0\)），是不是说明 \(Q = 0\) 且 \(W = 0\)？</li>
+            <li>本板块只论"<strong>能量数量是否守恒</strong>"，不论"<strong>过程能否自发发生</strong>"。为什么这两件事不一样？</li>
+          </ul>
+          <div class="quote-block">
+            <strong>状态量 vs 过程量</strong>：<br>
+            · \(U\) 是<strong>状态量</strong>：只依赖系统当前状态（\(N, T, V, \) 三态等），写法是 \(U\)（不写 \(\Delta U\) 也有意义）<br>
+            · \(Q, W\) 是<strong>过程量</strong>：依赖"<strong>路径</strong>"（同样的始末态，走不同路径吸热和做功的量可以不同）。写法常用 \(Q, W\) 或 \(\delta Q, \delta W\)，不写 \(\Delta Q, \Delta W\)<br>
+            这个区分在<strong>盖斯定律</strong>（化学反应焓变 \(\Delta H\) 路径无关）和<strong>进阶板块状态函数</strong>会再次强调。
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 1 检查点</div>
+        <label data-key="fl-c1-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立写出 ΔU = Q − W 并说清三个量的符号约定（系统视角：吸热 Q &gt; 0、系统对外做功 W &gt; 0、内能增大 ΔU &gt; 0）</span></label>
+        <label data-key="fl-c1-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"第一定律 = 能量守恒在热力学系统的具体形式" —— 不是新原理</span></label>
+        <label data-key="fl-c1-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用 ΔU = Q − W 论证第一类永动机不可能（Q = 0, ΔU = 0 ⇒ W = 0 矛盾）</span></label>
+        <label data-key="fl-c1-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分内能 U（状态量）与热量 Q、功 W（过程量），并说出"为什么这个区分重要"</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：能量观 · 守恒律 · 系统建模 · 状态量 vs 过程量</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 2 ==================== -->
+  <div class="task-card" id="task2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>热传导 vs 做功 —— 两种"给能量"方式的微观区分</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：宏观上 \(Q\) 和 \(W\) 都是"外界传能给系统"的方式，最终都体现为 \(\Delta U\)。但<strong>微观上</strong>这两种方式有本质区别 —— 本卡用分子图像把它讲清<br>
+        <strong>建议时长</strong>：30-40 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5 分钟）</span></div>
+        <div class="step-content">
+          <p>两个场景，凭直觉答 ——</p>
+          <ul>
+            <li><strong>烧水</strong>: 把一壶 20°C 的水放在火上，温度升到 80°C。外界给水的<strong>能量</strong>是怎么"进入"水分子的？</li>
+            <li><strong>摩擦生热</strong>: 双手反复搓动，手心从冷到温到热。外界给手的<strong>能量</strong>又是怎么"进入"皮肤分子的？</li>
+            <li>这两种"传能"方式，<strong>微观图像</strong>看上去一样吗？</li>
+          </ul>
+          <p>给一个核心猜测：<strong>热传导 \(Q\) = 大量分子的"无序"撞击传能；做功 \(W\) = 整体的"有序"位移传能</strong>。后面把这点讲清。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">微观对比 — 无序 vs 有序</span></div>
+        <div class="step-content">
+          <div class="diagram-block">
+            <svg viewBox="0 0 600 360" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-vibr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c0392b"></path></marker>
+                <marker id="arrow-piston" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0055B8"></path></marker>
+              </defs>
+              <text x="300" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">热传导 vs 做功 — 微观对比</text>
+              <!-- 左半: 热传导 -->
+              <text x="150" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">热传导 (Q)</text>
+              <rect x="60" y="80" width="180" height="180" fill="#fbeaea" stroke="#c0392b" stroke-width="1.5" rx="6"></rect>
+              <rect x="65" y="85" width="85" height="170" fill="#f5c2c2" opacity="0.5"></rect>
+              <text x="107" y="100" text-anchor="middle" font-size="9" fill="#c0392b">高温侧</text>
+              <text x="190" y="100" text-anchor="middle" font-size="9" fill="#34495e">低温侧</text>
+              <circle cx="85" cy="135" r="5" fill="#c0392b"></circle>
+              <line x1="85" y1="135" x2="100" y2="125" stroke="#c0392b" stroke-width="1" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="120" cy="170" r="5" fill="#c0392b"></circle>
+              <line x1="120" y1="170" x2="105" y2="180" stroke="#c0392b" stroke-width="1" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="100" cy="210" r="5" fill="#c0392b"></circle>
+              <line x1="100" y1="210" x2="115" y2="200" stroke="#c0392b" stroke-width="1" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="135" cy="220" r="5" fill="#c0392b"></circle>
+              <line x1="135" y1="220" x2="125" y2="235" stroke="#c0392b" stroke-width="1" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="175" cy="140" r="5" fill="#2980b9"></circle>
+              <line x1="175" y1="140" x2="180" y2="135" stroke="#2980b9" stroke-width="0.8" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="210" cy="175" r="5" fill="#2980b9"></circle>
+              <line x1="210" y1="175" x2="205" y2="180" stroke="#2980b9" stroke-width="0.8" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="190" cy="215" r="5" fill="#2980b9"></circle>
+              <line x1="190" y1="215" x2="195" y2="210" stroke="#2980b9" stroke-width="0.8" marker-end="url(#arrow-vibr)"></line>
+              <circle cx="220" cy="230" r="5" fill="#2980b9"></circle>
+              <line x1="220" y1="230" x2="225" y2="225" stroke="#2980b9" stroke-width="0.8" marker-end="url(#arrow-vibr)"></line>
+              <text x="150" y="285" text-anchor="middle" font-size="11" fill="#c0392b">高温分子无规则振动剧烈</text>
+              <text x="150" y="302" text-anchor="middle" font-size="11" fill="#34495e">→ 撞击低温分子 → 传能</text>
+              <text x="150" y="325" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">"无序"传能</text>
+              <text x="150" y="342" text-anchor="middle" font-size="9" fill="#6e6e73">能量随机分散到各个方向</text>
+              <!-- 右半: 做功 -->
+              <text x="450" y="60" text-anchor="middle" font-size="13" font-weight="700" fill="#0055B8">做功 (W)</text>
+              <rect x="360" y="80" width="180" height="180" fill="#eaf2fb" stroke="#0055B8" stroke-width="1.5" rx="6"></rect>
+              <rect x="362" y="85" width="20" height="170" fill="#7f8c8d" stroke="#34495e" stroke-width="1"></rect>
+              <text x="372" y="76" text-anchor="middle" font-size="9" fill="#34495e">活塞</text>
+              <line x1="350" y1="170" x2="362" y2="170" stroke="#0055B8" stroke-width="3" marker-end="url(#arrow-piston)"></line>
+              <text x="345" y="158" text-anchor="end" font-size="10" fill="#0055B8">F</text>
+              <circle cx="410" cy="120" r="5" fill="#0055B8"></circle>
+              <line x1="410" y1="120" x2="430" y2="120" stroke="#0055B8" stroke-width="1.2" marker-end="url(#arrow-piston)"></line>
+              <circle cx="430" cy="155" r="5" fill="#0055B8"></circle>
+              <line x1="430" y1="155" x2="450" y2="155" stroke="#0055B8" stroke-width="1.2" marker-end="url(#arrow-piston)"></line>
+              <circle cx="450" cy="190" r="5" fill="#0055B8"></circle>
+              <line x1="450" y1="190" x2="470" y2="190" stroke="#0055B8" stroke-width="1.2" marker-end="url(#arrow-piston)"></line>
+              <circle cx="420" cy="225" r="5" fill="#0055B8"></circle>
+              <line x1="420" y1="225" x2="440" y2="225" stroke="#0055B8" stroke-width="1.2" marker-end="url(#arrow-piston)"></line>
+              <circle cx="475" cy="135" r="5" fill="#0055B8"></circle>
+              <line x1="475" y1="135" x2="495" y2="135" stroke="#0055B8" stroke-width="1.2" marker-end="url(#arrow-piston)"></line>
+              <circle cx="490" cy="210" r="5" fill="#0055B8"></circle>
+              <line x1="490" y1="210" x2="510" y2="210" stroke="#0055B8" stroke-width="1.2" marker-end="url(#arrow-piston)"></line>
+              <text x="450" y="285" text-anchor="middle" font-size="11" fill="#0055B8">活塞向右推 → 所有分子获得</text>
+              <text x="450" y="302" text-anchor="middle" font-size="11" fill="#34495e">同一方向的额外速度</text>
+              <text x="450" y="325" text-anchor="middle" font-size="11" font-weight="700" fill="#0055B8">"有序"传能</text>
+              <text x="450" y="342" text-anchor="middle" font-size="9" fill="#6e6e73">能量沿外力方向定向注入</text>
+            </svg>
+            <div class="diagram-caption">图 2 · 热传导（左）与做功（右）的微观图像对比。左图用红色与蓝色小圆表示高温侧与低温侧的分子，每个分子带短箭头表示各方向无规则振动；高温分子振动剧烈，与低温分子相撞将能量"分散"传过去。右图用灰色矩形表示压缩气体的活塞，活塞向右推动后，气体中的分子普遍获得一个朝向同方向（向右）的额外速度；能量沿外力方向"定向"注入。</div>
+          </div>
+
+          <p><strong>关键对比</strong>:</p>
+          <table class="compare-table">
+            <tr><th>方面</th><th>热传导 \(Q\)</th><th>做功 \(W\)</th></tr>
+            <tr><td>驱动</td><td>温度差</td><td>有方向的外力（活塞推 / 摩擦 / ...）</td></tr>
+            <tr><td>微观图像</td><td>分子<strong>无规则</strong>碰撞 → 传能</td><td>分子被<strong>同方向</strong>推 → 传能</td></tr>
+            <tr><td>能量"形态"</td><td>能量随机分散到所有方向</td><td>能量集中在一个方向上注入</td></tr>
+            <tr><td>宏观举例</td><td>烧水 / 太阳晒地球 / 火焰加热铁块</td><td>气体被压缩 / 摩擦生热 / 拉伸橡皮筋</td></tr>
+            <tr><td>对 \(\Delta U\) 的贡献</td><td>\(+Q\)（吸热）</td><td>\(-W\)（系统对外做功）或 \(+|W|\)（外界对系统做功）</td></tr>
+          </table>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 3 · 摩擦生热是 Q 还是 W？</div>
+            <div class="tp-pause">两块铁互相摩擦，最后都变热了。这个过程中，对每一块铁而言，<strong>能量传递的方式</strong>是热 \(Q\) 还是功 \(W\)？为什么？</div>
+            <div class="tp-ask">关键看"<strong>外界的能量是通过什么方式注入这块铁的</strong>"。摩擦时，对方的铁块以宏观<strong>有方向的力</strong>压在我这块铁上并相对滑动 → 我的表面分子被这个有方向的力<strong>定向推动</strong> → 这是<strong>做功 \(W\)</strong>。注意：<strong>不是热传导</strong>（不存在温度差先于摩擦发生的情形）。从宏观上看，"摩擦生热"是<strong>功转化为内能</strong>的过程：外界对铁做功 → 铁内能增加 → 表现为温度升高。一旦温度升高，<strong>之后</strong>铁可能向环境热传导散热（这是 \(Q\) 出去），但"摩擦让铁热起来"的过程本身是<strong>做功</strong>。</div>
+            <div class="tp-write">在纸上：① 写"摩擦生热"过程中 \(Q\) 和 \(W\) 的判断；② 用 \(\Delta U = Q - W\) 写出"对每一块铁"的方程（注意 \(W\) 是<strong>外界对它</strong>做的功 → 在系统对外做功约定下应取负号 \(W \lt 0\) → \(\Delta U = Q - W = 0 - (\text{负数}) = \text{正}\)）；③ 一句话总结"功 vs 热的判据：看微观上能量注入是<strong>有方向的</strong>还是<strong>无方向的</strong>"。</div>
+            <div class="tp-hint">"焦耳的热功当量实验"就是这个图像 — 焦耳用重物下落驱动桨叶搅动水，<strong>做功</strong>让水内能增大、温度升高。最终他得出"\(1\) 卡 \(\approx 4.18\) 焦耳" — 功和热可以等量互换。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">反思 — 两种方式宏观等价、微观不等价</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>宏观上</strong>: \(Q\) 和 \(W\) 都改变 \(\Delta U\)，对 \(U\) 的最终值贡献等价（差的只是符号）。第一定律 \(\Delta U = Q - W\) 把它们<strong>加在一起</strong></li>
+            <li><strong>微观上</strong>: 二者的"能量注入方式"完全不同 —— 无序 vs 有序</li>
+            <li>这就是为什么 \(Q\) 和 \(W\) 是<strong>独立的过程量</strong>，不能由内能反推（同样的 \(\Delta U\) 可以由多种 \(Q, W\) 组合实现）</li>
+            <li><strong>这个"微观差异"是后续板块的重要线索</strong>：第二定律会问"做功能否 100% 转化为热？热能否 100% 转化为做功？" —— 二者并不对称，这与微观图像中的"有序 / 无序"密切相关（细节留给后续板块）</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 2 检查点</div>
+        <label data-key="fl-c2-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立画"热传导 vs 做功"的微观对比图（无序碰撞 vs 有序定向）</span></label>
+        <label data-key="fl-c2-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能判别一个具体过程的能量传递方式是热 Q 还是功 W（如摩擦生热是功、火焰加热铁块是热、压缩气体是功）</span></label>
+        <label data-key="fl-c2-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说清"热 Q 与功 W 是独立的过程量" —— 同样的 ΔU 可以由多种 Q、W 组合实现</span></label>
+        <label data-key="fl-c2-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能预告"功与热的不对称性"留给第二定律 —— 第一定律对二者一视同仁，但微观图像已暗示后续差异</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：宏观-微观桥接 · 概念区分 · 物理图像</div>
+    </div>
+  </div>
+
+  <!-- ==================== Task Card 3 ==================== -->
+  <div class="task-card" id="task3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>4 种典型过程 + 综合应用</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：把 \(\Delta U = Q - W\) 应用到 4 类典型过程 —— 等容 / 等压 / 等温 / 绝热。每类的关键特征是"<strong>哪一个量被固定 / 哪一个量等于零</strong>"，由此简化第一定律的等式<br>
+        <strong>建议时长</strong>：50-60 分钟
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">4 类过程的概览</span></div>
+        <div class="step-content">
+          <p>对一团理想气体，常考的 4 种过程及第一定律的简化形式 ——</p>
+          <table class="compare-table">
+            <tr><th>过程</th><th>固定量</th><th>关键简化</th><th>第一定律变形</th></tr>
+            <tr><td><strong>等容</strong>（isochoric）</td><td>\(V\) 不变</td><td>\(W = p \cdot \Delta V = 0\)</td><td>\(\Delta U = Q\)（吸热全部变内能）</td></tr>
+            <tr><td><strong>等压</strong>（isobaric）</td><td>\(P\) 不变</td><td>\(W = p \cdot \Delta V\)</td><td>\(\Delta U = Q - p \cdot \Delta V\)</td></tr>
+            <tr><td><strong>等温</strong>（isothermal）</td><td>\(T\) 不变</td><td>对理想气体 \(\Delta U = 0\)</td><td>\(Q = W\)（吸热全部用来做功）</td></tr>
+            <tr><td><strong>绝热</strong>（adiabatic）</td><td>\(Q = 0\)（不吸不放热）</td><td>—</td><td>\(\Delta U = -W\)（做功全部来自内能消耗）</td></tr>
+          </table>
+
+          <div class="prereq-recap">
+            <strong>先回顾</strong>：等温过程下"理想气体 \(\Delta U = 0\)"这一步用到的是 <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> Card 5 的结论 ——<strong>理想气体的内能只依赖温度（动能项 \(\propto N \cdot T\)，势能项 \(\approx 0\) 因为气体分子间距 \(\gg r_0\)）</strong>。等温意味着 \(T\) 不变、\(N\) 不变 → \(U\) 不变 → \(\Delta U = 0\)。<br>
+            注意这一结论<strong>只对理想气体成立</strong>；实际气体在等温下 \(\Delta U\) 可能略不为零（因为有分子间相互作用势能），不在本板块范围。
+          </div>
+
+          <p><strong>4 过程的 P-V 图示意</strong>（每条线都从同一个起点出发，看终点跑去了哪里）:</p>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="arrow-pv-axis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1d1d1f"></path></marker>
+              </defs>
+              <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">4 过程 P-V 图（同一起点 A）</text>
+              <line x1="60" y1="320" x2="500" y2="320" stroke="#1d1d1f" stroke-width="1.5" marker-end="url(#arrow-pv-axis)"></line>
+              <line x1="80" y1="340" x2="80" y2="55" stroke="#1d1d1f" stroke-width="1.5" marker-end="url(#arrow-pv-axis)"></line>
+              <text x="510" y="325" font-size="12" font-weight="700" fill="#1d1d1f">V</text>
+              <text x="62" y="50" font-size="12" font-weight="700" fill="#1d1d1f">P</text>
+              <text x="65" y="340" font-size="10" fill="#6e6e73">O</text>
+              <circle cx="180" cy="200" r="5" fill="#1d1d1f"></circle>
+              <text x="172" y="194" text-anchor="end" font-size="11" font-weight="700" fill="#1d1d1f">A</text>
+              <text x="172" y="208" text-anchor="end" font-size="9" fill="#6e6e73">起点</text>
+              <line x1="180" y1="200" x2="180" y2="90" stroke="#c0392b" stroke-width="2.5"></line>
+              <circle cx="180" cy="90" r="4" fill="#c0392b"></circle>
+              <text x="160" y="80" text-anchor="end" font-size="11" font-weight="700" fill="#c0392b">等容 (V 不变)</text>
+              <text x="160" y="94" text-anchor="end" font-size="9" fill="#c0392b">P↑ → 终点</text>
+              <line x1="180" y1="200" x2="380" y2="200" stroke="#e67e22" stroke-width="2.5"></line>
+              <circle cx="380" cy="200" r="4" fill="#e67e22"></circle>
+              <text x="390" y="196" font-size="11" font-weight="700" fill="#e67e22">等压 (P 不变)</text>
+              <text x="390" y="210" font-size="9" fill="#e67e22">V↑ → 终点</text>
+              <path d="M 180,200 Q 220,250 280,280 Q 350,300 440,310" fill="none" stroke="#27ae60" stroke-width="2.5"></path>
+              <circle cx="440" cy="310" r="4" fill="#27ae60"></circle>
+              <text x="350" y="265" font-size="11" font-weight="700" fill="#27ae60">等温 (PV = const)</text>
+              <text x="350" y="279" font-size="9" fill="#27ae60">膨胀 V↑ P↓ → 终点</text>
+              <path d="M 180,200 Q 200,250 230,290 Q 270,315 330,318" fill="none" stroke="#8e44ad" stroke-width="2.5" stroke-dasharray="6,3"></path>
+              <circle cx="330" cy="318" r="4" fill="#8e44ad"></circle>
+              <text x="450" y="118" font-size="10" fill="#34495e">说明:</text>
+              <text x="450" y="132" font-size="9" fill="#c0392b">━ 等容 (垂直)</text>
+              <text x="450" y="146" font-size="9" fill="#e67e22">━ 等压 (水平)</text>
+              <text x="450" y="160" font-size="9" fill="#27ae60">━ 等温 (双曲)</text>
+              <text x="450" y="174" font-size="9" fill="#8e44ad">┅ 绝热 (更陡)</text>
+            </svg>
+            <div class="diagram-caption">图 3 · 4 过程的 P-V 图（同一起点 A 出发）。红色垂直线 = 等容过程（V 不变，沿垂直方向移动）；橙色水平线 = 等压过程（P 不变，沿水平方向移动）；绿色曲线 = 等温过程（PV = const 双曲线，自 A 向右下方走）；紫色虚线 = 绝热过程（PV<sup>γ</sup> = const，γ &gt; 1，所以绝热膨胀比等温膨胀压强下降更快、曲线更陡）。同样从 A 出发膨胀（V 增大），等温终点 P 下降较少，绝热终点 P 下降较多。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">4 过程的物理图像 + 一题一例</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 4 · 等容加热</div>
+            <div class="tp-pause">把一团气体装在<strong>刚性容器</strong>（V 不能变）里加热。这是什么过程？外界给的能量都跑哪去了？\(\Delta U\) 和 \(Q\) 什么关系？</div>
+            <div class="tp-ask">等容过程：\(V = \) const → \(\Delta V = 0\) → \(W = p \cdot \Delta V = 0\) → 第一定律变为 <strong>\(\Delta U = Q\)</strong>。<br>物理图像：刚性容器装气体，吸收的热量<strong>全部</strong>变成内能（分子动能增大 → 温度升高）。这是 4 过程中"最简单"的一个。</div>
+            <div class="tp-write">在纸上：① 写出等容过程的特征 \(V = \) const；② 由 \(W = p \cdot \Delta V\) 推出 \(W = 0\)；③ 代回 \(\Delta U = Q - W\) → \(\Delta U = Q\)；④ 用一句话总结物理图像。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 5 · 等压膨胀</div>
+            <div class="tp-pause">气体被压在<strong>无重活塞</strong>下方，外界压强是常数 \(p\)。加热气体，活塞被推起来 \(\Delta V\)。这是什么过程？\(\Delta U\)、\(Q\)、\(W\) 各是什么？</div>
+            <div class="tp-ask">等压过程：\(P = \) const。<strong>气体顶活塞做功的推导</strong> —— 活塞底面积 \(A\)，被推位移 \(\Delta x\)。气体对活塞施压力 \(F = p \cdot A\)（外压恒等于气压 \(p\)）→ 做功 \(W = F \cdot \Delta x = p \cdot A \cdot \Delta x\)。注意到 \(A \cdot \Delta x = \Delta V\)（活塞扫过的体积），故 <strong>\(W = p \cdot \Delta V\)</strong>。几何上 = P-V 图中"等压过程线"下方那块矩形的面积。<br>代回第一定律 → <strong>\(\Delta U = Q - p \cdot \Delta V\)</strong>。物理图像：吸收的热量<strong>一部分</strong>变成内能（温度升高），<strong>另一部分</strong>用来对外做膨胀功（顶活塞）。<br>注意这里 \(\Delta U \lt Q\)（因为有一部分给了功）— 与等容（\(\Delta U = Q\)）相比，加同样的热温度升得少一些。</div>
+            <div class="tp-write">在纸上：① 自己推一遍 \(W = p \cdot \Delta V\)（从 \(F = pA\)、\(W = F \cdot \Delta x\) 推出）；② 写第一定律的等压形式；③ 在 P-V 图上画"等压过程线下方矩形面积 = W"的几何意义；④ 用一句话总结"为什么等压加热温度升得比等容少"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 6 · 等温膨胀</div>
+            <div class="tp-pause">理想气体被装在<strong>导热壁</strong>容器里、与<strong>恒温浴</strong>接触。让它慢慢膨胀（推活塞），温度始终保持不变。这是什么过程？\(\Delta U\)、\(Q\)、\(W\) 什么关系？</div>
+            <div class="tp-ask">等温过程：\(T = \) const。对<strong>理想气体</strong>，内能只依赖温度 → \(\Delta U = 0\)。第一定律变为 <strong>\(Q = W\)</strong>。<br>物理图像：气体膨胀对外做功 \(W\) → 内能<strong>本应</strong>下降 → 但导热壁让恒温浴源源不断<strong>补充</strong>热量 \(Q\) 进来恰好抵消 → 温度保持不变。<br>核心：等温膨胀时"<strong>吸收的热量全部变成了对外做的功</strong>"（\(\Delta U = 0\) 是关键）。</div>
+            <div class="tp-write">在纸上：① 用"理想气体 \(U\) 只依赖 T"得 \(\Delta U = 0\)；② 代第一定律得 \(Q = W\)；③ 在 P-V 图上画等温膨胀的双曲线 + 在图下方面积标"= W = Q"。</div>
+            <div class="tp-hint">"理想气体内能只依赖 T"是关键。等温膨胀做功的具体公式 \(W = nRT \ln(V_2/V_1)\) 留给进阶板块（卡诺循环 / 微观推导）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 7 · 绝热膨胀</div>
+            <div class="tp-pause">气体被装在<strong>绝热壁</strong>容器里（不与外界交换热量），让它快速膨胀。这是什么过程？\(\Delta U\)、\(Q\)、\(W\) 什么关系？气体温度会怎么变？</div>
+            <div class="tp-ask">绝热过程：\(Q = 0\)。第一定律变为 <strong>\(\Delta U = -W\)</strong>（注意符号！）。<br>物理图像：膨胀时气体对外做功 \(W \gt 0\) → 内能<strong>必须减少</strong> \(|W|\) 来弥补（因为没有热量补充） → 内能减少 → <strong>温度下降</strong>。<br>反过来：<strong>绝热压缩</strong>（\(W \lt 0\) 外界对系统做功）→ 内能增加 → 温度升高。日常例子：自行车打气筒底部很烫（绝热压缩升温）；高山上空气稀薄、温度低（绝热膨胀降温）。</div>
+            <div class="tp-write">在纸上：① 写出 \(Q = 0\) → \(\Delta U = -W\)；② 解释为什么绝热膨胀温度下降；③ 画绝热曲线 P-V 图，比较与等温曲线的相对陡峭程度。<br><strong>绝热为什么比等温更陡（关键推理）</strong>：由 \(PV = nRT\) → \(P = nRT/V\)。等温过程 \(T\) 不变 → \(P\) 单纯随 \(V\) 反比下降；绝热膨胀<strong>\(V\) 增大的同时 \(T\) 也下降</strong>（如上所述）→ 分子分母双向作用让 \(P\) 下降得更多 → 绝热曲线在 P-V 图上比等温曲线更陡。</div>
+            <div class="tp-hint">绝热过程的精确方程 \(PV^\gamma = \) const（其中 \(\gamma = C_p / C_v\)）留给进阶<a href="carnot-cycle-task-cards.html">卡诺循环</a>板块推导。本板块只要求<strong>定性</strong>理解"绝热膨胀 → 内能减少 → 温度下降"。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">综合应用 — 复合过程</span></div>
+        <div class="step-content">
+          <p>真实场景常常是<strong>多个过程接连发生</strong>。第一定律由于是状态量等式（\(\Delta U\) 只依赖始末态），所以处理复合过程很方便：</p>
+
+          <div class="quote-block">
+            <strong>处理复合过程的 3 步法</strong>：<br>
+            ① 把过程<strong>拆成简单段</strong>（每段是等容 / 等压 / 等温 / 绝热中的一种）<br>
+            ② <strong>每段单独用第一定律</strong>算 \(\Delta U_i = Q_i - W_i\)<br>
+            ③ <strong>累加</strong>: \(\Delta U_\text{总} = \sum_i \Delta U_i\)、\(Q_\text{总} = \sum_i Q_i\)、\(W_\text{总} = \sum_i W_i\)<br>
+            注意 \(\Delta U_\text{总}\) 只看始末态（因为 U 是状态量），即使中间路径不同，总 \(\Delta U\) 相同。
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">思考点 8 · 综合实例 — 压缩后冷却</div>
+            <div class="tp-pause">一团气体先<strong>绝热压缩</strong>（外界对它做功 5 焦耳；注意按本板块约定 \(W\) 是<strong>系统对外</strong>做的功 → 外界对系统做功 5 J 等价于系统对外做功 \(W_1 = -5\) J）；然后<strong>等容冷却</strong>（系统放热 3 焦耳，按约定吸热为正 → 放热 \(Q_2 = -3\) J，且等容 \(W_2 = 0\)）。总过程的 \(\Delta U_\text{总}\)、\(Q_\text{总}\)、\(W_\text{总}\) 各是多少？</div>
+            <div class="tp-ask">第一段（绝热压缩）：\(Q_1 = 0, W_1 = -5\) J → \(\Delta U_1 = 0 - (-5) = +5\) J。<br>第二段（等容冷却）：\(Q_2 = -3\) J, \(W_2 = 0\) → \(\Delta U_2 = -3 - 0 = -3\) J。<br>累加：\(\Delta U_\text{总} = +5 + (-3) = +2\) J；\(Q_\text{总} = 0 + (-3) = -3\) J；\(W_\text{总} = -5 + 0 = -5\) J。<br>验证：\(\Delta U_\text{总} = Q_\text{总} - W_\text{总} = -3 - (-5) = +2\) J ✓ 与逐段累加一致。<br>物理结论：气体最终内能增加了 2 焦耳，过程中净吸热 -3 焦耳（实际放热 3 焦耳），外界对它做功 5 焦耳。</div>
+            <div class="tp-write">在纸上：① 算每段 \(\Delta U_i\)；② 累加得总；③ 用第一定律对总过程做一次验证（应该与累加结果一致 — 因为 U 是状态量）。</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">边界 — 本板块到哪里为止</span></div>
+        <div class="step-content">
+          <ul>
+            <li><strong>不引入</strong>: 反应方向 / 自发性 / 不可逆性 / 熵 \(S\) — 这些留给<strong>第二定律基础</strong>板块（待建）</li>
+            <li><strong>不引入</strong>: 卡诺循环效率 \(\eta = 1 - T_2/T_1\) 的严格推导 / 状态函数概念的形式化 / 焓 \(H = U + PV\) — 这些是<strong>进阶</strong>板块的内容</li>
+            <li><strong>本板块完成的</strong>: 用 \(\Delta U = Q - W\) 这一个等式串起 4 个典型过程的分析框架。这是后续所有热力学板块的<strong>计算基础</strong></li>
+          </ul>
+
+          <div class="quote-block">
+            <strong>下游连接</strong>: 本板块的 \(\Delta U = Q - W\) 是<strong>整个热力学大主题的算式基石</strong>。后续：
+            <ul style="margin-top: 6px;">
+              <li>第二定律基础板块: 在 \(\Delta U = Q - W\) 之外加"方向"判据</li>
+              <li>盖斯定律: 引入焓 \(H = U + PV\) 后用 \(\Delta H = Q_p\)（等压过程）做化学反应能量分析</li>
+              <li>进阶 卡诺循环 / 状态函数 / 熵 / 焓: 用第一定律为基础推导更深的结论</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="checkpoint">
+        <div class="checkpoint-title">✓ Card 3 检查点</div>
+        <label data-key="fl-c3-1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能独立画 4 过程的 P-V 图（同一起点出发 → 等容垂直 / 等压水平 / 等温双曲 / 绝热更陡）</span></label>
+        <label data-key="fl-c3-2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能默写 4 过程下第一定律的简化形式（等容 ΔU = Q / 等压 ΔU = Q − pΔV / 等温 Q = W / 绝热 ΔU = −W）</span></label>
+        <label data-key="fl-c3-3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释绝热膨胀为什么温度下降（Q = 0 → 做功消耗内能）+ 绝热压缩为什么温度升高</span></label>
+        <label data-key="fl-c3-4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用"3 步法"处理复合过程（拆段 + 各段算 + 累加），并验证总 ΔU 与始末态一致</span></label>
+        <label data-key="fl-c3-5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出本板块的<strong>边界</strong> —— 不涉及反应方向 / 熵 / 焓 / 卡诺效率，这些留给后续板块</span></label>
+      </div>
+      <div class="literacy-tag">素养字段：过程分析 · 公式应用 · 物理建模 · 多步骤问题分解</div>
+    </div>
+  </div>
+
+  <!-- ==================== 学习产出要求 ==================== -->
+  <div class="card">
+    <h2 class="section-title">学习产出要求</h2>
+    <table class="info-table">
+      <tr><td>手写推导稿</td><td>A4 纸手写完成 3 件事：(1) Card 1 思考点 1：从能量守恒推 \(\Delta U = Q - W\) 的完整逻辑链（含画系统+外界方框图 + 符号约定的推理）；(2) Card 3 思考点 4-7：4 过程下第一定律的简化形式的完整代入；(3) Card 3 思考点 8：综合实例的累加过程。</td></tr>
+      <tr><td>学习反思日志</td><td>200-300 字。回答：① "热"和"功"在宏观第一定律里<strong>形式上对称</strong>（都进入同一个等式 \(\Delta U = Q - W\)，都是改变 \(\Delta U\) 的方式），但微观上是不同的图像（无序传能 vs 有序定向）—— 这个"宏观对称、微观不对称"的体验给你的物理思维带来什么启发？② "第一定律 = 能量守恒"的认识是怎么改变你对"守恒律"的看法的？</td></tr>
+      <tr><td>自评清单</td><td>所有 3 张卡的 checkpoint 都勾完。重点确认 Card 1（公式 + 符号约定）和 Card 3（4 过程默写）—— 这两条是后续板块的强依赖。</td></tr>
+      <tr><td>深度口试预约</td><td>与学科导师约 15-20 分钟口试，准备用 <strong>3 分钟</strong> 清晰说出"第一定律为什么不是新原理，而是能量守恒在热力学场景的具体形式"。</td></tr>
+    </table>
+    <div class="quote-block" style="margin-top: 14px;">
+      <strong>提示</strong>：本板块的关键产出是<strong>手写推导稿</strong>（公式推导 + 4 过程 + 复合过程）。\(\Delta U = Q - W\) 是后续所有热力学板块的<strong>共同语言</strong> —— 必须自己写一遍、用一遍、有手感。
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <div class="bottom-nav">
+    <a href="index.html">⬅ 返回主页</a>
+    <a href="basic-mock-check.html">📝 基础检测</a>
+    <a href="basic-fluency-test.html">📈 熟练度检测</a>
+    <a href="basic-oral-exam.html">🎤 深度口试</a>
+  </div>
+
+  <div class="footer">
+    蓝色诺瓦学院 · 物理 + 化学 · 热力学大主题 · 热力学第一定律（基础模块 · 2026-06-09 重做）
+  </div>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (typeof renderMathInElement !== "undefined") {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "\\[", right: "\\]", display: true },
+        { left: "\\(", right: "\\)", display: false }
+      ],
+      throwOnError: false
+    });
+  }
+  restoreCheckboxes();
+});
+function toggleCard(header) {
+  var body = header.nextElementSibling;
+  if (body.classList.contains('collapsed')) {
+    body.classList.remove('collapsed');
+    header.classList.remove('collapsed');
+  } else {
+    body.classList.add('collapsed');
+    header.classList.add('collapsed');
+  }
+}
+var STORAGE_KEY = 'task-cards-first-law-checkpoints';
+function getCheckboxState() {
+  try { var data = localStorage.getItem(STORAGE_KEY); return data ? JSON.parse(data) : {}; }
+  catch (e) { return {}; }
+}
+function saveCheckbox(checkbox) {
+  var label = checkbox.closest('label');
+  var key = label.getAttribute('data-key');
+  if (!key) return;
+  var state = getCheckboxState();
+  state[key] = checkbox.checked;
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  if (checkbox.checked) { label.classList.add('checked'); } else { label.classList.remove('checked'); }
+}
+function restoreCheckboxes() {
+  var state = getCheckboxState();
+  var labels = document.querySelectorAll('.checkpoint label[data-key]');
+  labels.forEach(function(label) {
+    var key = label.getAttribute('data-key');
+    if (state[key]) {
+      var cb = label.querySelector('input[type="checkbox"]');
+      if (cb) { cb.checked = true; label.classList.add('checked'); }
+    }
+  });
+}
+</script>
+</body>
+</html>

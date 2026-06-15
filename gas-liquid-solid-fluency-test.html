@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理想气体的状态方程 · 熟练度检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 580px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.composite { background: #ede7f6; color: #4527a0; font-weight: 600; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; white-space: pre-wrap; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; min-height: 160px; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-feedback.partial { border-left-color: #e67e22; background: #fff7e8; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-result.partial { color: #e67e22; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-knowledge { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-approach  { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-solution  { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .q-reflection { margin-top: 18px; padding: 18px 22px; background: linear-gradient(135deg, #fef9e7, #fff3e0); border-left: 4px solid #d4af37; border-radius: 8px; }
+  .q-reflection-title { font-weight: 600; color: #b66100; margin-bottom: 12px; font-size: 14px; }
+  .q-reflection ol { padding-left: 22px; margin-bottom: 12px; font-size: 13px; color: #5a3a1a; }
+  .q-reflection ol li { margin: 4px 0; }
+  .q-reflection-input { width: 100%; border: 1px solid #fce4a8; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: white; min-height: 100px; }
+  .q-reflection-input:focus { outline: none; border-color: #d4af37; background: #fffbf0; }
+  .q-reflection-hint { font-size: 12px; color: #b66100; margin-top: 6px; font-style: italic; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .kp-section { background: #f0f7ff; border: 1px solid #cfe0f5; border-radius: 8px; padding: 16px 20px; margin: 18px auto; max-width: 720px; text-align: left; font-size: 13px; }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 600; color: #0055B8; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .kp-toggle::after { content: '▼'; font-size: 10px; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 14px; }
+  .kp-intro { background: #fef9e7; border-left: 3px solid #d4af37; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.8; color: #5a3a1a; }
+  .kp-intro strong { color: #b66100; }
+  .kp-item { background: white; border-radius: 8px; padding: 14px 18px; margin: 12px 0; border-left: 4px solid #0055B8; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #ecf0f1; }
+  .kp-item .kp-no { background: #0055B8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; }
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 15px; color: #00409A; }
+  .kp-item .kp-freq { background: #fdeaea; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .kp-item .kp-note { color: #7f8c8d; font-size: 12px; font-style: italic; margin-bottom: 8px; }
+  .kp-item .kp-section-label { font-weight: 600; color: #00409A; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 13px; line-height: 1.85; color: #2c3e50; }
+  .kp-item .kp-list li { margin: 3px 0; }
+  .kp-item .kp-list li strong { color: #c0392b; }
+  .kp-item .kp-revisit { font-size: 12px; color: #0055B8; margin-top: 10px; padding: 6px 10px; background: #e8f0fe; border-radius: 4px; }
+  .kp-footer { text-align: center; padding: 12px; color: #27ae60; font-weight: 600; font-size: 14px; }
+  .mastery-map { background: #fafbfc; border-radius: 8px; padding: 16px 20px; margin: 18px 0; text-align: left; }
+  .mastery-map h3 { font-size: 14px; color: #00409A; margin-bottom: 12px; }
+  .mastery-row { display: grid; grid-template-columns: 48px 1fr 60px 100px; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; }
+  .mastery-row.correct { background: #f1f8f4; border-left: 3px solid #27ae60; }
+  .mastery-row.partial { background: #fff7e8; border-left: 3px solid #e67e22; }
+  .mastery-row.wrong { background: #fdf2f0; border-left: 3px solid #c0392b; }
+  .mastery-row .m-tid { font-weight: 700; color: #00409A; font-size: 13px; }
+  .mastery-row .m-title { color: #2c3e50; }
+  .mastery-row .m-status { font-weight: 700; text-align: center; font-size: 18px; }
+  .mastery-row .m-status.correct { color: #27ae60; }
+  .mastery-row .m-status.partial { color: #e67e22; }
+  .mastery-row .m-status.wrong { color: #c0392b; }
+  .mastery-row .m-pct { text-align: right; color: #5a6c7d; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 4px; font-size: 12px; }
+  .mastery-row .m-revisit a { color: #0055B8; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 理想气体的状态方程 &raquo;
+  <strong>理想气体的状态方程 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<header class="page-header">
+  <h1>理想气体的状态方程 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(20 题池, 每次随机抽 5 题) · 同高考题型(选择 + 综合大题) · 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 选择(单选) / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考)</li>
+    <li>通过 ≥ 70 分(已具备纸笔熟练度检测备考水平);荣誉 ≥ 90 分(通过可能性高)</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards 和 mock-check</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea,<strong>本地保存, 不判分</strong>)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+    <li>可点『重新抽题』再做, 抽到不同变体训练;反思按变体 ID 保留</li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存, 跨次自动恢复。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #0055B8;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="gas-liquid-solid-task-cards.html">📖 返回学习任务卡</a>
+  <a href="gas-liquid-solid-mock-check.html">📝 基础检测练习</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 理想气体的状态方程 · 熟练度检测 · fluency-test Skill v0.1.3</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'BOYLE-LAW':                       '玻意耳定律 \\(PV=\\)常数(等温)',
+  'CHARLES-LAW':                     '查理定律 \\(P/T=\\)常数(等容)',
+  'GAY-LUSSAC-LAW':                  '盖-吕萨克定律 \\(V/T=\\)常数(等压)',
+  'KELVIN-CELSIUS-RELATION':         '开尔文与摄氏度的关系',
+  'ABSOLUTE-ZERO-EXTRAPOLATION':     '绝对零度外推由来',
+  'IDEAL-GAS-EQUATION':              '理想气体状态方程 \\(PV=nRT\\)',
+  'GAS-CONSTANT-R':                  '普适气体常数 \\(R=8.314\\) J/(mol·K)',
+  'COMBINED-GAS-EQUATION':           '结合方程 \\(P_1V_1/T_1=P_2V_2/T_2\\)',
+  'BOYLE-MICRO':                     '玻意耳定律的微观机制',
+  'CHARLES-MICRO':                   '查理定律的微观机制',
+  'IDEAL-GAS-ASSUMPTIONS':           '理想气体 2 假设',
+  'SURFACE-TENSION':                 '表面张力的微观本质',
+  'LIQUID-SURFACE-CONTRACTS':        '液面收缩倾向',
+  'WETTING-CRITERION':               '浸润判据(液-固 vs 液-液引力比较)',
+  'CAPILLARY-EFFECT':                '毛细现象',
+  'CRYSTAL-CHARACTERISTICS':         '晶体特征(规则点阵 + 固定熔点 + 解理 + 各向异性)',
+  'AMORPHOUS-CHARACTERISTICS':       '非晶体特征(无规则 + 渐变软化 + 各向同性 + 亚稳态)',
+  'CRYSTAL-MELT-MECHANISM':          '晶体固定熔点的微观机制(均一束缚同时冲破)',
+  'SINGLE-VS-POLY-CRYSTAL':          '单晶 vs 多晶',
+  'ANISO-VS-ISOTROPIC':              '各向异性 vs 各向同性',
+  'UNIFIED-MICRO-EXPLAINS-3-STATES': '一套微观工具解释三态',
+  'EXPERIMENT-TO-EQUATION':          '从实验综合到方程',
+  'BOUNDARY-NO-IDEAL-GAS-DERIVATION':'边界:不推严格压强公式'
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考物理的<strong>气体状态方程</strong>、<strong>液体表面性质</strong>、<strong>固体晶体与非晶体</strong>三大块内容,也是化学反应中气体计算的基础。属于<strong>微观-宏观桥接</strong>能力 — 高考中既考概念辨析(如开尔文 vs 摄氏度 / 浸润 vs 不浸润 / 晶体 vs 非晶体),又考定量计算(\\(PV=nRT\\) 综合应用)。建议做下面熟练度模拟练习之前,先对照下方 6 个考察点自查,不熟的回到学习任务卡或基础检测复习。',
+  topics: [
+    { no:'一', title:'气体三定律 + 开尔文标度 + 绝对零度', examFreq:'选择题高频', examNote:'每年必出',
+      examMethods:[
+        '选择题:三定律的等式形式辨识(\\(PV\\)=常数 / \\(P/T\\)=常数 / \\(V/T\\)=常数)',
+        '辨析题:为什么查理 / 盖-吕萨克必须用开尔文标度(过原点)',
+        '推断题:由查理定律外推绝对零度'
+      ],
+      mustMaster:[
+        '玻意耳定律 \\(PV=\\)常数(等温);查理定律 \\(P/T=\\)常数(等容);盖-吕萨克定律 \\(V/T=\\)常数(等压)',
+        '开尔文 \\(T_{\\text{K}}=t_{\\text{°C}}+273.15\\),查理 / 盖-吕萨克的『过原点』只在开尔文成立',
+        '绝对零度 \\(T=0\\) K \\(\\Leftrightarrow t=-273.15\\)°C \\(\\Leftrightarrow\\) 经典图像下分子热运动停止',
+        '<strong>三定律分别约束 1 个变量后剩余 2 个变量关系</strong>'
+      ],
+      prepNotes:[
+        '高考最常见错点:把摄氏度直接代入 \\(P/T\\) 或 \\(V/T\\)(必须先换开尔文)',
+        '记住三定律的"约束 + 剩余 2 变量关系"结构, 比死记公式更稳'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 3 + 基础检测 T1 复习' },
+
+    { no:'二', title:'理想气体状态方程 \\(PV=nRT\\) + 结合方程综合计算', examFreq:'综合大题高频', examNote:'近年每年出',
+      examMethods:[
+        '综合大题:已知 \\(P, V, T, n\\) 任意 3 个求第 4 个',
+        '综合大题:结合方程 \\(P_1V_1/T_1=P_2V_2/T_2\\) 求 3 量同时变化时的初末态',
+        '辨析题:普适气体常数 \\(R=8.314\\) J/(mol·K) 的"普适"含义'
+      ],
+      mustMaster:[
+        '\\(PV=nRT\\) — 三定律 + 阿伏伽德罗定律的实验综合',
+        '\\(R=8.314\\) J/(mol·K), 对所有理想气体相同',
+        '结合方程 \\(P_1V_1/T_1=P_2V_2/T_2\\) — 一定量气体常用',
+        '<strong>标准状态 1 mol 体积 \\(\\approx\\) 22.4 L</strong>',
+        'T 必须用开尔文(否则 R 不普适)'
+      ],
+      prepNotes:[
+        '高考综合题套路:先列 \\(PV=nRT\\) 或结合方程, 再换算单位 + 代数运算',
+        '单位换算是高考失分点(Pa vs atm / L vs m³ / kJ vs J),做题前必先把单位统一'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 4 + 基础检测 T2 复习' },
+
+    { no:'三', title:'气体三定律微观机制 + 理想气体 2 假设', examFreq:'选择题中频 + 综合中频',
+      examNote:'考微观图像理解',
+      examMethods:[
+        '选择题:玻意耳 / 查理 / 盖-吕萨克的微观机制辨析',
+        '辨析题:理想气体 2 假设的内容 + 适用范围',
+        '综合题:用微观图像解释气体压强变化'
+      ],
+      mustMaster:[
+        '玻意耳微观:等温 → 平均动能不变, 数密度变 → 撞壁频率变 → 压强反比',
+        '查理微观:等容 → 数密度不变, 温度变 → 平均动能变 → 双重效应(力 + 频率)',
+        '理想气体 2 假设:① 分子大小可忽略(点状) ② 分子间无相互作用(碰撞除外)',
+        '<strong>常温常压下假设满足良好;高压低温偏离 → 需范德瓦尔斯修正(留进阶)</strong>'
+      ],
+      prepNotes:[
+        '高考最常见错点:把"撞壁力"和"撞壁频率"二者效应混淆',
+        '理解"实验综合 vs 公理"区分:\\(PV=nRT\\) 是实验综合,不是新原理'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 3 + STEP 4 + 基础检测 T3 复习' },
+
+    { no:'四', title:'液体表面张力 + 浸润 + 毛细现象', examFreq:'选择题中频', examNote:'考微观-宏观解释',
+      examMethods:[
+        '选择题:表面张力的微观本质(表面分子少邻居能量高)',
+        '辨析题:浸润是<strong>液-固组合属性</strong>(水浸润玻璃 vs 水银不浸润玻璃)',
+        '推断题:毛细现象 — 浸润 → 上升, 不浸润 → 下降; 管越细越显著'
+      ],
+      mustMaster:[
+        '表面张力 = 表面分子比内部分子少了上方邻居引力 → 能量高 → 系统倾向最小化表面积',
+        '浸润判据:液-固引力 > 液-液引力 → 浸润(铺开);反之 → 不浸润(收缩成球)',
+        '毛细现象:浸润 → 液面凹 → 表面张力把液体『拉起』 → 上升;反之下降',
+        '<strong>"液滴呈球形"的能量最小化解释</strong>'
+      ],
+      prepNotes:[
+        '常见错点:把表面张力当作"液体本身属性"(实际反映液-液引力)',
+        '理解浸润是<strong>组合属性</strong>(同液不同固表现不同)是关键'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 + 基础检测 T4 复习' },
+
+    { no:'五', title:'晶体 vs 非晶体 + 固定熔点机制', examFreq:'选择题高频', examNote:'近年高频考点',
+      examMethods:[
+        '选择题:晶体 4 大特征 vs 非晶体 4 大特征辨识',
+        '辨析题:晶体为何有固定熔点(规则点阵 → 束缚均一 → 同时冲破)',
+        '推断题:玻璃 / 沥青等是晶体还是非晶体'
+      ],
+      mustMaster:[
+        '<strong>晶体 4 特征</strong>:规则点阵 + 固定熔点 + 解理性 + 单晶各向异性',
+        '<strong>非晶体 4 特征</strong>:无规则 + 渐变软化 + 各向同性 + 亚稳态',
+        '<strong>晶体固定熔点的微观机制</strong>:规则点阵 → 所有分子束缚均一 → 加热到某 T 同时冲破',
+        '常见物质:食盐 / 石英 / 金属 = 晶体; 玻璃 / 塑料 / 沥青 = 非晶体'
+      ],
+      prepNotes:[
+        '高考最常见错点:把"晶体 vs 非晶体"的 4 大特征记反',
+        '"亚稳态"是非晶体最深刻的性质 — 有可能(很慢)重结晶'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 3 STEP 2 + 基础检测 T5 复习' },
+
+    { no:'六', title:'单晶 vs 多晶 + 各向异性 vs 各向同性', examFreq:'选择题中频', examNote:'判断常见物体',
+      examMethods:[
+        '选择题:常见物体(水 / 玻璃 / 铁丝 / 云母片)的各向异性 / 同性判断',
+        '辨析题:单晶 vs 多晶的微观本质(取向一致 vs 取向随机)',
+        '推断题:多晶为何宏观各向同性(取向随机平均)'
+      ],
+      mustMaster:[
+        '<strong>单晶</strong>:整体规则 → 各向异性(单晶云母片 / 单晶硅 / 食盐颗粒)',
+        '<strong>多晶</strong>:大量小晶粒随机取向 → <strong>宏观</strong>各向同性(普通铁块 / 多晶硅)',
+        '<strong>非晶</strong>:无规则 → 各向同性(玻璃 / 塑料)',
+        '<strong>液体</strong>:也各向同性(分子运动均匀)',
+        '"微观结构 vs 宏观尺寸"独立(纳米晶可单晶, 大块可非晶)'
+      ],
+      prepNotes:[
+        '高考常考"日常物体的各向性"判断 — 必须区分单晶 / 多晶 / 非晶 / 液体',
+        '"宏观平均使方向性消失"是统计平均思维的范例'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 3 STEP 3 + 基础检测 T6 复习' }
+  ],
+  footer: '✓ 6 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1: { title:'气体三定律 + 开尔文 + 绝对零度', revisit:'回任务卡 Card 1 STEP 3 + 基础检测 T1 复习' },
+  T2: { title:'\\(PV=nRT\\) + 结合方程综合计算', revisit:'回任务卡 Card 1 STEP 4 + 基础检测 T2 复习' },
+  T3: { title:'三定律微观机制 + 理想气体假设', revisit:'回任务卡 Card 1 STEP 3 + STEP 4 + 基础检测 T3 复习' },
+  T4: { title:'气体方程 综合计算 + 微观解释', revisit:'回任务卡 Card 1 全卡 + 基础检测 T1-T3 复习' },
+  T5: { title:'液体表面 / 浸润 / 毛细 + 固体晶体 / 非晶 综合', revisit:'回任务卡 Card 2-3 + 基础检测 T4-T6 复习' }
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["BOYLE-LAW","CHARLES-LAW","GAY-LUSSAC-LAW"],
+      stem:"一定量气体, 下列对气体三定律的表述<strong>正确</strong>的是:",
+      options:{A:"玻意耳定律:等容下 \\(PV=\\)常数",B:"查理定律:等容下 \\(P/T=\\)常数(\\(T\\) 用开尔文)",C:"盖-吕萨克定律:等温下 \\(V/T=\\)常数(\\(T\\) 用摄氏度)",D:"三定律都适用于任何温度标度"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:气体三定律的约束条件 + 数学形式 + 温度标度。玻意耳:等温 \\(PV=\\)常数;查理:等容 \\(P/T=\\)常数(K);盖-吕萨克:等压 \\(V/T=\\)常数(K)。',
+        approach:'<strong>解题思路</strong>:逐项核对"约束变量 + 数学关系 + 温度标度"3 个要素 — 任一错则该项错。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 玻意耳是<strong>等温</strong>不是等容;<br>B 正确 — 查理:等容 \\(P/T=\\)常数(K);<br>C 错 — 盖-吕萨克是<strong>等压</strong>不是等温, 而且 T 必须开尔文;<br>D 错 — 三定律涉及 \\(P/T\\) 或 \\(V/T\\) 时必须用开尔文(过原点)。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["KELVIN-CELSIUS-RELATION","CHARLES-LAW"],
+      stem:"一定量气体在等容下从 27°C 升温到 327°C, 压强变化为原来的:",
+      options:{A:"原来的 \\(327/27 = 12.1\\) 倍",B:"原来的 \\(600/300 = 2.0\\) 倍",C:"不变(压强与摄氏度无关)",D:"原来的 \\(327-27 = 300\\) 倍"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:查理定律 \\(P_1/T_1 = P_2/T_2\\) 中 T 必须用开尔文。摄氏度换开尔文:\\(T = t + 273\\)(简化为整数)。',
+        approach:'<strong>解题思路</strong>:① 先把摄氏度换成开尔文;② 用查理定律比例 \\(P_2/P_1 = T_2/T_1\\)。',
+        solution:'<strong>详细解题</strong>:<br>\\(T_1 = 27 + 273 = 300\\) K;\\(T_2 = 327 + 273 = 600\\) K<br>\\(P_2/P_1 = T_2/T_1 = 600/300 = 2.0\\) 倍<br>故选 <strong>B</strong>。<br>排除:<br>A 用摄氏度直接除(错);<br>C 误以为压强与温度无关;<br>D 用摄氏度差(错)。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["ABSOLUTE-ZERO-EXTRAPOLATION","KELVIN-CELSIUS-RELATION"],
+      stem:"关于绝对零度的描述<strong>错误</strong>的是:",
+      options:{A:"绝对零度 \\(T=0\\) K \\(\\Leftrightarrow t=-273.15\\)°C",B:"由查理定律实验数据外推到 \\(P=0\\) 得到",C:"绝对零度对应分子停止运动(经典图像)",D:"绝对零度在实验室已经可以达到"},
+      answer:"D",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:绝对零度的物理本质 + 外推由来 + 不可达性(热力学第三定律)。',
+        approach:'<strong>解题思路</strong>:辨识"外推得到 vs 实验达到"是不同概念,绝对零度可外推但不可实际达到。',
+        solution:'<strong>详细解题</strong>:<br>A 正确;<br>B 正确 — 查理定律外推法;<br>C 正确(经典图像, 量子角度仍有零点能);<br>D 错 — <strong>绝对零度无法实际达到</strong>(热力学第三定律, 留进阶), 实验室目前记录约 \\(10^{-9}\\) K;<br>故选 <strong>D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"较难", exportIds:["BOYLE-LAW","CHARLES-LAW","GAY-LUSSAC-LAW"],
+      stem:"下图(题中省略)描述某理想气体过程, 已知初状态 (\\(P_1=2 \\times 10^5\\) Pa, \\(T_1=300\\) K), 末状态 (\\(P_2=10^5\\) Pa, \\(T_2=300\\) K), 体积变化 \\(V_2/V_1\\) 为:",
+      options:{A:"\\(V_2/V_1 = 1/2\\)",B:"\\(V_2/V_1 = 2\\)",C:"\\(V_2/V_1 = 1\\)(等温下体积不变)",D:"无法判断"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:玻意耳定律 — 等温下 \\(PV=\\)常数, 即 \\(P_1V_1 = P_2V_2\\), \\(V_2/V_1 = P_1/P_2\\)。',
+        approach:'<strong>解题思路</strong>:① 识别等温(\\(T_1 = T_2 = 300\\) K);② 应用玻意耳定律。',
+        solution:'<strong>详细解题</strong>:<br>等温过程, 由玻意耳定律 \\(P_1V_1 = P_2V_2\\)<br>\\(V_2/V_1 = P_1/P_2 = (2 \\times 10^5) / (10^5) = 2\\)<br>故选 <strong>B</strong>。<br>排除:<br>A 比颠倒;<br>C 误以为等温下体积不变(实际上压强变化时体积反比变化);<br>D 玻意耳定律给出明确关系, 可判断。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["IDEAL-GAS-EQUATION","GAS-CONSTANT-R"],
+      stem:"关于理想气体状态方程 \\(PV=nRT\\) 中各量的说法<strong>正确</strong>的是:",
+      options:{A:"\\(R\\) 不同气体不同, 须查表",B:"\\(R = 8.314\\) J/(mol·K), 对所有理想气体相同",C:"T 用摄氏度即可",D:"P 必须用 atm 单位"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:\\(R = 8.314\\) J/(mol·K), 普适气体常数, 对所有理想气体相同; T 必须用开尔文; P 用 Pa(SI 单位)。',
+        approach:'<strong>解题思路</strong>:逐项核对 R / T 单位 / P 单位的正确表述。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — R 对所有理想气体相同(普适);<br>B 正确;<br>C 错 — T 必须开尔文;<br>D 错 — P 用 Pa 是 SI 标准, atm 是辅助单位(若用 atm 则 R 数值改为 0.0821 L·atm/(mol·K))。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"中等", exportIds:["IDEAL-GAS-EQUATION"],
+      stem:"标准状态下(\\(P_0 = 1.013 \\times 10^5\\) Pa, \\(T_0 = 273.15\\) K), 1 mol 理想气体的体积约为:",
+      options:{A:"约 22.4 L",B:"约 2.24 L",C:"约 224 L",D:"约 1.0 L"},
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:标准状态下 1 mol 理想气体的体积 \\(V_m \\approx 22.4\\) L,是化学常用基线。',
+        approach:'<strong>解题思路</strong>:\\(V = nRT/P = (1 \\text{ mol}) \\times (8.314) \\times (273.15) / (1.013 \\times 10^5)\\)。',
+        solution:'<strong>详细解题</strong>:<br>\\(V = nRT/P = 8.314 \\times 273.15 / (1.013 \\times 10^5) \\approx 0.0224\\) m³ = 22.4 L<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"中等", exportIds:["COMBINED-GAS-EQUATION"],
+      stem:"结合方程 \\(P_1V_1/T_1 = P_2V_2/T_2\\) 的适用条件是:",
+      options:{A:"等温过程",B:"一定量气体(\\(n\\) 不变)",C:"等压过程",D:"任何情况"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:结合方程 = \\(PV=nRT\\) 在<strong>一定量气体</strong>(n 不变)下的初末态比较形式。',
+        approach:'<strong>解题思路</strong>:由 \\(PV=nRT\\) 得 \\(PV/T = nR\\), n 不变时 \\(nR =\\) 常数, 故 \\(PV/T\\) 在初末态相等。',
+        solution:'<strong>详细解题</strong>:<br>结合方程的导出:\\(PV=nRT \\Rightarrow PV/T = nR\\), 当 n 不变 → \\(nR\\) 是常数 → \\(P_1V_1/T_1 = P_2V_2/T_2\\)。<br>故适用条件是<strong>一定量气体</strong>。<br>排除:<br>A、C 是更严格的特殊情况(等温 / 等压都满足);<br>D 错 — 必须 n 不变。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"较难", exportIds:["COMBINED-GAS-EQUATION","IDEAL-GAS-EQUATION"],
+      stem:"一气球内 1 mol 气体, 初状态 \\(P_1=1.0 \\times 10^5\\) Pa, \\(V_1=20\\) L, \\(T_1=300\\) K。升至高空后压强降至 \\(P_2=0.5 \\times 10^5\\) Pa, 温度降至 \\(T_2=250\\) K。新体积 \\(V_2\\) 约为:",
+      options:{A:"约 16.7 L",B:"约 33.3 L",C:"约 20 L",D:"约 40 L"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:结合方程 \\(P_1V_1/T_1 = P_2V_2/T_2\\), 一定量气体, T 必须开尔文。',
+        approach:'<strong>解题思路</strong>:\\(V_2 = V_1 \\times (P_1/P_2) \\times (T_2/T_1)\\)。',
+        solution:'<strong>详细解题</strong>:<br>\\(V_2 = V_1 \\times (P_1/P_2) \\times (T_2/T_1)\\)<br>\\(= 20 \\times (1.0/0.5) \\times (250/300)\\)<br>\\(= 20 \\times 2.0 \\times 0.833 \\approx 33.3\\) L<br>故选 <strong>B</strong>。<br>排除:<br>A P 比颠倒;<br>C 忽略变化;<br>D 漏算 \\(T_2/T_1\\) 的修正。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"中等", exportIds:["BOYLE-MICRO","CHARLES-MICRO"],
+      stem:"关于气体三定律的微观机制, 下列说法<strong>正确</strong>的是(严格相等判分):",
+      options:{A:"玻意耳定律(等温)微观:体积减小 → 分子数密度增大 → 撞壁频率增大 → 压强增大",B:"查理定律(等容)微观:温度升高 → 平均动能增大 → 单次撞壁力 + 撞壁频率同时增大 → 压强增大",C:"压缩气体压强增大是因为分子质量变大",D:"等容升温时分子数密度增大, 故压强增大",E:"理想气体压强 = 撞壁力 × 撞壁频率 / 单位时间"},
+      answer:["A","B","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:玻意耳微观(单一效应 · 频率) + 查理微观(双重效应 · 力 + 频率); 压强 = 力 × 频率 / 单位时间。',
+        approach:'<strong>解题思路</strong>:抓住"等温(T 不变 → 平均动能不变)"和"等容(V 不变 → 数密度不变)"的核心区分。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 玻意耳微观机制;<br>B 正确 — 查理微观, 双重效应;<br>C 错 — 压缩不改变分子质量;<br>D 错 — 等容下 V 不变, 数密度 \\(n_\\text{数}=N/V\\) 也不变(气体量也不变);<br>E 正确 — 气压的微观本质。<br>故选 <strong>A、B、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"中等", exportIds:["IDEAL-GAS-ASSUMPTIONS"],
+      stem:"关于理想气体的 2 大假设, 下列说法<strong>正确</strong>的是:",
+      options:{A:"分子大小可忽略, 即分子是点状",B:"分子之间无相互作用(碰撞瞬间除外)",C:"分子间总是吸引(任意 r 处)",D:"常温常压下理想气体假设满足良好",E:"高压低温下理想气体方程偏离, 需修正"},
+      answer:["A","B","D","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:理想气体 2 假设 + 适用范围。',
+        approach:'<strong>解题思路</strong>:理解 2 假设 — "点状 + 无相互作用(碰撞除外)"。注意"碰撞瞬间"修饰避免极端理解。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 假设 ①;<br>B 正确 — 假设 ②(注意"碰撞除外"修饰);<br>C 错 — F-r 曲线在 \\(r=r_0\\) 处合力 = 0, 在 \\(r>r_0\\) 时引力, 在 \\(r<r_0\\) 时斥力, 不是"任意 r 都吸引";理想气体假设是"无相互作用"而不是"总吸引";<br>D 正确 — 常温常压满足良好;<br>E 正确 — 高压低温偏离, 需范德瓦尔斯修正。<br>故选 <strong>A、B、D、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"较难", exportIds:["BOYLE-MICRO","CHARLES-MICRO","IDEAL-GAS-EQUATION"],
+      stem:"关于『\\(PV=nRT\\) 与微观机制的关系』, 下列说法<strong>正确</strong>的是:",
+      options:{A:"\\(PV=nRT\\) 是三定律 + 阿伏伽德罗定律的实验综合",B:"由 \\(PV=nRT\\), 可推出『等温下 V 增大 → P 减小』(玻意耳)",C:"由 \\(PV=nRT\\), 可推出『等容下 T 增大 → P 增大』(查理)",D:"\\(PV=nRT\\) 是从分子动理论严格推导出来的(本板块给出严格推导)",E:"\\(R\\) 与玻尔兹曼常数 \\(k\\) 的关系是 \\(R = N_A k\\)"},
+      answer:["A","B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:\\(PV=nRT\\) 的实验综合由来 + 与三定律的等价 + \\(R\\) 与 \\(k\\) 的关系(留进阶严格推导)。',
+        approach:'<strong>解题思路</strong>:辨识本板块是<strong>实验综合</strong>而非严格推导;严格推导留给进阶 · 微观推导板块。',
+        solution:'<strong>详细解题</strong>:<br>A 正确;<br>B 正确(由 \\(PV=nRT\\) 等温下 \\(nR T\\)=常数 → \\(PV\\)=常数);<br>C 正确(由 \\(PV=nRT\\) 等容下 \\(nR/V\\)=常数 → \\(P=cT\\));<br>D 错 — <strong>本板块</strong>给出的是实验综合形式, 严格推导留<strong>进阶 · 微观推导</strong>板块;<br>E 正确 — \\(R = N_A k\\) 把宏观普适常数与微观玻尔兹曼常数连接(本板块定性,详细留进阶)。<br>故选 <strong>A、B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["BOYLE-MICRO","CHARLES-MICRO","IDEAL-GAS-ASSUMPTIONS"],
+      stem:"<strong>综合辨析</strong>:下列说法<strong>正确</strong>的是:",
+      options:{A:"压强 = 撞壁力 × 撞壁频率, 是分子动理论给出的气压微观图像",B:"理想气体假设 ②『分子间无相互作用』意味着碰撞瞬间也无相互作用",C:"实际气体在高压下偏离 \\(PV=nRT\\), 因为分子大小变得不可忽略",D:"实际气体在低温下偏离 \\(PV=nRT\\), 因为分子间引力变得显著(动能不足以克服)",E:"绝对零度对应分子运动停止(经典图像), 这是分子动理论的边界声明之一"},
+      answer:["A","C","D","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:气压微观本质 + 理想气体假设的修饰("碰撞除外") + 偏离的两类原因 + 边界声明。',
+        approach:'<strong>解题思路</strong>:逐项辨识理想气体假设的<strong>例外</strong>修饰(碰撞除外)与<strong>边界</strong>条件(高压低温偏离的微观由来)。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 气压微观图像;<br>B 错 — 假设是"<strong>碰撞瞬间除外</strong>", 碰撞瞬间作用力极大(否则气体会塌陷);<br>C 正确 — 高压偏离的微观由来(分子大小相对总体积不可忽略);<br>D 正确 — 低温偏离的微观由来(动能不足以克服引力束缚);<br>E 正确 — 边界声明。<br>故选 <strong>A、C、D、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"中等", exportIds:["IDEAL-GAS-EQUATION","COMBINED-GAS-EQUATION","BOYLE-MICRO","CHARLES-MICRO"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:一气球内含一定量氢气, 初状态 \\(P_1=1.0 \\times 10^5\\) Pa, \\(V_1=10\\) L, \\(T_1=300\\) K。<br><br><strong>(1)</strong> 算气球内气体的物质的量 \\(n\\)(单位 mol, 用 \\(R=8.314\\) J/(mol·K));<br><strong>(2)</strong> 气球升至高空后压强降至 \\(P_2=0.5 \\times 10^5\\) Pa, 温度降至 \\(T_2=250\\) K, 算新体积 \\(V_2\\);<br><strong>(3)</strong> <strong>从微观角度</strong>解释为什么气球上升时体积增大(温度降低本应使体积减小, 但压强降一半使体积增大, 净效应是体积增加约 67%)。",
+      keywords:["mol","撞壁","数密度","平均动能"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 理想气体方程 \\(PV=nRT\\) 算 n;② 结合方程算 \\(V_2\\);③ 微观图像:压强 = 撞壁力 × 频率, 体积变化的微观本质。',
+        approach:'<strong>解题思路</strong>(3 小问分步):<br>① 由 \\(PV=nRT\\) 求 n;<br>② 由 \\(P_1V_1/T_1 = P_2V_2/T_2\\) 求 \\(V_2\\);<br>③ 用微观图像解释:压强降一半 → 撞壁频率需减半 → 体积翻一倍(玻意耳);温度降 → 平均动能降 → 撞壁力降。两者综合, 压强效应主导, 体积净增加。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 物质的量 n</strong>:<br>由 \\(PV=nRT\\),\\(n = PV/(RT)\\)<br>\\(= (1.0 \\times 10^5) \\times (10 \\times 10^{-3}) / (8.314 \\times 300)\\)<br>\\(\\approx 1000 / 2494 \\approx 0.401\\) mol。<br><br><strong>(2) 新体积 \\(V_2\\)</strong>:<br>由结合方程 \\(P_1V_1/T_1 = P_2V_2/T_2\\),\\(V_2 = V_1 \\times (P_1/P_2) \\times (T_2/T_1)\\)<br>\\(= 10 \\times (1.0/0.5) \\times (250/300)\\)<br>\\(= 10 \\times 2.0 \\times 0.833 \\approx 16.7\\) L<br>体积增大约 67%。<br><br><strong>(3) 微观角度解释</strong>(关键字命中):<br>气球升高时, 体积变化的微观本质是<strong>分子撞壁</strong>条件的变化:<br>· <strong>外部气压降低</strong>(\\(P_2 = 0.5 P_1\\)):气球内部需<strong>同样的内压</strong>抵消才能维持平衡 — 但温度降低让<strong>平均动能降低</strong>, 单次撞壁力降低。<br>· 为补偿: 气体<strong>膨胀</strong>使<strong>数密度</strong>减小,使内压降到与外压平衡。<br>· <strong>净效应</strong>:压强降一半的效应(体积翻一倍)主导;温度降的效应(体积稍降)较小;最终体积净增加 67%。<br>这是分子动理论"撞壁力 + 撞壁频率"二分法的具体应用。<br><br><strong>关键字命中</strong>:① "mol" / ② "撞壁" / ③ "数密度" / ④ "平均动能"<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"压强 = 撞壁力 × 频率"这个微观图像我能熟练运用吗?',
+        '为什么气球上升一定会膨胀?(单靠 \\(PV=nRT\\) 能否回答, 还是需要微观解释)',
+        '高考综合题中"气体压强变化的微观解释"我能写出哪些要点?',
+        '\\(PV=nRT\\) 和结合方程在熟练运用上有什么差别?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"较难", exportIds:["IDEAL-GAS-EQUATION","BOYLE-LAW","IDEAL-GAS-ASSUMPTIONS"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某科学家在 25°C(298 K)下做气体实验, 得到下列数据:某气体在 \\(P=1.0 \\times 10^5\\) Pa 时体积 \\(V=22.4\\) L, 在 \\(P=2.0 \\times 10^5\\) Pa 时体积变为 \\(V=11.2\\) L。<br><br><strong>(1)</strong> 验证这组数据是否符合<strong>玻意耳定律</strong>;<br><strong>(2)</strong> 算该气体的物质的量 \\(n\\);<br><strong>(3)</strong> 解释这组数据为什么可被视为<strong>理想气体</strong>处理(2 假设是否成立, 在什么条件下会偏离)。",
+      keywords:["PV","常数","理想气体","假设"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 玻意耳定律验证(\\(PV\\) 是否守恒);② 理想气体方程 \\(PV=nRT\\) 算 n;③ 理想气体 2 假设 + 适用条件(常温常压满足良好,高压低温偏离)。',
+        approach:'<strong>解题思路</strong>(3 小问分步):<br>① 算两个状态下 \\(PV\\), 比较;<br>② 用 \\(PV=nRT\\) 求 n;<br>③ 讨论理想气体 2 假设 + 适用范围。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 验证玻意耳定律</strong>:<br>状态 1:\\(P_1V_1 = (1.0 \\times 10^5) \\times (22.4 \\times 10^{-3}) = 2240\\) J<br>状态 2:\\(P_2V_2 = (2.0 \\times 10^5) \\times (11.2 \\times 10^{-3}) = 2240\\) J<br>两态 \\(PV\\) 守恒(都是 2240) → <strong>符合玻意耳定律</strong>。<br><br><strong>(2) 物质的量 n</strong>:<br>由 \\(PV = nRT\\), \\(n = PV/(RT) = 2240 / (8.314 \\times 298) \\approx 0.904\\) mol ≈ <strong>1 mol</strong>。<br><br><strong>(3) 理想气体处理的合理性</strong>(关键字命中):<br>这组数据可被视为理想气体, 因为:<br>① <strong>实验温度 25°C / 压强 \\(10^5\\) Pa</strong> = <strong>常温常压</strong> — 此条件下理想气体 <strong>2 假设</strong>满足良好:<br>　· 假设 ① "分子大小可忽略" — 气体分子稀疏, 分子直径 \\(\\sim 10^{-10}\\) m, 而分子间距 \\(\\sim 10^{-9}\\) m, 体积比 \\(10^{-3}\\), 故分子大小相对总体积可忽略;<br>　· 假设 ② "分子间无相互作用" — F-r 曲线在 \\(r \\gg r_0\\) 时作用力极小, 可忽略。<br>② \\(PV\\) 守恒数据已直接验证 — 否则会偏离;<br>③ <strong>偏离条件</strong>:在<strong>高压</strong>(>50 atm)或<strong>低温</strong>(接近液化点)时, 2 假设失效, 需用<strong>范德瓦尔斯方程</strong>等修正(留进阶 · 大学物化)。<br><br><strong>关键字命中</strong>:① "PV" / ② "常数" / ③ "理想气体" / ④ "假设"<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"玻意耳定律的数据验证"思路:算 \\(PV\\) 是否守恒 — 这种思路我能熟练应用吗?',
+        '理想气体 2 假设的关键修饰("点状 + 无相互作用 + 碰撞除外")我能完整复述吗?',
+        '高考综合题中"在什么条件下需要用范德瓦尔斯方程"这类题型, 我能写出几个偏离的条件?',
+        '\\(PV=nRT\\) 中各量单位的统一(尤其 V 的 m³ vs L)我能熟练换算吗?'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"较难", exportIds:["IDEAL-GAS-EQUATION","COMBINED-GAS-EQUATION","CHARLES-LAW","GAY-LUSSAC-LAW"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:汽车轮胎在冬天 -10°C(263 K)时充气至 \\(P_1=2.5 \\times 10^5\\) Pa。<br><br><strong>(1)</strong> 夏天温度升至 40°C(313 K), 若轮胎不膨胀(等容), 算<strong>胎压</strong> \\(P_2\\);<br><strong>(2)</strong> 实际上夏天轮胎会膨胀 5%(体积增 \\(1.05 V_1\\)), 算<strong>真实胎压</strong> \\(P_2′\\);<br><strong>(3)</strong> 从微观角度解释为什么<strong>夏天胎压会增大</strong>(气体三定律微观机制 + 温度对分子运动的影响)。",
+      keywords:["开尔文","平均动能","撞壁","膨胀"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 等容过程查理定律;② 结合方程综合;③ 温度对分子运动的微观影响。',
+        approach:'<strong>解题思路</strong>(3 小问分步):<br>① 等容下 \\(P_2 = P_1 \\times T_2/T_1\\);<br>② 体积膨胀的修正用结合方程;<br>③ 微观解释:T ↑ → 平均动能 ↑ → 撞壁力 + 频率双重增加。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 等容下胎压</strong>:<br>由查理定律 \\(P_2 = P_1 \\times T_2/T_1 = 2.5 \\times 10^5 \\times (313/263) \\approx 2.98 \\times 10^5\\) Pa。<br>胎压升高约 19%。<br><br><strong>(2) 体积膨胀 5% 后的真实胎压</strong>:<br>由结合方程 \\(P_1V_1/T_1 = P_2′V_2/T_2\\),\\(V_2 = 1.05 V_1\\)<br>\\(P_2′ = P_1 \\times (V_1/V_2) \\times (T_2/T_1) = 2.5 \\times 10^5 \\times (1/1.05) \\times (313/263)\\)<br>\\(\\approx 2.5 \\times 10^5 \\times 0.952 \\times 1.190 \\approx 2.83 \\times 10^5\\) Pa。<br>体积膨胀缓解了部分胎压升高(从 2.98 降到 2.83 Pa)。<br><br><strong>(3) 微观解释</strong>(关键字命中):<br>夏天胎压升高的微观本质:<br>· 温度升高 → 气体分子<strong>平均动能</strong>增大 → 平均速率增大<br>· <strong>两个独立效应同时发生</strong>:<br>　① <strong>单次撞壁力</strong>增大(动量 \\(mv\\) 大);<br>　② <strong>撞壁频率</strong>增大(单位时间内更多撞击);<br>· 双重作用 → 总压强增大。<br>这正是<strong>查理定律的微观机制</strong> — 与玻意耳定律(等温下数密度变化的单一效应)有质的不同。<br>体积<strong>膨胀</strong> 5% 部分缓解胎压升高: 体积变大 → 分子有更大空间运动 → 数密度降低 → 撞壁频率部分降低 → 部分抵消温度引起的胎压上升。<br>注意:温度<strong>必须用开尔文</strong>(否则 \\(P/T\\)=常数不过原点, 比例失效)。<br><br><strong>关键字命中</strong>:① "开尔文" / ② "平均动能" / ③ "撞壁" / ④ "膨胀"<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '为什么夏天轮胎要适当减压?这与查理定律是什么关系?',
+        '微观解释"撞壁力 + 撞壁频率"二分法, 我能区分玻意耳 vs 查理的微观本质吗?',
+        '体积膨胀对胎压的"缓解"作用是怎样的物理图像?',
+        '高考综合题"用气体方程 + 微观解释"双轨答题, 我能熟练分两轨吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["IDEAL-GAS-EQUATION","COMBINED-GAS-EQUATION"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:某容器内两个隔离区域:<br>· <strong>区 A</strong>:体积 \\(V_A = 2\\) L, 压强 \\(P_A = 3 \\times 10^5\\) Pa, 温度 \\(T_A = 300\\) K, 含氮气;<br>· <strong>区 B</strong>:体积 \\(V_B = 1\\) L, 压强 \\(P_B = 1 \\times 10^5\\) Pa, 温度 \\(T_B = 300\\) K, 含氮气。<br><br>打开两区中间的阀门后, 两气体混合, 温度保持 300 K(等温混合)。<br><br><strong>(1)</strong> 计算两区原各自的<strong>物质的量</strong> \\(n_A\\)、\\(n_B\\)(用 \\(R = 8.314\\) J/(mol·K), 单位 mol);<br><strong>(2)</strong> 用 \\(PV=nRT\\) 计算混合后的<strong>平衡压强</strong> \\(P_{\\text{平衡}}\\)(注意总体积 \\(V_\\text{总} = V_A + V_B = 3\\) L, 总物质的量 \\(n_\\text{总} = n_A + n_B\\));<br><strong>(3)</strong> 解释为什么气体混合后<strong>不会自发分离</strong>(从分子运动的微观角度)。",
+      keywords:["nRT","PV","平衡","分子运动"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 用 \\(PV=nRT\\) 求各区 n;② 混合后总 P 由 \\(P_\\text{总} V_\\text{总} = n_\\text{总} R T\\) 求;③ 气体不自发分离是熵增方向(分子热运动 + 扩散自发方向)。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① \\(n = PV/(RT)\\);<br>② \\(P_\\text{平衡} = n_\\text{总} R T / V_\\text{总}\\);<br>③ 用分子热运动 + 扩散自发方向解释。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 各区物质的量</strong>:<br>· \\(n_A = P_A V_A / (RT_A) = (3 \\times 10^5 \\times 2 \\times 10^{-3}) / (8.314 \\times 300)\\)<br>　\\(\\approx 600 / 2494 \\approx 0.241\\) mol<br>· \\(n_B = P_B V_B / (RT_B) = (1 \\times 10^5 \\times 1 \\times 10^{-3}) / (8.314 \\times 300)\\)<br>　\\(\\approx 100 / 2494 \\approx 0.0401\\) mol<br>· <strong>\\(n_\\text{总} = 0.241 + 0.0401 \\approx 0.281\\) mol</strong>。<br><br><strong>(2) 平衡压强</strong>(关键字命中):<br>由 \\(PV=nRT\\), 混合后:<br>\\(P_\\text{平衡} V_\\text{总} = n_\\text{总} R T\\)<br>\\(P_\\text{平衡} = n_\\text{总} R T / V_\\text{总}\\)<br>\\(= (0.281 \\times 8.314 \\times 300) / (3 \\times 10^{-3})\\)<br>\\(\\approx 700 / (3 \\times 10^{-3}) \\approx 2.33 \\times 10^5\\) Pa<br>(验证:\\(P_A V_A + P_B V_B = 600 + 100 = 700\\) J / \\(V_\\text{总} = 3 \\times 10^{-3}\\) m³ → \\(P_\\text{平衡} \\approx 2.33 \\times 10^5\\) Pa ✓)<br>故<strong>混合后平衡压强约 \\(2.33 \\times 10^5\\) Pa</strong>, 介于 \\(P_A\\) 与 \\(P_B\\) 之间。<br><br><strong>(3) 不自发分离的微观解释</strong>(关键字命中):<br>气体混合后<strong>不会自发分离</strong>是因为:<br>· <strong>分子热运动</strong>:每个分子做永不停止的无规则热运动, 没有"记得"自己来自哪一区;<br>· <strong>扩散方向</strong>:分子自然向<strong>低密度</strong>方向扩散, 直到均匀分布;<br>· <strong>反向不自发</strong>:气体重新自发分离到原始 A / B 区 = 极低概率的微观状态 → 与<strong>熵增方向</strong>矛盾, 不会自发发生。<br>用<strong>类比</strong>:混合后的扑克牌不会自发恢复排序 — 同样的随机化原理。<br>注意:气体可以<strong>用外力</strong>(如离心 / 蒸馏)分离, 但这违反<strong>『自发』</strong>定义, 需消耗能量。<br>这是<strong>气体扩散自发方向</strong>的具体体现, 也为后续<strong>第二定律</strong>(熵增 / 不可逆性)埋下种子。<br><br><strong>关键字命中</strong>:① nRT / ② PV / ③ 平衡 / ④ 分子运动<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"两个气体混合后平衡压强"的计算是高考热门题, 我能熟练用 \\(PV=nRT\\) 算吗?',
+        '为什么混合气体不会自发分离? 微观图像 + 自发方向我能理解吗?',
+        '高考综合题"气体混合 / 分离 + 平衡压强" 我能熟练应用吗?',
+        '气体扩散与第二定律的关系是什么? 后续板块如何深化?'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"中等", exportIds:["SURFACE-TENSION","WETTING-CRITERION","CAPILLARY-EFFECT"],
+      stem:"<strong>综合大题(150-300 字)</strong>:某同学观察到下列现象:① 雨滴落地前在空中呈球形;② 玻璃细管插入水中, 水面在管内<strong>上升</strong>;③ 玻璃细管插入水银中, 水银面在管内<strong>下降</strong>。<br><br><strong>(1)</strong> 用<strong>表面张力</strong>的微观本质解释雨滴呈球形(为什么自由液滴最小化表面积);<br><strong>(2)</strong> 用<strong>浸润判据</strong>解释玻璃-水浸润 + 玻璃-水银不浸润(从液-固引力 vs 液-液引力);<br><strong>(3)</strong> 用<strong>毛细现象</strong>解释为什么水<strong>上升</strong>而水银<strong>下降</strong>(浸润 → 凹液面 → 表面张力把液体拉起;不浸润 → 凸液面 → 把液体压下)。",
+      keywords:["邻居","引力","凹","凸"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 表面张力 = 表面分子少邻居 → 能量高 → 系统最小化表面积; ② 浸润 = 液-固引力 > 液-液引力; ③ 毛细 = 浸润凹面 → 上升, 不浸润凸面 → 下降。',
+        approach:'<strong>解题思路</strong>(3 小问分步):<br>① 用"邻居 + 能量最小化"解释表面张力;<br>② 用"两种引力比较"解释浸润;<br>③ 用"凹 / 凸液面 + 表面张力方向"解释毛细。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 雨滴呈球形的解释</strong>:<br>液体内部分子周围四面 8 方都有<strong>邻居</strong>, 引力<strong>合力 = 0</strong>(平衡)。<br>表面分子<strong>少了上方邻居的引力束缚</strong>, 引力<strong>合力净向内</strong>, 且能量比内部分子<strong>高</strong>(少了一部分负势能贡献)。<br>系统倾向<strong>最小化表面积</strong>来<strong>降低总能量</strong>, 表现为表面"想要收缩"的力 = <strong>表面张力</strong>。<br>对同体积, <strong>球形表面积最小</strong>(几何性质), 故自由液滴呈球形。<br><br><strong>(2) 浸润判据的应用</strong>:<br>玻璃-水<strong>浸润</strong>:水分子被玻璃表面(SiO₂)的引力<strong>强于</strong>水-水分子之间的引力 → 水"愿意"接触玻璃 → 铺开。<br>玻璃-水银<strong>不浸润</strong>:水银分子之间的<strong>金属键引力</strong>(强)<strong>大于</strong>水银-玻璃的引力 → 水银"不愿"接触玻璃 → 收缩成球避开。<br>关键: <strong>浸润是液 + 固组合属性</strong>, 同水可在不同固体上有截然不同表现。<br><br><strong>(3) 毛细现象的解释</strong>(关键字命中):<br>· <strong>水(浸润玻璃)在细管中</strong>:管壁吸引水 → 水沿管壁上爬 → 形成<strong>凹</strong>液面(中间低周围高) → 表面张力沿液面切向作用, 净效应是<strong>把水"拉起"</strong> → 水面上升, 直到表面张力与重力平衡。<br>· <strong>水银(不浸润玻璃)在细管中</strong>:管壁不吸引水银 → 水银分子被自己引力束缚 → 形成<strong>凸</strong>液面(中间高周围低) → 表面张力把液体"压下" → 水银面下降。<br>· <strong>管越细</strong>, 表面张力 vs 重力的<strong>比值越大</strong>, 现象越显著。<br><br><strong>关键字命中</strong>:① "邻居" / ② "引力" / ③ "凹" / ④ "凸"<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"表面张力"的微观本质是"邻居 + 能量最小化", 这与"自发降低自由能"是同一思想吗?',
+        '为什么浸润是"组合属性"?如何理解水可浸润纸但不浸润荷叶?',
+        '毛细现象的"管越细越显著"我能用尺度分析说清楚吗?',
+        '高考综合题"液体表面性质的微观解释"我能熟练用 3 个工具(表面张力 / 浸润 / 毛细)解释吗?'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"中等", exportIds:["CRYSTAL-CHARACTERISTICS","AMORPHOUS-CHARACTERISTICS","CRYSTAL-MELT-MECHANISM"],
+      stem:"<strong>综合大题(150-300 字)</strong>:晶体和非晶体都属于固体, 但其物理性质有质的差异。<br><br><strong>(1)</strong> 列出<strong>晶体 4 大特征</strong>和<strong>非晶体 4 大特征</strong>,并对比说明;<br><strong>(2)</strong> 用<strong>规则点阵 + 束缚均一</strong>解释为什么晶体有<strong>固定熔点</strong>而非晶体<strong>渐变软化</strong>;<br><strong>(3)</strong> 判断下列物质是<strong>晶体</strong>还是<strong>非晶体</strong>,并简述判断依据:食盐颗粒 / 普通玻璃 / 石蜡 / 石英(SiO₂ 单晶)。",
+      keywords:["规则点阵","均一","渐变","亚稳态"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 晶体 4 特征(规则 + 固定熔点 + 解理 + 各向异性);② 非晶体 4 特征(无规则 + 渐变 + 各向同性 + 亚稳态);③ 固定熔点的微观机制(均一束缚同时冲破)。',
+        approach:'<strong>解题思路</strong>(3 小问分步):<br>① 列对比;<br>② 用规则点阵 + 束缚均一解释固定熔点;<br>③ 判断常见物质。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 4 大特征对比</strong>:<br><strong>晶体</strong>(4 特征):<br>① 微观规则点阵(分子严格周期排列);<br>② <strong>固定熔点</strong>(在某确定温度下整体熔化);<br>③ <strong>解理性</strong>(沿特定晶面易裂开);<br>④ 单晶<strong>各向异性</strong>(不同方向物理性质不同)。<br><strong>非晶体</strong>(4 特征):<br>① 微观无规则排列(类似"冻结的液体");<br>② <strong>渐变软化</strong>(无固定熔点,加热逐渐变软);<br>③ <strong>各向同性</strong>(各方向相同);<br>④ <strong>亚稳态</strong>(能量上不是最低,长时间可能重结晶)。<br><br><strong>(2) 固定熔点的微观机制</strong>(关键字命中):<br>晶体的<strong>规则点阵</strong>意味着所有分子在<strong>相同的几何环境</strong>下被周围邻居引力束缚 — 束缚程度<strong>均一</strong>。<br>加热时所有分子的"逃脱阈值"<strong>相同</strong>, 在某确定温度时<strong>同时冲破</strong>约束 → <strong>瞬间熔化</strong>(固定熔点)。<br>非晶体<strong>无规则</strong> → 每个分子的束缚程度<strong>不一</strong> → "逃脱阈值"<strong>不同</strong> → 加热时不同分子在不同温度下<strong>逐个挣脱</strong> → <strong>渐变软化</strong>(无固定熔点)。<br>"束缚均一 vs 不一"是固定熔点 vs 渐变软化的微观本质。<br><br><strong>(3) 物质判断</strong>:<br>· <strong>食盐颗粒</strong>:<strong>晶体</strong>(每颗是一个 NaCl 单晶, 立方形, 有解理面);<br>· <strong>普通玻璃</strong>:<strong>非晶体</strong>(<strong>亚稳态</strong>过冷液体, 无固定熔点, 渐变软化);<br>· <strong>石蜡</strong>:<strong>非晶体</strong>(也是亚稳态, 渐变熔化);<br>· <strong>石英(SiO₂ 单晶)</strong>:<strong>晶体</strong>(规则点阵, 有固定熔点 1713°C, 各向异性)。<br><br><strong>关键字命中</strong>:① "规则点阵" / ② "均一" / ③ "渐变" / ④ "亚稳态"<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"晶体的固定熔点 vs 非晶体的渐变软化"的微观本质我能熟练解释吗?',
+        '为什么玻璃是"过冷液体"或"亚稳态"?这一概念如何理解?',
+        '高考常考的物质判断(晶体 vs 非晶体), 我能列出至少 5 个典型案例吗?',
+        '"束缚均一"的思想与"统计平均"思想有何联系?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"较难", exportIds:["SINGLE-VS-POLY-CRYSTAL","ANISO-VS-ISOTROPIC","CRYSTAL-CHARACTERISTICS"],
+      stem:"<strong>综合大题(150-300 字)</strong>:在材料科学和半导体工业中,<strong>单晶</strong>和<strong>多晶</strong>是两种重要的晶体形态。<br><br><strong>(1)</strong> 说明<strong>单晶 vs 多晶</strong>的本质区别(取向一致 vs 取向随机);<br><strong>(2)</strong> 解释为什么<strong>单晶</strong>表现出<strong>各向异性</strong>而<strong>多晶</strong>(如普通铁块)表现出<strong>宏观各向同性</strong>(用统计平均思想);<br><strong>(3)</strong> 判断下列物体的各向异性 / 同性: 水 / 玻璃 / 普通铁丝(多晶) / 单晶云母片 / 食盐颗粒。",
+      keywords:["取向","各向异性","各向同性","平均"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 单晶整体规则 → 各向异性; ② 多晶 = 小晶粒取向随机 → 宏观各向同性; ③ 统计平均思想; ④ 微观结构 vs 宏观尺寸独立。',
+        approach:'<strong>解题思路</strong>(3 小问分步):<br>① 单晶 vs 多晶定义;<br>② 用统计平均解释多晶各向同性;<br>③ 判断常见物体。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 单晶 vs 多晶的本质区别</strong>(关键字命中):<br>· <strong>单晶</strong>:整体是一个完整规则点阵, 所有分子<strong>取向一致</strong>(一个方向) → 整体规则有方向性;<br>· <strong>多晶</strong>:由<strong>大量小晶粒</strong>组成, 每个晶粒内部规则但<strong>不同晶粒的取向随机</strong>(各方向都有) → 整体上方向性被平均抵消。<br>差异核心: <strong>晶粒间的取向关系</strong>。<br><br><strong>(2) 单晶 vs 多晶的宏观各向性</strong>:<br><strong>单晶各向异性</strong>:取向一致 → 沿一个方向的物理性质(电导 / 热导 / 力学强度 / 光学折射)与垂直方向不同。例:单晶云母沿层方向 vs 垂直层方向差异显著。<br><strong>多晶宏观各向同性</strong>:每个小晶粒虽各向异性, 但<strong>大量小晶粒取向随机</strong>; <strong>统计平均</strong>下方向性<strong>互相抵消</strong> → 宏观上各方向物理性质相同。这是<strong>"统计平均使方向性消失"</strong>的具体范例 — 类似"温度反映平均"的思想。<br>注意: 多晶<strong>宏观</strong>各向同性, 但<strong>微观</strong>每个晶粒仍各向异性 — 不要把多晶误为"无规则"。<br><br><strong>(3) 各向性判断</strong>:<br>· <strong>水(液体)</strong>:<strong>各向同性</strong>(液体分子运动均匀);<br>· <strong>玻璃(非晶)</strong>:<strong>各向同性</strong>(无规则方向);<br>· <strong>普通铁丝(多晶金属)</strong>:<strong>宏观各向同性</strong>(取向随机平均);<br>· <strong>单晶云母片</strong>:<strong>各向异性</strong>(单晶完整规则方向);<br>· <strong>食盐颗粒</strong>:<strong>各向异性</strong>(每颗是 NaCl 单晶, 但是小且方向显示不明显)。<br><br><strong>关键字命中</strong>:① "取向" / ② "各向异性" / ③ "各向同性" / ④ "平均"<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"单晶 vs 多晶 vs 非晶 vs 液体"4 种态各向性我能熟练判断吗?',
+        '"统计平均使方向性消失"在物理学其他场景还有什么例子?(温度 / 内能 / 麦克斯韦分布)',
+        '"微观结构 vs 宏观尺寸"独立的概念我能区分吗?(纳米晶可单晶, 大块可非晶)',
+        '高考综合题"日常物体的各向性判断"我能熟练应用吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"较难", exportIds:["CRYSTAL-CHARACTERISTICS","SINGLE-VS-POLY-CRYSTAL","ANISO-VS-ISOTROPIC","AMORPHOUS-CHARACTERISTICS"],
+      stem:"<strong>综合大题(150-300 字)</strong>:某未知材料 X 具有以下性质:<br>· 显微镜下表现为<strong>严格规则点阵</strong>;<br>· 加热时在某<strong>确定温度</strong>突然全部熔化(固定熔点);<br>· 沿特定面易<strong>裂开</strong>(解理);<br>· 不同方向的<strong>导电率</strong>不同(各向异性);<br>· 整体可见为一颗肉眼可识的方块。<br><br><strong>(1)</strong> 判断 X 是<strong>晶体 / 非晶体 / 液体</strong>中的哪一种, 说明判断依据(列出至少 3 个特征);<br><strong>(2)</strong> 进一步判断 X 是<strong>单晶</strong>还是<strong>多晶</strong>, 说明判断依据;<br><strong>(3)</strong> 举一个<strong>生活中常见的 X 类</strong>物质例子(单晶), 并对比一个<strong>多晶</strong>物质(如普通铁块)和一个<strong>非晶</strong>物质(如普通玻璃)的<strong>各自宏观性质</strong>差异。",
+      keywords:["规则点阵","固定熔点","解理","单晶"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 晶体 4 大特征(规则点阵 + 固定熔点 + 解理 + 各向异性);② 单晶 vs 多晶判断;③ 常见物质分类;④ 各类物质宏观性质对比。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 用 4 大特征判断 X 是晶体;<br>② 用『各向异性 + 整体规则』判断单晶;<br>③ 列实例 + 三类对比。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) X 的相态判断</strong>(关键字命中):<br>X 是<strong>晶体</strong>(<strong>固体的一种, 不是液体也不是非晶体</strong>)。<br>判断依据(至少 3 个):<br>· <strong>规则点阵</strong>(微观周期排列)— 晶体的核心特征, 非晶体无规则;<br>· <strong>固定熔点</strong>(某 T 突然熔化)— 晶体束缚均一, 同时冲破;非晶体渐变软化;<br>· <strong>解理</strong>(沿特定面裂开)— 晶体规则点阵下断裂偏好特定晶面, 非晶体无解理;<br>· <strong>各向异性</strong>(各方向物理性质不同)— 单晶各向异性, 液体 / 非晶体各向同性。<br>4 大特征都符合 → X 是晶体。<br><br><strong>(2) 单晶 vs 多晶判断</strong>:<br>X 是<strong>单晶</strong>。<br>判断依据:<br>· <strong>整体表现各向异性</strong> — 多晶宏观各向同性(小晶粒取向随机平均);单晶整体规则取向一致 → 显宏观各向异性。本题 X 在不同方向<strong>导电率</strong>不同, 说明<strong>整体一个晶向</strong>;<br>· <strong>『整体一颗肉眼可识的方块』</strong> — 单晶呈完整几何形状(如食盐立方颗粒 / 单晶硅圆柱), 多晶呈非规则块状或粉末状。<br>故 X 是<strong>单晶</strong>。<br><br><strong>(3) 实例 + 三类对比</strong>(关键字命中):<br><strong>X 类(单晶)生活实例</strong>:<br>· <strong>食盐颗粒</strong>(NaCl 单晶, 立方形, 解理面平整);<br>· <strong>蔗糖颗粒</strong>(单晶, 棱柱形);<br>· <strong>石英</strong>(SiO₂ 单晶, 六角柱形 + 各向异性显著);<br>· <strong>云母片</strong>(层状硅酸盐单晶, 易解理成薄片);<br>· <strong>单晶硅</strong>(半导体, 整块大单晶)。<br><strong>三类物质对比</strong>:<br>| 类别 | 实例 | 微观结构 | 固定熔点? | 各向异性? |<br>|---|---|---|---|---|<br>| <strong>单晶</strong> | 食盐 / 云母 | 整体规则点阵 | ✓ | ✓(显著) |<br>| <strong>多晶</strong> | 普通铁块 / 多晶硅 | 大量小晶粒随机取向 | ✓ | ✗(宏观各向同性) |<br>| <strong>非晶</strong> | 玻璃 / 塑料 / 石蜡 | 无规则排列(亚稳态) | ✗(渐变软化) | ✗ |<br>三类各有<strong>微观结构 → 宏观性质</strong>的差异, 这是分子动理论解释固体性质的精彩示例。<br><br><strong>关键字命中</strong>:① 规则点阵 / ② 固定熔点 / ③ 解理 / ④ 单晶<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"晶体 4 大特征" 我能熟练判断未知物质吗?',
+        '"单晶 vs 多晶 vs 非晶" 的<strong>宏观各向性差异</strong>我能用『取向』解释吗?',
+        '高考综合题"物质类别判断 + 宏观性质对比"我能熟练应用 4 大特征吗?',
+        '本板块的"晶体 / 非晶体 / 单晶 / 多晶" 分类对学习材料科学有何指导意义?'
+      ]
+    }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "gas-liquid-solid";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    html += `<div class="kp-item">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        ${compositeTag}
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="8" data-q-id="q${n}" placeholder="请分小问作答(150-300 字, 可分段)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 或 mock-check 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="gas-liquid-solid-task-cards.html">学习任务卡</a> · <a href="gas-liquid-solid-mock-check.html">基础检测</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "gas-liquid-solid";
+  const MODULE_NAME = "理想气体状态方程";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

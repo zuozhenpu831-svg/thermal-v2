@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学应用 · 化学 · 深度口试 · 题库 · 蓝色诺瓦学院</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 14px; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 32px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px; font-size: 26px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .intro-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #00409A; }
+  .intro-card h2 { color: #00409A; font-size: 19px; margin-bottom: 12px; }
+  .intro-card p { font-size: 14.5px; margin-bottom: 10px; color: #2c3e50; }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .intro-card .key { background: #e8f0fe; color: #00409A; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-top: 12px; }
+  .section-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .section-card h2 { color: #00409A; font-size: 19px; margin-bottom: 14px; }
+  .section-card h2 .tag { font-size: 12px; background: #e8f0fe; color: #0055B8; border-radius: 10px; padding: 2px 10px; vertical-align: middle; margin-left: 8px; font-weight: 500; }
+  .flow-bar { display: flex; flex-wrap: wrap; gap: 10px; }
+  .flow-step { flex: 1; min-width: 180px; background: #f8f9fb; border-top: 4px solid #0055B8; border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
+  .flow-step .ft { font-weight: 600; color: #00409A; font-size: 14px; }
+  .flow-step .fm { color: #e67e22; font-weight: 600; font-size: 12px; }
+  .listen-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  .listen-table th, .listen-table td { border: 1px solid #e3e8ee; padding: 7px 10px; text-align: left; vertical-align: top; }
+  .listen-table th { background: #e8f0fe; color: #00409A; font-weight: 600; }
+  .listen-table td.cat { background: #f8f9fb; font-weight: 600; color: #5a6c7d; white-space: nowrap; }
+  .lp { background: #e8f5e9; color: #2e7d32; padding: 2px 9px; border-radius: 4px; font-size: 12.5px; margin: 2px 3px 2px 0; display: inline-block; }
+  .lp.core { background: #d8eedc; font-weight: 600; border: 1px solid #2e7d32; }
+  .lp.boundary-lp { background: #f0f0f5; color: #6a1b9a; border: 1px dashed #9b8bc4; }
+  .core-star { color: #d4af37; }
+  .qline { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #0055B8; }
+  .qline-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .qline-header h3 { font-size: 17px; color: #00409A; flex: 1; }
+  .qline-num { background: #00409A; color: white; border-radius: 6px; padding: 3px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+  .qline-time { font-size: 12px; color: #7f8c8d; white-space: nowrap; }
+  .main-q { background: #e8f0fe; border-left: 4px solid #0055B8; border-radius: 8px; padding: 13px 16px; font-size: 15px; margin-bottom: 12px; }
+  .main-q .mq-tag { font-weight: 600; color: #00409A; }
+  .key-points { font-size: 14px; }
+  .key-points .kp-title { font-weight: 600; color: #2e7d32; margin-bottom: 6px; }
+  .key-points li { margin: 5px 0 5px 18px; }
+  .prep-card { background: #fffbea; border-left: 4px solid #d4af37; border-radius: 8px; padding: 18px 22px; margin-top: 14px; font-size: 14px; }
+  .prep-card h3 { color: #9a7a00; font-size: 16px; margin-bottom: 8px; }
+  .prep-card ul { margin-left: 22px; }
+  .prep-card li { margin: 5px 0; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; padding: 18px 24px; background: white; border-radius: 10px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #e8f0fe; color: #0055B8; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+  .bottom-nav a:hover { background: #d7e6fc; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 16px; }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">蓝色诺瓦学院 · 物理 · 物化融合 &raquo; 热力学 · 融合 · 热力学应用 · 化学 &raquo; <strong>深度口试 · 题库</strong></nav>
+
+<header class="page-header">
+  <h1>热力学应用 · 化学 · 深度口试 · 题库</h1>
+  <div class="subtitle">面对面 15-20 分钟 · 6 条主问题中抽 3 条 · 当场签字 = 真实通关</div>
+</header>
+
+<div id="user-bar"></div>
+
+<section class="intro-card">
+  <h2>关于深度口试</h2>
+  <p>口试是热力学第一定律板块的<strong>真实通关环节</strong>：先把学习任务卡学完、基础检测和熟练度检测练熟，然后预约口试。本页是 <strong>完整题库</strong>，公开给所有学生 —— 你可以提前准备每一条主问题。</p>
+  <p>口试由教师当面进行，从下方 6 条主问题中<strong>抽 3 条</strong>。每条主问题先开放讲，再由教师根据你的回答追问。<strong>讲思路</strong>比说出唯一正确答案重要 —— 教师听的是因果重建，不是背诵。</p>
+  <div class="key">📌 通关条件：抽中的 3 条里，<strong>至少 2 条把核心要点讲清楚并能回应一层「为什么」</strong>，且整场至少一次在纸上写出 <strong>ΔU = Q − W</strong> 并指着式子说清每一项含义。</div>
+</section>
+
+<section class="section-card">
+  <h2>口试流程 <span class="tag">总时长 15-20 分钟</span></h2>
+  <div class="flow-bar">
+    <div class="flow-step"><div class="ft">① 暖场 · 自述</div><div class="fm">0-3 分钟</div>你先讲：「这个板块学到的最重要的一件事是什么？为什么重要？」—— 不卡时间，讲到能切入主问题就行。</div>
+    <div class="flow-step"><div class="ft">② 主问题 ×3</div><div class="fm">3-15 分钟</div>从下方 6 条主问题中由教师抽 3 条，每条约 3-4 分钟。先开放讲，再回答追问。</div>
+    <div class="flow-step"><div class="ft">③ 错题联动</div><div class="fm">15-18 分钟</div>带 1-2 道自己曾经做错的题（基础检测或熟练度检测里的），现场讲「当时为什么错、现在怎么想」。</div>
+    <div class="flow-step"><div class="ft">④ 判定 · 签字</div><div class="fm">18-20 分钟</div>通过 = 当场签字；暂缓 = 给补学方向 + 预约二试（换未用过的主问题）；不通过 = 回到学习阶段重学。</div>
+  </div>
+</section>
+
+<!-- ==================== 主问题 1 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 1</span>
+    <h3>主问题 1 · 跨 盖斯定律 + 燃烧热与中和热 · 用燃烧热数据反算未知反应</h3>
+    <span class="qline-time">约 6-7 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>工业上常需要 CH₄ + ½O₂ → CO + 2H₂(g) 这个反应的 ΔH，但实验室直接测它很难（不完全燃烧产物难控）。现在给你三个燃烧热数据：CH₄(g) -890.3、C(石墨) -393.5、H₂(g) -285.8 kJ/mol（H₂O 全是液态）。请你在纸上把这道综合题做出来 —— 关键是讲清楚两件事：① 用哪条原理把『测不到的反应』搭到『测得到的反应』上？② 三个组合系数怎么定？做完，把数值算到底。</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 盖斯定律：ΔH 只看始末态、与路径无关 —— 这是搭桥的原理</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 把目标反应写成已知燃烧热反应的代数组合：目标 = (CH₄ 燃烧) − (C 石墨燃烧) − 2×(H₂ 燃烧)</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 燃烧热定义：1 mol 可燃物完全燃烧 → 稳定氧化物（H₂O 液态）、ΔH<0</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 三种已知反应都是「→ CO₂(g) + H₂O(l) 完全燃烧式」，所以三个端点对齐才能消</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 反向规则：反向取 ΔH 相反数（学生说出 C 燃烧、H₂ 燃烧两条要反向）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 倍乘规则：H₂ 燃烧 × 2（因目标有 2H₂）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 净计量数法定系数（CH₄=+1、C=−1、H₂=−2 经物质核算）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 连接性：实验测的燃烧热数据 → 用盖斯算法 → 算出测不到的反应（数据入口 → 算法出口）</span></li>
+      <li><span class="lp">答案 ≈ −35.7 kJ/mol；用消元法核对方程左右物质对齐</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主问题 2 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 2</span>
+    <h3>主问题 2 · 跨 键能与反应焓变 + 盖斯定律 · 键能法 vs ΔHf° 法同题双算</h3>
+    <span class="qline-time">约 6-7 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>对反应 H₂(g) + ½O₂(g) → H₂O(g)，给你两套数据：(α) 键能 —— H-H 436、O=O 498、O-H 463 kJ/mol；(β) 标准生成焓 —— ΔHf°(H₂O, g) = −241.8 kJ/mol（稳定单质生成焓 = 0）。请你用两套方法分别算出这个反应的 ΔH —— 在纸上写过程。算完，回答三个问题：① 两次结果接近还是恰好一样？② 它们一致或近似一致的『根源』是什么？③ 如果不一致，能简单地说『有一个方法错了』吗？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 键能法：ΔH = Σ反应物键能 − Σ产物键能 = (436 + ½×498) − 2×463 = −241 kJ/mol</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 盖斯+ΔHf° 法：ΔH = Σν·ΔHf°(产) − Σν·ΔHf°(反) = −241.8 − 0 = −241.8 kJ/mol</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 两次结果几乎相同（差 < 1 kJ/mol）—— 这道题键能法精度好；一般键能法 ±5-10%、ΔHf° 法 ±1%</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 一致性根源：键能法 = 盖斯定律应用到「全部断键到原子态」的虚拟路径，本质是同一个状态量原理</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 连接性：所有 ΔH 算法的统一根源 = 焓是状态函数 / ΔH 路径无关</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 误差讨论：平均键能在多键反应里高低估部分抵消，所以最终 ΔH 误差被压缩</span></li>
+      <li><span class="lp">若不一致：可能因为题里 O-H 用了平均键能，不是 H₂O 第一/第二离解能</span></li>
+      <li><span class="lp">选谁的决策：有 ΔHf° → 优先 ΔHf°；全气态共价 + 缺数据 → 用键能估算</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主问题 3 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 3</span>
+    <h3>主问题 3 · 跨 燃烧热与中和热 + 盖斯定律 · 葡萄糖代谢综合题</h3>
+    <span class="qline-time">约 5-6 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>生物课问到：一颗中等苹果含约 27 g 可代谢的葡萄糖，全部氧化能放多少能量？反应是 C₆H₁₂O₆(s) + 6O₂(g) → 6CO₂(g) + 6H₂O(l)。已知 ΔHf°(葡萄糖) = −1273.3、ΔHf°(CO₂) = −393.5、ΔHf°(H₂O, l) = −285.8、ΔHf°(O₂) = 0 kJ/mol。请在纸上：① 算反应 ΔH；② 算 27 g 葡萄糖释放的能量（M = 180 g/mol）；③ 顺带回答：这个反应的 ΔH 算不算是『葡萄糖的燃烧热』？为什么？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ ΔH = Σν·ΔHf°(产) − Σν·ΔHf°(反) = [6×(−393.5) + 6×(−285.8)] − [(−1273.3) + 0] = −2802.5 kJ/mol</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 燃烧热定义 4 约定：1 mol 可燃物 / 完全燃烧 / 稳定氧化物（H₂O 液）/ 标准条件</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 葡萄糖系数恰为 1 mol → 满足『1 mol 可燃物』归一</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 产物是 6CO₂(g) + 6H₂O(l) → 满足『稳定氧化物』+ 液态水约定</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 「两步法」物理本质：先把葡萄糖分解为稳定单质（反向 ΔHf°）+ 再让单质合成 CO₂ + H₂O —— 这就是 ΔHf° 公式『末减初』的来源</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 稳定单质 O₂ 的 ΔHf° = 0（约定 / 零点参考）</span></li>
+      <li><span class="lp">为何选稳定单质做零点：因为反应物 / 产物都可拆为元素</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 连接性：ΔHf° 公式本身就是盖斯定律在『以稳定单质为零点』情形下的代数化</span></li>
+      <li><span class="lp">连接性：本题的 ΔHf° 数据本身来源 = 弹式量热计实验测量</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主问题 4 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 4</span>
+    <h3>主问题 4 · 跨 吉布斯基础 + 键能 / 盖斯 · 合成氨综合判据</h3>
+    <span class="qline-time">约 6-7 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>工业合成氨：N₂(g) + 3H₂(g) → 2NH₃(g)，ΔH = −92 kJ/mol、ΔS = −198 J/(mol·K)。请在纸上完成这道综合题：① 用键能数据（N≡N = 945、H-H = 436、N-H = 391 kJ/mol）独立验算这个 ΔH ≈ −92 是否合理；② 写出 ΔG = ΔH − TΔS，算出转变温度 T_转 = ΔH/ΔS；③ 室温 298 K 下 ΔG 是正还是负？理论上自发吗？④ 工业合成氨为什么实际选在 ~450 ℃ + 高压 + 催化剂？这跟 ΔG 怎么协调？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 键能验算：ΔH = (945 + 3×436) − 6×391 = 2253 − 2346 = −93 kJ/mol ≈ −92 ✓</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ ΔG = ΔH − TΔS（本板块核心成果 / capstone 关键综合）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ T_转 = ΔH/ΔS = (−92000)/(−198) ≈ 465 K ≈ 192 ℃</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ (ΔH<0, ΔS<0) 组合 → 低温自发（T < T_转）/ 高温不自发</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ ΔG < 0 自发 / = 0 平衡 / > 0 不自发（室温 ΔG = −92 + 298×0.198 ≈ −33 < 0 → 理论自发）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 「自发」≠「马上发生」：室温 ΔG<0 但 N≡N 键 945 kJ/mol → 动力学障碍极高 → 室温几乎不进行</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 450 ℃：升温提速率（动力学）但牺牲一些 ΔG（热力学打折）+ 催化剂降活化能 + 高压利用气体摩尔减少推产率 —— 三重妥协</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 案例数值：合成氨 ΔH = −92.4 / ΔS = −198 / T_转 ≈ 467 K</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 三定律三件套：第一定律守恒、第二定律方向、ΔG 综合判据 —— 同一道题用了三个</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 连接性：键能算 ΔH 本身依赖盖斯定律 + 焓状态量 —— ΔG 的 ΔH 输入是盖斯算法体系的产物</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ==================== 主问题 5 ==================== -->
+<section class="qline">
+  <div class="qline-header">
+    <span class="qline-num">主问题 5</span>
+    <h3>主问题 5 · 跨 盖斯定律 + 吉布斯基础 + 燃烧热（讲思路）· 催化剂 vs 自发 vs ΔH 状态量</h3>
+    <span class="qline-time">约 5-6 分钟</span>
+  </div>
+  <div class="main-q"><span class="mq-tag">🎤 开放主问：</span>工业 CO₂ 加氢制甲醇分两步：① CO₂ + H₂ → CO + H₂O(g) ΔH₁ = +41.2；② CO + 2H₂ → CH₃OH(g) ΔH₂ = −90.8 kJ/mol。请你不动笔（先讲思路），回答 4 个问题：① 总反应 ΔH 怎么算？根据是什么原理？② 如果换一种 Cu/ZnO 新型催化剂，让中间过渡态能量降低 30 kJ，总反应 ΔH 会变吗？为什么？③ 这个反应总 ΔH ≈ −50 < 0 是放热，那它是不是「肯定自发」？为什么？④ 第 1 步 ΔH₁ > 0 吸热、第 2 步放热 —— 中间体 CO 的存在，对工业实施有什么提示？</div>
+  <div class="key-points">
+    <div class="kp-title">👂 教师在听这些要点</div>
+    <ul>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 总 ΔH = ΔH₁ + ΔH₂ = +41.2 + (−90.8) = −49.6 kJ/mol —— 盖斯定律加规则</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 盖斯定律核心：ΔH 路径无关 / 焓是状态函数 ⇐ 反复用在两问里</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ 路径无关在化学反应中：测不到 / 难直测的反应可借能测的算出（第 ① 问的工具根基）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐⭐</span> ⭐⭐ ΔG = ΔH − TΔS：判断自发要看 ΔG 不是只看 ΔH</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 「放热不等于自发」（金刚石→石墨反例 / 冰融化反例）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 显式说出「ΔH < 0 ≠ 自发」是盖斯定律板块明确留给吉布斯解决的边界</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ 催化剂改变路径 → 改动力学 / 不改始末态 → 不改 ΔH（盖斯定律推论）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> ⭐ ΔH = H_末 − H_初 凡始末态固定 → ΔH 固定（催化剂不改始末态）</span></li>
+      <li><span class="lp">盖斯代数 4 规则之加规则（① + ② = 总）</span></li>
+      <li><span class="lp core"><span class="core-star">⭐</span> 盖斯板块的边界：自发性判据的『另一半』是熵 → 吉布斯回答</span></li>
+      <li><span class="lp">中间体 CO 提示：第 1 步吸热 → 需供热 / 催化剂选择性；高温吸热平衡偏右 + 低温放热平衡偏右 —— 两步温度难协同</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="prep-card">
+  <h3>📝 怎么准备</h3>
+  <ul>
+    <li><strong>不要背口诀</strong>。教师追问的第一刀往往就是「为什么」—— 把每个核心结论的<strong>来源 + 一句话理由</strong>想清楚（比如：等温 ΔU = 0 的根据是「理想气体 U 只依赖 T」，这条结论来自分子动理论板块）。</li>
+    <li><strong>带纸和笔</strong>。主问题 1、2、3、5、6 都涉及在纸上写公式或画图，画完再讲思路。</li>
+    <li><strong>提前挑 1-2 道自己错过的题</strong>（基础检测、熟练度检测、或纸笔检测里的），准备讲「当时为什么错、现在怎么想」。这是流程第 ③ 步。</li>
+    <li><strong>边界声明给你「松绑」</strong>：本板块有些「更深层」的概念不在要求内，没学过也不扣分；如果主动谈到是亮点，教师会简短肯定但不展开（这些深入内容在后续板块或进阶板块里学）。</li>
+    <li><strong>讲思路 ＞ 算对答案</strong>。教师听的是因果重建：你能不能把「为什么这样、不那样」讲清楚，比说出唯一正确数值更重要。</li>
+  </ul>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #00409A;">
+  <h2 style="color: #00409A;">📅 申请口试</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">完成学习任务卡 + 基础检测 + 熟练度检测后，向教师申请口试。<strong>申请将自动绑定你的登录账号</strong>，请先确认顶部已登录。</p>
+
+  <div id="my-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选）</label><textarea id="apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="apply-confirm" required style="margin-top:3px;"><span>我已完成本板块的学习任务卡 + 基础检测 + 熟练度检测（如有）</span></label>
+      <button type="submit" id="apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <h3 style="font-size:14px;color:#00409A;margin: 14px 0 6px;">📋 准备清单（建议自查）</h3>
+  <ul style="margin-left: 22px; font-size: 13.5px;">
+    <li>☐ 已学完<strong>热力学应用 · 化学</strong>板块的学习任务卡（所有 STEP）</li>
+    <li>☐ 基础检测模拟通过率 ≥ 70%</li>
+    <li>☐ 熟练度检测练熟（若该板块含）</li>
+    <li>☐ 已通读本页 6 条主问题 + 准备建议</li>
+    <li>☐ 准备好 1-2 道自己曾经做错的题（用于流程 ③ 错题联动）</li>
+  </ul>
+
+  <details style="margin-top:10px;">
+    <summary style="cursor:pointer;font-weight:600;color:#5a6c7d;font-size:13.5px;">📨 备选：线下申请渠道</summary>
+    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#2c3e50;padding:8px 12px;background:#fafbfc;border-radius:4px;">
+      <strong>📱 班级微信群</strong>：联系班主任 / 学科教师获取群二维码<br>
+      <strong>👨‍🏫 当面找教师</strong>：教师答疑时段当面约时间<br>
+      <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[申请口试]%20热力学应用 · 化学" style="color:#0055B8;">📧 打开邮件客户端</a>
+    </div>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #27ae60;">
+  <h2 style="color: #1e8449;">📋 我的口试反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有口试单</strong>（含初次判定 + 历次修订）。教师在教师页提交判定后会自动出现在这里。</p>
+  <div id="my-receipts-region"></div>
+  <div style="font-size: 12px; color: #5a6c7d; margin-top: 10px; padding: 8px 12px; background: #f5f7fa; border-radius: 4px;">
+    🚧 <strong>当前 demo</strong>：仅显示本浏览器 localStorage 内的口试单（教师端 + 学生端同一浏览器才能看到）。跨终端实时推送待 starmap 后端上线。
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;">
+  <h2 style="color: #6c3483;">📩 申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师给出的口试判定有异议，可以发起申诉。<strong>申诉将自动绑定你的登录账号</strong>。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成口试 + 收到教师口试单（含口试单 ID）<span style="color:#c0392b;">·未收到 = 请先「📅 申请口试」</span></li>
+    <li><strong>时限</strong>：在收到口试单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后，<strong>① 重新评估 → 出新口试单 v2/v3 ...</strong> 或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+    <li><strong>申诉不影响二试</strong>：选择直接二试不申诉，按约定时间再来一次即可</li>
+  </ul>
+
+  <div id="my-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">口试单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="appeal-receipt" required placeholder="如 OE-BASIC-20260613-160230-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;">
+      <div style="font-size:12px;color:#5a6c7d;margin-top:-4px;margin-bottom:10px;padding:8px 12px;background:#f5f7fa;border-radius:4px;line-height:1.7;">
+        <strong style="color:#6c3483;">ℹ️ 在哪查口试单 ID？</strong><br>
+        · 口试单 ID <strong>自动包含</strong>在教师发给你的反馈里（教师无需单独填写）<br>
+        · 反馈通过 <strong>微信 / 邮件 / 纸面</strong> 发给你；ID 在反馈顶部，格式 <code style="background:white;padding:1px 5px;border-radius:3px;font-size:11.5px;">OE-{板块}-{日期}-{时间}-{你的账号}</code><br>
+        · 遗失了？联系教师从「教师 portal · 📚 历史口试记录」一键重发<br>
+        · 🚧 待 starmap 后端：学生端「我的口试单」可直接查询历史
+      </div></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的主问题编号 <span style="color:#c0392b;">*</span></label><input type="text" id="appeal-qnum" required placeholder="如 主问题 3 / 主问题 5" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">当时我具体讲了什么 + 为什么认为判定有误 <span style="color:#c0392b;">*</span></label><textarea id="appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当时记录</option><option value="reexam">② 补讲后重判（约时间二次评估）</option></select></div>
+      <button type="submit" id="appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+
+  <details style="margin-top:10px;">
+    <summary style="cursor:pointer;font-weight:600;color:#5a6c7d;font-size:13.5px;">📨 备选：线下申诉渠道</summary>
+    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#2c3e50;padding:8px 12px;background:#fafbfc;border-radius:4px;">
+      <strong>📱 班级微信群</strong>「[申诉] 口试单 ID · 主问题 N · 申诉理由」<br>
+      <strong>👨‍🏫 当面找教师</strong>：带纸质口试单 + 想补讲的内容<br>
+      <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[口试申诉]%20热力学应用 · 化学" style="color:#6c3483;">📧 打开邮件客户端</a>
+    </div>
+  </details>
+
+  <div style="font-size: 13px; color: #6c3483; margin-top: 14px; padding: 12px 16px; background: #faf4fc; border-radius: 6px;">
+    🚧 <strong>待完善（starmap 后端上线后启用）</strong>
+    <ul style="margin: 6px 0 0 22px;">
+      <li>① 真正的账号系统（统一身份认证 / SSO），跨终端登录态同步</li>
+      <li>② 学生在自己设备上「一键申请 / 申诉」实时同步到教师待办</li>
+      <li>③ 学生永久查看历史口试单 / 教师打分明细 / 主问题反馈 / 修订时间线</li>
+      <li>④ 申诉前置条件自动校验（无打分记录 → 禁用申诉表单）</li>
+      <li>⑤ 教师驳回时学生端通知 + 一次"补充申诉"机会</li>
+      <li>⑥ 教师端实时通知（申请 / 申诉 / 二试 / 错题联动材料）</li>
+      <li>⑦ 基础检测 / 熟练度检测：PDF 题库 4-5 套；教师评价时记录选用套号，二试避开</li>
+    </ul>
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="basic-task-cards.html">📖 学习任务卡</a>
+  <a href="basic-mock-check.html">📝 基础检测</a>
+  <a href="basic-fluency-test.html">📈 熟练度检测</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 第一定律 · 深度口试题库</footer>
+
+</div>
+<script>
+(function() {
+  const SLUG = "thermodynamics-application-chemistry";
+  const MODULE_NAME = "热力学应用 · 化学";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  // mock 账号表（demo · 真账号系统待 starmap 后端）
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    // 更新 apply / appeal 表单的用户信息条
+    ["apply-user-info", "appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30";
+        el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // 禁用 / 启用 提交按钮
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyReceipts === "function") renderMyReceipts();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById("apply-time-day").value;
+    const _hm = document.getElementById("apply-time-hm").value;
+    const _t_other = document.getElementById("apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId("APP"),
+      type: "oral-exam-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById("apply-contact").value.trim(),
+      timeWindow: _timeWindow,
+      note: document.getElementById("apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name + "（" + u.account + "）\n\n教师在 teacher-portal 待办看到后会审核。\n🚧 当前 demo: 跨终端推送待 starmap 后端。");
+    document.getElementById("apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId("APL"),
+      type: "oral-exam-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById("appeal-receipt").value.trim(),
+      qnum: document.getElementById("appeal-qnum").value.trim(),
+      reason: document.getElementById("appeal-reason").value.trim(),
+      want: document.getElementById("appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id + "\n申请人: " + u.name + "（" + u.account + "）");
+    document.getElementById("appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const myApplies = loadMyTasks("oral-exam-apply");
+    const region = document.getElementById("my-applies-region");
+    if (!region) return;
+    if (myApplies.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + myApplies.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    myApplies.forEach(a => {
+      const statusLabel = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li style="margin:4px 0;">' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const myAppeals = loadMyTasks("oral-exam-appeal");
+    const region = document.getElementById("my-appeals-region");
+    if (!region) return;
+    if (myAppeals.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + myAppeals.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    myAppeals.forEach(a => {
+      const statusLabel = { pending: "⏳ 等待教师评估", approved: "✅ 已重判 v2", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li style="margin:4px 0;">主问题 ' + escapeHtml(a.qnum) + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyReceipts() {
+    const u = getUser();
+    const region = document.getElementById("my-receipts-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">请先登录查看你的口试反馈<br><small>（点上方申请/申诉表单的提交按钮也会自动弹登录）</small></div>';
+      return;
+    }
+    const myReceipts = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (!key) continue;
+      const m = key.match(/^oral-exam-(.+)-v0\.1\.3-(.+)$/);
+      if (!m) continue;
+      if (m[1] !== SLUG) continue;
+      if (m[2] !== u.account) continue;
+      try {
+        const data = JSON.parse(localStorage.getItem(key));
+        if (data && data.submissions && Array.isArray(data.submissions)) {
+          data.submissions.forEach(sub => myReceipts.push(sub));
+        }
+      } catch (e) {}
+    }
+    if (myReceipts.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">👤 ' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无<strong>本板块</strong>口试反馈<br><small>教师在 portal 端为你完成口试并提交判定后会出现在此处</small></div>';
+      return;
+    }
+    myReceipts.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+    let html = '';
+    myReceipts.forEach(sub => {
+      const verdict = sub.verdict;
+      const verdictLabel = { pass: '✅ 通过', defer: '⏸ 暂缓 · 补学后二试', fail: '❌ 不通过 · 重学' }[verdict] || verdict;
+      const verdictColor = { pass: '#27ae60', defer: '#e67e22', fail: '#c0392b' }[verdict] || '#5a6c7d';
+      const verdictBg = { pass: '#d4efdf', defer: '#fdebd0', fail: '#fadbd8' }[verdict] || '#ecf0f1';
+      const picked = (sub.snapshot && sub.snapshot.picked) || [];
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:' + verdictBg + ';color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">v' + sub.version + (sub.version > 1 ? '（修订）' : '') + ' · ' + new Date(sub.submittedAt).toLocaleString("zh-CN") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:12.5px;color:#5a6c7d;margin-bottom:8px;">口试单 ID：<code style="background:#f0f3f5;padding:2px 6px;border-radius:3px;font-size:11.5px;">' + escapeHtml(sub.receiptId || '—') + '</code></div>';
+      html += '<details>';
+      html += '<summary style="cursor:pointer;font-size:13.5px;color:#0055B8;font-weight:500;">查看反馈详情</summary>';
+      html += '<div style="font-size:13px;color:#2c3e50;line-height:1.7;background:#fafbfc;padding:10px 14px;border-radius:6px;margin-top:8px;">';
+      html += '<div style="margin:4px 0;"><strong>抽中主问题：</strong>' + (picked.length ? '主问题 ' + picked.join('、') : '—') + '</div>';
+      if (sub.snapshot && sub.snapshot.statuses) {
+        html += '<div style="margin:4px 0;"><strong>各主问题判定：</strong></div>';
+        html += '<ul style="margin-left:18px;font-size:12.5px;">';
+        Object.keys(sub.snapshot.statuses).forEach(k => {
+          const st = sub.snapshot.statuses[k];
+          const stLabel = { pass: '✅ 通过', stuck: '⏸ 卡壳', fail: '❌ 不通过', auto: '自动判定' }[st] || st;
+          html += '<li>主问题 ' + escapeHtml(k) + ' · ' + stLabel + '</li>';
+        });
+        html += '</ul>';
+      }
+      if (sub.overall) html += '<div style="margin:8px 0;"><strong>📝 教师总体备注：</strong><br>' + escapeHtml(sub.overall).replace(/\n/g, '<br>') + '</div>';
+      if (sub.snapshot && sub.snapshot.notes) {
+        const noteKeys = Object.keys(sub.snapshot.notes);
+        if (noteKeys.length > 0) {
+          html += '<div style="margin:8px 0;"><strong>主问题备注：</strong></div>';
+          html += '<ul style="margin-left:18px;font-size:12.5px;">';
+          noteKeys.forEach(k => {
+            html += '<li>主问题 ' + escapeHtml(k) + '：' + escapeHtml(sub.snapshot.notes[k]).replace(/\n/g, '<br>') + '</li>';
+          });
+          html += '</ul>';
+        }
+      }
+      if (sub.revisionReason) html += '<div style="margin:8px 0;padding:8px 12px;background:#faf4fc;border-left:3px solid #8e44ad;border-radius:4px;"><strong>📨 修订原因（你的申诉详情）：</strong><br>' + escapeHtml(sub.revisionReason).replace(/\n/g, '<br>') + '</div>';
+      html += '</div></details>';
+      html += '</div>';
+    });
+    region.innerHTML = html;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyReceipts();
+    renderMyApplies();
+    renderMyAppeals();
+  });
+})();
+</script>
+</body>
+</html>

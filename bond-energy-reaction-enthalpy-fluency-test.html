@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>键能与反应焓变 · 熟练度检测(题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
+  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
+  .breadcrumb a { color: #0055B8; text-decoration: none; }
+  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
+  .v021-banner strong { color: #b66100; }
+  header.page-header { background: linear-gradient(135deg, #00409A, #0055B8, #006AD6); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
+  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
+  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
+  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
+  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
+  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
+  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
+  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 580px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  .entry-card .info-list li { margin: 5px 0; }
+  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-primary:hover { opacity: 0.92; }
+  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
+  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
+  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
+  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
+  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
+  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
+  .q-meta.composite { background: #ede7f6; color: #4527a0; font-weight: 600; }
+  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
+  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; white-space: pre-wrap; }
+  .q-options { list-style: none; padding: 0; margin: 0; }
+  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
+  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
+  .q-options label { display: block; cursor: pointer; font-size: 14px; }
+  .q-options input { margin-right: 10px; vertical-align: middle; }
+  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
+  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; min-height: 160px; }
+  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
+  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
+  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
+  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
+  .q-feedback.partial { border-left-color: #e67e22; background: #fff7e8; }
+  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .q-result.correct { color: #27ae60; }
+  .q-result.wrong { color: #c0392b; }
+  .q-result.partial { color: #e67e22; }
+  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
+  .q-fb-row strong { color: #00409A; }
+  .q-fb-row.q-fb-knowledge { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
+  .q-fb-row.q-fb-approach  { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
+  .q-fb-row.q-fb-solution  { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
+  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
+  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
+  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: #0055B8; }
+  .q-reflection { margin-top: 18px; padding: 18px 22px; background: linear-gradient(135deg, #fef9e7, #fff3e0); border-left: 4px solid #d4af37; border-radius: 8px; }
+  .q-reflection-title { font-weight: 600; color: #b66100; margin-bottom: 12px; font-size: 14px; }
+  .q-reflection ol { padding-left: 22px; margin-bottom: 12px; font-size: 13px; color: #5a3a1a; }
+  .q-reflection ol li { margin: 4px 0; }
+  .q-reflection-input { width: 100%; border: 1px solid #fce4a8; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: white; min-height: 100px; }
+  .q-reflection-input:focus { outline: none; border-color: #d4af37; background: #fffbf0; }
+  .q-reflection-hint { font-size: 12px; color: #b66100; margin-top: 6px; font-style: italic; }
+  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .btn-submit:hover { opacity: 0.92; }
+  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
+  .btn-secondary:hover { background: #e8f0fe; }
+  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
+  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
+  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
+  .score-big.passed { color: #0055B8; }
+  .score-big.failed { color: #7f8c8d; }
+  .score-big.honored { color: #d4af37; }
+  .status { font-size: 16px; margin: 8px 0 20px 0; }
+  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
+  .wrong-list strong { color: #c0392b; }
+  .kp-section { background: #f0f7ff; border: 1px solid #cfe0f5; border-radius: 8px; padding: 16px 20px; margin: 18px auto; max-width: 720px; text-align: left; font-size: 13px; }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 600; color: #0055B8; display: flex; align-items: center; gap: 8px; font-size: 14px; }
+  .kp-toggle::after { content: '▼'; font-size: 10px; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 14px; }
+  .kp-intro { background: #fef9e7; border-left: 3px solid #d4af37; border-radius: 6px; padding: 12px 16px; margin-bottom: 16px; font-size: 13px; line-height: 1.8; color: #5a3a1a; }
+  .kp-intro strong { color: #b66100; }
+  .kp-item { background: white; border-radius: 8px; padding: 14px 18px; margin: 12px 0; border-left: 4px solid #0055B8; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px dashed #ecf0f1; }
+  .kp-item .kp-no { background: #0055B8; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: 700; font-size: 14px; }
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 15px; color: #00409A; }
+  .kp-item .kp-freq { background: #fdeaea; color: #c0392b; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+  .kp-item .kp-note { color: #7f8c8d; font-size: 12px; font-style: italic; margin-bottom: 8px; }
+  .kp-item .kp-section-label { font-weight: 600; color: #00409A; margin-top: 10px; margin-bottom: 4px; font-size: 13px; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 13px; line-height: 1.85; color: #2c3e50; }
+  .kp-item .kp-list li { margin: 3px 0; }
+  .kp-item .kp-list li strong { color: #c0392b; }
+  .kp-item .kp-revisit { font-size: 12px; color: #0055B8; margin-top: 10px; padding: 6px 10px; background: #e8f0fe; border-radius: 4px; }
+  .kp-footer { text-align: center; padding: 12px; color: #27ae60; font-weight: 600; font-size: 14px; }
+  .mastery-map { background: #fafbfc; border-radius: 8px; padding: 16px 20px; margin: 18px 0; text-align: left; }
+  .mastery-map h3 { font-size: 14px; color: #00409A; margin-bottom: 12px; }
+  .mastery-row { display: grid; grid-template-columns: 48px 1fr 60px 100px; gap: 10px; align-items: center; padding: 10px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; }
+  .mastery-row.correct { background: #f1f8f4; border-left: 3px solid #27ae60; }
+  .mastery-row.partial { background: #fff7e8; border-left: 3px solid #e67e22; }
+  .mastery-row.wrong { background: #fdf2f0; border-left: 3px solid #c0392b; }
+  .mastery-row .m-tid { font-weight: 700; color: #00409A; font-size: 13px; }
+  .mastery-row .m-title { color: #2c3e50; }
+  .mastery-row .m-status { font-weight: 700; text-align: center; font-size: 18px; }
+  .mastery-row .m-status.correct { color: #27ae60; }
+  .mastery-row .m-status.partial { color: #e67e22; }
+  .mastery-row .m-status.wrong { color: #c0392b; }
+  .mastery-row .m-pct { text-align: right; color: #5a6c7d; font-variant-numeric: tabular-nums; font-size: 13px; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 4px; font-size: 12px; }
+  .mastery-row .m-revisit a { color: #0055B8; }
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
+  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
+  .bottom-nav span { color: #bdc3c7; }
+  .hidden { display: none !important; }
+  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .katex { font-size: 1em; }
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学 · 键能与反应焓变 &raquo;
+  <strong>键能与反应焓变 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<header class="page-header">
+  <h1>键能与反应焓变 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 题库版(20 题池, 每次随机抽 5 题) · 同高考题型(选择 + 综合大题) · 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 选择(单选) / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考)</li>
+    <li>通过 ≥ 70 分;荣誉 ≥ 90 分</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards 和 mock-check</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, 本地保存, 不判分)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #0055B8;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="bond-energy-reaction-enthalpy-task-cards.html">📖 返回学习任务卡</a>
+  <a href="bond-energy-reaction-enthalpy-mock-check.html">📝 基础检测练习</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 键能与反应焓变 · 熟练度检测 · fluency-test Skill v0.1.5(高考实战聚焦 · 题库版 5T×4)</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'BOND-ENERGY-DEFINITION':            '键能定义(气态 · 1 mol · 断成气态原子)',
+  'BOND-ENERGY-4-CONDITIONS':          '键能定义的 4 个限定条件',
+  'GAS-PHASE-LIMITATION':              '气态限定(排除分子间作用力干扰)',
+  'COMPLETE-DISSOCIATION-TO-ATOMS':    '完全断成气态原子(不是断成离子 / 碎片)',
+  'BREAKING-BOND-IS-ENDOTHERMIC':      '断键吸热 / 成键放热',
+  'DISSOCIATION-VS-AVERAGE-BOND-ENERGY':'离解能 vs 平均键能(水 O-H:498 / 428 / 平均 463)',
+  'TYPICAL-BOND-ENERGY-DATA':          '典型键能数据表',
+  'BOND-ENERGY-FORMULA':               '键能公式 ΔH = Σ断键键能 − Σ成键键能',
+  'BOND-ENERGY-IS-HESS-SPECIAL-CASE':  '键能法 = 盖斯定律的特例',
+  'THREE-LEVEL-ENERGY-DIAGRAM':        '三层能级图(反应物 / 气态原子 / 产物)',
+  'BOND-ENERGY-PRECISION-LIMIT':       '键能法精度极限(结果是估算值)',
+  'BOND-ENERGY-4-USAGE-LIMITS':        '键能法 4 条使用限制',
+  'H2-CL2-HCL-EXAMPLE':                'H₂ + Cl₂ → 2HCl 键能计算范例',
+  'CH4-COMBUSTION-BY-BOND-ENERGY':     '甲烷燃烧的键能估算案例(与实测差额分账)',
+  'H2O-GAS-VS-LIQUID-DIFFERENCE':      'H₂O(g) 与 H₂O(l) 相差汽化焓(约 44 kJ/mol)',
+  'THREE-METHODS-COMPARISON':          '三种求 ΔH 方法的比较(量热实验 / 盖斯 / 键能)',
+  'METHOD-DECISION-TREE':              '方法选择决策树',
+  'H2-O2-H2O-THREE-METHOD':            'H₂ 燃烧三方法一致性案例',
+  'EXPERIMENT-ALGORITHM-BOND-COMPLEMENT':'实验为基准 · 盖斯为算法 · 键能为补位',
+  'MICROSCOPIC-VIEW-OF-REACTION':      '化学反应的微观本质(断旧键 + 成新键)',
+  'ENGINEERING-ESTIMATE-VS-PRECISE-CALC':'工程估算 vs 精确测定',
+  'AVERAGE-CANCELLATION-ARGUMENT':     '平均键能误差抵消论证'
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考化学<strong>反应原理</strong>板块中的<strong>键能与反应热</strong>核心考查点。高考既考概念辨析(键能定义的限定条件 / 断键吸热成键放热 / 平均键能的估算性质), 又考计算(由键能数据求 \\(\\Delta H\\) / 用字母代数式反求未知键能)。建议做下面熟练度模拟练习之前, 先对照下方 6 个考察点自查, 不熟的回学习任务卡或基础检测复习。',
+  topics: [
+    { no:'一', title:'键能定义 + 4 个限定条件', examFreq:'选择题高频', examNote:'概念辨析必考',
+      examMethods:[
+        '选择题:辨识键能定义的完整表述(挑出漏掉限定条件的错误选项)',
+        '辨析题:为什么必须强调「气态」「断成气态原子」',
+        '判断题:断键与成键的能量方向(断键消耗能量 / 成键释放能量)'
+      ],
+      mustMaster:[
+        '<strong>定义</strong>:25°C、标准压强下, 断开 1 mol <strong>气态</strong>分子中的某种共价键、使其变成<strong>气态原子</strong>所需的能量(单位 kJ/mol)',
+        '<strong>4 个限定</strong>:① 气态分子 ② 1 mol 键 ③ 断成气态<strong>原子</strong>(不是离子 / 碎片) ④ 25°C 标准压强',
+        '<strong>气态限定的理由</strong>:排除分子间作用力(液 / 固还要额外耗能克服分子间引力), 保证能量全部记在共价键账上',
+        '<strong>能量方向</strong>:断键<strong>消耗</strong>能量(克服原子间引力), 成键<strong>释放</strong>能量 — 方向不可记反'
+      ],
+      prepNotes:[
+        '高考爱用<strong>「漏限定词」</strong>设错:选项少了「气态」或把「原子」换成「离子」',
+        '记忆口诀:「气态、1 mol、到气态原子」三件套一个都不能少'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 2 + 基础检测 T1 复习' },
+
+    { no:'二', title:'键能公式 ΔH = Σ断键 − Σ成键 + 典型数据', examFreq:'选择题 / 填空必考', examNote:'每年必有',
+      examMethods:[
+        '选择题:给键能数据表 → 计算反应的 \\(\\Delta H\\)',
+        '辨析题:公式方向(断键在前、成键在后, 是「断 − 成」不是「成 − 断」)',
+        '判断题:ΔH 符号 — 成键释放多于断键消耗 → 放热(ΔH < 0)'
+      ],
+      mustMaster:[
+        '<strong>公式</strong>:\\(\\Delta H = \\Sigma E(\\text{断键}) - \\Sigma E(\\text{成键})\\)(反应物的键断掉、产物的键建起来)',
+        '<strong>符号判读</strong>:Σ断 < Σ成 → ΔH < 0 放热;Σ断 > Σ成 → ΔH > 0 吸热',
+        '<strong>典型数据感</strong>:H-H 436 / Cl-Cl 243 / H-Cl 431 / O=O 498 / N≡N 945 / C-H 413 / O-H 463(单位 kJ/mol, 题目都会给, 但有数据感能自查)',
+        '<strong>N≡N 特别牢固</strong>(945):氮气稳定 / 合成氨困难的微观根源'
+      ],
+      prepNotes:[
+        '<strong>公式方向反了</strong>(算成 Σ成 − Σ断)是第一大失分点 — 结果符号整个颠倒',
+        '检查习惯:放热反应算出来必须是负号, 不对就回查方向'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 2 + 基础检测 T2 复习' },
+
+    { no:'三', title:'数键陷阱(按结构式数键)', examFreq:'计算题高频失分点', examNote:'隐形陷阱',
+      examMethods:[
+        '计算题:多原子分子参与的反应 — 数清每种键各有几根',
+        '陷阱题:取代反应(如甲烷氯代)中「没动的键」要么两边都数、要么两边都不数',
+        '配平系数题:键数 = 分子内键数 × 化学计量数'
+      ],
+      mustMaster:[
+        '<strong>先画结构式再数键</strong>:CH₄ 有 4 根 C-H;NH₃ 有 3 根 N-H;C₂H₆ 有 6 根 C-H + 1 根 C-C',
+        '<strong>计量数加倍</strong>:2NH₃ 共 6 根 N-H — 漏乘计量数是高频错误',
+        '<strong>两种数法等价</strong>:全断全建(把反应物全断成原子再拼产物) ≡ 只动变化的键(没动的键两边抵消) — 但<strong>不许混用</strong>',
+        '<strong>混用陷阱</strong>:断键时全断、成键时只数新键 → 结果离谱地偏大'
+      ],
+      prepNotes:[
+        '考前练 3 个分子的数键:CH₄(4 根) / C₂H₄(4 根 C-H + 1 根 C=C) / C₂H₆(6 根 C-H + 1 根 C-C)',
+        '算完看数量级:常见反应 ΔH 多在几十到几百 kJ/mol, 上千就要警惕数键错误'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 + 基础检测 T2, T3 复习' },
+    { no:'四', title:'字母代数式 + 反求未知键能', examFreq:'综合大题新趋势', examNote:'近年增多',
+      examMethods:[
+        '综合大题:已知反应 ΔH 与部分键能 → 反求某个未知键能',
+        '代数式题:键能用字母(a、b、x)表示 → 写出 ΔH 的代数表达式再解方程',
+        '检验题:反求结果与典型数据表对照, 检查数量级是否合理'
+      ],
+      mustMaster:[
+        '<strong>反求三步</strong>:① 写键能公式并代入已知量 ② 含未知数 x 列方程 ③ 解出 x 并对照数据表查合理性',
+        '<strong>字母题不慌</strong>:把 a、b 当成具体数字一样代入公式, 最后整理成 x = (…)/n 的形式',
+        '<strong>移项符号</strong>:ΔH 是负数时, 移项要带着负号走, 这是代数式题最大失分点',
+        '<strong>单位与每 mol 键</strong>:解出的 x 是「1 mol 该键」的键能, 别忘了除以键的根数'
+      ],
+      prepNotes:[
+        '高考喜欢把 ΔH 给成<strong>负值</strong>再让你反求 — 专考移项符号',
+        '反求后养成习惯:把 x 代回原方程验算一遍'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 2 STEP 2 + 基础检测 T2, T7 复习' },
+
+    { no:'五', title:'离解能 vs 平均键能 + 键能法 4 条使用限制', examFreq:'辨析题中频', examNote:'区分度题',
+      examMethods:[
+        '辨析题:同一分子逐根断键能量不同(水的两根 O-H 不一样), 表中键能是平均值',
+        '限制题:键能法的适用前提 — 气态 / 知道结构 / 共价键 / 接受估算精度',
+        '应用题:对离子化合物(如 NaCl)为什么不能直接用键能法'
+      ],
+      mustMaster:[
+        '<strong>离解能 ≠ 平均键能</strong>:水断第一根 O-H 与断第二根所需能量不同, 表中 463 是平均值',
+        '<strong>限制 ①</strong> 气态:液 / 固要先加相变焓修正',
+        '<strong>限制 ②</strong> 须知结构式:不知道分子里有哪些键就没法数键',
+        '<strong>限制 ③</strong> 只适用共价键:离子化合物靠离子键 / 晶格能, 没有「键能表」可查',
+        '<strong>限制 ④</strong> 平均值精度:结果只能当估算值, 不能当精确值'
+      ],
+      prepNotes:[
+        '辨析题常设错:「键能表数据是逐根实测的精确值」— 错, 是<strong>平均值</strong>',
+        '看到 NaCl / 离子晶体参与的反应直接排除键能法'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 1 STEP 3 + Card 2 STEP 4 + 基础检测 T4, T5 复习' },
+
+    { no:'六', title:'三种求 ΔH 方法的比较与决策', examFreq:'综合大题中频', examNote:'方法论考点',
+      examMethods:[
+        '综合大题:同一反应用键能法算出的值与量热实验值不一致 → 解释差异来源 + 判断以哪个为准',
+        '决策题:给定情境(快速筛选 / 精确立项 / 无法直接测量)选择合适方法',
+        '原理题:键能法为什么本质上是盖斯定律的特例'
+      ],
+      mustMaster:[
+        '<strong>三种方法</strong>:① 量热实验直接测 ② 盖斯定律由已知反应组合算 ③ 键能数据估算',
+        '<strong>可靠性排序</strong>:量热实验 > 盖斯定律(基于实验数据) > 键能估算(平均值误差)',
+        '<strong>差异分账</strong>:键能法与实验值不符时, 先查<strong>水的状态</strong>(键能法对应气态水, 差汽化焓), 再归因平均键能误差',
+        '<strong>盖斯特例</strong>:键能法 = 走「反应物 → 气态原子 → 产物」中间路径的盖斯定律',
+        '<strong>决策逻辑</strong>:能测就测;不能测用盖斯;数据不全 / 初筛阶段用键能估算'
+      ],
+      prepNotes:[
+        '答「差异来源」题用两段式:<strong>先状态修正、再平均键能误差</strong>, 顺序不要反',
+        '答「以哪个为准」一律以<strong>量热实验值</strong>为准, 并说明键能法是估算'
+      ],
+      revisit:'不熟悉?回学习任务卡 Card 3 + 基础检测 T6, T7 复习' }
+  ],
+  footer:'✓ 6 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1:{ title:'键能定义 + 断键成键能量方向', revisit:'回任务卡 Card 1 + 基础检测 T1, T3 复习' },
+  T2:{ title:'键能公式计算(数键 + 代入)', revisit:'回任务卡 Card 2 + 基础检测 T2 复习' },
+  T3:{ title:'概念辨析(离解 / 限制 / 三方法)', revisit:'回任务卡 Card 1, Card 2 + 基础检测 T4, T5 复习' },
+  T4:{ title:'键能公式 综合(反求 / 代数式 / 误差)', revisit:'回任务卡 Card 2 + 基础检测 T2, T7 复习' },
+  T5:{ title:'三方法比较与误差分析 综合', revisit:'回任务卡 Card 3 + 基础检测 T6, T7 复习' }
+};
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["BOND-ENERGY-DEFINITION","BOND-ENERGY-4-CONDITIONS","COMPLETE-DISSOCIATION-TO-ATOMS"],
+      stem:"下列关于<strong>键能</strong>的定义, 表述<strong>最准确</strong>的是:",
+      options:{A:"断开 1 mol 任意状态分子中的某种共价键所需的能量",B:"25°C、标准压强下, 断开 1 mol <strong>气态</strong>分子中的某种共价键、使其变成<strong>气态原子</strong>所需的能量(kJ/mol)",C:"断开 1 mol 气态分子中的某种共价键、使其变成阴阳离子所需的能量",D:"1 mol 物质完全燃烧释放的能量"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:键能定义带 4 个限定 — ① 气态分子 ② 1 mol 键 ③ 断成气态<strong>原子</strong> ④ 25°C 标准压强。少一个都会让数值失去统一标准。',
+        approach:'<strong>解题思路</strong>:逐项对照 4 个限定词, 挑出「漏限定」或「换概念」的选项。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 漏掉「气态」:液 / 固态分子还要额外耗能克服分子间作用力, 测出的能量就不纯粹是共价键的了;<br>B 正确 — 4 个限定词齐全;<br>C 错 — 断成的是<strong>原子</strong>不是离子(断成离子对应的是另一类能量量度);<br>D 错 — 那是燃烧热的概念, 与键能无关。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"基础", exportIds:["BREAKING-BOND-IS-ENDOTHERMIC","MICROSCOPIC-VIEW-OF-REACTION"],
+      stem:"从微观角度看, 化学反应 = 断旧键 + 成新键。关于两步的<strong>能量方向</strong>, 正确的是:",
+      options:{A:"断键释放能量, 成键消耗能量",B:"断键和成键都释放能量, 所以化学反应总是放热",C:"断键和成键都消耗能量, 所以化学反应总是吸热",D:"断键<strong>消耗</strong>能量(克服原子间引力), 成键<strong>释放</strong>能量;反应吸热还是放热取决于两笔账的差额"},
+      answer:"D",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:成键的原子间存在引力, 把它们拉开必须<strong>消耗</strong>能量;反过来, 原子靠近成键时<strong>释放</strong>能量。反应的 ΔH = 断键账 − 成键账。',
+        approach:'<strong>解题思路</strong>:用「拉开有引力的两个物体要做功」这一物理直觉确定方向, 再看差额决定吸放热。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 方向整个记反了;<br>B、C 错 — 两步方向相反, 不可能「都释放」或「都消耗」;且化学反应有吸热也有放热, 任何「总是」的说法都可疑;<br>D 正确 — 断键消耗(吸热步)、成键释放(放热步);成键释放多于断键消耗 → 整体放热(ΔH < 0), 反之吸热。<br>故选 <strong>D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["GAS-PHASE-LIMITATION","BOND-ENERGY-DEFINITION"],
+      stem:"键能定义中特别强调「<strong>气态</strong>分子」「断成<strong>气态</strong>原子」。强调气态的根本原因是:",
+      options:{A:"排除分子间作用力的干扰 — 液 / 固态下分开分子还要先耗能克服分子间引力, 只有气态才能保证测得的能量全部用于断共价键",B:"气态分子的共价键比液态时更弱, 容易断",C:"只有气态物质才能发生化学反应",D:"气态是物质最稳定的状态"},
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:键能要量度的是「共价键本身」的强度。液 / 固态中分子之间还有分子间作用力, 不先排除它, 能量账就混了两笔。',
+        approach:'<strong>解题思路</strong>:问「为什么限定」类题, 找「保证量度纯粹 / 统一标准」方向的选项。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 气态分子之间几乎没有相互作用, 断键耗的能量全部记在共价键账上;若从液态出发, 还得先付一笔汽化的能量(克服分子间引力), 键能数值就不纯了;<br>B 错 — 共价键强度由成键原子决定, 不随聚集状态明显改变;<br>C 错 — 液态、固态当然也能反应;<br>D 错 — 与稳定性无关, 而且气态通常能量更高。<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"中等", exportIds:["DISSOCIATION-VS-AVERAGE-BOND-ENERGY","TYPICAL-BOND-ENERGY-DATA"],
+      stem:"实验测得:把 H₂O(g) 断掉第一根 O-H(生成 OH 和 H)需 498 kJ/mol, 再断第二根 O-H(OH 断成 O 和 H)只需 428 kJ/mol;而键能表中 O-H 写的是 463 kJ/mol。对此理解<strong>正确</strong>的是:",
+      options:{A:"两次测量结果不同, 说明实验有误",B:"表中 463 是第一根 O-H 的真实键能",C:"逐根断键的能量(离解能)各不相同, 表中 463 是两根 O-H 的<strong>平均值</strong>:(498 + 428) / 2 = 463",D:"OH 中的 O-H 键比 H₂O 中的更强"},
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:<strong>离解能 ≠ 平均键能</strong>。同一分子中逐根断键, 每一步的化学环境都在变, 所需能量各不相同;键能表收录的是平均值。',
+        approach:'<strong>解题思路</strong>:验证 (498 + 428) / 2 是否等于 463 → 正是平均关系。',
+        solution:'<strong>详细解题</strong>:<br>A 错 — 两步能量本来就该不同:断掉第一个 H 后, 剩下的 OH 电子分布改变, 第二根 O-H 的环境已经变了;<br>B 错 — 463 既不是第一根也不是第二根, 是平均;<br>C 正确 — (498 + 428) / 2 = 926 / 2 = 463, 表中数据正是平均键能;<br>D 错 — 数据相反:OH 中断 O-H 只要 428, 比 H₂O 中的 498 更<strong>弱</strong>。<br>故选 <strong>C</strong>。这也是键能法只能估算的根源之一:用平均值算个别分子的具体断键, 必有偏差。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["BOND-ENERGY-FORMULA","TYPICAL-BOND-ENERGY-DATA"],
+      stem:"已知键能(kJ/mol):N≡N 945、H-H 436、N-H 391。反应 \\(\\mathrm{N_2(g) + 3H_2(g) \\to 2NH_3(g)}\\) 的 \\(\\Delta H\\) 为:",
+      options:{A:"+93 kJ/mol",B:"−965 kJ/mol",C:"−93 kJ/mol",D:"+2253 kJ/mol"},
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:键能公式 \\(\\Delta H = \\Sigma E(\\text{断键}) - \\Sigma E(\\text{成键})\\);数键要乘计量数(2NH₃ 共 6 根 N-H)。',
+        approach:'<strong>解题思路</strong>:断 1 根 N≡N + 3 根 H-H;成 6 根 N-H;代入公式。',
+        solution:'<strong>详细解题</strong>:<br>断键:\\(945 + 3 \\times 436 = 945 + 1308 = 2253\\) kJ/mol;<br>成键:\\(2 \\times 3 \\times 391 = 2346\\) kJ/mol(每个 NH₃ 有 3 根 N-H, 共 2 个 NH₃);<br>\\(\\Delta H = 2253 - 2346 = -93\\) kJ/mol(放热)。<br>A 错 — 公式方向反了(算成 Σ成 − Σ断);<br>B 错 — 断键漏乘了 H-H 的计量数 3(\\(945 + 436 - 2346 = -965\\));<br>D 错 — 只算了断键、忘了成键释放。<br>故选 <strong>C</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"基础", exportIds:["BOND-ENERGY-FORMULA","H2-CL2-HCL-EXAMPLE","TYPICAL-BOND-ENERGY-DATA"],
+      stem:"已知键能(kJ/mol):H-H 436、Cl-Cl 243、H-Cl 431。反应 \\(\\mathrm{H_2(g) + Cl_2(g) \\to 2HCl(g)}\\) 的 \\(\\Delta H\\) 为:",
+      options:{A:"−183 kJ/mol",B:"+183 kJ/mol",C:"+248 kJ/mol",D:"−862 kJ/mol"},
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:键能公式 ΔH = Σ断 − Σ成;产物 2HCl 共 2 根 H-Cl。',
+        approach:'<strong>解题思路</strong>:断 H-H + Cl-Cl, 成 2 根 H-Cl。',
+        solution:'<strong>详细解题</strong>:<br>断键:\\(436 + 243 = 679\\) kJ/mol;<br>成键:\\(2 \\times 431 = 862\\) kJ/mol;<br>\\(\\Delta H = 679 - 862 = -183\\) kJ/mol — 成键释放多于断键消耗, 放热, 与氢气在氯气中燃烧的事实一致。<br>B 错 — 公式方向反了;<br>C 错 — 成键只数了 1 根 H-Cl(\\(679 - 431 = +248\\)), 漏乘计量数 2;<br>D 错 — 只写了成键释放的总量, 忘了减去断键消耗。<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"较难", exportIds:["BOND-ENERGY-FORMULA","TYPICAL-BOND-ENERGY-DATA","MICROSCOPIC-VIEW-OF-REACTION"],
+      stem:"已知键能(kJ/mol):C-H 413、Cl-Cl 243、C-Cl 328、H-Cl 431。甲烷氯代 \\(\\mathrm{CH_4(g) + Cl_2(g) \\to CH_3Cl(g) + HCl(g)}\\) 的 \\(\\Delta H\\) 为:",
+      options:{A:"+1136 kJ/mol",B:"−759 kJ/mol",C:"+103 kJ/mol",D:"−103 kJ/mol"},
+      answer:"D",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:取代反应中<strong>没动的键</strong>(3 根 C-H)要么两边都数、要么两边都不数 — 两种数法等价, 但绝不能混用。',
+        approach:'<strong>解题思路</strong>:简化法只记变化的键:断 1 根 C-H + 1 根 Cl-Cl, 成 1 根 C-Cl + 1 根 H-Cl。',
+        solution:'<strong>详细解题</strong>:<br><strong>简化法</strong>:断 \\(413 + 243 = 656\\);成 \\(328 + 431 = 759\\);\\(\\Delta H = 656 - 759 = -103\\) kJ/mol;<br><strong>全断全建法验证</strong>:断 \\(4 \\times 413 + 243 = 1895\\);成 \\(3 \\times 413 + 328 + 431 = 1998\\);\\(1895 - 1998 = -103\\) ✓ 两种数法一致。<br>A 错 — 经典混用陷阱:断键时全断 4 根 C-H(1895), 成键却只数新键(759), \\(1895 - 759 = +1136\\), 数值离谱地大、符号还反了;<br>B 错 — 只写成键总量;<br>C 错 — 公式方向反了。<br>故选 <strong>D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"中等", exportIds:["BOND-ENERGY-FORMULA","TYPICAL-BOND-ENERGY-DATA","BREAKING-BOND-IS-ENDOTHERMIC"],
+      stem:"已知键能(kJ/mol):N≡N 945、O=O 498、NO 分子内氮氧键 632。生成 1 mol NO 的反应 \\(\\mathrm{\\tfrac{1}{2}N_2(g) + \\tfrac{1}{2}O_2(g) \\to NO(g)}\\) 的 \\(\\Delta H\\) 为:",
+      options:{A:"−89.5 kJ/mol",B:"+89.5 kJ/mol",C:"+721.5 kJ/mol",D:"−632 kJ/mol"},
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:计量数是分数时, 键数同样按分数乘(断半根 N≡N 的意思是「每生成 1 mol NO 平摊断 ½ mol N≡N」);Σ断 > Σ成 → 吸热。',
+        approach:'<strong>解题思路</strong>:断 ½ N≡N + ½ O=O, 成 1 根氮氧键。',
+        solution:'<strong>详细解题</strong>:<br>断键:\\(\\tfrac{1}{2} \\times 945 + \\tfrac{1}{2} \\times 498 = 472.5 + 249 = 721.5\\) kJ/mol;<br>成键:\\(632\\) kJ/mol;<br>\\(\\Delta H = 721.5 - 632 = +89.5\\) kJ/mol — 吸热:N≡N 太牢固, 断键账远大于成键账, 所以常温下氮气氧气共存于空气中却几乎不反应, 只有雷电 / 发动机高温下才生成 NO。<br>A 错 — 符号反了;<br>C 错 — 只算断键消耗, 忘了成键释放;<br>D 错 — 只写成键一笔账。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"中等", exportIds:["DISSOCIATION-VS-AVERAGE-BOND-ENERGY","BOND-ENERGY-PRECISION-LIMIT"],
+      stem:"水分子逐根断 O-H 键:第一根需 498 kJ/mol, 第二根需 428 kJ/mol, 键能表中 O-H 为 463 kJ/mol。下列说法<strong>正确</strong>的是:",
+      options:{A:"同一分子中逐根断键所需能量各不相同(每断一根, 剩余部分的电子环境就变了)",B:"表中 463 是两步离解能的<strong>平均值</strong>",C:"两步数值不同说明测量仪器有系统误差",D:"用表中平均键能去计算某一根键的具体断键能量, 会有偏差 — 这是键能法只能估算的根源之一",E:"第二根 O-H(428)比第一根(498)更难断"},
+      answer:["A","B","D"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:离解能(逐根实测)≠ 平均键能(表中数据);平均值好用但有精度代价。',
+        approach:'<strong>解题思路</strong>:抓「环境变了 → 逐根不同 → 表取平均 → 用平均必有偏差」这条逻辑链逐项判断。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 断掉一个 H 后剩下 OH, 其电子分布与 H₂O 不同, 第二根键的强度自然变化;<br>B 正确 — (498 + 428) / 2 = 463;<br>C 错 — 数值不同是化学环境变化的真实反映, 不是误差;<br>D 正确 — 平均值抹掉了逐根差异, 用它算具体某根键必有偏差;<br>E 错 — 428 < 498, 第二根更<strong>容易</strong>断。<br>故选 <strong>A、B、D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"中等", exportIds:["BOND-ENERGY-4-USAGE-LIMITS","GAS-PHASE-LIMITATION"],
+      stem:"关于<strong>键能法使用条件</strong>的辨析, 下列说法<strong>正确</strong>的是:",
+      options:{A:"键能法适用于一切化合物参与的反应, 包括离子化合物",B:"NaCl 等离子化合物中没有共价键可数, 不能直接用键能法",C:"键能法的前提之一是各物质为<strong>气态</strong>;若有液态 / 固态物质, 须先用相变焓修正",D:"键能表中的数据是逐根实测的精确值",E:"使用键能法前必须先知道分子的<strong>结构式</strong>, 才能数清断了哪些键、成了哪些键"},
+      answer:["B","C","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:键能法 4 条使用限制 — ① 气态(否则先修相变焓) ② 须知结构式 ③ 只适用共价键 ④ 平均值精度(估算)。',
+        approach:'<strong>解题思路</strong>:逐项对照 4 条限制。',
+        solution:'<strong>详细解题</strong>:<br>A 错、B 正确 — 离子化合物靠离子键和晶格能维系, 键能表是共价键的账本, 对它无从下手;<br>C 正确 — 键能定义在气态;液态水参与时要先加汽化焓的账;<br>D 错 — 表中是<strong>平均值</strong>(同种键在大量化合物中的平均), 不是逐根精确值;<br>E 正确 — 不知道结构式就数不了键:同分异构体分子式相同、键的种类数目却不同。<br>故选 <strong>B、C、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"较难", exportIds:["THREE-METHODS-COMPARISON","BOND-ENERGY-PRECISION-LIMIT","AVERAGE-CANCELLATION-ARGUMENT"],
+      stem:"对比三种获得反应焓变的途径(量热实验直接测 / 盖斯定律组合已知反应 / 键能数据计算), 下列说法<strong>正确</strong>的是:",
+      options:{A:"键能法的结果只能当<strong>估算值</strong> — 因为用的是平均键能",B:"键能法比量热实验更精确",C:"当表中平均键能恰好主要来自所计算的那类分子时(如 O-H 取自水), 偏差会部分<strong>抵消</strong>, 算出的结果可以相当准",D:"可靠性排序:量热实验 > 盖斯定律(基于实验数据组合) > 键能估算",E:"三种方法对同一反应必然给出完全相同的数值"},
+      answer:["A","C","D"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:三方法可靠性排序与各自误差来源;平均键能「取自谁、算谁」时误差抵消。',
+        approach:'<strong>解题思路</strong>:按「数据来源离实验越近越可靠」原则排序, 再辨析抵消机制。',
+        solution:'<strong>详细解题</strong>:<br>A 正确 — 平均值天生带偏差;<br>B 错 — 恰好说反:量热实验是直接测量, 是三者中的基准;<br>C 正确 — 表中 O-H 平均键能本来就主要由水的数据定出, 拿它回头算水的反应, 「平均化」造成的偏差大部分又被吃了回去;<br>D 正确 — 盖斯定律本身严格成立, 误差只来自所用的实验数据, 故介于两者之间;<br>E 错 — 键能法常与另两者差出几十 kJ/mol(平均值 + 状态问题)。<br>故选 <strong>A、C、D</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["BOND-ENERGY-IS-HESS-SPECIAL-CASE","THREE-LEVEL-ENERGY-DIAGRAM","H2O-GAS-VS-LIQUID-DIFFERENCE","BOND-ENERGY-4-CONDITIONS"],
+      stem:"关于键能法的<strong>原理与细节</strong>, 下列说法<strong>正确</strong>的是:",
+      options:{A:"键能法是与盖斯定律完全无关的独立原理",B:"键能法本质是<strong>盖斯定律的特例</strong>:人为设计了「反应物 → 气态原子 → 产物」的中间路径, 两段能量相减",C:"对生成水的反应, 键能法直接得到的就是生成<strong>液态</strong>水的 ΔH",D:"键能法对应的产物水是 H₂O(<strong>g</strong>);若题目要 H₂O(l) 的 ΔH, 还须计入约 44 kJ/mol 的汽化焓差",E:"键能定义本身就带着「气态、1 mol、断成气态原子、25°C 标准压强」多重限定"},
+      answer:["B","D","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能法 = 盖斯定律走「全断成原子」中间站的特例(三层能级图);② 键能定义在气态 → 算出的水是 H₂O(g);③ 4 个限定条件。',
+        approach:'<strong>解题思路</strong>:画三层能级图(反应物 / 气态原子 / 产物)理解原理, 再抠「水的状态」细节。',
+        solution:'<strong>详细解题</strong>:<br>A 错、B 正确 — 「反应物 → 原子」吸收 Σ断键, 「原子 → 产物」释放 Σ成键, 总 ΔH 与路径无关 — 这正是盖斯定律, 键能法只是选了一条特别的路;<br>C 错、D 正确 — 键能定义全程在气态, 算出的是 H₂O(g) 的账;要液态水还得加上水汽凝结放出的能量(约 44 kJ/mol / mol 水);忽略这一步是键能法与实验值对不上的第一大原因;<br>E 正确 — 定义 4 限定。<br>故选 <strong>B、D、E</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"中等", exportIds:["BOND-ENERGY-FORMULA","BREAKING-BOND-IS-ENDOTHERMIC","TYPICAL-BOND-ENERGY-DATA","MICROSCOPIC-VIEW-OF-REACTION"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:乙烯加氢制乙烷:\\(\\mathrm{C_2H_4(g) + H_2(g) \\to C_2H_6(g)}\\), 实验测得 \\(\\Delta H = -124\\) kJ/mol。已知键能(kJ/mol):C-H 413、H-H 436、C-C 348;乙烯分子含 1 根 C=C 和 4 根 C-H, 乙烷分子含 1 根 C-C 和 6 根 C-H。<br><br><strong>(1)</strong> 设 C=C 键能为 x, 用键能公式列方程, 反求 x;<br><strong>(2)</strong> 把 x 与 2 根 C-C 的键能之和比较 — 这个对比说明碳碳双键的什么特点?<br><strong>(3)</strong> 从微观角度解释:为什么断开 C=C 键必须消耗能量?<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。等号 = 与字母 x 直接用键盘输入即可。</em>",
+      keywords:["614","696","力","克服"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能公式 ΔH = Σ断 − Σ成 的反求用法;② 双键 ≠ 两根单键之和(第二根 π 键较弱);③ 断键吸热的微观根源是原子间引力。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 含 x 列方程 → 解出 x;<br>② x 与 2 × 348 比较;<br>③ 从「成键原子间有引力, 拉开要做功」解释。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 反求 C=C 键能</strong>(关键字命中):<br>断键(乙烯 + 氢气全断):\\(x + 4 \\times 413 + 436 = x + 2088\\);<br>成键(拼出乙烷):\\(348 + 6 \\times 413 = 2826\\);<br>键能公式:\\(\\Delta H = (x + 2088) - 2826 = -124\\);<br>解得:\\(x = 2826 - 2088 - 124 = 614\\) kJ/mol(与典型数据表 C=C 614 一致 ✓)。<br><strong>简化法验证</strong>(只记变化的键):断 C=C(x) + H-H(436), 成 C-C(348) + 2 根 C-H(826):\\(x + 436 - 1174 = -124\\) → x = 614 ✓ 两种数法一致。<br><br><strong>(2) 双键的特点</strong>:<br>2 根 C-C 单键之和 = \\(2 \\times 348 = 696\\) kJ/mol > C=C 的 614 kJ/mol;<br>说明<strong>双键不是两根单键的简单相加</strong>:第一根(σ 键)结合牢固, 第二根(π 键)结合较弱, 只贡献了 \\(614 - 348 = 266\\) kJ/mol;<br>这正是烯烃比烷烃活泼、容易发生加成反应的能量根源 — 打开较弱的第二根键代价不大, 换来两根新单键的释放, 整体放热(本反应 ΔH < 0)。<br><br><strong>(3) 断键耗能的微观解释</strong>(关键字命中):<br>成键的两个碳原子之间存在<strong>引力</strong>(共用电子对同时受两核吸引, 把两个原子「绑」在一起);<br>要把它们拉开到互不作用的距离, 必须克服这种引力做功 — 所以断键过程必然<strong>吸收</strong>能量, 这是键能恒为正值的根本原因。<br><br><strong>关键字命中</strong>:① 614(C=C 键能) / ② 696(2 根 C-C 键能之和) / ③ 力(原子间引力) / ④ 克服(克服引力做功)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '「已知 ΔH 反求未知键能」的三步(列方程 → 移项 → 验算), 我能独立完成吗?',
+        '我答错的根本原因是什么?(数键错 / 移项符号错 / 微观解释说不清)',
+        '「双键 < 两根单键之和」与烯烃易加成的联系, 我能讲给同学听吗?',
+        '高考反求键能题最爱在「ΔH 是负数的移项」上设陷阱, 我这步稳吗?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"中等", exportIds:["BOND-ENERGY-FORMULA","TYPICAL-BOND-ENERGY-DATA","BREAKING-BOND-IS-ENDOTHERMIC"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:合成氨反应 \\(\\mathrm{N_2(g) + 3H_2(g) \\to 2NH_3(g)}\\) 的 \\(\\Delta H = -92\\) kJ/mol。设 N≡N 键能为 a kJ/mol、H-H 键能为 b kJ/mol、N-H 键能为 x kJ/mol。<br><br><strong>(1)</strong> 用 a、b、x 写出 \\(\\Delta H\\) 的代数表达式, 并解出 x 的表达式;<br><strong>(2)</strong> 代入典型键能数据 a = 945、b = 436, 求 x 的数值(保留 1 位小数);<br><strong>(3)</strong> 由 (1) 的方程结构说明:这个反应放热, 说明哪一步的能量账更大?<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。字母 a、b、x 与加减号、除号 / 直接用键盘输入即可。</em>",
+      keywords:["92","a+3b","39","断"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能用字母表示时同样代入公式 ΔH = Σ断 − Σ成;② 2NH₃ 共 6 根 N-H(数键乘计量数);③ 放热 = 成键释放 > 断键吸收。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 断 1 根 N≡N + 3 根 H-H, 成 6 根 N-H, 列出含字母的方程并解 x;<br>② 代入数值;<br>③ 比较方程两侧的两笔能量账。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 代数表达式</strong>(关键字命中):<br>断键:\\(a + 3b\\);成键:\\(6x\\)(2 个 NH₃ × 每个 3 根 N-H);<br>键能公式:\\(\\Delta H = a + 3b - 6x = -92\\);<br>移项(注意 −92 带符号走):\\(6x = a + 3b + 92\\), 即 <strong>x = (a + 3b + 92) / 6</strong>。<br><br><strong>(2) 数值计算</strong>(关键字命中):<br>\\(x = (945 + 3 \\times 436 + 92) / 6 = (945 + 1308 + 92) / 6 = 2345 / 6 \\approx 390.8\\) kJ/mol;<br>与典型数据表中 N-H 约 391 kJ/mol 吻合 ✓(反求后代回验算的好习惯)。<br><br><strong>(3) 放热的能量账</strong>(关键字命中):<br>由方程:\\(\\Delta H = \\underbrace{(a+3b)}_{\\text{断键吸收}} - \\underbrace{6x}_{\\text{成键释放}} < 0\\);<br>说明<strong>成键释放的能量(6x = 2346 kJ/mol)大于断键吸收的能量(a + 3b = 2253 kJ/mol)</strong>, 差额 92 kJ/mol 以热的形式放出;<br>虽然 N≡N(945)极难断, 但 6 根 N-H 新键的释放总量更大, 整体仍是放热反应。<br><br><strong>关键字命中</strong>:① 92(ΔH 数值, 移项后出现在分子上) / ② a+3b(代数式) / ③ 39(x ≈ 390.8) / ④ 断(断键账 vs 成键账)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '字母代数式题(高考新趋势)我能像处理数字一样处理 a、b 吗?',
+        '我答错的根本原因是什么?(漏乘计量数 6 / 移项符号错 / 表达式没化简)',
+        '「ΔH 为负值时移项要带负号」这个高频失分点, 我这次踩了吗?',
+        '反求出 x 后「代回验算 / 与典型数据对照」的检查习惯, 我有吗?'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"中等", exportIds:["BOND-ENERGY-FORMULA","BOND-ENERGY-PRECISION-LIMIT","TYPICAL-BOND-ENERGY-DATA"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:工业上乙烷脱氢制乙烯:\\(\\mathrm{C_2H_6(g) \\to C_2H_4(g) + H_2(g)}\\)。已知键能(kJ/mol):C-H 413、C-C 348、C=C 614、H-H 436;文献实测该反应 \\(\\Delta H = +137\\) kJ/mol。<br><br><strong>(1)</strong> 用键能公式计算该反应 \\(\\Delta H\\) 的估算值(乙烷:6 根 C-H + 1 根 C-C;乙烯:4 根 C-H + 1 根 C=C);<br><strong>(2)</strong> 计算结果为正值 — 这对工业生产的供能方式意味着什么?<br><strong>(3)</strong> 键能估算值与文献实测值 +137 kJ/mol 有十几 kJ/mol 的出入, 解释这一出入的来源。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["124","差","平均","吸"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能公式正算;② ΔH > 0 = 吸热反应, 需外界持续供能;③ 键能法偏差的头号来源 = 表中数据是平均键能。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 把乙烷全部断键、拼出乙烯 + 氢气;<br>② 正号 → 吸热 → 供热;<br>③ 归因平均键能。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 键能估算</strong>(关键字命中):<br>断键(乙烷全断):\\(6 \\times 413 + 348 = 2478 + 348 = 2826\\) kJ/mol;<br>成键(拼乙烯 + 氢气):\\(614 + 4 \\times 413 + 436 = 614 + 1652 + 436 = 2702\\) kJ/mol;<br>\\(\\Delta H = 2826 - 2702 = +124\\) kJ/mol;<br><strong>简化法同样可行</strong>(只记变化的键):断 C-C(348) + 2 根 C-H(826), 成 C=C(614) + H-H(436):\\(1174 - 1050 = +124\\) ✓。<br><br><strong>(2) 对工业供能的含义</strong>(关键字命中):<br>ΔH > 0, 该反应<strong>吸热</strong> — 反应自己不产能量, 必须由外界<strong>持续供热</strong>维持;<br>这正是工业乙烷脱氢(蒸汽裂解)要在高温炉(约 800°C 以上)中进行、能耗巨大的根本原因之一。<br><br><strong>(3) 偏差来源</strong>(关键字命中):<br>表中键能是同种键在大量化合物中的<strong>平均值</strong>:<br>· 乙烷与乙烯中的 C-H 键强度其实略有差别, 表里却都按 413 记账;<br>· C=C、C-C 同理, 都是「平均化」后的数字;<br>· 逐项的小偏差累计起来, 就造成估算值(+124)与实测(+137)十几 kJ/mol 的出入 — 这是键能法天生的精度极限, 估算够用、精确不足。<br><br><strong>关键字命中</strong>:① 124(估算值) / ② 差(估算与实测的偏差) / ③ 平均(键能) / ④ 吸(热)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '正算键能题的数键(6 根 C-H + 1 根 C-C), 我是画了结构式数的, 还是凭感觉?',
+        '我答错的根本原因是什么?(数键漏 / 公式方向反 / 偏差来源答非所问)',
+        '「估算值与实测值不符 → 先想平均键能」这条归因路径, 我建立了吗?',
+        '高考解释题「键能法为何有偏差」我能用「平均值」三个字答到点上吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["BOND-ENERGY-FORMULA","CH4-COMBUSTION-BY-BOND-ENERGY","BOND-ENERGY-PRECISION-LIMIT"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:甲烷完全燃烧(产物均为气态):\\(\\mathrm{CH_4(g) + 2O_2(g) \\to CO_2(g) + 2H_2O(g)}\\), 量热实验值 \\(\\Delta H = -799\\) kJ/mol。已知键能(kJ/mol):C-H 413、O=O 498、O-H 463;设 CO₂ 分子中每根碳氧键的键能为 x。<br><br><strong>(1)</strong> 列方程反求 x(CO₂ 含 2 根碳氧键, 2 个 H₂O 共 4 根 O-H);<br><strong>(2)</strong> \\(\\Delta H\\) 为负值, 从断键与成键两笔能量账的对比角度怎么理解?<br><strong>(3)</strong> 键能表中一般 C=O(如醛、酮中)约为 745 kJ/mol — 把 x 与它对比, 解释为什么 CO₂ 中的碳氧键明显更强(可从 CO₂ 分子的形状与成键方式考虑)。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。字母 x 直接用键盘输入即可。</em>",
+      keywords:["79","平均","结构","放"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 反求未知键能(含 2x 的方程);② 放热 = 成键释放 > 断键吸收;③ 同名键在不同分子环境中强度不同 — 平均键能依赖分子结构。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 断 4 C-H + 2 O=O, 成 2x + 4 O-H, 列方程;<br>② 比较两笔账;<br>③ 从 CO₂ 的直线形结构与键的特殊性解释 797.5 ≫ 745。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 反求 CO₂ 中碳氧键键能</strong>(关键字命中):<br>断键:\\(4 \\times 413 + 2 \\times 498 = 1652 + 996 = 2648\\) kJ/mol;<br>成键:\\(2x + 4 \\times 463 = 2x + 1852\\) kJ/mol;<br>键能公式:\\(2648 - (2x + 1852) = -799\\), 即 \\(796 - 2x = -799\\);<br>解得:\\(2x = 1595\\), <strong>x = 797.5 kJ/mol</strong>。<br><br><strong>(2) 负号的能量账解读</strong>(关键字命中):<br>\\(\\Delta H < 0\\) 表示<strong>成键释放的能量(2x + 1852 = 3447 kJ/mol)大于断键吸收的能量(2648 kJ/mol)</strong>;<br>多出的 799 kJ/mol 以热和光的形式<strong>放</strong>出 — 这正是甲烷可以做燃料的能量本质:旧键弱、新键强, 换键有利可图。<br><br><strong>(3) 为什么 CO₂ 的碳氧键更强</strong>(关键字命中):<br>x = 797.5 比一般 C=O 的 745 高出约 52 kJ/mol:<br>· CO₂ 是<strong>直线形</strong>分子 O=C=O, 两组双键共用同一个碳, 电子云可在三个原子间离域, 额外增强了每根键;<br>· 这说明「碳氧双键」不是一个固定强度的零件 — 同名键在不同的分子<strong>结构</strong>(环境)中强度不同;<br>· 键能表给的只是<strong>平均</strong>值, 遇到 CO₂ 这类特殊分子, 用表值 745 去算会带来明显偏差(本题用实验值反推, 才看清了这一点)。<br><br><strong>关键字命中</strong>:① 79(x = 797.5) / ② 平均(键能) / ③ 结构(分子环境) / ④ 放(成键释放更多)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '含 2x 的反求方程(系数不是 1), 我的移项与除系数操作熟练吗?',
+        '我答错的根本原因是什么?(数键错 / 负号移项错 / 第 (3) 问只说了「就是更强」没说为什么)',
+        '「同名键在不同分子中强度不同」这一结论, 我能再举一个例子吗?(如 O-H 在水和醇中)',
+        '高考对比解释题(为什么 A 比 B 强)我能做到「给数据差 + 给结构原因」两段式吗?'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"较难", exportIds:["BOND-ENERGY-FORMULA","THREE-METHODS-COMPARISON","EXPERIMENT-ALGORITHM-BOND-COMPLEMENT","TYPICAL-BOND-ENERGY-DATA"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:肼(N₂H₄)是常用火箭推进剂, 燃烧反应:\\(\\mathrm{N_2H_4(g) + O_2(g) \\to N_2(g) + 2H_2O(g)}\\)。已知键能(kJ/mol):N-H 391、N-N 163、O=O 498、N≡N 945、O-H 463;肼分子含 4 根 N-H 和 1 根 N-N。<br><br><strong>(1)</strong> 用键能公式计算该反应的 \\(\\Delta H\\);<br><strong>(2)</strong> 结合计算过程说明:肼燃烧强放热的能量来源主要是哪根新键的形成?<br><strong>(3)</strong> 获得反应焓变共有三种方法, 本题用的是哪一种?把三种方法按可靠性从高到低排序, 并说明工程上它们各自扮演什么角色。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["572","盖斯","实验","2225"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能公式正算(多种键混合数键);② N≡N(945)是普通单键的数倍 — 形成它是巨大的放热来源;③ 三方法可靠性:量热实验 > 盖斯定律 > 键能估算。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 断 4 N-H + 1 N-N + 1 O=O;成 1 N≡N + 4 O-H;<br>② 对比各键贡献, 找最大的一笔;<br>③ 方法归类 + 排序 + 各自角色。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 键能法计算</strong>(关键字命中):<br>断键:\\(4 \\times 391 + 163 + 498 = 1564 + 163 + 498 = 2225\\) kJ/mol;<br>成键:\\(945 + 4 \\times 463 = 945 + 1852 = 2797\\) kJ/mol;<br>\\(\\Delta H = 2225 - 2797 = -572\\) kJ/mol — 强放热, 这正是肼能做火箭推进剂的能量基础。<br><br><strong>(2) 放热的主要来源</strong>:<br>成键账里最大的一笔是 <strong>N≡N 的形成:945 kJ/mol</strong>, 几乎是断掉 N-N(163)所耗的 6 倍;<br>肼分子里两个氮原子只用一根弱弱的 N-N 单键相连, 燃烧后却结成三键氮气 — 「弱键变最强键」是肼类燃料强放热的结构根源;4 根 O-H(1852)同样贡献巨大。<br><br><strong>(3) 方法归类与排序</strong>(关键字命中):<br>本题用的是<strong>键能估算法</strong>(第三种);<br>可靠性从高到低:<strong>量热实验 > 盖斯定律(组合实验数据) > 键能估算(平均值误差)</strong>;<br>工程角色分工:实验值是<strong>基准</strong>(立项 / 设计以它为准);盖斯定律是<strong>算法</strong>(把测不了的反应用测得了的组合出来);键能法是<strong>补位</strong>(数据不全、快速初筛时先估个量级)。三者不是竞争关系, 而是一套互补的工具箱。<br><br><strong>关键字命中</strong>:① 572(ΔH 数值) / ② 盖斯(定律) / ③ 实验(量热实验为基准) / ④ 2225(断键总和)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '五种键混在一起数键(4 N-H + N-N + O=O → N≡N + 4 O-H), 我能一次数对吗?',
+        '我答错的根本原因是什么?(数键漏 / 算术错 / 三方法排序记反)',
+        '「弱键变强键 = 放热来源」这一结构化理解, 我能迁移到其他燃料(如氢气)吗?',
+        '高考方法论问题(哪种方法 / 以谁为准)我能用「基准 / 算法 / 补位」的语言规范作答吗?'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"中等", exportIds:["H2-O2-H2O-THREE-METHOD","AVERAGE-CANCELLATION-ARGUMENT","H2O-GAS-VS-LIQUID-DIFFERENCE","BOND-ENERGY-FORMULA"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:氢气燃烧 \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(g)}\\)。已知键能(kJ/mol):H-H 436、O=O 498、O-H 463。用盖斯定律(由标准生成焓表)得 −241.8 kJ/mol, 量热实验值也是 −241.8 kJ/mol。<br><br><strong>(1)</strong> 用键能公式计算该反应 \\(\\Delta H\\) 的估算值;<br><strong>(2)</strong> 键能法通常有几十 kJ/mol 的偏差, 本题却与另两种方法几乎完全一致 — 解释这一「巧合」的真正原因(提示:表中 O-H 的数据是从哪类分子定出来的?);<br><strong>(3)</strong> 已知 \\(\\mathrm{H_2O(l) \\to H_2O(g)}\\) 的 \\(\\Delta H = +44\\) kJ/mol。求产物为<strong>液态水</strong>时反应的 \\(\\Delta H\\), 并说明书写热化学方程式时为什么必须注明每种物质是气还是液。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["241","926","状态","抵消"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 分数计量数的键能计算;② 平均键能误差抵消 — O-H 表值本来就主要取自水;③ H₂O(g) 与 H₂O(l) 差一笔汽化焓, 状态标注决定 ΔH 数值。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 断 1 H-H + ½ O=O, 成 2 O-H;<br>② 「取自谁、算谁」→ 偏差吃回去;<br>③ 在 (1) 的基础上再加凝结放热一笔账。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 键能法计算</strong>(关键字命中):<br>断键:\\(436 + \\tfrac{1}{2} \\times 498 = 436 + 249 = 685\\) kJ/mol;<br>成键:\\(2 \\times 463 = 926\\) kJ/mol;<br>\\(\\Delta H = 685 - 926 = -241\\) kJ/mol — 与盖斯定律值、实验值(−241.8)几乎重合。<br><br><strong>(2) 一致的真正原因</strong>(关键字命中):<br>不是键能法突然变精确了, 而是<strong>误差抵消</strong>:<br>· 表中 O-H 的平均键能(463)本来就主要由<strong>水分子</strong>的数据平均得来(水断两根 O-H 共 926, 平均 463);<br>· 现在反过来用它算水的生成, 「平均化」造成的偏差大部分又被吃了回去;<br>· 若拿同一个 463 去算<strong>别的</strong>含 O-H 分子(如乙醇), 偏差就会显出来 — 所以这是个案的「巧」, 不是方法的「准」。<br><br><strong>(3) 液态水的 ΔH 与状态标注</strong>(关键字命中):<br>水汽凝结 \\(\\mathrm{H_2O(g) \\to H_2O(l)}\\) 放热 44 kJ/mol(题给逆过程的相反数);<br>\\(\\Delta H(\\text{液}) = -241.8 + (-44) = -285.8\\) kJ/mol;<br>同一个化学反应, 产物水是气是液, ΔH 差了 44 kJ/mol(约 18%)— 所以热化学方程式必须注明每种物质的聚集<strong>状态</strong>:状态不同, 始末态就不同, ΔH(状态量)自然不同;不标状态的 ΔH 没有意义。<br><br><strong>关键字命中</strong>:① 241(键能法估算值) / ② 926(成键 2 × 463) / ③ 状态(聚集状态标注) / ④ 抵消(误差抵消)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '「误差抵消」论证(取自谁、算谁就准)我能独立复述并举出反例吗?',
+        '我答错的根本原因是什么?(½ 计量数处理错 / 第 (2) 问答成「键能法本来就准」/ 凝结放热符号反)',
+        '「H₂O(g) 与 H₂O(l) 差 44」这笔账, 我能主动用在燃烧热类题目里吗?',
+        '高考热化学方程式判断题最常见的错误选项就是「漏标状态」, 我对此敏感吗?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"中等", exportIds:["CH4-COMBUSTION-BY-BOND-ENERGY","H2O-GAS-VS-LIQUID-DIFFERENCE","BOND-ENERGY-PRECISION-LIMIT","THREE-METHODS-COMPARISON"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:量热实验测得甲烷燃烧热(产物为 CO₂(g) 和<strong>液态水</strong>):\\(\\mathrm{CH_4(g) + 2O_2(g) \\to CO_2(g) + 2H_2O(l)}\\), \\(\\Delta H = -890\\) kJ/mol。已知键能(kJ/mol):C-H 413、O=O 498、C=O(表中一般值) 745、O-H 463;\\(\\mathrm{H_2O(l) \\to H_2O(g)}\\) 的 \\(\\Delta H = +44\\) kJ/mol。<br><br><strong>(1)</strong> 用键能公式估算 \\(\\Delta H\\)(注意:键能法算出的产物水是什么状态?);<br><strong>(2)</strong> 估算值与实验值 −890 相差约 196 kJ/mol。先做<strong>第一笔修正</strong>:把水的状态修正计入, 算出修正后的估算值;<br><strong>(3)</strong> 修正后仍有约百余 kJ/mol 的差距 — 这剩余差距主要来自哪里?(提示:CO₂ 中碳氧键的真实强度与表中一般 C=O 相比如何?)<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["694","88","108","液"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:键能法与实验值的差额要<strong>分两笔账</strong>:① 状态账(键能法对应气态水, 差汽化焓) ② 平均键能账(CO₂ 中碳氧键远强于表中一般 C=O)。顺序:先修状态、再归因平均。',
+        approach:'<strong>解题思路</strong>(3 小问):<br>① 键能法正算(产物按气态记);<br>② 2 mol 水液化的放热补上;<br>③ 剩余差距归因 C=O 平均值偏低。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 键能法估算</strong>(关键字命中):<br>断键:\\(4 \\times 413 + 2 \\times 498 = 1652 + 996 = 2648\\) kJ/mol;<br>成键:\\(2 \\times 745 + 4 \\times 463 = 1490 + 1852 = 3342\\) kJ/mol;<br>\\(\\Delta H = 2648 - 3342 = -694\\) kJ/mol;<br>注意:键能定义全程在气态, 这个 −694 对应的产物是 <strong>H₂O(g)</strong>, 而实验值 −890 对应<strong>液</strong>态水 — 两者口径不同, 不能直接比。<br><br><strong>(2) 第一笔修正:状态账</strong>(关键字命中):<br>2 mol 水汽凝结成液态水, 放热 \\(2 \\times 44 = 88\\) kJ/mol;<br>修正后:\\(-694 + (-88) = -782\\) kJ/mol — 距实验值 −890 的差距从 196 缩小到约 108。<br><br><strong>(3) 第二笔账:平均键能误差</strong>(关键字命中):<br>剩余约 \\(890 - 782 = 108\\) kJ/mol 主要来自 <strong>C=O 的「平均值」偏低</strong>:<br>· CO₂ 中碳氧键的真实强度约 798 kJ/mol, 远高于表中一般 C=O(醛酮环境)的 745;<br>· 每根差约 53, 2 根共差约 106 ≈ 108 — 差距基本对上;<br>· 教训:遇到 CO₂ 这类特殊分子, 用表中平均键能必然失真;差额分账时<strong>先修状态、再怪平均</strong>, 顺序不能反。<br><br><strong>关键字命中</strong>:① 694(键能法估算值) / ② 88(2 mol 水的状态修正) / ③ 108(平均键能账) / ④ 液(态水 / 液化)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '「先修状态、再怪平均」的差额分账两步法, 我能在新题里按顺序执行吗?',
+        '我答错的根本原因是什么?(忘了键能法对应气态水 / 88 的符号方向错 / 第 (3) 问没量化)',
+        '键能法、盖斯定律、量热实验对同一反应给出不同数值时, 我知道先检查什么吗?',
+        '高考「解释估算与实测差异」题, 我能写出有数字支撑的两段式答案吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"中等", exportIds:["METHOD-DECISION-TREE","BOND-ENERGY-4-USAGE-LIMITS","ENGINEERING-ESTIMATE-VS-PRECISE-CALC","EXPERIMENT-ALGORITHM-BOND-COMPLEMENT"],
+      stem:"<strong>综合大题(150-300 字, 无计算)</strong>:某化工研发团队要为新工艺选择反应路线, 面对「量热实验直接测 / 盖斯定律组合已知数据 / 键能数据计算」三种获得反应焓变的途径, 请回答:<br><br><strong>(1)</strong> 研发初期要从 50 种候选反应中<strong>快速</strong>比较放热能力, 应选哪种途径?为什么?<br><strong>(2)</strong> 使用这种途径之前, 必须先弄清每种候选分子的什么信息?为什么缺它不可?<br><strong>(3)</strong> 候选清单里有一个食盐(NaCl)参与的反应 — 能直接查键能表用这种途径吗?为什么?<br><strong>(4)</strong> 初筛完成、工艺定型之前, 为什么不能直接采用第 (1) 问算出的数值?最终应该怎么把 \\(\\Delta H\\) 定准?<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>",
+      keywords:["估","结构","离子","平均"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:方法选择决策树 — 初筛用键能估算(快), 定型用量热实验(准);键能法 4 条使用限制(气态 / 须知结构式 / 只适用共价键 / 平均值精度)。',
+        approach:'<strong>解题思路</strong>(4 小问):<br>① 比速度 → 键能法;<br>② 数键的前提 → 结构式;<br>③ NaCl 无共价键 → 不适用;<br>④ 平均值只能估算 → 实验定准。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 初筛选键能法</strong>(关键字命中):<br>应选<strong>键能数据计算</strong>:50 种反应逐一做量热实验耗时耗钱, 盖斯定律要求每个反应都凑得齐已知反应组合;而键能法只需查表 + 数键, 几分钟就能<strong>估算</strong>出一个量级, 最适合大批量快速初筛、排掉明显不行的候选。<br><br><strong>(2) 必须先知道结构式</strong>(关键字命中):<br>必须先弄清分子的<strong>结构</strong>式 — 键能法的全部操作就是「数键查表」:不知道分子里有哪几种键、各几根, 公式 ΔH = Σ断 − Σ成 根本无从下手;分子式相同的同分异构体, 键的组成不同, ΔH 也不同。<br><br><strong>(3) NaCl 不适用</strong>(关键字命中):<br>不能。NaCl 是<strong>离子</strong>化合物, 钠与氯之间靠离子键 / 晶格能维系, 分子内没有共价键可数 — 键能表是共价键的账本, 对离子化合物无从记账;这类反应应改用盖斯定律或实验测定。<br><br><strong>(4) 定型前必须实验定准</strong>(关键字命中):<br>键能表中的数据是<strong>平均</strong>键能, 算出的 ΔH 只能当估算值(常有几十 kJ/mol 出入), 拿去做工艺设计 / 安全核算风险太大;<br>最终应对入选反应做<strong>量热实验</strong>精确测定(测不了的用盖斯定律由实验数据组合) — 「键能补位初筛、实验基准定型」, 这正是三种方法在工程上的分工。<br><br><strong>关键字命中</strong>:① 估(算 / 初筛) / ② 结构(式) / ③ 离子(化合物不适用) / ④ 平均(键能精度)<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '三种方法的「快 / 准 / 适用范围」三维比较表, 我能默写出来吗?',
+        '我答错的根本原因是什么?(只记了排序没记角色 / 忘了离子化合物这条限制 / 第 (2) 问没答到数键)',
+        '「分子式相同、键组成不同」的同分异构体例子, 我能举一个说明结构式的必要性吗?',
+        '高考方法论题(选哪种方法 + 为什么)我能做到每问「下判断 + 给理由」两步走吗?'
+      ]
+    }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "bond-energy-reaction-enthalpy";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+const EXCLUDE_PAIRS = [
+  ["T2-1","T4-2"],["T2-4","T4-2"],["T4-2","T5-1"],
+  ["T3-1","T5-2"],["T3-3","T5-2"],["T3-4","T5-2"],
+  ["T3-2","T5-4"],["T3-3","T5-4"],["T3-3","T5-1"],
+  ["T1-2","T4-1"],["T1-3","T4-1"],["T1-2","T4-3"],
+  ["T3-1","T4-3"],["T3-3","T4-3"],["T3-1","T5-4"]
+];
+function conflictsWithPicked(id, pickedIds) {
+  return EXCLUDE_PAIRS.some(p =>
+    (p[0] === id && pickedIds.includes(p[1])) || (p[1] === id && pickedIds.includes(p[0])));
+}
+function pickQuestions() {
+  selectedQuestions = [];
+  const pickedIds = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    const allowed = pool.filter(q => !conflictsWithPicked(q.id, pickedIds));
+    const pickPool = allowed.length ? allowed : pool;
+    const q = pickPool[Math.floor(Math.random() * pickPool.length)];
+    selectedQuestions.push(q);
+    pickedIds.push(q.id);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    html += `<div class="kp-item">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">第 ${n} 题</span>
+        <span class="q-meta">${typeTag}</span>
+        ${compositeTag}
+        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
+        <span class="q-score">${q.score} 分</span>
+      </div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="8" data-q-id="q${n}" placeholder="请分小问作答(150-300 字, 可分段)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 或 mock-check 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="bond-energy-reaction-enthalpy-task-cards.html">学习任务卡</a> · <a href="bond-energy-reaction-enthalpy-mock-check.html">基础检测</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "bond-energy-reaction-enthalpy";
+  const MODULE_NAME = "键能与反应焓变";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>
