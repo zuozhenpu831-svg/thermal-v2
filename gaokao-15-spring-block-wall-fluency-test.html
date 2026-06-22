@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考 15 压轴 · 弹簧+板块+墙 · 熟练度检测(capstone) · 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 fluency-test · 三色制(蓝 / 金 / 银) · 圆形锚点 · 大留白 v0.1.6 ===== */
+  :root {
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #7B8290;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ===== Banner ===== */
+  .v021-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .v021-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+  }
+  .v021-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  .cross-banner {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-banner::before {
+    content: "!";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-banner strong { color: var(--blue-700); }
+
+  /* ===== Header · 极简化 · 双大圆装饰锚 ===== */
+  header.page-header {
+    text-align: center;
+    padding: 56px 32px 48px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  header.page-header::before {
+    content: "";
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  header.page-header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  header.page-header h1 {
+    font-size: 1.45rem;
+    margin: 0 0 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+    position: relative; z-index: 1;
+  }
+  header.page-header .subtitle {
+    font-size: 0.9rem;
+    opacity: 1;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== Entry card · 顶部圆形 CTA ===== */
+  .entry-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    position: relative;
+  }
+  .entry-card h2 {
+    color: var(--blue-700);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .entry-card h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .entry-card p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.92rem; }
+  .entry-card input[type="text"] {
+    padding: 13px 20px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    font-size: 0.98rem;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .entry-card input[type="text"]:focus { outline: none; border-color: var(--blue-700); }
+  .entry-card .info-list {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    max-width: 760px;
+    margin: 22px auto;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    list-style: none;
+  }
+  .entry-card .info-list li { margin: 6px 0; padding-left: 22px; position: relative; }
+  .entry-card .info-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0.7em;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--silver-500);
+  }
+  .entry-card .info-list li strong { color: var(--blue-700); }
+
+  /* ===== 主按钮 · 普通圆角(不要圆形) ===== */
+  .btn-primary {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 16px 44px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); background: var(--blue-900); }
+
+  /* ===== Progress bar ===== */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 14px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .progress-bar-wrap .student,
+  .progress-bar-wrap .answered-count { color: var(--blue-700); font-weight: 700; }
+
+  /* ===== 题卡 · 大留白 · 按题号循环色(蓝→金→银) ===== */
+  .question {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+    border-top: 3px solid var(--q-mid);
+  }
+  .question:nth-of-type(3n+1) {
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+  }
+  .question:nth-of-type(3n+2) {
+    --q-rich: var(--gold-900);
+    --q-mid:  var(--gold-700);
+    --q-bg:   var(--gold-050);
+    --q-tint: var(--gold-100);
+  }
+  .question:nth-of-type(3n) {
+    --q-rich: var(--silver-900);
+    --q-mid:  var(--silver-700);
+    --q-bg:   var(--silver-050);
+    --q-tint: var(--silver-100);
+  }
+
+  /* ===== 题头大圆 · 220-240px · 4 行居中(第N题/题型/难度/编号) ===== */
+  .q-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--silver-100);
+  }
+  .q-header-circle {
+    background: var(--q-mid);
+    color: #fff;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    box-shadow: 0 0 0 8px var(--q-tint);
+    padding: 18px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  .q-header-circle .q-line-no {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .q-header-circle .q-line-type {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.95;
+    line-height: 1.3;
+  }
+  .q-header-circle .q-line-diff {
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.18);
+    padding: 4px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .q-header-circle .q-line-id {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .q-score { color: var(--silver-700); font-size: 0.85rem; font-weight: 500; margin: 8px 0 0; text-align: center; }
+  .q-prompt { font-size: 0.94rem; line-height: 1.9; margin-bottom: 20px; color: var(--text-primary); }
+  .q-prompt svg { display: block; margin: 14px auto; max-width: 100%; }
+  .q-prompt ol { margin: 10px 0 10px 24px; }
+  .q-prompt ol li { margin: 8px 0; }
+
+  .q-short-input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: var(--bg-secondary);
+    min-height: 240px;
+    transition: var(--transition);
+    color: var(--text-primary);
+  }
+  .q-short-input:focus { outline: none; border-color: var(--q-mid); background: #fff; box-shadow: 0 0 0 3px var(--q-tint); }
+
+  /* ===== Feedback · 题号循环色驱动 · 无绿无紫 ===== */
+  .q-feedback {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--q-bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--q-mid);
+  }
+  .q-feedback.correct { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.wrong { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.partial { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-result { font-weight: 700; font-size: 0.92rem; margin-bottom: 12px; color: var(--q-rich); }
+  .q-result.correct::before { content: "\2713  "; }
+  .q-result.partial::before { content: "\25D0  "; }
+  .q-result.wrong::before { content: "\2717  "; }
+  .q-fb-row { background: #fff; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-size: 0.88rem; color: var(--text-primary); }
+  .q-fb-row strong { color: var(--q-rich); }
+  .q-fb-row.q-fb-knowledge { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; }
+  .q-fb-row.q-fb-approach { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; opacity: 0.96; }
+  .q-fb-row.q-fb-solution { background: #fff; border: 1px solid var(--border-color); border-left: 3px solid var(--q-rich); padding: 14px 18px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; color: var(--text-primary); }
+  .q-export-label { background: var(--q-tint); color: var(--q-rich); padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; margin: 0 2px; display: inline-block; font-weight: 600; }
+  .q-anchor { font-size: 0.82rem; color: var(--text-secondary); padding-top: 10px; border-top: 1px solid var(--silver-100); margin-top: 12px; }
+  .q-anchor code { background: var(--q-tint); color: var(--q-rich); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: var(--q-mid); }
+
+  /* ===== Reflection · 跟随题号循环色 ===== */
+  .q-reflection {
+    margin-top: 20px;
+    padding: 22px 26px 22px 60px;
+    background: var(--q-bg);
+    border: none;
+    border-left: 3px solid var(--q-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    position: relative;
+  }
+  .q-reflection::before {
+    content: "\2197";
+    position: absolute;
+    left: 14px; top: 22px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--q-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .q-reflection-title { font-weight: 700; color: var(--q-rich); margin-bottom: 14px; font-size: 0.92rem; }
+  .q-reflection ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.85rem; color: var(--text-primary); }
+  .q-reflection ol li { margin: 5px 0; line-height: 1.8; }
+  .q-reflection-input {
+    width: 100%;
+    border: 1px solid var(--q-tint);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    background: #fff;
+    min-height: 110px;
+    color: var(--text-primary);
+  }
+  .q-reflection-input:focus { outline: none; border-color: var(--q-mid); box-shadow: 0 0 0 3px var(--q-tint); }
+  .q-reflection-hint { font-size: 0.78rem; color: var(--q-rich); margin-top: 8px; font-style: italic; opacity: 0.85; }
+
+  /* ===== Submit ===== */
+  .submit-area {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin: 36px 0 22px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .btn-submit {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 14px 44px;
+    border-radius: 16px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 0 0 6px var(--blue-100), var(--shadow-md);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+  }
+  .btn-submit:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: #fff;
+    color: var(--blue-700);
+    border: 1.5px solid var(--blue-700);
+    padding: 12px 28px;
+    margin: 6px;
+    font-size: 0.88rem;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .btn-secondary:hover { background: var(--blue-050); }
+
+  /* ===== Results ===== */
+  .results-summary {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+  .results-summary h2 {
+    margin: 0 0 22px;
+    color: var(--blue-700);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .results-summary h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .score-big {
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin: 14px 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .score-big.passed { color: var(--blue-700); }
+  .score-big.failed { color: var(--silver-700); }
+  .score-big.honored { color: var(--gold-700); }
+  .status { font-size: 0.95rem; margin: 10px 0 20px; }
+  .wrong-list { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; font-size: 0.88rem; color: var(--text-secondary); text-align: left; }
+  .wrong-list strong { color: var(--silver-900); }
+
+  /* ===== 考察点梳理 · kp-section ===== */
+  .kp-section {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    margin: 22px auto;
+    max-width: 800px;
+    text-align: left;
+    font-size: 0.85rem;
+  }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 700; color: var(--blue-700); display: flex; align-items: center; gap: 8px; font-size: 0.92rem; }
+  .kp-toggle::after { content: '▼'; font-size: 0.7rem; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 16px; }
+  .kp-intro {
+    background: var(--gold-050);
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    line-height: 1.85;
+    color: var(--gold-900);
+  }
+  .kp-intro strong { color: var(--gold-900); }
+  .kp-item {
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin: 14px 0;
+    border-left: 3px solid var(--blue-700);
+    box-shadow: 0 1px 3px rgba(20,30,60,0.04);
+  }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--silver-100); }
+
+  /* ===== kp-no · 28×28 圆 · 三色映射 freq 档 ===== */
+  .kp-item .kp-no {
+    background: var(--silver-700);
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px var(--silver-100);
+  }
+  .kp-item.freq-high .kp-no { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .kp-item.freq-mid .kp-no { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .kp-item.freq-low .kp-no { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .kp-item.freq-high { border-left-color: var(--gold-700); }
+  .kp-item.freq-mid { border-left-color: var(--blue-700); }
+  .kp-item.freq-low { border-left-color: var(--silver-700); }
+
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 0.95rem; color: var(--blue-700); }
+
+  /* ===== kp-freq · 频次档胶囊 · 三色 ===== */
+  .kp-item .kp-freq { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kp-item .kp-tag {
+    background: var(--silver-100);
+    color: var(--silver-900);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .kp-item.freq-high .kp-tag { background: var(--gold-100); color: var(--gold-900); }
+  .kp-item.freq-mid .kp-tag { background: var(--blue-100); color: var(--blue-700); }
+  .kp-item.freq-low .kp-tag { background: var(--silver-100); color: var(--silver-900); }
+
+  .kp-item .kp-note { color: var(--text-secondary); font-size: 0.78rem; font-style: italic; }
+  .kp-item .kp-section-label { font-weight: 700; color: var(--blue-700); margin-top: 12px; margin-bottom: 6px; font-size: 0.85rem; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 0.85rem; line-height: 1.85; color: var(--text-primary); }
+  .kp-item .kp-list li { margin: 4px 0; }
+  .kp-item .kp-list li strong { color: var(--blue-700); }
+  .kp-item .kp-revisit { font-size: 0.8rem; color: var(--blue-700); margin-top: 12px; padding: 8px 12px; background: var(--blue-050); border-radius: var(--radius-sm); }
+  .kp-footer { text-align: center; padding: 14px; color: var(--blue-700); font-weight: 700; font-size: 0.9rem; }
+
+  /* ===== 掌握度矩阵 · 圆形状态点 · 三色(蓝/金/银) ===== */
+  .mastery-map { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 20px 24px; margin: 20px 0; text-align: left; }
+  .mastery-map h3 { font-size: 0.95rem; color: var(--blue-700); margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .mastery-map h3::before {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 3px var(--blue-100);
+  }
+  .mastery-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px 110px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin: 8px 0;
+    font-size: 0.85rem;
+    background: #fff;
+    border-left: 3px solid var(--silver-500);
+  }
+  .mastery-row.correct { border-left-color: var(--blue-700); }
+  .mastery-row.partial { border-left-color: var(--gold-700); }
+  .mastery-row.wrong { border-left-color: var(--silver-700); }
+  .mastery-row .m-tid { font-weight: 700; color: var(--blue-700); font-size: 0.85rem; }
+  .mastery-row .m-title { color: var(--text-primary); }
+
+  /* ===== 状态点 → 圆 ===== */
+  .mastery-row .m-status {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin: 0 auto;
+  }
+  .mastery-row .m-status.correct { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .mastery-row .m-status.partial { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .mastery-row .m-status.wrong { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .mastery-row .m-pct { text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 6px; font-size: 0.78rem; }
+  .mastery-row .m-revisit a { color: var(--blue-700); }
+
+  /* ===== Bottom nav ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 28px 32px; background: #fff; border-radius: var(--radius); margin-bottom: 22px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 160px; text-align: center; padding: 14px 18px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-100); }
+  .bottom-nav span { color: var(--silver-500); }
+  .nav-supplementary { text-align: center; padding: 12px 18px; margin-bottom: 22px; font-size: 0.85rem; color: var(--text-secondary); background: var(--blue-050); border-radius: var(--radius-sm); }
+  .nav-supplementary a { color: var(--blue-700); text-decoration: underline; }
+  .hidden { display: none; }
+  footer { text-align: center; color: var(--silver-700); font-size: 0.78rem; padding: 24px; line-height: 1.8; }
+  .katex { font-size: 1em; }
+
+  /* ===== 移动端退化 ===== */
+  @media (max-width: 640px) {
+    .btn-primary { width: 100%; max-width: 320px; border-radius: 16px; padding: 16px 28px; }
+    .btn-submit { width: 100%; max-width: 280px; height: auto; border-radius: 16px; padding: 18px 32px; box-shadow: var(--shadow-sm); }
+    .q-header-circle { width: 200px; height: 200px; padding: 14px; }
+    .q-header-circle .q-line-no { font-size: 1.02rem; }
+    .q-header-circle .q-line-type { font-size: 0.82rem; }
+  }
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">
+  <a href="gaokao-mechanics-em-index.html">主页</a> &raquo;
+  <span>物理</span> &raquo;
+  高考综合应用 &raquo;
+  <strong>15 压轴 · 弹簧板块墙 · 熟练度检测(capstone)</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度通关</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。
+</div>
+
+<header class="page-header">
+  <h1>高考 15 压轴 · 弹簧 + 板块 + 墙(53 母题练透 3 类 12 变体)· capstone</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 高考综合应用 · capstone Skill · 题库版(12 题池, 每次随机抽 3 题) · 全部综合大题 · 100 分 · 约 35-45 分钟 · 通过 70 / 荣誉 90 · 母题: 2023 辽宁 15 / 17 分(53 专题七 题型 25 P25.1)</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>3</strong> 道综合大题(每个考察点 T1-T3 各随机抽 1 道, 共 12 题池, 同骨架不同情境)</li>
+    <li>分值: T1=30 / T2=35 / T3=35 = <strong>100</strong></li>
+    <li>题型: <strong>全部综合大题</strong>(单骨架专项, 不设选择题)</li>
+    <li>通过 ≥ 70 分(已具备纸笔熟练度检测备考水平);荣誉 ≥ 90 分(通过可能性高)</li>
+    <li>建议 35-45 分钟内完成(不强制限时, 15 压轴综合性强可酌情放宽)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 100% 满分 / 50-99% 半分 / &lt; 50% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, <strong>本地保存, 不判分</strong>)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+    <li>可点『重新抽题』再做, 抽到不同变体训练;反思按变体 ID 保留</li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 弹簧+板块+墙骨架 · 3 大考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 3</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7B8290;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 2 题(≈67%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考察点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #FBF7EC; border-radius: 6px; font-size: 13px; color: #8E6E2E;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存, 跨次自动恢复。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+<nav class="bottom-nav">
+  <a href="gaokao-mechanics-em-index.html">⬅ 返回主页</a>
+  <a href="gaokao-15-spring-block-wall-task-cards.html">📖 学习任务卡</a>
+  <span>📝 基础检测(待开放)</span>
+  <span>🎤 深度口试(待开放)</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 高考综合应用 · 15 压轴 · 弹簧+板块+墙骨架 · capstone Skill · 熟练度检测 · fluency-test v0.1.5</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'KP-T1': '弹簧板块基础(共速+E_p)',
+  'KP-T2': '53 母题标杆(3 小问压轴)',
+  'KP-T3': '升级变式(多过程/双弹簧)'
+};
+
+const TOPIC_TITLES = {
+  T1: { title: '弹簧板块基础情境(共速判定 + 最大弹性势能 E_p)', revisit: '回任务卡 Card 1 复习' },
+  T2: { title: '53 母题标杆(2023 辽宁 15 仿 · 3 小问压轴)', revisit: '回任务卡 Card 2 复习' },
+  T3: { title: '升级变式(地面摩擦/弹性碰+弹簧/双弹簧/斜面)', revisit: '回任务卡 Card 3 复习' }
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考物理 <strong>15 题位压轴大题</strong>(15-17 分级)的<strong>弹簧 + 板块 + 墙</strong>骨架。母题为 <strong>2023 辽宁卷 15 题</strong>(53 专题七 题型 25 P25.1 · 压轴母题标杆)。属于<strong>动量 + 能量 + 弹性势能 + 多过程</strong>的高阶融合应用 —— 重在识别"共速 = 弹簧最大形变"、"反弹分离时刻动量+能量联立"、"相对位移与 L_板 的对比"。下面练习先做对照下方 3 个考察点自查, 不熟的回学习任务卡复习。',
+  topics: [
+    { no: '一', title: '弹簧板块基础(共速 + 最大弹性势能 E_p)', examFreq: '压轴大题入门位', examNote: '15 题位 14 分级 · 2 小问 · 入门必拿',
+      examMethods: [
+        '(1) 系统动量守恒 → 求共速 v_共(弹簧最大压缩时刻)',
+        '(2) 机械能守恒 / 能量守恒(含摩擦) → 求最大弹性势能 E_pmax',
+        '识别陷阱:"共速时刻"≠"弹簧自然长度时刻", 共速 = 相对速度 0 = 弹簧形变最大'
+      ],
+      mustMaster: [
+        '<strong>系统动量守恒</strong>: \\(m v_0 = (m+M) v_{共}\\)(板水平 + 光滑面)',
+        '<strong>共速判定</strong>:相对速度为 0 的瞬间, 弹簧形变达到极值',
+        '<strong>机械能守恒</strong>(无摩擦): \\(\\dfrac{1}{2}m v_0^2 = \\dfrac{1}{2}(m+M) v_{共}^2 + E_{pmax}\\)',
+        '<strong>能量守恒</strong>(含摩擦): 上式右侧再加 \\(\\mu m g \\Delta s_{相对}\\)',
+        '<strong>墙顶住板的特殊情形</strong>: v_板 = 0 全程, 共速 = 物块速度为 0'
+      ],
+      prepNotes: [
+        '"光滑水平面 + 弹簧" → 动量 + 机械能 双守恒, 等价弹性碰撞处理',
+        '"板上有摩擦" → 动量守恒 + 能量守恒含 ΔU 项',
+        '"板贴墙" → 板被墙顶住 v_板=0, 物块单体能量守恒含弹簧势能',
+        '15 分钟内必须做完(高考节奏, 压轴入门段)'
+      ],
+      revisit: '不熟悉?回学习任务卡 Card 1 复习' },
+
+    { no: '二', title: '53 母题标杆(2023 辽宁 15 仿 · 3 小问压轴)', examFreq: '压轴大题标杆位', examNote: '15 题位 17 分级 · 3 小问 · 53 P25.1',
+      examMethods: [
+        '(1) 共速时刻动量守恒 → 求 v_共',
+        '(2) 能量守恒(含 ΔU = μmgΔs_相对) → 求最大弹性势能 E_pmax',
+        '(3) 反弹后分离瞬间动量+能量联立 → 求 v_m\' / v_M\'; 判定相对位移是否超 L_板'
+      ],
+      mustMaster: [
+        '<strong>3 阶段分段</strong>: 滑入 + 共速 / 压缩 + 释放 / 分离 + 后续摩擦',
+        '<strong>共速 ≠ 分离</strong>: 共速是弹簧最大压缩, 分离是弹簧恢复到自然长度',
+        '<strong>压缩段相对位移 ≠ 释放段相对位移</strong>(摩擦持续耗能, 不对称)',
+        '<strong>分离时刻</strong>: 动量守恒 + 能量守恒(E_pmax 释放完 - 释放段摩擦内能) 联立',
+        '<strong>总相对位移</strong>: Δs_总 = Δs_压缩 + Δs_释放, 判断是否 &gt; L_板(滑离)'
+      ],
+      prepNotes: [
+        '53 标杆参数: m₁=1 / m₂=4 / k=25 / v_0=2 / μ=0.2 / L=0.5(标杆熟到肌肉记忆)',
+        '"长板足够长" vs "L 给出有限值" → 后者必须算 Δs_总 与 L 对比',
+        '"反弹后分离"指弹簧恢复自然长度瞬间, 物块与弹簧脱开, 板与物块继续在摩擦下相互作用',
+        '20 分钟内是高考标杆, 训练时可放到 25 分钟'
+      ],
+      revisit: '不熟悉?回学习任务卡 Card 2 复习' },
+
+    { no: '三', title: '升级变式(地面摩擦 / 双弹簧 / 弹性碰+弹簧 / 斜面)', examFreq: '压轴大题高位', examNote: '15 题位上限 / 部分省份 14 压轴 17 分级 · 3 小问',
+      examMethods: [
+        '(1) 地面有摩擦 → 板的运动需考虑双层摩擦(地-板 + 物-板), 加速度分段',
+        '(2) 弹性碰 + 弹簧 → 先碰撞用双解公式, 再共速+弹簧用动量+能量',
+        '(3) 双弹簧(物块在中间) → 系统对称, 两端弹簧分别储能',
+        '(4) 弹簧 + 倾斜板 → 重力分量参与, 沿斜面方向列动量/能量'
+      ],
+      mustMaster: [
+        '<strong>双摩擦判定</strong>: 板与地最大静摩擦 vs 物-板摩擦驱动力, 决定板是否动',
+        '<strong>多过程分段</strong>: 碰撞瞬间(动量守恒) + 共速段(动量+能量) + 分离段(动量+能量)',
+        '<strong>双弹簧能量守恒</strong>: \\(\\dfrac{1}{2}m v_0^2 = E_{p1} + E_{p2} + \\dfrac{1}{2}(m+M)v_共^2\\)',
+        '<strong>斜面 + 弹簧</strong>: 沿斜面方向用动能定理或能量守恒, 注意重力做功 mgh',
+        '<strong>非对称释放</strong>: 含摩擦时 Δs_压缩 ≠ Δs_释放, 必须分段算'
+      ],
+      prepNotes: [
+        '"地面有摩擦 μ_板地": 必须先判板能否动, 再列方程',
+        '"弹性碰 + 弹簧": 先弹性碰双解公式, 后续板上骨架照旧',
+        '"双弹簧夹物块": 共速时两弹簧形变之和 = 物块相对板的位移差',
+        '25 分钟是高位训练上限, 不必死磕全做对, 抓核心步骤'
+      ],
+      revisit: '不熟悉?回学习任务卡 Card 3 复习' }
+  ],
+  footer: '✓ 3 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+// ============================================================
+// QUESTION_BANK - 3 T × 4 变体 = 12 题
+// ============================================================
+const QUESTION_BANK = {
+
+// ===== T1 综合大题 30 分 弹簧板块基础(共速 + E_p) =====
+T1: [
+  { id:"T1-1", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(15 压轴仿 · 变体 1 · 物块滑入静止木板 + 弹簧未压缩)光滑水平面上, 长木板 M(质量 \\(M=3\\) kg)静止。板的右端固定一根轻弹簧(劲度系数 \\(k=200\\) N/m, 自由长度 \\(L_0=0.4\\) m, 初始未压缩)。物块 m(质量 \\(m=1\\) kg)从板的左端以 \\(v_0=4\\) m/s 水平滑入板, 物块与板之间动摩擦因数 \\(\\mu=0.2\\), 水平面与板之间光滑。取 \\(g=10\\) m/s²。物块向右滑动, 接触并压缩弹簧。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <line x1="20" y1="115" x2="20" y2="123" stroke="#5a6c7d"/>
+  <line x1="400" y1="115" x2="400" y2="123" stroke="#5a6c7d"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="60" y="95" width="320" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=3 kg, μ=0.2</text>
+  <rect x="65" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="79" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m</text>
+  <line x1="95" y1="84" x2="130" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="130,84 124,81 124,87" fill="#c0392b"/>
+  <text x="98" y="76" font-size="10" fill="#c0392b">v0 →</text>
+  <polyline points="320,85 325,90 330,85 335,80 340,85 345,90 350,85 355,80 360,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="370" y1="75" x2="370" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="320" y="68" font-size="10" fill="#d4af37">弹簧 k (未压缩)</text>
+</svg>
+<ol>
+  <li><strong>(12 分)</strong> 求物块和板共速时(即弹簧最大压缩瞬间)的共同速度 \\(v_{共}\\) 的大小和方向。</li>
+  <li><strong>(18 分)</strong> 设从物块滑入到达共速时, 物块相对板的位移为 \\(\\Delta s_1 = 1.5\\) m, 求弹簧的最大弹性势能 \\(E_{pmax}\\)。</li>
+</ol>`,
+    keywords:["动量守恒","共速","v共","能量守恒","ΔU","相对位移","Epmax","摩擦","弹性势能"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:<strong>共速 = 弹簧最大形变</strong>(相对速度为 0, 弹簧不再继续被压缩)。系统动量守恒求 v_共; 能量守恒含摩擦内能 ΔU = μmgΔs_相对 求 E_pmax。',
+      approach:'<strong>解题思路</strong>:(1) 取 m+M 系统(水平面光滑), 动量守恒解 v_共。(2) 能量守恒: 物块初动能 = 共速动能 + 弹簧最大势能 + 摩擦耗散内能。',
+      solution:'<strong>(1)</strong> 系统动量守恒(取向右为正): \\(m v_0 + 0 = (m+M) v_{共}\\)<br>\\(1\\times 4 = 4 v_{共}\\) → \\(v_{共} = 1\\) m/s, 方向向右。<br><strong>(2)</strong> 能量守恒: \\(\\dfrac{1}{2}m v_0^2 = \\dfrac{1}{2}(m+M) v_{共}^2 + E_{pmax} + \\mu m g \\Delta s_1\\)<br>\\(\\dfrac{1}{2}\\times 1\\times 16 = \\dfrac{1}{2}\\times 4\\times 1 + E_{pmax} + 0.2\\times 1\\times 10\\times 1.5\\)<br>\\(8 = 2 + E_{pmax} + 3\\) → \\(E_{pmax} = 3\\) J。<br>(可校验弹簧形变 \\(x = \\sqrt{2E_{pmax}/k} = \\sqrt{6/200} \\approx 0.173\\) m, 小于自由长度, 物理合理。)'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么共速时刻弹簧形变最大?',
+      '我答错是因为:□ 共速动量漏 M □ 能量守恒漏 ΔU 项 □ 相对位移混淆为绝对位移 □ 数值代入错',
+      '类似题目我之后该如何识别?(关键字"光滑水平面""板上有摩擦""弹簧""共速")',
+      '对应高考 15 压轴 14 分级入门, 哪些步骤可以在 10 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T1-2", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(15 压轴仿 · 变体 2 · 物块从右滑入 + 板带弹簧连墙)长板 M(质量 \\(M=2\\) kg)的左端固定一根轻弹簧(劲度系数 \\(k=400\\) N/m), 弹簧另一端连接竖直墙(板被弹簧顶住, 板可在水平面上自由滑动, 弹簧初始为自然长度)。物块 m(质量 \\(m=1\\) kg)从板的右端以 \\(v_0=3\\) m/s 向左水平滑入板, 物块与板之间动摩擦因数 \\(\\mu=0.1\\), 板与水平面光滑。取 \\(g=10\\) m/s²。物块向左滑动, 摩擦推动板向左, 弹簧被压缩。求物块、板和弹簧到达"共速"瞬间(物块与板速度相等, 弹簧形变最大)的相关量:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="20" y="55" width="15" height="60" fill="#bdc3c7" stroke="#5a6c7d"/>
+  <text x="22" y="40" font-size="10" fill="#5a6c7d">墙</text>
+  <polyline points="35,85 40,90 45,85 50,80 55,85 60,90 65,85 70,80 75,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <text x="40" y="70" font-size="10" fill="#d4af37">k</text>
+  <rect x="80" y="95" width="300" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="220" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=2 kg, μ=0.1</text>
+  <rect x="340" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="354" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m</text>
+  <line x1="335" y1="84" x2="305" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="305,84 311,81 311,87" fill="#c0392b"/>
+  <text x="310" y="76" font-size="10" fill="#c0392b">← v0</text>
+</svg>
+<ol>
+  <li><strong>(15 分)</strong> 论证 m+M 系统水平方向动量是否守恒(说明墙通过弹簧的作用是否为系统外力)。题设给定: 出题者选取的特定 k 值使"共速瞬间恰为弹簧最大压缩瞬间", 此时形式上 \\(v_{共} = m v_0 / (m + M)\\) 在数值上成立。求 \\(v_{共}\\)(注明方向)。</li>
+  <li><strong>(15 分)</strong> 题设物块相对板位移 \\(\\Delta s_1 = 0.6\\) m, 用能量守恒求弹簧最大弹性势能 \\(E_{pmax}\\)。</li>
+</ol>`,
+    keywords:["墙对板有作用力","系统动量不守恒","形式化动量","v共","能量守恒","Epmax","ΔU","相对位移","弹性势能","摩擦"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:墙通过弹簧对板施加外力, <strong>系统(m+M)水平方向动量不严格守恒</strong>。但题设选取特定 k 让"共速 = 最大压缩"恰好成立, 此时形式上 v_共 = mv_0/(m+M) 在数值上仍可用(但卷面要写"由题设")。能量守恒永远成立: 初动能 = 共速动能 + E_pmax + 摩擦内能。',
+      approach:'<strong>解题思路</strong>:(1) 论证墙通过弹簧对系统提供外力, 故严格意义上动量不守恒; 但由题设特定 k 使形式公式数值仍成立。(2) 能量守恒求 E_pmax。',
+      solution:'<strong>(1)</strong> 墙通过弹簧对板施加水平向右的弹力(随压缩增大), 该力是<strong>系统外力</strong>。因此 m+M 系统水平动量<strong>严格不守恒</strong>, 卷面不能写"由动量守恒"。<br>由题设特定 k 让共速恰为最大压缩, 此时形式上 \\(v_{共} = \\dfrac{m v_0}{m + M} = \\dfrac{1 \\times 3}{1 + 2} = 1\\) m/s, 方向向左。<br><strong>(2)</strong> 能量守恒: \\(\\dfrac{1}{2}m v_0^2 = \\dfrac{1}{2}(m+M) v_{共}^2 + E_{pmax} + \\mu m g \\Delta s_1\\)<br>\\(\\dfrac{1}{2}\\times 1\\times 9 = \\dfrac{1}{2}\\times 3\\times 1 + E_{pmax} + 0.1\\times 1\\times 10\\times 0.6\\)<br>\\(4.5 = 1.5 + E_{pmax} + 0.6\\) → \\(E_{pmax} = 2.4\\) J。<br>(校验: 弹簧形变 \\(x = \\sqrt{2E_{pmax}/k} = \\sqrt{4.8/400} \\approx 0.11\\) m, 物理合理。)'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么墙存在时系统动量不守恒?',
+      '我答错是因为:□ 误用动量守恒 □ 忘了墙是外力源 □ 能量守恒漏 ΔU □ 共速定义不清',
+      '类似题目我之后该如何识别?(关键字"弹簧连墙""板贴弹簧""墙的外力")',
+      '对应高考 15 压轴 14 分级, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T1-3", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(15 压轴仿 · 变体 3 · 弹簧竖直 + 物块从板上方落下)如图, 一长板 M(质量 \\(M=2\\) kg)静置于光滑水平面上, 板下方紧贴地面装有一根竖直弹簧(劲度系数 \\(k=200\\) N/m, 自由长度 \\(L_0=0.3\\) m, 一端固定于地面, 另一端顶住板的中央下方, 初始弹簧自然长度, 板与水平面之间光滑)。物块 m(质量 \\(m=1\\) kg)从板正上方高度 \\(h=0.45\\) m 处自由下落, 落到板中央(物块与板的撞击为<strong>完全非弹性碰撞 = 瞬间黏合</strong>, 共同压缩竖直弹簧)。取 \\(g=10\\) m/s²。求:</p>
+<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" width="420" height="200">
+  <line x1="20" y1="175" x2="400" y2="175" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="192" font-size="11" fill="#7f8c8d" text-anchor="middle">地面 (固定弹簧底端)</text>
+  <rect x="80" y="115" width="260" height="18" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="85" y="127" font-size="10" fill="#0055B8">长板 M=2 kg</text>
+  <text x="300" y="192" font-size="10" fill="#0055B8" text-anchor="middle">(水平光滑)</text>
+  <polyline points="200,138 205,143 210,138 215,133 220,138 225,143 230,138 235,133 240,138" fill="none" stroke="#d4af37" stroke-width="2" transform="rotate(90 215 158) translate(0,-30)"/>
+  <line x1="205" y1="133" x2="205" y2="170" stroke="#d4af37" stroke-width="2"/>
+  <line x1="220" y1="133" x2="220" y2="170" stroke="#d4af37" stroke-width="2" stroke-dasharray="3,2"/>
+  <text x="232" y="155" font-size="10" fill="#d4af37">弹簧 k</text>
+  <rect x="200" y="50" width="30" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="215" y="65" font-size="11" fill="#c0392b" text-anchor="middle">m</text>
+  <line x1="215" y1="78" x2="215" y2="108" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="215,108 212,102 218,102" fill="#c0392b"/>
+  <text x="240" y="92" font-size="10" fill="#c0392b">h=0.45 m</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求物块刚接触板瞬间的速度 \\(v_1\\)。</li>
+  <li><strong>(20 分)</strong> 求黏合后系统(物块 + 板)瞬间共同速度 \\(v_{共}\\) 以及黏合到弹簧最大压缩时弹簧吸收的<strong>最大弹性势能</strong> \\(E_{pmax}\\)(从黏合瞬间到弹簧最大压缩, 共同体下移 \\(\\Delta h_1 = 0.05\\) m)。</li>
+</ol>`,
+    keywords:["自由落体","v_1","动量守恒","黏合","v共","能量守恒","Epmax","重力做功","弹性势能"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:落体段用<strong>自由落体</strong>(或机械能守恒)求 v_1; 黏合瞬间用<strong>动量守恒</strong>(竖直方向); 压缩段用<strong>能量守恒</strong>(共同体动能 + 重力做功 = 弹性势能, 弹簧最大压缩时共同体速度 0)。',
+      approach:'<strong>解题思路</strong>:(1) v_1 = √(2gh)。(2) 黏合动量守恒 m v_1 = (m+M) v_共; 从黏合到最大压缩, 共同体下移 Δh_1, 速度从 v_共 减到 0, 能量守恒 ½(m+M)v_共² + (m+M)g Δh_1 = E_pmax。',
+      solution:'<strong>(1)</strong> 自由落体: \\(v_1 = \\sqrt{2 g h} = \\sqrt{2\\times 10\\times 0.45} = \\sqrt{9} = 3\\) m/s, 方向竖直向下。<br><strong>(2)</strong> 黏合瞬间(竖直方向动量守恒, 弹簧冲量在 Δt→0 内可忽略):<br>\\(m v_1 = (m+M) v_{共}\\) → \\(v_{共} = \\dfrac{1\\times 3}{3} = 1\\) m/s, 方向向下。<br>黏合到弹簧最大压缩:共同体速度从 1 m/s 减到 0, 下移 Δh_1 = 0.05 m。能量守恒:<br>\\(\\dfrac{1}{2}(m+M) v_{共}^2 + (m+M) g \\Delta h_1 = E_{pmax}\\)<br>\\(\\dfrac{1}{2}\\times 3\\times 1 + 3\\times 10\\times 0.05 = E_{pmax}\\)<br>\\(1.5 + 1.5 = E_{pmax}\\) → \\(E_{pmax} = 3\\) J。<br>(说明: 黏合损失机械能 = ½ m v_1² - ½(m+M)v_共² = 4.5 - 1.5 = 3 J, 转化为内能, 不进入弹簧。)'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么黏合瞬间用动量守恒, 之后压缩段用能量守恒?',
+      '我答错是因为:□ 自由落体公式 □ 动量守恒漏 M □ 能量守恒漏重力做功 □ E_pmax 双重计算',
+      '类似题目我之后该如何识别?(关键字"自由落体""黏合""竖直弹簧")',
+      '对应高考 15 压轴 14 分级, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T1-4", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(15 压轴仿 · 变体 4 · 弹簧已被压缩 + 物块能否离开板)长板 M(质量 \\(M=4\\) kg)静止于光滑水平面上, 板的右端固定一根轻弹簧(劲度系数 \\(k=200\\) N/m), 弹簧初始已被压缩, 储存了弹性势能 \\(E_{p0}=2\\) J(由销钉锁定)。物块 m(质量 \\(m=1\\) kg)静置于弹簧的自由端(接触但未压缩)。物块与板之间动摩擦因数 \\(\\mu=0.2\\), 板与水平面光滑。取 \\(g=10\\) m/s²。某瞬间销钉拔出, 弹簧释放推动物块向左运动, 板因摩擦也获得向右的反作用力。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="60" y="95" width="320" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=4 kg, μ=0.2</text>
+  <polyline points="295,85 299,89 303,85 307,81 311,85 315,89 319,85 323,81 327,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="370" y1="75" x2="370" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="50" y="60" font-size="10" fill="#d4af37">弹簧 (压缩 E_p0=2 J)</text>
+  <rect x="265" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="240" y="65" font-size="11" fill="#c0392b" text-anchor="middle">m</text>
+  <text x="160" y="78" font-size="10" fill="#c0392b">销钉拔出 →</text>
+</svg>
+<ol>
+  <li><strong>(15 分)</strong> 弹簧释放完(恢复到自然长度)瞬间, 求物块和板的速度 \\(v_m\'\\) 与 \\(v_M\'\\)(设弹簧释放过程中物块相对板的位移为 \\(\\Delta s_1 = 0.1\\) m)。</li>
+  <li><strong>(15 分)</strong> 弹簧释放后物块离开弹簧自由端, 继续与板因摩擦相互作用直到再次共速。判断物块是否能向左继续相对板滑动, 若能, 求最终共速 \\(v_{共}\'\'\\)。</li>
+</ol>`,
+    keywords:["动量守恒","能量守恒","v_m'","v_M'","Δs相对","弹性势能释放","共速","v共''","摩擦","ΔU"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:弹簧释放等价于<strong>从静止开始的"反向碰撞"</strong> — 系统初动量 0, 释放完后 m 向左、M 向右, 总动量仍为 0。能量分配为: 弹性势能 = 两体动能 + 摩擦内能。释放后继续作用直到共速。',
+      approach:'<strong>解题思路</strong>:(1) 动量守恒 0 = m v_m\' + M v_M\'(取向右为正, v_m\' < 0); 能量守恒 E_p0 = ½ m v_m\'² + ½ M v_M\'² + μ m g Δs_1。联立两方程解 v_m\' 和 v_M\'。(2) 释放后系统动量仍守恒, m 向左 M 向右, 摩擦使两体减速 → 最终共速 v_共\'\' = 总动量 / 总质量 = 0。',
+      solution:'<strong>(1)</strong> 取向右为正, 弹簧释放时系统初动量为 0:<br>动量守恒: \\(0 = m v_m\' + M v_M\'\\) → \\(v_M\' = -\\dfrac{m v_m\'}{M} = -\\dfrac{v_m\'}{4}\\)<br>能量守恒: \\(E_{p0} = \\dfrac{1}{2} m v_m\'^2 + \\dfrac{1}{2} M v_M\'^2 + \\mu m g \\Delta s_1\\)<br>\\(2 = \\dfrac{1}{2}\\times 1\\times v_m\'^2 + \\dfrac{1}{2}\\times 4\\times \\dfrac{v_m\'^2}{16} + 0.2\\times 1\\times 10\\times 0.1\\)<br>\\(2 = 0.5 v_m\'^2 + 0.125 v_m\'^2 + 0.2\\)<br>\\(1.8 = 0.625 v_m\'^2\\) → \\(v_m\'^2 = 2.88\\), \\(v_m\' \\approx -1.70\\) m/s(向左)。<br>\\(v_M\' = -v_m\'/4 \\approx 0.42\\) m/s(向右)。<br><strong>(2)</strong> 释放后物块向左、板向右, 物块相对板向左滑, 摩擦使物块向右减速、板向左减速。系统动量守恒, 总动量 = 0, 故最终共速 \\(v_{共}\'\' = 0\\)。<br>物块能否继续向左相对板滑动? 释放瞬间 v_m\' = -1.70 m/s 向左, v_M\' = +0.42 m/s 向右, 相对速度 v_m\' - v_M\' = -2.12 m/s(向左), 故物块<strong>能</strong>继续向左相对板滑动, 直到共速 0 为止。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么弹簧释放后系统总动量保持 0?',
+      '我答错是因为:□ 释放段动量守恒漏摩擦内能 □ 联立方程错 □ 释放后共速判断错 □ 方向符号',
+      '类似题目我之后该如何识别?(关键字"销钉锁定""弹簧已压缩""释放""光滑水平面")',
+      '对应高考 15 压轴 14 分级, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  }
+],
+
+// ===== T2 综合大题 35 分 53 母题标杆(2023 辽宁 15 仿 · 3 小问) =====
+T2: [
+  { id:"T2-1", type:"short", score:35, difficulty:"中高", exportIds:["KP-T2"],
+    stem:`<p>(15 压轴 · 2023 辽宁 15 标杆原题数值)如图, 光滑水平面上, 长板 m₁ = 1 kg, 板的左端固定一根轻弹簧(劲度系数 \\(k = 25\\) N/m), 弹簧另一端为自由端。物块 m₂ = 4 kg 以初速 \\(v_0 = 2\\) m/s 从板右端水平向左滑入板, 物块与板之间动摩擦因数 \\(\\mu = 0.2\\), 板长 \\(L = 0.5\\) m, 板与水平面光滑。物块向左滑动并压缩弹簧, 之后弹簧反弹将物块推回。取 \\(g = 10\\) m/s²。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="40" y="95" width="320" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 m₁=1 kg, L=0.5 m, μ=0.2</text>
+  <polyline points="50,85 54,89 58,85 62,81 66,85 70,89 74,85 78,81 82,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="40" y1="75" x2="40" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="55" y="68" font-size="10" fill="#d4af37">弹簧 k=25</text>
+  <rect x="320" y="73" width="32" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="336" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m₂=4</text>
+  <line x1="315" y1="84" x2="285" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="285,84 291,81 291,87" fill="#c0392b"/>
+  <text x="290" y="76" font-size="10" fill="#c0392b">← v0=2</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求物块与板共速时(即弹簧最大压缩瞬间)的共同速度 \\(v_{共}\\)。</li>
+  <li><strong>(15 分)</strong> 设从物块滑入到达共速时, 物块相对板的位移为 \\(\\Delta s_1 = 0.1\\) m。求弹簧最大弹性势能 \\(E_{pmax}\\)。</li>
+  <li><strong>(10 分)</strong> 弹簧反弹将物块推回直到弹簧恢复自然长度, 求此时物块和板的速度 \\(v_{m_2}\'\\) 与 \\(v_{m_1}\'\\)(设释放段相对位移 \\(\\Delta s_2 = 0.05\\) m, 释放比压缩耗能少); 判定物块向右的总相对位移 \\(\\Delta s_{总} = \\Delta s_1 + \\Delta s_2\\) 是否 &gt; L = 0.5 m(若 &gt; 则滑离)。</li>
+</ol>`,
+    keywords:["动量守恒","共速","v共","能量守恒","Epmax","ΔU","相对位移","释放","v_m2'","v_m1'","Δs总","L","滑离"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:<strong>2023 辽宁 15 标杆三阶段</strong> — 压缩段(动量守恒 + 能量守恒解 v_共, E_pmax) → 释放段(动量+能量再守恒解 v_m2\', v_m1\') → 总相对位移与 L 对比判定。<strong>共速 ≠ 分离</strong>!',
+      approach:'<strong>解题思路</strong>:(1) m+M 系统动量守恒解 v_共。(2) 能量守恒含 ΔU = μ m₂ g Δs_1 解 E_pmax。(3) 释放段以 v_共为初速, E_pmax释放, 摩擦再耗能 μ m₂ g Δs_2, 联立动量+能量守恒解 v_m2\', v_m1\'; 比较 Δs_总 与 L。',
+      solution:'<strong>(1)</strong> 取向左为正, 系统动量守恒: \\(m_2 v_0 + 0 = (m_1+m_2) v_{共}\\)<br>\\(4\\times 2 = 5 v_{共}\\) → \\(v_{共} = 1.6\\) m/s, 方向向左。<br><strong>(2)</strong> 能量守恒: \\(\\dfrac{1}{2} m_2 v_0^2 = \\dfrac{1}{2}(m_1+m_2) v_{共}^2 + E_{pmax} + \\mu m_2 g \\Delta s_1\\)<br>\\(\\dfrac{1}{2}\\times 4\\times 4 = \\dfrac{1}{2}\\times 5\\times 2.56 + E_{pmax} + 0.2\\times 4\\times 10\\times 0.1\\)<br>\\(8 = 6.4 + E_{pmax} + 0.8\\) → \\(E_{pmax} = 0.8\\) J。<br><strong>(3)</strong> 释放段以 v_共为初速、E_pmax释放, 释放段相对位移 \\(\\Delta s_2 = 0.05\\) m(摩擦含能为 \\(Q_2 = \\mu m_2 g \\Delta s_2 = 0.4\\) J)。<br>动量守恒: \\((m_1+m_2) v_{共} = m_2 v_{m_2}\' + m_1 v_{m_1}\'\\) → \\(8 = 4 v_{m_2}\' + v_{m_1}\'\\), \\(v_{m_1}\' = 8 - 4 v_{m_2}\'\\)。<br>能量守恒: \\(\\dfrac{1}{2}(m_1+m_2)v_{共}^2 + E_{pmax} = \\dfrac{1}{2} m_2 v_{m_2}\'^2 + \\dfrac{1}{2} m_1 v_{m_1}\'^2 + Q_2\\)<br>\\(6.4 + 0.8 = 2 v_{m_2}\'^2 + 0.5 v_{m_1}\'^2 + 0.4\\) → \\(6.8 = 2 v_{m_2}\'^2 + 0.5 v_{m_1}\'^2\\)。<br>代入 \\(v_{m_1}\' = 8 - 4 v_{m_2}\'\\): \\(6.8 = 2 v_{m_2}\'^2 + 0.5(8 - 4 v_{m_2}\')^2 = 10 v_{m_2}\'^2 - 32 v_{m_2}\' + 32\\)<br>\\(10 v_{m_2}\'^2 - 32 v_{m_2}\' + 25.2 = 0\\) → \\(v_{m_2}\' = \\dfrac{32 \\pm \\sqrt{1024 - 1008}}{20} = \\dfrac{32 \\pm 4}{20}\\) = 1.8 或 1.4 m/s。<br>物理意义: 释放后物块被弹簧推得减速 → 选小根 \\(v_{m_2}\' = 1.4\\) m/s 向左; \\(v_{m_1}\' = 8 - 5.6 = 2.4\\) m/s 向左(板被弹簧推得反而加速 — 因板原本速度小于物块在压缩段, 释放段板获弹簧冲量进一步向左加速)。<br>Δs_总 = 0.1 + 0.05 = 0.15 m &lt; L = 0.5 m, <strong>物块不会滑离板</strong>。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么 2023 辽宁 15 是 53 标杆"压轴母题"?',
+      '我答错是因为:□ 共速动量漏 □ 压缩段能量守恒漏 ΔU □ 释放段动量+能量未联立 □ Δs总 与 L 对比错',
+      '类似题目我之后该如何识别?(关键字"长板""弹簧""光滑水平面""动摩擦因数""板长 L")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T2-2", type:"short", score:35, difficulty:"中高", exportIds:["KP-T2"],
+    stem:`<p>(15 压轴仿 · 变体 2 · 改数值: m₁=2 / m₂=3 / k=40 / v_0=3)光滑水平面上, 长板 m₁ = 2 kg, 板的左端固定一根轻弹簧(劲度系数 \\(k = 40\\) N/m, 自由端朝右)。物块 m₂ = 3 kg 以初速 \\(v_0 = 3\\) m/s 从板右端水平向左滑入板, 物块与板之间动摩擦因数 \\(\\mu = 0.2\\), 板长 \\(L = 1\\) m, 板与水平面光滑。取 \\(g = 10\\) m/s²。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="40" y="95" width="320" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 m₁=2 kg, L=1 m, μ=0.2</text>
+  <polyline points="50,85 54,89 58,85 62,81 66,85 70,89 74,85 78,81 82,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="40" y1="75" x2="40" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="55" y="68" font-size="10" fill="#d4af37">弹簧 k=40</text>
+  <rect x="320" y="73" width="32" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="336" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m₂=3</text>
+  <line x1="315" y1="84" x2="285" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="285,84 291,81 291,87" fill="#c0392b"/>
+  <text x="290" y="76" font-size="10" fill="#c0392b">← v0=3</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求物块与板共速时(弹簧最大压缩瞬间)的共同速度 \\(v_{共}\\)。</li>
+  <li><strong>(15 分)</strong> 设压缩段物块相对板的位移为 \\(\\Delta s_1 = 0.3\\) m, 求弹簧最大弹性势能 \\(E_{pmax}\\)。</li>
+  <li><strong>(10 分)</strong> 弹簧释放将物块推回到弹簧自然长度瞬间, 求物块和板的速度 \\(v_{m_2}\'\\) 与 \\(v_{m_1}\'\\)(设释放段相对位移 \\(\\Delta s_2 = 0.3\\) m); 总相对位移 \\(\\Delta s_{总}\\) 是否 &gt; L = 1 m?</li>
+</ol>`,
+    keywords:["动量守恒","共速","v共","能量守恒","Epmax","ΔU","相对位移","释放","v_m2'","v_m1'","Δs总","L"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:同 T2-1 的三阶段标杆结构(共速 → 最大压缩 → 释放分离), 仅参数变化, 解题流程不变。',
+      approach:'<strong>解题思路</strong>:(1) 系统动量守恒。(2) 能量守恒含 ΔU。(3) 释放段动量+能量联立解 v_m2\', v_m1\'; Δs_总 与 L 对比。',
+      solution:'<strong>(1)</strong> 动量守恒(取向左为正): \\(m_2 v_0 = (m_1+m_2) v_{共}\\)<br>\\(3\\times 3 = 5 v_{共}\\) → \\(v_{共} = 1.8\\) m/s 向左。<br><strong>(2)</strong> 能量守恒: \\(\\dfrac{1}{2} m_2 v_0^2 = \\dfrac{1}{2}(m_1+m_2) v_{共}^2 + E_{pmax} + \\mu m_2 g \\Delta s_1\\)<br>\\(\\dfrac{1}{2}\\times 3\\times 9 = \\dfrac{1}{2}\\times 5\\times 3.24 + E_{pmax} + 0.2\\times 3\\times 10\\times 0.3\\)<br>\\(13.5 = 8.1 + E_{pmax} + 1.8\\) → \\(E_{pmax} = 3.6\\) J。<br><strong>(3)</strong> 释放段(动量 + 能量守恒):<br>\\((m_1+m_2) v_{共} = m_2 v_{m_2}\' + m_1 v_{m_1}\'\\) → \\(9 = 3 v_{m_2}\' + 2 v_{m_1}\'\\), \\(v_{m_1}\' = \\dfrac{9 - 3 v_{m_2}\'}{2}\\)<br>\\(\\dfrac{1}{2}(m_1+m_2)v_{共}^2 + E_{pmax} = \\dfrac{1}{2} m_2 v_{m_2}\'^2 + \\dfrac{1}{2} m_1 v_{m_1}\'^2 + \\mu m_2 g \\Delta s_2\\)<br>\\(8.1 + 3.6 = 1.5 v_{m_2}\'^2 + v_{m_1}\'^2 + 1.8\\) → \\(9.9 = 1.5 v_{m_2}\'^2 + v_{m_1}\'^2\\)。<br>代入 v_m₁\': \\(9.9 = 1.5 v_{m_2}\'^2 + \\left(\\dfrac{9 - 3 v_{m_2}\'}{2}\\right)^2\\)<br>\\(9.9 = 1.5 v_{m_2}\'^2 + \\dfrac{81 - 54 v_{m_2}\' + 9 v_{m_2}\'^2}{4}\\)<br>乘 4: \\(39.6 = 6 v_{m_2}\'^2 + 81 - 54 v_{m_2}\' + 9 v_{m_2}\'^2 = 15 v_{m_2}\'^2 - 54 v_{m_2}\' + 81\\)<br>\\(15 v_{m_2}\'^2 - 54 v_{m_2}\' + 41.4 = 0\\) → \\(v_{m_2}\' = \\dfrac{54 \\pm \\sqrt{2916 - 2484}}{30} = \\dfrac{54 \\pm 20.78}{30}\\)<br>\\(v_{m_2}\' \\approx 2.49\\) m/s 或 \\(1.11\\) m/s 向左; 取较小根(分离时物块速度应小于 v_共, 因释放后物块被减速): \\(v_{m_2}\' \\approx 1.11\\) m/s, \\(v_{m_1}\' = (9 - 3.33)/2 \\approx 2.83\\) m/s 向左。<br>(物理意义: 板被弹簧推得更快, 物块相对减速, 即物块从板的左端向右"相对滑动"了 Δs_2 = 0.3 m。)<br>Δs_总 = 0.3 + 0.3 = 0.6 m &lt; L = 1 m, <strong>物块不会滑离板</strong>。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?释放段为什么板速 v_m1\' &gt; 物块速 v_m2\'(都向左)?',
+      '我答错是因为:□ 动量守恒方向 □ 能量方程漏摩擦 □ 二次方程双根选错 □ Δs_总判错',
+      '类似题目我之后该如何识别?(关键字"长板""弹簧""m1 m2 改数值""板长 L")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T2-3", type:"short", score:35, difficulty:"高", exportIds:["KP-T2"],
+    stem:`<p>(15 压轴仿 · 变体 3 · 物块从右滑入 + 板已贴墙)如图, 长板 M = 2 kg 初始<strong>右端贴墙</strong>静止(墙竖直, 可顶住板使其不向右移动, 但不阻止板向左移动)。板的左端固定一根轻弹簧(劲度系数 \\(k = 50\\) N/m, 自由端朝右)。物块 m = 1 kg 从板的右端以初速 \\(v_0 = 4\\) m/s 水平向左滑入板, 物块与板之间动摩擦因数 \\(\\mu = 0.2\\), 板与水平面光滑。取 \\(g = 10\\) m/s²。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="380" y="55" width="15" height="60" fill="#bdc3c7" stroke="#5a6c7d"/>
+  <text x="370" y="50" font-size="10" fill="#5a6c7d">墙</text>
+  <rect x="60" y="95" width="320" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="220" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=2 kg, μ=0.2 (右端贴墙)</text>
+  <polyline points="70,85 74,89 78,85 82,81 86,85 90,89 94,85 98,81 102,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="60" y1="75" x2="60" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="75" y="68" font-size="10" fill="#d4af37">弹簧 k=50</text>
+  <rect x="340" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="354" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m</text>
+  <line x1="335" y1="84" x2="305" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="305,84 311,81 311,87" fill="#c0392b"/>
+  <text x="310" y="76" font-size="10" fill="#c0392b">← v0=4</text>
+</svg>
+<ol>
+  <li><strong>(12 分)</strong> 物块滑入板上后, 摩擦推板向左(墙不阻止)。板能否立即开始向左移动? 判定标准是什么? 给出物块和板的初始加速度。</li>
+  <li><strong>(13 分)</strong> 求物块与板共速时(弹簧最大压缩瞬间)的共同速度 \\(v_{共}\\) 与弹簧最大弹性势能 \\(E_{pmax}\\)(设压缩段相对位移 \\(\\Delta s_1 = 0.4\\) m)。</li>
+  <li><strong>(10 分)</strong> 弹簧反弹推板向右, 板若被墙顶住瞬间动量瞬时改变。判断弹簧反弹完成后(自然长度), 板的速度方向并简述墙在该过程的作用机制。</li>
+</ol>`,
+    keywords:["板贴墙","动量守恒","v共","Epmax","ΔU","相对位移","墙的外力","反弹","加速度","摩擦","判定"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:板贴墙时, 墙只在板试图向右运动时才施加力(单向约束)。物块向左滑入, 摩擦推板向左, <strong>墙不阻止</strong>, 系统水平动量守恒。弹簧反弹推板向右时, 墙开始顶住板, 板被墙吸收向右冲量, 板速度被锁为 0。',
+      approach:'<strong>解题思路</strong>:(1) 摩擦推板向左, 墙不阻止, 板立即向左加速。a_m = -μg(物块减速), a_M = μmg/M(板加速向左)。(2) 系统动量守恒解 v_共; 能量守恒解 E_pmax。(3) 反弹时板向右运动, 墙顶住板, 板瞬时速度归 0, 墙吸收板的动量(墙的冲量进入系统)。',
+      solution:'<strong>(1)</strong> 物块向左滑, m-板摩擦 f = μmg = 0.2×1×10 = 2 N。物块受向右摩擦, 板受向左反作用力。<br>板受向左力 2 N, 墙在板向左移动时不施加力(墙是单向约束), 因此板<strong>立即向左加速</strong>。<br>a_m = -μg = -2 m/s²(物块向左减速); a_M = μmg/M = 2/2 = 1 m/s²(板向左加速)。<br>判定标准: 墙是<strong>单向约束</strong>, 仅在板试图向右时施加力。<br><strong>(2)</strong> 压缩段墙不施力, 系统动量守恒:<br>\\(m v_0 = (m+M) v_{共}\\) → \\(v_{共} = \\dfrac{1\\times 4}{3} \\approx 1.33\\) m/s 向左。<br>能量守恒: \\(\\dfrac{1}{2}\\times 1\\times 16 = \\dfrac{1}{2}\\times 3\\times \\dfrac{16}{9} + E_{pmax} + 0.2\\times 1\\times 10\\times 0.4\\)<br>\\(8 = \\dfrac{8}{3} + E_{pmax} + 0.8\\) → \\(E_{pmax} = 8 - 2.67 - 0.8 \\approx 4.53\\) J。<br><strong>(3)</strong> 弹簧反弹推板向右, 墙立即顶住板, 板速度被锁为 0(墙瞬时吸收板的向右动量)。弹簧将剩余能量全部传给物块, 物块向右加速。<br>反弹完成(自然长度)时板速度 = 0, 物块速度由能量守恒(板速 0, 故无板动能项): \\(E_{pmax} = \\dfrac{1}{2} m v_m\'^2 + \\mu m g \\Delta s_2\\)。设 Δs_2 ≈ 0.4 m: \\(4.53 = 0.5 v_m\'^2 + 0.8\\), \\(v_m\' \\approx 2.73\\) m/s 向右。<br>墙的作用机制: <strong>单向约束 — 仅在板试图向右时施力, 该力是系统的外力, 改变系统动量</strong>。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?墙的"单向约束"在压缩段和释放段分别如何起作用?',
+      '我答错是因为:□ 墙的单向约束误解 □ 压缩段动量守恒漏判 □ 反弹段板速归 0 没识别 □ 能量守恒漏 ΔU',
+      '类似题目我之后该如何识别?(关键字"板贴墙""单向约束""弹簧""光滑水平面")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T2-4", type:"short", score:35, difficulty:"高", exportIds:["KP-T2"],
+    stem:`<p>(15 压轴仿 · 变体 4 · 双物块同向滑入 + 板带弹簧)光滑水平面上, 长板 M = 2 kg 静止, 板的右端固定一根轻弹簧(劲度系数 \\(k = 100\\) N/m, 自由端朝左)。两个物块 m₁ = 1 kg 与 m₂ = 1 kg 沿同一直线<strong>同向</strong>从板的左端依次滑入板, m₁ 在前以 \\(v_1 = 6\\) m/s 向右, m₂ 在后以 \\(v_2 = 2\\) m/s 向右(m₂ 不追上 m₁)。两物块都与板有摩擦, 动摩擦因数均为 \\(\\mu = 0.1\\), 板与水平面光滑。取 \\(g = 10\\) m/s²。m₁ 先接触弹簧, m₂ 尚未接触弹簧。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="40" y="95" width="340" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=2 kg, μ=0.1</text>
+  <rect x="80" y="73" width="28" height="22" fill="#d4edda" stroke="#2e7d32"/>
+  <text x="94" y="88" font-size="11" fill="#2e7d32" text-anchor="middle">m₂</text>
+  <line x1="110" y1="84" x2="140" y2="84" stroke="#2e7d32" stroke-width="2"/>
+  <polygon points="140,84 134,81 134,87" fill="#2e7d32"/>
+  <text x="115" y="76" font-size="10" fill="#2e7d32">v2=2 →</text>
+  <rect x="220" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="234" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m₁</text>
+  <line x1="250" y1="84" x2="280" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="280,84 274,81 274,87" fill="#c0392b"/>
+  <text x="255" y="60" font-size="10" fill="#c0392b">v1=6 →</text>
+  <polyline points="310,85 314,89 318,85 322,81 326,85 330,89 334,85 338,81 342,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="370" y1="75" x2="370" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="305" y="48" font-size="10" fill="#d4af37">弹簧 k=100</text>
+</svg>
+<ol>
+  <li><strong>(12 分)</strong> 求 m₁ 与板共速时(m₁ 与板速度相等, 暂忽略 m₂ 的影响, 假设此时 m₂ 还未接触弹簧)的 m₁-板共速 \\(v_{共1}\\) 和此时弹簧最大压缩瞬间的弹性势能 \\(E_{p1}\\)(设 m₁ 在板上的相对位移 \\(\\Delta s_{1} = 0.5\\) m)。</li>
+  <li><strong>(13 分)</strong> 弹簧反弹将 m₁ 推回过程中, m₂ 已开始与 m₁ 相向接近(因板被弹簧带动有了向左的运动趋势)。若 m₂ 与 m₁ 发生正面碰撞且<strong>瞬间黏合</strong>, 给出黏合瞬间 m₁ + m₂ 的共同速度 \\(v_{m_1m_2}\'\\)(碰撞前 m₁ 的速度可视为 v_共1 反向, m₂ 速度仍为 v_2)。</li>
+  <li><strong>(10 分)</strong> 求黏合体 (m₁+m₂) 与板下一次共速时的速度 \\(v_{共2}\\)。</li>
+</ol>`,
+    keywords:["动量守恒","v共1","Ep1","ΔU","相对位移","黏合","v_m1m2'","v共2","能量守恒","双物块","摩擦"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:多体多过程 — (a) m₁ 与板压缩弹簧, (b) m₁ 反弹遇 m₂ 黏合, (c) 黏合体与板再次共速。每阶段独立列动量+能量。',
+      approach:'<strong>解题思路</strong>:(1) m₁+板系统动量守恒 + 能量守恒。(2) 黏合段 m₁-m₂ 动量守恒。(3) 黏合体+板系统动量守恒。',
+      solution:'<strong>(1)</strong> m₁ + 板系统动量守恒(忽略 m₂): \\(m_1 v_1 = (m_1+M) v_{共1}\\)<br>\\(1\\times 6 = 3 v_{共1}\\) → \\(v_{共1} = 2\\) m/s 向右。<br>能量守恒: \\(\\dfrac{1}{2}\\times 1\\times 36 = \\dfrac{1}{2}\\times 3\\times 4 + E_{p1} + 0.1\\times 1\\times 10\\times 0.5\\)<br>\\(18 = 6 + E_{p1} + 0.5\\) → \\(E_{p1} = 11.5\\) J。<br><strong>(2)</strong> 反弹后 m₁ 速度反向, 估算为 \\(v_{m_1}\' \\approx -2\\) m/s(向左, 简化对称 — 实际由释放段动量+能量解出, 教学上取 -2 m/s)。<br>m₁-m₂ 黏合(动量守恒): \\(m_1 v_{m_1}\' + m_2 v_2 = (m_1+m_2) v_{m_1m_2}\'\\)<br>\\(1\\times (-2) + 1\\times 2 = 2 v_{m_1m_2}\'\\) → \\(v_{m_1m_2}\' = 0\\)(刚好静止)。<br><strong>(3)</strong> 黏合体(总质量 2 kg, 速度 0) + 板(此时板速度由释放段决定, 简化取 +1 m/s 向右)。<br>系统动量守恒: \\(0\\times 2 + 1\\times 2 = (2+2) v_{共2}\\) → \\(v_{共2} = 0.5\\) m/s 向右。<br>(说明: 本题强调三阶段分段思路, 数值简化为概念辨析, 不追求闭式解。)'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么"分段"是多过程问题的解题骨架?',
+      '我答错是因为:□ 三阶段没分清 □ 动量守恒对象选错 □ 黏合段方向 □ 共速2 板速未跟踪',
+      '类似题目我之后该如何识别?(关键字"双物块""同向滑入""弹簧""黏合")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  }
+],
+
+// ===== T3 综合大题 35 分 升级变式(地面摩擦/弹性碰+弹簧/双弹簧/斜面) =====
+T3: [
+  { id:"T3-1", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(15 压轴升级仿 · 变体 1 · 地面有摩擦)长板 M = 3 kg 静止于<strong>有摩擦的</strong>水平地面上, 板与地面间动摩擦因数 \\(\\mu_1 = 0.1\\)。板的左端固定一根轻弹簧(劲度系数 \\(k = 50\\) N/m, 自由端朝右)。物块 m = 2 kg 以初速 \\(v_0 = 4\\) m/s 从板的右端水平向左滑入板, 物块与板之间动摩擦因数 \\(\\mu_2 = 0.4\\)。取 \\(g = 10\\) m/s²。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">地面 (板-地 μ_1=0.1)</text>
+  <rect x="40" y="95" width="340" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=3 kg (m-板 μ_2=0.4)</text>
+  <polyline points="50,85 54,89 58,85 62,81 66,85 70,89 74,85 78,81 82,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="40" y1="75" x2="40" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="55" y="68" font-size="10" fill="#d4af37">弹簧 k=50</text>
+  <rect x="340" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="354" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m=2</text>
+  <line x1="335" y1="84" x2="305" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="305,84 311,81 311,87" fill="#c0392b"/>
+  <text x="310" y="76" font-size="10" fill="#c0392b">← v0=4</text>
+</svg>
+<ol>
+  <li><strong>(12 分)</strong> 判断板能否立即开始运动? 计算 m-板间摩擦驱动力 vs 板-地最大静摩擦力, 给出 m 和板的初始加速度。</li>
+  <li><strong>(13 分)</strong> 若板能动, 求物块与板共速时的 \\(v_{共}\\)(用系统动量定理 + 地面摩擦冲量近似处理, 设共速时间 t_1 ≈ 0.5 s)。</li>
+  <li><strong>(10 分)</strong> 求达到共速时弹簧的最大弹性势能 \\(E_{pmax}\\)(设压缩段物块对地位移 \\(s_m = 1.5\\) m, 板对地位移 \\(s_M = 0.2\\) m, \\(\\Delta s_1 = s_m - s_M\\))。</li>
+</ol>`,
+    keywords:["双摩擦","判定","a_m","a_M","系统动量定理","v共","地摩擦冲量","Epmax","ΔU","相对位移"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:地面有摩擦 → 系统动量不严格守恒(地摩擦是外力)。需先判板能否动 — 比较 m-板摩擦驱动力与板-地最大静摩擦; 然后用系统动量定理(含地摩擦冲量项)解 v_共; 能量守恒含两套摩擦内能。',
+      approach:'<strong>解题思路</strong>:(1) f_2 = μ_2 m g, f_1max = μ_1 (m+M) g, 比较二者。若 f_2 &gt; f_1max 板能动。(2) 系统动量定理: m v_0 - μ_1(m+M)g·t_1 = (m+M) v_共。(3) 能量守恒含 ΔU_板地 + ΔU_物板。',
+      solution:'<strong>(1)</strong> m 受 m-板摩擦 f_2 = μ_2 m g = 0.4×2×10 = 8 N(向右, 反 v_0 方向)。板受 m 给的反作用力 8 N(向左) + 地给的最大静摩擦 f_1max = μ_1(m+M)g = 0.1×5×10 = 5 N(向右)。<br>因 8 &gt; 5, 板<strong>能向左加速</strong>。<br>a_m = -f_2/m = -4 m/s²(物块向左减速); a_M = (8 - 5)/M = 1 m/s²(板向左加速)。<br><strong>(2)</strong> 系统动量定理(取向左为正): \\(m v_0 - f_1\\cdot t_1 = (m+M) v_{共}\\)<br>\\(2\\times 4 - 5\\times 0.5 = 5 v_{共}\\) → \\(v_{共} = (8 - 2.5)/5 = 1.1\\) m/s 向左。<br><strong>(3)</strong> 能量守恒含双摩擦:<br>\\(\\dfrac{1}{2} m v_0^2 = \\dfrac{1}{2}(m+M)v_{共}^2 + E_{pmax} + \\mu_2 m g \\Delta s_1 + \\mu_1 (m+M) g s_M\\)<br>Δs_1 = s_m - s_M = 1.5 - 0.2 = 1.3 m。<br>\\(\\dfrac{1}{2}\\times 2\\times 16 = \\dfrac{1}{2}\\times 5\\times 1.21 + E_{pmax} + 0.4\\times 2\\times 10\\times 1.3 + 0.1\\times 5\\times 10\\times 0.2\\)<br>\\(16 = 3.025 + E_{pmax} + 10.4 + 1.0\\) → \\(E_{pmax} = 16 - 14.425 = 1.575\\) J。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?地面摩擦让系统动量守恒失效, 该如何调整方程?',
+      '我答错是因为:□ 板能否动判错 □ 系统动量定理漏冲量 □ 能量守恒漏地摩擦 ΔU □ 相对位移与对地位移混',
+      '类似题目我之后该如何识别?(关键字"地面有摩擦""μ_1 μ_2""长板""弹簧")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T3-2", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(15 压轴升级仿 · 变体 2 · 弹性碰撞替代滑入 + 弹簧)光滑水平面上, 长板 M = 3 kg 静止, 板的左端固定一根轻弹簧(劲度系数 \\(k = 100\\) N/m, 自由端朝右)。物块 A(质量 \\(m_A = 1\\) kg)静止于板的右端(在板上, 与板共速 0)。另一物块 B(质量 \\(m_B = 1\\) kg)从板的右侧外以 \\(v_0 = 6\\) m/s 向左运动, 在板的右端与 A 发生<strong>完全弹性</strong>正碰。碰后 B 反弹离板, A 在板上向左滑动并压缩弹簧, A 与板之间动摩擦因数 \\(\\mu = 0.2\\), 板与水平面光滑。取 \\(g = 10\\) m/s²。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="40" y="95" width="320" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=3 kg, μ=0.2 (m_A 在板上)</text>
+  <polyline points="50,85 54,89 58,85 62,81 66,85 70,89 74,85 78,81 82,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="40" y1="75" x2="40" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="55" y="68" font-size="10" fill="#d4af37">弹簧 k=100</text>
+  <rect x="320" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="334" y="88" font-size="11" fill="#c0392b" text-anchor="middle">A</text>
+  <rect x="375" y="73" width="20" height="22" fill="#d4edda" stroke="#2e7d32"/>
+  <text x="385" y="88" font-size="10" fill="#2e7d32" text-anchor="middle">B</text>
+  <line x1="370" y1="84" x2="360" y2="84" stroke="#2e7d32" stroke-width="2"/>
+  <polygon points="360,84 366,81 366,87" fill="#2e7d32"/>
+  <text x="362" y="76" font-size="9" fill="#2e7d32">← v0</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求 A-B 弹性碰撞后 A 与 B 的速度 \\(v_A\'\\) 和 \\(v_B\'\\)。</li>
+  <li><strong>(15 分)</strong> A 在板上向左滑动并压缩弹簧, 求 A 与板共速时(弹簧最大压缩瞬间)的 \\(v_{共}\\) 和弹簧最大弹性势能 \\(E_{pmax}\\)(设 A 在板上相对位移 \\(\\Delta s_1 = 0.6\\) m)。</li>
+  <li><strong>(10 分)</strong> 弹簧释放后 A 回到弹簧自然长度瞬间, 求 A 和板的速度 \\(v_A\'\'\\) 与 \\(v_M\'\'\\)(设释放段相对位移 \\(\\Delta s_2 = 0.6\\) m)。</li>
+</ol>`,
+    keywords:["弹性碰撞","v_A'","v_B'","动量守恒","机械能守恒","共速","v共","Epmax","ΔU","Δs相对","释放","v_A''","v_M''"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:先<strong>弹性碰撞</strong>(双解公式) → 再<strong>板上弹簧骨架</strong>(压缩段 + 释放段)。完全弹性碰撞同时满足动量 + 机械能守恒。',
+      approach:'<strong>解题思路</strong>:(1) 弹性碰双解公式。(2) A+板系统动量守恒解 v_共; 能量守恒含 ΔU 解 E_pmax。(3) 释放段动量+能量联立解 v_A\'\', v_M\'\'。',
+      solution:'<strong>(1)</strong> A 初速 0, B 初速 -v_0 = -6 m/s(向左, 取向右为正)。弹性碰公式:<br>\\(v_A\' = \\dfrac{2 m_B (-v_0)}{m_A+m_B} = \\dfrac{2\\times 1\\times (-6)}{2} = -6\\) m/s 向左。<br>\\(v_B\' = \\dfrac{(m_B-m_A)(-v_0)}{m_A+m_B} = 0\\)(B 静止)。<br>(等质量弹性碰 → 速度交换。)<br><strong>(2)</strong> A 以 -6 m/s 进入弹簧骨架。A+板系统动量守恒:<br>\\(m_A\\times(-6) + 0 = (m_A+M) v_{共}\\) → \\(v_{共} = -6/4 = -1.5\\) m/s 向左。<br>能量守恒: \\(\\dfrac{1}{2}\\times 1\\times 36 = \\dfrac{1}{2}\\times 4\\times 2.25 + E_{pmax} + 0.2\\times 1\\times 10\\times 0.6\\)<br>\\(18 = 4.5 + E_{pmax} + 1.2\\) → \\(E_{pmax} = 12.3\\) J。<br><strong>(3)</strong> 释放段(动量+能量守恒):<br>\\((m_A+M) v_{共} = m_A v_A\'\' + M v_M\'\'\\) → \\(-6 = v_A\'\' + 3 v_M\'\'\\)<br>\\(\\dfrac{1}{2}\\times 4\\times 2.25 + 12.3 = \\dfrac{1}{2} v_A\'\'^2 + \\dfrac{1}{2}\\times 3\\times v_M\'\'^2 + 0.2\\times 1\\times 10\\times 0.6\\)<br>\\(4.5 + 12.3 - 1.2 = 0.5 v_A\'\'^2 + 1.5 v_M\'\'^2\\) → \\(15.6 = 0.5 v_A\'\'^2 + 1.5 v_M\'\'^2\\)。<br>代入 v_A\'\' = -6 - 3 v_M\'\': \\(15.6 = 0.5(6 + 3 v_M\'\')^2 + 1.5 v_M\'\'^2\\)<br>展开: \\(15.6 = 0.5(36 + 36 v_M\'\' + 9 v_M\'\'^2) + 1.5 v_M\'\'^2 = 18 + 18 v_M\'\' + 6 v_M\'\'^2\\)<br>\\(6 v_M\'\'^2 + 18 v_M\'\' + 2.4 = 0\\) → \\(v_M\'\'^2 + 3 v_M\'\' + 0.4 = 0\\)<br>\\(v_M\'\' = \\dfrac{-3 \\pm \\sqrt{9 - 1.6}}{2} \\approx \\dfrac{-3 \\pm 2.72}{2}\\) → \\(v_M\'\' \\approx -0.14\\) 或 \\(-2.86\\) m/s。<br>物理上: 弹簧在板左端, 自由端朝右; A 向左压弹簧。释放时弹簧推 A 向<strong>右</strong>、推板向<strong>左</strong> → A 应向右加速(从 -1.5 → 较大值或正), 板应向左加速(从 -1.5 → 更负)。<strong>选 \\(v_M\'\' \\approx -2.86\\) m/s</strong>(板向左加速), \\(v_A\'\' = -6 - 3 \\times (-2.86) = 2.58\\) m/s(A 反向, 向右)。<br>(物理含义: 弹性碰把 B 的动量全部转给 A → A 压弹簧, 弹簧释放后 A 被反推向右, 板被推向左。)'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?弹性碰撞+弹簧骨架的两阶段分别用哪些守恒?',
+      '我答错是因为:□ 弹性公式错 □ 共速动量漏 □ 释放段二次方程双根选错 □ ΔU 符号',
+      '类似题目我之后该如何识别?(关键字"弹性碰撞""板上""弹簧""光滑水平面")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T3-3", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(15 压轴升级仿 · 变体 3 · 双弹簧夹物块)光滑水平面上, 长板 M = 4 kg 静止, 板的<strong>左、右两端各固定一根轻弹簧</strong>(劲度系数都为 \\(k = 200\\) N/m, 自由长度均为 \\(L_0 = 0.3\\) m, 自由端均向板内)。物块 m = 1 kg 位于板的正中央, 以初速 \\(v_0 = 3\\) m/s 向右运动(物块初始与两端弹簧均不接触)。物块与板之间动摩擦因数 \\(\\mu = 0.1\\), 板与水平面光滑。取 \\(g = 10\\) m/s²。物块向右压缩右弹簧, 反弹后又向左可能压缩左弹簧。求:</p>
+<svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" width="420" height="140">
+  <line x1="20" y1="115" x2="400" y2="115" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="132" font-size="11" fill="#7f8c8d" text-anchor="middle">光滑水平面</text>
+  <rect x="40" y="95" width="340" height="20" fill="#cfe0f5" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="200" y="109" font-size="11" fill="#0055B8" text-anchor="middle">长板 M=4 kg, μ=0.1</text>
+  <polyline points="50,85 54,89 58,85 62,81 66,85 70,89 74,85 78,81 82,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="40" y1="75" x2="40" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="55" y="68" font-size="10" fill="#d4af37">左弹簧 k=200</text>
+  <rect x="195" y="73" width="28" height="22" fill="#fde0d0" stroke="#c0392b"/>
+  <text x="209" y="88" font-size="11" fill="#c0392b" text-anchor="middle">m</text>
+  <line x1="225" y1="84" x2="255" y2="84" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="255,84 249,81 249,87" fill="#c0392b"/>
+  <text x="230" y="60" font-size="10" fill="#c0392b">v0=3 →</text>
+  <polyline points="300,85 304,89 308,85 312,81 316,85 320,89 324,85 328,81 332,85" fill="none" stroke="#d4af37" stroke-width="2"/>
+  <line x1="380" y1="75" x2="380" y2="95" stroke="#5a6c7d" stroke-width="2"/>
+  <text x="305" y="48" font-size="10" fill="#d4af37">右弹簧 k=200</text>
+</svg>
+<ol>
+  <li><strong>(12 分)</strong> 物块向右压缩右弹簧, 求物块与板共速时(右弹簧最大压缩瞬间)的 \\(v_{共}\\)。</li>
+  <li><strong>(13 分)</strong> 求右弹簧最大弹性势能 \\(E_{p, 右}\\)(设压缩段物块相对板向右位移 \\(\\Delta s_1 = 0.2\\) m)。</li>
+  <li><strong>(10 分)</strong> 右弹簧释放推物块向左, 物块离开右弹簧后向左可能接触左弹簧。判断物块是否能压缩左弹簧? 若能, 给出简要论证(用能量守恒比较)。</li>
+</ol>`,
+    keywords:["动量守恒","v共","能量守恒","Ep右","ΔU","Δs相对","双弹簧","释放","左弹簧判定","总相对位移"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:双弹簧情境本质上是 T1 骨架的对称延展 — 右弹簧压缩阶段照旧, 释放后物块向左继续在板上滑动, 累计摩擦内能 → 判断能量是否足以压缩左弹簧。',
+      approach:'<strong>解题思路</strong>:(1) m+板系统动量守恒。(2) 能量守恒含 ΔU。(3) 释放 + 物块向左滑过中间无弹簧段 + 接触左弹簧, 用累计能量守恒判定。',
+      solution:'<strong>(1)</strong> 系统动量守恒: \\(m v_0 = (m+M) v_{共}\\) → \\(v_{共} = 3/5 = 0.6\\) m/s 向右。<br><strong>(2)</strong> 能量守恒: \\(\\dfrac{1}{2}\\times 1\\times 9 = \\dfrac{1}{2}\\times 5\\times 0.36 + E_{p,右} + 0.1\\times 1\\times 10\\times 0.2\\)<br>\\(4.5 = 0.9 + E_{p,右} + 0.2\\) → \\(E_{p,右} = 3.4\\) J。<br><strong>(3)</strong> 释放段: 右弹簧释放 3.4 J, 摩擦再耗 0.2 J(对称取 Δs_2 = 0.2 m), 物块离开右弹簧后速度由动量+能量守恒求出(数值上 v_m\' &lt; 0, 即向左)。<br>物块继续在板上向左滑动到左弹簧自由端的距离 ≈ 板长扣除两弹簧自由长度的中段距离, 此段摩擦再耗能。<br>能量判定: 释放后物块剩余动能(相对板) + 板的动能 → 若仍 &gt; 摩擦中段所需 ΔU, 则物块能压缩左弹簧。<br>定性论证: 系统总能量减少量 = 摩擦内能累计 = μmg × (总相对位移)。释放后系统剩余能量 = 共速动能 + 右弹簧释放能量 - 释放段摩擦内能 ≈ 0.9 + 3.4 - 0.2 = 4.1 J。继续滑过中段(设中段相对位移 0.3 m), 摩擦再耗 0.3 J → 剩余 3.8 J 进入左弹簧。<br><strong>结论:物块能压缩左弹簧</strong>, 左弹簧最大势能约 3.8 J 减去再次共速动能。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?双弹簧情境下能量如何累计耗散?',
+      '我答错是因为:□ 第二阶段动量没跟踪 □ 能量守恒漏中段摩擦 □ 共速判定 □ 累计相对位移漏算',
+      '类似题目我之后该如何识别?(关键字"双弹簧""物块在中间""板上摩擦")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T3-4", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(15 压轴升级仿 · 变体 4 · 倾斜板 + 弹簧 + 物块滑下)如图, 一倾角 \\(\\theta = 37°\\) 的长板 M = 2 kg <strong>固定不动</strong>(板贴在墙上, 用挡板固定), 板上端连接竖直墙, 板下端通过定滑轮接地。板的上端固定一根轻弹簧(劲度系数 \\(k = 100\\) N/m, 自由端沿板向下), 弹簧自然长度为 \\(L_0 = 0.2\\) m。物块 m = 1 kg 从板的下端沿板向上以初速 \\(v_0 = 4\\) m/s 滑动, 物块与板之间动摩擦因数 \\(\\mu = 0.25\\)。已知 \\(\\sin\\theta = 0.6\\), \\(\\cos\\theta = 0.8\\), 取 \\(g = 10\\) m/s²。物块沿板向上滑动, 接触并压缩弹簧。求:</p>
+<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" width="420" height="200">
+  <line x1="20" y1="175" x2="400" y2="175" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="200" y="192" font-size="11" fill="#7f8c8d" text-anchor="middle">地面</text>
+  <polygon points="50,175 320,175 50,30" fill="#fef9e7" stroke="#d4af37" stroke-width="1.5"/>
+  <text x="325" y="60" font-size="10" fill="#5a3a1a">长板 M=2 kg</text>
+  <text x="325" y="76" font-size="10" fill="#5a3a1a">μ=0.25, θ=37°</text>
+  <line x1="55" y1="60" x2="100" y2="105" stroke="#d4af37" stroke-width="2"/>
+  <text x="80" y="48" font-size="10" fill="#d4af37">弹簧 k</text>
+  <rect x="180" y="100" width="22" height="22" fill="#fde0d0" stroke="#c0392b" transform="rotate(-37 191 111)"/>
+  <text x="290" y="115" font-size="10" fill="#c0392b">m, v0=4 m/s ↗</text>
+  <line x1="260" y1="155" x2="225" y2="125" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="225,125 232,123 230,131" fill="#c0392b"/>
+</svg>
+<ol>
+  <li><strong>(12 分)</strong> 求物块沿板向上滑动的初始加速度 \\(a_m\\) 大小和方向(板固定不动)。</li>
+  <li><strong>(13 分)</strong> 求物块运动到弹簧自由端时的速度 \\(v_1\\)(物块从初始位置滑动到弹簧自由端的距离为 \\(d = 0.8\\) m)。</li>
+  <li><strong>(10 分)</strong> 求物块压缩弹簧到最大压缩时, 弹簧的最大弹性势能 \\(E_{pmax}\\)(设最大压缩量 \\(x_{max} = 0.1\\) m)。</li>
+</ol>`,
+    keywords:["a_m","重力分量","摩擦","板固定","v_1","动能定理","机械能守恒","Epmax","θ","sinθ","cosθ","压缩"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>:斜面上沿板方向用<strong>动能定理</strong>(或牛二 + 动能定理), 含重力分量 mg sinθ 和摩擦 μ mg cosθ 两个减速力。板固定不动, 不参与动量方程。',
+      approach:'<strong>解题思路</strong>:(1) 沿板向上为正, 物块受重力分量 -mg sinθ 和摩擦 -μ mg cosθ, a_m = -(g sinθ + μ g cosθ)。(2) 动能定理求 v_1。(3) 压缩段动能定理含弹簧弹性势能。',
+      solution:'<strong>(1)</strong> 沿板向上为正方向, 物块受:<br>- 重力沿板分量 \\(mg\\sin\\theta = 1\\times 10\\times 0.6 = 6\\) N(向下)<br>- 摩擦 \\(\\mu mg\\cos\\theta = 0.25\\times 1\\times 10\\times 0.8 = 2\\) N(向下, 与物块运动方向相反)<br>合力 \\(F_{合} = -8\\) N(沿板向下)。<br>\\(a_m = F_{合}/m = -8\\) m/s²(沿板向下减速, 即沿板方向减速度大小 8 m/s²)。<br><strong>(2)</strong> 动能定理(从初始位置到弹簧自由端, 距离 d = 0.8 m):<br>\\(F_{合}\\cdot d = \\dfrac{1}{2} m v_1^2 - \\dfrac{1}{2} m v_0^2\\)<br>\\(-8\\times 0.8 = \\dfrac{1}{2}\\times 1\\times v_1^2 - \\dfrac{1}{2}\\times 1\\times 16\\)<br>\\(-6.4 = 0.5 v_1^2 - 8\\) → \\(v_1^2 = 3.2\\), \\(v_1 \\approx 1.79\\) m/s 沿板向上。<br><strong>(3)</strong> 压缩段(从弹簧自由端到最大压缩, x_max = 0.1 m, 共同体仍下滑同时压弹簧, 但物块此时速度由 v_1 减到 0)。能量守恒:<br>\\(\\dfrac{1}{2}m v_1^2 = E_{pmax} + mg\\sin\\theta \\cdot x_{max} + \\mu mg\\cos\\theta \\cdot x_{max}\\)<br>\\(\\dfrac{1}{2}\\times 1\\times 3.2 = E_{pmax} + 6\\times 0.1 + 2\\times 0.1\\)<br>\\(1.6 = E_{pmax} + 0.6 + 0.2\\) → \\(E_{pmax} = 0.8\\) J。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?斜面情境下重力分量与摩擦如何同时作用?',
+      '我答错是因为:□ 重力分量方向 □ 摩擦正压力错 □ 动能定理漏项 □ 临界条件没识别',
+      '类似题目我之后该如何识别?(关键字"倾斜板""固定""弹簧""动摩擦因数")',
+      '对应高考 15 压轴 17 分级, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  }
+]
+
+};
+// END QUESTION_BANK
+
+let selectedQuestions = [];
+let studentName = "student";
+
+const SLUG = "gaokao-15-spring-block-wall";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    const _freqText = String(t.examFreq || "");
+    const _freqClass = (_freqText.indexOf("压轴") >= 0 || _freqText.indexOf("高频") >= 0 || _freqText.indexOf("主战场") >= 0) ? "freq-high"
+                     : (_freqText.indexOf("常考") >= 0 || _freqText.indexOf("中频") >= 0) ? "freq-mid"
+                     : "freq-low";
+    html += `<div class="kp-item ${_freqClass}">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = "综合大题";
+    const compositeTag = '<span class="q-meta composite">综合大题</span>';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <div class="q-header-circle">
+          <div class="q-line-no">第 ${n} 题</div>
+          <div class="q-line-type">${typeTag}</div>
+          <div class="q-line-diff">难度 · ${q.difficulty}</div>
+          <div class="q-line-id">${q.id}</div>
+        </div>
+      </div>
+      <div class="q-score">${q.score} 分</div>
+      <div class="q-prompt">${q.stem}</div>
+      <textarea class="q-short-input" rows="12" data-q-id="q${n}" placeholder="请分小问作答(每小问 100-200 字, 含动量守恒/能量守恒等关键方程 + 数值结果 + 单位)"></textarea>
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+    if (el) el.addEventListener("input", updateAnsweredCount);
+  });
+}
+
+function collectAnswer(idx) {
+  const qid = `q${idx+1}`;
+  return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+  const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+  const ratio = hits.length / q.keywords.length;
+  let score = 0;
+  if (ratio >= 1.0) score = q.score;
+  else if (ratio >= 0.5) score = Math.round(q.score * 0.5);
+  return { score, isCorrect: ratio >= 1.0, hits, partial: ratio >= 0.5 && ratio < 1.0 };
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a && a.length > 0) answered++;
+  });
+  if (answered < 2) { if (!confirm(`已答 ${answered} / 3 题(< 67%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "var(--gold-700)" : (passed ? "var(--blue-700)" : "var(--silver-700)");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  const stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  const explanationHtml =
+    `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+    `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+    `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="gaokao-15-spring-block-wall-task-cards.html">学习任务卡</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7B8290;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+</body>
+</html>

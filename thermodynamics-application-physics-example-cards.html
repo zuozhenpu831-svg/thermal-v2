@@ -8,97 +8,468 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f3f8; color: #2c3e50; line-height: 1.7; }
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
-  .breadcrumb a { color: #6a1b9a; text-decoration: none; }
-  .breadcrumb a:hover { text-decoration: underline; }
-  header.page-header { background: linear-gradient(135deg, #6a1b9a, #8e24aa, #ab47bc); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(106,27,154,0.18); }
-  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
-  header.page-header .subtitle { font-size: 14px; opacity: 0.92; line-height: 1.7; }
-  .intro-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #6a1b9a; }
-  .intro-card h2 { color: #4a148c; font-size: 18px; margin-bottom: 12px; }
-  .intro-card p { color: #5a6c7d; font-size: 14px; margin-bottom: 10px; line-height: 1.8; }
-  .intro-card .learning-path { background: linear-gradient(135deg, rgba(106,27,154,0.06), rgba(171,71,188,0.10)); border-radius: 8px; padding: 14px 18px; margin: 14px 0; font-size: 14px; }
-  .intro-card .learning-path strong { color: #6a1b9a; }
-  .toc-card { background: white; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .toc-card h3 { color: #6a1b9a; font-size: 16px; margin-bottom: 12px; }
-  .toc-card ol { padding-left: 24px; font-size: 14px; }
-  .toc-card ol li { margin: 6px 0; color: #5a6c7d; }
-  .toc-card ol li a { color: #6a1b9a; text-decoration: none; font-weight: 500; }
-  .toc-card ol li a:hover { text-decoration: underline; }
-  .toc-card .type-tag { background: #f3e7fb; color: #6a1b9a; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 6px; }
-  .toc-card .diff-tag { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 10px; font-size: 11px; margin-left: 4px; }
-  .toc-card .diff-tag.中等 { background: #fff3e0; color: #e67e22; }
-  .toc-card .diff-tag.较难 { background: #fce4ec; color: #c0392b; }
-  .toc-card .diff-tag.综合压轴 { background: #ede7f6; color: #4527a0; }
+    :root {
+      /* Blue Nova brand · 真理源 task-cards v0.1.31 */
+      --blue-900: #002F73;
+      --blue-700: #00409A;
+      --blue-500: #0055B8;
+      --blue-100: #E8EEF9;
+      --blue-050: #F3F6FC;
+      --gold-900: #8E6E2E;
+      --gold-700: #B8924A;
+      --gold-500: #C9A961;
+      --gold-100: #F4ECD6;
+      --gold-050: #FBF7EC;
+      --silver-900: #5C6370;
+      --silver-700: #7B8290;
+      --silver-500: #A8AEBC;
+      --silver-100: #E5E7EC;
+      --silver-050: #F3F4F7;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-light: #7B8290;
+      --bg-primary: #ffffff;
+      --bg-secondary: #FAFAFB;
+      --border-color: #ECEDF0;
+      --radius: 24px;
+      --radius-sm: 14px;
+      --radius-btn: 16px;
+      --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+      --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-  .prereq-card { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #0055B8; }
-  .prereq-card h3 { color: #0055B8; font-size: 17px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .prereq-card h4 { color: #b66100; font-size: 14px; margin: 18px 0 8px 0; display: flex; align-items: center; gap: 8px; }
-  .prereq-card h4.recommend { color: #6a1b9a; }
-  .prereq-card p { font-size: 13px; color: #5a6c7d; margin-bottom: 10px; line-height: 1.8; }
-  .prereq-card .prereq-list { list-style: none; padding: 0; margin: 10px 0; }
-  .prereq-card .prereq-list li { background: #f5f9ff; border-radius: 8px; padding: 12px 16px; margin: 8px 0; border-left: 3px solid #0055B8; font-size: 14px; line-height: 1.8; }
-  .prereq-card .prereq-list li a { color: #0055B8; font-weight: 600; text-decoration: none; }
-  .prereq-card .prereq-list li a:hover { text-decoration: underline; }
-  .prereq-card .prereq-list li .usage { color: #5a6c7d; font-size: 13px; margin-left: 4px; }
-  .prereq-card .recommend-list { padding-left: 22px; margin: 6px 0; font-size: 13px; }
-  .prereq-card .recommend-list li { margin: 6px 0; color: #5a6c7d; }
-  .prereq-card .recommend-list li a { color: #6a1b9a; text-decoration: none; font-weight: 500; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      line-height: 1.85;
+      padding: 40px 36px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
 
-  .example-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 24px; border-left: 5px solid #6a1b9a; box-shadow: 0 2px 12px rgba(106,27,154,0.08); }
-  .example-card-header { display: flex; gap: 12px; align-items: center; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px dashed #e8e0f4; flex-wrap: wrap; }
-  .example-card-no { background: linear-gradient(135deg, #6a1b9a, #ab47bc); color: white; width: 38px; height: 38px; border-radius: 50%; text-align: center; line-height: 38px; font-weight: 700; font-size: 17px; flex-shrink: 0; }
-  .example-card-title { font-size: 17px; font-weight: 700; color: #4a148c; flex: 1; min-width: 200px; }
-  .example-card-type { background: #f3e7fb; color: #6a1b9a; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
-  .example-card-diff { background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
-  .example-card-diff.中等 { background: #fff3e0; color: #e67e22; }
-  .example-card-diff.较难 { background: #fce4ec; color: #c0392b; }
-  .example-card-diff.综合压轴 { background: #ede7f6; color: #4527a0; }
+    /* breadcrumb · 蓝 */
+    .breadcrumb { font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 20px; letter-spacing: 0.02em; }
+    .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
 
-  .q-stem { background: #fafafe; border-radius: 8px; padding: 16px 20px; margin-bottom: 20px; font-size: 15px; line-height: 1.85; border-left: 3px solid #6a1b9a; }
-  .q-stem .stem-label { display: inline-block; background: #6a1b9a; color: white; padding: 2px 10px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+    /* page header · 蓝 gradient */
+    header.page-header {
+      background: linear-gradient(135deg, var(--blue-900), var(--blue-700), var(--blue-500));
+      color: #fff;
+      padding: 36px 32px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+    }
+    header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
+    header.page-header .subtitle { font-size: 14px; opacity: 0.92; line-height: 1.7; }
 
-  .four-sec { background: white; border-radius: 8px; padding: 16px 20px; margin: 14px 0; border-left: 4px solid; line-height: 1.85; font-size: 14.5px; }
-  .four-sec.knowledge { background: #e8f0fe; border-left-color: #0055B8; }
-  .four-sec.approach  { background: #f3e7fb; border-left-color: #6a1b9a; }
-  .four-sec.solution  { background: #f1f8f4; border-left-color: #2e7d32; }
-  .four-sec.mistakes  { background: #fdeaea; border-left-color: #c0392b; }
-  .four-sec-title { font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; font-size: 15px; }
-  .four-sec.knowledge .four-sec-title { color: #0055B8; }
-  .four-sec.approach  .four-sec-title { color: #6a1b9a; }
-  .four-sec.solution  .four-sec-title { color: #2e7d32; }
-  .four-sec.mistakes  .four-sec-title { color: #c0392b; }
-  .four-sec-body { line-height: 1.9; }
-  .four-sec-body ul { padding-left: 22px; margin: 4px 0; }
-  .four-sec-body ul li { margin: 4px 0; }
-  .four-sec-body .step { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px 14px; margin: 10px 0; border-left: 3px solid #2e7d32; }
-  .four-sec-body .step .step-no { display: inline-block; background: #2e7d32; color: white; padding: 1px 8px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-right: 6px; }
-  .four-sec-body .step .step-rule { font-size: 12px; color: #5a6c7d; font-style: italic; margin-top: 4px; }
-  .four-sec-body .mistake-item { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px 14px; margin: 10px 0; }
-  .four-sec-body .mistake-item .mistake-no { font-weight: 600; color: #c0392b; }
-  .four-sec-body .mistake-item .wrong { color: #c0392b; font-weight: 500; }
-  .four-sec-body .mistake-item .right { color: #2e7d32; font-weight: 500; }
-  .four-sec-body code.formula { background: rgba(255,255,255,0.7); padding: 2px 6px; border-radius: 4px; font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 13px; color: #4a148c; }
-  .four-sec-body .answer-box { background: rgba(46,125,50,0.10); border: 1px dashed #2e7d32; border-radius: 6px; padding: 10px 14px; margin: 12px 0; font-weight: 600; color: #1b5e20; }
+    /* intro-card · 蓝 left border */
+    .intro-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--blue-700);
+    }
+    .intro-card h2 { color: var(--blue-900); font-size: 18px; margin: 0 0 12px 0; }
+    .intro-card p { color: var(--text-primary); font-size: 14px; margin: 0 0 10px 0; line-height: 1.85; }
+    .intro-card .learning-path {
+      background: var(--blue-050);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 14px 0;
+      font-size: 14px;
+    }
+    .intro-card .learning-path strong { color: var(--blue-700); }
 
-  .verify-box { background: linear-gradient(90deg, #e8f5e9, #f1f8f4); border-left: 4px solid #2e7d32; border-radius: 6px; padding: 10px 14px; margin: 10px 0; font-size: 13px; color: #1b5e20; }
-  .verify-box strong { color: #2e7d32; }
+    /* ===== example-card · 3 色循环 蓝/金/银 ===== */
+    .example-card {
+      --q-rich: var(--blue-900);
+      --q-mid:  var(--blue-700);
+      --q-bg:   var(--blue-050);
+      --q-tint: var(--blue-100);
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      padding: 28px 30px;
+      margin-bottom: 28px;
+      border-left: 5px solid var(--q-mid);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .example-card:nth-of-type(3n+2) {
+      --q-rich: var(--gold-900);
+      --q-mid:  var(--gold-700);
+      --q-bg:   var(--gold-050);
+      --q-tint: var(--gold-100);
+    }
+    .example-card:nth-of-type(3n) {
+      --q-rich: var(--silver-900);
+      --q-mid:  var(--silver-700);
+      --q-bg:   var(--silver-050);
+      --q-tint: var(--silver-100);
+    }
 
-  .anchor-link { font-size: 13px; color: #5a6c7d; padding: 8px 12px; background: #f5f3f8; border-radius: 4px; margin: 8px 0; border-left: 3px solid #6a1b9a; }
-  .anchor-link a { color: #6a1b9a; }
+    /* header · 4 行大圆 */
+    .example-card-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--q-mid), var(--q-rich));
+      color: #fff;
+      margin: 0 auto 22px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 0 6px var(--q-tint), var(--shadow-md);
+    }
+    .example-card-no {
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      opacity: 0.92;
+      background: transparent;
+      width: auto;
+      height: auto;
+      line-height: 1.3;
+    }
+    .example-card-title {
+      font-size: 1.04rem;
+      font-weight: 700;
+      color: #fff;
+      flex: none;
+      min-width: 0;
+      line-height: 1.4;
+      padding: 0 6px;
+    }
+    .example-card-type {
+      background: rgba(255,255,255,0.18);
+      color: #fff;
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    .example-card-diff,
+    .example-card-diff.中等,
+    .example-card-diff.较难,
+    .example-card-diff.综合压轴 {
+      background: rgba(255,255,255,0.92);
+      color: var(--q-rich);
+      padding: 3px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
 
-  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f3f8; color: #5a6c7d; text-decoration: none; font-size: 14px; }
-  .bottom-nav a { background: #f3e7fb; color: #6a1b9a; }
-  .bottom-nav a:hover { background: #ede7f6; }
-  .bottom-nav span { color: #bdc3c7; }
+    /* q-stem */
+    .q-stem {
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 0 0 18px 0;
+      line-height: 1.95;
+      font-size: 0.95rem;
+      border-left: 3px solid var(--q-mid);
+    }
+    .q-stem .stem-label {
+      display: inline-block;
+      background: var(--q-mid);
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
 
-  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
-  .katex { font-size: 1em; }
-  sub, sup { font-size: 0.78em; }
+    /* ===== four-sec · 跟题色 ===== */
+    .four-sec {
+      background: var(--q-bg);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin: 14px 0;
+      border-left: 4px solid var(--q-mid);
+      line-height: 1.85;
+      font-size: 0.93rem;
+      color: var(--text-primary);
+    }
+    .four-sec.knowledge,
+    .four-sec.approach,
+    .four-sec.solution,
+    .four-sec.mistakes { background: var(--q-bg); border-left-color: var(--q-mid); }
+    .four-sec-title {
+      font-weight: 700;
+      color: var(--q-rich);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+    }
+    .four-sec.knowledge .four-sec-title,
+    .four-sec.approach  .four-sec-title,
+    .four-sec.solution  .four-sec-title,
+    .four-sec.mistakes  .four-sec-title { color: var(--q-rich); }
+    .four-sec-body { line-height: 1.95; color: var(--text-primary); }
+    .four-sec-body ul { padding-left: 22px; margin: 4px 0; }
+    .four-sec-body ul li { margin: 4px 0; color: var(--text-primary); }
+    .four-sec-body .step {
+      background: rgba(255,255,255,0.7);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 10px 0;
+      border-left: 3px solid var(--q-mid);
+    }
+    .four-sec-body .step .step-no {
+      display: inline-block;
+      background: var(--q-mid);
+      color: #fff;
+      padding: 1px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .four-sec-body .step .step-rule {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-top: 4px;
+    }
+    .four-sec-body .mistake-item {
+      background: rgba(255,255,255,0.7);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 10px 0;
+    }
+    .four-sec-body .mistake-item .mistake-no { font-weight: 700; color: var(--q-rich); }
+    .four-sec-body .mistake-item .wrong { color: var(--gold-900); font-weight: 500; }
+    .four-sec-body .mistake-item .right { color: var(--blue-700); font-weight: 500; }
+
+    /* answer-box / formula · 跟题色 */
+    .answer-box, .four-sec-body .answer-box {
+      background: rgba(255,255,255,0.75);
+      border: 1px dashed var(--q-mid);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin: 12px 0;
+      font-weight: 600;
+      color: var(--q-rich);
+    }
+    .formula, .four-sec-body code.formula {
+      background: rgba(255,255,255,0.85);
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+      color: var(--q-rich);
+    }
+
+    /* cross-prereq · 跟题色 */
+    .cross-prereq {
+      background: var(--q-bg);
+      border-left: 4px solid var(--q-mid);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-size: 0.86rem;
+      color: var(--text-primary);
+      line-height: 1.85;
+    }
+    .cross-prereq strong { color: var(--q-rich); }
+
+    /* cross-topic-warn · 蓝品牌警示 (同 task-cards .cross-topic-warning) */
+    .cross-topic-warn {
+      background: var(--blue-050);
+      border: 1px solid var(--blue-700);
+      border-left: 3px solid var(--blue-700);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 16px 22px;
+      margin: 18px 0;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      line-height: 1.85;
+    }
+    .cross-topic-warn strong { color: var(--blue-700); }
+
+    /* diff-tag inline (in titles) · 中性 */
+    .diff-tag,
+    .diff-tag.中等,
+    .diff-tag.较难,
+    .diff-tag.综合压轴 {
+      background: var(--silver-100);
+      color: var(--silver-900);
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      margin-left: 6px;
+      font-weight: 500;
+    }
+
+    /* generic links */
+    a { color: var(--blue-700); }
+    a:hover { text-decoration: underline; }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 32px 16px 8px;
+      font-size: 0.82rem;
+      color: var(--silver-700);
+      margin-top: 28px;
+    }
+
+    /* prereq-card · 银 left border (前置板块=已学过) */
+    .prereq-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--silver-700);
+    }
+    .prereq-card h3 { color: var(--silver-900); font-size: 17px; margin: 0 0 12px 0; }
+    .prereq-card h4 { color: var(--silver-900); font-size: 14.5px; margin: 18px 0 8px 0; font-weight: 600; }
+    .prereq-card h4.recommend { color: var(--gold-900); }
+    .prereq-card p { color: var(--text-primary); font-size: 14px; margin: 0 0 10px 0; line-height: 1.85; }
+
+    .prereq-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+    .prereq-list > li {
+      background: var(--silver-050);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      line-height: 1.8;
+    }
+    .prereq-list > li a:first-of-type { color: var(--blue-700); font-weight: 600; }
+    .prereq-list .usage {
+      font-size: 12.5px;
+      color: var(--silver-900);
+      margin-top: 6px;
+      padding: 6px 0 0 12px;
+      border-left: 2px solid var(--silver-100);
+      line-height: 1.7;
+    }
+    .prereq-list .usage strong { color: var(--silver-900); }
+
+    .recommend-list {
+      list-style: disc;
+      padding-left: 22px;
+      margin: 8px 0 4px;
+    }
+    .recommend-list li {
+      font-size: 13px;
+      margin-bottom: 6px;
+      line-height: 1.75;
+      color: var(--text-primary);
+    }
+    .recommend-list a { color: var(--gold-700); font-weight: 600; }
+    .recommend-list a:hover { color: var(--gold-900); }
+
+    /* toc-card · 金 left border (目录=突出导航) */
+    .toc-card {
+      background: var(--bg-primary);
+      border-radius: var(--radius-sm);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--gold-700);
+    }
+    .toc-card h3 { color: var(--gold-900); font-size: 18px; margin: 0 0 14px 0; }
+    .toc-card ol { padding-left: 24px; margin: 0; }
+    .toc-card li {
+      font-size: 14px;
+      margin-bottom: 10px;
+      line-height: 1.7;
+    }
+    .toc-card a { color: var(--blue-700); font-weight: 500; }
+    .toc-card a:hover { color: var(--blue-900); }
+    .toc-card .type-tag,
+    .type-tag {
+      background: var(--blue-050);
+      color: var(--blue-700);
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      margin-left: 6px;
+      font-weight: 500;
+    }
+
+    /* anchor-link · 锚回 (例题底部) */
+    .anchor-link {
+      background: var(--blue-050);
+      border-left: 3px solid var(--blue-700);
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.7;
+    }
+    .anchor-link a { color: var(--blue-700); font-weight: 600; }
+    .anchor-link a:hover { color: var(--blue-900); }
+
+    /* verify-box · 答案验证 (银底+金左条 · 跟答案确认调性) */
+    .verify-box {
+      background: var(--silver-050);
+      border-left: 3px solid var(--gold-700);
+      border-radius: 6px;
+      padding: 10px 16px;
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-primary);
+      line-height: 1.75;
+    }
+    .verify-box strong { color: var(--gold-900); }
+
+    /* bottom-nav · 胶囊导航 (与 basic-task-cards 一致) */
+    .bottom-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border-color);
+    }
+    .bottom-nav a, .bottom-nav span {
+      flex: 1;
+      min-width: 140px;
+      text-align: center;
+      padding: 16px 18px;
+      border-radius: 999px;
+      background: var(--silver-050);
+      color: var(--silver-700);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+    .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+    @media (max-width: 720px) {
+      body { padding: 22px 16px; }
+      .example-card { padding: 22px 18px; }
+      .example-card-header { width: 200px; height: 200px; padding: 16px; }
+      .example-card-title { font-size: 0.96rem; }
+      .prereq-card, .toc-card { padding: 20px 18px; }
+    }
 </style>
 </head>
 
@@ -136,26 +507,26 @@
   <ul class="prereq-list">
     <li>
       <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> ·
-      <a href="molecular-kinetic-theory-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
-      <a href="molecular-kinetic-theory-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <a href="molecular-kinetic-theory-mock-check.html" style="font-size:12px;color:#7B8290;">基础检测</a> ·
+      <a href="molecular-kinetic-theory-fluency-test.html" style="font-size:12px;color:#7B8290;">熟练度检测</a>
       <div class="usage">→ 本融合用到: <strong>微观三量</strong>(分子数密度 / 分子平均动能 / 单位时间单位面积碰撞) 与宏观 p, T 的桥接 — 例题 1 核心</div>
     </li>
     <li>
       <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> ·
-      <a href="gas-liquid-solid-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
-      <a href="gas-liquid-solid-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <a href="gas-liquid-solid-mock-check.html" style="font-size:12px;color:#7B8290;">基础检测</a> ·
+      <a href="gas-liquid-solid-fluency-test.html" style="font-size:12px;color:#7B8290;">熟练度检测</a>
       <div class="usage">→ 本融合用到: <strong>三大气体实验定律 + 理想气体状态方程</strong> + <strong>p-V / p-T / V-T 图像判别</strong>(过原点直线铁律) + <strong>受力平衡定压强</strong> — 例题 1/3/4/5 核心</div>
     </li>
     <li>
       <a href="basic-task-cards.html">热力学第一定律</a> ·
-      <a href="basic-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
-      <a href="basic-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <a href="basic-mock-check.html" style="font-size:12px;color:#7B8290;">基础检测</a> ·
+      <a href="basic-fluency-test.html" style="font-size:12px;color:#7B8290;">熟练度检测</a>
       <div class="usage">→ 本融合用到: <strong>ΔU = Q − W</strong>(本文统一约定 <strong>W 为气体对外界做的功</strong>) + <strong>四种特例过程</strong>(等温 ΔU=0 / 等容 W=0 / 等压 W=pΔV / 绝热 Q=0) — 例题 2/3/6 核心</div>
     </li>
     <li>
       <a href="second-law-basic-task-cards.html">热力学第二定律 · 基础</a> ·
-      <a href="second-law-basic-mock-check.html" style="font-size:12px;color:#5a6c7d;">基础检测</a> ·
-      <a href="second-law-basic-fluency-test.html" style="font-size:12px;color:#5a6c7d;">熟练度检测</a>
+      <a href="second-law-basic-mock-check.html" style="font-size:12px;color:#7B8290;">基础检测</a> ·
+      <a href="second-law-basic-fluency-test.html" style="font-size:12px;color:#7B8290;">熟练度检测</a>
       <div class="usage">→ 本融合用到: <strong>热传导的方向性</strong> + "绝热"作为过程条件 — 仅出现在例题 2/3 的个别辨析选项中, 不单独成题</div>
     </li>
   </ul>
@@ -200,7 +571,7 @@
       C. 该过程中气体分子的平均动能增大<br>
       D. 单位时间内撞击单位面积瓶壁的分子数增多, 但每次碰撞的平均冲力不变
     </div>
-    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+    <div style="margin-top:14px;background:#FAFAFB;border:1px solid #F3F4F7;border-radius:6px;padding:12px;text-align:center;">
       <svg viewBox="0 0 720 230" style="width:100%;max-width:720px;height:auto;" xmlns="http://www.w3.org/2000/svg">
         <!-- (a) p-T 图 等容线（本题用） -->
         <g transform="translate(20, 20)">
@@ -254,7 +625,7 @@
           <text x="100" y="68" text-anchor="middle" font-size="10" fill="#7f8c8d">(对照用 · 不过原点)</text>
         </g>
       </svg>
-      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">📊 状态图像三对照 · 题中"p-T 图过原点直线"= (a) 等容线 ⇒ V 不变. (b)(c) 仅作对照</p>
+      <p style="font-size:12px;color:#7B8290;margin-top:8px;">📊 状态图像三对照 · 题中"p-T 图过原点直线"= (a) 等容线 ⇒ V 不变. (b)(c) 仅作对照</p>
     </div>
   </div>
 
@@ -453,7 +824,7 @@
       D. C→A 过程气体放出的热量大于外界对气体做的功<br>
       E. 整个循环一周, 气体内能变化为零
     </div>
-    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+    <div style="margin-top:14px;background:#FAFAFB;border:1px solid #F3F4F7;border-radius:6px;padding:12px;text-align:center;">
       <svg viewBox="0 0 360 290" style="width:100%;max-width:360px;height:auto;" xmlns="http://www.w3.org/2000/svg">
         <!-- 坐标轴 -->
         <line x1="50" y1="240" x2="320" y2="240" stroke="#333" stroke-width="1.5"/>
@@ -498,7 +869,7 @@
         <text x="135" y="200" font-size="11" font-weight="600" fill="#0055B8">C→A 等压压缩</text>
         <text x="135" y="213" font-size="10" fill="#0055B8">(W&lt;0, Q&lt;0)</text>
       </svg>
-      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">📊 p-V 闭合循环 · A→B 等容(垂直) · B→C 等温(双曲线) · C→A 等压(水平). 一周 ΔU = 0</p>
+      <p style="font-size:12px;color:#7B8290;margin-top:8px;">📊 p-V 闭合循环 · A→B 等容(垂直) · B→C 等温(双曲线) · C→A 等压(水平). 一周 ΔU = 0</p>
     </div>
   </div>
 
@@ -603,7 +974,7 @@
       (2) 缓慢加热气体, 求活塞<strong>恰好离开卡销</strong>时的温度 T<sub>2</sub>;<br>
       (3) 继续缓慢加热, 使气柱长度变为 L<sub>3</sub> = 25 cm, 求此时温度 T<sub>3</sub>.
     </div>
-    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+    <div style="margin-top:14px;background:#FAFAFB;border:1px solid #F3F4F7;border-radius:6px;padding:12px;text-align:center;">
       <svg viewBox="0 0 320 380" style="width:100%;max-width:280px;height:auto;" xmlns="http://www.w3.org/2000/svg">
         <!-- 大气箭头 -->
         <text x="160" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#7f8c8d">大气 p₀ = 1.0×10⁵ Pa</text>
@@ -671,7 +1042,7 @@
         <!-- 开口标记 -->
         <text x="160" y="56" text-anchor="middle" font-size="9" fill="#888">(开口)</text>
       </svg>
-      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">🔧 卡销活塞装置剖面 · 加热气体 → 卡销支持力减为 0 时活塞恰好离开 → 之后等压上升</p>
+      <p style="font-size:12px;color:#7B8290;margin-top:8px;">🔧 卡销活塞装置剖面 · 加热气体 → 卡销支持力减为 0 时活塞恰好离开 → 之后等压上升</p>
     </div>
   </div>
 
@@ -773,9 +1144,9 @@
       (1) 要使瓶内压强达到 p<sub>2</sub> = 3.0×10<sup>5</sup> Pa, 需要打气<strong>多少次</strong>?<br>
       (2) 充好气的瓶子从 27 ℃ 的库房移到 −3 ℃ 的户外救援现场 (瓶内气体质量不再变化), 求瓶内气体压强 p<sub>3</sub>.
     </div>
-    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+    <div style="margin-top:14px;background:#FAFAFB;border:1px solid #F3F4F7;border-radius:6px;padding:12px;text-align:center;">
       <svg viewBox="0 0 480 260" style="width:100%;max-width:480px;height:auto;" xmlns="http://www.w3.org/2000/svg">
-        <text x="240" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="#6a1b9a">等效定质量法 · 充气筒 + 气瓶</text>
+        <text x="240" y="18" text-anchor="middle" font-size="13" font-weight="600" fill="var(--blue-700)">等效定质量法 · 充气筒 + 气瓶</text>
 
         <!-- 充气筒（左）-->
         <g transform="translate(20, 50)">
@@ -832,10 +1203,10 @@
         </g>
 
         <!-- 底部说明 -->
-        <text x="240" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="#6a1b9a">等效定质量打包：原瓶气体 + n 次充入气体 → 末态全部在瓶内</text>
+        <text x="240" y="240" text-anchor="middle" font-size="11" font-weight="600" fill="var(--blue-700)">等效定质量打包：原瓶气体 + n 次充入气体 → 末态全部在瓶内</text>
         <text x="240" y="254" text-anchor="middle" font-size="10" fill="#7f8c8d">p₁·V + n·p·ΔV = p₂·V（同温下打包等温）</text>
       </svg>
-      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">🔧 变质量充气示意 · 关键: 把"瓶内原有 + n 次充入"打包成定质量, 在共同 (p₁ = 1×10⁵ Pa) 下总体积 V + n·ΔV → 末态全挤进 V</p>
+      <p style="font-size:12px;color:#7B8290;margin-top:8px;">🔧 变质量充气示意 · 关键: 把"瓶内原有 + n 次充入"打包成定质量, 在共同 (p₁ = 1×10⁵ Pa) 下总体积 V + n·ΔV → 末态全挤进 V</p>
     </div>
   </div>
 
@@ -941,7 +1312,7 @@
       (1) 求加热结束时气体的温度 T<sub>2</sub>;<br>
       (2) 求该过程中电热丝放出的热量 Q (即气体吸收的热量).
     </div>
-    <div style="margin-top:14px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:12px;text-align:center;">
+    <div style="margin-top:14px;background:#FAFAFB;border:1px solid #F3F4F7;border-radius:6px;padding:12px;text-align:center;">
       <svg viewBox="0 0 280 380" style="width:100%;max-width:260px;height:auto;" xmlns="http://www.w3.org/2000/svg">
         <text x="140" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#7f8c8d">大气 p₀ = 1.0×10⁵ Pa</text>
         <line x1="115" y1="22" x2="115" y2="46" stroke="#7f8c8d" stroke-width="1.5" marker-end="url(#arrD6)"/>
@@ -1001,7 +1372,7 @@
         <line x1="214" y1="340" x2="222" y2="340" stroke="#0055B8" stroke-width="1"/>
         <text x="225" y="265" font-size="10" fill="#0055B8">L</text>
       </svg>
-      <p style="font-size:12px;color:#7f8c8d;margin-top:8px;">🔧 绝热缸 + 自由活塞 + 电热丝 · 活塞缓慢上升 6 cm = 等压过程. ΔU = CΔT, W = pΔV, Q = ΔU + W</p>
+      <p style="font-size:12px;color:#7B8290;margin-top:8px;">🔧 绝热缸 + 自由活塞 + 电热丝 · 活塞缓慢上升 6 cm = 等压过程. ΔU = CΔT, W = pΔV, Q = ΔU + W</p>
     </div>
   </div>
 

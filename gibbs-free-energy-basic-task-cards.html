@@ -8,225 +8,882 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
 <style>
+  /* ===== 蓝色诺瓦 · 三色制（蓝 / 金 / 银）· 圆形锚点 · 大留白 v0.2 ===== */
   :root {
-    --primary-blue: #00409A;
-    --secondary-blue: #0055B8;
-    --bright-blue: #006AD6;
-    --light-blue: #E6EEFF;
+    /* 蓝 · 主色 */
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    /* 金 · 第二色（节奏 2 · 强调 · 暖警示） */
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    /* 银 · 第三色（节奏 3 · 弱调 · 中性提示） */
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    /* 中性 */
     --text-primary: #1d1d1f;
     --text-secondary: #6e6e73;
     --text-light: #86868b;
     --bg-primary: #ffffff;
-    --bg-secondary: #f5f7fa;
-    --bg-light: #fafbfc;
-    --border-color: #e5e5e7;
-    --shadow-sm: 0 2px 8px rgba(0, 64, 154, 0.08);
-    --shadow-md: 0 4px 16px rgba(0, 64, 154, 0.12);
-    --shadow-lg: 0 8px 32px rgba(0, 64, 154, 0.16);
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    /* 形变 */
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --radius: 20px;
-    --radius-sm: 12px;
-    --accent-orange: #e67e22;
-    --accent-purple: #8e44ad;
-    --accent-green: #27ae60;
-    --success: #27ae60;
-    --danger: #c0392b;
+    /* 兼容旧变量（页面内联仍引用 var(--primary-blue) 等） */
+    --primary-blue: var(--blue-700);
+    --secondary-blue: var(--blue-500);
+    --bright-blue: var(--blue-500);
+    --light-blue: var(--blue-100);
+    --bg-light: var(--bg-secondary);
+    --accent-orange: var(--gold-700);
+    --accent-purple: var(--silver-700);
+    --accent-green: var(--silver-700);
+    --success: var(--silver-700);
+    --danger: var(--gold-900);
   }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background: var(--bg-secondary);
     color: var(--text-primary);
-    line-height: 1.7;
+    line-height: 1.85;
     min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
   }
-  .container { max-width: 720px; margin: 0 auto; padding: 20px 16px 40px; }
-  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
-  .breadcrumb a { color: var(--secondary-blue); text-decoration: none; }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
   .breadcrumb a:hover { text-decoration: underline; }
-  .breadcrumb .sep { margin: 0 6px; color: var(--border-color); }
+  .breadcrumb .sep { margin: 0 8px; color: var(--silver-500); }
+
+  /* ===== 头部 · 极简化 · 一个大金圆作为视觉锚 ===== */
   .header {
     text-align: center;
-    padding: 36px 20px;
-    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
-    color: #fff;
+    padding: 64px 32px 56px;
+    background: #fff;
+    color: var(--text-primary);
     border-radius: var(--radius);
-    margin-bottom: 28px;
+    margin-bottom: 48px;
     position: relative;
     overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
   }
-  .header h1 { font-size: 1.5rem; margin-bottom: 6px; font-weight: 700; animation: fadeInUp 0.8s ease-out; }
-  .header .subtitle { font-size: 0.9rem; opacity: 0.88; animation: fadeInUp 0.8s ease-out 0.2s both; }
-  .hero-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
-  .hero-decoration { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.1); animation: float 6s ease-in-out infinite; }
-  .hero-decoration:nth-of-type(1) { width: 60px; height: 60px; top: 20%; left: 10%; animation-delay: 0s; }
-  .hero-decoration:nth-of-type(2) { width: 40px; height: 40px; top: 60%; right: 15%; animation-delay: 2s; }
-  .hero-decoration:nth-of-type(3) { width: 80px; height: 80px; bottom: 10%; left: 60%; animation-delay: 4s; }
-  @keyframes float { 0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; } 50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; } }
-  @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 .h1-sub {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--silver-700);
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--silver-500);
+    opacity: 0.9;
+  }
+  .header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  /* 隐藏原内联装饰元素 · 由 ::before/::after 取代 */
+  .hero-wave, .hero-decoration { display: none; }
+
+  /* ===== Banner · 圆点开头 + 金色调（替代橙色 capstone-banner） ===== */
+  .capstone-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .capstone-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .capstone-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  /* ===== 跨主题警示 · 蓝色品牌主色（统一品牌） ===== */
+  .cross-topic-warning {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin: 28px 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-topic-warning::before {
+    content: "!";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-topic-warning .ctw-title { font-weight: 700; color: var(--blue-700); margin-bottom: 10px; font-size: 0.95rem; }
+  .cross-topic-warning strong { color: var(--blue-700); }
+
+  /* ===== 主卡片 · 节奏 蓝→金→银→蓝→金→银 ===== */
   .card {
     background: var(--bg-primary);
     border-radius: var(--radius);
-    padding: 24px 20px;
-    margin-bottom: 24px;
-    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
-    transition: var(--transition);
+    padding: 40px 36px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
   }
-  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-  .info-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  .info-table td { padding: 10px 14px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
-  .info-table td:first-child { font-weight: 600; color: var(--primary-blue); white-space: nowrap; width: 130px; }
+  /* .card 顶边锁定蓝色（不轮换） */
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .info-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .info-table td:first-child { font-weight: 600; color: var(--blue-700); white-space: nowrap; width: 130px; }
   .info-table tr:last-child td { border-bottom: none; }
-  .section-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary-blue); }
-  .objectives-list { padding-left: 24px; font-size: 0.92rem; }
-  .objectives-list li { margin-bottom: 8px; line-height: 1.65; }
-  .objectives-list li::marker { color: var(--secondary-blue); font-weight: 700; }
+
+  /* ===== 章节标题 · 圆形锚点前置 + 节奏色 ===== */
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--silver-100);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  /* .card .section-title 锁定蓝色（不轮换） */
+
+  .objectives-list { padding-left: 24px; font-size: 0.94rem; }
+  .objectives-list li { margin-bottom: 14px; line-height: 1.85; }
+  .objectives-list li::marker { color: var(--blue-700); font-weight: 700; }
+  .card .objectives-list li strong { color: var(--blue-700); }
+
+  /* ===== 驱动问题 · 极简留白 + 圆形「?」 ===== */
   .driving-question {
-    background: linear-gradient(135deg, rgba(0, 64, 154,0.06), rgba(0, 106, 214, 0.06));
-    border-left: 4px solid var(--primary-blue);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    padding: 20px 24px;
-    margin-bottom: 24px;
+    background: var(--blue-050);
+    border: none;
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 32px 32px 32px 72px;
+    margin-bottom: 40px;
+    position: relative;
   }
-  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 12px; }
-  .driving-question p { font-size: 0.92rem; margin-bottom: 8px; line-height: 1.7; }
+  .driving-question::before {
+    content: "?";
+    position: absolute;
+    left: 22px;
+    top: 30px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--blue-700); margin-bottom: 16px; letter-spacing: -0.005em; }
+  .driving-question p { font-size: 0.94rem; margin-bottom: 12px; line-height: 1.85; }
   .driving-question p:last-child { margin-bottom: 0; }
-  .driving-question .hint { font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
-  .deepening-recommendation {
-    background: linear-gradient(135deg, rgba(142, 68, 173, 0.06), rgba(142, 68, 173, 0.10));
-    border-left: 4px solid var(--accent-purple);
-    border-radius: 0 12px 12px 0;
-    padding: 16px 20px;
-    margin: 16px 0;
-    font-size: 0.88rem;
-    line-height: 1.7;
-  }
-  .deepening-recommendation .dr-title { font-size: 1rem; font-weight: 700; color: var(--accent-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-  .deepening-recommendation .dr-title::before { content: '🔭'; font-size: 1.1rem; }
-  .deepening-recommendation strong { color: var(--accent-purple); }
-  .deepening-recommendation a { color: var(--accent-purple); text-decoration: underline; font-weight: 600; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--silver-700); margin-top: 10px; }
+
+  /* ===== 任务卡 · 大号圆形编号 + 节奏色 ===== */
   .task-card {
     background: var(--bg-primary);
     border-radius: var(--radius);
-    margin-bottom: 28px;
-    box-shadow: 0 2px 12px rgba(0, 64, 154, 0.08);
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
     overflow: hidden;
   }
   .task-card-header {
-    background: linear-gradient(135deg, #00409A 0%, #0055B8 50%, #006AD6 100%);
+    background: #fff;
+    color: var(--text-primary);
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+  .task-card-header:hover { background: var(--blue-050); }
+  .task-card-number {
+    background: var(--blue-700);
     color: #fff;
-    padding: 16px 20px;
-    display: flex; align-items: center; gap: 12px;
-    cursor: pointer; user-select: none; transition: opacity 0.2s;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px var(--blue-100);
   }
-  .task-card-header:hover { opacity: 0.92; }
-  .task-card-number { background: rgba(255,255,255,0.2); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; flex-shrink: 0; }
-  .task-card-header h3 { font-size: 1.05rem; font-weight: 600; flex-grow: 1; }
-  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.7; }
+  /* task-card-number 锁定蓝色（不跟例题序号轮换） */
+  .task-card-header h3 { font-size: 1.1rem; font-weight: 600; flex-grow: 1; color: var(--text-primary); line-height: 1.6; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.5; color: var(--silver-700); }
   .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
-  .task-card-body { padding: 20px; transition: max-height 0.3s ease; }
+  .task-card-body { padding: 40px 36px; }
   .task-card-body.collapsed { display: none; }
+
   .task-objective {
-    background: rgba(0, 64, 154,0.06);
-    border-radius: 8px;
-    padding: 10px 14px;
-    font-size: 0.88rem;
-    color: var(--primary-blue);
-    font-weight: 500;
-    margin-bottom: 20px;
+    background: var(--blue-050);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--blue-700);
+    line-height: 1.85;
+    margin-bottom: 36px;
+    border-left: 3px solid var(--blue-700);
   }
-  .step { margin-bottom: 20px; }
+  /* task-objective 锁定蓝色（不跟例题序号轮换） */
+
+  /* ===== STEP · 圆形 badge ===== */
+  /* ===== STEP 标题 · 小圆形文本框（220×220） =====
+     · 圆 = STEP 编号（小字）+ 标题（居中换行 · word-break）
+     · 圆之间天然有 step-content 矩形隔开，避免连续圆形
+     · 节奏色按步骤序号循环 蓝→金→银 */
+  .step { margin-bottom: 40px; }
   .step:last-of-type { margin-bottom: 16px; }
-  .step-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-  .step-badge { background: var(--secondary-blue); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 4px; white-space: nowrap; letter-spacing: 0.5px; }
-  .step-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
-  .step-content { font-size: 0.9rem; padding-left: 4px; }
-  .step-content p { margin-bottom: 8px; }
-  .step-content ul, .step-content ol { padding-left: 20px; margin-bottom: 8px; }
-  .step-content li { margin-bottom: 4px; }
+
+  .step-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 32px 28px;
+    margin: 0 auto 36px;
+    text-align: center;
+    gap: 0;
+  }
+
+  /* badge → 圆顶部小字签条 */
+  .step-header .step-badge {
+    background: transparent;
+    color: var(--blue-700);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0 0 8px;
+    margin: 0 0 14px;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    display: inline-block;
+    border-bottom: 1.5px solid var(--blue-700);
+    flex-shrink: 1;
+  }
+
+  /* title → 圆心标题 · 居中换行 */
+  .step-header .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    line-height: 1.55;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  /* 副标题（括号细节） · 小一号 + 跟随 STEP 色 */
+  .step-header .step-title .step-sub {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--step-mid);
+    opacity: 0.8;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+   * 单一真理源 · STEP 节奏色系统
+   * 每个 .step 注入 4 个变量：--step-rich (900) / --step-mid (700) / --step-bg (050) / --step-tint (100)
+   * 使用 :nth-child(N of .step) 仅按 .step 计数（不被 .task-objective 干扰）
+   * STEP 1=蓝 · 2=金 · 3=银 · 4=蓝 · 5=金 · 6=银（每个 task-card 独立计数）
+   * 例题 4 综合反思（无 task-objective）→ A=蓝 · B=金 · C=银 · D=蓝 · E=金 · F=银
+   * ============================================================ */
+  .step {
+    --step-rich: var(--blue-900);
+    --step-mid:  var(--blue-700);
+    --step-bg:   var(--blue-050);
+    --step-tint: var(--blue-100);
+  }
+  .task-card-body > .step:nth-child(3n+2 of .step) {
+    --step-rich: var(--gold-900);
+    --step-mid:  var(--gold-700);
+    --step-bg:   var(--gold-050);
+    --step-tint: var(--gold-100);
+  }
+  .task-card-body > .step:nth-child(3n of .step) {
+    --step-rich: var(--silver-900);
+    --step-mid:  var(--silver-700);
+    --step-bg:   var(--silver-050);
+    --step-tint: var(--silver-100);
+  }
+
+  /* 兼容旧 inline 样式：17 处 路径 N 标题 `color:var(--primary-blue)`
+     通过 .step 级 var 重定向，让它跟随 STEP 区域色（而非死锁蓝） */
+  .step {
+    --primary-blue:   var(--step-rich);
+    --secondary-blue: var(--step-mid);
+    --bright-blue:    var(--step-mid);
+    --light-blue:     var(--step-bg);
+  }
+
+  /* step-header 圆 → 跟随 STEP 色 */
+  .step .step-header {
+    background: var(--step-bg);
+    border-color: var(--step-mid);
+  }
+  .step .step-header .step-badge {
+    color: var(--step-rich);
+    border-bottom-color: var(--step-mid);
+  }
+
+  .step-content { font-size: 0.92rem; padding-left: 0; }
+  .step-content p { margin-bottom: 12px; }
+  .step-content ul, .step-content ol { padding-left: 22px; margin-bottom: 12px; }
+  .step-content li { margin-bottom: 8px; }
+
+  /* ===== 引用块 · 跟随 STEP 色 ===== */
   .quote-block {
-    background: rgba(0, 64, 154,0.05);
-    border-left: 3px solid var(--secondary-blue);
-    padding: 10px 14px;
-    margin: 10px 0;
-    border-radius: 0 6px 6px 0;
-    font-size: 0.85rem;
-    color: #34495e;
-    line-height: 1.65;
+    background: var(--step-bg);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 18px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.85;
   }
+
+  /* ===== 前置回顾 · 跟随 STEP 色 ===== */
   .prereq-recap {
-    background: #eef2f7;
-    border-left: 4px solid var(--primary-blue);
-    padding: 12px 16px;
-    margin: 12px 0;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.86rem;
-    color: #2c3e50;
-    line-height: 1.65;
+    background: #fff;
+    border: 1px solid var(--silver-100);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.8;
   }
-  .prereq-recap strong { color: var(--primary-blue); }
-  .prereq-recap a { color: var(--bright-blue); text-decoration: underline; }
+  .prereq-recap strong { color: var(--step-rich); }
+
+  /* ===== 推导块 · 留白 + 节奏色（蓝/金/银 轮换）===== */
   .derivation-block {
-    background: linear-gradient(135deg, rgba(0, 64, 154, 0.04), rgba(0, 106, 214, 0.04));
-    border: 1px solid rgba(0, 64, 154, 0.15);
-    border-radius: 10px;
-    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 28px 30px;
+    margin: 22px 0;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .derivation-block::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: -1px; bottom: -1px;
+    width: 4px;
+    background: var(--step-mid);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .derivation-block .derivation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .derivation-block .derivation-title::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    box-shadow: 0 0 0 3px var(--step-tint);
+    flex-shrink: 0;
+  }
+
+  .derivation-block .step-line {
     margin: 12px 0;
+    padding-left: 18px;
+    border-left: 1px solid var(--silver-100);
+    line-height: 1.85;
+  }
+  .derivation-block .step-line strong { color: var(--step-rich); }
+
+  /* ===== STEP 0（.card 直辖 · 非 .step）的 derivation-block 循环色 ===== */
+  /* 默认 蓝（骨架 1, 4 …） */
+  .card > .derivation-block::before { background: var(--blue-700); }
+  .card > .derivation-block .derivation-title { color: var(--blue-700); }
+  .card > .derivation-block .derivation-title::before { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .card > .derivation-block .step-line strong { color: var(--blue-700); }
+  /* 第 2/5/8 个 → 金 */
+  .card > .derivation-block:nth-of-type(3n+2)::before { background: var(--gold-700); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title { color: var(--gold-900); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title::before { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .card > .derivation-block:nth-of-type(3n+2) .step-line strong { color: var(--gold-900); }
+  /* 第 3/6 个 → 银 */
+  .card > .derivation-block:nth-of-type(3n)::before { background: var(--silver-700); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title { color: var(--silver-900); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title::before { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .card > .derivation-block:nth-of-type(3n) .step-line strong { color: var(--silver-900); }
+
+  /* ===== 思考停顿 · 跟随 STEP 色 ===== */
+  .thinking-point {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .thinking-point::before {
+    content: "💭";
+    position: absolute;
+    left: 16px;
+    top: 22px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--step-mid);
+    display: flex; align-items: center; justify-content: center;
     font-size: 0.9rem;
   }
-  .derivation-block .derivation-title { font-size: 0.85rem; font-weight: 700; color: var(--primary-blue); margin-bottom: 10px; letter-spacing: 0.5px; }
-  .derivation-block .step-line { margin: 8px 0; padding-left: 14px; border-left: 2px solid rgba(0, 64, 154, 0.2); }
-  .derivation-block .step-line strong { color: var(--secondary-blue); }
-  .thinking-point {
-    background: rgba(230, 126, 34, 0.04);
-    border-left: 4px solid var(--accent-orange);
-    border-radius: 0 10px 10px 0;
-    padding: 14px 16px;
-    margin: 14px 0;
-  }
-  .thinking-point .tp-title { font-weight: 700; color: var(--accent-orange); font-size: 0.95rem; margin-bottom: 10px; }
-  .thinking-point .tp-pause { background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 6px; margin: 8px 0; font-size: 0.86rem; }
+  .thinking-point .tp-title { font-weight: 700; color: var(--step-rich); font-size: 0.98rem; margin-bottom: 14px; }
+  .thinking-point .tp-pause { background: #fff; padding: 12px 16px; border-radius: var(--radius-sm); margin: 10px 0; font-size: 0.88rem; border: 1px solid var(--step-tint); }
   .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
-  .thinking-point .tp-ask { background: rgba(0, 64, 154, 0.05); border-left: 3px solid var(--secondary-blue); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; color: #2c3e50; }
-  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--secondary-blue); margin-right: 4px; }
-  .thinking-point .tp-write { background: rgba(39, 174, 96, 0.06); border-left: 3px solid var(--accent-green); padding: 8px 12px; border-radius: 0 6px 6px 0; margin: 8px 0; font-size: 0.86rem; }
-  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--accent-green); margin-right: 4px; }
-  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--text-secondary); font-style: italic; margin: 6px 0 2px 0; }
-  .diagram-block { margin: 18px 0; text-align: center; }
-  .diagram-block svg { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
-  .diagram-block img { max-width: 100%; height: auto; background: #fafbff; border-radius: 10px; padding: 12px 8px; border: 1px solid var(--border-color); }
-  .diagram-caption { font-size: 0.82rem; color: var(--text-secondary); margin-top: 6px; font-style: italic; }
-  .checkpoint {
-    background: rgba(39,174,96,0.06);
-    border: 1px solid rgba(39,174,96,0.2);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-top: 16px;
+  .thinking-point .tp-ask { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-write { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--silver-700); font-style: italic; margin: 6px 0 2px 0; }
+
+  /* ===== 进阶推荐 · 跟随 STEP 色 ===== */
+  .deepening-recommendation {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px 20px 56px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: var(--step-rich);
+    line-height: 1.8;
+    position: relative;
   }
-  .checkpoint-title { font-size: 0.85rem; font-weight: 700; color: var(--accent-green); margin-bottom: 10px; }
-  .checkpoint label { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; margin-bottom: 8px; cursor: pointer; line-height: 1.5; }
+  .deepening-recommendation::before {
+    content: "↗";
+    position: absolute;
+    left: 14px; top: 20px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .deepening-recommendation .dr-title { font-weight: 700; color: var(--step-rich); margin-bottom: 8px; }
+
+  /* ===== 图示块 · 干净背景 ===== */
+  .diagram-block { margin: 32px 0; text-align: center; }
+  .diagram-block svg {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+  }
+  .diagram-caption { font-size: 0.83rem; color: var(--silver-700); margin-top: 12px; font-style: italic; line-height: 1.7; }
+
+  /* ===== 自查 / 检查点 · 跟随 STEP 色 ===== */
+  .checkpoint {
+    background: var(--step-bg);
+    border: 1px solid var(--step-tint);
+    border-radius: var(--radius-sm);
+    padding: 24px 26px 22px 26px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .checkpoint-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .checkpoint-title::before {
+    content: "✓";
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; margin-bottom: 12px; cursor: pointer; line-height: 1.7; }
   .checkpoint label:last-child { margin-bottom: 0; }
-  .checkpoint input[type="checkbox"] { margin-top: 4px; flex-shrink: 0; accent-color: var(--accent-green); width: 16px; height: 16px; }
-  .checkpoint label.checked span { text-decoration: line-through; color: var(--text-secondary); }
-  .literacy-tag { font-size: 0.8rem; color: var(--text-secondary); margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
-  .compare-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.85rem; }
-  .compare-table th { background: rgba(0, 64, 154, 0.08); color: var(--primary-blue); padding: 10px 12px; text-align: left; border: 1px solid var(--border-color); }
-  .compare-table td { padding: 10px 12px; border: 1px solid var(--border-color); vertical-align: top; }
-  .compare-table tr:nth-child(even) td { background: rgba(0, 64, 154, 0.02); }
-  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; padding-top: 20px; border-top: 1px solid #e8e8e8; }
-  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #bdc3c7; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
-  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
-  .bottom-nav a:hover { background: #d7e6fc; }
-  .footer { text-align: center; padding: 24px 16px 8px; font-size: 0.82rem; color: var(--text-secondary); }
+  .checkpoint input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; accent-color: var(--step-mid); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--silver-700); }
+
+  /* ===== 素养标签 ===== */
+  .literacy-tag { font-size: 0.82rem; color: var(--silver-700); margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--silver-100); }
+
+  /* ===== 评分表 · 跟随 STEP 色 ===== */
+  .scoring-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .scoring-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .scoring-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .scoring-table tr:nth-child(even) td { background: var(--step-bg); }
+  .scoring-table td:last-child { color: var(--step-rich); font-weight: 500; }
+
+  /* ===== 对比 / 符号表 · 跟随 STEP 色 ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .compare-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .compare-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .compare-table tr:nth-child(even) td { background: var(--step-bg); }
+  .compare-table td:first-child { font-weight: 600; color: var(--step-rich); white-space: nowrap; }
+
+  /* ===== 反思区 ===== */
+  .reflect-area { width: 100%; min-height: 100px; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem; line-height: 1.75; resize: vertical; background: #fff; margin-top: 8px; transition: var(--transition); }
+  .reflect-area:focus { outline: none; border-color: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .reflect-q { font-size: 0.9rem; margin: 16px 0 6px; color: var(--text-primary); font-weight: 600; }
+
+  /* ===== 底部导航 ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 28px; border-top: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span {
+    flex: 1; min-width: 140px;
+    text-align: center;
+    padding: 16px 18px;
+    border-radius: 999px;
+    background: var(--silver-050);
+    color: var(--silver-500);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+  .footer { text-align: center; padding: 32px 16px 8px; font-size: 0.82rem; color: var(--silver-700); }
+
+  /* ===== 响应式 ===== */
   @media (max-width: 480px) {
-    .header h1 { font-size: 1.25rem; }
-    .header { padding: 28px 16px; }
-    .task-card-header h3 { font-size: 0.95rem; }
-    .task-card-body { padding: 16px; }
-    .card { padding: 18px 14px; }
-    .info-table td:first-child { width: auto; }
-    .driving-question { padding: 16px 18px; }
-    .thinking-point { padding: 12px 12px; }
+    .container { padding: 20px 16px 48px; }
+    .header { padding: 48px 24px 40px; }
+    .header h1 { font-size: 1.3rem; }
+    .header::before { width: 140px; height: 140px; top: -50px; }
+    .card { padding: 28px 22px; }
+    .task-card-header { padding: 20px 22px; gap: 14px; }
+    .task-card-number { width: 44px; height: 44px; font-size: 1.15rem; box-shadow: 0 0 0 4px var(--blue-100); }
+    .task-card-header h3 { font-size: 1rem; }
+    .task-card-body { padding: 28px 22px; }
+    .step-content { padding-left: 0; }
+    .step-header { width: 220px; height: 220px; padding: 22px 20px; }
+    .step-header .step-title { font-size: 0.88rem; }
+    .step-header .step-badge { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .driving-question { padding: 24px 22px 24px 64px; }
+    .capstone-banner, .cross-topic-warning { padding-left: 56px; padding-right: 20px; }
+  }
+
+  /* ===================================================================
+   * 圆形文本框 v0.3 · 与方形框交替使用
+   * 三种用法：
+   *   .card.card--circle                 把整张 card 改成圆形容器
+   *   .driving-question.is-circle        把 dq 块改成圆形容器
+   *   .task-objective.is-circle          把 task-objective 改成圆形容器
+   * 圆内放任何文本：用 shape-outside 让文本沿圆弧自然收边
+   * =================================================================== */
+  .card.card--circle,
+  .driving-question.is-circle,
+  .task-objective.is-circle {
+    background: transparent;
+    border: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .card.card--circle { margin-bottom: 56px; }
+  .driving-question.is-circle,
+  .task-objective.is-circle { margin-bottom: 40px; color: var(--text-primary); }
+  .driving-question.is-circle::before,
+  .task-objective.is-circle::before { display: none; }
+
+  /* 真圆容器（fixed width=height + border-radius:50%） */
+  .circle-frame {
+    width: 560px;
+    height: 560px;
+    max-width: 96vw;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: var(--shadow-md);
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+  }
+  .circle-frame--lg { width: 680px; height: 680px; }
+  .circle-frame--md { width: 480px; height: 480px; }
+  .circle-frame--sm { width: 400px; height: 400px; }
+  .circle-frame--blue   { background: var(--blue-050);   border-color: var(--blue-700); }
+  .circle-frame--gold   { background: var(--gold-050);   border-color: var(--gold-700); }
+  .circle-frame--silver { background: var(--silver-050); border-color: var(--silver-700); }
+
+  /* shape-outside · 两个半侧"虚拟体积"把文本压成圆弧内嵌 */
+  .circle-frame::before,
+  .circle-frame::after {
+    content: "";
+    width: 50%;
+    height: 100%;
+    display: block;
+  }
+  .circle-frame::before {
+    float: left;
+    shape-outside: ellipse(50% 50% at 100% 50%);
+  }
+  .circle-frame::after {
+    float: right;
+    shape-outside: ellipse(50% 50% at 0% 50%);
+  }
+
+  /* 圆内内容 · 通过 padding-top 让正文下沉到圆腹 */
+  .circle-frame .circle-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.005em;
+    padding-top: 18%;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .circle-frame--gold   .circle-title { color: var(--gold-900); }
+  .circle-frame--silver .circle-title { color: var(--silver-900); }
+  .circle-frame .circle-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+  .circle-frame--gold   .circle-title::after { background: var(--gold-700); }
+  .circle-frame--silver .circle-title::after { background: var(--silver-700); }
+
+  /* 把原有 dq-title 当作 circle-title 处理 */
+  .circle-frame .dq-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    padding-top: 18%;
+    margin-bottom: 18px;
+  }
+  .circle-frame .dq-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+
+  /* 圆内段落 */
+  .circle-frame p {
+    font-size: 0.86rem;
+    line-height: 1.78;
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .circle-frame p:last-child { margin-bottom: 0; }
+  .circle-frame p.hint {
+    font-size: 0.78rem;
+    color: var(--silver-700);
+    text-align: center;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .circle-frame strong { color: var(--blue-700); }
+  .circle-frame--gold   strong { color: var(--gold-900); }
+  .circle-frame--silver strong { color: var(--silver-900); }
+
+  /* 圆内列表 · 字号收紧以契合圆形空间 */
+  .circle-frame ol,
+  .circle-frame ul {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 22px;
+    margin: 0;
+  }
+  .circle-frame ol li,
+  .circle-frame ul li { margin-bottom: 8px; }
+  .circle-frame ol li::marker {
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  .circle-frame--gold   ol li::marker { color: var(--gold-700); }
+  .circle-frame--silver ol li::marker { color: var(--silver-700); }
+
+  /* task-objective 短文本居中版 · 无 title */
+  .circle-frame.is-objective {
+    padding: 0;
+  }
+  .circle-frame.is-objective .objective-body {
+    padding-top: 32%;
+    padding-bottom: 32%;
+    text-align: center;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+  .circle-frame.is-objective.circle-frame--sm .objective-body {
+    padding-top: 28%;
+    padding-bottom: 28%;
+    font-size: 0.82rem;
+  }
+
+  /* 移动端 · 圆形退化为大圆角矩形（保证可读） */
+  @media (max-width: 640px) {
+    .circle-frame,
+    .circle-frame--lg,
+    .circle-frame--md,
+    .circle-frame--sm {
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 28px;
+      padding: 32px 26px;
+    }
+    .circle-frame::before,
+    .circle-frame::after { display: none; }
+    .circle-frame .circle-title,
+    .circle-frame .dq-title { padding-top: 0; }
+    .circle-frame.is-objective .objective-body { padding-top: 0; padding-bottom: 0; }
   }
 </style>
 </head>
@@ -312,7 +969,7 @@
       </div>
 
       <div class="step">
-        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想（5-8 分钟）</span></div>
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">先自己想<br><span class="step-sub">5-8 分钟</span></span></div>
         <div class="step-content">
           <p>不查笔记，先答 ——</p>
           <ul>
@@ -347,30 +1004,30 @@
             <svg viewBox="0 0 540 280" xmlns="http://www.w3.org/2000/svg">
               <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">ΔG = ΔH − TΔS（综合判据）</text>
               <!-- ΔH 项 -->
-              <rect x="55" y="80" width="150" height="100" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="8"></rect>
-              <text x="130" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#c0392b">ΔH</text>
-              <text x="130" y="132" text-anchor="middle" font-size="11" fill="#c0392b">能量项</text>
-              <text x="130" y="150" text-anchor="middle" font-size="9" fill="#34495e">系统偏好 ΔH &lt; 0</text>
-              <text x="130" y="165" text-anchor="middle" font-size="9" fill="#34495e">（能量降低 / 放热）</text>
+              <rect x="55" y="80" width="150" height="100" fill="#E8EEF9" stroke="#002F73" stroke-width="2" rx="8"></rect>
+              <text x="130" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#002F73">ΔH</text>
+              <text x="130" y="132" text-anchor="middle" font-size="11" fill="#002F73">能量项</text>
+              <text x="130" y="150" text-anchor="middle" font-size="9" fill="#5C6370">系统偏好 ΔH &lt; 0</text>
+              <text x="130" y="165" text-anchor="middle" font-size="9" fill="#5C6370">（能量降低 / 放热）</text>
               <!-- "−" 符号 -->
-              <text x="225" y="135" text-anchor="middle" font-size="24" font-weight="700" fill="#34495e">−</text>
+              <text x="225" y="135" text-anchor="middle" font-size="24" font-weight="700" fill="#5C6370">−</text>
               <!-- TΔS 项 -->
-              <rect x="245" y="80" width="150" height="100" fill="#eaf2fb" stroke="#0055B8" stroke-width="2" rx="8"></rect>
+              <rect x="245" y="80" width="150" height="100" fill="#F3F6FC" stroke="#0055B8" stroke-width="2" rx="8"></rect>
               <text x="320" y="110" text-anchor="middle" font-size="13" font-weight="700" fill="#0055B8">TΔS</text>
               <text x="320" y="132" text-anchor="middle" font-size="11" fill="#0055B8">熵项（带温度权重）</text>
-              <text x="320" y="150" text-anchor="middle" font-size="9" fill="#34495e">系统偏好 ΔS &gt; 0</text>
-              <text x="320" y="165" text-anchor="middle" font-size="9" fill="#34495e">（无序度升高）</text>
+              <text x="320" y="150" text-anchor="middle" font-size="9" fill="#5C6370">系统偏好 ΔS &gt; 0</text>
+              <text x="320" y="165" text-anchor="middle" font-size="9" fill="#5C6370">（无序度升高）</text>
               <!-- "=" 符号 -->
-              <text x="415" y="135" text-anchor="middle" font-size="24" font-weight="700" fill="#34495e">=</text>
+              <text x="415" y="135" text-anchor="middle" font-size="24" font-weight="700" fill="#5C6370">=</text>
               <!-- ΔG 项 -->
-              <rect x="435" y="80" width="80" height="100" fill="#f5eafb" stroke="#8e44ad" stroke-width="2" rx="8"></rect>
-              <text x="475" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#8e44ad">ΔG</text>
-              <text x="475" y="138" text-anchor="middle" font-size="10" fill="#8e44ad">综合判据</text>
-              <text x="475" y="156" text-anchor="middle" font-size="9" fill="#34495e">ΔG &lt; 0</text>
-              <text x="475" y="170" text-anchor="middle" font-size="9" fill="#34495e">⇔ 自发</text>
+              <rect x="435" y="80" width="80" height="100" fill="#F3F4F7" stroke="#7B8290" stroke-width="2" rx="8"></rect>
+              <text x="475" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#7B8290">ΔG</text>
+              <text x="475" y="138" text-anchor="middle" font-size="10" fill="#7B8290">综合判据</text>
+              <text x="475" y="156" text-anchor="middle" font-size="9" fill="#5C6370">ΔG &lt; 0</text>
+              <text x="475" y="170" text-anchor="middle" font-size="9" fill="#5C6370">⇔ 自发</text>
               <!-- 底部说明 -->
-              <text x="270" y="220" text-anchor="middle" font-size="11" fill="#34495e">温度 T 决定熵项的权重 —— 低温下 ΔH 主导，高温下 TΔS 主导</text>
-              <text x="270" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#8e44ad">ΔG = ΔH − TΔS</text>
+              <text x="270" y="220" text-anchor="middle" font-size="11" fill="#5C6370">温度 T 决定熵项的权重 —— 低温下 ΔH 主导，高温下 TΔS 主导</text>
+              <text x="270" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#7B8290">ΔG = ΔH − TΔS</text>
               <text x="270" y="258" text-anchor="middle" font-size="10" fill="#6e6e73">（等温等压下的自发判据）</text>
             </svg>
             <div class="diagram-caption">图 1 · ΔG = ΔH − TΔS 的结构图。左侧红色方框代表能量项 ΔH（系统偏好 ΔH &lt; 0，即放热）；中间蓝色方框代表熵项 TΔS（系统偏好 ΔS &gt; 0，即无序度增大），温度 T 在这里作为权重；右侧紫色方框代表综合判据 ΔG（ΔG &lt; 0 即自发）。三者由公式 ΔG = ΔH − TΔS 连接。</div>
@@ -416,7 +1073,7 @@
       </div>
 
       <div class="step">
-        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思 · 完整的热力学判据体系</span></div>
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">反思<br>完整的热力学判据体系</span></div>
         <div class="step-content">
           <p>到本板块为止，热力学有了<strong>完整的判据体系</strong>：</p>
           <table class="compare-table">
@@ -463,42 +1120,42 @@
             <svg viewBox="0 0 540 360" xmlns="http://www.w3.org/2000/svg">
               <text x="270" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="#00409A">4 种 ΔH/ΔS 组合 — 自发性分析</text>
               <!-- 坐标轴 -->
-              <text x="270" y="65" text-anchor="middle" font-size="10" fill="#34495e">↑ ΔS（熵变）</text>
-              <text x="510" y="190" text-anchor="middle" font-size="10" fill="#34495e">→ ΔH</text>
+              <text x="270" y="65" text-anchor="middle" font-size="10" fill="#5C6370">↑ ΔS（熵变）</text>
+              <text x="510" y="190" text-anchor="middle" font-size="10" fill="#5C6370">→ ΔH</text>
               <!-- 4 象限分割线(纵线在底部注释前终止) -->
               <line x1="50" y1="190" x2="490" y2="190" stroke="#1d1d1f" stroke-width="1.5"></line>
               <line x1="270" y1="80" x2="270" y2="300" stroke="#1d1d1f" stroke-width="1.5"></line>
               <text x="40" y="200" text-anchor="end" font-size="10" fill="#6e6e73">O</text>
               <!-- 象限 II: ΔH<0, ΔS>0 (左上) -->
-              <rect x="55" y="85" width="210" height="100" fill="#d4f1e0" stroke="#27ae60" stroke-width="2" rx="6"></rect>
-              <text x="160" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#27ae60">(a) ΔH &lt; 0, ΔS &gt; 0</text>
-              <text x="160" y="125" text-anchor="middle" font-size="10" fill="#27ae60">放热 + 熵增</text>
-              <text x="160" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#27ae60">✓ 任何温度自发</text>
-              <text x="160" y="160" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (−) − T(+) = 始终 &lt; 0</text>
-              <text x="160" y="175" text-anchor="middle" font-size="9" fill="#34495e">例: 2H₂ + O₂ → 2H₂O 部分情况</text>
+              <rect x="55" y="85" width="210" height="100" fill="#F4ECD6" stroke="#B8924A" stroke-width="2" rx="6"></rect>
+              <text x="160" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#B8924A">(a) ΔH &lt; 0, ΔS &gt; 0</text>
+              <text x="160" y="125" text-anchor="middle" font-size="10" fill="#B8924A">放热 + 熵增</text>
+              <text x="160" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#B8924A">✓ 任何温度自发</text>
+              <text x="160" y="160" text-anchor="middle" font-size="9" fill="#5C6370">ΔG = (−) − T(+) = 始终 &lt; 0</text>
+              <text x="160" y="175" text-anchor="middle" font-size="9" fill="#5C6370">例: 2H₂ + O₂ → 2H₂O 部分情况</text>
               <!-- 象限 I: ΔH>0, ΔS>0 (右上) -->
-              <rect x="275" y="85" width="210" height="100" fill="#fff5d6" stroke="#e67e22" stroke-width="2" rx="6"></rect>
-              <text x="380" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#e67e22">(c) ΔH &gt; 0, ΔS &gt; 0</text>
-              <text x="380" y="125" text-anchor="middle" font-size="10" fill="#e67e22">吸热 + 熵增</text>
-              <text x="380" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#e67e22">高温自发</text>
-              <text x="380" y="160" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (+) − T(+), T 大时 &lt; 0</text>
-              <text x="380" y="175" text-anchor="middle" font-size="9" fill="#34495e">例: CaCO₃ → CaO + CO₂</text>
+              <rect x="275" y="85" width="210" height="100" fill="#FBF7EC" stroke="#B8924A" stroke-width="2" rx="6"></rect>
+              <text x="380" y="105" text-anchor="middle" font-size="11" font-weight="700" fill="#B8924A">(c) ΔH &gt; 0, ΔS &gt; 0</text>
+              <text x="380" y="125" text-anchor="middle" font-size="10" fill="#B8924A">吸热 + 熵增</text>
+              <text x="380" y="145" text-anchor="middle" font-size="12" font-weight="700" fill="#B8924A">高温自发</text>
+              <text x="380" y="160" text-anchor="middle" font-size="9" fill="#5C6370">ΔG = (+) − T(+), T 大时 &lt; 0</text>
+              <text x="380" y="175" text-anchor="middle" font-size="9" fill="#5C6370">例: CaCO₃ → CaO + CO₂</text>
               <!-- 象限 III: ΔH<0, ΔS<0 (左下) -->
-              <rect x="55" y="195" width="210" height="100" fill="#e0e8f5" stroke="#0055B8" stroke-width="2" rx="6"></rect>
+              <rect x="55" y="195" width="210" height="100" fill="#F3F4F7" stroke="#0055B8" stroke-width="2" rx="6"></rect>
               <text x="160" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#0055B8">(b) ΔH &lt; 0, ΔS &lt; 0</text>
               <text x="160" y="235" text-anchor="middle" font-size="10" fill="#0055B8">放热 + 熵减</text>
               <text x="160" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#0055B8">低温自发</text>
-              <text x="160" y="270" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (−) − T(−), T 小时 &lt; 0</text>
-              <text x="160" y="285" text-anchor="middle" font-size="9" fill="#34495e">例: H₂O(液) → H₂O(冰)（低温下）</text>
+              <text x="160" y="270" text-anchor="middle" font-size="9" fill="#5C6370">ΔG = (−) − T(−), T 小时 &lt; 0</text>
+              <text x="160" y="285" text-anchor="middle" font-size="9" fill="#5C6370">例: H₂O(液) → H₂O(冰)（低温下）</text>
               <!-- 象限 IV: ΔH>0, ΔS<0 (右下) -->
-              <rect x="275" y="195" width="210" height="100" fill="#fbeaea" stroke="#c0392b" stroke-width="2" rx="6"></rect>
-              <text x="380" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#c0392b">(d) ΔH &gt; 0, ΔS &lt; 0</text>
-              <text x="380" y="235" text-anchor="middle" font-size="10" fill="#c0392b">吸热 + 熵减</text>
-              <text x="380" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#c0392b">✗ 任何温度不自发</text>
-              <text x="380" y="270" text-anchor="middle" font-size="9" fill="#34495e">ΔG = (+) − T(−) = 始终 &gt; 0</text>
-              <text x="380" y="285" text-anchor="middle" font-size="9" fill="#34495e">逆反应(d→a)任何温度自发</text>
+              <rect x="275" y="195" width="210" height="100" fill="#E8EEF9" stroke="#002F73" stroke-width="2" rx="6"></rect>
+              <text x="380" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#002F73">(d) ΔH &gt; 0, ΔS &lt; 0</text>
+              <text x="380" y="235" text-anchor="middle" font-size="10" fill="#002F73">吸热 + 熵减</text>
+              <text x="380" y="255" text-anchor="middle" font-size="12" font-weight="700" fill="#002F73">✗ 任何温度不自发</text>
+              <text x="380" y="270" text-anchor="middle" font-size="9" fill="#5C6370">ΔG = (+) − T(−) = 始终 &gt; 0</text>
+              <text x="380" y="285" text-anchor="middle" font-size="9" fill="#5C6370">逆反应(d→a)任何温度自发</text>
               <!-- 底部注释 -->
-              <text x="270" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#34495e">(b) 和 (c) 存在"转变温度" T<tspan font-size="9" dy="3">转</tspan><tspan dy="-3"></tspan> = ΔH/ΔS（ΔG = 0 处）</text>
+              <text x="270" y="325" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6370">(b) 和 (c) 存在"转变温度" T<tspan font-size="9" dy="3">转</tspan><tspan dy="-3"></tspan> = ΔH/ΔS（ΔG = 0 处）</text>
             </svg>
             <div class="diagram-caption">图 2 · 按 ΔH（横轴）和 ΔS（纵轴）的正负号分 4 个象限，每个象限标注 (a)(b)(c)(d) 4 种组合。绿色 (a) 左上："放热 + 熵增"双重有利，任何温度自发。橙色 (c) 右上："吸热 + 熵增"，高温自发。蓝色 (b) 左下："放热 + 熵减"，低温自发。红色 (d) 右下："吸热 + 熵减"双重不利，任何温度不自发（但逆反应任何温度自发）。(b) 和 (c) 这两组合存在"转变温度" T<sub>转</sub> = ΔH/ΔS，是 ΔG = 0 自发与不自发的分界点。</div>
           </div>

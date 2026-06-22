@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考 14 题位 · 带电粒子在磁场 · 熟练度检测(capstone) · 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 fluency-test · 三色制(蓝 / 金 / 银) · 圆形锚点 · 大留白 v0.1.6 ===== */
+  :root {
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #7B8290;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ===== Banner ===== */
+  .v021-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .v021-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+  }
+  .v021-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  .cross-banner {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-banner::before {
+    content: "!";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-banner strong { color: var(--blue-700); }
+
+  /* ===== Header · 极简化 · 双大圆装饰锚 ===== */
+  header.page-header {
+    text-align: center;
+    padding: 56px 32px 48px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  header.page-header::before {
+    content: "";
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  header.page-header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  header.page-header h1 {
+    font-size: 1.45rem;
+    margin: 0 0 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+    position: relative; z-index: 1;
+  }
+  header.page-header .subtitle {
+    font-size: 0.9rem;
+    opacity: 1;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== Entry card · 顶部圆形 CTA ===== */
+  .entry-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    position: relative;
+  }
+  .entry-card h2 {
+    color: var(--blue-700);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .entry-card h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .entry-card p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.92rem; }
+  .entry-card input[type="text"] {
+    padding: 13px 20px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    font-size: 0.98rem;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .entry-card input[type="text"]:focus { outline: none; border-color: var(--blue-700); }
+  .entry-card .info-list {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    max-width: 760px;
+    margin: 22px auto;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    list-style: none;
+  }
+  .entry-card .info-list li { margin: 6px 0; padding-left: 22px; position: relative; }
+  .entry-card .info-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0.7em;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--silver-500);
+  }
+  .entry-card .info-list li strong { color: var(--blue-700); }
+
+  /* ===== 主按钮 · 普通圆角(不要圆形) ===== */
+  .btn-primary {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 16px 44px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); background: var(--blue-900); }
+
+  /* ===== Progress bar ===== */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 14px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .progress-bar-wrap .student,
+  .progress-bar-wrap .answered-count { color: var(--blue-700); font-weight: 700; }
+
+  /* ===== 题卡 · 大留白 · 按题号循环色(蓝→金→银) ===== */
+  .question {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+    border-top: 3px solid var(--q-mid);
+  }
+  .question:nth-of-type(3n+1) {
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+  }
+  .question:nth-of-type(3n+2) {
+    --q-rich: var(--gold-900);
+    --q-mid:  var(--gold-700);
+    --q-bg:   var(--gold-050);
+    --q-tint: var(--gold-100);
+  }
+  .question:nth-of-type(3n) {
+    --q-rich: var(--silver-900);
+    --q-mid:  var(--silver-700);
+    --q-bg:   var(--silver-050);
+    --q-tint: var(--silver-100);
+  }
+
+  /* ===== 题头大圆 · 220-240px · 4 行居中(第N题/题型/难度/编号) ===== */
+  .q-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--silver-100);
+  }
+  .q-header-circle {
+    background: var(--q-mid);
+    color: #fff;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    box-shadow: 0 0 0 8px var(--q-tint);
+    padding: 18px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  .q-header-circle .q-line-no {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .q-header-circle .q-line-type {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.95;
+    line-height: 1.3;
+  }
+  .q-header-circle .q-line-diff {
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.18);
+    padding: 4px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .q-header-circle .q-line-id {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .q-score { color: var(--silver-700); font-size: 0.85rem; font-weight: 500; margin: 8px 0 0; text-align: center; }
+  .q-prompt { font-size: 0.94rem; line-height: 1.9; margin-bottom: 20px; color: var(--text-primary); }
+  .q-prompt svg { display: block; margin: 14px auto; max-width: 100%; }
+  .q-prompt ol { margin: 10px 0 10px 24px; }
+  .q-prompt ol li { margin: 8px 0; }
+
+  .q-short-input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: var(--bg-secondary);
+    min-height: 240px;
+    transition: var(--transition);
+    color: var(--text-primary);
+  }
+  .q-short-input:focus { outline: none; border-color: var(--q-mid); background: #fff; box-shadow: 0 0 0 3px var(--q-tint); }
+
+  /* ===== Feedback · 题号循环色驱动 · 无绿无紫 ===== */
+  .q-feedback {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--q-bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--q-mid);
+  }
+  .q-feedback.correct { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.wrong { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.partial { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-result { font-weight: 700; font-size: 0.92rem; margin-bottom: 12px; color: var(--q-rich); }
+  .q-result.correct::before { content: "\2713  "; }
+  .q-result.partial::before { content: "\25D0  "; }
+  .q-result.wrong::before { content: "\2717  "; }
+  .q-fb-row { background: #fff; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-size: 0.88rem; color: var(--text-primary); }
+  .q-fb-row strong { color: var(--q-rich); }
+  .q-fb-row.q-fb-knowledge { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; }
+  .q-fb-row.q-fb-approach { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; opacity: 0.96; }
+  .q-fb-row.q-fb-solution { background: #fff; border: 1px solid var(--border-color); border-left: 3px solid var(--q-rich); padding: 14px 18px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; color: var(--text-primary); }
+  .q-export-label { background: var(--q-tint); color: var(--q-rich); padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; margin: 0 2px; display: inline-block; font-weight: 600; }
+  .q-anchor { font-size: 0.82rem; color: var(--text-secondary); padding-top: 10px; border-top: 1px solid var(--silver-100); margin-top: 12px; }
+  .q-anchor code { background: var(--q-tint); color: var(--q-rich); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: var(--q-mid); }
+
+  /* ===== Reflection · 跟随题号循环色 ===== */
+  .q-reflection {
+    margin-top: 20px;
+    padding: 22px 26px 22px 60px;
+    background: var(--q-bg);
+    border: none;
+    border-left: 3px solid var(--q-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    position: relative;
+  }
+  .q-reflection::before {
+    content: "\2197";
+    position: absolute;
+    left: 14px; top: 22px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--q-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .q-reflection-title { font-weight: 700; color: var(--q-rich); margin-bottom: 14px; font-size: 0.92rem; }
+  .q-reflection ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.85rem; color: var(--text-primary); }
+  .q-reflection ol li { margin: 5px 0; line-height: 1.8; }
+  .q-reflection-input {
+    width: 100%;
+    border: 1px solid var(--q-tint);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    background: #fff;
+    min-height: 110px;
+    color: var(--text-primary);
+  }
+  .q-reflection-input:focus { outline: none; border-color: var(--q-mid); box-shadow: 0 0 0 3px var(--q-tint); }
+  .q-reflection-hint { font-size: 0.78rem; color: var(--q-rich); margin-top: 8px; font-style: italic; opacity: 0.85; }
+
+  /* ===== Submit ===== */
+  .submit-area {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin: 36px 0 22px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .btn-submit {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 14px 44px;
+    border-radius: 16px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 0 0 6px var(--blue-100), var(--shadow-md);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+  }
+  .btn-submit:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: #fff;
+    color: var(--blue-700);
+    border: 1.5px solid var(--blue-700);
+    padding: 12px 28px;
+    margin: 6px;
+    font-size: 0.88rem;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .btn-secondary:hover { background: var(--blue-050); }
+
+  /* ===== Results ===== */
+  .results-summary {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+  .results-summary h2 {
+    margin: 0 0 22px;
+    color: var(--blue-700);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .results-summary h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .score-big {
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin: 14px 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .score-big.passed { color: var(--blue-700); }
+  .score-big.failed { color: var(--silver-700); }
+  .score-big.honored { color: var(--gold-700); }
+  .status { font-size: 0.95rem; margin: 10px 0 20px; }
+  .wrong-list { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; font-size: 0.88rem; color: var(--text-secondary); text-align: left; }
+  .wrong-list strong { color: var(--silver-900); }
+
+  /* ===== 考察点梳理 · kp-section ===== */
+  .kp-section {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    margin: 22px auto;
+    max-width: 800px;
+    text-align: left;
+    font-size: 0.85rem;
+  }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 700; color: var(--blue-700); display: flex; align-items: center; gap: 8px; font-size: 0.92rem; }
+  .kp-toggle::after { content: '▼'; font-size: 0.7rem; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 16px; }
+  .kp-intro {
+    background: var(--gold-050);
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    line-height: 1.85;
+    color: var(--gold-900);
+  }
+  .kp-intro strong { color: var(--gold-900); }
+  .kp-item {
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin: 14px 0;
+    border-left: 3px solid var(--blue-700);
+    box-shadow: 0 1px 3px rgba(20,30,60,0.04);
+  }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--silver-100); }
+
+  /* ===== kp-no · 28×28 圆 · 三色映射 freq 档 ===== */
+  .kp-item .kp-no {
+    background: var(--silver-700);
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px var(--silver-100);
+  }
+  .kp-item.freq-high .kp-no { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .kp-item.freq-mid .kp-no { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .kp-item.freq-low .kp-no { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .kp-item.freq-high { border-left-color: var(--gold-700); }
+  .kp-item.freq-mid { border-left-color: var(--blue-700); }
+  .kp-item.freq-low { border-left-color: var(--silver-700); }
+
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 0.95rem; color: var(--blue-700); }
+
+  /* ===== kp-freq · 频次档胶囊 · 三色 ===== */
+  .kp-item .kp-freq { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kp-item .kp-tag {
+    background: var(--silver-100);
+    color: var(--silver-900);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .kp-item.freq-high .kp-tag { background: var(--gold-100); color: var(--gold-900); }
+  .kp-item.freq-mid .kp-tag { background: var(--blue-100); color: var(--blue-700); }
+  .kp-item.freq-low .kp-tag { background: var(--silver-100); color: var(--silver-900); }
+
+  .kp-item .kp-note { color: var(--text-secondary); font-size: 0.78rem; font-style: italic; }
+  .kp-item .kp-section-label { font-weight: 700; color: var(--blue-700); margin-top: 12px; margin-bottom: 6px; font-size: 0.85rem; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 0.85rem; line-height: 1.85; color: var(--text-primary); }
+  .kp-item .kp-list li { margin: 4px 0; }
+  .kp-item .kp-list li strong { color: var(--blue-700); }
+  .kp-item .kp-revisit { font-size: 0.8rem; color: var(--blue-700); margin-top: 12px; padding: 8px 12px; background: var(--blue-050); border-radius: var(--radius-sm); }
+  .kp-footer { text-align: center; padding: 14px; color: var(--blue-700); font-weight: 700; font-size: 0.9rem; }
+
+  /* ===== 掌握度矩阵 · 圆形状态点 · 三色(蓝/金/银) ===== */
+  .mastery-map { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 20px 24px; margin: 20px 0; text-align: left; }
+  .mastery-map h3 { font-size: 0.95rem; color: var(--blue-700); margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .mastery-map h3::before {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 3px var(--blue-100);
+  }
+  .mastery-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px 110px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin: 8px 0;
+    font-size: 0.85rem;
+    background: #fff;
+    border-left: 3px solid var(--silver-500);
+  }
+  .mastery-row.correct { border-left-color: var(--blue-700); }
+  .mastery-row.partial { border-left-color: var(--gold-700); }
+  .mastery-row.wrong { border-left-color: var(--silver-700); }
+  .mastery-row .m-tid { font-weight: 700; color: var(--blue-700); font-size: 0.85rem; }
+  .mastery-row .m-title { color: var(--text-primary); }
+
+  /* ===== 状态点 → 圆 ===== */
+  .mastery-row .m-status {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin: 0 auto;
+  }
+  .mastery-row .m-status.correct { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .mastery-row .m-status.partial { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .mastery-row .m-status.wrong { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .mastery-row .m-pct { text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 6px; font-size: 0.78rem; }
+  .mastery-row .m-revisit a { color: var(--blue-700); }
+
+  /* ===== Bottom nav ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 28px 32px; background: #fff; border-radius: var(--radius); margin-bottom: 22px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 160px; text-align: center; padding: 14px 18px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-100); }
+  .bottom-nav span { color: var(--silver-500); }
+  .nav-supplementary { text-align: center; padding: 12px 18px; margin-bottom: 22px; font-size: 0.85rem; color: var(--text-secondary); background: var(--blue-050); border-radius: var(--radius-sm); }
+  .nav-supplementary a { color: var(--blue-700); text-decoration: underline; }
+  .hidden { display: none; }
+  footer { text-align: center; color: var(--silver-700); font-size: 0.78rem; padding: 24px; line-height: 1.8; }
+  .katex { font-size: 1em; }
+
+  /* ===== 移动端退化 ===== */
+  @media (max-width: 640px) {
+    .btn-primary { width: 100%; max-width: 320px; border-radius: 16px; padding: 16px 28px; }
+    .btn-submit { width: 100%; max-width: 280px; height: auto; border-radius: 16px; padding: 18px 32px; box-shadow: var(--shadow-sm); }
+    .q-header-circle { width: 200px; height: 200px; padding: 14px; }
+    .q-header-circle .q-line-no { font-size: 1.02rem; }
+    .q-header-circle .q-line-type { font-size: 0.82rem; }
+  }
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<nav class="breadcrumb">
+  <span>主页</span> &raquo;
+  <span>物理</span> &raquo;
+  高考综合应用 &raquo;
+  <strong>14 题位 · 带电粒子磁场 · 熟练度检测(capstone)</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度通关</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。
+</div>
+
+<header class="page-header">
+  <h1>高考 14 题位 · 带电粒子在磁场(练透 3 类 12 变体) · capstone</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 高考综合应用 · capstone Skill · 题库版(12 题池, 每次随机抽 3 题) · 全部综合大题 · 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>3</strong> 道综合大题(每个考察点 T1-T3 各随机抽 1 道, 共 12 题池, 同骨架不同情境)</li>
+    <li>分值: T1=30 / T2=35 / T3=35 = <strong>100</strong></li>
+    <li>题型: <strong>全部综合大题</strong>(单骨架专项, 不设选择题)</li>
+    <li>通过 ≥ 70 分(已具备纸笔熟练度检测备考水平);荣誉 ≥ 90 分(通过可能性高)</li>
+    <li>建议 30-40 分钟内完成(不强制限时, capstone 综合性较强可酌情放宽)</li>
+    <li>综合大题用关键字命中率判分(命中率 ≥ 100% 满分 / 50-99% 半分 / &lt; 50% 不给分)</li>
+    <li>提交后展示标准答案 + 解析(知识点 + 解题思路 + 详细解题过程)+ 锚回 task-cards</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, <strong>本地保存, 不判分</strong>)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+    <li>可点『重新抽题』再做, 抽到不同变体训练;反思按变体 ID 保留</li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 带电粒子磁场 · 3 大考察点梳理(熟练度备考前置 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 3</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7B8290;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 2 题(≈67%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考察点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #FBF7EC; border-radius: 6px; font-size: 13px; color: #8E6E2E;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存, 跨次自动恢复。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+<nav class="bottom-nav">
+  <span>⬅ 返回主页(待开放)</span>
+  <a href="gaokao-14-charge-in-magnetic-field-task-cards.html">📖 学习任务卡</a>
+  <span>📝 基础检测(待开放)</span>
+  <span>🎤 深度口试(待开放)</span>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 高考综合应用 · 14 题位带电粒子磁场 · capstone Skill · 熟练度检测 · fluency-test v0.1.5</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题考的核心结论是什么?',
+  '我答错的根本原因是什么?(知识点不熟 / 题干理解错 / 计算粗心 / ...)',
+  '类似题目我之后该如何识别?',
+  '对应纸笔熟练度检测的高考题型, 这道题哪些步骤需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'KP-T1': '匀强磁场圆周基础(半径+圆心+弦切几何)',
+  'KP-T2': '电荷源 + 收集器(x 轴弦长几何)',
+  'KP-T3': '多场景综合(撤场 / 双区 / 跨界 / 板反射)'
+};
+
+const TOPIC_TITLES = {
+  T1: { title: '匀强磁场圆周基础(半径公式 + 圆心定位 + 弦切几何)', revisit: '回任务卡 Card 1 复习' },
+  T2: { title: '电荷源粒子枪 + 收集器(x 轴弦长几何)', revisit: '回任务卡 Card 2 复习' },
+  T3: { title: '多场景综合(撤场直线 / 双区周期 / 跨界拼接 / 板反射)', revisit: '回任务卡 Card 3 复习' }
+};
+
+const EXAM_REVIEW = {
+  intro: '本板块对应高考物理新高考 II 卷 <strong>14 题位综合大题</strong>(12-14 分)的<strong>带电粒子在磁场</strong>类题。属于<strong>洛伦兹力 + 圆周运动几何</strong>的融合应用 — 重在<strong>左手定则定圆心</strong>(正电粒子 + 磁场出纸面 → 顺时针圆周; 正电粒子 + 磁场入纸面 → 逆时针)、<strong>r = mv/(qB)</strong> 半径公式、以及<strong>弦切几何</strong>(出入射点连线 + 圆心垂直平分)。下面练习先做对照下方 3 个考察点自查, 不熟的回学习任务卡复习。',
+  topics: [
+    { no: '一', title: '匀强磁场圆周基础(半径 + 圆心 + 弦切几何)', examFreq: '综合大题基础位', examNote: '14 题位 12 分级 · 2-3 小问',
+      examMethods: [
+        '(1) 由 \\(qvB = \\dfrac{mv^2}{r}\\) 求半径 \\(r = \\dfrac{mv}{qB}\\)',
+        '(2) 由洛伦兹力方向(左手定则 · 正电用四指顺速度方向 + 磁场穿掌心 + 大拇指为力方向)定圆心位置',
+        '(3) 弦切几何: 出入射点连线 = 弦, 圆心在弦的<strong>垂直平分线</strong>上'
+      ],
+      mustMaster: [
+        '<strong>洛伦兹力方向 (铁律)</strong>: 正电粒子在 B 出纸面 (⊙) 中, 圆周运动方向<strong>顺时针</strong>; B 入纸面 (×) 中<strong>逆时针</strong>',
+        '<strong>圆心定位</strong>: 圆心在<strong>洛伦兹力方向</strong>上, 距粒子位置 r; 也等价于从速度方向"按 B 方向所要求的 90° 旋转"',
+        '<strong>半径公式</strong>: \\(r = \\dfrac{mv}{qB}\\), 与 q/m 直接相关',
+        '<strong>出射点方向</strong>: 出射速度与圆心 → 出射点的半径<strong>垂直</strong>'
+      ],
+      prepNotes: [
+        '<strong>定圆心三步走</strong>: ① 找入射点 ② 沿洛伦兹力方向画 r 长度 ③ 圆心确认',
+        '注意 q 是<strong>正电</strong>还是<strong>负电</strong>(影响洛伦兹力方向)',
+        '12 分钟内必须做完(高考节奏)'
+      ],
+      revisit: '不熟悉?回学习任务卡 Card 1 复习' },
+
+    { no: '二', title: '电荷源 + 收集器(x 轴弦长几何)', examFreq: '综合大题中位', examNote: '14 题位 13 分级 · 2-3 小问',
+      examMethods: [
+        '(1) 粒子源 P(0, h) 各方向均匀发射, 同 r, 求 x 轴上可被收集到的范围 [x_min, x_max]',
+        '(2) 弦长可行性: 一个 x 轴点 Q 被某条圆周到达, 当且仅当 \\(|PQ| \\leq 2r\\)(弦不超过直径)',
+        '(3) 几何不等式 \\(x^2 + h^2 \\leq 4r^2\\) → \\(|x| \\leq \\sqrt{4r^2 - h^2}\\)'
+      ],
+      mustMaster: [
+        '<strong>弦最长 = 直径</strong>: \\(|PQ|_{max} = 2r\\)',
+        '<strong>x 轴收集范围</strong>: \\(x \\in [-\\sqrt{4r^2 - h^2}, +\\sqrt{4r^2 - h^2}]\\), 前提 \\(2r \\geq h\\)',
+        '若 \\(2r < h\\): <strong>不可达</strong>; 若 \\(2r = h\\): 临界 — 唯一一点 \\(x = 0\\)',
+        '<strong>多源叠加</strong>: 各源独立给出范围, 取<strong>并集</strong>'
+      ],
+      prepNotes: [
+        '<strong>不要先算每条轨迹</strong>: 这是几何题, 用"弦长 ≤ 直径"一招到底',
+        '范围两端是闭区间(端点 = 直径正好等于 PQ 时)',
+        '15 分钟内是高考标杆'
+      ],
+      revisit: '不熟悉?回学习任务卡 Card 2 复习' },
+
+    { no: '三', title: '多场景综合(撤场 / 双区 / 跨界 / 板反射)', examFreq: '综合大题高位', examNote: '14 题位上限 13-14 分级 · 3 小问',
+      examMethods: [
+        '(1) 撤场: 在 B 中圆周一段后 B 突然为 0 → 粒子沿切线匀速直线 → 联立直线方程过指定点求撤场时刻',
+        '(2) 双区周期: B 在两半区方向相反 → 粒子在每个半区做半圆, 整体呈周期性漂移',
+        '(3) 跨界拼接: 上下/左右两块 B 方向相反, 出第一区切入第二区 → 第二区圆心需重新算',
+        '(4) 板反射: 垂直反射壁 \\(v_x\\) 反号; 反射后在 B 中重新画圆心'
+      ],
+      mustMaster: [
+        '<strong>撤场即直线</strong>: 切线方向 = 当前速度方向(垂直于半径)',
+        '<strong>双区每半圆时间 = πr/v</strong>, 完整周期漂移 = 4r',
+        '<strong>跨界圆心重算</strong>: 在新区域新 B 下重画圆心',
+        '<strong>板反射后</strong>: \\(v_x \\to -v_x\\), 圆心位置因新速度方向而改变'
+      ],
+      prepNotes: [
+        '<strong>把圆心当锚点</strong>: 几何题就是定圆心 + 量距离 + 找交点',
+        '撤场后直线方程 + 目标点联立求时刻',
+        '双区粒子在边界跨界时<strong>速度连续但圆心跳变</strong>',
+        '20 分钟内是高考标杆, 训练时可放到 25 分钟'
+      ],
+      revisit: '不熟悉?回学习任务卡 Card 3 复习' }
+  ],
+  footer: '✓ 3 个考察点都熟练? 那就开始下面的熟练度模拟练习吧!'
+};
+
+// ============================================================
+// QUESTION_BANK - 3 T × 4 变体 = 12 题
+// ============================================================
+const QUESTION_BANK = {
+
+// ===== T1 综合大题 30 分 匀强磁场圆周基础(半径 + 圆心 + 弦切几何) =====
+T1: [
+  { id:"T1-1", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(14 题位仿 · 变体 1 · 矩形磁场 + 水平入射)在 \\(xy\\) 平面的矩形区域 \\(0 \\leq x \\leq 1.6\\) m, \\(0 \\leq y \\leq 0.8\\) m 内有<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.2\\) T。一<strong>正电粒子</strong>从左边界中点 \\((0, 0.4)\\) m 处沿 \\(+x\\) 方向射入, 速度 \\(v = 800\\) m/s, 已知比荷 \\(q/m = 10^4\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" width="420" height="250">
+  <text x="20" y="34" font-size="12" fill="#0055B8">B 出纸面 (⊙ 阵列) · 正电粒子 · 水平入射</text>
+  <rect x="60" y="60" width="320" height="160" fill="#eef5fc" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="80" y="82" font-size="11" fill="#0055B8">⊙</text>
+  <text x="160" y="82" font-size="11" fill="#0055B8">⊙</text>
+  <text x="240" y="82" font-size="11" fill="#0055B8">⊙</text>
+  <text x="320" y="82" font-size="11" fill="#0055B8">⊙</text>
+  <text x="80" y="215" font-size="11" fill="#0055B8">⊙</text>
+  <text x="240" y="215" font-size="11" fill="#0055B8">⊙</text>
+  <text x="320" y="215" font-size="11" fill="#0055B8">⊙</text>
+  <circle cx="60" cy="140" r="4" fill="#c0392b"/>
+  <line x1="64" y1="140" x2="100" y2="140" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="100,140 94,137 94,143" fill="#c0392b"/>
+  <text x="20" y="128" font-size="11" fill="#c0392b">入(0,0.4)</text>
+  <text x="70" y="125" font-size="10" fill="#c0392b">v</text>
+  <path d="M 60 140 A 80 80 0 0 1 140 220" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="140" cy="220" r="3.5" fill="#B8924A"/>
+  <text x="156" y="240" font-size="11" fill="#B8924A">出(0.4,0)↓</text>
+  <circle cx="60" cy="220" r="2.5" fill="#7f8c8d"/>
+  <text x="20" y="240" font-size="10" fill="#7f8c8d">圆心(0,0)</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\) 与周期 \\(T\\)。</li>
+  <li><strong>(10 分)</strong> 求圆心坐标, 并说明粒子在磁场中作<strong>顺时针</strong>还是<strong>逆时针</strong>圆周运动的判定理由(写出洛伦兹力方向的左手定则推理)。</li>
+  <li><strong>(10 分)</strong> 求粒子在磁场内的出射点坐标和出射方向, 以及在磁场中运动的时间 \\(t\\)。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.4","顺时针","圆心","出射","左手定则","正电","出纸面"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 洛伦兹力提供向心力 \\(qvB = mv^2/r\\) → \\(r = mv/(qB) = v/[(q/m)B]\\); 周期 \\(T = 2\\pi m/(qB) = 2\\pi r/v\\)。正电粒子在 B 出纸面 (⊙) 中受力方向由左手定则: 四指顺 v(+x), 磁场穿掌心(出纸面 → 由掌心穿出), 大拇指指 -y, 故粒子做<strong>顺时针</strong>圆周(圆心在初始位置正下方)。',
+      approach:'<strong>解题思路</strong>: ① 由 \\(r = v/[(q/m)B]\\) 算半径与周期。② 圆心 = 入射点 + r·(洛伦兹力方向单位矢), 此处即 \\((0, 0.4) + 0.4\\cdot(0, -1) = (0, 0)\\)。③ 顺时针四分之一圆从 \\((0, 0.4)\\) 到 \\((0.4, 0)\\), 出射方向沿 \\(-y\\), 时间 \\(t = T/4\\)。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{800}{10^4 \\times 0.2} = 0.4\\) m。<br>周期 \\(T = \\dfrac{2\\pi r}{v} = \\dfrac{2\\pi \\times 0.4}{800} = \\pi \\times 10^{-3}\\) s \\(\\approx 3.14 \\times 10^{-3}\\) s。<br><strong>(2)</strong> 入射点 \\((0, 0.4)\\) m, v=+x。正电粒子在 B 出纸面中, 由左手定则: 四指顺 +x, 磁场垂直掌心从掌内向掌外(即手背贴纸面), 大拇指指向 \\(-y\\)。所以洛伦兹力沿 \\(-y\\), 圆心在入射点正下方距离 r = 0.4 m 处, 即圆心 \\((0, 0)\\)。粒子做<strong>顺时针</strong>圆周。<br><strong>(3)</strong> 顺时针圆周: 圆方程 \\(x^2 + y^2 = 0.16\\)。从 \\((0, 0.4)\\) 顺时针走 1/4 圆周到 \\((0.4, 0)\\)。出射点 \\((0.4, 0)\\) m 在下边界 \\(y = 0\\) 上。出射速度方向: 从圆心 \\((0, 0)\\) 到出射点 \\((0.4, 0)\\) 的半径 = \\(+x\\); 顺时针切线 = 半径转 \\(-90°\\) = \\(-y\\)。所以出射方向沿 \\(-y\\)(向下)。<br>时间 \\(t = T/4 = \\pi/4 \\times 10^{-3} \\approx 7.85 \\times 10^{-4}\\) s。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么"正电 + B 出纸面 → 顺时针"是铁律?',
+      '我答错是因为: □ 洛伦兹力方向反了(画成逆时针) □ 半径公式漏 q/m □ 圆心定位错 □ 出射点没在边界上',
+      '类似题目我之后该如何识别?(关键字"矩形磁场""出纸面""沿 +x 入射")',
+      '对应高考 14 题位 12-13 分, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T1-2", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(14 题位仿 · 变体 2 · 90° 扇形磁场 + 角平分线入射)\\(xy\\) 平面第一象限内, 以原点 \\(O\\) 为顶点的 90° 扇形区域(由 \\(+x\\) 轴、\\(+y\\) 轴、半径 \\(R = 0.4\\) m 的弧围成)内有<strong>方向入纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T。一<strong>正电粒子</strong>从原点 \\(O\\) 沿角平分线方向(与 \\(+x\\) 轴成 \\(45°\\))射入扇形, 速度大小 \\(v = 250\\) m/s, 比荷 \\(q/m = 2.5 \\times 10^3\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg" width="460" height="280">
+  <text x="20" y="32" font-size="12" fill="#c0392b">B 入纸面 (×) · 90° 扇形 R=0.4 m · 正电粒子</text>
+  <path d="M 120 240 L 320 240 A 200 200 0 0 0 120 40 Z" fill="#fdeaea" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="160" y="155" font-size="11" fill="#c0392b">×</text>
+  <text x="210" y="185" font-size="11" fill="#c0392b">×</text>
+  <text x="245" y="155" font-size="11" fill="#c0392b">×</text>
+  <text x="190" y="220" font-size="11" fill="#c0392b">×</text>
+  <text x="260" y="210" font-size="11" fill="#c0392b">×</text>
+  <line x1="120" y1="240" x2="430" y2="240" stroke="#5a6c7d" stroke-width="0.8"/>
+  <line x1="120" y1="240" x2="120" y2="60" stroke="#5a6c7d" stroke-width="0.8"/>
+  <text x="128" y="260" font-size="11" fill="#5a6c7d">O</text>
+  <text x="432" y="250" font-size="10" fill="#5a6c7d">+x</text>
+  <text x="104" y="62" font-size="10" fill="#5a6c7d">+y</text>
+  <circle cx="120" cy="240" r="4" fill="#B8924A"/>
+  <line x1="120" y1="240" x2="160" y2="200" stroke="#B8924A" stroke-width="2"/>
+  <polygon points="160,200 154,201 159,206" fill="#B8924A"/>
+  <text x="170" y="200" font-size="10" fill="#B8924A">v 45°</text>
+  <path d="M 120 240 A 100 100 0 0 1 120 99" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="120" cy="99" r="4" fill="#0055B8"/>
+  <text x="332" y="106" font-size="11" fill="#0055B8">出 P_1 (0, √2/5)</text>
+  <line x1="125" y1="103" x2="328" y2="103" stroke="#0055B8" stroke-width="0.6" stroke-dasharray="2,2"/>
+  <line x1="105" y1="89" x2="73" y2="57" stroke="#0055B8" stroke-width="2"/>
+  <polygon points="73,57 79,60 77,64" fill="#0055B8"/>
+  <text x="332" y="124" font-size="10" fill="#0055B8">出射方向 135°</text>
+  <line x1="79" y1="63" x2="328" y2="120" stroke="#0055B8" stroke-width="0.4" stroke-dasharray="2,2"/>
+  <circle cx="49" cy="169" r="2.5" fill="#7f8c8d"/>
+  <text x="18" y="158" font-size="10" fill="#7f8c8d">圆心 C</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\)。</li>
+  <li><strong>(10 分)</strong> 求圆心 \\(C\\) 坐标 (说明定圆心的左手定则推理: 正电 + B 入纸面 → 逆时针, 圆心方向 = v 方向逆时针 90°)。</li>
+  <li><strong>(10 分)</strong> 求粒子的出射点位置 \\(P_1\\) 及粒子从入射点到 \\(P_1\\) 的弦长。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.2","逆时针","圆心","出射","左手定则","正电","入纸面","x轴","弦长"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 正电粒子在 B 入纸面 (×) 中, 由左手定则: 四指顺 v, 磁场穿掌心(由掌外向掌内, 即手心贴纸面), 大拇指为洛伦兹力方向。结果: 圆周方向<strong>逆时针</strong>, 圆心在 v 方向<strong>逆时针 90°</strong>方向。',
+      approach:'<strong>解题思路</strong>: ① \\(r = v / [(q/m) B]\\)。② 圆心 = \\(O + r \\cdot (\\cos 135°, \\sin 135°)\\)(因 v 方向 45° 逆时针 90° = 135°)。③ 用圆方程与边界 \\(x = 0\\)(即 \\(+y\\) 轴)联立求出射点 \\(P_1\\)(注意 CCW 从 O 出发, 圆心在第二象限, 圆与 \\(+x\\) 轴仅在 \\(x \\leq 0\\) 半轴有第二交点, 故粒子先到 \\(+y\\) 轴出射)。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{250}{2.5 \\times 10^3 \\times 0.5} = 0.2\\) m。<br><strong>(2)</strong> 正电 + B 入纸面 → 圆周<strong>逆时针</strong>。圆心方向 = v 方向逆时针旋转 90°: v 在 \\(45°\\), 逆时针 \\(+90°\\) → \\(135°\\)。圆心 \\(C = O + r(\\cos 135°, \\sin 135°) = (0, 0) + 0.2(-\\sqrt 2/2, \\sqrt 2/2) = (-\\sqrt 2/10, \\sqrt 2/10)\\) m \\(\\approx (-0.141, 0.141)\\) m。<br>(左手定则核验: 四指顺 v 方向 45°, 磁场入纸面则掌心向纸面外, 大拇指指 135° 方向 = 洛伦兹力方向 = 圆心方向 ✓。)<br><strong>(3)</strong> 圆方程: \\((x + \\sqrt 2/10)^2 + (y - \\sqrt 2/10)^2 = 0.04\\)。<br>求与 \\(+y\\) 轴(\\(x=0\\))的交点:<br>\\((0 + \\sqrt 2/10)^2 + (y - \\sqrt 2/10)^2 = 0.04\\) → \\((y - \\sqrt 2/10)^2 = 0.02\\) → \\(y - \\sqrt 2/10 = \\pm \\sqrt 2/10\\)。<br>取正根(沿 CCW 远离 O): \\(y = \\sqrt 2/5 \\approx 0.283\\) m, 即出射点 \\(P_1 = (0, \\sqrt 2/5)\\) m。(另一根 \\(y = 0\\) 是入射点 O。)<br>弦长 \\(L = |OP_1| = \\sqrt 2/5 \\approx 0.283\\) m。出射方向: 在 \\(P_1\\) 处 CCW 切线方向 = 半径 \\(C \\to P_1\\) 方向逆时针 \\(90°\\) = \\((+45° + 90°) = 135°\\)(即指向第二象限上方)。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么"正电 + B 入纸面 → 逆时针"?',
+      '我答错是因为: □ 圆心方向定错(画到了 v 同侧) □ 半径算错 □ 弦切几何忘了用 P_1 在边界上 □ 出射方向漏画半径垂直',
+      '类似题目我之后该如何识别?(关键字"扇形磁场""角平分线入射""入纸面")',
+      '对应高考 14 题位 12-13 分, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T1-3", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(14 题位仿 · 变体 3 · 圆形磁场 + 弦切几何)\\(xy\\) 平面内, 以原点 \\(O\\) 为圆心、半径 \\(R = 0.5\\) m 的圆形区域内有<strong>方向入纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.4\\) T。一<strong>正电粒子</strong>从圆形区域边界上 \\((-0.5, 0)\\) m 处以 \\(+x\\) 方向射入, 速度 \\(v = 2000\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 460 280" xmlns="http://www.w3.org/2000/svg" width="460" height="280">
+  <text x="20" y="32" font-size="12" fill="#c0392b">B 入纸面 (×) · 圆形区域 R=0.5 m · 正电粒子</text>
+  <circle cx="230" cy="170" r="100" fill="#fdeaea" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="200" y="220" font-size="11" fill="#c0392b">×</text>
+  <text x="270" y="160" font-size="11" fill="#c0392b">×</text>
+  <text x="270" y="220" font-size="11" fill="#c0392b">×</text>
+  <text x="200" y="250" font-size="11" fill="#c0392b">×</text>
+  <text x="260" y="250" font-size="11" fill="#c0392b">×</text>
+  <line x1="60" y1="170" x2="420" y2="170" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="230" y1="80" x2="230" y2="270" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="424" y="182" font-size="10" fill="#7f8c8d">x</text>
+  <text x="240" y="78" font-size="10" fill="#7f8c8d">y</text>
+  <circle cx="130" cy="170" r="4" fill="#B8924A"/>
+  <text x="60" y="160" font-size="10" fill="#B8924A">入(-0.5,0)</text>
+  <line x1="134" y1="170" x2="170" y2="170" stroke="#B8924A" stroke-width="2"/>
+  <polygon points="170,170 164,167 164,173" fill="#B8924A"/>
+  <text x="148" y="186" font-size="10" fill="#B8924A">v</text>
+  <path d="M 130 170 Q 168 120 230 80" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="230" cy="80" r="4" fill="#0055B8"/>
+  <text x="252" y="78" font-size="11" fill="#0055B8">出 P (0, 0.5)</text>
+  <text x="252" y="92" font-size="10" fill="#0055B8">v_out=+y</text>
+  <circle cx="130" cy="80" r="2.5" fill="#7f8c8d"/>
+  <text x="64" y="72" font-size="10" fill="#7f8c8d">圆心 C</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\); 验证此时 \\(r = R\\)(磁场区域半径)。</li>
+  <li><strong>(12 分)</strong> 定圆心 \\(C\\) 坐标; 求粒子轨迹圆与磁场边界圆的两个交点(入射 + 出射), 即出射点 \\(P\\)。</li>
+  <li><strong>(8 分)</strong> 求弦 \\(\\overline{入射 P}\\) 的长度及出射方向。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.5","r=R","逆时针","圆心","出射","(0,0.5)","√2/2","+y","入纸面"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 当粒子轨迹半径 \\(r\\) 等于磁场区域半径 \\(R\\) 时, 两圆相等, 几何上的弦长与方向有简洁关系。正电 + B 入纸面 → 逆时针圆周。',
+      approach:'<strong>解题思路</strong>: ① \\(r = v/[(q/m)B]\\)。② 圆心 = 入射点 + r·(v 方向逆时针 90°), v=+x → 圆心方向 +y。③ 联立两圆方程求出射点。④ 弦长 = \\(\\sqrt{(\\Delta x)^2 + (\\Delta y)^2}\\); 出射方向 = 圆心-出射点向量逆时针 90°。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{2000}{10^4 \\times 0.4} = 0.5\\) m。验证 \\(r = R = 0.5\\) m ✓。<br><strong>(2)</strong> 正电 + B 入纸面 → 圆周逆时针, 圆心方向 = v 方向逆时针 90°。v=+x → 圆心方向 = +y。圆心 \\(C = (-0.5, 0) + 0.5(0, 1) = (-0.5, 0.5)\\) m。<br>轨迹圆: \\((x + 0.5)^2 + (y - 0.5)^2 = 0.25\\)。<br>磁场边界圆: \\(x^2 + y^2 = 0.25\\)。<br>两式相减: \\(x + 0.25 - y + 0.25 = 0\\) → \\(y = x + 0.5\\)。<br>代入磁场圆: \\(x^2 + (x + 0.5)^2 = 0.25\\) → \\(2 x^2 + x = 0\\) → \\(x(2 x + 1) = 0\\)。<br>解: \\(x = 0, y = 0.5\\), 出射点 \\(P = (0, 0.5)\\) m; 或 \\(x = -0.5, y = 0\\) (入射点) ✓。<br><strong>(3)</strong> 弦长: \\(L = \\sqrt{0.5^2 + 0.5^2} = \\sqrt{0.5} = \\dfrac{\\sqrt 2}{2} \\approx 0.707\\) m。<br>出射方向: 从圆心 \\((-0.5, 0.5)\\) 到 \\(P (0, 0.5)\\) 的半径向量 = \\((0.5, 0) = +x\\) 方向; 逆时针的切线 = 半径转 \\(+90°\\) = \\(+y\\) 方向。所以<strong>出射方向沿 \\(+y\\)(向上)</strong>。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么 r=R 这个特殊条件使弦长有简洁表达?',
+      '我答错是因为: □ 圆心定位偏 □ 两圆方程相减没简化 □ 弦长算错 □ 出射方向找错垂直关系',
+      '类似题目我之后该如何识别?(关键字"圆形磁场""沿弦入射""r=R")',
+      '对应高考 14 题位 13 分, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T1-4", type:"short", score:30, difficulty:"中", exportIds:["KP-T1"],
+    stem:`<p>(14 题位仿 · 变体 4 · 矩形磁场 + 斜入射 60°)\\(xy\\) 平面矩形区域 \\(0 \\leq x \\leq 1.2\\) m, \\(0 \\leq y \\leq 0.6\\) m 内有<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T。一<strong>正电粒子</strong>从下边界 \\((0.3, 0)\\) m 处以与 \\(+x\\) 轴成 \\(60°\\) 角(指向右上方)的速度射入, 速度大小 \\(v = 300\\) m/s, 比荷 \\(q/m = 2 \\times 10^3\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 420 250" xmlns="http://www.w3.org/2000/svg" width="420" height="250">
+  <rect x="60" y="60" width="320" height="160" fill="#eef5fc" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="20" y="34" font-size="12" fill="#0055B8">B 出纸面 (⊙ 阵列) · 正电粒子 · 斜入射 60°</text>
+  <text x="100" y="85" font-size="11" fill="#0055B8">⊙</text>
+  <text x="180" y="85" font-size="11" fill="#0055B8">⊙</text>
+  <text x="260" y="85" font-size="11" fill="#0055B8">⊙</text>
+  <text x="340" y="85" font-size="11" fill="#0055B8">⊙</text>
+  <text x="100" y="200" font-size="11" fill="#0055B8">⊙</text>
+  <text x="340" y="200" font-size="11" fill="#0055B8">⊙</text>
+  <circle cx="140" cy="220" r="4" fill="#c0392b"/>
+  <text x="78" y="240" font-size="11" fill="#c0392b">入(0.3,0)</text>
+  <line x1="142" y1="214" x2="172" y2="162" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="172,162 167,166 174,170" fill="#c0392b"/>
+  <text x="178" y="158" font-size="10" fill="#c0392b">v 60°</text>
+  <path d="M 140 220 Q 220 120 260 220" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="260" cy="220" r="4" fill="#B8924A"/>
+  <text x="270" y="240" font-size="11" fill="#B8924A">出(0.82,0)</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\)。</li>
+  <li><strong>(10 分)</strong> 求圆心 \\(C\\) 坐标(说明正电 + B 出纸面对应顺时针, 圆心方向 = v 方向顺时针 \\(90°\\))。</li>
+  <li><strong>(10 分)</strong> 求粒子从哪个边界出射, 出射点坐标和出射方向。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.3","顺时针","圆心","出射","下边界","0.3√3","60°","出纸面"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 当入射角不沿坐标轴时, 圆心位置 = 入射点 + r·(v 方向顺时针 \\(90°\\))。粒子轨迹圆若<strong>整个圆都不能突破上边界 + 左右边界</strong>, 则粒子会回到下边界出射(弦在下边界上, 长度 \\(L = 2 r \\sin\\theta\\), \\(\\theta\\) 为入射角)。',
+      approach:'<strong>解题思路</strong>: ① \\(r = v/[(q/m)B]\\)。② 圆心 = 入射点 + r·(\\(\\sin 60°, -\\cos 60°\\))(将 v 顺时针 90°)。③ 圆轨迹 \\(y_{max}\\) 是否 < 上边界 0.6 m → 判断不能从上出。④ 圆与 \\(y = 0\\) 的两个交点中, 出射点 = 远离入射点的那个。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{300}{2 \\times 10^3 \\times 0.5} = 0.3\\) m。<br><strong>(2)</strong> 正电 + B 出纸面 → 顺时针圆周, 圆心方向 = v 方向顺时针 \\(90°\\)。v 方向 \\(60°\\), 顺时针转 \\(90°\\) → \\(60° - 90° = -30°\\)。圆心 \\(C =\\) 入射点 + r·\\((\\cos(-30°), \\sin(-30°))\\) = \\((0.3, 0) + 0.3(\\sqrt 3/2, -1/2) = (0.3 + 0.15\\sqrt 3, -0.15) \\approx (0.560, -0.150)\\) m。<br><strong>(3)</strong> 圆轨迹: \\((x - 0.560)^2 + (y + 0.150)^2 = 0.09\\)。<br>轨迹最高 y = -0.150 + 0.3 = 0.150 m, 低于上边界 0.6 m → 不能从上边界出。<br>与下边界 \\(y = 0\\) 求交点: \\((x - 0.560)^2 + 0.0225 = 0.09\\) → \\((x - 0.560)^2 = 0.0675 = (0.15\\sqrt 3)^2\\) → \\(x = 0.560 \\pm 0.15\\sqrt 3\\)。即 \\(x = 0.3\\)(入射点) 或 \\(x = 0.560 + 0.15\\sqrt 3 = 0.3 + 0.3\\sqrt 3 \\approx 0.820\\) m。<br>出射点 \\((0.3 + 0.3\\sqrt 3, 0) \\approx (0.820, 0)\\) m, 仍在下边界 \\(y = 0\\) 上。<br>弦长 = \\(0.3 \\sqrt 3 \\approx 0.520\\) m。<br>出射方向: 由对称性, 弦的中垂线过圆心, 入射与出射相对此中垂线对称 → 入射速度与 \\(+x\\) 成 \\(+60°\\), 出射速度与 \\(+x\\) 成 \\(-60°\\)(即指向右下方)。所以<strong>出射方向相对 \\(+x\\) 轴 \\(-60°\\)(右下方)</strong>。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么入射 60°+ 顺时针 → 弦长 = 2r sin 60°?',
+      '我答错是因为: □ 圆心方向(顺/逆时针记反) □ 轨迹 y_max 没验证 □ 出射点只算了一个根 □ 出射角度遗漏对称性',
+      '类似题目我之后该如何识别?(关键字"斜入射""矩形磁场""下边界")',
+      '对应高考 14 题位 13 分, 哪些步骤可以在 12 分钟内完成?哪些是失分点?'
+    ]
+  }
+],
+
+// ===== T2 综合大题 35 分 电荷源 + 收集器(x 轴弦长几何) =====
+T2: [
+  { id:"T2-1", type:"short", score:35, difficulty:"中高", exportIds:["KP-T2"],
+    stem:`<p>(14 题位仿 · 变体 1 · 标准版)\\(xy\\) 平面内整个区域为<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T。在 \\(P(0, 0.6)\\) m 处有一<strong>正电粒子</strong>源, 向 \\(xy\\) 平面内<strong>各方向均匀</strong>发射粒子, 各粒子的速度大小均为 \\(v = 2500\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。\\(x\\) 轴是收集器(到达 \\(x\\) 轴即被收集, 之后停止)。不计重力。求:</p>
+<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" width="420" height="220">
+  <rect x="40" y="20" width="340" height="180" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="18" y="36" font-size="11" fill="#0055B8">B 出纸面 (整域 ⊙) · 正电粒子源 P · 各向均匀发射</text>
+  <text x="65" y="40" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="40" font-size="10" fill="#0055B8">⊙</text>
+  <text x="65" y="195" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="195" font-size="10" fill="#0055B8">⊙</text>
+  <line x1="40" y1="160" x2="380" y2="160" stroke="#5a6c7d" stroke-width="1.8"/>
+  <text x="386" y="164" font-size="10" fill="#5a6c7d">x</text>
+  <text x="80" y="178" font-size="10" fill="#5a6c7d">收集器 (x 轴)</text>
+  <line x1="210" y1="50" x2="210" y2="200" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="218" y="58" font-size="10" fill="#7f8c8d">y</text>
+  <circle cx="210" cy="100" r="5" fill="#c0392b"/>
+  <text x="218" y="98" font-size="11" fill="#c0392b">P(0, 0.6)</text>
+  <text x="218" y="112" font-size="10" fill="#c0392b">源 各向均匀</text>
+  <line x1="158" y1="160" x2="262" y2="160" stroke="#B8924A" stroke-width="4"/>
+  <text x="120" y="195" font-size="11" fill="#B8924A">x=-0.8</text>
+  <text x="252" y="195" font-size="11" fill="#B8924A">x=+0.8</text>
+  <circle cx="158" cy="160" r="3.5" fill="#B8924A"/>
+  <circle cx="262" cy="160" r="3.5" fill="#B8924A"/>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\); 验证 \\(2r > h = 0.6\\) m 即收集有解。</li>
+  <li><strong>(15 分)</strong> 给出"x 轴上可被收集到的位置 \\(x\\) 的范围"的几何依据: 弦长 \\(|PQ| \\leq 2r\\) → \\(x^2 + h^2 \\leq 4r^2\\); 求出收集范围 \\([x_{min}, x_{max}]\\)。</li>
+  <li><strong>(10 分)</strong> 求收集线段总长 \\(L_{收集}\\); 说明 \\(x = x_{max}\\) 端点对应的几何含义("弦 = 直径")。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.5","弦长","直径","x²+h²≤4r²","x_min","x_max","0.8","1.6"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 这是经典"粒子源 + 收集器"几何题 — 关键是<strong>弦长不超过直径</strong>: \\(|PQ| \\leq 2r\\), 即 \\(\\sqrt{x^2 + h^2} \\leq 2r\\), 化简 \\(x^2 + h^2 \\leq 4r^2\\)。这给出 \\(|x| \\leq \\sqrt{4r^2 - h^2}\\)。',
+      approach:'<strong>解题思路</strong>: ① 由 \\(r = v/[(q/m)B]\\) 算 r。② 直接套用弦长不等式, 解 \\(|x| \\leq \\sqrt{4r^2 - h^2}\\)。③ 端点 = 弦正好等于直径 (\\(|PQ| = 2r\\))。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{2500}{10^4 \\times 0.5} = 0.5\\) m。\\(2r = 1.0\\) m > \\(h = 0.6\\) m ✓ 有解。<br><strong>(2)</strong> 一个 \\(x\\) 轴点 \\(Q(x, 0)\\) 被某粒子到达 ⇔ 存在过 \\(P\\) 和 \\(Q\\) 的半径为 r 的圆 ⇔ 弦 \\(|PQ| \\leq 2r\\)(直径)。<br>\\(|PQ|^2 = x^2 + h^2 = x^2 + 0.36\\)。条件 \\(x^2 + 0.36 \\leq 4 \\times 0.25 = 1.00\\) → \\(x^2 \\leq 0.64\\) → \\(|x| \\leq 0.8\\) m。<br>因为发射方向"各向均匀", 所以对每个 \\(x \\in [-0.8, 0.8]\\) 都至少存在一个发射方向使粒子顺时针圆周到达 Q。<br>收集范围 \\([x_{min}, x_{max}] = [-0.8, +0.8]\\) m。<br><strong>(3)</strong> 收集线段总长 \\(L_{收集} = x_{max} - x_{min} = 1.6\\) m。<br>\\(x = +0.8\\) 处: 弦 \\(PQ\\) 长 = \\(\\sqrt{0.64 + 0.36} = 1 = 2r\\), <strong>弦正好等于直径</strong>; 这是 \\(x\\) 轴上"最远可达"的极限位置。同理 \\(x = -0.8\\) 也是直径极限。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么"弦长不超过直径"就是关键约束?',
+      '我答错是因为: □ 不识别弦长 ≤ 2r 这一招 □ 漏开方 □ 端点物理含义不明 □ 误把 h 当成 v',
+      '类似题目我之后该如何识别?(关键字"粒子源""各向均匀""收集器""x 轴")',
+      '对应高考 14 题位 13-14 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T2-2", type:"short", score:35, difficulty:"中高", exportIds:["KP-T2"],
+    stem:`<p>(14 题位仿 · 变体 2 · 源高度变化 0.6 → 0.8)\\(xy\\) 平面内整个区域为<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T。在 \\(P(0, 0.8)\\) m 处(相对变体 1 高度从 0.6 m 增加到 0.8 m)有一<strong>正电粒子</strong>源, 向 \\(xy\\) 平面内<strong>各方向均匀</strong>发射粒子, 各粒子速度大小均为 \\(v = 2500\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。\\(x\\) 轴是收集器。不计重力。求:</p>
+<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" width="420" height="220">
+  <rect x="40" y="20" width="340" height="180" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="18" y="36" font-size="11" fill="#0055B8">B 出纸面 (整域 ⊙) · 正电粒子源 P · 各向均匀发射</text>
+  <text x="65" y="40" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="40" font-size="10" fill="#0055B8">⊙</text>
+  <text x="65" y="195" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="195" font-size="10" fill="#0055B8">⊙</text>
+  <line x1="40" y1="170" x2="380" y2="170" stroke="#5a6c7d" stroke-width="1.8"/>
+  <text x="386" y="174" font-size="10" fill="#5a6c7d">x</text>
+  <text x="80" y="188" font-size="10" fill="#5a6c7d">收集器 (x 轴)</text>
+  <line x1="210" y1="50" x2="210" y2="200" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="218" y="58" font-size="10" fill="#7f8c8d">y</text>
+  <circle cx="210" cy="74" r="5" fill="#c0392b"/>
+  <text x="218" y="72" font-size="11" fill="#c0392b">P(0, 0.8)</text>
+  <line x1="170" y1="170" x2="250" y2="170" stroke="#B8924A" stroke-width="4"/>
+  <text x="130" y="205" font-size="11" fill="#B8924A">x=-0.6</text>
+  <text x="240" y="205" font-size="11" fill="#B8924A">x=+0.6</text>
+  <circle cx="170" cy="170" r="3.5" fill="#B8924A"/>
+  <circle cx="250" cy="170" r="3.5" fill="#B8924A"/>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\); 验证 \\(2r > h' = 0.8\\) m。</li>
+  <li><strong>(15 分)</strong> 用弦长不等式 \\(x^2 + h'^2 \\leq 4r^2\\) 求新的收集范围 \\([x_{min}', x_{max}']\\)。</li>
+  <li><strong>(10 分)</strong> 求新的收集线段总长 \\(L_{收集}'\\); 比较与变体 1 (\\(h = 0.6\\) m) 的收集长度, 说明物理趋势("h 越大, 收集范围越小")。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.5","x²+h²≤4r²","0.6","1.2","h越大范围越小","弦长","直径"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 同变体 1 的几何约束, 但 \\(h\\) 改变 → 收集范围 \\(2\\sqrt{4r^2 - h^2}\\), 单调递减于 \\(h\\)。',
+      approach:'<strong>解题思路</strong>: 直接套用公式 \\(|x| \\leq \\sqrt{4r^2 - h^2}\\), \\(h = 0.8\\) m。',
+      solution:'<strong>(1)</strong> \\(r = 0.5\\) m。\\(2r = 1.0\\) m > \\(h\' = 0.8\\) m ✓ 有解。<br><strong>(2)</strong> \\(x^2 + 0.64 \\leq 1.00\\) → \\(x^2 \\leq 0.36\\) → \\(|x| \\leq 0.6\\) m。<br>收集范围 \\([-0.6, +0.6]\\) m。<br><strong>(3)</strong> 总长 \\(L_{收集}\' = 1.2\\) m。<br>对比变体 1: \\(L_{收集} = 1.6\\) m > \\(L_{收集}\' = 1.2\\) m。<br>物理: 源越高(h 越大), 粒子要从更远到达 \\(x\\) 轴上的点, 弦长可能超过直径 → 不可达 → 收集范围更小。极限 \\(h \\to 2r\\): 范围 \\(\\to 0\\); \\(h > 2r\\): 完全不可达。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?h 改变后, 收集范围公式怎么单调变化?',
+      '我答错是因为: □ h 代错 □ 没识别公式是变体 1 的同种 □ 算数 □ 物理结论遗漏',
+      '类似题目我之后该如何识别?(关键字"源位置改变""收集范围比较")',
+      '对应高考 14 题位 12 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T2-3", type:"short", score:35, difficulty:"高", exportIds:["KP-T2"],
+    stem:`<p>(14 题位仿 · 变体 3 · 临界情形 \\(2r = h\\))\\(xy\\) 平面内整个区域为<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T。在 \\(P(0, 1.0)\\) m 处有一<strong>正电粒子</strong>源, 向 \\(xy\\) 平面内<strong>各方向均匀</strong>发射粒子, 各粒子速度大小均为 \\(v = 2500\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。\\(x\\) 轴是收集器。不计重力。求:</p>
+<svg viewBox="0 0 420 240" xmlns="http://www.w3.org/2000/svg" width="420" height="240">
+  <rect x="40" y="20" width="340" height="200" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="50" y="34" font-size="12" fill="#0055B8">B 出纸面 (整域) · 临界 2r=h</text>
+  <text x="65" y="58" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="58" font-size="10" fill="#0055B8">⊙</text>
+  <text x="65" y="226" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="226" font-size="10" fill="#0055B8">⊙</text>
+  <line x1="40" y1="200" x2="380" y2="200" stroke="#5a6c7d" stroke-width="1.8"/>
+  <text x="386" y="204" font-size="10" fill="#5a6c7d">x</text>
+  <text x="80" y="218" font-size="10" fill="#5a6c7d">收集器 (x 轴)</text>
+  <line x1="210" y1="50" x2="210" y2="220" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="218" y="58" font-size="10" fill="#7f8c8d">y</text>
+  <circle cx="210" cy="50" r="5" fill="#c0392b"/>
+  <text x="218" y="48" font-size="11" fill="#c0392b">P(0, 1.0)</text>
+  <text x="218" y="62" font-size="10" fill="#c0392b">2r=h 临界</text>
+  <circle cx="210" cy="200" r="5" fill="#B8924A"/>
+  <text x="222" y="232" font-size="11" fill="#B8924A">仅 (0, 0) 一点</text>
+  <line x1="210" y1="56" x2="210" y2="194" stroke="#B8924A" stroke-width="2" stroke-dasharray="4,3"/>
+  <text x="222" y="130" font-size="10" fill="#B8924A">PQ = 2r = 直径</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\); 比较 \\(2r\\) 与 \\(h = 1.0\\) m 的关系(临界判断)。</li>
+  <li><strong>(15 分)</strong> 分析临界情形下 \\(x\\) 轴的收集情况: 应用 \\(x^2 + h^2 \\leq 4r^2\\) 即 \\(x^2 \\leq 0\\) → 仅 \\(x = 0\\) 一点。给出对应的发射方向。</li>
+  <li><strong>(10 分)</strong> 说明若 \\(h\\) 再略增大, 是否仍有收集点; 给出"完全无收集"的物理判据。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.5","2r=h","临界","仅一点","x=0","直径","无收集","2r<h"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 临界情形 \\(2r = h\\) 时, 弦 \\(PQ\\) 最长 = 直径 = 2r, 仅当 Q = (0, 0) 时满足; 此时存在过 \\(P\\) 与 \\(O\\) 且半径 r 的圆, 圆心位于 \\(PO\\) 中点 = \\((0, 0.5)\\)。',
+      approach:'<strong>解题思路</strong>: ① \\(2r\\) vs \\(h\\) 判断临界。② \\(x^2 + h^2 \\leq 4r^2\\) 当 \\(h^2 = 4r^2\\) 时退化为 \\(x = 0\\)。③ 发射方向由几何 (弦正好为直径) + 粒子顺时针圆周共同决定。',
+      solution:'<strong>(1)</strong> \\(r = 0.5\\) m。\\(2r = 1.0\\) m \\(= h\\) (临界相等)。<br><strong>(2)</strong> 公式 \\(x^2 + h^2 \\leq 4r^2\\) 代入: \\(x^2 + 1 \\leq 1\\) → \\(x^2 \\leq 0\\) → \\(x = 0\\) 仅一点。<br>对应发射方向: 弦 \\(P(0, 1.0) \\to Q(0, 0)\\) 长 = 直径 = 1 m, 弦方向 = \\(-y\\)。当弦 = 直径时, 圆心 = 弦中点 = \\((0, 0.5)\\)。在 \\(P\\) 处, 圆心方向 = \\(-y\\); 顺时针圆周 (B 出纸面 + 正电) 要求 v 与"圆心方向" 垂直且<strong>顺时针 90°(即 v 方向 = 圆心方向逆时针 90° = +x)</strong>。所以发射方向 = \\(+x\\)。由对称, 另一条圆 (圆心 \\((0, 0.5)\\) 同一个), 因发射方向只对应一种 (顺时针时), 不重复。<br>注: 学生也可论证"沿 -y 的直射轨迹"不被允许 (B 出纸面下, 正电直线下飞会受 +x 方向洛伦兹力, 立刻偏离)。所以仅 \\(+x\\) 发射 (对应顺时针走 1/2 圆到达 O)。<br><strong>(3)</strong> 若 \\(h\\) 略增大 (\\(h > 2r\\)), \\(x^2 + h^2 > 4r^2\\) 对任何 \\(x\\) 都成立 → 弦长 > 直径不可能 → <strong>完全无收集</strong>。<br>物理判据: \\(h > 2r\\) 即"源到 \\(x\\) 轴距离 > 粒子轨迹直径" → 几何上, 任何过 \\(P\\) 的圆 (半径 r) 都不能再触到 \\(x\\) 轴。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么 2r=h 是临界?',
+      '我答错是因为: □ 临界条件认错 □ 一点的发射方向定向漏 □ 无收集判据没写 □ 公式记错',
+      '类似题目我之后该如何识别?(关键字"临界""2r=h""仅一点""恰好直径")',
+      '对应高考 14 题位 12 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T2-4", type:"short", score:35, difficulty:"高", exportIds:["KP-T2"],
+    stem:`<p>(14 题位仿 · 变体 4 · 双源对称 + 偏移)\\(xy\\) 平面内整个区域为<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T。两个<strong>正电粒子</strong>源: \\(P_1(0, 0.6)\\) m 与 \\(P_2(0.4, 0.6)\\) m, 各源都向 \\(xy\\) 平面内<strong>各方向均匀</strong>发射粒子, 各粒子速度大小均为 \\(v = 2500\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。\\(x\\) 轴是收集器。不计重力。求:</p>
+<svg viewBox="0 0 420 220" xmlns="http://www.w3.org/2000/svg" width="420" height="220">
+  <rect x="40" y="20" width="340" height="180" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="18" y="36" font-size="11" fill="#0055B8">B 出纸面 (整域 ⊙) · 正电粒子源 P · 各向均匀发射</text>
+  <text x="65" y="40" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="40" font-size="10" fill="#0055B8">⊙</text>
+  <text x="65" y="195" font-size="10" fill="#0055B8">⊙</text>
+  <text x="355" y="195" font-size="10" fill="#0055B8">⊙</text>
+  <line x1="40" y1="160" x2="380" y2="160" stroke="#5a6c7d" stroke-width="1.8"/>
+  <text x="386" y="164" font-size="10" fill="#5a6c7d">x</text>
+  <line x1="170" y1="50" x2="170" y2="200" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="178" y="58" font-size="10" fill="#7f8c8d">y</text>
+  <circle cx="170" cy="100" r="5" fill="#c0392b"/>
+  <text x="100" y="98" font-size="11" fill="#c0392b">P_1(0,0.6)</text>
+  <circle cx="226" cy="100" r="5" fill="#9b59b6"/>
+  <text x="234" y="98" font-size="11" fill="#9b59b6">P_2(0.4,0.6)</text>
+  <line x1="58" y1="160" x2="282" y2="160" stroke="#B8924A" stroke-width="4"/>
+  <text x="42" y="195" font-size="11" fill="#B8924A">-0.8</text>
+  <text x="272" y="195" font-size="11" fill="#B8924A">+1.2</text>
+  <circle cx="58" cy="160" r="3.5" fill="#B8924A"/>
+  <circle cx="282" cy="160" r="3.5" fill="#B8924A"/>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求半径 \\(r\\); 分别给出 \\(P_1\\) 与 \\(P_2\\) 单独收集的范围。</li>
+  <li><strong>(15 分)</strong> 求两源共同覆盖的 \\(x\\) 轴收集范围(<strong>并集</strong>)\\([x_{min}, x_{max}]\\)。</li>
+  <li><strong>(10 分)</strong> 给出"两范围相交段长度"(即两源都能到达的区间)。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.5","并集","-0.8","+1.2","2.0","相交段","1.2"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 多源时, 每源单独应用弦长不等式 + 取并集。\\(P_2\\) 在 \\(x\\) 方向偏移 \\(0.4\\) m → 范围右移 \\(0.4\\) 偏移。',
+      approach:'<strong>解题思路</strong>: ① 套公式给出 \\(P_1\\) 收集 \\([-0.8, +0.8]\\); \\(P_2\\) 收集 \\([0.4 - 0.8, 0.4 + 0.8] = [-0.4, +1.2]\\)。② 并集 \\([-0.8, 1.2]\\)。③ 交集 \\([-0.4, +0.8]\\), 长 1.2 m。',
+      solution:'<strong>(1)</strong> \\(r = 0.5\\) m。\\(P_1\\) 范围: \\(|x| \\leq \\sqrt{1 - 0.36} = 0.8\\) → \\([-0.8, +0.8]\\) m。\\(P_2\\) 范围: \\((x - 0.4)^2 \\leq 1 - 0.36 = 0.64\\) → \\(|x - 0.4| \\leq 0.8\\) → \\([-0.4, +1.2]\\) m。<br><strong>(2)</strong> 并集 = \\([-0.8, +0.8] \\cup [-0.4, +1.2] = [-0.8, +1.2]\\) m, 总长 \\(2.0\\) m。<br><strong>(3)</strong> 相交段 = \\([-0.8, +0.8] \\cap [-0.4, +1.2] = [-0.4, +0.8]\\) m, 长 \\(1.2\\) m。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么 P_2 范围正好平移 P_1 范围 0.4 m?',
+      '我答错是因为: □ P_2 偏移没算对 □ 并集错算成相加 □ 相交段公式漏 □ 端点开闭',
+      '类似题目我之后该如何识别?(关键字"两源""并集""相交段")',
+      '对应高考 14 题位 13 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  }
+],
+
+// ===== T3 综合大题 35 分 多场景综合(撤场 / 双区 / 跨界 / 板反射) =====
+T3: [
+  { id:"T3-1", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(14 题位升级仿 · 变体 1 · 撤场 + 直线过目标点)在 \\(xy\\) 平面 \\(x \\geq 0\\) 半平面内有<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T; \\(x < 0\\) 区域无场。一<strong>正电粒子</strong>从原点 \\(O(0, 0)\\) 沿 \\(+x\\) 方向射入, 速度 \\(v = 1000\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。粒子做圆周运动一段后, 实验员在某时刻 \\(t_1\\) <strong>突然撤去磁场</strong>, 粒子之后沿撤场瞬间的速度方向做匀速直线运动。已知粒子最终经过点 \\(Q(0.2, -0.4)\\) m。不计重力。求:</p>
+<svg viewBox="0 0 420 320" xmlns="http://www.w3.org/2000/svg" width="420" height="320">
+  <text x="20" y="32" font-size="11" fill="#0055B8">B 出纸面 (x≥0 半平面) · 正电粒子 · 撤场后直线</text>
+  <rect x="210" y="60" width="180" height="240" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="240" y="80" font-size="11" fill="#0055B8">⊙</text>
+  <text x="350" y="80" font-size="11" fill="#0055B8">⊙</text>
+  <text x="240" y="290" font-size="11" fill="#0055B8">⊙</text>
+  <text x="350" y="290" font-size="11" fill="#0055B8">⊙</text>
+  <line x1="30" y1="160" x2="395" y2="160" stroke="#5a6c7d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="210" y1="60" x2="210" y2="300" stroke="#5a6c7d" stroke-width="1.2"/>
+  <text x="394" y="148" font-size="10" fill="#5a6c7d">x</text>
+  <text x="220" y="68" font-size="10" fill="#5a6c7d">y</text>
+  <circle cx="210" cy="160" r="4" fill="#c0392b"/>
+  <text x="184" y="152" font-size="11" fill="#c0392b">O</text>
+  <line x1="214" y1="160" x2="244" y2="160" stroke="#c0392b" stroke-width="2"/>
+  <polygon points="244,160 238,157 238,163" fill="#c0392b"/>
+  <text x="220" y="148" font-size="10" fill="#c0392b">v</text>
+  <path d="M 210 160 Q 232 172 250 192" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="250" cy="192" r="3.5" fill="#e67e22"/>
+  <text x="260" y="190" font-size="10" fill="#e67e22">撤场点 (0.2,-0.2)</text>
+  <line x1="250" y1="196" x2="250" y2="240" stroke="#e67e22" stroke-width="2"/>
+  <polygon points="250,240 247,234 253,234" fill="#e67e22"/>
+  <text x="258" y="222" font-size="10" fill="#e67e22">沿 -y 直线</text>
+  <circle cx="250" cy="240" r="4" fill="#B8924A"/>
+  <text x="260" y="246" font-size="11" fill="#B8924A">Q(0.2,-0.4)</text>
+  <circle cx="210" cy="200" r="2.5" fill="#7f8c8d"/>
+  <text x="120" y="222" font-size="10" fill="#7f8c8d">圆心(0,-0.2)</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子在磁场中做圆周运动的半径 \\(r\\) 与圆心位置。</li>
+  <li><strong>(15 分)</strong> 求实验员撤去磁场的时刻 \\(t_1\\)(以粒子从 \\(O\\) 进入磁场时刻为 0); 给出撤场瞬间粒子的位置与速度方向。</li>
+  <li><strong>(10 分)</strong> 求粒子从撤场到经过点 \\(Q\\) 的时间 \\(t_2\\)。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.2","圆心","顺时针","t_1","撤场","-y","t_2","2×10^-4"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 撤场即直线 — 粒子沿撤场瞬间的<strong>切向速度方向</strong>做匀速直线。判定撤场时刻的关键是<strong>反向构造</strong>: 从 \\(Q\\) 向后画出"过 \\(Q\\) 且与切线方向同向"的反延射线, 与圆轨迹的交点 = 撤场点。',
+      approach:'<strong>解题思路</strong>: ① \\(r = v/[(q/m)B]\\); 正电 + B 出纸面 → 顺时针, 圆心在初始位置正下方 r。② 设撤场时角速度走过 \\(\\theta\\), 撤场位置 \\((r \\sin \\theta, -r + r \\cos \\theta)\\), 速度方向 \\((\\cos\\theta, -\\sin\\theta)\\); 联立"沿此方向延长到 \\(Q\\)"解 \\(\\theta\\)。③ 计算时间。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{1000}{10^4 \\times 0.5} = 0.2\\) m。<br>正电 + B 出纸面 → 顺时针, 圆心在 \\(O\\) 正下方 r 处: 圆心 \\((0, -0.2)\\) m。<br><strong>(2)</strong> 设粒子走过圆弧角 \\(\\theta\\), 位置 \\((r \\sin\\theta, -r + r \\cos\\theta) = (0.2 \\sin\\theta, -0.2 + 0.2 \\cos\\theta)\\), 切向(沿顺时针的速度方向) \\(v(\\cos\\theta, -\\sin\\theta)\\)。<br>撤场后沿直线: 在某 \\(\\lambda > 0\\) 时刻位置 \\((0.2 \\sin\\theta + \\lambda v \\cos\\theta, -0.2 + 0.2\\cos\\theta - \\lambda v \\sin\\theta) = (0.2, -0.4)\\)。<br>测试 \\(\\theta = \\pi/2\\): \\(\\sin\\theta=1\\), \\(\\cos\\theta=0\\)。撤场点 \\((0.2, -0.2)\\), 速度方向 \\((0, -1) \\cdot v\\) 即沿 \\(-y\\)。直线沿 \\(-y\\) 从 \\((0.2, -0.2)\\) 到 \\((0.2, -0.4)\\), 满足!<br>所以 \\(\\theta = \\pi/2\\)。<br>角速度 \\(\\omega = v/r = 5000\\) rad/s。撤场时刻 \\(t_1 = \\theta/\\omega = (\\pi/2)/5000 = \\pi/10000 \\approx 3.14 \\times 10^{-4}\\) s。<br>撤场瞬间: 位置 \\((0.2, -0.2)\\) m, 速度沿 \\(-y\\), 大小 1000 m/s。<br><strong>(3)</strong> 撤场后沿 \\(-y\\) 直线走 \\(0.2\\) m 到 \\(Q\\): \\(t_2 = 0.2/v = 0.2/1000 = 2 \\times 10^{-4}\\) s。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么撤场后"切向匀速直线"是铁律?',
+      '我答错是因为: □ 圆心定位错 □ 没识别"反推 Q 找撤场点"思路 □ θ 测试没找到合适值 □ 时间公式漏 ω = v/r',
+      '类似题目我之后该如何识别?(关键字"撤场""匀速直线""恰好过点")',
+      '对应高考 14 题位 13-14 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T3-2", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(14 题位升级仿 · 变体 2 · 双区周期 + 漂移)在 \\(xy\\) 平面: \\(x > 0\\) 半平面有<strong>方向入纸面</strong>的匀强磁场, \\(x < 0\\) 半平面有<strong>方向出纸面</strong>的匀强磁场, 两区域磁感应强度大小相等, \\(B = 0.5\\) T。一<strong>正电粒子</strong>从原点 \\(O(0, 0)\\) 沿 \\(+x\\) 方向射入, 速度 \\(v = 1000\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" width="460" height="320">
+  <text x="20" y="34" font-size="11" fill="#2c3e50">双区: 左 ⊙ (x<0 出纸面) / 右 × (x>0 入纸面) · 正电粒子</text>
+  <rect x="40" y="60" width="190" height="240" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="60" y="80" font-size="11" fill="#0055B8">⊙ (x<0)</text>
+  <text x="60" y="290" font-size="11" fill="#0055B8">⊙</text>
+  <text x="200" y="290" font-size="11" fill="#0055B8">⊙</text>
+  <text x="60" y="140" font-size="11" fill="#0055B8">⊙</text>
+  <rect x="230" y="60" width="190" height="240" fill="#fdeaea" stroke="#c0392b" stroke-width="0.8"/>
+  <text x="250" y="80" font-size="11" fill="#c0392b">× (x>0)</text>
+  <text x="380" y="80" font-size="11" fill="#c0392b">×</text>
+  <text x="250" y="290" font-size="11" fill="#c0392b">×</text>
+  <text x="380" y="290" font-size="11" fill="#c0392b">×</text>
+  <line x1="40" y1="180" x2="420" y2="180" stroke="#5a6c7d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="230" y1="60" x2="230" y2="300" stroke="#5a6c7d" stroke-width="1.5"/>
+  <text x="424" y="192" font-size="10" fill="#5a6c7d">y</text>
+  <text x="238" y="68" font-size="10" fill="#5a6c7d">x=0</text>
+  <circle cx="230" cy="180" r="4" fill="#B8924A"/>
+  <text x="155" y="200" font-size="10" fill="#B8924A">O 起点</text>
+  <line x1="234" y1="180" x2="266" y2="180" stroke="#B8924A" stroke-width="2"/>
+  <polygon points="266,180 260,177 260,183" fill="#B8924A"/>
+  <text x="270" y="174" font-size="10" fill="#B8924A">v=+x (入 x>0)</text>
+  <path d="M 230 180 A 40 40 0 0 0 230 100" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="270" cy="140" r="2.5" fill="#B8924A" opacity="0.5"/>
+  <text x="278" y="144" font-size="9" fill="#B8924A">圆心 1 (0,r)</text>
+  <circle cx="230" cy="100" r="3.5" fill="#e67e22"/>
+  <text x="244" y="98" font-size="10" fill="#e67e22">半圆 1 后 (0, 2r)</text>
+  <path d="M 230 100 A 40 40 0 0 1 230 20" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="190" cy="60" r="2.5" fill="#B8924A" opacity="0.5"/>
+  <text x="120" y="64" font-size="9" fill="#B8924A">圆心 2 (0,3r)</text>
+  <circle cx="230" cy="20" r="3.5" fill="#9b59b6"/>
+  <text x="240" y="34" font-size="10" fill="#9b59b6">半圆 2 后 (0, 4r=0.8 m)</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\) 与每个半圆所用时间 \\(T_{半}\\)。</li>
+  <li><strong>(15 分)</strong> 说明粒子的运动模式: 在 \\(x > 0\\) 区做半圆 → 跨入 \\(x < 0\\) 区做半圆 → 跨入 \\(x > 0\\) 区做半圆 ... 求粒子<strong>每完成一个完整周期</strong>(即两个相反方向的半圆 = 一个完整 \\(T = 2T_{半}\\))后, 粒子在 \\(y\\) 方向漂移了多少。</li>
+  <li><strong>(10 分)</strong> 求粒子完成 \\(N = 5\\) 个完整周期后的位置 \\((x, y)\\)。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.2","半圆","πr/v","漂移","4r","0.8","完整周期","5周期","4.0"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 双区周期运动是"半圆 + 半圆"拼接, 粒子在每个区做半圆 + 跨界时<strong>速度连续但圆心瞬变</strong>。一个完整周期 = 两个相反方向的半圆 = 净漂移 \\(4r\\)(垂直于初速度方向)。',
+      approach:'<strong>解题思路</strong>: ① \\(r, T_{半}\\)。② 画一个完整周期的几何轨迹, 算粒子位置净位移。③ 倍数推广到 \\(N\\) 周期。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{1000}{10^4 \\times 0.5} = 0.2\\) m。<br>每个半圆时间 \\(T_{半} = \\dfrac{\\pi r}{v} = \\dfrac{\\pi \\times 0.2}{1000} = 2\\pi \\times 10^{-4}\\) s \\(\\approx 6.28 \\times 10^{-4}\\) s。<br>完整周期 \\(T = 2 T_{半} = 4\\pi \\times 10^{-4}\\) s。<br><strong>(2)</strong> 半圆 1 (x>0 区, B 入纸面 → 正电逆时针): 从 \\(O\\) 出发 \\(v = +x\\), 圆心方向 = v 逆时针 90° = +y, 圆心 \\((0, 0.2)\\)。半圆 CCW 后到 \\((0, 0.4)\\), 速度 \\(-x\\)。<br>半圆 2 (跨到 x<0 区, B 出纸面 → 正电顺时针): 起点 \\((0, 0.4)\\), 速度 \\(-x\\), 圆心方向 = v 顺时针 90° = +y, 圆心 \\((0, 0.6)\\)。半圆 CW 后到 \\((0, 0.8)\\), 速度 \\(+x\\)。<br>所以一个完整周期 = 2 个半圆, 净位移 \\(+y\\) 方向 \\(4r = 0.8\\) m, 速度回到 \\(+x\\)(同初始)。<br><strong>(3)</strong> N = 5 个完整周期, 位置 \\((0, 5 \\times 0.8) = (0, 4.0)\\) m。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么"双区每完整周期漂移 4r"?',
+      '我答错是因为: □ 圆心跨界没重算 □ 半圆方向(顺/逆)记反 □ 一个周期漂移误算成 2r □ N 倍推广算错',
+      '类似题目我之后该如何识别?(关键字"双区""方向相反""周期")',
+      '对应高考 14 题位 13-14 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T3-3", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(14 题位升级仿 · 变体 3 · 跨界拼接 · 两区相邻)\\(xy\\) 平面内两块相邻矩形磁场: 上区 \\(0 \\leq x \\leq 0.6\\) m, \\(0 \\leq y \\leq 0.6\\) m, \\(B_A\\) <strong>出纸面</strong>; 下区 \\(0 \\leq x \\leq 0.6\\) m, \\(-0.6 \\leq y \\leq 0\\) m, \\(B_B\\) <strong>入纸面</strong>。两区 \\(|B| = 0.5\\) T。一<strong>正电粒子</strong>从左边界 \\((0, 0.3)\\) m 处沿 \\(+x\\) 方向射入上区, 速度 \\(v = 300\\) m/s, 比荷 \\(q/m = 2 \\times 10^3\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 460 420" xmlns="http://www.w3.org/2000/svg" width="460" height="420">
+  <text x="20" y="34" font-size="11" fill="#2c3e50">上区 B_A 出纸面 (⊙) · 下区 B_B 入纸面 (×) · 正电粒子 (比例 300 px/m)</text>
+  <rect x="80" y="20" width="180" height="180" fill="#eef5fc" stroke="#0055B8" stroke-width="1.5"/>
+  <text x="100" y="50" font-size="11" fill="#0055B8">⊙</text>
+  <text x="220" y="50" font-size="11" fill="#0055B8">⊙</text>
+  <text x="100" y="180" font-size="11" fill="#0055B8">⊙</text>
+  <text x="220" y="180" font-size="11" fill="#0055B8">⊙</text>
+  <text x="270" y="40" font-size="10" fill="#0055B8">B_A 出</text>
+  <rect x="80" y="200" width="180" height="180" fill="#fdeaea" stroke="#c0392b" stroke-width="1.5"/>
+  <text x="100" y="230" font-size="11" fill="#c0392b">×</text>
+  <text x="220" y="230" font-size="11" fill="#c0392b">×</text>
+  <text x="100" y="360" font-size="11" fill="#c0392b">×</text>
+  <text x="220" y="360" font-size="11" fill="#c0392b">×</text>
+  <text x="270" y="220" font-size="10" fill="#c0392b">B_B 入</text>
+  <line x1="80" y1="200" x2="260" y2="200" stroke="#5a6c7d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="60" y="204" font-size="10" fill="#5a6c7d">y=0</text>
+  <circle cx="80" cy="110" r="4" fill="#B8924A"/>
+  <text x="20" y="98" font-size="10" fill="#B8924A">入(0,0.3)</text>
+  <line x1="84" y1="110" x2="120" y2="110" stroke="#B8924A" stroke-width="2"/>
+  <polygon points="120,110 114,107 114,113" fill="#B8924A"/>
+  <text x="92" y="102" font-size="10" fill="#B8924A">v</text>
+  <path d="M 80 110 A 90 90 0 0 1 170 200" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="80" cy="200" r="2.5" fill="#B8924A" opacity="0.5"/>
+  <text x="50" y="218" font-size="9" fill="#B8924A">圆心(0,0)</text>
+  <circle cx="170" cy="200" r="3.5" fill="#e67e22"/>
+  <text x="178" y="194" font-size="10" fill="#e67e22">跨界 (0.3, 0)</text>
+  <path d="M 170 200 A 90 90 0 0 0 260 290" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="260" cy="200" r="2.5" fill="#c0392b" opacity="0.5"/>
+  <text x="265" y="195" font-size="9" fill="#c0392b">圆心(0.6,0)</text>
+  <circle cx="260" cy="290" r="4" fill="#9b59b6"/>
+  <text x="270" y="310" font-size="10" fill="#9b59b6">出 (0.6, -0.3)</text>
+  <line x1="264" y1="290" x2="300" y2="290" stroke="#9b59b6" stroke-width="2"/>
+  <polygon points="300,290 294,287 294,293" fill="#9b59b6"/>
+  <text x="306" y="294" font-size="10" fill="#9b59b6">v_out=+x</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子在两区做圆周运动的共同半径 \\(r\\); 给出上区圆心位置(粒子从入射点向哪个方向偏)。</li>
+  <li><strong>(15 分)</strong> 求粒子在上区到达边界 \\(y = 0\\)(跨入下区)的位置和速度方向; 求下区的圆心位置。</li>
+  <li><strong>(10 分)</strong> 求粒子在下区从哪个边界出射, 出射位置坐标和出射速度方向。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.3","顺时针","上区圆心","(0,0)","跨界点","(0.3,0)","下区圆心","(0.6,0)","逆时针","+x"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 跨界时<strong>速度方向连续但圆心瞬变</strong>(因新区 B 方向不同)。每个区分别用 r 与 B 方向定圆心 + 算交边界。',
+      approach:'<strong>解题思路</strong>: ① 算 r 与上区圆心。② 算上区轨迹与 \\(y = 0\\) 的交点 + 速度方向。③ 在下区重新算圆心(用新速度方向 + 新 B 方向)。④ 算下区轨迹与边界的交点。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{300}{2 \\times 10^3 \\times 0.5} = 0.3\\) m。<br>上区: 正电 + B 出纸面 → 顺时针, 圆心 = 入射点 + r·(v 顺时针 90°) = \\((0, 0.3) + 0.3(0, -1) = (0, 0)\\)。<br><strong>(2)</strong> 上区轨迹: \\(x^2 + y^2 = 0.09\\)。求与 \\(y = 0\\)(下区边界)交点: \\(x^2 = 0.09 \\to x = 0.3\\)(取正, 顺时针从 (0, 0.3) 到 (0.3, 0))。跨界点 \\((0.3, 0)\\) m。<br>速度方向: 在 \\((0.3, 0)\\), 半径向量 (0.3, 0) (从圆心(0,0)→粒子), 顺时针切线 = 半径转 \\(-90°\\) = \\((0, -0.3)\\) 单位化 = \\(-y\\)。所以跨界时速度沿 \\(-y\\), 大小 v=300 m/s。<br>下区: 正电 + B 入纸面 → 逆时针, 圆心 = 跨界点 + r·(v 逆时针 90°)。v = -y 方向, 逆时针 90° 后 = \\(+x\\)。圆心 = \\((0.3, 0) + 0.3 \\cdot (1, 0) = (0.6, 0)\\) m。<br><strong>(3)</strong> 下区轨迹: \\((x - 0.6)^2 + y^2 = 0.09\\)。<br>求与右边界 \\(x = 0.6\\) (出射候选): \\(y^2 = 0.09 \\to y = \\pm 0.3\\)。粒子从 \\((0.3, 0)\\) 逆时针进入下区 → \\(y\\) 减小 → 取 \\(y = -0.3\\)。出射点 \\((0.6, -0.3)\\) m, 在下区右边界。<br>出射方向: 在 \\((0.6, -0.3)\\), 半径向量 (从圆心 (0.6, 0) 到 (0.6, -0.3)) = \\((0, -0.3) = -y\\)。逆时针切线 = 转 \\(+90°\\) = \\(+x\\)。出射速度沿 \\(+x\\), 大小 v=300 m/s。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么跨界时"速度连续但圆心跳变"?',
+      '我答错是因为: □ 跨界没重算圆心 □ 上区与下区方向(顺/逆)颠倒 □ 出射边界识别错 □ 出射速度方向忘了切线垂直半径',
+      '类似题目我之后该如何识别?(关键字"两区相邻""方向相反""跨界")',
+      '对应高考 14 题位 13-14 分, 哪些步骤可以在 15 分钟内完成?哪些是失分点?'
+    ]
+  },
+  { id:"T3-4", type:"short", score:35, difficulty:"高", exportIds:["KP-T3"],
+    stem:`<p>(14 题位升级仿 · 变体 4 · 反射板 + 弹性反弹)\\(xy\\) 平面 \\(x \\geq 0\\) 半平面内整个区域为<strong>方向出纸面</strong>的匀强磁场, 磁感应强度 \\(B = 0.5\\) T; \\(x < 0\\) 区域无场。在 \\(x = 0.4\\) m 处有一固定垂直反射板(\\(y\\) 方向延伸, 完全弹性反射: \\(v_x \\to -v_x\\), \\(v_y\\) 不变)。一<strong>正电粒子</strong>从原点 \\(O(0, 0)\\) 沿 \\(+x\\) 方向射入磁场区, 速度 \\(v = 2500\\) m/s, 比荷 \\(q/m = 10^4\\) C/kg。不计重力。求:</p>
+<svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg" width="460" height="360">
+  <text x="20" y="34" font-size="11" fill="#0055B8">B 出纸面 (x≥0 半平面) · 反射板 x=0.4 · 正电粒子 (比例 450 px/m)</text>
+  <rect x="80" y="60" width="320" height="290" fill="#eef5fc" stroke="#0055B8" stroke-width="0.8"/>
+  <text x="120" y="80" font-size="11" fill="#0055B8">⊙</text>
+  <text x="220" y="80" font-size="11" fill="#0055B8">⊙</text>
+  <text x="350" y="80" font-size="11" fill="#0055B8">⊙</text>
+  <text x="120" y="340" font-size="11" fill="#0055B8">⊙</text>
+  <text x="350" y="340" font-size="11" fill="#0055B8">⊙</text>
+  <line x1="260" y1="60" x2="260" y2="350" stroke="#5a6c7d" stroke-width="3"/>
+  <text x="276" y="74" font-size="11" fill="#5a6c7d">反射板 x=0.4</text>
+  <line x1="80" y1="120" x2="400" y2="120" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <line x1="80" y1="60" x2="80" y2="350" stroke="#7f8c8d" stroke-width="0.8" stroke-dasharray="3,2"/>
+  <text x="38" y="124" font-size="10" fill="#7f8c8d">y=0</text>
+  <text x="404" y="124" font-size="10" fill="#7f8c8d">x</text>
+  <circle cx="80" cy="120" r="4" fill="#B8924A"/>
+  <text x="46" y="114" font-size="10" fill="#B8924A">O</text>
+  <line x1="84" y1="120" x2="114" y2="120" stroke="#B8924A" stroke-width="2"/>
+  <polygon points="114,120 108,117 108,123" fill="#B8924A"/>
+  <text x="88" y="112" font-size="10" fill="#B8924A">v</text>
+  <path d="M 80 120 A 225 225 0 0 1 260 210" fill="none" stroke="#B8924A" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="260" cy="210" r="3.5" fill="#e67e22"/>
+  <text x="276" y="204" font-size="10" fill="#e67e22">碰板 (0.4,-0.2)</text>
+  <path d="M 260 210 A 225 225 0 0 1 80 300" fill="none" stroke="#c0392b" stroke-width="1.8" stroke-dasharray="4,3"/>
+  <circle cx="80" cy="300" r="4" fill="#9b59b6"/>
+  <text x="92" y="324" font-size="10" fill="#9b59b6">出 (0,-0.4)</text>
+  <line x1="76" y1="300" x2="46" y2="300" stroke="#9b59b6" stroke-width="2"/>
+  <polygon points="46,300 52,297 52,303" fill="#9b59b6"/>
+  <text x="20" y="294" font-size="10" fill="#9b59b6">v_out=-x</text>
+</svg>
+<ol>
+  <li><strong>(10 分)</strong> 求粒子做圆周运动的半径 \\(r\\), 写出初始圆心位置 + 顺时针方向判定。</li>
+  <li><strong>(15 分)</strong> 求粒子第一次碰到反射板的位置 \\((0.4, y_1)\\) 和碰板瞬间的速度分量; 验证粒子轨迹能触及反射板。</li>
+  <li><strong>(10 分)</strong> 反射后粒子继续在 B 中做圆周运动; 求粒子最终从 \\(y\\) 轴(\\(x = 0\\))离开磁场区的位置和速度方向。</li>
+</ol>`,
+    keywords:["r=mv/(qB)","0.5","顺时针","圆心","碰板","(0.4,-0.2)","反射","新圆心","(0,0.1)","出射","(0,-0.4)","-x"],
+    explanation:{
+      knowledge:'<strong>核心知识点</strong>: 反射板完全弹性 → \\(v_x\\) 反号, \\(v_y\\) 不变, 即<strong>速度方向相对垂直反射板镜像</strong>。反射后<strong>在 B 中重新画圆心</strong>(用新速度方向 + 同样的洛伦兹力规则)。',
+      approach:'<strong>解题思路</strong>: ① \\(r\\) + 初始圆心。② 圆与 \\(x = 0.4\\) 求交点 + 切线速度。③ 反射: \\((v_x, v_y) \\to (-v_x, v_y)\\)。④ 新位置 + 新速度方向 → 新圆心(同 B 出纸面, 顺时针, 圆心 = 位置 + r·(v 顺时针 90°))。⑤ 算与 \\(x = 0\\) 的交点。',
+      solution:'<strong>(1)</strong> \\(r = \\dfrac{v}{(q/m)B} = \\dfrac{2500}{10^4 \\times 0.5} = 0.5\\) m。<br>初始圆心: 正电 + B 出纸面 → 顺时针, 圆心 = \\((0, 0) + 0.5 \\cdot (0, -1) = (0, -0.5)\\) m。<br><strong>(2)</strong> 初始轨迹: \\(x^2 + (y + 0.5)^2 = 0.25\\)。与 \\(x = 0.4\\) 的交点: \\(0.16 + (y + 0.5)^2 = 0.25 \\to (y + 0.5)^2 = 0.09 \\to y + 0.5 = \\pm 0.3\\) → \\(y = -0.2\\) 或 \\(y = -0.8\\)。<br>顺时针从 \\((0, 0)\\) 出发先到 \\(y = -0.2\\): 碰板点 \\((0.4, -0.2)\\) m。验证 \\(r = 0.5 > 0.4\\) ✓ 轨迹能触及反射板。<br>碰板瞬间速度方向: 半径向量 (从圆心 \\((0, -0.5)\\) 到 \\((0.4, -0.2)\\)) = \\((0.4, 0.3)\\), 模长 0.5 ✓。顺时针切线 = 半径转 \\(-90°\\) = \\((0.3, -0.4)\\)。单位化乘 v: \\(\\vec v_{碰} = v \\cdot (0.3/0.5, -0.4/0.5) = 2500 \\cdot (0.6, -0.8) = (1500, -2000)\\) m/s。<br><strong>(3)</strong> 反射: \\(v_x \\to -v_x\\), 新速度 \\((-1500, -2000)\\) m/s。新单位方向 \\((-0.6, -0.8)\\)。<br>新圆心: 正电 + B 出纸面顺时针, 圆心 = 位置 + r·(v 顺时针 90°)。<br>v_new 单位向量 \\((-0.6, -0.8)\\) 顺时针 90° (旋转 \\(-90°\\)): \\((-0.8, 0.6)\\)。新圆心 = \\((0.4, -0.2) + 0.5 \\cdot (-0.8, 0.6) = (0, 0.1)\\) m。<br>新轨迹: \\(x^2 + (y - 0.1)^2 = 0.25\\)。与 \\(x = 0\\) (y 轴)交点: \\((y - 0.1)^2 = 0.25 \\to y = 0.1 \\pm 0.5\\) → \\(y = 0.6\\) 或 \\(y = -0.4\\)。<br>反射后顺时针从 \\((0.4, -0.2)\\) 继续运动 (新 v 沿左下方), 应取下方的 \\(y = -0.4\\): 出射点 \\((0, -0.4)\\) m。<br>出射速度方向: 半径向量 (从圆心 \\((0, 0.1)\\) 到 \\((0, -0.4)\\)) = \\((0, -0.5) = -y\\)。顺时针切线 = 转 \\(-90°\\) = \\((-0.5, 0)\\) 单位化 = \\(-x\\)。出射速度沿 \\(-x\\), 大小 v = 2500 m/s。'
+    },
+    reflectionPrompts:[
+      '这道题的核心结论是什么?为什么"反射后必须重新画圆心"?',
+      '我答错是因为: □ 碰板速度方向算错 □ 反射后 v_x 没反号 □ 新圆心没用顺时针 90° □ 出射点选错根',
+      '类似题目我之后该如何识别?(关键字"反射板""完全弹性""碰板""反弹后")',
+      '对应高考 14 题位 14 分压轴, 哪些步骤可以在 18 分钟内完成?哪些是失分点?'
+    ]
+  }
+]
+
+};
+// END QUESTION_BANK
+
+let selectedQuestions = [];
+let studentName = "student";
+
+const SLUG = "gaokao-14-charge-in-magnetic-field";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    const _freqText = String(t.examFreq || "");
+    const _freqClass = (_freqText.indexOf("压轴") >= 0 || _freqText.indexOf("高频") >= 0 || _freqText.indexOf("主战场") >= 0) ? "freq-high"
+                     : (_freqText.indexOf("常考") >= 0 || _freqText.indexOf("中频") >= 0) ? "freq-mid"
+                     : "freq-low";
+    html += `<div class="kp-item ${_freqClass}">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = "综合大题";
+    const compositeTag = '<span class="q-meta composite">综合大题</span>';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <div class="q-header-circle">
+          <div class="q-line-no">第 ${n} 题</div>
+          <div class="q-line-type">${typeTag}</div>
+          <div class="q-line-diff">难度 · ${q.difficulty}</div>
+          <div class="q-line-id">${q.id}</div>
+        </div>
+      </div>
+      <div class="q-score">${q.score} 分</div>
+      <div class="q-prompt">${q.stem}</div>
+      <textarea class="q-short-input" rows="12" data-q-id="q${n}" placeholder="请分小问作答(每小问 100-200 字, 含 r=mv/(qB) / 圆心定位 / 弦切几何 等关键方程 + 数值结果 + 单位)"></textarea>
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+    if (el) el.addEventListener("input", updateAnsweredCount);
+  });
+}
+
+function collectAnswer(idx) {
+  const qid = `q${idx+1}`;
+  return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+  const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+  const ratio = hits.length / q.keywords.length;
+  let score = 0;
+  if (ratio >= 1.0) score = q.score;
+  else if (ratio >= 0.5) score = Math.round(q.score * 0.5);
+  return { score, isCorrect: ratio >= 1.0, hits, partial: ratio >= 0.5 && ratio < 1.0 };
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a && a.length > 0) answered++;
+  });
+  if (answered < 2) { if (!confirm(`已答 ${answered} / 3 题(< 67%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回 task-cards 复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "var(--gold-700)" : (passed ? "var(--blue-700)" : "var(--silver-700)");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  const stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  const explanationHtml =
+    `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+    `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+    `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="gaokao-14-charge-in-magnetic-field-task-cards.html">学习任务卡</a> 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7B8290;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+</body>
+</html>

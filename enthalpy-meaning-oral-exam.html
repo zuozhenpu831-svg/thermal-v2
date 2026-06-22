@@ -5,51 +5,568 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>焓与焓变的意义 · 深度口试 · 题库 · 蓝色诺瓦学院</title>
 <style>
+  /* ===== 蓝色诺瓦 · oral-exam 视觉系统 v0.1.7 ===== */
+  /* 真理源：task-cards v3 三色制（蓝 / 金 / 银）· 圆形锚点 · 大留白 */
+  :root {
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #7B8290;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
-  .container { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
-  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 14px; }
-  header.page-header { background: linear-gradient(135deg, #5A4BD1, #6C5CE7, #8B7CF0); color: white; padding: 32px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 4px 16px rgba(0,64,154,0.15); }
-  header.page-header h1 { margin: 0 0 8px; font-size: 26px; font-weight: 600; }
-  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
-  .intro-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #00409A; }
-  .intro-card h2 { color: #00409A; font-size: 19px; margin-bottom: 12px; }
-  .intro-card p { font-size: 14.5px; margin-bottom: 10px; color: #2c3e50; }
-  .intro-card p:last-child { margin-bottom: 0; }
-  .intro-card .key { background: #e8f0fe; color: #00409A; padding: 12px 16px; border-radius: 8px; font-size: 14px; margin-top: 12px; }
-  .section-card { background: white; border-radius: 12px; padding: 24px 28px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .section-card h2 { color: #00409A; font-size: 19px; margin-bottom: 14px; }
-  .section-card h2 .tag { font-size: 12px; background: #e8f0fe; color: #0055B8; border-radius: 10px; padding: 2px 10px; vertical-align: middle; margin-left: 8px; font-weight: 500; }
-  .flow-bar { display: flex; flex-wrap: wrap; gap: 10px; }
-  .flow-step { flex: 1; min-width: 180px; background: #f8f9fb; border-top: 4px solid #0055B8; border-radius: 8px; padding: 12px 14px; font-size: 13.5px; }
-  .flow-step .ft { font-weight: 600; color: #00409A; font-size: 14px; }
-  .flow-step .fm { color: #e67e22; font-weight: 600; font-size: 12px; }
-  .listen-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  .listen-table th, .listen-table td { border: 1px solid #e3e8ee; padding: 7px 10px; text-align: left; vertical-align: top; }
-  .listen-table th { background: #e8f0fe; color: #00409A; font-weight: 600; }
-  .listen-table td.cat { background: #f8f9fb; font-weight: 600; color: #5a6c7d; white-space: nowrap; }
-  .lp { background: #e8f5e9; color: #2e7d32; padding: 2px 9px; border-radius: 4px; font-size: 12.5px; margin: 2px 3px 2px 0; display: inline-block; }
-  .lp.core { background: #d8eedc; font-weight: 600; border: 1px solid #2e7d32; }
-  .lp.boundary-lp { background: #f0f0f5; color: #6a1b9a; border: 1px dashed #9b8bc4; }
-  .core-star { color: #d4af37; }
-  .qline { background: white; border-radius: 12px; padding: 22px 26px; margin-bottom: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 5px solid #0055B8; }
-  .qline-header { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-  .qline-header h3 { font-size: 17px; color: #00409A; flex: 1; }
-  .qline-num { background: #00409A; color: white; border-radius: 6px; padding: 3px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
-  .qline-time { font-size: 12px; color: #7f8c8d; white-space: nowrap; }
-  .main-q { background: #e8f0fe; border-left: 4px solid #0055B8; border-radius: 8px; padding: 13px 16px; font-size: 15px; margin-bottom: 12px; }
-  .main-q .mq-tag { font-weight: 600; color: #00409A; }
-  .key-points { font-size: 14px; }
-  .key-points .kp-title { font-weight: 600; color: #2e7d32; margin-bottom: 6px; }
-  .key-points li { margin: 5px 0 5px 18px; }
-  .prep-card { background: #fffbea; border-left: 4px solid #d4af37; border-radius: 8px; padding: 18px 22px; margin-top: 14px; font-size: 14px; }
-  .prep-card h3 { color: #9a7a00; font-size: 16px; margin-bottom: 8px; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 820px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb strong { color: var(--text-primary); }
+
+  /* ===== Header · 极简化 · 大金圆作为视觉锚（与 task-cards 共用） ===== */
+  header.page-header {
+    text-align: center;
+    padding: 64px 32px 56px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  header.page-header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  header.page-header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  header.page-header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  header.page-header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== Intro / Section card · 蓝边引导块 ===== */
+  .intro-card,
+  .section-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 36px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--blue-700);
+  }
+  .intro-card h2,
+  .section-card h2 {
+    color: var(--blue-700);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--silver-100);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .intro-card h2::before,
+  .section-card h2::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .section-card h2 .tag {
+    font-size: 0.72rem;
+    background: var(--blue-050);
+    color: var(--blue-700);
+    border-radius: 999px;
+    padding: 3px 12px;
+    vertical-align: middle;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-left: auto;
+  }
+  .intro-card p,
+  .section-card p { font-size: 0.94rem; margin-bottom: 12px; line-height: 1.85; color: var(--text-primary); }
+  .intro-card p:last-child,
+  .section-card p:last-child { margin-bottom: 0; }
+  .intro-card .key {
+    background: var(--blue-050);
+    color: var(--blue-700);
+    padding: 16px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-top: 16px;
+    border-left: 3px solid var(--blue-700);
+  }
+
+  /* ===== Flow bar · 4 阶段水平 pill 行（v0.1.7：去除圆形，圆形语义专属主问题标题） =====
+     · 横向 pill / 数字小角标 + 标题 + 时段
+     · 节奏色统一中性蓝（蓝品牌色淡底），不再做循环色（循环色给 qline 用） */
+  .flow-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px 0;
+  }
+  .flow-step {
+    flex: 1 1 auto;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-sm);
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-left: 3px solid var(--blue-700);
+    box-shadow: none;
+    box-sizing: border-box;
+    padding: 14px 18px;
+    display: block;
+    text-align: left;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--text-primary);
+  }
+  .flow-step .ft {
+    display: inline-block;
+    font-weight: 700;
+    color: var(--blue-700);
+    font-size: 0.9rem;
+    margin-right: 10px;
+    letter-spacing: 0.02em;
+    line-height: 1.4;
+    border: none;
+    padding: 0;
+    border-bottom: none;
+  }
+  .flow-step .fm {
+    display: inline-block;
+    color: var(--silver-700);
+    font-weight: 600;
+    font-size: 0.78rem;
+    margin: 0 12px 0 0;
+    padding: 2px 10px;
+    border-bottom: none;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--silver-100);
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== 听点矩阵 · 金/银双圆等级（语义=等级，独立于主问题循环色） ===== */
+  .listen-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.88rem;
+    margin-top: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  .listen-table th,
+  .listen-table td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.75;
+  }
+  .listen-table tr:last-child th,
+  .listen-table tr:last-child td { border-bottom: none; }
+  .listen-table th {
+    background: var(--blue-050);
+    color: var(--blue-700);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  .listen-table td.cat {
+    background: var(--bg-secondary);
+    font-weight: 600;
+    color: var(--silver-900);
+    white-space: nowrap;
+  }
+  .lp {
+    background: var(--silver-050);
+    color: var(--silver-900);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    margin: 3px 4px 3px 0;
+    display: inline-block;
+    line-height: 1.6;
+    border: 1px solid var(--silver-100);
+  }
+  .lp.core {
+    background: var(--gold-050);
+    color: var(--gold-900);
+    font-weight: 600;
+    border: 1px solid var(--gold-500);
+  }
+  .lp.boundary-lp {
+    background: var(--silver-050);
+    color: var(--silver-900);
+    border: 1px dashed var(--silver-500);
+  }
+  /* 金圆 = core ⭐⭐ · 银圆 = boundary ⭐ */
+  .core-star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    font-size: 0.62rem;
+    font-weight: 700;
+    margin-right: 4px;
+    vertical-align: middle;
+    box-shadow: 0 0 0 2px var(--gold-100);
+  }
+  .lp.boundary-lp .core-star {
+    background: var(--silver-700);
+    box-shadow: 0 0 0 2px var(--silver-100);
+  }
+
+  /* ===== qline · 主问题块 · v0.1.7：循环色 + 大圆标题 =====
+     真理源：task-cards STEP 模式（蓝→金→银 按主问题序号 :nth-of-type(3n+1/2/0)）
+     每个 qline 注入 --q-rich/-mid/-bg/-tint 4 变量 · 全部子元素跟随
+     圆形语义 = 主问题标题，不是 flow-step（v0.1.6 错位修复） */
+  .qline {
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 32px 36px 32px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--q-mid);
+  }
+  /* 显式色类（Python 推送时按主问题序号循环 1→蓝 / 2→金 / 3→银 / 4→蓝 ...）
+     不用 :nth-of-type 因为 section-card / intro-card 也是 <section>，会被一起计数 */
+  .qline.q-blue {
+    --q-rich: var(--blue-900); --q-mid: var(--blue-700);
+    --q-bg: var(--blue-050); --q-tint: var(--blue-100);
+  }
+  .qline.q-gold {
+    --q-rich: var(--gold-900); --q-mid: var(--gold-700);
+    --q-bg: var(--gold-050); --q-tint: var(--gold-100);
+  }
+  .qline.q-silver {
+    --q-rich: var(--silver-900); --q-mid: var(--silver-700);
+    --q-bg: var(--silver-050); --q-tint: var(--silver-100);
+  }
+
+  /* qline-header → 大圆 220×220 · 居中布局：编号 / 标题 / 时长 */
+  .qline-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: var(--q-bg);
+    border: 2px solid var(--q-mid);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 28px 24px;
+    margin: 0 auto 28px;
+    text-align: center;
+    gap: 0;
+    flex-wrap: nowrap;
+  }
+  /* qline-num → 圆顶部小字（"主问题 N"） */
+  .qline-num {
+    background: transparent;
+    color: var(--q-mid);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    display: inline-block;
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1.2;
+    padding: 0 0 8px;
+    margin: 0 0 12px;
+    letter-spacing: 0.22em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: none;
+    border-bottom: 1.5px solid var(--q-mid);
+  }
+  .qline-header h3 {
+    font-size: 1rem;
+    color: var(--q-rich);
+    flex: 0 1 auto;
+    min-width: 0;
+    font-weight: 700;
+    line-height: 1.55;
+    text-align: center;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 12px;
+  }
+  .qline-time {
+    font-size: 0.74rem;
+    color: var(--q-mid);
+    white-space: nowrap;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+    margin-top: 4px;
+    opacity: 0.85;
+    letter-spacing: 0.04em;
+  }
+
+  /* main-q 主问句 → 跟随 qline 循环色 */
+  .main-q {
+    background: var(--q-bg);
+    border-left: 3px solid var(--q-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 18px 22px;
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+    line-height: 1.85;
+    color: var(--text-primary);
+  }
+  .main-q .mq-tag { font-weight: 700; color: var(--q-mid); }
+
+  .key-points { font-size: 0.92rem; }
+  .key-points .kp-title {
+    font-weight: 700;
+    color: var(--q-rich);
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+  }
+  .key-points ul { padding-left: 4px; list-style: none; }
+  .key-points li {
+    margin: 8px 0;
+    line-height: 1.8;
+    padding-left: 0;
+  }
+
+  /* ===== prep-card · v0.1.7：跟随当前 qline 循环色（不再永远金） =====
+     prep-card 通常嵌套在 qline 之外作为该 qline 的辅助 → 若直接子元素位于 qline 内则用 var(--q-*)
+     若在 qline 外作为顶层辅助（如全篇唯一备考卡片）→ fallback 金（保留旧行为兼容） */
+  .qline .prep-card,
+  .prep-card {
+    background: var(--q-bg, var(--gold-050));
+    border: none;
+    border-left: 3px solid var(--q-mid, var(--gold-700));
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 28px 32px 28px 64px;
+    margin: 24px 0;
+    font-size: 0.92rem;
+    line-height: 1.85;
+    color: var(--text-primary);
+    position: relative;
+  }
+  .qline .prep-card::before,
+  .prep-card::before {
+    content: "📝";
+    position: absolute;
+    left: 18px;
+    top: 26px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--q-mid, var(--gold-700));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.88rem;
+  }
+  .qline .prep-card h3,
+  .prep-card h3 {
+    color: var(--q-rich, var(--gold-900));
+    font-size: 1.02rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+  }
+  .qline .prep-card ul,
   .prep-card ul { margin-left: 22px; }
-  .prep-card li { margin: 5px 0; }
-  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; padding: 18px 24px; background: white; border-radius: 10px; }
-  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #e8f0fe; color: #0055B8; text-decoration: none; font-size: 14px; font-weight: 500; transition: background 0.2s; }
-  .bottom-nav a:hover { background: #d7e6fc; }
-  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 16px; }
+  .qline .prep-card li,
+  .prep-card li { margin: 8px 0; line-height: 1.85; }
+  .qline .prep-card strong { color: var(--q-rich, var(--gold-900)); }
+  .prep-card strong { color: var(--gold-900); }
+
+  /* ===== CTA section（申请口试 / 申诉等） · 圆形胶囊按钮 · 蓝品牌色 ===== */
+  body .container .section-card form button[type="submit"],
+  body .container .section-card button.cta-btn {
+    background: var(--blue-700);
+    background-image: none;
+    color: #fff;
+    border: none;
+    padding: 14px 28px;
+    font-size: 0.92rem;
+    border-radius: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(0,64,154,0.18);
+    transition: var(--transition);
+    letter-spacing: 0.02em;
+    font-family: inherit;
+  }
+  body .container .section-card form button[type="submit"]:hover,
+  body .container .section-card button.cta-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,64,154,0.24);
+  }
+
+  /* details / summary 通用美化 */
+  details {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm);
+    padding: 14px 18px;
+    margin: 14px 0;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--blue-700);
+    font-size: 0.95rem;
+  }
+
+  /* ===== bottom-nav · 圆角胶囊 ===== */
+  .bottom-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+    padding: 22px 24px;
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+  }
+  .bottom-nav a,
+  .bottom-nav span {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    padding: 12px 16px;
+    border-radius: 999px;
+    background: var(--blue-050);
+    color: var(--blue-700);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 1px solid var(--blue-100);
+  }
+  .bottom-nav a:hover {
+    background: var(--blue-100);
+    border-color: var(--blue-500);
+  }
+
+  footer {
+    text-align: center;
+    color: var(--silver-700);
+    font-size: 0.78rem;
+    padding: 24px 16px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== 移动端 ===== */
+  @media (max-width: 640px) {
+    .container { padding: 20px 14px 40px; }
+    header.page-header { padding: 44px 22px 36px; }
+    header.page-header h1 { font-size: 1.25rem; }
+    .intro-card, .section-card, .qline { padding: 24px 22px; }
+    .qline-header { width: 200px; height: 200px; padding: 22px 18px; }
+    .qline-num { font-size: 0.66rem; padding: 0 0 6px; margin: 0 0 10px; }
+    .qline-header h3 { font-size: 0.9rem; margin-bottom: 10px; }
+    .qline-time { font-size: 0.68rem; }
+    .flow-step { padding: 12px 14px; font-size: 0.84rem; }
+    .flow-step .ft { font-size: 0.84rem; }
+    .flow-step .fm { font-size: 0.72rem; }
+    .prep-card { padding: 22px 20px 22px 56px; }
+    .prep-card::before { left: 14px; top: 22px; }
+  }
+
 </style>
 </head>
 
@@ -64,6 +581,8 @@
 </header>
 
 <div id="user-bar"></div>
+
+
 
 <section class="intro-card">
   <h2>关于深度口试</h2>
@@ -83,7 +602,7 @@
 </section>
 
 <!-- ==================== 主问题 1 ==================== -->
-<section class="qline">
+<section class="qline q-blue">
   <div class="qline-header">
     <span class="qline-num">主问题 1</span>
     <h3>Q 不是状态函数 · 假想热含量反例</h3>
@@ -102,7 +621,7 @@
 </section>
 
 <!-- ==================== 主问题 2 ==================== -->
-<section class="qline">
+<section class="qline q-gold">
   <div class="qline-header">
     <span class="qline-num">主问题 2</span>
     <h3>H ≡ U + PV · 为什么这个组合是状态函数</h3>
@@ -121,7 +640,7 @@
 </section>
 
 <!-- ==================== 主问题 3 ==================== -->
-<section class="qline">
+<section class="qline q-silver">
   <div class="qline-header">
     <span class="qline-num">主问题 3</span>
     <h3>反向推理 · 恒压下 ΔH = Q_p 怎么逼出来的</h3>
@@ -142,7 +661,7 @@
 </section>
 
 <!-- ==================== 主问题 4 ==================== -->
-<section class="qline">
+<section class="qline q-blue">
   <div class="qline-header">
     <span class="qline-num">主问题 4</span>
     <h3>符号双视角 · +74 kJ 与 ΔH = −74 kJ/mol</h3>
@@ -162,7 +681,7 @@
 </section>
 
 <!-- ==================== 主问题 5 ==================== -->
-<section class="qline">
+<section class="qline q-gold">
   <div class="qline-header">
     <span class="qline-num">主问题 5</span>
     <h3>标准生成焓 · 海平面思路与可查表</h3>
@@ -182,7 +701,7 @@
 </section>
 
 <!-- ==================== 主问题 6 ==================== -->
-<section class="qline">
+<section class="qline q-silver">
   <div class="qline-header">
     <span class="qline-num">主问题 6</span>
     <h3>稳定性的相对性 · 边界守门</h3>
@@ -217,15 +736,15 @@
 
   <div id="my-applies-region"></div>
 
-  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+  <details open style="background:#F3F6FC;border:1px solid #E8EEF9;border-radius:8px;padding:14px 18px;margin:14px 0;">
     <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
-    <div id="apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <div id="apply-user-info" style="background:#FAFAFB;border-radius:4px;padding:8px 12px;font-size:13px;color:#7B8290;margin:10px 0;"></div>
     <form id="apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitApply();">
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#5C6370;">*</span></label><input type="text" id="apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
       <div style="margin-bottom:10px;">
-        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:6px;">期望时间段 <span style="color:#5C6370;">*</span></label>
         <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
-          <select id="apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+          <select id="apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
             <option value="">选择周几</option>
             <option value="周一">周一</option>
             <option value="周二">周二</option>
@@ -235,7 +754,7 @@
             <option value="周六">周六</option>
             <option value="周日">周日</option>
           </select>
-          <select id="apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+          <select id="apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
             <option value="">选择时间</option>
             <option value="08:30">08:30</option>
             <option value="09:00">09:00</option>
@@ -259,11 +778,11 @@
             <option value="18:00">18:00</option>
           </select>
         </div>
-        <input type="text" id="apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+        <input type="text" id="apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;">
       </div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选）</label><textarea id="apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
-      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="apply-confirm" required style="margin-top:3px;"><span>我已完成本板块的学习任务卡 + 基础检测 + 熟练度检测（如有）</span></label>
-      <button type="submit" id="apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">备注（可选）</label><textarea id="apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#7B8290;margin:10px 0;"><input type="checkbox" id="apply-confirm" required style="margin-top:3px;"><span>我已完成本板块的学习任务卡 + 基础检测 + 熟练度检测（如有）</span></label>
+      <button type="submit" id="apply-submit-btn">→ 提交申请</button>
     </form>
   </details>
 
@@ -277,8 +796,8 @@
   </ul>
 
   <details style="margin-top:10px;">
-    <summary style="cursor:pointer;font-weight:600;color:#5a6c7d;font-size:13.5px;">📨 备选：线下申请渠道</summary>
-    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#2c3e50;padding:8px 12px;background:#fafbfc;border-radius:4px;">
+    <summary style="cursor:pointer;font-weight:600;color:#7B8290;font-size:13.5px;">📨 备选：线下申请渠道</summary>
+    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#5C6370;padding:8px 12px;background:#FAFAFB;border-radius:4px;">
       <strong>📱 班级微信群</strong>：联系班主任 / 学科教师获取群二维码<br>
       <strong>👨‍🏫 当面找教师</strong>：教师答疑时段当面约时间<br>
       <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[申请口试]%20焓与焓变的意义" style="color:#0055B8;">📧 打开邮件客户端</a>
@@ -286,21 +805,21 @@
   </details>
 </section>
 
-<section class="section-card" style="border-left: 4px solid #27ae60;">
-  <h2 style="color: #1e8449;">📋 我的口试反馈</h2>
+<section class="section-card" style="border-left: 4px solid #B8924A;">
+  <h2 style="color: #B8924A;">📋 我的口试反馈</h2>
   <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有口试单</strong>（含初次判定 + 历次修订）。教师在教师页提交判定后会自动出现在这里。</p>
   <div id="my-receipts-region"></div>
-  <div style="font-size: 12px; color: #5a6c7d; margin-top: 10px; padding: 8px 12px; background: #f5f7fa; border-radius: 4px;">
+  <div style="font-size: 12px; color: #7B8290; margin-top: 10px; padding: 8px 12px; background: #F3F4F7; border-radius: 4px;">
     🚧 <strong>当前 demo</strong>：仅显示本浏览器 localStorage 内的口试单（教师端 + 学生端同一浏览器才能看到）。跨终端实时推送待 starmap 后端上线。
   </div>
 </section>
 
-<section class="section-card" style="border-left: 4px solid #8e44ad;">
-  <h2 style="color: #6c3483;">📩 申诉通道</h2>
+<section class="section-card" style="border-left: 4px solid #7B8290;">
+  <h2 style="color: #7B8290;">📩 申诉通道</h2>
   <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师给出的口试判定有异议，可以发起申诉。<strong>申诉将自动绑定你的登录账号</strong>。</p>
 
   <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
-    <li><strong>前置条件</strong>：已完成口试 + 收到教师口试单（含口试单 ID）<span style="color:#c0392b;">·未收到 = 请先「📅 申请口试」</span></li>
+    <li><strong>前置条件</strong>：已完成口试 + 收到教师口试单（含口试单 ID）<span style="color:#7B8290;">·未收到 = 请先「📅 申请口试」</span></li>
     <li><strong>时限</strong>：在收到口试单的 <strong>7 个工作日内</strong>提出</li>
     <li><strong>流程</strong>：教师收到申诉后，<strong>① 重新评估 → 出新口试单 v2/v3 ...</strong> 或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
     <li><strong>申诉不影响二试</strong>：选择直接二试不申诉，按约定时间再来一次即可</li>
@@ -308,35 +827,35 @@
 
   <div id="my-appeals-region"></div>
 
-  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
-    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
-    <div id="appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+  <details open style="background:#F3F4F7;border:1px solid #A8AEBC;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#7B8290;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="appeal-user-info" style="background:#FAFAFB;border-radius:4px;padding:8px 12px;font-size:13px;color:#7B8290;margin:10px 0;"></div>
     <form id="appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitAppeal();">
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">口试单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="appeal-receipt" required placeholder="如 OE-BASIC-20260613-160230-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;">
-      <div style="font-size:12px;color:#5a6c7d;margin-top:-4px;margin-bottom:10px;padding:8px 12px;background:#f5f7fa;border-radius:4px;line-height:1.7;">
-        <strong style="color:#6c3483;">ℹ️ 在哪查口试单 ID？</strong><br>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">口试单 ID <span style="color:#7B8290;">*</span></label><input type="text" id="appeal-receipt" required placeholder="如 OE-BASIC-20260613-160230-..." style="width:100%;padding:8px 10px;border:1px solid #A8AEBC;border-radius:4px;font-family:inherit;font-size:14px;">
+      <div style="font-size:12px;color:#7B8290;margin-top:-4px;margin-bottom:10px;padding:8px 12px;background:#F3F4F7;border-radius:4px;line-height:1.7;">
+        <strong style="color:#7B8290;">ℹ️ 在哪查口试单 ID？</strong><br>
         · 口试单 ID <strong>自动包含</strong>在教师发给你的反馈里（教师无需单独填写）<br>
         · 反馈通过 <strong>微信 / 邮件 / 纸面</strong> 发给你；ID 在反馈顶部，格式 <code style="background:white;padding:1px 5px;border-radius:3px;font-size:11.5px;">OE-{板块}-{日期}-{时间}-{你的账号}</code><br>
         · 遗失了？联系教师从「教师 portal · 📚 历史口试记录」一键重发<br>
         · 🚧 待 starmap 后端：学生端「我的口试单」可直接查询历史
       </div></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的主问题编号 <span style="color:#c0392b;">*</span></label><input type="text" id="appeal-qnum" required placeholder="如 主问题 3 / 主问题 5" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">当时我具体讲了什么 + 为什么认为判定有误 <span style="color:#c0392b;">*</span></label><textarea id="appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当时记录</option><option value="reexam">② 补讲后重判（约时间二次评估）</option></select></div>
-      <button type="submit" id="appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">有异议的主问题编号 <span style="color:#7B8290;">*</span></label><input type="text" id="appeal-qnum" required placeholder="如 主问题 3 / 主问题 5" style="width:100%;padding:8px 10px;border:1px solid #A8AEBC;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">当时我具体讲了什么 + 为什么认为判定有误 <span style="color:#7B8290;">*</span></label><textarea id="appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #A8AEBC;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">期望处理 <span style="color:#7B8290;">*</span></label><select id="appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #A8AEBC;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当时记录</option><option value="reexam">② 补讲后重判（约时间二次评估）</option></select></div>
+      <button type="submit" id="appeal-submit-btn">→ 提交申诉</button>
     </form>
   </details>
 
   <details style="margin-top:10px;">
-    <summary style="cursor:pointer;font-weight:600;color:#5a6c7d;font-size:13.5px;">📨 备选：线下申诉渠道</summary>
-    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#2c3e50;padding:8px 12px;background:#fafbfc;border-radius:4px;">
+    <summary style="cursor:pointer;font-weight:600;color:#7B8290;font-size:13.5px;">📨 备选：线下申诉渠道</summary>
+    <div style="margin-top:8px;font-size:13.5px;line-height:1.7;color:#5C6370;padding:8px 12px;background:#FAFAFB;border-radius:4px;">
       <strong>📱 班级微信群</strong>「[申诉] 口试单 ID · 主问题 N · 申诉理由」<br>
       <strong>👨‍🏫 当面找教师</strong>：带纸质口试单 + 想补讲的内容<br>
-      <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[口试申诉]%20焓与焓变的意义" style="color:#6c3483;">📧 打开邮件客户端</a>
+      <strong>📧 邮件</strong>：<a href="mailto:teacher@bluenova-academy.example?subject=[口试申诉]%20焓与焓变的意义" style="color:#7B8290;">📧 打开邮件客户端</a>
     </div>
   </details>
 
-  <div style="font-size: 13px; color: #6c3483; margin-top: 14px; padding: 12px 16px; background: #faf4fc; border-radius: 6px;">
+  <div style="font-size: 13px; color: #7B8290; margin-top: 14px; padding: 12px 16px; background: #F3F4F7; border-radius: 6px;">
     🚧 <strong>待完善（starmap 后端上线后启用）</strong>
     <ul style="margin: 6px 0 0 22px;">
       <li>① 真正的账号系统（统一身份认证 / SSO），跨终端登录态同步</li>
@@ -405,7 +924,7 @@
     if (!region) return;
     const u = getUser();
     if (u && u.role === "student") {
-      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+      region.innerHTML = '<div style="background:#FBF7EC;border-left:4px solid #B8924A;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#8E6E2E;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#7B8290;border:1px solid #7B8290;padding:4px 10px;border-radius: 16px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
     } else { region.innerHTML = ''; }
     // 更新 apply / appeal 表单的用户信息条
     ["apply-user-info", "appeal-user-info"].forEach(id => {
@@ -413,11 +932,11 @@
       if (!el) return;
       if (u) {
         el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
-        el.style.color = "#1e5a30";
-        el.style.background = "#e8f5e9";
+        el.style.color = "#8E6E2E";
+        el.style.background = "#FBF7EC";
       } else {
         el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
-        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+        el.style.color = "#7B8290"; el.style.background = "#FAFAFB";
       }
     });
     // 禁用 / 启用 提交按钮
@@ -503,10 +1022,10 @@
     const region = document.getElementById("my-applies-region");
     if (!region) return;
     if (myApplies.length === 0) { region.innerHTML = ""; return; }
-    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + myApplies.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    let html = '<div style="background:#FBF7EC;border-left:4px solid #B8924A;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#B8924A;">📤 你提交的申请（' + myApplies.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
     myApplies.forEach(a => {
       const statusLabel = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
-      html += '<li style="margin:4px 0;">' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+      html += '<li style="margin:4px 0;">' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#F3F4F7;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
     });
     html += '</ul></div>';
     region.innerHTML = html;
@@ -517,10 +1036,10 @@
     const region = document.getElementById("my-appeals-region");
     if (!region) return;
     if (myAppeals.length === 0) { region.innerHTML = ""; return; }
-    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + myAppeals.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    let html = '<div style="background:#F3F4F7;border-left:4px solid #7B8290;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#7B8290;">📤 你提交的申诉（' + myAppeals.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
     myAppeals.forEach(a => {
       const statusLabel = { pending: "⏳ 等待教师评估", approved: "✅ 已重判 v2", rejected: "❌ 已驳回" }[a.status] || a.status;
-      html += '<li style="margin:4px 0;">主问题 ' + escapeHtml(a.qnum) + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+      html += '<li style="margin:4px 0;">主问题 ' + escapeHtml(a.qnum) + ' · ' + statusLabel + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#F3F4F7;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
     });
     html += '</ul></div>';
     region.innerHTML = html;
@@ -532,7 +1051,7 @@
     const region = document.getElementById("my-receipts-region");
     if (!region) return;
     if (!u) {
-      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">请先登录查看你的口试反馈<br><small>（点上方申请/申诉表单的提交按钮也会自动弹登录）</small></div>';
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#7B8290;font-size:14px;background:#FAFAFB;border-radius:8px;">请先登录查看你的口试反馈<br><small>（点上方申请/申诉表单的提交按钮也会自动弹登录）</small></div>';
       return;
     }
     const myReceipts = [];
@@ -551,7 +1070,7 @@
       } catch (e) {}
     }
     if (myReceipts.length === 0) {
-      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;font-size:14px;background:#fafbfc;border-radius:8px;">👤 ' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无<strong>本板块</strong>口试反馈<br><small>教师在 portal 端为你完成口试并提交判定后会出现在此处</small></div>';
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#7B8290;font-size:14px;background:#FAFAFB;border-radius:8px;">👤 ' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无<strong>本板块</strong>口试反馈<br><small>教师在 portal 端为你完成口试并提交判定后会出现在此处</small></div>';
       return;
     }
     myReceipts.sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
@@ -559,18 +1078,18 @@
     myReceipts.forEach(sub => {
       const verdict = sub.verdict;
       const verdictLabel = { pass: '✅ 通过', defer: '⏸ 暂缓 · 补学后二试', fail: '❌ 不通过 · 重学' }[verdict] || verdict;
-      const verdictColor = { pass: '#27ae60', defer: '#e67e22', fail: '#c0392b' }[verdict] || '#5a6c7d';
-      const verdictBg = { pass: '#d4efdf', defer: '#fdebd0', fail: '#fadbd8' }[verdict] || '#ecf0f1';
+      const verdictColor = { pass: '#B8924A', defer: '#B8924A', fail: '#7B8290' }[verdict] || '#7B8290';
+      const verdictBg = { pass: '#F4ECD6', defer: '#F4ECD6', fail: '#E5E7EC' }[verdict] || '#F3F4F7';
       const picked = (sub.snapshot && sub.snapshot.picked) || [];
-      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="background:white;border:1px solid #F3F4F7;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
       html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
       html += '<span style="background:' + verdictBg + ';color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
-      html += '<span style="font-size:13px;color:#5a6c7d;">v' + sub.version + (sub.version > 1 ? '（修订）' : '') + ' · ' + new Date(sub.submittedAt).toLocaleString("zh-CN") + '</span>';
+      html += '<span style="font-size:13px;color:#7B8290;">v' + sub.version + (sub.version > 1 ? '（修订）' : '') + ' · ' + new Date(sub.submittedAt).toLocaleString("zh-CN") + '</span>';
       html += '</div>';
-      html += '<div style="font-size:12.5px;color:#5a6c7d;margin-bottom:8px;">口试单 ID：<code style="background:#f0f3f5;padding:2px 6px;border-radius:3px;font-size:11.5px;">' + escapeHtml(sub.receiptId || '—') + '</code></div>';
+      html += '<div style="font-size:12.5px;color:#7B8290;margin-bottom:8px;">口试单 ID：<code style="background:#F3F4F7;padding:2px 6px;border-radius:3px;font-size:11.5px;">' + escapeHtml(sub.receiptId || '—') + '</code></div>';
       html += '<details>';
-      html += '<summary style="cursor:pointer;font-size:13.5px;color:#0055B8;font-weight:500;">查看反馈详情</summary>';
-      html += '<div style="font-size:13px;color:#2c3e50;line-height:1.7;background:#fafbfc;padding:10px 14px;border-radius:6px;margin-top:8px;">';
+      html += '<summary style="cursor:pointer;font-size:13.5px;color:#7B8290;font-weight:500;">查看反馈详情</summary>';
+      html += '<div style="font-size:13px;color:#5C6370;line-height:1.7;background:#FAFAFB;padding:10px 14px;border-radius:6px;margin-top:8px;">';
       html += '<div style="margin:4px 0;"><strong>抽中主问题：</strong>' + (picked.length ? '主问题 ' + picked.join('、') : '—') + '</div>';
       if (sub.snapshot && sub.snapshot.statuses) {
         html += '<div style="margin:4px 0;"><strong>各主问题判定：</strong></div>';
@@ -594,7 +1113,7 @@
           html += '</ul>';
         }
       }
-      if (sub.revisionReason) html += '<div style="margin:8px 0;padding:8px 12px;background:#faf4fc;border-left:3px solid #8e44ad;border-radius:4px;"><strong>📨 修订原因（你的申诉详情）：</strong><br>' + escapeHtml(sub.revisionReason).replace(/\n/g, '<br>') + '</div>';
+      if (sub.revisionReason) html += '<div style="margin:8px 0;padding:8px 12px;background:#F3F4F7;border-left:3px solid #7B8290;border-radius:4px;"><strong>📨 修订原因（你的申诉详情）：</strong><br>' + escapeHtml(sub.revisionReason).replace(/\n/g, '<br>') + '</div>';
       html += '</div></details>';
       html += '</div>';
     });

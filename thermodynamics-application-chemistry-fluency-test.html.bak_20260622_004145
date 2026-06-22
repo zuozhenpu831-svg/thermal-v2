@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学应用 · 化学 · 熟练度检测(融合模块 · 题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 fluency-test · 三色制(蓝 / 金 / 银) · 圆形锚点 · 大留白 v0.1.6 ===== */
+  :root {
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ===== Banner ===== */
+  .v021-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .v021-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+  }
+  .v021-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  .cross-banner {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-banner::before {
+    content: "!";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-banner strong { color: var(--blue-700); }
+
+  /* ===== Header · 极简化 · 双大圆装饰锚 ===== */
+  header.page-header {
+    text-align: center;
+    padding: 56px 32px 48px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  header.page-header::before {
+    content: "";
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  header.page-header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  header.page-header h1 {
+    font-size: 1.45rem;
+    margin: 0 0 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+    position: relative; z-index: 1;
+  }
+  header.page-header .subtitle {
+    font-size: 0.9rem;
+    opacity: 1;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== Entry card · 顶部圆形 CTA ===== */
+  .entry-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    position: relative;
+  }
+  .entry-card h2 {
+    color: var(--blue-700);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .entry-card h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .entry-card p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.92rem; }
+  .entry-card input[type="text"] {
+    padding: 13px 20px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    font-size: 0.98rem;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .entry-card input[type="text"]:focus { outline: none; border-color: var(--blue-700); }
+  .entry-card .info-list {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    max-width: 760px;
+    margin: 22px auto;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    list-style: none;
+  }
+  .entry-card .info-list li { margin: 6px 0; padding-left: 22px; position: relative; }
+  .entry-card .info-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0.7em;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--silver-500);
+  }
+  .entry-card .info-list li strong { color: var(--blue-700); }
+
+  /* ===== 主按钮 · 普通圆角(不要圆形) ===== */
+  .btn-primary {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 16px 44px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); background: var(--blue-900); }
+
+  /* ===== Progress bar ===== */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 14px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .progress-bar-wrap .student,
+  .progress-bar-wrap .answered-count { color: var(--blue-700); font-weight: 700; }
+
+  /* ===== 题卡 · 大留白 · 按题号循环色(蓝→金→银) ===== */
+  .question {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+    border-top: 3px solid var(--q-mid);
+  }
+  .question:nth-of-type(3n+1) {
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+  }
+  .question:nth-of-type(3n+2) {
+    --q-rich: var(--gold-900);
+    --q-mid:  var(--gold-700);
+    --q-bg:   var(--gold-050);
+    --q-tint: var(--gold-100);
+  }
+  .question:nth-of-type(3n) {
+    --q-rich: var(--silver-900);
+    --q-mid:  var(--silver-700);
+    --q-bg:   var(--silver-050);
+    --q-tint: var(--silver-100);
+  }
+
+  /* ===== 题头大圆 · 220-240px · 4 行居中(第N题/题型/难度/编号) ===== */
+  .q-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--silver-100);
+  }
+  .q-header-circle {
+    background: var(--q-mid);
+    color: #fff;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    box-shadow: 0 0 0 8px var(--q-tint);
+    padding: 18px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  .q-header-circle .q-line-no {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .q-header-circle .q-line-type {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.95;
+    line-height: 1.3;
+  }
+  .q-header-circle .q-line-diff {
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.18);
+    padding: 4px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .q-header-circle .q-line-id {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .q-score { color: var(--silver-700); font-size: 0.85rem; font-weight: 500; margin: 8px 0 0; text-align: center; }
+  .q-prompt { font-size: 0.94rem; line-height: 1.9; margin-bottom: 20px; color: var(--text-primary); }
+  .q-prompt svg { display: block; margin: 14px auto; max-width: 100%; }
+  .q-prompt ol { margin: 10px 0 10px 24px; }
+  .q-prompt ol li { margin: 8px 0; }
+
+  .q-short-input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: var(--bg-secondary);
+    min-height: 240px;
+    transition: var(--transition);
+    color: var(--text-primary);
+  }
+  .q-short-input:focus { outline: none; border-color: var(--q-mid); background: #fff; box-shadow: 0 0 0 3px var(--q-tint); }
+
+  /* ===== Feedback · 题号循环色驱动 · 无绿无紫 ===== */
+  .q-feedback {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--q-bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--q-mid);
+  }
+  .q-feedback.correct { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.wrong { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.partial { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-result { font-weight: 700; font-size: 0.92rem; margin-bottom: 12px; color: var(--q-rich); }
+  .q-result.correct::before { content: "\2713  "; }
+  .q-result.partial::before { content: "\25D0  "; }
+  .q-result.wrong::before { content: "\2717  "; }
+  .q-fb-row { background: #fff; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-size: 0.88rem; color: var(--text-primary); }
+  .q-fb-row strong { color: var(--q-rich); }
+  .q-fb-row.q-fb-knowledge { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; }
+  .q-fb-row.q-fb-approach { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; opacity: 0.96; }
+  .q-fb-row.q-fb-solution { background: #fff; border: 1px solid var(--border-color); border-left: 3px solid var(--q-rich); padding: 14px 18px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; color: var(--text-primary); }
+  .q-export-label { background: var(--q-tint); color: var(--q-rich); padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; margin: 0 2px; display: inline-block; font-weight: 600; }
+  .q-anchor { font-size: 0.82rem; color: var(--text-secondary); padding-top: 10px; border-top: 1px solid var(--silver-100); margin-top: 12px; }
+  .q-anchor code { background: var(--q-tint); color: var(--q-rich); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: var(--q-mid); }
+
+  /* ===== Reflection · 跟随题号循环色 ===== */
+  .q-reflection {
+    margin-top: 20px;
+    padding: 22px 26px 22px 60px;
+    background: var(--q-bg);
+    border: none;
+    border-left: 3px solid var(--q-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    position: relative;
+  }
+  .q-reflection::before {
+    content: "\2197";
+    position: absolute;
+    left: 14px; top: 22px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--q-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .q-reflection-title { font-weight: 700; color: var(--q-rich); margin-bottom: 14px; font-size: 0.92rem; }
+  .q-reflection ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.85rem; color: var(--text-primary); }
+  .q-reflection ol li { margin: 5px 0; line-height: 1.8; }
+  .q-reflection-input {
+    width: 100%;
+    border: 1px solid var(--q-tint);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    background: #fff;
+    min-height: 110px;
+    color: var(--text-primary);
+  }
+  .q-reflection-input:focus { outline: none; border-color: var(--q-mid); box-shadow: 0 0 0 3px var(--q-tint); }
+  .q-reflection-hint { font-size: 0.78rem; color: var(--q-rich); margin-top: 8px; font-style: italic; opacity: 0.85; }
+
+  /* ===== Submit ===== */
+  .submit-area {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin: 36px 0 22px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .btn-submit {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 14px 44px;
+    border-radius: 16px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 0 0 6px var(--blue-100), var(--shadow-md);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+  }
+  .btn-submit:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: #fff;
+    color: var(--blue-700);
+    border: 1.5px solid var(--blue-700);
+    padding: 12px 28px;
+    margin: 6px;
+    font-size: 0.88rem;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .btn-secondary:hover { background: var(--blue-050); }
+
+  /* ===== Results ===== */
+  .results-summary {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+  .results-summary h2 {
+    margin: 0 0 22px;
+    color: var(--blue-700);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .results-summary h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .score-big {
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin: 14px 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .score-big.passed { color: var(--blue-700); }
+  .score-big.failed { color: var(--silver-700); }
+  .score-big.honored { color: var(--gold-700); }
+  .status { font-size: 0.95rem; margin: 10px 0 20px; }
+  .wrong-list { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; font-size: 0.88rem; color: var(--text-secondary); text-align: left; }
+  .wrong-list strong { color: var(--silver-900); }
+
+  /* ===== 考察点梳理 · kp-section ===== */
+  .kp-section {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    margin: 22px auto;
+    max-width: 800px;
+    text-align: left;
+    font-size: 0.85rem;
+  }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 700; color: var(--blue-700); display: flex; align-items: center; gap: 8px; font-size: 0.92rem; }
+  .kp-toggle::after { content: '▼'; font-size: 0.7rem; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 16px; }
+  .kp-intro {
+    background: var(--gold-050);
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    line-height: 1.85;
+    color: var(--gold-900);
+  }
+  .kp-intro strong { color: var(--gold-900); }
+  .kp-item {
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin: 14px 0;
+    border-left: 3px solid var(--blue-700);
+    box-shadow: 0 1px 3px rgba(20,30,60,0.04);
+  }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--silver-100); }
+
+  /* ===== kp-no · 28×28 圆 · 三色映射 freq 档 ===== */
+  .kp-item .kp-no {
+    background: var(--silver-700);
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px var(--silver-100);
+  }
+  .kp-item.freq-high .kp-no { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .kp-item.freq-mid .kp-no { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .kp-item.freq-low .kp-no { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .kp-item.freq-high { border-left-color: var(--gold-700); }
+  .kp-item.freq-mid { border-left-color: var(--blue-700); }
+  .kp-item.freq-low { border-left-color: var(--silver-700); }
+
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 0.95rem; color: var(--blue-700); }
+
+  /* ===== kp-freq · 频次档胶囊 · 三色 ===== */
+  .kp-item .kp-freq { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kp-item .kp-tag {
+    background: var(--silver-100);
+    color: var(--silver-900);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .kp-item.freq-high .kp-tag { background: var(--gold-100); color: var(--gold-900); }
+  .kp-item.freq-mid .kp-tag { background: var(--blue-100); color: var(--blue-700); }
+  .kp-item.freq-low .kp-tag { background: var(--silver-100); color: var(--silver-900); }
+
+  .kp-item .kp-note { color: var(--text-secondary); font-size: 0.78rem; font-style: italic; }
+  .kp-item .kp-section-label { font-weight: 700; color: var(--blue-700); margin-top: 12px; margin-bottom: 6px; font-size: 0.85rem; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 0.85rem; line-height: 1.85; color: var(--text-primary); }
+  .kp-item .kp-list li { margin: 4px 0; }
+  .kp-item .kp-list li strong { color: var(--blue-700); }
+  .kp-item .kp-revisit { font-size: 0.8rem; color: var(--blue-700); margin-top: 12px; padding: 8px 12px; background: var(--blue-050); border-radius: var(--radius-sm); }
+  .kp-footer { text-align: center; padding: 14px; color: var(--blue-700); font-weight: 700; font-size: 0.9rem; }
+
+  /* ===== 掌握度矩阵 · 圆形状态点 · 三色(蓝/金/银) ===== */
+  .mastery-map { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 20px 24px; margin: 20px 0; text-align: left; }
+  .mastery-map h3 { font-size: 0.95rem; color: var(--blue-700); margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .mastery-map h3::before {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 3px var(--blue-100);
+  }
+  .mastery-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px 110px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin: 8px 0;
+    font-size: 0.85rem;
+    background: #fff;
+    border-left: 3px solid var(--silver-500);
+  }
+  .mastery-row.correct { border-left-color: var(--blue-700); }
+  .mastery-row.partial { border-left-color: var(--gold-700); }
+  .mastery-row.wrong { border-left-color: var(--silver-700); }
+  .mastery-row .m-tid { font-weight: 700; color: var(--blue-700); font-size: 0.85rem; }
+  .mastery-row .m-title { color: var(--text-primary); }
+
+  /* ===== 状态点 → 圆 ===== */
+  .mastery-row .m-status {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin: 0 auto;
+  }
+  .mastery-row .m-status.correct { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .mastery-row .m-status.partial { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .mastery-row .m-status.wrong { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .mastery-row .m-pct { text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 6px; font-size: 0.78rem; }
+  .mastery-row .m-revisit a { color: var(--blue-700); }
+
+  /* ===== Bottom nav ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 28px 32px; background: #fff; border-radius: var(--radius); margin-bottom: 22px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 160px; text-align: center; padding: 14px 18px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-100); }
+  .bottom-nav span { color: var(--silver-500); }
+  .nav-supplementary { text-align: center; padding: 12px 18px; margin-bottom: 22px; font-size: 0.85rem; color: var(--text-secondary); background: var(--blue-050); border-radius: var(--radius-sm); }
+  .nav-supplementary a { color: var(--blue-700); text-decoration: underline; }
+  .hidden { display: none; }
+  footer { text-align: center; color: var(--silver-700); font-size: 0.78rem; padding: 24px; line-height: 1.8; }
+  .katex { font-size: 1em; }
+
+  /* ===== 移动端退化 ===== */
+  @media (max-width: 640px) {
+    .btn-primary { width: 100%; max-width: 320px; border-radius: 16px; padding: 16px 28px; }
+    .btn-submit { width: 100%; max-width: 280px; height: auto; border-radius: 16px; padding: 18px 32px; box-shadow: var(--shadow-sm); }
+    .q-header-circle { width: 200px; height: 200px; padding: 14px; }
+    .q-header-circle .q-line-no { font-size: 1.02rem; }
+    .q-header-circle .q-line-type { font-size: 0.82rem; }
+  }
+
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学大主题 · 融合模块 &raquo;
+  <strong>热力学应用 · 化学 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<div class="integration-banner">
+  🔗 <strong>融合模块熟练度检测</strong> · 本练习对接<strong>盖斯定律 + 燃烧热与中和热 + 键能与反应焓变 + 吉布斯基础</strong> 4 个基础板块的<strong>跨板块综合应用</strong>。5 道题骨架与本融合模块的<a href="thermodynamics-application-chemistry-example-cards.html" style="color:#00409A;font-weight:600;">例题讲解集</a>一一对应(再换情境 / 数值 / 物质)。建议先学完例题再做本练习。
+</div>
+
+<header class="page-header">
+  <h1>热力学应用 · 化学 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 融合模块 · 题库版(20 题池, 每次随机抽 5 题)· 同高考题型(选择 + 多选 + 综合大题)· 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始融合模块熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 单选 / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考化学反应原理压轴题型)</li>
+    <li>通过 ≥ 70 分;荣誉 ≥ 90 分</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 三段式解析(知识 / 思路 / 步骤)+ 锚回相关基础板块</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, 本地保存, 不判分)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(融合模块视角 · 6 考察点 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius: 16px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #B8924A;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #7B8290;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#F3F6FC;border:1px solid #E8EEF9;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#002F73;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#002F73,#00409A);color:white;border:none;padding:10px 24px;font-size:14px;border-radius: 16px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="thermodynamics-application-chemistry-example-cards.html">📖 返回例题讲解集</a>
+  <a href="hess-law-task-cards.html">盖斯定律</a>
+  <a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 融合模块 · 热力学应用 · 化学 · 熟练度检测 · fluency-test Skill v0.1.5(融合模式 · 首应用)</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题涉及哪 2-3 个基础板块的知识?(燃烧热 / 盖斯 / 键能 / 历程图)',
+  '我答错的根本原因是哪个板块?(知识点不熟 / 跨板块衔接错 / 计算粗心 / ...)',
+  '类似的跨板块综合题在高考压轴题中如何识别?',
+  '对应纸笔熟练度检测的高考综合题, 我哪些步骤(读题 / 列方程 / 算 ΔH / 解释工程意义)需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'COMBUSTION-4-RULES':              '燃烧热 4 大约定(1 mol 可燃物 / 完全燃烧 / 稳定氧化物 H₂O(l) / 标准条件)',
+  'NEUTRALIZATION-DEFINITION':       '中和热定义(强酸强碱稀溶液生成 1 mol H₂O(l))',
+  'PHASE-STATE-CORRECTION':          '物态修正(H₂O(g) vs H₂O(l) 差 ≈ 44 kJ/mol)',
+  'HESS-LAW-STATEMENT':              '盖斯定律(任意反应总焓变相同 / 路径无关)',
+  'HESS-EQUATION':                   '盖斯方程 \\(\\Delta H_\\text{总} = \\sum \\Delta H_i\\)',
+  'ALG-ADD-SUBTRACT':                '反应叠加 / 相减规则(+ / -)',
+  'ALG-REVERSE':                     '反应反向规则(取负)',
+  'ALG-SCALE':                       '反应乘 k 规则',
+  'NET-STOICHIOMETRY-METHOD':        '净计量数法(逐物质列方程定系数)',
+  'FORMATION-ENTHALPY-FORMULA':      '标准生成焓公式(末减初 + 化学计量数加权)',
+  'REFERENCE-ZERO-IS-CHOICE':        '稳定单质 \\(\\Delta H_f^\\circ = 0\\)(约定零点)',
+  'BOND-ENERGY-FORMULA':             '键能与 ΔH 关系 \\(\\Delta H = \\sum E(反键) - \\sum E(产键)\\)',
+  'BOND-COUNTING':                   '原子键计数(分子中各类键的数量)',
+  'PATH-INDEPENDENCE-CHEMISTRY':     '路径无关的化学延伸(测不到的反应可算)',
+  'CATALYST-EFFECT-ON-EA':           '催化剂改活化能 \\(E_a\\), 不改 \\(\\Delta H\\)',
+  'RATE-LIMITING-STEP':              '决速步 = \\(E_a\\) 最大的一步(动力学⚠️ 跨主题前置)',
+  'ENERGY-DIAGRAM-READING':          '反应历程图读图(终点 - 起点 = ΔH)',
+  'BOUNDARY-SPONTANEITY-VS-EXOTHERMIC': '边界:放热 ≠ 自发(需 ΔG = ΔH - TΔS 判)',
+  'INDUSTRIAL-CONDITION-TRADEOFF':   '工业反应条件权衡(热力学 + 动力学 + 工程成本)'
+};
+
+const EXAM_REVIEW = {
+  intro: '本融合模块对接高考化学<strong>反应原理</strong>板块的<strong>反应能量综合压轴题</strong>(选择 + 大题). 高考既考<strong>概念辨析</strong>(燃烧热 / 中和热定义 / 盖斯定律本质 / 路径无关 / 催化剂作用), 也考<strong>跨板块定量计算</strong>(多反应组合算 ΔH / \\(\\Delta H_f^\\circ\\) 表算 / 键能联用 / 读反应历程图). 5 道题对应本融合模块<a href="thermodynamics-application-chemistry-example-cards.html" style="color:#00409A;font-weight:600;">例题讲解集</a>的 6 道例题骨架(再换情境). 建议练习前对照下方 6 考察点自查, 不熟的回相关基础板块复习.',
+  topics: [
+    { no:'一', title:'热化学方程式辨析(燃烧热 / 中和热定义陷阱)', examFreq:'选择题高频',
+      examNote:'近 5 年高考反复考',
+      examMethods:[
+        '选择题:4 个候选方程式 → 选符合燃烧热 / 中和热定义者',
+        '辨析题:H₂O(l) vs H₂O(g) / 系数归一化 / 强弱酸碱中和热差异',
+        '陷阱题:低位热值 LHV(H₂O(g)) vs 高位热值 HHV(H₂O(l))'
+      ],
+      mustMaster:[
+        '<strong>燃烧热 4 约定</strong>:1 mol 可燃物 + 完全燃烧 + 稳定氧化物(H₂O 必须 l) + 25°C/101 kPa',
+        '<strong>中和热定义</strong>:强酸强碱稀溶液生成 <strong>1 mol</strong> H₂O(l), 标准值 -57.3 kJ/mol',
+        '<strong>弱酸 / 弱碱中和热</strong>偏小(电离吸热抵消部分中和放热)',
+        '<strong>物态差</strong>:每 1 mol H₂O(g) → H₂O(l) 放 ~44 kJ(汽化热反方向)'
+      ],
+      prepNotes:[
+        '高考考<strong>燃烧热</strong>必含 1-2 个『物态错(H₂O(g))』和 1 个『系数错(2 mol)』选项',
+        '<strong>低位 / 高位热值</strong>是工程概念, 严格定义燃烧热用<strong>高位(H₂O(l))</strong>',
+        '<strong>中和热</strong>常考<strong>弱酸 / 弱碱</strong>陷阱(数值偏小)和<strong>含沉淀的中和</strong>(放热多)'
+      ],
+      revisit:'不熟悉?回<a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热</a> Card 1-2 + <a href="combustion-neutralization-heat-fluency-test.html">单板块熟练度</a> 复习' },
+
+    { no:'二', title:'多反应组合算 ΔH(盖斯定律 4 规则 + 净计量数法)', examFreq:'选择题 + 综合大题双高频',
+      examNote:'高考标志题型(化学反应原理压轴必含)',
+      examMethods:[
+        '选择题:给 3-4 反应 + ΔH → 求目标反应 ΔH 数值(4 选 1)',
+        '综合大题:工业反应(CO₂ 制甲醇 / 水煤气变换 / 合成氨)+ 多反应组合 + 物态修正',
+        '辨析题:何时反向(取负) + 何时乘 k + 物态变化(H₂O g→l)的处理'
+      ],
+      mustMaster:[
+        '<strong>4 大代数规则</strong>:加 + 减 + <strong>反向(取负)</strong> + <strong>乘 k</strong>',
+        '<strong>净计量数法</strong>:对每个物质列净系数方程, 包括<strong>不同物态</strong>的同物质 + <strong>中间体</strong>',
+        '<strong>消元验证</strong>:累加组合方程 → 消元后必须 = 目标方程',
+        '<strong>物态修正</strong>:目标含 H₂O(l), 已知反应给 H₂O(g) → 必须加汽化 / 液化步骤'
+      ],
+      prepNotes:[
+        '高考最常见陷阱:<strong>忘加物态修正步骤</strong>(干扰项的 ΔH 差 ≈ 44 × n)',
+        '<strong>反向规则</strong>:反应反向 → ΔH <strong>取负</strong>(易错符号丢)',
+        '<strong>系数 k</strong>:整体反应乘 k → ΔH 同步乘 k'
+      ],
+      revisit:'不熟悉?回<a href="hess-law-task-cards.html">盖斯定律</a> Card 2-4 + <a href="hess-law-fluency-test.html">单板块熟练度</a> 复习' },
+
+    { no:'三', title:'\\(\\Delta H_f^\\circ\\) 表算 ΔH(末减初 + 化学计量数加权)', examFreq:'综合大题中高频',
+      examNote:'近年高考新趋势(数据驱动型)',
+      examMethods:[
+        '综合大题:给 \\(\\Delta H_f^\\circ\\) 表(列 4-6 物质)→ 算反应 ΔH',
+        '辨析题:稳定单质 \\(\\Delta H_f^\\circ = 0\\) 的物理本质',
+        '应用题:摩尔数 → kJ 总能量(代谢 / 燃料能量分析)'
+      ],
+      mustMaster:[
+        '<strong>反应焓变公式</strong>:\\(\\Delta H = \\sum \\nu \\Delta H_f^\\circ(产) - \\sum \\nu \\Delta H_f^\\circ(反)\\)(末减初 + 加权)',
+        '<strong>稳定单质零点</strong>:O₂(g), N₂(g), H₂(g), 石墨 C(s) 的 \\(\\Delta H_f^\\circ = 0\\)',
+        '<strong>同分异构体</strong>:石墨 vs 钻石 \\(\\Delta H_f^\\circ\\) 不同(石墨为零参考)',
+        '<strong>物态约定</strong>:H₂O(l) ≠ H₂O(g), 不同物态的 \\(\\Delta H_f^\\circ\\) 不同'
+      ],
+      prepNotes:[
+        '<strong>稳定单质 = 0</strong> 易忘写进公式(虽数值为 0, 形式上不能漏)',
+        '<strong>化学计量数</strong>必乘到每物质前(忘乘是高频失误)',
+        '<strong>物态对应</strong>表里的 H₂O(l) 与方程的 H₂O(l) 必一致'
+      ],
+      revisit:'不熟悉?回<a href="hess-law-task-cards.html">盖斯定律</a> Card 3 + <a href="enthalpy-meaning-task-cards.html">焓与焓变(进阶)</a> 复习' },
+
+    { no:'四', title:'键能 + 盖斯联用(\\(\\Delta H = \\sum E_反 - \\sum E_产\\))', examFreq:'选择题 + 综合大题中频',
+      examNote:'高考压轴选择常用(如 2024 重庆 13)',
+      examMethods:[
+        '综合大题:给反应 ΔH + 部分键能 → 求未知键能(字母代数表达式 + 数值)',
+        '选择题:给键能 + 多反应组合 → 求某反应 ΔH',
+        '应用题:工业反应条件分析(高键能 → 高活化能 → 需催化剂 / 高温)'
+      ],
+      mustMaster:[
+        '<strong>键能与 ΔH 关系</strong>:<code>ΔH = Σ键能(反应物) - Σ键能(产物)</code>(断键吸能 - 成键放能)',
+        '<strong>计数原子键</strong>:NH₃ 含 <strong>3 个 N-H</strong>, C₂H₆ 含 1 个 C-C + 6 个 C-H, H₂O 含 2 个 O-H',
+        '<strong>系数</strong>:3 mol H₂ → 3 个 H-H 键, 乘到字母键能上',
+        '<strong>高键能物理意义</strong>:N≡N (946) 三键稳定 → 合成氨需高温 / 催化剂'
+      ],
+      prepNotes:[
+        '高考易错<strong>方向</strong>:Σ反 - Σ产, <strong>不是反过来</strong>',
+        '<strong>多键计数</strong>:多原子分子键数必<strong>画结构</strong>核对',
+        '<strong>字母代数</strong>整理符号易错(移项时符号)'
+      ],
+      revisit:'不熟悉?回<a href="bond-energy-reaction-enthalpy-task-cards.html">键能与反应焓变</a> Card 2 + <a href="hess-law-task-cards.html">盖斯定律</a> 综合复习' },
+
+    { no:'五', title:'反应历程图综合(读图 + 决速步 + 催化剂)<span style="color:#b66100;">⚠️ 含动力学跨主题前置</span>', examFreq:'综合大题超高频(化学反应原理压轴)',
+      examNote:'近 3 年化学反应原理超高频(占 60%+)',
+      examMethods:[
+        '综合大题:给 2-3 步能量历程图 → 算分步 ΔH + 总 ΔH + 决速步 + 催化剂影响',
+        '辨析题:活化能 \\(E_a\\) vs ΔH(动力学 vs 热力学的区分)',
+        '应用题:催化剂改路径不改 ΔH 的工程意义(节能 + 选择性)'
+      ],
+      mustMaster:[
+        '<strong>读图算 ΔH</strong>:ΔH = 终点能量 - 起点能量(状态函数性质)',
+        '<strong>分步 ΔH</strong>:第 N 步 ΔH = 该步终点 - 该步起点 → 满足 \\(\\sum \\Delta H_i = \\Delta H_\\text{总}\\)',
+        '<strong>活化能 \\(E_a\\)</strong>:从某步<strong>起点</strong>到该步过渡态顶点的能量差 ⚠️ 跨主题(动力学)',
+        '<strong>决速步</strong>:\\(E_a\\) 最大的一步(限速) ⚠️ 跨主题(动力学)',
+        '<strong>催化剂</strong>:改变路径 → <strong>降低 \\(E_a\\)</strong>(动力学), <strong>不改 ΔH</strong>(热力学)'
+      ],
+      prepNotes:[
+        '高考标志陷阱:<strong>过渡态能量当 ΔH</strong>(过渡态 = \\(E_a\\), 终点才是 ΔH)',
+        '<strong>\\(E_a\\) 起点错</strong>:第 2 步的 \\(E_a\\) 应从<strong>中间体</strong>算, 不是初始反应物',
+        '<strong>决速步取大</strong>:\\(E_a\\) 大 = 速率慢 = 限速(取<strong>最大</strong>不是最小)',
+        '<strong>催化剂不改 ΔH</strong>是<strong>路径无关</strong>的工业直接应用'
+      ],
+      revisit:'不熟悉?回<a href="thermodynamics-application-chemistry-example-cards.html">融合模块例题 6</a> + <a href="hess-law-task-cards.html">盖斯定律</a> Card 1 复习. 动力学详细概念待『反应动力学』板块建成' },
+
+    { no:'六', title:'反应自发性辨析 + 工业条件权衡', examFreq:'综合大题末段中频',
+      examNote:'考工程思辨能力',
+      examMethods:[
+        '辨析题:放热 ≠ 自发(钻石 → 石墨 ΔH<0 但常温稳定)',
+        '综合大题末段:分析工业反应为何选某温度 / 压强(热力学 vs 动力学 vs 成本)',
+        '应用题:催化剂 / 高温 / 高压的物理意义对应到反应类型(放热降温利平衡 / 摩尔减压增压利平衡)'
+      ],
+      mustMaster:[
+        '<strong>放热 ≠ 自发</strong>:自发需 ΔG = ΔH - TΔS &lt; 0, 放热(ΔH&lt;0)只是<strong>一个有利条件</strong>',
+        '<strong>动力学 vs 热力学</strong>:ΔH 管能量, \\(E_a\\) 管能否 / 多快发生',
+        '<strong>勒夏特列原理</strong>(简版):放热升温→平衡左移; 气体摩尔减少→高压利右移',
+        '<strong>工业条件权衡</strong>:温度兼顾速率 + 平衡; 压强兼顾产率 + 设备成本; 催化剂降 \\(E_a\\)'
+      ],
+      prepNotes:[
+        '高考综合大题<strong>末小问</strong>常考"为何选 XXX 温度 / 压强"',
+        '答题模板:① 速率(动力学)+ ② 平衡(热力学)+ ③ 工程成本 三角分析',
+        '<strong>路径无关</strong>是工业选择的<strong>自由度</strong>来源(不必走某一路径)'
+      ],
+      revisit:'不熟悉?回<a href="gibbs-free-energy-basic-task-cards.html">吉布斯自由能 · 基础</a> + <a href="second-law-basic-task-cards.html">第二定律 · 基础</a> 复习' }
+  ],
+  footer:'✓ 6 个考察点都熟练? 那就开始下面的融合模块熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1:{ title:'热化学方程式辨析(燃烧热 / 中和热)', revisit:'回<a href="combustion-neutralization-heat-task-cards.html">燃烧热与中和热</a> + <a href="thermodynamics-application-chemistry-example-cards.html">例题 1</a> 复习' },
+  T2:{ title:'多反应组合算 ΔH(4 选 1)',          revisit:'回<a href="hess-law-task-cards.html">盖斯定律</a> + <a href="thermodynamics-application-chemistry-example-cards.html">例题 2</a> 复习' },
+  T3:{ title:'\\(\\Delta H_f^\\circ\\) + 多反应综合多选', revisit:'回<a href="hess-law-task-cards.html">盖斯定律</a> Card 3 + <a href="thermodynamics-application-chemistry-example-cards.html">例题 3+4</a> 复习' },
+  T4:{ title:'键能 + 盖斯联用 综合大题',           revisit:'回<a href="bond-energy-reaction-enthalpy-task-cards.html">键能与反应焓变</a> + <a href="thermodynamics-application-chemistry-example-cards.html">例题 5</a> 复习' },
+  T5:{ title:'反应历程图综合(含动力学⚠️)',      revisit:'回<a href="thermodynamics-application-chemistry-example-cards.html">例题 6</a> + <a href="hess-law-task-cards.html">盖斯定律</a> Card 1 复习' }
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["COMBUSTION-4-RULES","PHASE-STATE-CORRECTION"],
+      stem:"已知 25°C / 101 kPa 下: C(石墨) 燃烧热 = -393.5 kJ/mol; H<sub>2</sub>(g) 燃烧热 = -285.8 kJ/mol; CO(g) 燃烧热 = -283.0 kJ/mol。下列热化学方程式中, ΔH 表示<strong>燃烧热</strong>的是:",
+      options:{
+        A:"2C(石墨) + 2O<sub>2</sub>(g) → 2CO<sub>2</sub>(g), ΔH = -787.0 kJ/mol",
+        B:"CO(g) + ½O<sub>2</sub>(g) → CO<sub>2</sub>(g), ΔH = -283.0 kJ/mol",
+        C:"H<sub>2</sub>(g) + ½O<sub>2</sub>(g) → H<sub>2</sub>O(g), ΔH = -241.8 kJ/mol",
+        D:"C(石墨) + ½O<sub>2</sub>(g) → CO(g), ΔH = -110.5 kJ/mol"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:燃烧热 4 大约定 — ① 1 mol 可燃物; ② 完全燃烧; ③ 稳定氧化物(H<sub>2</sub>O 必须液态 l); ④ 标准条件。逐项辨识。',
+        approach:'<strong>解题思路</strong>:对 4 选项逐个对照 4 约定 → 找出全部满足者。',
+        solution:'<strong>详细解题</strong>:<br>A:可燃物 = <strong>2 mol</strong> C, 违反约定 ① → 错;<br>B:1 mol CO + 完全燃烧 → CO<sub>2</sub> + 数值 -283.0 一致 → <strong>全部 4 约定满足 ✓</strong>;<br>C:1 mol H<sub>2</sub> + 完全燃烧 ✓, 但 H<sub>2</sub>O 是<strong>气态(g)</strong>, 违反约定 ③(稳定氧化物 H<sub>2</sub>O(l)) → 错;<br>D:1 mol C, 但产物是 CO(<strong>不完全燃烧</strong>, C 未变成 CO<sub>2</sub>), 违反约定 ② → 错。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"中等", exportIds:["NEUTRALIZATION-DEFINITION","COMBUSTION-4-RULES"],
+      stem:"已知 25°C 下强酸强碱稀溶液中和热 ΔH = -57.3 kJ/mol。下列热化学方程式中, ΔH 表示<strong>中和热</strong>的是:",
+      options:{
+        A:"NaOH(s) + HCl(aq) → NaCl(aq) + H<sub>2</sub>O(l), ΔH = -81.0 kJ/mol",
+        B:"½H<sub>2</sub>SO<sub>4</sub>(aq) + NaOH(aq) → ½Na<sub>2</sub>SO<sub>4</sub>(aq) + H<sub>2</sub>O(l), ΔH = -57.3 kJ/mol",
+        C:"CH<sub>3</sub>COOH(aq) + NaOH(aq) → CH<sub>3</sub>COONa(aq) + H<sub>2</sub>O(l), ΔH = -56.0 kJ/mol",
+        D:"HCl(g) + NaOH(aq) → NaCl(aq) + H<sub>2</sub>O(l), ΔH = -130 kJ/mol"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:中和热定义 — 强酸 + 强碱稀溶液生成 <strong>1 mol H<sub>2</sub>O(l)</strong> 时的反应焓变, 标准值 -57.3 kJ/mol。物态必须 aq + l。',
+        approach:'<strong>解题思路</strong>:对 4 选项审 ① 强酸强碱? ② 反应物物态 aq? ③ 生成 1 mol H<sub>2</sub>O(l)? ④ 数值是否合理?',
+        solution:'<strong>详细解题</strong>:<br>A:NaOH 物态是 <strong>固态(s)</strong> 不是 aq → 反应除中和外还含 NaOH 溶解放热, 数值 -81.0 不等于 -57.3 → 错;<br>B:稀 H<sub>2</sub>SO<sub>4</sub>(aq) + NaOH(aq) → 强酸强碱 + 生成 1 mol H<sub>2</sub>O(l), 数值 -57.3 ✓ → <strong>正确</strong>;<br>C:CH<sub>3</sub>COOH 是<strong>弱酸</strong>(电离吸热部分抵消中和放热), 数值偏小(-56.0 &gt; -57.3) → 不是标准中和热, 错;<br>D:HCl 是<strong>气态</strong>(g), 溶解过程也放热, 数值 -130 远大于中和热 → 错。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"中等", exportIds:["COMBUSTION-4-RULES","PHASE-STATE-CORRECTION"],
+      stem:"已知 25°C 下乙炔 C<sub>2</sub>H<sub>2</sub>(g) 燃烧热 = -1299.6 kJ/mol。下列热化学方程式中, ΔH 表示<strong>燃烧热</strong>的是:",
+      options:{
+        A:"2C<sub>2</sub>H<sub>2</sub>(g) + 5O<sub>2</sub>(g) → 4CO<sub>2</sub>(g) + 2H<sub>2</sub>O(l), ΔH = -1299.6 kJ/mol",
+        B:"C<sub>2</sub>H<sub>2</sub>(g) + 5/2 O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + H<sub>2</sub>O(l), ΔH = -1299.6 kJ/mol",
+        C:"C<sub>2</sub>H<sub>2</sub>(g) + 5/2 O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + H<sub>2</sub>O(g), ΔH = -1299.6 kJ/mol",
+        D:"½C<sub>2</sub>H<sub>2</sub>(g) + 5/4 O<sub>2</sub>(g) → CO<sub>2</sub>(g) + ½H<sub>2</sub>O(l), ΔH = -649.8 kJ/mol"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:燃烧热严格要求 <strong>1 mol 可燃物 + H<sub>2</sub>O(l) + 完全燃烧</strong>。',
+        approach:'<strong>解题思路</strong>:可燃物归一化 = 1 mol + 物态查 + 数值校核。',
+        solution:'<strong>详细解题</strong>:<br>A:可燃物 = <strong>2 mol</strong> C<sub>2</sub>H<sub>2</sub>, 违反 ① ; 此外数值应为 -2599.2 不是 -1299.6 → 错;<br>B:1 mol C<sub>2</sub>H<sub>2</sub> + 完全燃烧 → CO<sub>2</sub> + H<sub>2</sub>O(<strong>l</strong>), 数值 -1299.6 ✓ → <strong>正确</strong>;<br>C:H<sub>2</sub>O 是<strong>气态(g)</strong>, 违反约定 ③ → 错(数值实际是低位热值 LHV, 应小于 -1299.6);<br>D:可燃物 = <strong>0.5 mol</strong>, 违反 ① → 错(燃烧热要求严格 1 mol)。<br>故选 <strong>B</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"较难", exportIds:["COMBUSTION-4-RULES","NEUTRALIZATION-DEFINITION"],
+      stem:"已知 25°C: CH<sub>3</sub>OH(l) 燃烧热 = -726.5 kJ/mol; 强酸强碱中和热 = -57.3 kJ/mol。下列说法<strong>正确</strong>的是:",
+      options:{
+        A:"CH<sub>3</sub>OH(l) + 3/2 O<sub>2</sub>(g) → CO<sub>2</sub>(g) + 2H<sub>2</sub>O(l), ΔH = -726.5 kJ/mol",
+        B:"CH<sub>3</sub>OH(l) + 3/2 O<sub>2</sub>(g) → CO<sub>2</sub>(g) + 2H<sub>2</sub>O(g), ΔH = -726.5 kJ/mol",
+        C:"½Ba(OH)<sub>2</sub>(aq) + ½H<sub>2</sub>SO<sub>4</sub>(aq) → ½BaSO<sub>4</sub>(s) + H<sub>2</sub>O(l), ΔH = -57.3 kJ/mol",
+        D:"NH<sub>3</sub>·H<sub>2</sub>O(aq) + HCl(aq) → NH<sub>4</sub>Cl(aq) + H<sub>2</sub>O(l), ΔH = -57.3 kJ/mol"
+      },
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 燃烧热严格定义; ② 含沉淀的中和(Ba<sup>2+</sup> + SO<sub>4</sub><sup>2-</sup> → BaSO<sub>4</sub>(s) 额外放热); ③ 弱碱中和热偏小。',
+        approach:'<strong>解题思路</strong>:逐项辨别物态 + 是否含其他能量项。',
+        solution:'<strong>详细解题</strong>:<br>A:1 mol CH<sub>3</sub>OH(l) + 完全燃烧 → CO<sub>2</sub> + H<sub>2</sub>O(<strong>l</strong>), 数值 -726.5 ✓ → <strong>正确</strong>;<br>B:H<sub>2</sub>O(<strong>g</strong>) 错;此外数值应小于 -726.5(物态错 → 数值也错) → 错;<br>C:Ba<sup>2+</sup> + SO<sub>4</sub><sup>2-</sup> → BaSO<sub>4</sub>(s) <strong>额外放热</strong>(沉淀生成放能), 故 ΔH &lt; -57.3 → 错;<br>D:NH<sub>3</sub>·H<sub>2</sub>O 是<strong>弱碱</strong>, 电离吸热抵消部分中和放热, ΔH 偏小(&gt; -57.3) → 错。<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["HESS-EQUATION","ALG-ADD-SUBTRACT","NET-STOICHIOMETRY-METHOD"],
+      stem:"工业上用 CO 与 H<sub>2</sub> 合成甲醛(HCHO, 制酚醛树脂的原料)。已知 (298 K):<br>① CO(g) + ½O<sub>2</sub>(g) → CO<sub>2</sub>(g), ΔH<sub>1</sub> = -283.0 kJ/mol<br>② H<sub>2</sub>(g) + ½O<sub>2</sub>(g) → H<sub>2</sub>O(g), ΔH<sub>2</sub> = -241.8 kJ/mol<br>③ HCHO(g) + O<sub>2</sub>(g) → CO<sub>2</sub>(g) + H<sub>2</sub>O(g), ΔH<sub>3</sub> = -570.8 kJ/mol<br><br>目标反应 CO(g) + H<sub>2</sub>(g) → HCHO(g) 的 ΔH = (    )",
+      options:{
+        A:"+46.0 kJ/mol",
+        B:"-46.0 kJ/mol",
+        C:"-1095.6 kJ/mol",
+        D:"+1095.6 kJ/mol"
+      },
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:盖斯定律 4 规则(加 + 减 + 反向 + 乘 k)+ 净计量数法。',
+        approach:'<strong>解题思路</strong>:目标 = ① + ② - ③(③ 反向消去 HCHO 在产物位置)。',
+        solution:'<strong>详细解题</strong>:<br>检查目标 CO + H<sub>2</sub> → HCHO 中各物质位置:<br>· CO:目标左 → ① 中 CO 在左 → ① <strong>正向</strong>(系数 +1)<br>· H<sub>2</sub>:目标左 → ② 中 H<sub>2</sub> 在左 → ② <strong>正向</strong>(系数 +1)<br>· HCHO:目标右 → ③ 中 HCHO 在左 → ③ <strong>反向</strong>(系数 -1)<br>· 验消元:CO + ½O<sub>2</sub> + H<sub>2</sub> + ½O<sub>2</sub> - (CO<sub>2</sub> + H<sub>2</sub>O - HCHO - O<sub>2</sub>) = CO + H<sub>2</sub> + O<sub>2</sub> - CO<sub>2</sub> - H<sub>2</sub>O + HCHO + O<sub>2</sub>... 整理:消去 CO<sub>2</sub>, H<sub>2</sub>O, O<sub>2</sub> → CO + H<sub>2</sub> → HCHO ✓<br>累加 ΔH:<br>ΔH = ΔH<sub>1</sub> + ΔH<sub>2</sub> - ΔH<sub>3</sub><br>= (-283.0) + (-241.8) - (-570.8)<br>= -283.0 - 241.8 + 570.8<br>= <strong>+46.0 kJ/mol</strong>(吸热, 合理)<br>故选 <strong>A</strong>。<br>干扰项 B 是符号错;C, D 是漏反向。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"中等", exportIds:["HESS-EQUATION","ALG-REVERSE","NET-STOICHIOMETRY-METHOD"],
+      stem:"工业上乙烯加氢制乙烷(用于燃料和有机合成原料)。已知 (298 K):<br>① C<sub>2</sub>H<sub>4</sub>(g) + 3O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 2H<sub>2</sub>O(l), ΔH<sub>1</sub> = -1411 kJ/mol<br>② C<sub>2</sub>H<sub>6</sub>(g) + 7/2 O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 3H<sub>2</sub>O(l), ΔH<sub>2</sub> = -1560 kJ/mol<br>③ H<sub>2</sub>(g) + ½O<sub>2</sub>(g) → H<sub>2</sub>O(l), ΔH<sub>3</sub> = -286 kJ/mol<br><br>目标 C<sub>2</sub>H<sub>4</sub>(g) + H<sub>2</sub>(g) → C<sub>2</sub>H<sub>6</sub>(g) 的 ΔH = (    )",
+      options:{
+        A:"-137 kJ/mol",
+        B:"+137 kJ/mol",
+        C:"-1735 kJ/mol",
+        D:"+149 kJ/mol"
+      },
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:多个燃烧反应组合反推单一加氢反应 ΔH。需识别哪个反应反向。',
+        approach:'<strong>解题思路</strong>:目标 = ① + ③ - ②(② 反向消去 C<sub>2</sub>H<sub>6</sub> 在产物位置)。',
+        solution:'<strong>详细解题</strong>:<br>逐物质看位置:<br>· C<sub>2</sub>H<sub>4</sub>:目标左 → ① 中 C<sub>2</sub>H<sub>4</sub> 在左 → ① <strong>正向</strong><br>· H<sub>2</sub>:目标左 → ③ 中 H<sub>2</sub> 在左 → ③ <strong>正向</strong><br>· C<sub>2</sub>H<sub>6</sub>:目标右 → ② 中 C<sub>2</sub>H<sub>6</sub> 在左 → ② <strong>反向</strong>(取负)<br>· 验消元:CO<sub>2</sub>:① 右 2 + ③ 右 0 - ② 右 2 = 0 ✓; H<sub>2</sub>O(l):① 右 2 + ③ 右 1 - ② 右 3 = 0 ✓; O<sub>2</sub>:① 左 3 + ③ 左 ½ - ② 左 7/2 = 0 ✓<br>累加:<br>ΔH = ΔH<sub>1</sub> + ΔH<sub>3</sub> - ΔH<sub>2</sub><br>= -1411 + (-286) - (-1560)<br>= -1411 - 286 + 1560<br>= <strong>-137 kJ/mol</strong>(放热, 加氢反应通常放热)<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"中等", exportIds:["HESS-EQUATION","ALG-ADD-SUBTRACT","PHASE-STATE-CORRECTION"],
+      stem:"工业上乙烯水合制乙醇(用作燃料 / 溶剂 / 有机合成原料)。已知 (298 K):<br>① C<sub>2</sub>H<sub>4</sub>(g) + 3O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 2H<sub>2</sub>O(l), ΔH<sub>2</sub> = -1411 kJ/mol<br>② C<sub>2</sub>H<sub>5</sub>OH(l) + 3O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 3H<sub>2</sub>O(l), ΔH<sub>3</sub> = -1367 kJ/mol<br><br>目标 C<sub>2</sub>H<sub>4</sub>(g) + H<sub>2</sub>O(l) → C<sub>2</sub>H<sub>5</sub>OH(l) 的 ΔH = (    )",
+      options:{
+        A:"-44 kJ/mol",
+        B:"+44 kJ/mol",
+        C:"-2778 kJ/mol",
+        D:"+2778 kJ/mol"
+      },
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:用两个燃烧反应组合反推水合 ΔH。',
+        approach:'<strong>解题思路</strong>:目标 = ① - ②(② 反向消去 C<sub>2</sub>H<sub>5</sub>OH 在产物位置)。',
+        solution:'<strong>详细解题</strong>:<br>· 设组合 = a·① + b·②, 求 a, b<br>· 对每物质列净系数方程(目标右 - 目标左):<br>　- C<sub>2</sub>H<sub>4</sub>: 目标左 -1 = a·(-1) + b·0 → a = 1<br>　- C<sub>2</sub>H<sub>5</sub>OH(l): 目标右 +1 = a·0 + b·(-1) → b = -1(<strong>② 反向</strong>)<br>　- 验 CO<sub>2</sub>: a·(+2) + b·(+2) = 2 - 2 = 0 ✓<br>　- 验 H<sub>2</sub>O(l): 目标左 -1 = a·(+2) + b·(+3) = 2 - 3 = -1 ✓(自动得目标左有 1 个 H<sub>2</sub>O)<br>　- 验 O<sub>2</sub>: a·(-3) + b·(-3) = -3 + 3 = 0 ✓<br>· 故组合 = ① - ②<br>累加:<br>ΔH = ΔH<sub>2</sub> - ΔH<sub>3</sub> = -1411 - (-1367) = -1411 + 1367 = <strong>-44 kJ/mol</strong>(放热, 水合反应)<br>故选 <strong>A</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"较难", exportIds:["HESS-EQUATION","PHASE-STATE-CORRECTION","NET-STOICHIOMETRY-METHOD"],
+      stem:"工业上 CH<sub>3</sub>OH 与 CO 在催化剂下合成 CH<sub>3</sub>COOH(羰基化反应)。已知 (298 K):<br>① CH<sub>3</sub>OH(g) + CO(g) → CH<sub>3</sub>COOH(l), ΔH<sub>1</sub> = -135 kJ/mol<br>② CH<sub>3</sub>OH(l) → CH<sub>3</sub>OH(g), ΔH<sub>2</sub> = +37 kJ/mol<br>③ CH<sub>3</sub>COOH(l) → CH<sub>3</sub>COOH(g), ΔH<sub>3</sub> = +42 kJ/mol<br><br>目标 CH<sub>3</sub>OH(l) + CO(g) → CH<sub>3</sub>COOH(g) 的 ΔH = (    )",
+      options:{
+        A:"-56 kJ/mol",
+        B:"-130 kJ/mol",
+        C:"-214 kJ/mol",
+        D:"+56 kJ/mol"
+      },
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:多反应组合 + 物态修正(汽化反应)。',
+        approach:'<strong>解题思路</strong>:目标含 CH<sub>3</sub>OH(l) 但 ① 用 CH<sub>3</sub>OH(g) → 加 ②;目标含 CH<sub>3</sub>COOH(g) 但 ① 给 CH<sub>3</sub>COOH(l) → 加 ③。',
+        solution:'<strong>详细解题</strong>:<br>· 目标 CH<sub>3</sub>OH(l) + CO → CH<sub>3</sub>COOH(g)<br>· 由 ②(CH<sub>3</sub>OH(l) → CH<sub>3</sub>OH(g))把目标左的 CH<sub>3</sub>OH(l) 转为 CH<sub>3</sub>OH(g);<br>· 再由 ①(CH<sub>3</sub>OH(g) + CO → CH<sub>3</sub>COOH(l))得到 CH<sub>3</sub>COOH(l);<br>· 最后由 ③(CH<sub>3</sub>COOH(l) → CH<sub>3</sub>COOH(g))把产物转为气态。<br>组合 = ② + ① + ③ <strong>全部正向</strong>。<br>累加 ΔH:<br>ΔH = ΔH<sub>2</sub> + ΔH<sub>1</sub> + ΔH<sub>3</sub><br>= +37 + (-135) + (+42)<br>= 37 - 135 + 42<br>= <strong>-56 kJ/mol</strong><br>故选 <strong>A</strong>。<br>干扰项 B = -135 - (-5) 漏加汽化;C = 错加号;D = 符号错。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"基础", exportIds:["FORMATION-ENTHALPY-FORMULA","REFERENCE-ZERO-IS-CHOICE","CATALYST-EFFECT-ON-EA"],
+      stem:"生命科学:乙醇代谢反应 C<sub>2</sub>H<sub>5</sub>OH(l) + 3O<sub>2</sub>(g) → 2CO<sub>2</sub>(g) + 3H<sub>2</sub>O(l)。已知 298 K 的标准摩尔生成焓(kJ/mol):<br>· ΔH<sub>f</sub>°(C<sub>2</sub>H<sub>5</sub>OH, l) = -277.6<br>· ΔH<sub>f</sub>°(O<sub>2</sub>, g) = 0<br>· ΔH<sub>f</sub>°(CO<sub>2</sub>, g) = -393.5<br>· ΔH<sub>f</sub>°(H<sub>2</sub>O, l) = -285.8<br><br>下列说法<strong>正确</strong>的是(多选):",
+      options:{
+        A:"反应 ΔH ≈ -1367 kJ/mol(放热)",
+        B:"ΔH<sub>f</sub>°(O<sub>2</sub>) = 0 是因 O<sub>2</sub> 是稳定单质, 这是约定的零点参考",
+        C:"若反应物改为 C<sub>2</sub>H<sub>5</sub>OH(g), 反应放热量比 C<sub>2</sub>H<sub>5</sub>OH(l) 燃烧时放热量更多",
+        D:"该反应路径无关, 故用 Fe 催化或 Pt 催化, 放热量不同"
+      },
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① ΔH<sub>f</sub>° 公式(末减初 + 加权); ② 稳定单质零点约定; ③ 物态变化对放热的影响; ④ 催化剂不改 ΔH。',
+        approach:'<strong>解题思路</strong>:逐项分析 — 算 ΔH + 概念判断。',
+        solution:'<strong>详细解题</strong>:<br>A:ΔH = [2×(-393.5) + 3×(-285.8)] - [(-277.6) + 3×0] = [-787 + (-857.4)] - (-277.6) = -1644.4 + 277.6 = <strong>-1366.8 ≈ -1367 kJ/mol</strong> ✓ <strong>正确</strong>;<br>B:稳定单质 ΔH<sub>f</sub>°=0 是约定零点(参考标准), 不是物理量本身为零 ✓ <strong>正确</strong>;<br>C:C<sub>2</sub>H<sub>5</sub>OH(l) → C<sub>2</sub>H<sub>5</sub>OH(g) 吸热, 即气态能量更高, 故 C<sub>2</sub>H<sub>5</sub>OH(g) 燃烧释放更多能量(初态能量更高 → ΔH 更负) ✓ <strong>正确</strong>;<br>D:催化剂只改变反应路径(降 \\(E_a\\)), <strong>不改 ΔH</strong>(状态函数路径无关), 故无论 Fe 还是 Pt, 放热量都是 -1367 kJ/mol → <strong>D 错</strong>。<br>故选 <strong>ABC</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"中等", exportIds:["FORMATION-ENTHALPY-FORMULA","BOUNDARY-SPONTANEITY-VS-EXOTHERMIC"],
+      stem:"营养学:蔗糖代谢反应 C<sub>12</sub>H<sub>22</sub>O<sub>11</sub>(s) + 12O<sub>2</sub>(g) → 12CO<sub>2</sub>(g) + 11H<sub>2</sub>O(l)。已知 298 K(kJ/mol):<br>· ΔH<sub>f</sub>°(蔗糖, s) = -2222<br>· ΔH<sub>f</sub>°(CO<sub>2</sub>, g) = -393.5<br>· ΔH<sub>f</sub>°(H<sub>2</sub>O, l) = -285.8<br><br>蔗糖 M = 342 g/mol。下列说法<strong>正确</strong>的是(多选):",
+      options:{
+        A:"反应 ΔH ≈ -5644 kJ/mol",
+        B:"摄入 3.42 g 蔗糖, 完全代谢可释能约 56.4 kJ",
+        C:"每克蔗糖释能约 16.5 kJ ≈ 3.94 kcal, 与营养标签『碳水化合物 4 kcal/g』吻合",
+        D:"该反应放热, 故必然自发, 与 ΔS 或 ΔG 无关"
+      },
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① ΔH<sub>f</sub>° 公式; ② 摩尔数 → kJ 总能量(应用); ③ 自发性需 ΔG 判, 放热只是有利条件。',
+        approach:'<strong>解题思路</strong>:算 ΔH + 摩尔数 → kJ 应用 + 自发性概念辨识。',
+        solution:'<strong>详细解题</strong>:<br>A:ΔH = [12×(-393.5) + 11×(-285.8)] - [(-2222) + 12×0] = [-4722 + (-3143.8)] + 2222 = -7865.8 + 2222 = <strong>-5643.8 ≈ -5644 kJ/mol</strong> ✓ <strong>正确</strong>;<br>B:n = 3.42 / 342 = 0.01 mol; E = 0.01 × 5644 = <strong>56.44 kJ</strong> ≈ 56.4 ✓ <strong>正确</strong>;<br>C:每克 = 5644 / 342 ≈ <strong>16.5 kJ/g</strong>; 换算 16.5 / 4.184 ≈ 3.94 kcal/g, 与营养标签 4 kcal/g 一致 ✓ <strong>正确</strong>;<br>D:放热只是<strong>有利条件</strong>, 自发需 ΔG = ΔH - TΔS &lt; 0。如钻石 → 石墨 ΔH&lt;0 但常温下也不自发(动力学势垒)。故"必然自发"是错的, 且"与 ΔG 无关"严重错误 → <strong>D 错</strong>。<br>故选 <strong>ABC</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"中等", exportIds:["FORMATION-ENTHALPY-FORMULA","BOND-ENERGY-FORMULA","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:"石化工艺:甲苯加氢制甲基环己烷(用于喷气燃料)。反应 C<sub>7</sub>H<sub>8</sub>(l) + 3H<sub>2</sub>(g) → C<sub>7</sub>H<sub>14</sub>(l)。已知 298 K(kJ/mol):<br>· ΔH<sub>f</sub>°(C<sub>7</sub>H<sub>8</sub> 甲苯, l) = +12<br>· ΔH<sub>f</sub>°(C<sub>7</sub>H<sub>14</sub> 甲基环己烷, l) = -190<br>· ΔH<sub>f</sub>°(H<sub>2</sub>, g) = 0<br><br>下列说法<strong>正确</strong>的是(多选):",
+      options:{
+        A:"反应 ΔH = -202 kJ/mol(放热)",
+        B:"甲苯加氢是放热反应, 但工业上仍需高温 + 催化剂",
+        C:"反应破坏甲苯的芳香稳定性, 实际反应活化能高 — 这与盖斯定律算出的 ΔH 数值无关",
+        D:"ΔH<sub>f</sub>°(甲苯) = +12 表明甲苯比稳定单质能量高, 故甲苯<strong>化学性质不稳定</strong>"
+      },
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① ΔH<sub>f</sub>° 算 ΔH; ② 放热 ≠ 速率快(动力学需高温催化); ③ ΔHf° 与稳定性区分。',
+        approach:'<strong>解题思路</strong>:算 ΔH + 概念辨析。',
+        solution:'<strong>详细解题</strong>:<br>A:ΔH = -190 - [12 + 3×0] = -190 - 12 = <strong>-202 kJ/mol</strong> ✓;<br>B:反应虽放热(热力学利好), 但芳环稳定 → \\(E_a\\) 大 → 需高温催化剂(Ni / Pt) ✓;<br>C:活化能(动力学)与 ΔH(热力学)<strong>无关</strong>, 盖斯定律只管 ΔH ✓;<br>D:ΔH<sub>f</sub>° &gt; 0 只说明从稳定单质合成需吸热, <strong>不代表化学不稳定</strong>。甲苯在常温下化学性质非常稳定(芳香稳定性)。"稳定性"是反应活性概念, 与 ΔH<sub>f</sub>° 符号无直接关系 → <strong>D 错</strong>。<br>故选 <strong>ABC</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["FORMATION-ENTHALPY-FORMULA","COMBUSTION-4-RULES","PHASE-STATE-CORRECTION"],
+      stem:"已知 298 K 各物质标准摩尔生成焓(kJ/mol):<br>· ΔH<sub>f</sub>°(CO, g) = -110.5<br>· ΔH<sub>f</sub>°(CO<sub>2</sub>, g) = -393.5<br>· ΔH<sub>f</sub>°(H<sub>2</sub>O, g) = -241.8<br>· ΔH<sub>f</sub>°(H<sub>2</sub>O, l) = -285.8<br>· ΔH<sub>f</sub>°(CH<sub>3</sub>OH, l) = -239.0<br>· ΔH<sub>f</sub>°(CH<sub>4</sub>, g) = -74.8<br><br>下列<strong>热化学方程式</strong>判断<strong>正确</strong>的是(多选):",
+      options:{
+        A:"CH<sub>4</sub>(g) + 2O<sub>2</sub>(g) → CO<sub>2</sub>(g) + 2H<sub>2</sub>O(l), ΔH = -890.4 kJ/mol — 是 CH<sub>4</sub> 的燃烧热方程式",
+        B:"CO(g) + ½O<sub>2</sub>(g) → CO<sub>2</sub>(g), ΔH = -283.0 kJ/mol",
+        C:"CO(g) + 2H<sub>2</sub>(g) → CH<sub>3</sub>OH(l), ΔH = -128.5 kJ/mol",
+        D:"H<sub>2</sub>O(l) → H<sub>2</sub>O(g), ΔH = -44.0 kJ/mol(汽化)"
+      },
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:ΔH<sub>f</sub>° 公式 + 燃烧热定义 + 物态间转化 ΔH 符号。',
+        approach:'<strong>解题思路</strong>:逐项算 + 物态符号判断。',
+        solution:'<strong>详细解题</strong>:<br>A:ΔH = [(-393.5) + 2×(-285.8)] - [(-74.8) + 2×0] = -393.5 - 571.6 + 74.8 = <strong>-890.3 ≈ -890.4 kJ/mol</strong>, 1 mol CH<sub>4</sub> + 完全燃烧 + H<sub>2</sub>O(l), 符合燃烧热定义 ✓;<br>B:ΔH = (-393.5) - [(-110.5) + 0] = <strong>-283.0 kJ/mol</strong> ✓;<br>C:ΔH = (-239.0) - [(-110.5) + 2×0] = <strong>-128.5 kJ/mol</strong> ✓;<br>D:H<sub>2</sub>O(l) → H<sub>2</sub>O(g) 是<strong>汽化吸热</strong>, ΔH = (-241.8) - (-285.8) = <strong>+44.0 kJ/mol</strong>(吸热为正)。题给 -44.0 符号错 → <strong>D 错</strong>。<br>故选 <strong>ABC</strong>。'
+      },
+      reflectionPrompts: REFLECTION_DEFAULT
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"中等", exportIds:["BOND-ENERGY-FORMULA","BOND-COUNTING","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:石化工业 — 乙烯加氢制乙烷:<br>&nbsp;&nbsp;C<sub>2</sub>H<sub>4</sub>(g) + H<sub>2</sub>(g) → C<sub>2</sub>H<sub>6</sub>(g), ΔH = -137 kJ/mol<br><br>已知键能 (kJ/mol):H-H = <em>a</em> = 436;C-C = <em>b</em> = 348;C-H = <em>c</em> = 413<br><br><strong>(1)</strong> 求 C=C 键能(用字母 <em>a</em>, <em>b</em>, <em>c</em> 表示);<br><strong>(2)</strong> 代入数值, 求 C=C 键能(kJ/mol);<br><strong>(3)</strong> 解释为何 C=C 键能 &gt; C-C 键能(从电子结构角度), 以及这对工业乙烯加氢反应的<strong>能量趋势</strong>(放热还是吸热)的意义。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 π(希腊字母, 读 pai), 可直接复制本提示中的 π 使用;不要用英文 pi 代替。</em>",
+      keywords:["C=C","π","加氢","放热"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能与 ΔH 关系 \\(\\Delta H = \\sum E(反键) - \\sum E(产键)\\);② C₂H₄ 含 1 个 C=C + 4 个 C-H;C₂H₆ 含 1 个 C-C + 6 个 C-H;③ C=C 双键(σ+π)结构。',
+        approach:'<strong>解题思路</strong>:<br>(1) 用键能公式列方程, 解出 C=C 的字母表达式;<br>(2) 代入 a, b, c 数值;<br>(3) 从 σ+π 双键结构解释能量趋势。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 字母表达式</strong>(关键字 C=C):<br>反应物键 = 1 个 C=C + 4 个 C-H + 1 个 H-H = (C=C) + 4<em>c</em> + <em>a</em><br>产物键 = 1 个 C-C + 6 个 C-H = <em>b</em> + 6<em>c</em><br>ΔH = Σ反 - Σ产 = (C=C) + 4<em>c</em> + <em>a</em> - <em>b</em> - 6<em>c</em> = (C=C) + <em>a</em> - <em>b</em> - 2<em>c</em><br>代入 ΔH = -137:<br>-137 = (C=C) + <em>a</em> - <em>b</em> - 2<em>c</em><br>解得 <strong>(C=C) = <em>b</em> + 2<em>c</em> - <em>a</em> - 137</strong> kJ/mol<br><br><strong>(2) 代入数值</strong>:<br>(C=C) = 348 + 2×413 - 436 - 137<br>= 348 + 826 - 436 - 137<br>= 1174 - 573<br>= <strong>601 kJ/mol</strong>(与文献值 ~614 kJ/mol 接近)<br><br><strong>(3) 物理含义 + 工业意义</strong>(关键字 π / 加氢 / 放热):<br>· <strong>电子结构</strong>:C=C 是<strong>双键</strong>(1 σ + 1 <strong>π 键</strong>), C-C 是单键(只 σ)。π 键虽较弱(σ 通常 ~350, π 通常 ~250), 但加在 σ 上, 使双键总能量 &gt; 单键, 故 C=C(601) &gt; C-C(348);<br>· 但<strong>双键 &lt; 2× 单键</strong>(601 &lt; 696), 这反映 π 键不如 σ 键稳定 — π 键活泼易反应, 这正是<strong>烯烃比烷烃化学性质活泼</strong>(易加氢 / 加成 / 聚合)的根本原因;<br>· <strong>加氢反应的能量趋势</strong>:加氢时<strong>断 C=C(601) + H-H(436)</strong> = 1037 吸能;<strong>成 C-C(348) + 2 个 C-H(826)</strong> = 1174 放能。差额 = 1037 - 1174 = -137 = ΔH(<strong>放热</strong>) ✓ 与给定 ΔH 自洽;<br>· <strong>工业意义</strong>:乙烯加氢放热, 不需供能, 但需<strong>催化剂(Ni / Pd)</strong>降低活化能 + 适温保证速率。<br><br><strong>关键字命中</strong>:① C=C / ② π / ③ 加氢 / ④ 放热<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"键能公式 ΔH = Σ反键 - Σ产键" 我能熟练应用吗?(注意方向, 不能反过来)',
+        '"原子键计数" 我能熟练画结构核对吗?(C₂H₄ 4 个 C-H, C₂H₆ 6 个 C-H)',
+        '"σ vs π 键能量结构差异" 我能解释烯烃化学活泼性吗?',
+        '高考压轴题"加氢反应 ΔH 估算 + 工业条件分析" 我能熟练答吗?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"中等", exportIds:["BOND-ENERGY-FORMULA","BOND-COUNTING","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:双碳目标 — CO 加氢制甲醇是 CO 资源化关键路径:<br>&nbsp;&nbsp;CO(g) + 2H<sub>2</sub>(g) → CH<sub>3</sub>OH(g), ΔH = -90.8 kJ/mol<br><br>已知键能(kJ/mol):H-H = <em>a</em> = 436;C-H = <em>b</em> = 413;O-H = <em>c</em> = 463;C≡O(CO 中三键) = <em>d</em> = 1071<br><br><strong>(1)</strong> 求 CH<sub>3</sub>OH 中 C-O 键能(用字母);<br><strong>(2)</strong> 代入数值;<br><strong>(3)</strong> 解释为何 CO 中 C≡O 键能极大(~1071 kJ/mol), 这对工业合成甲醇的<strong>反应条件</strong>(温度 / 压强 / 催化剂)有何意义。<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:三键符号 ≡ 可从题面「C≡O」处复制, 也可直接复制本提示中的 ≡ 使用;不要用等号 = 代替。</em>",
+      keywords:["C≡O","三键","催化剂","高压"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能公式;② CH<sub>3</sub>OH 含 3 个 C-H + 1 个 C-O + 1 个 O-H;③ C≡O 三键稳定性 + 工业条件权衡。',
+        approach:'<strong>解题思路</strong>:列方程解 C-O 字母表达式 → 代入数值 → 解释三键稳定性 + 工业条件。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 字母表达式</strong>:<br>反应物键 = 1 个 C≡O + 2 个 H-H = <em>d</em> + 2<em>a</em><br>产物 CH<sub>3</sub>OH 键 = 3 个 C-H + 1 个 C-O + 1 个 O-H = 3<em>b</em> + (C-O) + <em>c</em><br>ΔH = Σ反 - Σ产 = <em>d</em> + 2<em>a</em> - 3<em>b</em> - (C-O) - <em>c</em><br>代入 ΔH = -90.8:<br>-90.8 = <em>d</em> + 2<em>a</em> - 3<em>b</em> - <em>c</em> - (C-O)<br>解得 <strong>(C-O) = <em>d</em> + 2<em>a</em> - 3<em>b</em> - <em>c</em> + 90.8</strong> kJ/mol<br><br><strong>(2) 代入数值</strong>:<br>(C-O) = 1071 + 2×436 - 3×413 - 463 + 90.8<br>= 1071 + 872 - 1239 - 463 + 90.8<br>= 1943 - 1239 - 463 + 90.8<br>= 241 + 90.8<br>= <strong>331.8 kJ/mol</strong>(与文献值 ~358 接近, 偏差源于题目所给键能均为平均值)<br><br><strong>(3) 物理含义 + 工业意义</strong>(关键字 C≡O / 三键 / 催化剂 / 高压):<br>· <strong>C≡O 是三键</strong>(1 σ + 2 π), 类似 N≡N(946), 键能极大(~1071 kJ/mol)<br>· <strong>CO 极稳定</strong>:三键稳固使 CO 在常温下化学惰性, 是大气中 CO 难自然氧化的根本原因<br>· <strong>工业反应难点</strong>:合成甲醇需<strong>断开 C≡O 三键</strong>, 活化能极高 → 必须<strong>催化剂(Cu/ZnO)</strong>降 \\(E_a\\)<br>· <strong>温度选择</strong>:200-300°C <strong>速率</strong>(升温利于动力学)和<strong>平衡产率</strong>(放热反应降温利平衡)的折中<br>· <strong>压强选择</strong>:气体摩尔数从 3(CO + 2H<sub>2</sub>) → 1(CH<sub>3</sub>OH), <strong>高压(50-100 atm)</strong>由勒夏特列原理利于产率<br>· <strong>工业意义</strong>:甲醇是化工核心原料 + 双碳战略的 CO 利用方案<br><br><strong>关键字命中</strong>:① C≡O / ② 三键 / ③ 催化剂 / ④ 高压<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"C≡O 三键键能" 我能熟练对比 C=O(羰基)和 C-O(醇)的能量差异吗?',
+        '"高压 + 催化剂 + 适温" 工业条件三要素 我能解释勒夏特列 + 速率 + 工程成本的权衡吗?',
+        '"双碳目标" 把 CO / CO₂ 资源化的化学逻辑 我能联系到本题吗?',
+        '高考压轴题"工业反应条件分析" 我能熟练用本板块公式答吗?'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"较难", exportIds:["BOND-ENERGY-FORMULA","BOND-COUNTING","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:工业制乙烯 — 浓 H<sub>2</sub>SO<sub>4</sub> / 170°C 催化乙醇脱水:<br>&nbsp;&nbsp;C<sub>2</sub>H<sub>5</sub>OH(g) → C<sub>2</sub>H<sub>4</sub>(g) + H<sub>2</sub>O(g), ΔH = +44 kJ/mol(吸热)<br><br>已知键能(kJ/mol):C-C = <em>a</em> = 348;C-H = <em>b</em> = 413;C=C = <em>c</em> = 614;C-O = <em>d</em> = 358<br><br><strong>(1)</strong> 求 O-H 键能(用字母);<br><strong>(2)</strong> 代入数值;<br><strong>(3)</strong> 解释脱水反应吸热的<strong>物理本质</strong>(断键 vs 成键)+ 工业脱水为何用<strong>高温 + 浓 H<sub>2</sub>SO<sub>4</sub></strong>(从吸热反应平衡分析)。",
+      keywords:["断键","吸热","催化剂","平衡"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能公式;② C<sub>2</sub>H<sub>5</sub>OH 键计数(1 C-C + 5 C-H + 1 C-O + 1 O-H);C<sub>2</sub>H<sub>4</sub>(1 C=C + 4 C-H), H<sub>2</sub>O(2 O-H);③ 吸热反应工业条件(高温利平衡 + 催化剂)。',
+        approach:'<strong>解题思路</strong>:逐键计数 → 列方程 → 代入解 → 解释吸热本质。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 字母表达式</strong>:<br>反应物 C<sub>2</sub>H<sub>5</sub>OH 键 = 1 C-C + 5 C-H + 1 C-O + 1 O-H = <em>a</em> + 5<em>b</em> + <em>d</em> + (O-H)<br>产物键 = (C<sub>2</sub>H<sub>4</sub>:1 C=C + 4 C-H)+ (H<sub>2</sub>O:2 O-H) = <em>c</em> + 4<em>b</em> + 2(O-H)<br>ΔH = Σ反 - Σ产 = <em>a</em> + 5<em>b</em> + <em>d</em> + (O-H) - <em>c</em> - 4<em>b</em> - 2(O-H) = <em>a</em> + <em>b</em> + <em>d</em> - <em>c</em> - (O-H)<br>代入 ΔH = +44:<br>+44 = <em>a</em> + <em>b</em> + <em>d</em> - <em>c</em> - (O-H)<br>解得 <strong>(O-H) = <em>a</em> + <em>b</em> + <em>d</em> - <em>c</em> - 44</strong> kJ/mol<br><br><strong>(2) 代入数值</strong>:<br>(O-H) = 348 + 413 + 358 - 614 - 44<br>= 1119 - 614 - 44<br>= 505 - 44<br>= <strong>461 kJ/mol</strong>(与文献值 ~463 kJ/mol 几乎一致 ✓)<br><br><strong>(3) 物理本质 + 工业意义</strong>(关键字 断键 / 吸热 / 催化剂 / 平衡):<br>· <strong>吸热本质</strong>:本反应中<strong>断键吸能</strong>:C-C(348)+5×C-H(2065)+C-O(358)+O-H(461)= 3232 kJ;<strong>成键放能</strong>:C=C(614)+4×C-H(1652)+2×O-H(922)= 3188 kJ;<br>· 净 ΔH = 3232 - 3188 = +44 kJ/mol(<strong>吸热</strong>) ✓;<br>· 原因:断 1 个 O-H + 1 个 C-O 形成 1 个 C=C + 1 个 O-H, 反应实际增加 1 个 C=C 键, 但损失 1 个 C-O(C-O 较弱), 净吸热;<br>· <strong>高温的必要性</strong>:本反应吸热, 由勒夏特列原理, <strong>升温利于正向</strong>(170°C 浓硫酸条件), 同时升温升速率;<br>· <strong>浓 H<sub>2</sub>SO<sub>4</sub> 的双重作用</strong>:① <strong>催化剂</strong>(质子化羟基, 降活化能);② <strong>脱水剂</strong>(吸收生成的 H<sub>2</sub>O, 推动<strong>平衡</strong>向右);<br>· <strong>工业意义</strong>:乙烯是基础化工原料(聚乙烯 / 乙二醇 / 苯乙烯), 工业用此法或乙烷裂解制取。<br><br><strong>关键字命中</strong>:① 断键 / ② 吸热 / ③ 催化剂 / ④ 平衡<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"断键吸能 vs 成键放能" 的能量平衡逻辑 我能用键能公式解释吸热 / 放热吗?',
+        '"勒夏特列原理对吸热反应升温利平衡" 我能熟练应用吗?',
+        '"浓 H₂SO₄ 同时作催化剂和脱水剂" 推动平衡的双重作用 我能体会吗?',
+        '高考压轴题"吸热反应条件优化" 我能熟练答吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["BOND-ENERGY-FORMULA","BOND-COUNTING","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:"<strong>综合大题(150-300 字 + 计算)</strong>:氢氧燃料电池 — 直接把化学能转电能:<br>&nbsp;&nbsp;2H<sub>2</sub>(g) + O<sub>2</sub>(g) → 2H<sub>2</sub>O(g), ΔH = -484 kJ/mol<br><br>已知键能(kJ/mol):H-H = <em>a</em> = 436;O=O = <em>b</em> = 498<br><br><strong>(1)</strong> 求 H<sub>2</sub>O 中 O-H 键能(用字母);<br><strong>(2)</strong> 代入数值;<br><strong>(3)</strong> 解释为何 O-H 键能较大(~464 kJ/mol), 这对<strong>氢氧燃料电池</strong>作为清洁能源(对比传统燃烧)的<strong>能量转化优势</strong>有何意义。",
+      keywords:["O-H","效率","燃料电池","清洁"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 键能公式;② H<sub>2</sub>O 含 2 个 O-H;③ 氢氧燃料电池绕过 Carnot 效率限制 + 清洁排放。',
+        approach:'<strong>解题思路</strong>:列方程解 O-H → 代入 → 解释 O-H 强度 + 燃料电池意义。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 字母表达式</strong>:<br>反应物键 = 2 个 H-H + 1 个 O=O = 2<em>a</em> + <em>b</em><br>产物键 = 2 个 H<sub>2</sub>O × 2 个 O-H/每 H<sub>2</sub>O = 4 个 O-H = 4(O-H)<br>ΔH = Σ反 - Σ产 = 2<em>a</em> + <em>b</em> - 4(O-H)<br>代入 ΔH = -484:<br>-484 = 2<em>a</em> + <em>b</em> - 4(O-H)<br>4(O-H) = 2<em>a</em> + <em>b</em> + 484<br>解得 <strong>(O-H) = (2<em>a</em> + <em>b</em> + 484) / 4</strong> kJ/mol<br><br><strong>(2) 代入数值</strong>:<br>(O-H) = (2×436 + 498 + 484) / 4<br>= (872 + 498 + 484) / 4<br>= 1854 / 4<br>= <strong>463.5 kJ/mol</strong>(与文献值 ~463 kJ/mol 一致 ✓)<br><br><strong>(3) 物理含义 + 工业意义</strong>(关键字 O-H / 效率 / 燃料电池 / 清洁):<br>· <strong>O-H 键能较大</strong>(~464):在常见单键中仅次于 C=O(~743)、N=O 等, 是 H<sub>2</sub>O 极稳定的根本(O-H 键能 &gt; O=O 单键能 ~498 / 2 = 249, 也 &gt; O-O 键能 ~146);<br>· 故 H<sub>2</sub>O 是<strong>常见的稳定产物</strong>, 燃烧反应放热的主要来源之一就是 O-H 键的形成;<br>· <strong>氢氧燃料电池的优势</strong>:<br>　- 与传统<strong>燃烧法</strong>(化学能 → 热能 → 机械能 → 电能, 受 Carnot 效率限制 ~30-40%)对比;<br>　- 燃料电池: 化学能 → 电能<strong>直接转化</strong>, 效率可达 60-70%(理论可达 \\(\\Delta G / \\Delta H\\) ≈ 83%);<br>　- <strong>清洁排放</strong>:产物只有 H<sub>2</sub>O, 无 CO<sub>2</sub> / NO<sub>x</sub> / SO<sub>x</sub> 污染;<br>　- 应用:航天 / 电动车 / 备用电源(丰田 Mirai / 现代 Nexo 等);<br>· <strong>挑战</strong>:① H<sub>2</sub> 制取(电解水成本高 / 蒸汽重整含碳);② 储运(高压 / 液氢);③ 催化剂(Pt 昂贵, 寻找替代);<br>· <strong>双碳意义</strong>:绿氢(可再生能源电解水)+ 氢能燃料电池是<strong>清洁</strong>能源体系的关键。<br><br><strong>关键字命中</strong>:① O-H / ② 效率 / ③ 燃料电池 / ④ 清洁<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"O-H 键能较大 → H₂O 稳定 → 燃烧反应放热" 这条逻辑链 我能熟练讲清吗?',
+        '"燃料电池直接化学能 → 电能, 绕过 Carnot 限制" 的工程意义 我能理解吗?',
+        '"清洁能源 / 双碳目标" 化学如何参与解决能源问题 我能说出 2-3 例吗?',
+        '高考压轴题"键能 + 工业应用" 我能熟练联系经济意义吗?'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"中等", exportIds:["ENERGY-DIAGRAM-READING","HESS-EQUATION","RATE-LIMITING-STEP","CATALYST-EFFECT-ON-EA","PATH-INDEPENDENCE-CHEMISTRY"],
+      stem:`<strong>综合大题(150-300 字 + 计算)</strong>:合成氨工业 — Fe 催化剂作用下 N<sub>2</sub> + 3H<sub>2</sub> → 2NH<sub>3</sub> 分两步进行(吸附 + 表面反应)。实测能量历程图(能量单位 kJ/mol, 以 N<sub>2</sub> + 3H<sub>2</sub> 起点为 0):
+        <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="40" x2="40" y2="240" stroke="#666" stroke-width="1.5"/>
+          <line x1="40" y1="240" x2="580" y2="240" stroke="#666" stroke-width="1.5"/>
+          <text x="20" y="44" font-size="11" fill="#666">能量/kJ·mol⁻¹</text>
+          <text x="530" y="258" font-size="11" fill="#666">反应进程</text>
+          <line x1="36" y1="200" x2="40" y2="200" stroke="#666"/><text x="8" y="204" font-size="10" fill="#666">-92</text>
+          <line x1="36" y1="170" x2="40" y2="170" stroke="#666"/><text x="14" y="174" font-size="10" fill="#666">0</text>
+          <line x1="36" y1="150" x2="40" y2="150" stroke="#666"/><text x="8" y="154" font-size="10" fill="#666">+40</text>
+          <line x1="36" y1="100" x2="40" y2="100" stroke="#666"/><text x="0" y="104" font-size="10" fill="#666">+120</text>
+          <line x1="36" y1="60" x2="40" y2="60" stroke="#666"/><text x="0" y="64" font-size="10" fill="#666">+180</text>
+          <path d="M 60 170 L 100 170 L 140 60 L 200 60 L 220 150 L 280 150 L 320 100 L 380 100 L 410 200 L 540 200" fill="none" stroke="#00409A" stroke-width="2.5"/>
+          <circle cx="160" cy="60" r="3" fill="#c0392b"/><text x="115" y="50" font-size="10" fill="#c0392b" font-weight="600">过渡态 1 (+180)</text>
+          <text x="240" y="142" font-size="10" fill="#00409A" font-weight="600">中间体 (+40)</text>
+          <circle cx="345" cy="100" r="3" fill="#c0392b"/><text x="300" y="92" font-size="10" fill="#c0392b" font-weight="600">过渡态 2 (+120)</text>
+          <text x="48" y="190" font-size="10" fill="#0055B8" font-weight="600">起点 0</text><text x="48" y="205" font-size="9" fill="#5a6c7d">N₂+3H₂</text>
+          <text x="450" y="222" font-size="10" fill="#2e7d32" font-weight="600">终点 -92</text><text x="450" y="236" font-size="9" fill="#5a6c7d">2NH₃</text>
+        </svg>
+        <div class="cross-topic-warn">
+          <strong>⚠️ 跨主题前置(反应动力学)</strong>:本题涉及『活化能 \\(E_a\\) / 过渡态 / 决速步 / 中间体』, 来自反应动力学(蓝色诺瓦未来板块). 最小自包含简介:<strong>\\(E_a\\)</strong> = 该步起点到过渡态顶点的能量差(能垒);<strong>决速步</strong> = \\(E_a\\) 最大的一步(限速);<strong>中间体</strong> = 两步之间的稳定瞬态(图上波谷). 本题<strong>所有定量计算</strong>仍由<strong>热力学(盖斯定律)</strong>解决.
+        </div>
+        <strong>(1)</strong> 第 1 步 ΔH<sub>1</sub> = ____ kJ/mol;第 2 步 ΔH<sub>2</sub> = ____ kJ/mol;总反应 ΔH = ____ kJ/mol;<br>
+        <strong>(2)</strong> \\(E_{a1}\\) 和 \\(E_{a2}\\) 分别 = ____ kJ/mol;<strong>决速步</strong>是第 ___ 步;<br>
+        <strong>(3)</strong> 若改用新型催化剂使过渡态 1 能量降至 +120 kJ/mol(中间体 / 过渡态 2 / 终点不变), 总反应 ΔH 是否改变? 解释(从盖斯定律 / 状态函数角度);新催化剂对合成氨工业有何意义?<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>`,
+      keywords:["ΔH","决速步","催化剂","路径无关"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 读图算 ΔH(终点 - 起点 / 分步 ΔH);② 活化能 \\(E_a\\) 从该步起点算;③ 决速步 = \\(E_a\\) 最大者;④ 催化剂改 \\(E_a\\) 不改 ΔH(盖斯定律).',
+        approach:'<strong>解题思路</strong>:逐小问读图算 → 比较 \\(E_a\\) 判决速 → 用路径无关解释催化剂.',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 分步 + 总 ΔH</strong>(关键字 ΔH):<br>· ΔH<sub>1</sub> = 中间体(+40) - 起点(0) = <strong>+40 kJ/mol</strong>(吸热)<br>· ΔH<sub>2</sub> = 终点(-92) - 中间体(+40) = <strong>-132 kJ/mol</strong>(放热)<br>· 总 ΔH = 终点(-92) - 起点(0) = <strong>-92 kJ/mol</strong>(放热)<br>· 验:ΔH<sub>1</sub> + ΔH<sub>2</sub> = +40 + (-132) = -92 = 总 ΔH ✓ 自洽(盖斯定律加和)<br><br><strong>(2) 活化能 + 决速步</strong>(关键字 决速步):<br>· \\(E_{a1}\\) = 过渡态 1(+180) - 第 1 步起点(0) = <strong>180 kJ/mol</strong><br>· \\(E_{a2}\\) = 过渡态 2(+120) - 第 2 步起点(中间体 +40) = <strong>80 kJ/mol</strong><br>· 比较:\\(E_{a1}\\) (180) &gt; \\(E_{a2}\\) (80) → <strong>第 1 步是决速步</strong>(\\(E_a\\) 最大 = 速率最慢 = 限速)<br>· 物理含义:打开 N≡N(键能 946 kJ/mol)是合成氨最难一步, 确实决速<br><br><strong>(3) 催化剂改路径不改 ΔH + 工业意义</strong>(关键字 催化剂 / 路径无关):<br>· 答:<strong>总 ΔH 不变</strong>, 仍为 -92 kJ/mol;<br>· <strong>根据</strong>:由<strong>盖斯定律</strong>(焓 H 是状态函数), ΔH = H<sub>末</sub> - H<sub>初</sub> 只与<strong>始末态</strong>决定, <strong>与路径无关</strong>;<br>· 新催化剂改变<strong>路径</strong>(过渡态高度由 +180 降至 +120), 但<strong>起点</strong>(N<sub>2</sub> + 3H<sub>2</sub>)和<strong>终点</strong>(2NH<sub>3</sub>)物质 + 能量不变 → ΔH 不变;<br>· <strong>新 \\(E_{a1}\\)</strong> = 120 - 0 = 120 kJ/mol(降了 60), 但 \\(E_{a2}\\) = 80 不变 → 第 1 步仍是决速步, 速率显著提高<br>· <strong>工业意义</strong>:① 反应速率提高 → 可<strong>降低反应温度</strong>(节能);② 同等温度下产率提高;③ 但 ΔH 不变 → 总<strong>能量收益固定</strong>, 催化剂不"创造能量";<br>· Haber-Bosch 工艺 1909 突破就在<strong>Fe 催化剂</strong>降 \\(E_{a1}\\), 让合成氨在 400-500°C 可行(无催化剂需 &gt; 1000°C). 新催化剂研发(钌基 / 单原子)是降本节能的关键方向.<br><br><strong>关键字命中</strong>:① ΔH / ② 决速步 / ③ 催化剂 / ④ 路径无关<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分.'
+      },
+      reflectionPrompts: [
+        '"读图算 ΔH = 终点 - 起点" 我能避开"过渡态当 ΔH"的陷阱吗?',
+        '"\\(E_a\\) 从该步起点算" 第 2 步 \\(E_a\\) 应从中间体起算, 我能熟练吗?',
+        '"决速步 = \\(E_a\\) 最大者" (越大 = 越慢 = 限速)我能体会反方向直觉吗?',
+        '"催化剂改路径不改 ΔH" 这是盖斯定律的工业应用, 我能说出 2-3 个例子吗?'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"中等", exportIds:["ENERGY-DIAGRAM-READING","HESS-EQUATION","RATE-LIMITING-STEP","CATALYST-EFFECT-ON-EA"],
+      stem:`<strong>综合大题(150-300 字 + 计算)</strong>:石化工业 — Ag 催化乙烯氧化制环氧乙烷(用于乙二醇 / 防冻液 / 表面活性剂)。在 Ag 催化下分两步:<br>&nbsp;&nbsp;C<sub>2</sub>H<sub>4</sub>(g) + ½O<sub>2</sub>(g) → C<sub>2</sub>H<sub>4</sub>O(g) 环氧乙烷, ΔH ≈ -105 kJ/mol<br>
+        <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="40" x2="40" y2="240" stroke="#666" stroke-width="1.5"/>
+          <line x1="40" y1="240" x2="580" y2="240" stroke="#666" stroke-width="1.5"/>
+          <text x="20" y="44" font-size="11" fill="#666">能量/kJ·mol⁻¹</text>
+          <text x="530" y="258" font-size="11" fill="#666">反应进程</text>
+          <line x1="36" y1="210" x2="40" y2="210" stroke="#666"/><text x="6" y="214" font-size="10" fill="#666">-105</text>
+          <line x1="36" y1="170" x2="40" y2="170" stroke="#666"/><text x="14" y="174" font-size="10" fill="#666">0</text>
+          <line x1="36" y1="180" x2="40" y2="180" stroke="#666"/><text x="6" y="184" font-size="10" fill="#666">-30</text>
+          <line x1="36" y1="160" x2="40" y2="160" stroke="#666"/><text x="14" y="164" font-size="10" fill="#666">+10</text>
+          <line x1="36" y1="80" x2="40" y2="80" stroke="#666"/><text x="6" y="84" font-size="10" fill="#666">+90</text>
+          <path d="M 60 170 L 100 170 L 140 80 L 200 80 L 220 180 L 280 180 L 320 160 L 380 160 L 410 210 L 540 210" fill="none" stroke="#00409A" stroke-width="2.5"/>
+          <circle cx="160" cy="80" r="3" fill="#c0392b"/><text x="115" y="70" font-size="10" fill="#c0392b" font-weight="600">过渡态 1 (+90)</text>
+          <text x="240" y="172" font-size="10" fill="#00409A" font-weight="600">中间体 (-30)</text>
+          <circle cx="345" cy="160" r="3" fill="#c0392b"/><text x="300" y="152" font-size="10" fill="#c0392b" font-weight="600">过渡态 2 (+10)</text>
+          <text x="48" y="190" font-size="10" fill="#0055B8" font-weight="600">起点 0</text><text x="48" y="205" font-size="9" fill="#5a6c7d">C₂H₄+½O₂</text>
+          <text x="450" y="232" font-size="10" fill="#2e7d32" font-weight="600">终点 -105</text><text x="450" y="246" font-size="9" fill="#5a6c7d">C₂H₄O</text>
+        </svg>
+        <div class="cross-topic-warn">
+          <strong>⚠️ 跨主题前置(反应动力学)</strong>:同 T5-1 简介 — \\(E_a\\) / 过渡态 / 决速步 / 中间体 来自动力学. 本题热力学计算仍主导.
+        </div>
+        <strong>(1)</strong> 第 1 步 ΔH<sub>1</sub> = ____ kJ/mol;第 2 步 ΔH<sub>2</sub> = ____ kJ/mol;<br>
+        <strong>(2)</strong> \\(E_{a1}\\) 和 \\(E_{a2}\\) 分别 = ____ kJ/mol;<strong>决速步</strong>是第 ___ 步;<br>
+        <strong>(3)</strong> 若改用新型 Ag 单原子催化剂使过渡态 1 能量降至 +50 kJ/mol。总反应 ΔH 是否改变? 工业意义?(从路径无关角度)<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>`,
+      keywords:["ΔH","决速步","催化剂","路径无关"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:同 T5-1 — 读图分步 ΔH + \\(E_a\\) + 决速步 + 催化剂不改 ΔH.',
+        approach:'<strong>解题思路</strong>:读图算分步 → 算 \\(E_a\\) → 用盖斯解释催化剂.',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 分步 ΔH</strong>:<br>· ΔH<sub>1</sub> = 中间体(-30) - 起点(0) = <strong>-30 kJ/mol</strong>(放热)<br>· ΔH<sub>2</sub> = 终点(-105) - 中间体(-30) = <strong>-75 kJ/mol</strong>(放热)<br>· 验:ΔH<sub>1</sub> + ΔH<sub>2</sub> = -30 + (-75) = -105 = 总 ΔH ✓<br><br><strong>(2) \\(E_a\\) + 决速步</strong>(关键字 决速步):<br>· \\(E_{a1}\\) = 过渡态 1(+90) - 第 1 步起点(0) = <strong>90 kJ/mol</strong><br>· \\(E_{a2}\\) = 过渡态 2(+10) - 第 2 步起点(中间体 -30) = <strong>40 kJ/mol</strong><br>· 比较:\\(E_{a1}\\) (90) &gt; \\(E_{a2}\\) (40) → <strong>第 1 步是决速步</strong><br>· 物理:O<sub>2</sub> 在 Ag 表面解离 / 与 C<sub>2</sub>H<sub>4</sub> 配合形成中间体, 难度较高<br><br><strong>(3) 催化剂改路径不改 ΔH</strong>(关键字 催化剂 / 路径无关):<br>· 答:<strong>ΔH 不变</strong>(总反应仍 -105 kJ/mol)<br>· <strong>根据</strong>:盖斯定律 / 焓 H 状态函数 → ΔH 由<strong>始末态</strong>决定, <strong>路径无关</strong>;<br>· Ag 单原子催化剂改路径 → <strong>新 \\(E_{a1}\\)</strong> = 50 - 0 = 50 kJ/mol(降了 40)→ 第 1 步速率提高;<br>· <strong>工业意义</strong>:① 速率提高 → 同等条件下<strong>产率</strong>更高;② 可<strong>降低反应温度</strong>(原工业 250-280°C 可降到 200°C)→ 节能;③ <strong>选择性提高</strong>(Ag 单原子能减少<strong>深度氧化</strong>副反应 CO<sub>2</sub> + H<sub>2</sub>O 的生成);④ 但 ΔH 不变 → 单位反应放热不变, 总能量利用率取决于副反应抑制.<br>· 环氧乙烷年产量 ~3000 万吨, 催化剂改进直接关系工业经济效益.<br><br><strong>关键字命中</strong>:① ΔH / ② 决速步 / ③ 催化剂 / ④ 路径无关<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分.'
+      },
+      reflectionPrompts: [
+        '"两步都放热, 决速步仍是 \\(E_a\\) 较大者" 我能避开"决速步 = 放热多的步"的误解吗?',
+        '"Ag 单原子催化剂提高选择性" — 催化剂不只是降 \\(E_a\\) 也影响产物分布, 我能体会吗?',
+        '"环氧乙烷 → 乙二醇 / 防冻液 / 表面活性剂"工业链 我能联系到化学的经济价值吗?',
+        '高考压轴题"催化剂的多重作用" 我能熟练答吗?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"较难", exportIds:["ENERGY-DIAGRAM-READING","HESS-EQUATION","RATE-LIMITING-STEP","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:`<strong>综合大题(150-300 字 + 计算)</strong>:工业制氢 — Ni 催化甲烷重整(SMR, Steam Methane Reforming):<br>&nbsp;&nbsp;CH<sub>4</sub>(g) + H<sub>2</sub>O(g) → CO(g) + 3H<sub>2</sub>(g), ΔH = +206 kJ/mol(<strong>强吸热</strong>)<br>Ni 催化下分两步:
+        <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="40" x2="40" y2="240" stroke="#666" stroke-width="1.5"/>
+          <line x1="40" y1="240" x2="580" y2="240" stroke="#666" stroke-width="1.5"/>
+          <text x="20" y="44" font-size="11" fill="#666">能量/kJ·mol⁻¹</text>
+          <text x="530" y="258" font-size="11" fill="#666">反应进程</text>
+          <line x1="36" y1="170" x2="40" y2="170" stroke="#666"/><text x="14" y="174" font-size="10" fill="#666">0</text>
+          <line x1="36" y1="110" x2="40" y2="110" stroke="#666"/><text x="0" y="114" font-size="10" fill="#666">+120</text>
+          <line x1="36" y1="80" x2="40" y2="80" stroke="#666"/><text x="0" y="84" font-size="10" fill="#666">+170</text>
+          <line x1="36" y1="60" x2="40" y2="60" stroke="#666"/><text x="0" y="64" font-size="10" fill="#666">+220</text>
+          <line x1="36" y1="50" x2="40" y2="50" stroke="#666"/><text x="0" y="54" font-size="10" fill="#666">+240</text>
+          <line x1="36" y1="70" x2="40" y2="70" stroke="#666"/><text x="0" y="74" font-size="10" fill="#666">+206</text>
+          <path d="M 60 170 L 100 170 L 140 60 L 200 60 L 220 110 L 280 110 L 320 50 L 380 50 L 410 70 L 540 70" fill="none" stroke="#00409A" stroke-width="2.5"/>
+          <circle cx="160" cy="60" r="3" fill="#c0392b"/><text x="115" y="50" font-size="10" fill="#c0392b" font-weight="600">过渡态 1 (+220)</text>
+          <text x="235" y="102" font-size="10" fill="#00409A" font-weight="600">中间体 (+120)</text>
+          <circle cx="345" cy="50" r="3" fill="#c0392b"/><text x="300" y="42" font-size="10" fill="#c0392b" font-weight="600">过渡态 2 (+240)</text>
+          <text x="48" y="190" font-size="10" fill="#0055B8" font-weight="600">起点 0</text><text x="48" y="205" font-size="9" fill="#5a6c7d">CH₄+H₂O(g)</text>
+          <text x="450" y="92" font-size="10" fill="#e67e22" font-weight="600">终点 +206</text><text x="450" y="106" font-size="9" fill="#5a6c7d">CO+3H₂</text>
+        </svg>
+        <div class="cross-topic-warn">
+          <strong>⚠️ 跨主题前置(反应动力学)</strong>:\\(E_a\\) / 过渡态 / 决速步 简介同 T5-1.
+        </div>
+        <strong>(1)</strong> 第 1 步 ΔH<sub>1</sub> = ____ kJ/mol;第 2 步 ΔH<sub>2</sub> = ____ kJ/mol;<br>
+        <strong>(2)</strong> \\(E_{a1}\\) 和 \\(E_{a2}\\) 分别 = ____ kJ/mol;<strong>决速步</strong>是第 ___ 步;<br>
+        <strong>(3)</strong> 该反应<strong>强吸热</strong> + 高活化能, 工业为何仍大量生产? 解释<strong>700-1000°C 高温</strong>(从吸热反应平衡分析)+ <strong>Ni 催化剂作用</strong> + <strong>能源经济意义</strong>。`,
+      keywords:["吸热","高温","催化剂","平衡"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 读图算分步 + 总 ΔH(本题总吸热);② 决速步;③ 吸热反应工业条件 — 高温利平衡 + 催化剂降 \\(E_a\\).',
+        approach:'<strong>解题思路</strong>:读图算 → 比较 \\(E_a\\) → 解释吸热反应的工业必要性 + 条件选择.',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 分步 ΔH</strong>:<br>· ΔH<sub>1</sub> = 中间体(+120) - 起点(0) = <strong>+120 kJ/mol</strong>(吸热)<br>· ΔH<sub>2</sub> = 终点(+206) - 中间体(+120) = <strong>+86 kJ/mol</strong>(吸热)<br>· 验:120 + 86 = 206 = 总 ΔH ✓ 自洽<br><br><strong>(2) \\(E_a\\) + 决速步</strong>:<br>· \\(E_{a1}\\) = 过渡态 1(+220) - 起点(0) = <strong>220 kJ/mol</strong><br>· \\(E_{a2}\\) = 过渡态 2(+240) - 中间体(+120) = <strong>120 kJ/mol</strong><br>· 比较:\\(E_{a1}\\) (220) &gt; \\(E_{a2}\\) (120) → <strong>第 1 步是决速步</strong><br>· 物理:CH<sub>4</sub> 中 C-H 键活化是 SMR 反应的关键瓶颈<br><br><strong>(3) 吸热反应的工业必要性</strong>(关键字 吸热 / 高温 / 催化剂 / 平衡):<br>· <strong>为何仍生产</strong>:H<sub>2</sub> 是<strong>双碳战略 + 化工 + 能源</strong>核心原料(合成氨 / 甲醇 / 燃料电池 / 钢铁还原), 工业需求巨大;<br>· <strong>700-1000°C 高温的双重作用</strong>:<br>　- <strong>动力学</strong>:升温提高分子动能 → 部分分子超过 \\(E_{a1}\\)=220 → 反应速率显著提高;<br>　- <strong>平衡(热力学)</strong>:本反应<strong>强吸热</strong>(ΔH = +206), 由勒夏特列原理, <strong>升温利于正向</strong>(平衡右移, 提高 H<sub>2</sub> 产率);<br>　- 高温 / 高吸热反应是<strong>双赢</strong>(动力学 + 平衡都利好), 不存在矛盾;<br>· <strong>Ni 催化剂作用</strong>:降低 \\(E_{a1}\\) 和 \\(E_{a2}\\), 使反应在 700-1000°C 可行(无催化剂需 &gt; 1500°C, 工程不可行);<br>· <strong>能源经济意义</strong>:供能成本(高温需燃料燃烧供热, 常用 CH<sub>4</sub> 的部分燃烧反应供热)是 H<sub>2</sub> 制取的主要成本;<br>· <strong>双碳挑战</strong>:SMR 产 1 mol H<sub>2</sub> 伴随 CO 副产物(后续水煤气变换 CO + H<sub>2</sub>O → CO<sub>2</sub> + H<sub>2</sub> 利用 + 排放 CO<sub>2</sub>), 故 SMR 制 H<sub>2</sub> 是<strong>灰氢</strong>(含碳排放). 替代方案:电解水制<strong>绿氢</strong>(可再生能源驱动)是清洁路线.<br><br><strong>关键字命中</strong>:① 吸热 / ② 高温 / ③ 催化剂 / ④ 平衡<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分.'
+      },
+      reflectionPrompts: [
+        '"吸热反应升温双赢(动力学 + 平衡都利好)" 我能体会无矛盾的工程条件吗?',
+        '"催化剂让 SMR 在 700-1000°C 可行" 工业可行性的工程逻辑 我能联系吗?',
+        '"灰氢 vs 绿氢" 不同制氢路径的碳排放差异 我能解释吗?',
+        '高考压轴题"工业反应路径的能源 / 经济 / 环境分析" 我能熟练答吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"较难", exportIds:["ENERGY-DIAGRAM-READING","HESS-EQUATION","RATE-LIMITING-STEP","CATALYST-EFFECT-ON-EA","INDUSTRIAL-CONDITION-TRADEOFF"],
+      stem:`<strong>综合大题(150-300 字 + 计算)</strong>:化肥工业 — NH<sub>3</sub> 选择氧化制 NO(奥斯瓦尔德工艺第 1 步, 后续 NO → NO<sub>2</sub> → HNO<sub>3</sub>):<br>&nbsp;&nbsp;4NH<sub>3</sub>(g) + 5O<sub>2</sub>(g) → 4NO(g) + 6H<sub>2</sub>O(g), ΔH ≈ -908 kJ/mol<br>Pt-Rh 合金催化, 850°C 下分两步:
+        <svg viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+          <line x1="40" y1="40" x2="40" y2="240" stroke="#666" stroke-width="1.5"/>
+          <line x1="40" y1="240" x2="580" y2="240" stroke="#666" stroke-width="1.5"/>
+          <text x="20" y="44" font-size="11" fill="#666">能量/kJ·mol⁻¹</text>
+          <text x="530" y="258" font-size="11" fill="#666">反应进程</text>
+          <line x1="36" y1="170" x2="40" y2="170" stroke="#666"/><text x="14" y="174" font-size="10" fill="#666">0</text>
+          <line x1="36" y1="100" x2="40" y2="100" stroke="#666"/><text x="0" y="104" font-size="10" fill="#666">+150</text>
+          <line x1="36" y1="220" x2="40" y2="220" stroke="#666"/><text x="0" y="224" font-size="10" fill="#666">-300</text>
+          <line x1="36" y1="160" x2="40" y2="160" stroke="#666"/><text x="0" y="164" font-size="10" fill="#666">-220</text>
+          <line x1="36" y1="230" x2="40" y2="230" stroke="#666"/><text x="0" y="234" font-size="10" fill="#666">-908</text>
+          <path d="M 60 170 L 100 170 L 140 100 L 200 100 L 220 220 L 280 220 L 320 160 L 380 160 L 410 230 L 540 230" fill="none" stroke="#00409A" stroke-width="2.5"/>
+          <circle cx="160" cy="100" r="3" fill="#c0392b"/><text x="115" y="92" font-size="10" fill="#c0392b" font-weight="600">过渡态 1 (+150)</text>
+          <text x="240" y="212" font-size="10" fill="#00409A" font-weight="600">中间体 (-300)</text>
+          <circle cx="345" cy="160" r="3" fill="#c0392b"/><text x="295" y="152" font-size="10" fill="#c0392b" font-weight="600">过渡态 2 (-220)</text>
+          <text x="48" y="190" font-size="10" fill="#0055B8" font-weight="600">起点 0</text><text x="48" y="205" font-size="9" fill="#5a6c7d">4NH₃+5O₂</text>
+          <text x="445" y="222" font-size="10" fill="#2e7d32" font-weight="600">终点 -908</text><text x="445" y="236" font-size="9" fill="#5a6c7d">4NO+6H₂O(g)</text>
+        </svg>
+        <div class="cross-topic-warn">
+          <strong>⚠️ 跨主题前置(反应动力学)</strong>:\\(E_a\\) / 决速步 / 中间体 简介同 T5-1. 特别注意第 2 步起点是中间体(-300), 不是初始反应物.
+        </div>
+        <strong>(1)</strong> 第 1 步 ΔH<sub>1</sub> = ____ kJ/mol;第 2 步 ΔH<sub>2</sub> = ____ kJ/mol;<br>
+        <strong>(2)</strong> \\(E_{a1}\\) 和 \\(E_{a2}\\) 分别 = ____ kJ/mol;<strong>决速步</strong>是第 ___ 步;<br>
+        <strong>(3)</strong> 解释为何工业用 <strong>Pt-Rh 合金 + 850°C + 接触时间极短(~0.001 秒)</strong> 而不是用<strong>Fe 催化剂 + 低温</strong>(从选择性 + 速率分析)。此反应对化肥工业的意义?<br><br><em style='color:#7f8c8d;font-size:13px;'>💡 输入提示:作答时若需要符号 Δ(希腊字母, 读 delta), 可从题面或本提示中复制 Δ 使用;不要用三角形符号 △ 或英文 delta 代替。</em>`,
+      keywords:["ΔH","决速步","催化剂","选择性"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 读图算分步 ΔH(本题第 2 步起点是中间体, 第 1 步放热极多, 第 2 步吸热)② 决速步;③ 催化剂选择性 — 同样反应不同催化剂可能给不同产物(NO vs N<sub>2</sub>).',
+        approach:'<strong>解题思路</strong>:读图 → 算 \\(E_a\\) → 解释催化剂选择性 + 高温 + 短时的工业逻辑.',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 分步 ΔH</strong>(关键字 ΔH):<br>· ΔH<sub>1</sub> = 中间体(-300) - 起点(0) = <strong>-300 kJ/mol</strong>(放热)<br>· ΔH<sub>2</sub> = 终点(-908) - 中间体(-300) = <strong>-608 kJ/mol</strong>(继续放热)<br>· 验:-300 + (-608) = -908 = 总 ΔH ✓<br><br><strong>(2) \\(E_a\\) + 决速步</strong>(关键字 决速步):<br>· \\(E_{a1}\\) = 过渡态 1(+150) - 起点(0) = <strong>150 kJ/mol</strong><br>· \\(E_{a2}\\) = 过渡态 2(-220) - 中间体(-300) = <strong>80 kJ/mol</strong><br>· 比较:\\(E_{a1}\\) (150) &gt; \\(E_{a2}\\) (80) → <strong>第 1 步是决速步</strong><br>· 物理:NH<sub>3</sub> 在催化剂表面活化是第 1 步, 较难<br><br><strong>(3) Pt-Rh + 高温 + 短接触时间</strong>(关键字 催化剂 / 选择性):<br>· <strong>核心挑战 — 副反应竞争</strong>:NH<sub>3</sub> 氧化有两条路径<br>　- 路径 A:4NH<sub>3</sub> + 5O<sub>2</sub> → 4NO + 6H<sub>2</sub>O(目标, ΔH = -908)<br>　- 路径 B:4NH<sub>3</sub> + 3O<sub>2</sub> → 2N<sub>2</sub> + 6H<sub>2</sub>O(副反应, ΔH ≈ -1268)<br>· 路径 B 热力学更利好(更负 ΔH), 用 Fe 催化或低温会大量生成 N<sub>2</sub>(浪费 NH<sub>3</sub>);<br>· <strong>Pt-Rh 合金的选择性</strong>:在<strong>高温(850°C)+ 短接触时间(~0.001 s)</strong>下, Pt-Rh 表面优先生成 NO 而非 N<sub>2</sub>(<strong>动力学选择性</strong>);<br>· <strong>短接触时间</strong>的关键:即使 NO 在热力学上不稳定(可继续被还原为 N<sub>2</sub>), 短时间下不来得及深度反应, 保留 NO;<br>· <strong>催化剂不改 ΔH</strong>:不论 Pt-Rh 或 Fe 或低温, 总反应 ΔH 仍 -908 kJ/mol(盖斯定律), 但<strong>产物分布</strong>由催化剂 + 温度 + 接触时间控制;<br>· <strong>化肥工业意义</strong>:NO → NO<sub>2</sub> → HNO<sub>3</sub> → NH<sub>4</sub>NO<sub>3</sub>(化肥). 奥斯瓦尔德工艺与合成氨(Haber-Bosch)串联, <strong>从大气固氮制化肥</strong>, 支撑了 20 世纪人口增长的食物供应.<br><br><strong>关键字命中</strong>:① ΔH / ② 决速步 / ③ 催化剂 / ④ 选择性<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分.'
+      },
+      reflectionPrompts: [
+        '"催化剂选择性" — 不同催化剂可能给不同产物, 我能体会"控制产物分布"的工程价值吗?',
+        '"短接触时间防深度反应" 这是工业上利用动力学(而非热力学)抓住目标产物的典型, 我能联系吗?',
+        '"奥斯瓦尔德工艺 + 哈伯-博施工艺 = 大气固氮 → 化肥"工业链 我能联系到 20 世纪食品供应吗?',
+        '高考压轴题"催化剂选择性 + 工业产物控制" 我能熟练答吗?'
+      ]
+    }
+  ]
+};
+
+let studentName = "";
+let selectedQuestions = [];
+const SLUG = "thermodynamics-application-chemistry";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    const _freqText = String(t.examFreq || "");
+    const _freqClass = (_freqText.indexOf("压轴") >= 0 || _freqText.indexOf("高频") >= 0 || _freqText.indexOf("主战场") >= 0) ? "freq-high"
+                     : (_freqText.indexOf("常考") >= 0 || _freqText.indexOf("中频") >= 0) ? "freq-mid"
+                     : "freq-low";
+    html += `<div class="kp-item ${_freqClass}">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <div class="q-header-circle">
+          <div class="q-line-no">第 ${n} 题</div>
+          <div class="q-line-type">${typeTag}</div>
+          <div class="q-line-diff">难度 · ${q.difficulty}</div>
+          <div class="q-line-id">${q.id}</div>
+        </div>
+      </div>
+      <div class="q-score">${q.score} 分</div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="10" data-q-id="q${n}" placeholder="请分小问作答(150-400 字, 可分段, 含计算 + 解释)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回相关基础板块复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "var(--gold-700)" : (passed ? "var(--blue-700)" : "var(--silver-700)");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+  setTimeout(renderMath, 50);
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="thermodynamics-application-chemistry-example-cards.html">融合模块例题</a> · 相关基础板块 task-cards 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "thermodynamics-application-chemistry";
+  const MODULE_NAME = "热力学应用 · 化学";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#00409A;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius: 16px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#00409A"; el.style.background = "#F3F6FC";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+      timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#00409A;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#002F73;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#00409A' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+
+</body>
+</html>

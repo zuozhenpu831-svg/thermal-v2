@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>热力学应用 · 物理 · 熟练度检测(融合模块 · 题库版)· 蓝色诺瓦学院</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 fluency-test · 三色制(蓝 / 金 / 银) · 圆形锚点 · 大留白 v0.1.6 ===== */
+  :root {
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ===== Banner ===== */
+  .v021-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .v021-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem;
+  }
+  .v021-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  .cross-banner {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin-bottom: 24px;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-banner::before {
+    content: "!";
+    position: absolute;
+    left: 18px; top: 20px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-banner strong { color: var(--blue-700); }
+
+  /* ===== Header · 极简化 · 双大圆装饰锚 ===== */
+  header.page-header {
+    text-align: center;
+    padding: 56px 32px 48px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  header.page-header::before {
+    content: "";
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  header.page-header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  header.page-header h1 {
+    font-size: 1.45rem;
+    margin: 0 0 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.55;
+    position: relative; z-index: 1;
+  }
+  header.page-header .subtitle {
+    font-size: 0.9rem;
+    opacity: 1;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative; z-index: 1;
+  }
+
+  /* ===== Entry card · 顶部圆形 CTA ===== */
+  .entry-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    position: relative;
+  }
+  .entry-card h2 {
+    color: var(--blue-700);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .entry-card h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .entry-card p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.92rem; }
+  .entry-card input[type="text"] {
+    padding: 13px 20px;
+    border: 1.5px solid var(--border-color);
+    border-radius: 999px;
+    font-size: 0.98rem;
+    width: 100%;
+    max-width: 280px;
+    text-align: center;
+    font-family: inherit;
+    transition: var(--transition);
+  }
+  .entry-card input[type="text"]:focus { outline: none; border-color: var(--blue-700); }
+  .entry-card .info-list {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    max-width: 760px;
+    margin: 22px auto;
+    text-align: left;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    list-style: none;
+  }
+  .entry-card .info-list li { margin: 6px 0; padding-left: 22px; position: relative; }
+  .entry-card .info-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px; top: 0.7em;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--silver-500);
+  }
+  .entry-card .info-list li strong { color: var(--blue-700); }
+
+  /* ===== 主按钮 · 普通圆角(不要圆形) ===== */
+  .btn-primary {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 16px 44px;
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); background: var(--blue-900); }
+
+  /* ===== Progress bar ===== */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 14px 22px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .progress-bar-wrap .student,
+  .progress-bar-wrap .answered-count { color: var(--blue-700); font-weight: 700; }
+
+  /* ===== 题卡 · 大留白 · 按题号循环色(蓝→金→银) ===== */
+  .question {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+    border-top: 3px solid var(--q-mid);
+  }
+  .question:nth-of-type(3n+1) {
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+  }
+  .question:nth-of-type(3n+2) {
+    --q-rich: var(--gold-900);
+    --q-mid:  var(--gold-700);
+    --q-bg:   var(--gold-050);
+    --q-tint: var(--gold-100);
+  }
+  .question:nth-of-type(3n) {
+    --q-rich: var(--silver-900);
+    --q-mid:  var(--silver-700);
+    --q-bg:   var(--silver-050);
+    --q-tint: var(--silver-100);
+  }
+
+  /* ===== 题头大圆 · 220-240px · 4 行居中(第N题/题型/难度/编号) ===== */
+  .q-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--silver-100);
+  }
+  .q-header-circle {
+    background: var(--q-mid);
+    color: #fff;
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+    box-shadow: 0 0 0 8px var(--q-tint);
+    padding: 18px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+  .q-header-circle .q-line-no {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .q-header-circle .q-line-type {
+    font-size: 0.9rem;
+    font-weight: 600;
+    opacity: 0.95;
+    line-height: 1.3;
+  }
+  .q-header-circle .q-line-diff {
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: rgba(255,255,255,0.18);
+    padding: 4px 14px;
+    border-radius: 999px;
+    letter-spacing: 0.02em;
+  }
+  .q-header-circle .q-line-id {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  .q-score { color: var(--silver-700); font-size: 0.85rem; font-weight: 500; margin: 8px 0 0; text-align: center; }
+  .q-prompt { font-size: 0.94rem; line-height: 1.9; margin-bottom: 20px; color: var(--text-primary); }
+  .q-prompt svg { display: block; margin: 14px auto; max-width: 100%; }
+  .q-prompt ol { margin: 10px 0 10px 24px; }
+  .q-prompt ol li { margin: 8px 0; }
+
+  .q-short-input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: var(--bg-secondary);
+    min-height: 240px;
+    transition: var(--transition);
+    color: var(--text-primary);
+  }
+  .q-short-input:focus { outline: none; border-color: var(--q-mid); background: #fff; box-shadow: 0 0 0 3px var(--q-tint); }
+
+  /* ===== Feedback · 题号循环色驱动 · 无绿无紫 ===== */
+  .q-feedback {
+    margin-top: 20px;
+    padding: 20px 24px;
+    background: var(--q-bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--q-mid);
+  }
+  .q-feedback.correct { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.wrong { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.partial { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-result { font-weight: 700; font-size: 0.92rem; margin-bottom: 12px; color: var(--q-rich); }
+  .q-result.correct::before { content: "\2713  "; }
+  .q-result.partial::before { content: "\25D0  "; }
+  .q-result.wrong::before { content: "\2717  "; }
+  .q-fb-row { background: #fff; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-size: 0.88rem; color: var(--text-primary); }
+  .q-fb-row strong { color: var(--q-rich); }
+  .q-fb-row.q-fb-knowledge { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; }
+  .q-fb-row.q-fb-approach { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; opacity: 0.96; }
+  .q-fb-row.q-fb-solution { background: #fff; border: 1px solid var(--border-color); border-left: 3px solid var(--q-rich); padding: 14px 18px; }
+  .q-fb-row > div { margin-top: 6px; line-height: 1.85; color: var(--text-primary); }
+  .q-export-label { background: var(--q-tint); color: var(--q-rich); padding: 3px 10px; border-radius: 999px; font-size: 0.75rem; margin: 0 2px; display: inline-block; font-weight: 600; }
+  .q-anchor { font-size: 0.82rem; color: var(--text-secondary); padding-top: 10px; border-top: 1px solid var(--silver-100); margin-top: 12px; }
+  .q-anchor code { background: var(--q-tint); color: var(--q-rich); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: var(--q-mid); }
+
+  /* ===== Reflection · 跟随题号循环色 ===== */
+  .q-reflection {
+    margin-top: 20px;
+    padding: 22px 26px 22px 60px;
+    background: var(--q-bg);
+    border: none;
+    border-left: 3px solid var(--q-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    position: relative;
+  }
+  .q-reflection::before {
+    content: "\2197";
+    position: absolute;
+    left: 14px; top: 22px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--q-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .q-reflection-title { font-weight: 700; color: var(--q-rich); margin-bottom: 14px; font-size: 0.92rem; }
+  .q-reflection ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.85rem; color: var(--text-primary); }
+  .q-reflection ol li { margin: 5px 0; line-height: 1.8; }
+  .q-reflection-input {
+    width: 100%;
+    border: 1px solid var(--q-tint);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.88rem;
+    resize: vertical;
+    background: #fff;
+    min-height: 110px;
+    color: var(--text-primary);
+  }
+  .q-reflection-input:focus { outline: none; border-color: var(--q-mid); box-shadow: 0 0 0 3px var(--q-tint); }
+  .q-reflection-hint { font-size: 0.78rem; color: var(--q-rich); margin-top: 8px; font-style: italic; opacity: 0.85; }
+
+  /* ===== Submit ===== */
+  .submit-area {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin: 36px 0 22px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .btn-submit {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 14px 44px;
+    border-radius: 16px;
+    font-size: 1.02rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 0 0 6px var(--blue-100), var(--shadow-md);
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+  }
+  .btn-submit:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: #fff;
+    color: var(--blue-700);
+    border: 1.5px solid var(--blue-700);
+    padding: 12px 28px;
+    margin: 6px;
+    font-size: 0.88rem;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .btn-secondary:hover { background: var(--blue-050); }
+
+  /* ===== Results ===== */
+  .results-summary {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    text-align: center;
+  }
+  .results-summary h2 {
+    margin: 0 0 22px;
+    color: var(--blue-700);
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .results-summary h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .score-big {
+    font-size: 3.6rem;
+    font-weight: 700;
+    margin: 14px 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+  .score-big.passed { color: var(--blue-700); }
+  .score-big.failed { color: var(--silver-700); }
+  .score-big.honored { color: var(--gold-700); }
+  .status { font-size: 0.95rem; margin: 10px 0 20px; }
+  .wrong-list { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 16px 20px; margin: 20px 0; font-size: 0.88rem; color: var(--text-secondary); text-align: left; }
+  .wrong-list strong { color: var(--silver-900); }
+
+  /* ===== 考察点梳理 · kp-section ===== */
+  .kp-section {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    margin: 22px auto;
+    max-width: 800px;
+    text-align: left;
+    font-size: 0.85rem;
+  }
+  .kp-toggle { cursor: pointer; user-select: none; font-weight: 700; color: var(--blue-700); display: flex; align-items: center; gap: 8px; font-size: 0.92rem; }
+  .kp-toggle::after { content: '▼'; font-size: 0.7rem; margin-left: auto; transition: transform 0.2s; }
+  .kp-section.collapsed .kp-toggle::after { transform: rotate(-90deg); }
+  .kp-section.collapsed .kp-body { display: none; }
+  .kp-body { margin-top: 16px; }
+  .kp-intro {
+    background: var(--gold-050);
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.85rem;
+    line-height: 1.85;
+    color: var(--gold-900);
+  }
+  .kp-intro strong { color: var(--gold-900); }
+  .kp-item {
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 18px 22px;
+    margin: 14px 0;
+    border-left: 3px solid var(--blue-700);
+    box-shadow: 0 1px 3px rgba(20,30,60,0.04);
+  }
+  .kp-item .kp-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--silver-100); }
+
+  /* ===== kp-no · 28×28 圆 · 三色映射 freq 档 ===== */
+  .kp-item .kp-no {
+    background: var(--silver-700);
+    color: #fff;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px var(--silver-100);
+  }
+  .kp-item.freq-high .kp-no { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .kp-item.freq-mid .kp-no { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .kp-item.freq-low .kp-no { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .kp-item.freq-high { border-left-color: var(--gold-700); }
+  .kp-item.freq-mid { border-left-color: var(--blue-700); }
+  .kp-item.freq-low { border-left-color: var(--silver-700); }
+
+  .kp-item .kp-title { font-weight: 700; flex: 1; font-size: 0.95rem; color: var(--blue-700); }
+
+  /* ===== kp-freq · 频次档胶囊 · 三色 ===== */
+  .kp-item .kp-freq { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kp-item .kp-tag {
+    background: var(--silver-100);
+    color: var(--silver-900);
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .kp-item.freq-high .kp-tag { background: var(--gold-100); color: var(--gold-900); }
+  .kp-item.freq-mid .kp-tag { background: var(--blue-100); color: var(--blue-700); }
+  .kp-item.freq-low .kp-tag { background: var(--silver-100); color: var(--silver-900); }
+
+  .kp-item .kp-note { color: var(--text-secondary); font-size: 0.78rem; font-style: italic; }
+  .kp-item .kp-section-label { font-weight: 700; color: var(--blue-700); margin-top: 12px; margin-bottom: 6px; font-size: 0.85rem; }
+  .kp-item .kp-list { margin-left: 22px; font-size: 0.85rem; line-height: 1.85; color: var(--text-primary); }
+  .kp-item .kp-list li { margin: 4px 0; }
+  .kp-item .kp-list li strong { color: var(--blue-700); }
+  .kp-item .kp-revisit { font-size: 0.8rem; color: var(--blue-700); margin-top: 12px; padding: 8px 12px; background: var(--blue-050); border-radius: var(--radius-sm); }
+  .kp-footer { text-align: center; padding: 14px; color: var(--blue-700); font-weight: 700; font-size: 0.9rem; }
+
+  /* ===== 掌握度矩阵 · 圆形状态点 · 三色(蓝/金/银) ===== */
+  .mastery-map { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 20px 24px; margin: 20px 0; text-align: left; }
+  .mastery-map h3 { font-size: 0.95rem; color: var(--blue-700); margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+  .mastery-map h3::before {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 3px var(--blue-100);
+  }
+  .mastery-row {
+    display: grid;
+    grid-template-columns: 60px 1fr 60px 110px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin: 8px 0;
+    font-size: 0.85rem;
+    background: #fff;
+    border-left: 3px solid var(--silver-500);
+  }
+  .mastery-row.correct { border-left-color: var(--blue-700); }
+  .mastery-row.partial { border-left-color: var(--gold-700); }
+  .mastery-row.wrong { border-left-color: var(--silver-700); }
+  .mastery-row .m-tid { font-weight: 700; color: var(--blue-700); font-size: 0.85rem; }
+  .mastery-row .m-title { color: var(--text-primary); }
+
+  /* ===== 状态点 → 圆 ===== */
+  .mastery-row .m-status {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    margin: 0 auto;
+  }
+  .mastery-row .m-status.correct { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .mastery-row .m-status.partial { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .mastery-row .m-status.wrong { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .mastery-row .m-pct { text-align: right; color: var(--text-secondary); font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+  .mastery-row .m-revisit { grid-column: 2 / 5; margin-top: 6px; font-size: 0.78rem; }
+  .mastery-row .m-revisit a { color: var(--blue-700); }
+
+  /* ===== Bottom nav ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 28px 32px; background: #fff; border-radius: var(--radius); margin-bottom: 22px; box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 160px; text-align: center; padding: 14px 18px; border-radius: 999px; background: var(--bg-secondary); color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-weight: 500; transition: var(--transition); }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-100); }
+  .bottom-nav span { color: var(--silver-500); }
+  .nav-supplementary { text-align: center; padding: 12px 18px; margin-bottom: 22px; font-size: 0.85rem; color: var(--text-secondary); background: var(--blue-050); border-radius: var(--radius-sm); }
+  .nav-supplementary a { color: var(--blue-700); text-decoration: underline; }
+  .hidden { display: none; }
+  footer { text-align: center; color: var(--silver-700); font-size: 0.78rem; padding: 24px; line-height: 1.8; }
+  .katex { font-size: 1em; }
+
+  /* ===== 移动端退化 ===== */
+  @media (max-width: 640px) {
+    .btn-primary { width: 100%; max-width: 320px; border-radius: 16px; padding: 16px 28px; }
+    .btn-submit { width: 100%; max-width: 280px; height: auto; border-radius: 16px; padding: 18px 32px; box-shadow: var(--shadow-sm); }
+    .q-header-circle { width: 200px; height: 200px; padding: 14px; }
+    .q-header-circle .q-line-no { font-size: 1.02rem; }
+    .q-header-circle .q-line-type { font-size: 0.82rem; }
+  }
+
+</style>
+</head>
+
+<body>
+<div class="container">
+<div id="user-bar"></div>
+
+
+<nav class="breadcrumb">
+  <a href="index.html">主页</a> &raquo;
+  <a href="index.html">物理 · 物化融合</a> &raquo;
+  热力学大主题 · 融合模块 &raquo;
+  <strong>热力学应用 · 物理 · 熟练度检测</strong>
+</nav>
+
+<div class="v021-banner">
+  📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈,真正的<strong>熟练度检测</strong>由教师组织<strong>纸笔形式 + 题型同高考 + 批改</strong>。本练习的『通过 70 分』≈ 已具备纸笔熟练度检测备考水平,可申请;『荣誉 90 分』≈ 纸笔熟练度检测通过可能性高,推荐申请。学分由真实检测决定。
+</div>
+
+<div class="integration-banner">
+  🔗 <strong>融合模块熟练度检测</strong> · 本练习对接<strong>分子动理论 + 气体液体固体 + 热力学第一定律</strong> 3 个基础板块的<strong>跨板块综合应用</strong>(第二定律基础仅作辨析选项边角出现)。5 道题骨架与本融合模块的<a href="thermodynamics-application-physics-example-cards.html" style="color:#00409A;font-weight:600;">例题讲解集</a>一一对应(再换情境 / 数值 / 装置)。建议先学完例题再做本练习。
+</div>
+
+<header class="page-header">
+  <h1>热力学应用 · 物理 · 熟练度检测</h1>
+  <div class="subtitle">蓝色诺瓦学院 · 物理 · 物化融合 · 热力学大主题 · 融合模块 · 题库版(20 题池, 每次随机抽 5 题)· 同高考题型(选择 + 多选 + 综合大题)· 100 分 · 约 30-40 分钟 · 通过 70 / 荣誉 90</div>
+</header>
+
+<div id="entry-screen" class="entry-card">
+  <h2>开始融合模块熟练度模拟练习</h2>
+  <p>请输入姓名(用于本地进度保存)</p>
+  <input type="text" id="student-name" placeholder="你的姓名" maxlength="20" value="student">
+  <ul class="info-list">
+    <li>共 <strong>5</strong> 道题(每个考点 T1-T5 各随机抽 1 道, 共 20 题池)</li>
+    <li>分值: T1=12 / T2=12 / T3=16 / T4=30 / T5=30 = <strong>100</strong></li>
+    <li>题型: T1-T2 单选 / T3 多选 / <strong>T4-T5 综合大题</strong>(同高考物理热学压轴题型)</li>
+    <li>通过 ≥ 70 分;荣誉 ≥ 90 分</li>
+    <li>建议 30-40 分钟内完成(不强制限时)</li>
+    <li>多选题严格相等(少选 / 多选 / 错均 0 分)</li>
+    <li>综合大题用关键字命中率判分(≥ 80% 满分 / 40-79% 半分 / &lt; 40% 不给分)</li>
+    <li>提交后展示标准答案 + 三段式解析(知识 / 思路 / 步骤)+ 锚回相关基础板块</li>
+    <li><strong>每个错题底部含『反思引导』段</strong>(4 个引导问题 + textarea, 本地保存, 不判分)</li>
+    <li>本练习独立完成, <strong>不使用 AI 辅助 / 不查资料</strong></li>
+  </ul>
+
+  <div class="kp-section collapsed" id="kp-section">
+    <div class="kp-toggle" onclick="document.getElementById('kp-section').classList.toggle('collapsed')">
+      📚 高考考察点梳理(融合模块视角 · 6 考察点 · 点击展开)
+    </div>
+    <div class="kp-body" id="kp-body"></div>
+  </div>
+
+  <div style="margin-top: 24px;">
+    <button class="btn-primary" id="start-btn" onclick="startTest()">开始练习</button>
+  </div>
+</div>
+
+<div id="test-screen" class="hidden">
+  <div class="progress-bar-wrap">
+    <span>👤 <span class="student" id="student-display"></span></span>
+    <span>本次抽题: <span id="picked-ids"></span></span>
+    <span>已答: <span class="answered-count">0</span> / 5</span>
+  </div>
+  <main id="question-list"></main>
+  <div class="submit-area">
+    <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
+    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 + 错题反思引导 · 已答 ≥ 4 题(80%)</div>
+  </div>
+</div>
+
+<div id="result-screen" class="hidden">
+  <section class="results-summary">
+    <h2>本次熟练度练习结果</h2>
+    <div id="score-big" class="score-big">— / 100</div>
+    <div id="status-msg" class="status"></div>
+    <div id="wrong-list" class="wrong-list"></div>
+    <div class="mastery-map" id="mastery-map" hidden>
+      <h3>📊 考点掌握度</h3>
+      <div id="mastery-body"></div>
+    </div>
+    <div style="margin: 12px 0; padding: 10px; background: #fef9e7; border-radius: 6px; font-size: 13px; color: #b66100;">
+      💡 <strong>反思引导提示</strong>:错题底部含『反思引导』段, textarea 已可填写。反思按变体 ID 本地保存。
+    </div>
+    <button class="btn-secondary" onclick="scrollToFirstWrong()">查看第 1 道错题</button>
+    <button class="btn-secondary" onclick="reshuffleAndStart()">🎲 重新抽题再练</button>
+    <button class="btn-secondary" onclick="backToEntry()">返回首页</button>
+  </section>
+</div>
+
+
+
+<section class="section-card" style="border-left: 4px solid #0055B8;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请熟练度检测（纸笔形式）</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的熟练度检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
+
+  <div id="my-fluency-test-applies-region"></div>
+
+  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#0055B8;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testApply();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
+          <select id="fluency-test-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择周几</option>
+            <option value="周一">周一</option>
+            <option value="周二">周二</option>
+            <option value="周三">周三</option>
+            <option value="周四">周四</option>
+            <option value="周五">周五</option>
+            <option value="周六">周六</option>
+            <option value="周日">周日</option>
+          </select>
+          <select id="fluency-test-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+            <option value="">选择时间</option>
+            <option value="08:30">08:30</option>
+            <option value="09:00">09:00</option>
+            <option value="09:30">09:30</option>
+            <option value="10:00">10:00</option>
+            <option value="10:30">10:30</option>
+            <option value="11:00">11:00</option>
+            <option value="11:30">11:30</option>
+            <option value="12:00">12:00</option>
+            <option value="12:30">12:30</option>
+            <option value="13:00">13:00</option>
+            <option value="13:30">13:30</option>
+            <option value="14:00">14:00</option>
+            <option value="14:30">14:30</option>
+            <option value="15:00">15:00</option>
+            <option value="15:30">15:30</option>
+            <option value="16:00">16:00</option>
+            <option value="16:30">16:30</option>
+            <option value="17:00">17:00</option>
+            <option value="17:30">17:30</option>
+            <option value="18:00">18:00</option>
+          </select>
+        </div>
+        <input type="text" id="fluency-test-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+      </div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="fluency-test-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="fluency-test-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔熟练度检测</span></label>
+      <button type="submit" id="fluency-test-apply-submit-btn" style="background:linear-gradient(135deg,#0055B8,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius: 16px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+    </form>
+  </details>
+
+  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+    🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
+    （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #B8924A;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+  <h2 style="color: #7B8290;font-size:19px;margin-bottom:14px;">📩 熟练度检测申诉通道</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔熟练度检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
+
+  <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
+    <li><strong>前置条件</strong>：已完成纸笔熟练度检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请熟练度检测」</span></li>
+    <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
+    <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
+  </ul>
+
+  <div id="my-fluency-test-appeals-region"></div>
+
+  <details open style="background:#F3F6FC;border:1px solid #E8EEF9;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#002F73;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="fluency-test-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <form id="fluency-test-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitFluency_testAppeal();">
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="fluency-test-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="fluency-test-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="fluency-test-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="fluency-test-appeal-submit-btn" style="background:linear-gradient(135deg,#002F73,#00409A);color:white;border:none;padding:10px 24px;font-size:14px;border-radius: 16px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+    </form>
+  </details>
+</section>
+
+
+
+<nav class="bottom-nav">
+  <a href="index.html">⬅ 返回主页</a>
+  <a href="thermodynamics-application-physics-example-cards.html">📖 返回例题讲解集</a>
+  <a href="gas-liquid-solid-task-cards.html">气体液体固体</a>
+  <a href="basic-task-cards.html">热力学第一定律</a>
+</nav>
+
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 融合模块 · 热力学应用 · 物理 · 熟练度检测 · fluency-test Skill v0.1.5(融合模式)</footer>
+
+</div>
+
+<script>
+const REFLECTION_DEFAULT = [
+  '这道题涉及哪 2-3 个基础板块的知识?(分子动理论 / 气体液体固体 / 第一定律)',
+  '我答错的根本原因是哪个板块?(知识点不熟 / 跨板块衔接错 / 受力分析错 / 单位换算粗心 / ...)',
+  '类似的跨板块综合题在高考物理热学题中如何识别?',
+  '对应纸笔熟练度检测的高考综合大题, 我哪些步骤(受力平衡定压强 / 列气体方程 / 算 ΔU = Q − W / 单位换算)需要更熟练?'
+];
+
+const EXPORT_NAMES = {
+  'NUMBER-DENSITY-FORMULA':              '分子数密度 n = N/V(质量一定时由体积决定)',
+  'KINETIC-ENERGY-TEMP-PROPORTIONAL':    '温度是分子平均动能的标志(平均动能只看 T)',
+  'BOYLE-MICRO':                         '玻意耳定律微观机制(V 减 → 数密度增 → 碰撞更频繁)',
+  'CHARLES-MICRO':                       '查理定律微观机制(T 升 → 撞壁力 + 频率都增)',
+  'BOYLE-LAW':                           '玻意耳定律 pV = 常数(等温)',
+  'CHARLES-LAW':                         '查理定律 p/T = 常数(等容 · p-T 图过原点直线)',
+  'GAY-LUSSAC-LAW':                      '盖-吕萨克定律 V/T = 常数(等压 · V-T 图过原点直线)',
+  'KELVIN-CELSIUS-RELATION':             '开尔文-摄氏换算 T = t + 273(气体定律必用 K)',
+  'IDEAL-GAS-EQUATION':                  '理想气体状态方程 pV = nRT',
+  'COMBINED-GAS-EQUATION':               '结合方程 \\(\\dfrac{p_1V_1}{T_1} = \\dfrac{p_2V_2}{T_2}\\)',
+  'FIRST-LAW-EQUATION':                  '热力学第一定律 ΔU = Q − W(W 为气体对外做功)',
+  'WORK-PV-FORMULA':                     '等压做功 W = pΔV(国际单位制)',
+  'ISOTHERMAL-PROCESS':                  '等温过程 ΔU = 0 → Q = W(不是不换热!)',
+  'ADIABATIC-PROCESS':                   '绝热过程 Q = 0 → ΔU = −W',
+  'STATE-VS-PROCESS':                    '状态量 vs 过程量(循环一周 ΔU = 0)',
+  'INTERNAL-ENERGY-IS-STATE-FUNCTION':   '内能是状态函数(理想气体 ΔU 只由 T 定)',
+  'SPONTANEOUS-DIRECTION':               '热传导方向性(热量不会自发从低温传向高温 · 第二定律边角)'
+};
+
+const EXAM_REVIEW = {
+  intro: '本融合模块对接高考物理<strong>热学</strong>的<strong>选择题 + 综合大题</strong>. 高考既考<strong>图像互判 + 微观解释</strong>(p-T / V-T / p-V 转换 + 分子动理论语言), 也考<strong>第一定律与气体定律绑定的综合计算</strong>. 综合大题的标准骨架是<strong>三步链</strong>: ① 受力平衡定压强 → ② 气体状态方程 → ③ ΔU = Q − W. 5 道题对应本融合模块<a href="thermodynamics-application-physics-example-cards.html" style="color:#00409A;font-weight:600;">例题讲解集</a>的 6 道例题骨架(再换情境 / 数值 / 装置). 建议练习前对照下方 6 考察点自查, 不熟的回相关基础板块复习.',
+  topics: [
+    { no:'一', title:'状态图像互判 + 微观解释', examFreq:'选择题高频',
+      examNote:'多为选择题第 3 题位',
+      examMethods:[
+        '选择题:p-T / V-T / p-V / p-1/V 图像 → 判断过程类型 + 各量变化',
+        '微观翻译:选项用分子动理论语言(数密度 / 平均动能 / 碰撞次数与冲力)',
+        '图像转换:给 p-T 图的过程 → 选对应的 p-V 图(或反之)'
+      ],
+      mustMaster:[
+        '<strong>过原点直线铁律</strong>:p-T 图过原点直线 = 等容线; V-T 图过原点直线 = 等压线',
+        '<strong>微观三量</strong>:数密度看 V / 平均动能只看 T / 压强 = 碰撞频率 × 平均冲力 两因素',
+        '<strong>p-V 直线段</strong>:pV 乘积定温度, 直线段中点常是温度极值点',
+        '<strong>等温线</strong>:p-V 图上是双曲线, p-1/V 图上才是过原点直线'
+      ],
+      prepNotes:[
+        '高考干扰项常把"碰撞次数增多"与"平均冲力增大"拆开 — 升温时两者都增',
+        '判图先看<strong>坐标轴</strong>是什么, 再谈过不过原点',
+        '"刚性容器 / 缓慢 / 恒温"等题眼词与图像信息互相印证'
+      ],
+      revisit:'不熟悉?回<a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> + <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> + <a href="thermodynamics-application-physics-example-cards.html">融合例题 1</a> 复习' },
+
+    { no:'二', title:'第一定律单过程辨析与数值计算', examFreq:'选择题高频',
+      examNote:'近年高考几乎每年必考',
+      examMethods:[
+        '辨析题:等温(气泡 / 恒温装置)/ 绝热(快速压缩)/ 等容(刚性罐)单过程的 Q / W / ΔU 判断',
+        '数值题:等容吸热 vs 等压吸热 同升温 → 反推 W 与 ΔV',
+        '方向性辨析:个别选项考"热量不会自发从低温传向高温"(第二定律边角)'
+      ],
+      mustMaster:[
+        '<strong>符号约定</strong>:ΔU = Q − W(W 为气体对外做功), 先写约定再代数',
+        '<strong>四特例</strong>:等温 ΔU=0 / 等容 W=0 / 等压 W=pΔV / 绝热 Q=0',
+        '<strong>等温 ≠ 绝热</strong>:温度不变是 ΔU=0, 必须边吸(放)热边做功',
+        '<strong>ΔU 只看 T</strong>:理想气体内能与体积无关'
+      ],
+      prepNotes:[
+        '"恒温 / 缓慢 / 快速 / 刚性"是题眼词, 先翻译成过程类型再判断',
+        '等容与等压吸热同升温时, ΔU 相同(同 ΔT), 差额全在 W = pΔV',
+        '"装置绝热"≠"过程绝热", 要看热源在系统内还是系统外'
+      ],
+      revisit:'不熟悉?回<a href="basic-task-cards.html">热力学第一定律</a> + <a href="basic-fluency-test.html">单板块熟练度</a> + <a href="thermodynamics-application-physics-example-cards.html">融合例题 2</a> 复习' },
+
+    { no:'三', title:'热机循环逐段分析(多选)', examFreq:'多选题中高频',
+      examNote:'热机循环只考状态参量 + 第一定律, 不考效率公式',
+      examMethods:[
+        '多选题:p-V / V-T / p-T 图上闭合循环 → 逐段判断 Q / W / ΔU',
+        '比较题:哪一段对外做功最多 / 吸热最多',
+        '先用状态方程把每个状态点 (p, V, T) 填满, 再逐段套第一定律'
+      ],
+      mustMaster:[
+        '<strong>循环铁律</strong>:循环一周 ΔU = 0 → 净吸热 = 净做功',
+        '<strong>两轮扫描法</strong>:第一轮定状态参量表, 第二轮逐段判能量',
+        '<strong>p-V 图面积</strong>:闭合回路面积 = 净做功, 顺时针对外净做功',
+        '<strong>等压段做功比较</strong>:W = pΔV 直接算; 等温段做功小于同体积变化的高压等压段'
+      ],
+      prepNotes:[
+        '循环题最常见陷阱:把等温段当绝热段("温度不变 → 不换热"是错的)',
+        '等压放热段:|Q| = |ΔU| + |W|, 大于其中任何一项',
+        '不先填参量表就判能量, 是丢分的根源'
+      ],
+      revisit:'不熟悉?回<a href="basic-task-cards.html">热力学第一定律</a> + <a href="thermodynamics-application-physics-example-cards.html">融合例题 3</a> 复习; 深化看<a href="carnot-cycle-task-cards.html">卡诺循环(进阶)</a>' },
+
+    { no:'四', title:'装置计算(活塞-汽缸 / 液柱)', examFreq:'综合大题高频',
+      examNote:'三步链前两步的主战场',
+      examMethods:[
+        '综合大题:竖直 / 水平汽缸 + 活塞(含卡销 / 弹簧 / 摩擦变式)→ 分段求 p / V / T',
+        '液柱题:水银柱封闭气柱 + 姿态变化(竖直 ↔ 水平)→ 玻意耳定律',
+        '创新情境:用气体定律反测力学量(如测重力加速度 g)'
+      ],
+      mustMaster:[
+        '<strong>受力平衡定压强</strong>:活塞受力四件套(重力 / 大气压力 / 气体压力 / 卡销或摩擦力)',
+        '<strong>临界条件翻译</strong>:"恰好离开卡销" = 卡销力为零 + 活塞平衡',
+        '<strong>分段选定律</strong>:卡销锁定 = 等容(查理); 活塞自由 = 等压(盖-吕萨克)',
+        '<strong>液柱压强</strong>:开口向上封闭气压强 = p₀ + ρgh; 开口向下 = p₀ − ρgh'
+      ],
+      prepNotes:[
+        '过程性质突变点(离开卡销 / 液柱流出)必须分段处理',
+        '比例式单位统一即可, 但 ρgh 求压强必须用国际单位制',
+        '温度一律换 K 再代入'
+      ],
+      revisit:'不熟悉?回<a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> + <a href="thermodynamics-application-physics-example-cards.html">融合例题 4</a> 复习' },
+
+    { no:'五', title:'变质量问题(等效定质量法)', examFreq:'综合大题中频',
+      examNote:'充气 / 放气 / 抽气 / 灌装 4 场景',
+      examMethods:[
+        '充气题:打气 n 次使容器达到目标压强 → 求 n',
+        '放气题:等温放出气体在大气压下的体积 / 质量比',
+        '变温 + 变质量复合:先等效处理变质量段, 再常规处理定质量段'
+      ],
+      mustMaster:[
+        '<strong>等效定质量法</strong>:重新圈定研究对象, 把"会变的质量"打包成"不变的总量"',
+        '<strong>充气在初态打包</strong>:原有气体 + 全部待充气体, 总体积 V + nΔV',
+        '<strong>放气在末态合并</strong>:留下的 + 放出的一起倒推',
+        '<strong>质量比</strong>:同温同压下质量比 = 体积比'
+      ],
+      prepNotes:[
+        '最高频失误:打包时漏算容器内原有气体',
+        '识别"哪一段变质量、哪一段定质量"是解题分水岭',
+        '核心一句话:定律不变, 研究对象变'
+      ],
+      revisit:'不熟悉?回<a href="thermodynamics-application-physics-example-cards.html">融合例题 5</a>(等效定质量法自包含讲解)+ <a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> 复习' },
+
+    { no:'六', title:'第一定律综合大题(ΔU = CΔT 三步链全链条)', examFreq:'综合大题压轴',
+      examNote:'物理热学最大头题型的压轴形态',
+      examMethods:[
+        '综合大题:活塞缓慢移动(等压)+ 题给 ΔU = CΔT → 求末温 + Q',
+        '迟滞变式:摩擦活塞升降温不同压强 → 求净吸热(始末同温 ΔU=0 → Q = 净做功)',
+        '生活情境:球类凹陷恢复 / 拔火罐冷却 → 状态方程 + 能量分析'
+      ],
+      mustMaster:[
+        '<strong>三步链全链条</strong>:受力平衡定 p → 气体定律定 T → Q = ΔU + W 收口',
+        '<strong>ΔU = CΔT 桥</strong>:题给常数 C 把温度变化换算成内能变化, ΔT 在 K 与 ℃ 下数值相同',
+        '<strong>W = pΔV 用国际单位制</strong>:cm 必须换 m',
+        '<strong>始末同温技巧</strong>:ΔU = 0 → 净吸热 = 净做功(迟滞题钥匙)'
+      ],
+      prepNotes:[
+        '能量账本意识:吸热 = 存内能 + 对外做功, 两本账缺一不可',
+        '摩擦活塞上行 / 下行压强不同(摩擦力方向反转), 必须分段定压',
+        '"缸壁绝热 + 内置热源"仍是吸热过程, 别看到绝热就写 Q = 0'
+      ],
+      revisit:'不熟悉?回<a href="basic-task-cards.html">热力学第一定律</a> + <a href="thermodynamics-application-physics-example-cards.html">融合例题 6</a> 复习; ΔU = CΔT 的根据看<a href="advanced-task-cards.html">理想气体内能的微观推导(进阶)</a>' }
+  ],
+  footer:'✓ 6 个考察点都熟练? 那就开始下面的融合模块熟练度模拟练习吧!'
+};
+
+const TOPIC_TITLES = {
+  T1:{ title:'状态图像互判 + 微观解释',            revisit:'回<a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> + <a href="molecular-kinetic-theory-task-cards.html">分子动理论</a> + <a href="thermodynamics-application-physics-example-cards.html">例题 1</a> 复习' },
+  T2:{ title:'第一定律单过程辨析',                 revisit:'回<a href="basic-task-cards.html">热力学第一定律</a> + <a href="thermodynamics-application-physics-example-cards.html">例题 2</a> 复习' },
+  T3:{ title:'热机循环逐段分析(多选)',             revisit:'回<a href="basic-task-cards.html">热力学第一定律</a> + <a href="thermodynamics-application-physics-example-cards.html">例题 3</a> 复习' },
+  T4:{ title:'装置计算 + 变质量 综合大题',          revisit:'回<a href="gas-liquid-solid-task-cards.html">气体、液体与固体</a> + <a href="thermodynamics-application-physics-example-cards.html">例题 4 + 5</a> 复习' },
+  T5:{ title:'第一定律综合大题(ΔU = CΔT)',        revisit:'回<a href="basic-task-cards.html">热力学第一定律</a> + <a href="thermodynamics-application-physics-example-cards.html">例题 6</a> 复习' }
+};
+
+const QUESTION_BANK = {
+  T1: [
+    { id:"T1-1", type:"choice", score:12, difficulty:"基础", exportIds:["CHARLES-LAW","NUMBER-DENSITY-FORMULA","KINETIC-ENERGY-TEMP-PROPORTIONAL","CHARLES-MICRO"],
+      stem:"消防车上一只<strong>刚性合金储气瓶</strong>内封有一定质量的理想气体. 从清晨到午后, 瓶内气体由状态 A 变为状态 B, 在 p-T 图像上 A、B 位于<strong>同一条延长线过原点的直线</strong>上, 且 T<sub>B</sub> &gt; T<sub>A</sub>. 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 280 220' style='width:100%;max-width:280px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='140' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>p-T 图 · 过原点直线=等容线</text><line x1='40' y1='180' x2='250' y2='180' stroke='#333' stroke-width='1.5'/><line x1='40' y1='30' x2='40' y2='180' stroke='#333' stroke-width='1.5'/><text x='245' y='195' font-size='11' fill='#333'>T</text><text x='27' y='38' font-size='11' fill='#333'>p</text><text x='32' y='195' font-size='10' fill='#888'>O</text><line x1='40' y1='180' x2='230' y2='40' stroke='#c0392b' stroke-width='2'/><circle cx='105' cy='133' r='4' fill='#0055B8'/><text x='90' y='130' font-size='12' font-weight='600' fill='#0055B8'>A</text><line x1='105' y1='133' x2='105' y2='180' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.8'/><text x='98' y='195' font-size='10' fill='#0055B8'>T_A</text><circle cx='185' cy='75' r='4' fill='#0055B8'/><text x='192' y='75' font-size='12' font-weight='600' fill='#0055B8'>B</text><line x1='185' y1='75' x2='185' y2='180' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.8'/><text x='178' y='195' font-size='10' fill='#0055B8'>T_B</text><text x='145' y='160' text-anchor='middle' font-size='11' fill='#c0392b' font-weight='600'>V = 常数</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 p-T 等容 · 储气瓶刚性体积不变</p></div>",
+      options:{
+        A:"该过程中气体体积增大",
+        B:"该过程中气体分子数密度减小",
+        C:"该过程中气体分子的平均动能增大",
+        D:"单位时间内撞击单位面积瓶壁的分子数增多, 但每次碰撞的平均冲力不变"
+      },
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① <strong>过原点直线铁律</strong> — p-T 图上过原点直线 = 等容线(p/T = 常数 ⇔ V 不变); ② 分子数密度 n = N/V 由体积决定(质量一定时); ③ 分子平均动能只由温度 T 决定; ④ 压强微观由"碰撞频率 × 平均冲力"两个因素共同决定。',
+        approach:'<strong>解题思路</strong>:三步翻译法 — ① 图像定过程类型(过原点直线 + 刚性瓶 → 等容); ② 宏观三量 p, V, T 定变化(V 不变 / T 升 / p 升); ③ 微观三量逐项翻译选项. 选项 A 看体积, B 看数密度, C 看平均动能, D 拆解压强微观机制。',
+        solution:'<strong>详细解题</strong>:<br><strong>判过程</strong>:p-T 图上 A、B 在<strong>过原点直线</strong>上 → p/T = 常数 → <strong>等容过程</strong>(与"刚性瓶"一致). T<sub>B</sub> &gt; T<sub>A</sub> → 升温升压, V 不变。<br><br><strong>A 错</strong>:等容 V 不变 → "体积增大" ❌<br><strong>B 错</strong>:质量一定 + V 不变 → 分子数密度 n = N/V <strong>不变</strong> → "减小" ❌<br><strong>C 对 ✓</strong>:T 升高 → 分子<strong>平均动能增大</strong>(T 是分子平均动能的标志)<br><strong>D 错</strong>:T 升 → 分子平均速率增大 → 单位时间撞壁次数增多 ✓, 但<strong>每次碰撞的平均冲力也增大</strong>(分子动量更大) → "平均冲力不变" ❌. 正是"次数增多 + 冲力增大"两因素共同使 p 升高。<br><br><strong>最终答案: C</strong>'
+      },
+      reflectionPrompts: [
+        '"p-T 图过原点直线 = 等容线"这条铁律我记牢了吗?同理 V-T 图过原点直线对应什么过程?',
+        '"分子数密度看 V / 平均动能只看 T / 压强 = 碰撞频率 × 平均冲力"三句口诀我能脱口而出吗?',
+        '高考干扰项常把"碰撞次数增多"与"平均冲力增大"拆开 — 这个陷阱我意识到了吗?',
+        '题目给"刚性容器"+"过原点直线"两个信息互相印证等容 — 我能从任一信息独立判出来吗?'
+      ]
+    },
+    { id:"T1-2", type:"choice", score:12, difficulty:"基础", exportIds:["BOYLE-LAW","NUMBER-DENSITY-FORMULA","BOYLE-MICRO","ISOTHERMAL-PROCESS"],
+      stem:"实验课上, 某同学用注射器封闭一段空气, 缓慢推活塞压缩气体, 过程中气体温度与室温始终相同. 测得气体的 p-1/V 图像是一条<strong>过原点的直线</strong>. 对该压缩过程, 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 300 220' style='width:100%;max-width:300px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='150' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>p-1/V 图 · 过原点直线 = 等温线</text><line x1='40' y1='180' x2='270' y2='180' stroke='#333' stroke-width='1.5'/><line x1='40' y1='30' x2='40' y2='180' stroke='#333' stroke-width='1.5'/><text x='258' y='195' font-size='11' fill='#333'>1/V</text><text x='27' y='38' font-size='11' fill='#333'>p</text><text x='32' y='195' font-size='10' fill='#888'>O</text><line x1='40' y1='180' x2='245' y2='40' stroke='#c0392b' stroke-width='2'/><circle cx='90' cy='146' r='4' fill='#0055B8'/><text x='75' y='143' font-size='12' font-weight='600' fill='#0055B8'>初</text><line x1='90' y1='146' x2='90' y2='180' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.8'/><circle cx='200' cy='71' r='4' fill='#0055B8'/><text x='207' y='71' font-size='12' font-weight='600' fill='#0055B8'>末</text><line x1='200' y1='71' x2='200' y2='180' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.8'/><text x='150' y='130' text-anchor='middle' font-size='11' fill='#c0392b' font-weight='600'>T = 常数</text><text x='150' y='160' text-anchor='middle' font-size='10' fill='#7f8c8d'>压缩 1/V 增 → p 增</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 p ∝ 1/V → pV = 常数 · 等温过程的图像新画法</p></div>",
+      options:{
+        A:"气体的内能随压缩而增大",
+        B:"气体分子数密度增大, 分子平均动能也增大",
+        C:"气体分子数密度增大, 分子平均动能不变",
+        D:"气体压强增大是因为分子平均速率增大"
+      },
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① p-1/V 图上过原点直线 ⇔ p ∝ 1/V ⇔ pV = 常数 ⇔ <strong>等温过程</strong>(玻意耳定律的另一种画法); ② 理想气体内能只由 T 决定, 等温 ΔU = 0; ③ 等温压缩微观机制 — V 减小 → 数密度增大 → 碰撞频率升高 → 压强增大, 但平均动能不变(T 不变)。',
+        approach:'<strong>解题思路</strong>:① 识别图像类型(过原点直线 + 横轴 1/V) → 等温; ② 等温 → ΔU = 0 排除 A; ③ 等温 → 平均动能(只看 T)不变, 排除 B、D; ④ 数密度 = N/V, V 减 → 数密度增 → C 正确。',
+        solution:'<strong>详细解题</strong>:<br><strong>判过程</strong>:p-1/V 图过原点直线 → p = k·(1/V) → <strong>pV = 常数</strong>, 又"温度与室温始终相同"印证 → <strong>等温过程</strong>(玻意耳定律)。<br><br><strong>A 错</strong>:等温过程理想气体内能只由 T 决定 → ΔU = 0, 内能<strong>不变</strong> ❌<br><strong>B 错</strong>:T 不变 → 分子平均动能<strong>不变</strong> ❌<br><strong>C 对 ✓</strong>:V 减小 + 质量一定 → 数密度 n = N/V <strong>增大</strong>; T 不变 → 平均动能<strong>不变</strong><br><strong>D 错</strong>:T 不变 → 分子平均速率不变. 等温压缩压强增大的微观原因是<strong>数密度增大 → 碰撞频率升高</strong>, 不是平均速率变化 ❌<br><br><strong>最终答案: C</strong>'
+      },
+      reflectionPrompts: [
+        'p-1/V 图过原点直线对应什么过程?它与 p-V 图上的双曲线是同一关系吗?',
+        '"等温压缩 p 增大是因为数密度增 → 碰撞更频繁"这条微观链条我能复述吗?',
+        '"分子平均动能"与"分子平均速率"的差别是什么?二者都只由 T 决定吗?',
+        '高考干扰项 D 把"压强增大"错归因于"平均速率增大" — 这是常见混淆, 我能识破吗?'
+      ]
+    },
+    { id:"T1-3", type:"choice", score:12, difficulty:"基础", exportIds:["GAY-LUSSAC-LAW","NUMBER-DENSITY-FORMULA","KINETIC-ENERGY-TEMP-PROPORTIONAL"],
+      stem:"广场上一只氛围装饰气球, 球膜很软, 球内气体压强始终与外界大气压近似相等. 从清晨到中午, 球内气体在 V-T 图像上的状态点沿一条<strong>过原点的直线</strong>向右上方移动. 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 300 220' style='width:100%;max-width:300px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='150' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#B8924A'>V-T 图 · 过原点直线 = 等压线</text><line x1='40' y1='180' x2='270' y2='180' stroke='#333' stroke-width='1.5'/><line x1='40' y1='30' x2='40' y2='180' stroke='#333' stroke-width='1.5'/><text x='265' y='195' font-size='11' fill='#333'>T</text><text x='27' y='38' font-size='11' fill='#333'>V</text><text x='32' y='195' font-size='10' fill='#888'>O</text><line x1='40' y1='180' x2='245' y2='40' stroke='#B8924A' stroke-width='2'/><circle cx='95' cy='146' r='4' fill='#0055B8'/><text x='80' y='143' font-size='12' font-weight='600' fill='#0055B8'>清晨</text><line x1='95' y1='146' x2='95' y2='180' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.8'/><circle cx='195' cy='78' r='4' fill='#0055B8'/><text x='202' y='78' font-size='12' font-weight='600' fill='#0055B8'>中午</text><line x1='195' y1='78' x2='195' y2='180' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.8'/><text x='150' y='130' text-anchor='middle' font-size='11' fill='#c0392b' font-weight='600'>p = 常数</text><text x='150' y='160' text-anchor='middle' font-size='10' fill='#7f8c8d'>软膜气球 → 等压升温</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 V-T 过原点直线 = 等压线 · V ∝ T · 软膜气球的盖-吕萨克过程</p></div>",
+      options:{
+        A:"气体经历等容过程, 压强随温度升高而增大",
+        B:"气体经历等压过程, 分子平均动能增大且分子数密度减小",
+        C:"气体经历等压过程, 分子平均动能不变",
+        D:"气体经历等温过程, 体积随时间膨胀"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① V-T 图上<strong>过原点直线 = 等压线</strong>(V/T = 常数 ⇔ p 不变), 与 p-T 图等容线对偶; ② 题面"球膜很软, 压强与大气压相等"直接确认等压; ③ 等压升温 → V 增 → 数密度 n = N/V 减; T 升 → 平均动能增。',
+        approach:'<strong>解题思路</strong>:① 识别 V-T 过原点直线 → 等压, 排除 A、D; ② 等压升温: V 增大 → 数密度减小 ✓; T 升高 → 平均动能增大 ✓; ③ B 对应"动能增 + 数密度减"两件齐, C 只对一半。',
+        solution:'<strong>详细解题</strong>:<br><strong>判过程</strong>:V-T 图<strong>过原点直线</strong>且 V、T 同向增大 → V/T = 常数 → <strong>等压过程</strong>(与"球膜很软, 压强与大气压相等"一致)。<br><br><strong>A 错</strong>:不是等容(题面明示压强不变) ❌<br><strong>B 对 ✓</strong>:T 升 → 平均动能<strong>增大</strong>; V 增 + 质量一定 → 数密度 n = N/V <strong>减小</strong> — 两件都对<br><strong>C 错</strong>:T 升高时分子平均动能必<strong>增大</strong>, 不是"不变" ❌<br><strong>D 错</strong>:温度从清晨到中午明显升高, 不是等温 ❌<br><br><strong>最终答案: B</strong>'
+      },
+      reflectionPrompts: [
+        '"V-T 图过原点直线 = 等压线"这条对偶铁律我和 T1-1 的 p-T 等容线一起记牢了吗?',
+        '"球膜很软, 压强与大气相等"这种题面如何翻译成等压过程?同类题眼词还有哪些?',
+        '等压升温的微观图像:V 增 → 数密度减 + T 升 → 动能增, 这两个变化我都能独立判出来吗?',
+        '若题目改为 V-T 图上"水平直线"或"竖直直线", 分别对应什么过程?'
+      ]
+    },
+    { id:"T1-4", type:"choice", score:12, difficulty:"中等", exportIds:["BOYLE-LAW","CHARLES-LAW","COMBINED-GAS-EQUATION","IDEAL-GAS-EQUATION"],
+      stem:"测试装置使一定质量的理想气体沿 p-V 图上的<strong>直线段</strong>从状态 a(p₀, 3V₀) 变化到状态 b(3p₀, V₀), c 为线段 ab 的中点 (2p₀, 2V₀). 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 320 250' style='width:100%;max-width:320px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='160' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>p-V 图 · 直线段 a→b · pV 乘积定温度</text><line x1='50' y1='210' x2='290' y2='210' stroke='#333' stroke-width='1.5'/><line x1='50' y1='30' x2='50' y2='210' stroke='#333' stroke-width='1.5'/><text x='285' y='225' font-size='11' fill='#333'>V</text><text x='37' y='38' font-size='11' fill='#333'>p</text><text x='42' y='225' font-size='10' fill='#888'>O</text><line x1='80' y1='190' x2='80' y2='210' stroke='#888' stroke-width='0.8'/><line x1='160' y1='190' x2='160' y2='210' stroke='#888' stroke-width='0.8'/><line x1='240' y1='190' x2='240' y2='210' stroke='#888' stroke-width='0.8'/><text x='75' y='225' font-size='10' fill='#5a6c7d'>V₀</text><text x='150' y='225' font-size='10' fill='#5a6c7d'>2V₀</text><text x='230' y='225' font-size='10' fill='#5a6c7d'>3V₀</text><line x1='40' y1='180' x2='50' y2='180' stroke='#888' stroke-width='0.8'/><line x1='40' y1='120' x2='50' y2='120' stroke='#888' stroke-width='0.8'/><line x1='40' y1='60' x2='50' y2='60' stroke='#888' stroke-width='0.8'/><text x='30' y='184' font-size='10' fill='#5a6c7d'>p₀</text><text x='20' y='124' font-size='10' fill='#5a6c7d'>2p₀</text><text x='20' y='64' font-size='10' fill='#5a6c7d'>3p₀</text><line x1='240' y1='180' x2='80' y2='60' stroke='#c0392b' stroke-width='2.5'/><circle cx='240' cy='180' r='5' fill='#0055B8'/><text x='250' y='185' font-size='12' font-weight='600' fill='#0055B8'>a</text><circle cx='160' cy='120' r='5' fill='#c0392b'/><text x='170' y='118' font-size='12' font-weight='600' fill='#c0392b'>c</text><circle cx='80' cy='60' r='5' fill='#0055B8'/><text x='62' y='58' font-size='12' font-weight='600' fill='#0055B8'>b</text><text x='160' y='80' text-anchor='middle' font-size='10' fill='#7f8c8d'>a: pV = 3p₀V₀</text><text x='160' y='160' text-anchor='middle' font-size='10' fill='#7f8c8d'>c: pV = 4p₀V₀ (最大)</text><text x='160' y='240' text-anchor='middle' font-size='10' fill='#7f8c8d'>b: pV = 3p₀V₀</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 p-V 直线段 · pV 乘积 a=b=3p₀V₀ &lt; c=4p₀V₀ · 温度极大值在中点</p></div>",
+      options:{
+        A:"a→b 是等温过程",
+        B:"状态 a 与状态 b 温度相同, 状态 c 温度比 a、b 都高",
+        C:"状态 c 温度比 a、b 都低",
+        D:"从 a 到 c 温度不断降低, 从 c 到 b 温度不断升高"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 理想气体状态方程 pV = nRT → T ∝ pV(质量一定时温度由 pV 乘积决定); ② <strong>p-V 直线段</strong>不是等温线(等温线是双曲线), 直线段上各点 pV 乘积不同, 温度也不同; ③ 直线段 ab 上 pV 是 V 的二次函数, 中点 c 常是 pV 乘积(温度)的极值点。',
+        approach:'<strong>解题思路</strong>:① 排除"等温" — 直线段不是等温线; ② 算三点 pV 乘积:a 处 pV = p₀·3V₀ = 3p₀V₀; b 处 pV = 3p₀·V₀ = 3p₀V₀; c 处 pV = 2p₀·2V₀ = 4p₀V₀; ③ T ∝ pV → T<sub>a</sub> = T<sub>b</sub> &lt; T<sub>c</sub>。',
+        solution:'<strong>详细解题</strong>:<br><strong>定 pV 乘积</strong>:<br>· a: pV = p₀ × 3V₀ = <strong>3p₀V₀</strong><br>· b: pV = 3p₀ × V₀ = <strong>3p₀V₀</strong><br>· c: pV = 2p₀ × 2V₀ = <strong>4p₀V₀</strong><br><br><strong>由 pV = nRT (质量一定 → nR 为常数)</strong> → T ∝ pV<br>→ T<sub>a</sub> = T<sub>b</sub>, T<sub>c</sub> &gt; T<sub>a</sub>(且 T<sub>c</sub> 是线段上的<strong>最高温</strong>)<br><br><strong>A 错</strong>:等温线在 p-V 图上是<strong>双曲线</strong>, 不是直线段 ❌<br><strong>B 对 ✓</strong>:T<sub>a</sub> = T<sub>b</sub>, T<sub>c</sub> &gt; T<sub>a</sub> = T<sub>b</sub><br><strong>C 错</strong>:T<sub>c</sub> 是最高温, 不是最低 ❌<br><strong>D 错</strong>:a → c 温度<strong>升高</strong>(pV 从 3 增到 4), c → b 温度<strong>降低</strong>, 与选项描述方向反 ❌<br><br><strong>最终答案: B</strong>'
+      },
+      reflectionPrompts: [
+        '"理想气体 T ∝ pV"这条铁律来自哪条公式?我能从 pV = nRT 一步推出来吗?',
+        '"p-V 直线段不是等温线"这句话我接受了吗?等温线在 p-V 图上长什么样?',
+        '对于 p-V 直线段, 我能用二次函数找到 pV 乘积(温度)极值点的位置吗?',
+        '高考变式:若 a→b 直线段反向延长过原点, 又对应什么过程?(提示:p ∝ V → 温度变化如何)'
+      ]
+    }
+  ],
+  T2: [
+    { id:"T2-1", type:"choice", score:12, difficulty:"基础", exportIds:["BOYLE-LAW","ISOTHERMAL-PROCESS","FIRST-LAW-EQUATION"],
+      stem:"桥梁施工用的沉箱缓慢下沉, 箱内封闭的一定质量空气被河水缓慢压缩, 过程中气体温度始终与水温相同保持不变. 对箱内气体, 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 320 230' style='width:100%;max-width:320px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='160' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>沉箱缓慢下沉 · 等温压缩</text><rect x='20' y='25' width='280' height='190' fill='#d6eaf8' opacity='0.6'/><text x='285' y='45' text-anchor='end' font-size='10' fill='#0055B8'>河水</text><path d='M 20 35 Q 50 30 80 35 T 140 35 T 200 35 T 260 35 T 300 35' fill='none' stroke='#0055B8' stroke-width='1' opacity='0.6'/><rect x='100' y='70' width='120' height='110' fill='#fdebd0' stroke='#5a6c7d' stroke-width='2'/><text x='160' y='90' text-anchor='middle' font-size='10' fill='#7d2820'>沉箱(开口向下)</text><rect x='108' y='130' width='104' height='42' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='160' y='150' text-anchor='middle' font-size='11' fill='#0055B8' font-weight='600'>封闭气体</text><text x='160' y='165' text-anchor='middle' font-size='10' fill='#0055B8'>T = T<tspan dy='2'>水</tspan> (不变)</text><path d='M 108 172 Q 130 178 152 172 T 196 172 T 212 172' fill='none' stroke='#3498db' stroke-width='1.5'/><text x='240' y='110' font-size='10' fill='#c0392b'>下沉</text><line x1='240' y1='115' x2='240' y2='160' stroke='#c0392b' stroke-width='2' marker-end='url(#aT21down)'/><defs><marker id='aT21down' markerWidth='8' markerHeight='8' refX='4' refY='8' orient='auto'><polygon points='0 0, 8 0, 4 8' fill='#c0392b'/></marker></defs><text x='40' y='200' font-size='9' fill='#0055B8'>水压增 → V 减</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等温压缩(玻意耳) · ΔU = 0 → Q = W &lt; 0(外界对气做功, 气放热)</p></div>",
+      options:{
+        A:"气体内能减小, 放出热量",
+        B:"气体内能不变, 放出热量",
+        C:"气体内能增大, 吸收热量",
+        D:"气体内能不变, 不吸热也不放热"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 等温过程理想气体 ΔU = 0(内能只由 T 决定); ② 第一定律 ΔU = Q − W(W 为气体对外做功); ③ 缓慢压缩 → 气体体积减小 → 外界对气体做功 → W &lt; 0(气体对外做负功)。',
+        approach:'<strong>解题思路</strong>:① "温度始终不变" → 等温 → ΔU = 0, 排除 A、C; ② 缓慢压缩 → V 减 → W (气体对外做功) &lt; 0; ③ 由 ΔU = Q − W → 0 = Q − W → Q = W &lt; 0, 气体<strong>放热</strong>, 排除 D。',
+        solution:'<strong>详细解题</strong>:<br><strong>定过程</strong>:气体温度与水温相同且不变 → <strong>等温过程</strong> → ΔU = 0(理想气体内能只由 T 决定)。<br><br><strong>定 W</strong>:沉箱下沉, 水压增大, 箱内气体被压缩 → V 减小 → 外界对气体做正功 → 气体对外做的功 <strong>W &lt; 0</strong>。<br><br><strong>定 Q</strong>:第一定律 ΔU = Q − W → 0 = Q − W → <strong>Q = W &lt; 0</strong> → 气体<strong>放热</strong>。<br>能量去向:外界对气体做的功全部以热的形式释放给周围河水, 内能分文不动。<br><br><strong>A 错</strong>:等温过程内能不变, 不是"减小" ❌<br><strong>B 对 ✓</strong>:ΔU = 0 + 放热<br><strong>C 错</strong>:等温过程内能不变, 不是"增大" ❌<br><strong>D 错</strong>:等温不等于不换热; 等温压缩必须<strong>放热</strong>(否则 T 会升) ❌<br><br><strong>最终答案: B</strong>'
+      },
+      reflectionPrompts: [
+        '"温度不变 → 内能不变 → 不吸热不放热"这条错误推理我警惕了吗? 等温 ≠ 绝热!',
+        '"缓慢" 在题面里到底是为了让学生联想到什么(等温? 准静态? 平衡态?)',
+        '第一定律 ΔU = Q − W 中 W 的符号约定(W 为气体对外做功), 我每次都先写清楚再代入吗?',
+        '等温压缩与等温膨胀的 Q 方向相反 — 我能各举一个生活情境吗?'
+      ]
+    },
+    { id:"T2-2", type:"choice", score:12, difficulty:"中等", exportIds:["ADIABATIC-PROCESS","FIRST-LAW-EQUATION","KINETIC-ENERGY-TEMP-PROPORTIONAL"],
+      stem:"用打气筒给自行车胎打气时<strong>快速下压</strong>活塞, 筒内空气被急剧压缩, 由于过程极快, 气体来不及与外界交换热量. 对筒内被压缩的气体, 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 320 230' style='width:100%;max-width:320px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='160' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>打气筒快速下压 · 绝热压缩</text><rect x='110' y='30' width='100' height='170' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='112' y='60' width='96' height='16' fill='#34495e'/><text x='160' y='72' text-anchor='middle' font-size='10' fill='white'>活塞 (快速下压)</text><line x1='160' y1='60' x2='160' y2='25' stroke='#2c3e50' stroke-width='3'/><line x1='140' y1='25' x2='180' y2='25' stroke='#2c3e50' stroke-width='3'/><line x1='160' y1='35' x2='160' y2='55' stroke='#c0392b' stroke-width='2.5' marker-end='url(#aT22down)'/><defs><marker id='aT22down' markerWidth='8' markerHeight='8' refX='4' refY='8' orient='auto'><polygon points='0 0, 8 0, 4 8' fill='#c0392b'/></marker></defs><text x='220' y='50' font-size='10' fill='#c0392b'>快速 ↓</text><rect x='112' y='76' width='96' height='122' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='160' y='115' text-anchor='middle' font-size='11' fill='#0055B8' font-weight='600'>气体</text><text x='160' y='135' text-anchor='middle' font-size='10' fill='#0055B8'>来不及换热</text><text x='160' y='150' text-anchor='middle' font-size='10' fill='#0055B8'>Q ≈ 0</text><text x='160' y='175' text-anchor='middle' font-size='10' fill='#c0392b'>T 升高</text><text x='160' y='190' text-anchor='middle' font-size='10' fill='#c0392b'>(摸筒发热)</text><text x='25' y='100' font-size='9' fill='#5a6c7d'>绝热</text><text x='25' y='115' font-size='9' fill='#5a6c7d'>压缩</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 绝热压缩 · Q = 0 · ΔU = −W &gt; 0(外界对气做功全转内能)</p></div>",
+      options:{
+        A:"气体的内能增大, 温度升高",
+        B:"气体的内能不变, 温度不变",
+        C:"气体内能减小, 温度降低",
+        D:"气体放出热量给筒壁, 内能减小"
+      },
+      answer:"A",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① <strong>绝热过程</strong>题面表述 — "极快, 来不及换热" ⇒ Q = 0(高考爱用此种翻译前的说法); ② 第一定律的绝热特例:Q = 0 → ΔU = −W; ③ 绝热压缩 W &lt; 0(气体对外做负功) → ΔU &gt; 0 → 内能增大 → T 升高(理想气体内能只由 T 决定)。',
+        approach:'<strong>解题思路</strong>:① 翻译题面"极快, 来不及换热" → 绝热过程 → Q = 0, 排除 D; ② 压缩 → W (气体对外做功) &lt; 0; ③ 由 ΔU = Q − W = 0 − W = −W &gt; 0 → 内能增大 + 温度升高, 选 A。',
+        solution:'<strong>详细解题</strong>:<br><strong>定过程</strong>:气体"来不及与外界交换热量" → <strong>绝热过程</strong> → Q = 0。<br><br><strong>定 W</strong>:活塞快速下压 → 气体被压缩 → 外界对气体做正功 → 气体对外做的功 <strong>W &lt; 0</strong>。<br><br><strong>用第一定律</strong>:ΔU = Q − W = 0 − W = −W &gt; 0 → 内能<strong>增大</strong>。<br>理想气体内能只由 T 决定 → 内能增大 ⇔ <strong>T 升高</strong>(这也是打气筒筒身会发烫的原因)。<br><br><strong>A 对 ✓</strong>:内能增大 + 温度升高<br><strong>B 错</strong>:绝热压缩温度必<strong>升高</strong>, 不是不变 ❌<br><strong>C 错</strong>:外界对气体做功, 内能<strong>增大</strong>, 不是减小 ❌<br><strong>D 错</strong>:Q = 0 → 不放热, 内能增大也不是减小 ❌<br><br><strong>最终答案: A</strong>'
+      },
+      reflectionPrompts: [
+        '"极快, 来不及换热"这种题面如何快速翻译成绝热? 同类暗示语还有"瞬间", "迅速", "瞬时"等。',
+        '绝热压缩 vs 等温压缩, 在 Q / W / ΔU 上分别有什么区别? 我能列对照表吗?',
+        '"打气筒发烫"是绝热压缩的真实物理现象 — 我能再举两个生活情境吗?',
+        '若改为绝热膨胀(如压缩气体瓶突然放气), 温度会怎么变? 内能呢?'
+      ]
+    },
+    { id:"T2-3", type:"choice", score:12, difficulty:"中等", exportIds:["FIRST-LAW-EQUATION","WORK-PV-FORMULA","GAY-LUSSAC-LAW"],
+      stem:"一定质量的理想气体从同一初态出发做两次实验: 第一次<strong>等容</strong>加热, 吸收热量 300 J, 温度升高 ΔT; 第二次<strong>等压</strong>加热, 吸收热量 500 J, 温度同样升高 ΔT. 已知等压过程中气体压强为 1.0×10<sup>5</sup> Pa. 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 380 200' style='width:100%;max-width:380px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='190' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>等容 vs 等压 同 ΔT · 能量分配对比</text><g transform='translate(10,30)'><text x='75' y='-2' text-anchor='middle' font-size='11' font-weight='600' fill='#c0392b'>① 等容 (V 不变)</text><rect x='20' y='10' width='110' height='130' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='22' y='12' width='106' height='126' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='75' y='55' text-anchor='middle' font-size='10' fill='#0055B8'>气体 V 不变</text><text x='75' y='75' text-anchor='middle' font-size='10' fill='#c0392b'>W = 0</text><text x='75' y='95' text-anchor='middle' font-size='10' fill='#c0392b'>Q = ΔU = 300 J</text><text x='75' y='115' text-anchor='middle' font-size='10' fill='#0055B8'>升温 ΔT</text></g><g transform='translate(200,30)'><text x='80' y='-2' text-anchor='middle' font-size='11' font-weight='600' fill='#B8924A'>② 等压 (p 不变)</text><rect x='20' y='10' width='120' height='130' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='22' y='40' width='116' height='98' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><rect x='22' y='12' width='116' height='26' fill='#34495e'/><text x='80' y='28' text-anchor='middle' font-size='9' fill='white'>活塞自由 ↑</text><line x1='80' y1='12' x2='80' y2='0' stroke='#c0392b' stroke-width='1.5' marker-end='url(#aT23up)'/><defs><marker id='aT23up' markerWidth='8' markerHeight='8' refX='4' refY='1' orient='auto'><polygon points='0 8, 8 8, 4 0' fill='#c0392b'/></marker></defs><text x='80' y='80' text-anchor='middle' font-size='10' fill='#0055B8'>气 V 增大</text><text x='80' y='100' text-anchor='middle' font-size='10' fill='#c0392b'>Q = 500 J</text><text x='80' y='118' text-anchor='middle' font-size='10' fill='#c0392b'>ΔU = 300 J</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 同 ΔT → ΔU 相同 = 300 J · 差额 500 − 300 = 200 J 全在 W = pΔV</p></div>",
+      options:{
+        A:"第二次过程气体内能变化为 500 J(等压吸热全部用于内能)",
+        B:"两次过程内能变化不同, 第二次比第一次大 200 J",
+        C:"第二次过程中气体对外做功 200 J, 体积变化量 ΔV = 2×10<sup>−3</sup> m<sup>3</sup>",
+        D:"第二次过程中气体对外做功 800 J(因 Q − ΔU = 500 − (−300))"
+      },
+      answer:"C",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 理想气体内能只由 T 决定 — 同初态 + 同 ΔT ⇒ 两次过程 ΔU 相同; ② 等容 W = 0 → Q = ΔU; ③ 等压 W = pΔV, 由第一定律 Q = ΔU + W 拆账; ④ 同 ΔT 下两次过程的 ΔU 等于等容的 Q。',
+        approach:'<strong>解题思路</strong>:① 等容: W = 0 → ΔU = Q<sub>1</sub> = 300 J; ② 同 ΔT → ΔU 相同 → 第二次 ΔU 也是 300 J(不是 500 J!); ③ 等压: W = Q<sub>2</sub> − ΔU = 500 − 300 = 200 J → ΔV = W/p = 200/(1.0×10⁵) = 2×10⁻³ m³。',
+        solution:'<strong>详细解题</strong>:<br><strong>第一次 (等容)</strong>:W<sub>1</sub> = 0(体积不变) → 第一定律 → ΔU<sub>1</sub> = Q<sub>1</sub> − W<sub>1</sub> = 300 J。<br><br><strong>关键桥梁</strong>:同一初态 + 升温 ΔT 相同 → 末态温度相同 → 理想气体内能只由 T 决定 → <strong>ΔU<sub>2</sub> = ΔU<sub>1</sub> = 300 J</strong>(同 ΔT 同 ΔU 的铁律)。<br><br><strong>第二次 (等压)</strong>:ΔU<sub>2</sub> = Q<sub>2</sub> − W<sub>2</sub> → W<sub>2</sub> = Q<sub>2</sub> − ΔU<sub>2</sub> = 500 − 300 = <strong>200 J</strong>(对外做功)。<br>由 W<sub>2</sub> = pΔV → ΔV = W<sub>2</sub>/p = 200 / (1.0×10⁵) = <strong>2×10⁻³ m³</strong>。<br><br><strong>A 错</strong>:第二次 ΔU = 300 J 不是 500 J; 把吸热 Q 错当作内能变化, 等压不可能"全部用于内能"(还有 W 占一部分) ❌<br><strong>B 错</strong>:同 ΔT → 两次过程 ΔU<strong>相同</strong>, 不是"不同" ❌<br><strong>C 对 ✓</strong>:W = 200 J + ΔV = 2×10⁻³ m³ 全对<br><strong>D 错</strong>:等压做功 W = Q − ΔU = 500 − 300 = 200 J 不是 800 J; D 选项错在 ΔU 的符号 ❌<br><br><strong>最终答案: C</strong>'
+      },
+      reflectionPrompts: [
+        '"理想气体内能只由 T 决定 → 同 ΔT 必同 ΔU"这个桥梁我能脱口而出吗? 它是本题的关键转折。',
+        '"等容吸的热 = ΔU"这条特例式我熟练吗? 它是本题的"已知"翻译。',
+        '等压做功 W = pΔV 中 ΔV 的单位是什么? 我代 J / Pa 时单位对得上吗?',
+        '同 ΔT 下等压吸的热为何比等容多? 多出的部分去哪了? 我能用能量图说明吗?'
+      ]
+    },
+    { id:"T2-4", type:"choice", score:12, difficulty:"中等", exportIds:["CHARLES-LAW","KELVIN-CELSIUS-RELATION","FIRST-LAW-EQUATION","INTERNAL-ENERGY-IS-STATE-FUNCTION"],
+      stem:"果汁热灌装生产线上, 玻璃罐在 87 ℃ 时灌装并立即密封, 罐颈上方封有少量空气(视为理想气体, 罐体积不变). 之后罐子在车间内静置, 冷却到室温 27 ℃. 对罐内封闭气体, 下列说法正确的是:<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 380 220' style='width:100%;max-width:380px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='190' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>热灌装等容冷却 · p/T 比例下降</text><g transform='translate(40,30)'><text x='40' y='-2' text-anchor='middle' font-size='10' font-weight='600' fill='#c0392b'>① 灌装密封 87 ℃</text><rect x='20' y='10' width='40' height='30' fill='#a9cce3' stroke='#5a6c7d' stroke-width='1.5'/><rect x='20' y='40' width='40' height='120' fill='#fdebd0' stroke='#5a6c7d' stroke-width='2'/><text x='40' y='28' text-anchor='middle' font-size='9' fill='#0055B8'>空气</text><text x='40' y='38' text-anchor='middle' font-size='8' fill='#0055B8'>360 K</text><text x='40' y='105' text-anchor='middle' font-size='9' fill='#7d2820'>果汁</text></g><g transform='translate(160,80)'><text x='30' y='-2' text-anchor='middle' font-size='10' fill='#0055B8'>冷却 60 K</text><line x1='0' y1='10' x2='60' y2='10' stroke='#0055B8' stroke-width='2' marker-end='url(#aT24)'/><defs><marker id='aT24' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#0055B8'/></marker></defs><text x='30' y='30' text-anchor='middle' font-size='9' fill='#7f8c8d'>V 不变</text></g><g transform='translate(260,30)'><text x='40' y='-2' text-anchor='middle' font-size='10' font-weight='600' fill='#B8924A'>② 静置至 27 ℃</text><rect x='20' y='10' width='40' height='30' fill='#a9cce3' stroke='#5a6c7d' stroke-width='1.5'/><rect x='20' y='40' width='40' height='120' fill='#fdebd0' stroke='#5a6c7d' stroke-width='2'/><text x='40' y='28' text-anchor='middle' font-size='9' fill='#0055B8'>空气</text><text x='40' y='38' text-anchor='middle' font-size='8' fill='#0055B8'>300 K</text><text x='40' y='105' text-anchor='middle' font-size='9' fill='#7d2820'>果汁</text><text x='75' y='30' font-size='9' fill='#c0392b'>p ↓</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等容降温(查理) · p₂/p₁ = T₂/T₁ = 300/360 = 5/6 · W = 0 → Q = ΔU &lt; 0(放热)</p></div>",
+      options:{
+        A:"气体经历等压过程, 体积减小",
+        B:"气体经历等容过程, 压强变为原来的 5/6, 放出热量",
+        C:"气体经历等容过程, 压强变为原来的 27/87, 放出热量",
+        D:"气体经历等容过程, 压强变为原来的 5/6, 吸收热量"
+      },
+      answer:"B",
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 摄氏 → 开尔文换算 T = t + 273 必须先做(87 ℃ = 360 K, 27 ℃ = 300 K); ② "罐体积不变" + "密封" → 等容过程, 查理定律 p/T = 常数; ③ 等容 W = 0 → 第一定律 Q = ΔU; ④ 降温 → ΔU &lt; 0 → Q &lt; 0 → 放热。',
+        approach:'<strong>解题思路</strong>:① 翻译"罐体积不变" → 等容, 排除 A; ② 摄氏度先换 K, 排除 C(用 27/87 是常见错); ③ 查理定律 p₂/p₁ = T₂/T₁ = 300/360 = 5/6; ④ 等容降温 W = 0, ΔU &lt; 0 → Q = ΔU &lt; 0 → 放热, 排除 D。',
+        solution:'<strong>详细解题</strong>:<br><strong>定过程</strong>:罐密封 + 罐体积不变 → <strong>等容过程</strong> → A 错(不是等压)。<br><br><strong>定 p<sub>2</sub>/p<sub>1</sub></strong>:温度换算 T<sub>1</sub> = 87 + 273 = 360 K, T<sub>2</sub> = 27 + 273 = 300 K。查理定律:<br>p<sub>1</sub>/T<sub>1</sub> = p<sub>2</sub>/T<sub>2</sub> → <strong>p<sub>2</sub>/p<sub>1</sub> = T<sub>2</sub>/T<sub>1</sub> = 300/360 = 5/6</strong>。<br>(C 用 27/87 是直接代摄氏度的常见错, 必须用 K!)<br><br><strong>定 Q</strong>:等容 → W = 0 → ΔU = Q − W = Q。降温 → 理想气体内能减小 → ΔU &lt; 0 → <strong>Q &lt; 0 (放热)</strong>。<br><br><strong>A 错</strong>:罐体积不变, 不是等压 ❌<br><strong>B 对 ✓</strong>:等容 + 5/6 + 放热<br><strong>C 错</strong>:用摄氏度比, 必须先换 K ❌<br><strong>D 错</strong>:等容降温必<strong>放热</strong>, 不是吸热 ❌<br><br><strong>最终答案: B</strong>'
+      },
+      reflectionPrompts: [
+        '"℃ → K 必须 +273 再代入气体定律"这个铁律我每次都先做吗? 用 27/87 是高考典型失分点。',
+        '"等容降温 → 放热"的直觉我建立了吗?(W = 0, 内能减少必由放热承担)',
+        '热灌装 + 密封 + 冷却 → 罐子轻轻凹陷, 这一现象的物理本质我能解释吗?',
+        '若改成"罐颈用软铝箔封口"(罐顶可形变, 压强 ≈ 大气压), 题目就变成等压过程 — 我能续答这种变式吗?'
+      ]
+    }
+  ],
+  T3: [
+    { id:"T3-1", type:"multi", score:16, difficulty:"中等", exportIds:["CHARLES-LAW","BOYLE-LAW","GAY-LUSSAC-LAW","FIRST-LAW-EQUATION","STATE-VS-PROCESS","ISOTHERMAL-PROCESS"],
+      stem:"一定质量的理想气体经历循环 A→B→C→A: <strong>A→B 等容加热</strong>, 压强由 p₀ 升到 2p₀; <strong>B→C 等温膨胀</strong>, 体积由 V₀ 增大到 2V₀; <strong>C→A 等压压缩</strong>回到初态. 已知初态 A 温度为 T₀. 下列说法正确的是(多选):<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 320 260' style='width:100%;max-width:320px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='160' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>p-V 三角形循环 A→B→C→A</text><line x1='50' y1='220' x2='290' y2='220' stroke='#333' stroke-width='1.5'/><line x1='50' y1='30' x2='50' y2='220' stroke='#333' stroke-width='1.5'/><text x='285' y='235' font-size='11' fill='#333'>V</text><text x='37' y='38' font-size='11' fill='#333'>p</text><text x='42' y='235' font-size='10' fill='#888'>O</text><line x1='100' y1='220' x2='100' y2='80' stroke='#c0392b' stroke-width='2.5' marker-end='url(#aT31AB)'/><path d='M 100 80 Q 130 105 160 135 Q 190 170 220 195' fill='none' stroke='#B8924A' stroke-width='2.5' marker-end='url(#aT31BC)'/><line x1='220' y1='195' x2='100' y2='195' stroke='#0055B8' stroke-width='2.5' marker-end='url(#aT31CA)'/><defs><marker id='aT31AB' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#c0392b'/></marker><marker id='aT31BC' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#B8924A'/></marker><marker id='aT31CA' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#0055B8'/></marker></defs><circle cx='100' cy='195' r='4' fill='#2c3e50'/><text x='80' y='200' font-size='12' font-weight='600' fill='#2c3e50'>A</text><circle cx='100' cy='80' r='4' fill='#2c3e50'/><text x='80' y='84' font-size='12' font-weight='600' fill='#2c3e50'>B</text><circle cx='220' cy='195' r='4' fill='#2c3e50'/><text x='227' y='200' font-size='12' font-weight='600' fill='#2c3e50'>C</text><text x='95' y='248' font-size='9' fill='#5a6c7d'>V₀</text><text x='215' y='248' font-size='9' fill='#5a6c7d'>2V₀</text><text x='35' y='200' font-size='9' fill='#5a6c7d'>p₀</text><text x='30' y='84' font-size='9' fill='#5a6c7d'>2p₀</text><text x='108' y='155' font-size='9' fill='#c0392b'>A→B 等容</text><text x='150' y='110' font-size='9' fill='#B8924A'>B→C 等温</text><text x='128' y='212' font-size='9' fill='#0055B8'>C→A 等压</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 三段式循环 · 状态:A(p₀,V₀,T₀) B(2p₀,V₀,2T₀) C(p₀,2V₀,2T₀)</p></div>",
+      options:{
+        A:"状态 B 与状态 C 的温度均为 2T₀",
+        B:"A→B 过程气体吸热, 且吸收的热量全部用于增加内能",
+        C:"B→C 过程气体不吸热也不放热",
+        D:"C→A 过程气体放出的热量大于外界对气体做的功",
+        E:"整个循环一周, 气体内能变化为零"
+      },
+      answer:["A","B","D","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① pV/T = 常数(质量一定) — 循环题先填满状态参量表; ② 四特例:等容 W=0 / 等温 ΔU=0 / 等压 W=pΔV / 绝热 Q=0; ③ 内能是状态量 → 循环一周 ΔU = 0(铁律)。',
+        approach:'<strong>解题思路</strong>:循环题两轮扫描 — 第一轮用状态方程定 A、B、C 三态 (p, V, T); 第二轮逐段套 ΔU = Q − W 判能量。',
+        solution:'<strong>详细解题</strong>:<br><strong>第一轮定状态</strong>:<br>· A: (p₀, V₀, T₀)<br>· A→B 等容: p₀/T₀ = 2p₀/T<sub>B</sub> → <strong>T<sub>B</sub> = 2T₀</strong> → B: (2p₀, V₀, 2T₀)<br>· B→C 等温: T<sub>C</sub> = T<sub>B</sub> = 2T₀; pV 恒定 → p<sub>C</sub> = 2p₀·V₀/2V₀ = p₀ → C: (p₀, 2V₀, 2T₀)<br>· 核对 C→A 等压 ✓<br><br><strong>A 对 ✓</strong>:T<sub>B</sub> = T<sub>C</sub> = 2T₀<br><strong>B 对 ✓</strong>:A→B 等容 → W = 0; T 升 → ΔU &gt; 0 → Q = ΔU &gt; 0, 吸热<strong>全部用于增加内能</strong><br><strong>C 错</strong>:B→C 等温 → ΔU = 0; V 增 → 对外做功 W &gt; 0 → Q = W &gt; 0, <strong>必须吸热</strong>(等温 ≠ 绝热!) ❌<br><strong>D 对 ✓</strong>:C→A 等压压缩, T 由 2T₀ 降到 T₀ → ΔU &lt; 0; V 减 → 外界做功 (W &lt; 0). |Q| = |ΔU| + |W| <strong>大于</strong> |W| → ✓<br><strong>E 对 ✓</strong>:内能是状态量, 循环回到 A → ΔU(一周) = 0<br><br><strong>最终答案: ABDE</strong>'
+      },
+      reflectionPrompts: [
+        '"循环题先填满状态参量表"这一步我每次都做吗? 不填就跳能量是丢分主因。',
+        '"等温 ≠ 绝热"这个最大陷阱我警惕了吗?(温度不变是 ΔU=0, 绝热才是 Q=0)',
+        '"循环一周 ΔU = 0"作为状态量的铁律, 我能立刻判 E 吗?',
+        '等压放热段为何 |Q| &gt; |W|? 多出来的部分是什么? 我能用能量图说明吗?'
+      ]
+    },
+    { id:"T3-2", type:"multi", score:16, difficulty:"较难", exportIds:["ADIABATIC-PROCESS","FIRST-LAW-EQUATION","WORK-PV-FORMULA","STATE-VS-PROCESS"],
+      stem:"某<strong>压燃式发动机</strong>的一个工作循环可简化为四个过程: <strong>① 绝热压缩</strong> — 活塞快速压缩空气; <strong>② 等压燃烧</strong> — 喷入燃料燃烧, 气体等压膨胀; <strong>③ 绝热膨胀</strong> — 高温气体推动活塞快速做功; <strong>④ 等容放热</strong> — 排气降压回到初态. 下列说法正确的是(多选):<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 340 260' style='width:100%;max-width:340px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='170' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>压燃发动机 4 过程循环 (p-V 图)</text><line x1='50' y1='220' x2='310' y2='220' stroke='#333' stroke-width='1.5'/><line x1='50' y1='30' x2='50' y2='220' stroke='#333' stroke-width='1.5'/><text x='305' y='235' font-size='11' fill='#333'>V</text><text x='37' y='38' font-size='11' fill='#333'>p</text><text x='42' y='235' font-size='10' fill='#888'>O</text><path d='M 250 200 Q 220 150 180 80' fill='none' stroke='#c0392b' stroke-width='2.5' marker-end='url(#aT32_1)'/><line x1='180' y1='80' x2='240' y2='80' stroke='#e67e22' stroke-width='2.5' marker-end='url(#aT32_2)'/><path d='M 240 80 Q 260 130 280 195' fill='none' stroke='#9b59b6' stroke-width='2.5' marker-end='url(#aT32_3)'/><line x1='280' y1='195' x2='280' y2='200' stroke='#0055B8' stroke-width='2.5'/><line x1='280' y1='200' x2='250' y2='200' stroke='#0055B8' stroke-width='2.5' marker-end='url(#aT32_4)'/><defs><marker id='aT32_1' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#c0392b'/></marker><marker id='aT32_2' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#e67e22'/></marker><marker id='aT32_3' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#9b59b6'/></marker><marker id='aT32_4' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#0055B8'/></marker></defs><circle cx='250' cy='200' r='3' fill='#2c3e50'/><circle cx='180' cy='80' r='3' fill='#2c3e50'/><circle cx='240' cy='80' r='3' fill='#2c3e50'/><circle cx='280' cy='195' r='3' fill='#2c3e50'/><text x='190' y='160' font-size='9' fill='#c0392b'>① 绝热压缩</text><text x='195' y='70' font-size='9' fill='#e67e22'>② 等压燃烧</text><text x='258' y='130' font-size='9' fill='#9b59b6'>③ 绝热膨胀</text><text x='225' y='215' font-size='9' fill='#0055B8'>④ 等容放热</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 4 段循环 · 闭合 p-V 顺时针 → 对外净做功 · 一周 ΔU = 0</p></div>",
+      options:{
+        A:"① 绝热压缩中气体温度升高, 内能增大",
+        B:"② 等压燃烧中气体对外做的功等于该段吸收的热量",
+        C:"③ 绝热膨胀中气体温度降低, 内能减小",
+        D:"④ 等容放热中气体不做功, 放出的热量等于内能的减少量",
+        E:"整个循环一周, 气体净吸热等于气体对外净做功"
+      },
+      answer:["A","C","D","E"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 绝热 Q = 0 → ΔU = −W; ② 等压 Q = ΔU + W(三项并存, 不能"全部"); ③ 等容 W = 0 → Q = ΔU; ④ 循环一周 ΔU = 0 → 净吸热 = 净做功(热机能量账)。',
+        approach:'<strong>解题思路</strong>:四段逐一套第一定律 — 压缩做负功(气对外)、膨胀做正功; 升温 ΔU &gt; 0, 降温 ΔU &lt; 0; 等压燃烧时不仅做功还增内能, 选项 B 把 Q 误当全部对外做功 → 错。E 用循环铁律。',
+        solution:'<strong>详细解题</strong>:<br><strong>① 绝热压缩</strong>:Q = 0, V 减 → W &lt; 0 → ΔU = −W &gt; 0 → 内能增大, T 升高 → <strong>A 对 ✓</strong><br><br><strong>② 等压燃烧</strong>:V 增 → W &gt; 0; T 升(燃烧供能) → ΔU &gt; 0; 由 Q = ΔU + W → <strong>Q &gt; W</strong> (吸热既给内能又对外做功, 不能"等于") → <strong>B 错</strong> ❌<br><br><strong>③ 绝热膨胀</strong>:Q = 0, V 增 → W &gt; 0 → ΔU = −W &lt; 0 → 内能减小, T 降低 → <strong>C 对 ✓</strong><br><br><strong>④ 等容放热</strong>:V 不变 → W = 0; 排气降压, T 降 → ΔU &lt; 0; Q = ΔU − 0 = ΔU &lt; 0, 即放热; |Q| = |ΔU| → 放出的热量 = 内能减少量 → <strong>D 对 ✓</strong><br><br><strong>⑤ 循环一周</strong>:回到初态 → ΔU(一周) = 0; Q<sub>净</sub> − W<sub>净</sub> = 0 → 净吸热 = 对外净做功(热机能量账) → <strong>E 对 ✓</strong><br><br><strong>最终答案: ACDE</strong>'
+      },
+      reflectionPrompts: [
+        '"绝热压缩 → 内能增 → 温升" 与 "绝热膨胀 → 内能减 → 温降" 这一对对偶过程, 我能秒判方向吗?',
+        '"等压燃烧 Q = ΔU + W (三项并存)" 与选项 B "Q 全部用于做功" 的区别 — 我警惕这种偷换吗?',
+        '"循环一周 ΔU = 0 → Q<sub>净</sub> = W<sub>净</sub>"这就是热机的能量账, 这条铁律我建立了吗?',
+        '压燃发动机(柴油机)与点燃发动机(汽油机)循环骨架的差异是什么? 我有兴趣去查吗?'
+      ]
+    },
+    { id:"T3-3", type:"multi", score:16, difficulty:"较难", exportIds:["BOYLE-LAW","GAY-LUSSAC-LAW","ISOTHERMAL-PROCESS","WORK-PV-FORMULA","FIRST-LAW-EQUATION","STATE-VS-PROCESS"],
+      stem:"一定质量的理想气体在 V-T 图上经历循环 a→b→c→a: <strong>a(V₀, T₀)</strong> 等温膨胀至 <strong>b(2V₀, T₀)</strong>; b 等压压缩至 <strong>c(V₀, T₀/2)</strong>; c 等容加热回到 a. 下列说法正确的是(多选):<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 320 260' style='width:100%;max-width:320px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='160' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>V-T 三角形循环 a→b→c→a</text><line x1='50' y1='220' x2='290' y2='220' stroke='#333' stroke-width='1.5'/><line x1='50' y1='30' x2='50' y2='220' stroke='#333' stroke-width='1.5'/><text x='285' y='235' font-size='11' fill='#333'>T</text><text x='37' y='38' font-size='11' fill='#333'>V</text><text x='42' y='235' font-size='10' fill='#888'>O</text><line x1='160' y1='160' x2='160' y2='80' stroke='#c0392b' stroke-width='0.5' stroke-dasharray='2,2'/><line x1='240' y1='160' x2='240' y2='80' stroke='#c0392b' stroke-width='0.5' stroke-dasharray='2,2'/><line x1='160' y1='160' x2='240' y2='160' stroke='#B8924A' stroke-width='2.5' marker-end='url(#aT33ab)'/><path d='M 240 160 L 160 80' fill='none' stroke='#9b59b6' stroke-width='2.5' marker-end='url(#aT33bc_dash)'/><line x1='240' y1='160' x2='160' y2='80' stroke='#9b59b6' stroke-width='2.5' marker-end='url(#aT33bc)'/><line x1='160' y1='80' x2='160' y2='160' stroke='#0055B8' stroke-width='2.5' marker-end='url(#aT33ca)'/><defs><marker id='aT33ab' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#B8924A'/></marker><marker id='aT33bc' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#9b59b6'/></marker><marker id='aT33bc_dash' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#9b59b6'/></marker><marker id='aT33ca' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#0055B8'/></marker></defs><circle cx='160' cy='80' r='4' fill='#2c3e50'/><text x='140' y='75' font-size='12' font-weight='600' fill='#2c3e50'>a</text><circle cx='240' cy='160' r='4' fill='#2c3e50'/><text x='245' y='160' font-size='12' font-weight='600' fill='#2c3e50'>b</text><circle cx='160' cy='160' r='4' fill='#2c3e50'/><text x='140' y='170' font-size='12' font-weight='600' fill='#2c3e50'>c</text><text x='35' y='84' font-size='9' fill='#5a6c7d'>2V₀</text><text x='38' y='164' font-size='9' fill='#5a6c7d'>V₀</text><text x='155' y='248' font-size='9' fill='#5a6c7d'>T₀/2 ... T₀</text><text x='225' y='248' font-size='9' fill='#5a6c7d'>T₀</text><text x='165' y='130' font-size='9' fill='#c0392b'>等容 c→a</text><text x='168' y='118' font-size='9' fill='#0055B8'>(V₀ 不变)</text><text x='195' y='176' font-size='9' fill='#B8924A'>等温 a→b</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 V-T 循环 · a(V₀,T₀,p₀) b(2V₀,T₀,p₀/2) c(V₀,T₀/2,p₀/2)</p></div>",
+      options:{
+        A:"状态 b 的压强为 p₀/2, 其中 p₀ 是状态 a 的压强",
+        B:"a→b 过程气体吸热, 吸收的热量等于气体对外做的功",
+        C:"b→c 过程气体放热",
+        D:"c→a 过程气体对外做功",
+        E:"整个循环一周, 气体净吸热为零"
+      },
+      answer:["A","B","C"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 在 V-T 图上读 a、b、c 三态参量 + 用 pV/T = 常数补出 p; ② 等温 ΔU=0 → Q = W; ③ 等压压缩 W &lt; 0, ΔU &lt; 0 → Q &lt; 0; ④ 等容 W = 0 → Q = ΔU; ⑤ 循环净吸热 = 净做功(不是零!)。',
+        approach:'<strong>解题思路</strong>:先补 p — a→b 等温 → p<sub>a</sub>V<sub>0</sub> = p<sub>b</sub>·2V<sub>0</sub> → p<sub>b</sub> = p<sub>a</sub>/2; 然后逐段判 Q / W; 最后用循环铁律核 E。',
+        solution:'<strong>详细解题</strong>:<br><strong>定状态(补 p)</strong>:设 a 处 p<sub>a</sub> = p₀。<br>· a→b 等温 → p<sub>a</sub>V<sub>a</sub> = p<sub>b</sub>V<sub>b</sub> → p₀·V₀ = p<sub>b</sub>·2V₀ → <strong>p<sub>b</sub> = p₀/2</strong> → <strong>A 对 ✓</strong><br>· b→c 等压 → p<sub>c</sub> = p<sub>b</sub> = p₀/2; c: (V₀, T₀/2, p₀/2)<br>· c→a 等容(V₀ 不变), 用查理: p<sub>c</sub>/T<sub>c</sub> = p<sub>a</sub>/T<sub>a</sub> → (p₀/2)/(T₀/2) = p₀/T₀ ✓<br><br><strong>a→b 等温膨胀</strong>:ΔU = 0; V 增 → W &gt; 0 → Q = W &gt; 0, <strong>吸热 = 对外做的功</strong> → <strong>B 对 ✓</strong><br><br><strong>b→c 等压压缩</strong>:V 由 2V₀ 减到 V₀ → W &lt; 0(气体对外做负功); T 由 T₀ 降到 T₀/2 → ΔU &lt; 0; Q = ΔU + W &lt; 0 → <strong>放热</strong> → <strong>C 对 ✓</strong><br><br><strong>c→a 等容加热</strong>:V 不变 → <strong>W = 0</strong>, 气体既不对外做功也不被外界做功 → <strong>D 错 ❌</strong><br><br><strong>循环一周</strong>:ΔU = 0 → Q<sub>净</sub> = W<sub>净</sub>。p-V 图上闭合回路面积 = 净做功 ≠ 0(一般情形), 故净吸热 ≠ 0 → <strong>E 错 ❌</strong>(E 把 ΔU=0 错说成 Q<sub>净</sub>=0)<br><br><strong>最终答案: ABC</strong>'
+      },
+      reflectionPrompts: [
+        '在 V-T 图上读循环时, 我会主动用 pV/T = 常数把缺失的 p 补出来吗?',
+        '"等容 W = 0 → 既不对外也不被外界做功"这条铁律我能识破选项 D 的陷阱吗?',
+        '"循环一周 ΔU = 0" ≠ "净吸热 = 0" — 这两件事的关系我理清了吗?',
+        '本题与 T3-1 的 p-V 三角形循环骨架相同但坐标系换了 — 我有"换坐标系不换分析框架"的统一视角吗?'
+      ]
+    },
+    { id:"T3-4", type:"multi", score:16, difficulty:"较难", exportIds:["GAY-LUSSAC-LAW","BOYLE-LAW","ISOTHERMAL-PROCESS","WORK-PV-FORMULA","FIRST-LAW-EQUATION","STATE-VS-PROCESS"],
+      stem:"一定质量的理想气体在 p-T 图上沿矩形 A→B→C→D→A 循环: <strong>A(1×10<sup>5</sup> Pa, 300 K)</strong> → <strong>B(1×10<sup>5</sup> Pa, 600 K)</strong> → <strong>C(2×10<sup>5</sup> Pa, 600 K)</strong> → <strong>D(2×10<sup>5</sup> Pa, 300 K)</strong> → A. 已知 A 状态体积 V<sub>A</sub> = 1 m<sup>3</sup>. 下列说法正确的是(多选):<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 320 260' style='width:100%;max-width:320px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='160' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>p-T 矩形循环 A→B→C→D→A</text><line x1='50' y1='220' x2='290' y2='220' stroke='#333' stroke-width='1.5'/><line x1='50' y1='30' x2='50' y2='220' stroke='#333' stroke-width='1.5'/><text x='285' y='235' font-size='11' fill='#333'>T</text><text x='37' y='38' font-size='11' fill='#333'>p</text><text x='42' y='235' font-size='10' fill='#888'>O</text><line x1='110' y1='180' x2='250' y2='180' stroke='#B8924A' stroke-width='2.5' marker-end='url(#aT34AB)'/><line x1='250' y1='180' x2='250' y2='80' stroke='#c0392b' stroke-width='2.5' marker-end='url(#aT34BC)'/><line x1='250' y1='80' x2='110' y2='80' stroke='#0055B8' stroke-width='2.5' marker-end='url(#aT34CD)'/><line x1='110' y1='80' x2='110' y2='180' stroke='#9b59b6' stroke-width='2.5' marker-end='url(#aT34DA)'/><defs><marker id='aT34AB' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#B8924A'/></marker><marker id='aT34BC' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#c0392b'/></marker><marker id='aT34CD' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#0055B8'/></marker><marker id='aT34DA' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#9b59b6'/></marker></defs><circle cx='110' cy='180' r='4' fill='#2c3e50'/><text x='95' y='195' font-size='12' font-weight='600' fill='#2c3e50'>A</text><circle cx='250' cy='180' r='4' fill='#2c3e50'/><text x='255' y='195' font-size='12' font-weight='600' fill='#2c3e50'>B</text><circle cx='250' cy='80' r='4' fill='#2c3e50'/><text x='255' y='80' font-size='12' font-weight='600' fill='#2c3e50'>C</text><circle cx='110' cy='80' r='4' fill='#2c3e50'/><text x='95' y='80' font-size='12' font-weight='600' fill='#2c3e50'>D</text><text x='100' y='248' font-size='9' fill='#5a6c7d'>300 K</text><text x='240' y='248' font-size='9' fill='#5a6c7d'>600 K</text><text x='15' y='184' font-size='9' fill='#5a6c7d'>1×10⁵</text><text x='15' y='84' font-size='9' fill='#5a6c7d'>2×10⁵</text><text x='160' y='195' font-size='9' fill='#B8924A'>A→B 等压</text><text x='258' y='130' font-size='9' fill='#c0392b'>B→C 等温</text><text x='150' y='75' font-size='9' fill='#0055B8'>C→D 等压</text><text x='65' y='130' font-size='9' fill='#9b59b6'>D→A 等温</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>📊 p-T 矩形 · A→B / C→D 水平线 = 等压 · B→C / D→A 竖直线 = 等温</p></div>",
+      options:{
+        A:"A→B 是等压过程, 体积变为 2 m<sup>3</sup>",
+        B:"B→C 是等温过程, 体积变为 1 m<sup>3</sup>",
+        C:"C→D 是等容过程",
+        D:"D→A 过程气体放热, 且放出的热量等于外界对气体做的功",
+        E:"整个循环一周, 气体净吸热为零"
+      },
+      answer:["A","B"],
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① p-T 图<strong>水平线</strong>(p 不变, T 变)= 等压; <strong>竖直线</strong>(T 不变, p 变)= 等温; ② 等压 V/T = 常数; 等温 pV = 常数; ③ 等温 ΔU = 0 → Q = W; ④ 循环净吸热 = 净做功(矩形面积非零)≠ 零。',
+        approach:'<strong>解题思路</strong>:① 识别 p-T 图上水平/竖直线分别是等压/等温, 排除 C 的"等容"; ② 用等压 V/T 比例算 V<sub>B</sub>; 用等温 pV 恒定算 V<sub>C</sub>; ③ D→A 在 p-T 图上 T 不变、p 由 2×10⁵ Pa 降到 1×10⁵ Pa → 等温减压 → V 增大 → 等温膨胀, 应<strong>吸热</strong>而非放热, 排除 D; ④ 循环 ΔU = 0 但 Q<sub>净</sub> ≠ 0, 排除 E。',
+        solution:'<strong>详细解题</strong>:<br><strong>识图</strong>:p-T 图上, A→B 水平(p 不变)= <strong>等压</strong>; B→C 竖直(T 不变)= <strong>等温</strong>; C→D 水平 = <strong>等压</strong>; D→A 竖直 = <strong>等温</strong>。<br><br><strong>A 对 ✓</strong>:A→B 等压 → V/T = 常数 → V<sub>B</sub> = V<sub>A</sub> × T<sub>B</sub>/T<sub>A</sub> = 1 × 600/300 = <strong>2 m³</strong><br><br><strong>B 对 ✓</strong>:B→C 等温 → pV = 常数 → V<sub>C</sub> = p<sub>B</sub>V<sub>B</sub>/p<sub>C</sub> = (1×10⁵ × 2)/(2×10⁵) = <strong>1 m³</strong><br><br><strong>C 错</strong>:C→D 是 p-T 图水平线(p 不变 = 2×10⁵)→ <strong>等压</strong>过程, 不是等容 ❌<br><br><strong>D 错</strong>:D→A 是 p-T 图竖直线(T = 300 K 不变, p 由 2×10⁵ Pa 降到 1×10⁵ Pa)→ <strong>等温过程</strong>。由 pV = 常数, V<sub>D</sub> = p<sub>C</sub>V<sub>C</sub>/p<sub>D</sub>……补 V<sub>D</sub>:C→D 等压 → V<sub>D</sub> = V<sub>C</sub> × T<sub>D</sub>/T<sub>C</sub> = 1 × 300/600 = 0.5 m³。所以 D→A 时 V 由 0.5 增到 1 m³, 是<strong>等温膨胀</strong> → 气体对外做正功 W &gt; 0, ΔU = 0 → Q = W &gt; 0, 即<strong>吸热</strong>(不是放热), 选项 D 的"放热"描述错误 ❌<br><br><strong>E 错</strong>:循环回到初态 ΔU = 0, 但 Q<sub>净</sub> = W<sub>净</sub> = 闭合回路在 p-V 图上的面积。本矩形 p-T 循环在 p-V 平面上是非零面积的闭合回路(顺时针 → 热机), 故 Q<sub>净</sub> ≠ 0 ❌<br><br><strong>最终答案: AB</strong>'
+      },
+      reflectionPrompts: [
+        'p-T 图上水平线 = 等压, 竖直线 = 等温, p-V 图上的等压/等温线分别长什么样? 我能列对照表吗?',
+        '"循环一周 ΔU = 0" 和 "净吸热为零" 是同一回事吗? E 选项的偷换我能识破吗?',
+        'D→A 过程方向是膨胀还是压缩? 我会先用 pV = nRT 算出 V<sub>D</sub>、V<sub>A</sub> 再判方向, 还是凭感觉?',
+        '矩形循环在 p-T 图上的 4 段, 哪两段是热量"进口"哪两段是"出口"? 我能画能量流向图吗?'
+      ]
+    }
+  ],
+  T4: [
+    { id:"T4-1", type:"short", score:30, difficulty:"较难", exportIds:["CHARLES-LAW","COMBINED-GAS-EQUATION","KELVIN-CELSIUS-RELATION"],
+      stem:"<strong>综合大题(受力平衡定压强 → 气体方程, 150-300 字 + 计算)</strong>:医用药液雾化器的储液罐密闭, 罐内药液上方封有一定质量的空气(视为理想气体). 一根竖直提液管下端插入药液中, 上端通向喷嘴. 初始时罐内气体压强等于大气压 p₀ = 1.0×10<sup>5</sup> Pa, 温度 T₁ = 300 K. 现缓慢加热罐内气体, 当气体压强恰好能把药液沿提液管送到高出罐内液面 h = 0.5 m 的喷嘴口时开始雾化. 罐是刚性的, 药液液面下降可忽略(气体体积视为不变). 已知药液密度 ρ = 1.0×10<sup>3</sup> kg/m<sup>3</sup>, g = 10 m/s<sup>2</sup>.<br><br><strong>(1)</strong> 求开始雾化时罐内气体的压强 p₂;<br><strong>(2)</strong> 求此时罐内气体的温度 T₂;<br><strong>(3)</strong> 说明本题用的是哪条气体实验定律, 为什么适用.<br><br><em style='color:#7f8c8d;font-size:12px;'>(作答提示: 压强请用 ρ 而非 p 表示液柱项, 防混淆)</em><div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 360 280' style='width:100%;max-width:340px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='180' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>医用药液雾化器 · 加热加压送液</text><rect x='80' y='90' width='160' height='160' fill='#fdebd0' stroke='#5a6c7d' stroke-width='2'/><rect x='84' y='94' width='152' height='60' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='160' y='118' text-anchor='middle' font-size='10' fill='#0055B8'>气体 (刚性罐 V 不变)</text><text x='160' y='133' text-anchor='middle' font-size='10' fill='#0055B8'>初: p₀=1×10⁵ Pa, 300 K</text><text x='160' y='148' text-anchor='middle' font-size='10' fill='#c0392b'>末: p₂=?, T₂=?</text><rect x='84' y='154' width='152' height='96' fill='#d6eaf8' stroke='#3498db' stroke-width='1.5'/><text x='160' y='200' text-anchor='middle' font-size='10' fill='#1a5276'>药液 ρ=1×10³ kg/m³</text><rect x='150' y='30' width='20' height='220' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='152' y='32' width='16' height='180' fill='#d6eaf8' stroke='#3498db' stroke-width='0.5'/><text x='160' y='250' text-anchor='middle' font-size='9' fill='#1a5276'>液</text><line x1='275' y1='30' x2='275' y2='154' stroke='#c0392b' stroke-width='1' stroke-dasharray='2,2'/><line x1='270' y1='30' x2='280' y2='30' stroke='#c0392b'/><line x1='270' y1='154' x2='280' y2='154' stroke='#c0392b'/><text x='285' y='95' font-size='10' font-weight='600' fill='#c0392b'>h = 0.5 m</text><polygon points='160,30 150,42 170,42' fill='#c0392b' opacity='0.7'/><text x='180' y='38' font-size='10' fill='#c0392b'>喷嘴</text><text x='40' y='130' font-size='10' fill='#7f8c8d'>加热 →</text><text x='40' y='145' font-size='9' fill='#7f8c8d'>(气压升)</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 受力平衡:p₂ = p₀ + ρgh · 等容(刚性罐 + 液面不变)→ 查理定律 p/T 恒</p></div>",
+      keywords:["1.05","315","查理","ρgh"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 液柱压强关系 — 喷嘴口与罐内液面的高度差要求气体压强比大气压高出 ρgh(液体平衡); ② 查理定律 p/T = 常数(质量一定 + 体积不变); ③ 三步链的前两步:压强分析 → 气体方程。',
+        approach:'<strong>解题思路</strong>:<br>(1) 对提液管内的药液柱做压强分析:罐内气压要把液柱顶到高 h 处并接上大气 → p₂ = p₀ + ρgh;<br>(2) 罐刚性 + 液面不动 → 等容, 用查理定律求 T₂;<br>(3) 点名定律 + 说明"质量一定、体积不变"两个适用条件。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 压强分析</strong>(关键字 ρgh):<br>开始雾化时, 提液管内药液升至喷嘴口, 对液柱列平衡:罐内气体压强 = 大气压 + 液柱压强<br>p₂ = p₀ + ρgh = 1.0×10⁵ + 1.0×10³×10×0.5 = 1.0×10⁵ + 0.05×10⁵ = <strong>1.05×10⁵ Pa</strong><br><br><strong>(2) 气体方程</strong>(关键字 查理):<br>罐刚性、液面下降可忽略 → 气体<strong>体积不变</strong>, 用<strong>查理定律</strong>:<br>p₁/T₁ = p₂/T₂ → T₂ = T₁ × p₂/p₁ = 300 × (1.05×10⁵)/(1.0×10⁵) = <strong>315 K</strong>(即 42 ℃, 恰好是药液适宜温度量级, 数值合理)<br><br><strong>(3) 定律适用性</strong>:<br>用的是<strong>查理定律</strong>(等容过程 p/T = 常数)。适用条件逐条核对:① 罐密闭 → 气体<strong>质量一定</strong>;② 罐刚性 + 液面变化忽略 → <strong>体积不变</strong>;③ 缓慢加热 → 每一时刻可视为平衡态。三条全满足, 故适用。<br><br><strong>关键字命中</strong>:① 1.05 / ② 315 / ③ 查理 / ④ ρgh<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"液柱平衡定压强"(p = p₀ + ρgh)这一步我能独立列出来吗?方向(加还是减)判断对了吗?',
+        '"等容 → 查理定律"的过程识别我熟练吗?题目没直接说"体积不变"时, 我能从"刚性罐 + 液面不动"读出来吗?',
+        '温度必须用开尔文(K)代入 — 如果题目给的是 ℃, 我会先 +273 再算吗?',
+        '高考装置计算大题的第一步永远是"分析压强" — 我拿到新装置(雾化器 / 千斤顶 / 汲酒器)时能先画受力/压强关系图吗?'
+      ]
+    },
+    { id:"T4-2", type:"short", score:30, difficulty:"较难", exportIds:["CHARLES-LAW","GAY-LUSSAC-LAW","COMBINED-GAS-EQUATION"],
+      stem:"<strong>综合大题(受力平衡定压强 → 气体方程, 约 200-280 字 + 计算)</strong>:某<strong>高压消毒釜</strong>的简化模型:竖直放置的汽缸开口向上, 内有质量 m = 1 kg、横截面积 S = 2×10<sup>−3</sup> m<sup>2</sup> 的活塞封闭一段理想气体, 活塞上方装有<strong>卡销</strong>挡住活塞、使其不能上移. 初始时气体压强 p₁ = 1.2×10<sup>5</sup> Pa, 温度 T₁ = 400 K, 气柱长 L₁ = 20 cm. 大气压 p₀ = 1.0×10<sup>5</sup> Pa, g = 10 m/s<sup>2</sup>, 活塞与缸壁无摩擦.<br><br><strong>(1)</strong> 求初始时卡销对活塞的压力 N;<br><strong>(2)</strong> 现让釜体自然冷却, 求活塞<strong>恰好离开卡销</strong>时气体的温度 T₂;<br><strong>(3)</strong> 继续冷却, 活塞缓慢下移, 当气柱长缩短为 L₂ = 18 cm 时, 求气体温度 T₃。<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 280 340' style='width:100%;max-width:240px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='140' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>高压消毒釜 · 卡销挡上</text><rect x='90' y='30' width='6' height='270' fill='#5a6c7d'/><rect x='184' y='30' width='6' height='270' fill='#5a6c7d'/><rect x='90' y='294' width='100' height='6' fill='#5a6c7d'/><rect x='80' y='100' width='14' height='8' fill='#c0392b'/><rect x='186' y='100' width='14' height='8' fill='#c0392b'/><text x='65' y='106' text-anchor='end' font-size='10' fill='#c0392b'>卡销 ↓</text><rect x='96' y='108' width='88' height='14' fill='#34495e'/><text x='140' y='118' text-anchor='middle' font-size='10' fill='white'>活塞 m=1 kg</text><rect x='96' y='122' width='88' height='172' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='140' y='180' text-anchor='middle' font-size='11' fill='#0055B8' font-weight='600'>气体</text><text x='140' y='200' text-anchor='middle' font-size='10' fill='#0055B8'>p₁=1.2×10⁵ Pa</text><text x='140' y='216' text-anchor='middle' font-size='10' fill='#0055B8'>T₁=400 K</text><text x='140' y='232' text-anchor='middle' font-size='10' fill='#0055B8'>L₁=20 cm</text><line x1='140' y1='128' x2='140' y2='110' stroke='#0055B8' stroke-width='1.5'/><text x='140' y='44' text-anchor='middle' font-size='10' fill='#7f8c8d'>大气 p₀ = 1×10⁵ Pa</text><line x1='140' y1='50' x2='140' y2='70' stroke='#7f8c8d' stroke-width='1.5'/><text x='220' y='220' font-size='10' fill='#0055B8'>冷却 →</text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 卡销在上方挡住活塞 · 冷却到卡销支持力为 0 时活塞恰好离开</p></div>",
+      keywords:["30","350","315","等容"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 卡销类问题分两段 — 活塞顶住卡销时<strong>体积不变</strong>(等容), 离开卡销后<strong>压强不变</strong>(等压); ② 活塞受力平衡定各阶段压强; ③ "恰好离开卡销" = 卡销压力恰好为零的临界态。',
+        approach:'<strong>解题思路</strong>:<br>(1) 对活塞受力分析(气体向上 p₁S, 大气向下 p₀S, 重力 mg, 卡销压力 N)解出 N;<br>(2) 临界条件 N = 0 → 定出临界压强 p₂ → 等容段用查理定律求 T₂;<br>(3) 离开卡销后等压, 用盖-吕萨克定律(体积比 = 气柱长度比)求 T₃。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 受力平衡求 N</strong>:<br>活塞平衡:p₁S = p₀S + mg + N<br>N = (1.2×10⁵ − 1.0×10⁵)×2×10⁻³ − 1×10 = 40 − 10 = <strong>30 N</strong>(方向竖直向下)<br><br><strong>(2) 临界态 + 等容段</strong>(关键字 等容):<br>恰好离开卡销 → N = 0:p₂S = p₀S + mg → p₂ = p₀ + mg/S = 1.0×10⁵ + 10/(2×10⁻³) = <strong>1.05×10⁵ Pa</strong><br>顶住卡销期间体积不变, <strong>等容</strong>(查理定律):<br>p₁/T₁ = p₂/T₂ → T₂ = 400 × (1.05/1.2) = <strong>350 K</strong><br><br><strong>(3) 等压段</strong>:<br>离开卡销后活塞自由, 压强恒为 p₂ = 1.05×10⁵ Pa, 等压(盖-吕萨克定律), 体积比 = 长度比:<br>L₁/T₂ = L₂/T₃ → T₃ = T₂ × L₂/L₁ = 350 × 18/20 = <strong>315 K</strong><br><br><strong>一致性核验</strong>:全程降温 400 → 350 → 315 K 单调下降, 与"持续冷却"相符 ✓<br><br><strong>关键字命中</strong>:① 30 / ② 350 / ③ 315 / ④ 等容<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"卡销/挡块类问题先等容、离开后等压"的两段式分析框架我建立了吗?',
+        '"恰好离开卡销 = 卡销压力为零"这个临界条件我能自己想到吗?(它是连接两段的桥)',
+        '活塞受力平衡式里, 大气压力、重力、卡销压力的方向我都画对了吗?',
+        '高考变式:如果卡销在活塞下方 / 汽缸开口向下, 受力平衡式会怎么变?我能举一反三吗?'
+      ]
+    },
+    { id:"T4-3", type:"short", score:30, difficulty:"较难", exportIds:["BOYLE-LAW","CHARLES-LAW","COMBINED-GAS-EQUATION"],
+      stem:"<strong>综合大题(变质量问题, 150-300 字 + 计算)</strong>:冬日清晨气温较低, 某同学发现自己电动自行车的轮胎瘪了. 轮胎容积 V = 3.0 L(可视为不变), 此时胎内气体压强只有 1.0×10<sup>5</sup> Pa, 温度 280 K. 该同学用便携充气筒充气, 每充一次可充入压强为 1.0×10<sup>5</sup> Pa、温度 280 K、体积 0.3 L 的空气. 充气过程中胎内气体温度始终保持 280 K.<br><br><strong>(1)</strong> 要使胎压达到 2.8×10<sup>5</sup> Pa, 求需要充气的次数 n;<br><strong>(2)</strong> 充好气后骑行, 轮胎与地面摩擦生热使胎内气体温度升至 320 K(容积仍不变), 求此时的胎压 p′;<br><strong>(3)</strong> 简述第(1)问把“变质量”化为“定质量”的建模方法。<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 460 220' style='width:100%;max-width:440px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='230' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>电动自行车胎充气</text><g transform='translate(20,30)'><text x='55' y='-2' text-anchor='middle' font-size='10' fill='#5a6c7d'>便携充气筒</text><rect x='20' y='10' width='80' height='110' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='22' y='10' width='76' height='12' fill='#34495e'/><line x1='60' y1='10' x2='60' y2='-5' stroke='#2c3e50' stroke-width='3'/><rect x='22' y='22' width='76' height='96' fill='#e8f0fe'/><text x='60' y='65' text-anchor='middle' font-size='10' fill='#0055B8'>0.3 L</text><text x='60' y='80' text-anchor='middle' font-size='10' fill='#0055B8'>1×10⁵ Pa, 280 K</text></g><g transform='translate(140,75)'><rect x='0' y='10' width='80' height='6' fill='#5a6c7d'/><polygon points='40,4 40,22 56,13' fill='#B8924A'/><text x='35' y='2' font-size='9' fill='#B8924A'>单向阀</text></g><g transform='translate(260,30)'><text x='90' y='-2' text-anchor='middle' font-size='10' fill='#5a6c7d'>自行车轮胎</text><ellipse cx='90' cy='80' rx='80' ry='40' fill='#fadbd8' stroke='#5a6c7d' stroke-width='2.5'/><rect x='0' y='75' width='15' height='10' fill='#5a6c7d'/><text x='90' y='65' text-anchor='middle' font-size='10' fill='#7d2820'>V=3.0 L 不变</text><text x='90' y='82' text-anchor='middle' font-size='10' fill='#7d2820'>初: 1×10⁵ Pa, 280 K</text><text x='90' y='98' text-anchor='middle' font-size='11' font-weight='600' fill='#c0392b'>末: 2.8×10⁵ Pa</text><text x='90' y='140' text-anchor='middle' font-size='10' fill='#0055B8'>骑后升温 280K→320K</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等温充气: p₁V + n·p·ΔV = p₂V | 升温等容: p/T 恒</p></div>",
+      keywords:["18","3.2","等效","查理"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 变质量充气问题的<strong>等效定质量法</strong> — 把"待充入的 n 份气体 + 胎内原有气体"整体当作研究对象, 充气前它们分散在各处, 充气后全部压进轮胎; ② 等温下用玻意耳定律对总体积列式; ③ 升温段是普通定质量等容过程(查理定律)。',
+        approach:'<strong>解题思路</strong>:<br>(1) 等效建模:初态 = 胎内 3.0 L(1.0×10⁵)+ n 份 0.3 L(各 1.0×10⁵), 末态 = 全部气体压进 3.0 L 胎内(2.8×10⁵), 同温 → 玻意耳;<br>(2) 充气完成后质量不再变 → 等容升温用查理定律;<br>(3) 用自己的话复述"化变质量为定质量"。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 等效定质量法</strong>(关键字 等效):<br>把"胎内原有气体 + 即将充入的 n 份气体"看作一个整体. 充气前后温度同为 280 K, 用玻意耳定律:<br>p₀(V + nV₀) = p₁V<br>1.0×10⁵ × (3.0 + 0.3n) = 2.8×10⁵ × 3.0<br>3.0 + 0.3n = 8.4 → 0.3n = 5.4 → <strong>n = 18 次</strong><br><br><strong>(2) 等容升温</strong>(关键字 查理):<br>充气结束后胎内气体质量一定、容积不变, 用<strong>查理定律</strong>:<br>p₁/T₁ = p′/T₂ → p′ = 2.8×10⁵ × 320/280 = <strong>3.2×10⁵ Pa</strong><br>(这正是行车前在低温下测胎压会"偏低"、骑行后偏高的原因)<br><br><strong>(3) 建模方法</strong>:<br>气体实验定律只对<strong>质量一定</strong>的气体成立. 充气时胎内气体质量在变, 直接对"胎内气体"列方程不合法. <strong>等效定质量法</strong>:把终态里的全部气体(胎内原有 + 后充入)在<strong>初态时刻</strong>就圈定为研究对象 — 它们当时分散在胎内(3.0 L)和气筒的 n 份(各 0.3 L)中, 压强同为 1.0×10⁵ Pa. 这样研究对象全程质量不变, 定律恢复适用。放气、抽气问题同理(把放出的气体仍计入研究对象)。<br><br><strong>关键字命中</strong>:① 18 / ② 3.2 / ③ 等效 / ④ 查理<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"等效定质量法"的核心一句话(把充入/放出的气体并入研究对象, 使质量不变)我能脱口而出吗?',
+        '充气 / 放气 / 抽气 / 灌装 4 种变质量场景, 我都能画出"初态各部分在哪里"的示意图吗?',
+        '玻意耳定律对"分散的同压同温气体"可以按总体积列式 — 这一步的合法性我理解了吗?',
+        '高考变质量题常再叠加一段定质量过程(如本题升温) — 我能分清哪段质量在变、哪段不变吗?'
+      ]
+    },
+    { id:"T4-4", type:"short", score:30, difficulty:"较难", exportIds:["BOYLE-LAW","ISOTHERMAL-PROCESS","COMBINED-GAS-EQUATION"],
+      stem:"<strong>综合大题(创新装置, 150-300 字 + 计算)</strong>:物理兴趣小组用<strong>热学方法测当地重力加速度</strong>:一根一端封闭、粗细均匀的细玻璃管, 竖直放置且<strong>开口向上</strong>, 管内一段长 10.0 cm 的水银柱封闭了长 L₁ = 25.0 cm 的空气柱. 将玻璃管<strong>缓慢转至水平</strong>, 空气柱长度变为 L₂ = 28.4 cm. 已知当地大气压 p₀ = 1.0×10<sup>5</sup> Pa, 水银密度 ρ = 13.6×10<sup>3</sup> kg/m<sup>3</sup>, 转动过程中温度不变, 水银不溢出.<br><br><strong>(1)</strong> 求玻璃管竖直时封闭气体的压强 p₁;<br><strong>(2)</strong> 求当地的重力加速度 g;<br><strong>(3)</strong> 这个实验为什么要求“缓慢”转动?<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 460 280' style='width:100%;max-width:440px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='230' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>玻璃管水银柱测 g · 竖直 ↔ 水平 对照</text><g transform='translate(40,30)'><text x='40' y='-2' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>竖直 · 开口向上</text><rect x='20' y='10' width='40' height='220' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='22' y='225' width='36' height='5' fill='#5a6c7d'/><rect x='22' y='110' width='36' height='115' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2' stroke-width='0.5'/><text x='40' y='175' text-anchor='middle' font-size='10' fill='#0055B8'>气 L₁</text><text x='40' y='190' text-anchor='middle' font-size='10' fill='#0055B8'>25 cm</text><rect x='22' y='60' width='36' height='50' fill='#a9a9a9' stroke='#5a6c7d'/><text x='40' y='90' text-anchor='middle' font-size='9' fill='white'>水银</text><text x='40' y='102' text-anchor='middle' font-size='9' fill='white'>10cm</text><text x='40' y='28' text-anchor='middle' font-size='10' fill='#7f8c8d'>大气 p₀ ↓</text><text x='80' y='90' font-size='10' fill='#c0392b'>p₁ = p₀ + ρgh</text></g><g transform='translate(180,140)'><text x='130' y='-22' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>缓慢转至水平</text><rect x='0' y='10' width='250' height='40' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='0' y='12' width='5' height='36' fill='#5a6c7d'/><rect x='5' y='12' width='140' height='36' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='75' y='35' text-anchor='middle' font-size='10' fill='#0055B8'>气 L₂ = 28.4 cm</text><rect x='145' y='12' width='50' height='36' fill='#a9a9a9'/><text x='170' y='35' text-anchor='middle' font-size='10' fill='white'>水银 10cm</text><text x='225' y='78' font-size='10' fill='#7f8c8d'>开口 → p₀</text><text x='80' y='80' font-size='10' fill='#c0392b'>p₂ = p₀ (水平时水银不压气)</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等温下: p₁·25 = p₂·28.4 · 解出 p₁ ⇒ ρgh = p₀(28.4/25 - 1) ⇒ g</p></div>",
+      keywords:["1.136","玻意耳","等温","平衡"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 液柱封闭气体的压强 — 开口向上时 p气 = p₀ + 水银柱压强, 水平时水银柱不提供压强差, p气 = p₀; ② 玻意耳定律(等温)联系两个状态; ③ 反向求 g:由压强差 = ρgh 解出 g。',
+        approach:'<strong>解题思路</strong>:本题的巧妙处在"反着用"液柱公式 — 常规题用 g 算压强, 这里用两状态的压强差反解 g:<br>(1) 水平态压强已知(= p₀), 用玻意耳定律倒推竖直态 p₁;<br>(2) 竖直态对水银柱列平衡:p₁ − p₀ = ρgh → 解出 g;<br>(3) 从"等温 + 准静态"答实验条件。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 玻意耳定律求 p₁</strong>(关键字 玻意耳 / 等温):<br>水平时水银柱对气柱不产生压强差 → p₂ = p₀ = 1.0×10⁵ Pa<br>温度不变, <strong>等温</strong>过程用<strong>玻意耳定律</strong>(截面均匀, 体积比 = 长度比):<br>p₁L₁ = p₂L₂ → p₁ = 1.0×10⁵ × 28.4/25.0 = <strong>1.136×10⁵ Pa</strong><br><br><strong>(2) 水银柱平衡求 g</strong>(关键字 平衡):<br>竖直开口向上时, 对水银柱受力<strong>平衡</strong>:封闭气体压强 = 大气压 + 水银柱压强<br>p₁ = p₀ + ρgh → g = (p₁ − p₀)/(ρh) = (0.136×10⁵)/(13.6×10³ × 0.100) = 1.36×10⁴/1.36×10³ = <strong>10 m/s²</strong><br><br><strong>(3) 为什么要缓慢</strong>:<br>① 缓慢转动保证气体随时与环境换热充分、温度始终等于环境温度 — 这是用<strong>玻意耳定律(等温)</strong>的前提;② 缓慢还保证水银柱每一时刻近似平衡(准静态), 压强关系式才成立. 若快速转动, 气体可能近似绝热升降温, p₁L₁ = p₂L₂ 不再成立, 测出的 g 会有系统偏差。<br><br><strong>关键字命中</strong>:① 1.136 / ② 玻意耳 / ③ 等温 / ④ 平衡<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '液柱封闭气体的压强三姿态(开口向上 / 向下 / 水平)公式我能不假思索写出来吗?',
+        '本题"反向求 g"的思路 — 用热学量反解力学量 — 我体会到创新题"装置新但骨架不变"的特点了吗?',
+        '"缓慢 = 等温 + 准静态"这个高考高频隐含条件, 我每次都能主动翻译出来吗?',
+        '如果管口改为向下, L₂ 会变长还是变短?我能先定性预判再列式验证吗?'
+      ]
+    }
+  ],
+  T5: [
+    { id:"T5-1", type:"short", score:30, difficulty:"中等", exportIds:["GAY-LUSSAC-LAW","WORK-PV-FORMULA","FIRST-LAW-EQUATION"],
+      stem:"<strong>综合大题(三步链:受力平衡 → 气体方程 → 第一定律, 150-300 字 + 计算)</strong>:一套<strong>太阳能集热演示装置</strong>:竖直放置的汽缸开口向上, 内有质量 m = 2 kg(含载物台)、横截面积 S = 1×10<sup>−3</sup> m<sup>2</sup> 的活塞, 封闭一段理想气体, 活塞可无摩擦滑动. 初始气柱长 L₁ = 20 cm, 温度 T₁ = 300 K. 正午阳光照射汽缸, 气体缓慢升温, 气柱伸长到 L₂ = 24 cm. 已知大气压 p₀ = 1.0×10<sup>5</sup> Pa, g = 10 m/s<sup>2</sup>, 该气体内能变化与温度变化满足 ΔU = CΔT, 其中 C = 0.4 J/K.<br><br><strong>(1)</strong> 求封闭气体的压强 p;<br><strong>(2)</strong> 求气柱伸长到 L₂ 时气体的温度 T₂;<br><strong>(3)</strong> 求该过程中气体对外做的功 W 和吸收的热量 Q。<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 460 220' style='width:100%;max-width:440px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='230' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>自行车胎充气</text><g transform='translate(20,30)'><text x='55' y='-2' text-anchor='middle' font-size='10' fill='#5a6c7d'>便携充气筒</text><rect x='20' y='10' width='80' height='110' fill='none' stroke='#5a6c7d' stroke-width='2'/><rect x='22' y='10' width='76' height='12' fill='#34495e'/><line x1='60' y1='10' x2='60' y2='-5' stroke='#2c3e50' stroke-width='3'/><rect x='22' y='22' width='76' height='96' fill='#e8f0fe'/><text x='60' y='65' text-anchor='middle' font-size='10' fill='#0055B8'>0.3 L</text><text x='60' y='80' text-anchor='middle' font-size='10' fill='#0055B8'>1×10⁵ Pa</text><text x='60' y='95' text-anchor='middle' font-size='10' fill='#0055B8'>280 K</text></g><g transform='translate(140,75)'><rect x='0' y='10' width='80' height='6' fill='#5a6c7d'/><polygon points='40,4 40,22 56,13' fill='#B8924A'/><text x='35' y='2' font-size='9' fill='#B8924A'>单向阀</text></g><g transform='translate(260,30)'><text x='90' y='-2' text-anchor='middle' font-size='10' fill='#5a6c7d'>自行车轮胎</text><ellipse cx='90' cy='80' rx='80' ry='40' fill='#fadbd8' stroke='#5a6c7d' stroke-width='2.5'/><rect x='0' y='75' width='15' height='10' fill='#5a6c7d'/><text x='90' y='65' text-anchor='middle' font-size='10' fill='#7d2820'>V=3.0 L 不变</text><text x='90' y='82' text-anchor='middle' font-size='10' fill='#7d2820'>初: p=1×10⁵ Pa</text><text x='90' y='98' text-anchor='middle' font-size='11' font-weight='600' fill='#c0392b'>末: p=2.8×10⁵ Pa</text><text x='90' y='140' text-anchor='middle' font-size='10' fill='#0055B8'>骑后升温 280K→320K</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等温下: p₁V + n·p·ΔV = p₂V (打包定质量) | 骑后等容: p/T 恒</p></div>",
+      keywords:["360","4.8","28.8","等压"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 自由活塞受力平衡 → 全程压强恒定(等压); ② 盖-吕萨克定律(长度比 = 体积比); ③ 等压做功 W = pΔV; ④ 第一定律 ΔU = Q − W → Q = ΔU + W; ⑤ ΔU = CΔT 桥接温度与内能。',
+        approach:'<strong>解题思路</strong>:标准三步链 —<br>① 受力平衡定压强:p = p₀ + mg/S;<br>② 等压过程用盖-吕萨克定律求 T₂;<br>③ W = pΔV、ΔU = CΔT, 再用第一定律拼出 Q。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 受力平衡定压强</strong>:<br>活塞平衡:pS = p₀S + mg → p = p₀ + mg/S = 1.0×10⁵ + 20/(1×10⁻³) = <strong>1.2×10⁵ Pa</strong><br>活塞全程自由滑动 → 压强恒定, 是<strong>等压</strong>过程(关键字 等压)<br><br><strong>(2) 盖-吕萨克定律</strong>:<br>L₁/T₁ = L₂/T₂ → T₂ = 300 × 24/20 = <strong>360 K</strong><br><br><strong>(3) 第一定律</strong>:<br>对外做功:W = pΔV = pS(L₂ − L₁) = 1.2×10⁵ × 1×10⁻³ × 0.04 = <strong>4.8 J</strong><br>内能增加:ΔU = CΔT = 0.4 × (360 − 300) = 24 J<br>由 ΔU = Q − W → Q = ΔU + W = 24 + 4.8 = <strong>28.8 J</strong><br>核验:吸热 28.8 J 中, 24 J 存为内能、4.8 J 用于顶着活塞与大气做功, 能量账目平 ✓<br><br><strong>关键字命中</strong>:① 360 / ② 4.8 / ③ 28.8 / ④ 等压<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '三步链"受力平衡定压强 → 气体方程 → ΔU = Q − W"我能不看提示独立走完吗?哪一步最卡?',
+        '"自由活塞 + 缓慢 = 等压"这个翻译我熟练吗?',
+        'W = pΔV 里的 ΔV 我会用 S×ΔL 换算吗?单位(cm → m)换算出错了吗?',
+        'ΔU = CΔT 是题目给的桥 — 没有它我知道高中阶段算不出 ΔU 吗?(这正是高考必给该条件的原因)'
+      ]
+    },
+    { id:"T5-2", type:"short", score:30, difficulty:"较难", exportIds:["CHARLES-LAW","GAY-LUSSAC-LAW","WORK-PV-FORMULA","FIRST-LAW-EQUATION","INTERNAL-ENERGY-IS-STATE-FUNCTION"],
+      stem:"<strong>综合大题(摩擦迟滞, 约 200-280 字 + 计算)</strong>:竖直放置的汽缸开口向上, 内有质量 m = 7 kg、横截面积 S = 2×10<sup>−3</sup> m<sup>2</sup> 的活塞封闭一段理想气体. 活塞与缸壁间<strong>有摩擦</strong>, 最大静摩擦力与滑动摩擦力均为 f = 30 N. 初始时气柱长 L₁ = 20 cm, 温度与环境相同为 T₁ = 300 K, 活塞<strong>恰好要向上滑动</strong>. 现缓慢加热, 活塞缓慢上移, 当气柱伸长到 L₂ = 25 cm 时停止加热, 随后整个装置自然冷却, 最终回到环境温度 300 K. 大气压 p₀ = 1.0×10<sup>5</sup> Pa, g = 10 m/s<sup>2</sup>, 气体内能满足 ΔU = CΔT, C = 0.1 J/K.<br><br><strong>(1)</strong> 求初始时气体的压强 p₁;<br><strong>(2)</strong> 求停止加热时气体的温度 T₂;<br><strong>(3)</strong> 判断冷却结束后活塞是否下滑, 求最终气体压强 p₃, 并求<strong>全过程</strong>气体净吸收的热量 Q。<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 280 340' style='width:100%;max-width:240px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='140' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>摩擦活塞汽缸 · 受力分析</text><rect x='90' y='30' width='6' height='270' fill='#5a6c7d'/><rect x='184' y='30' width='6' height='270' fill='#5a6c7d'/><rect x='90' y='294' width='100' height='6' fill='#5a6c7d'/><rect x='96' y='120' width='88' height='14' fill='#34495e'/><text x='140' y='130' text-anchor='middle' font-size='10' fill='white'>活塞 m=7 kg</text><path d='M 96,120 L 92,123 L 96,126 L 92,129 L 96,132' fill='none' stroke='#c0392b' stroke-width='1.2'/><path d='M 184,120 L 188,123 L 184,126 L 188,129 L 184,132' fill='none' stroke='#c0392b' stroke-width='1.2'/><text x='65' y='130' text-anchor='end' font-size='10' fill='#c0392b'>摩擦 f=30N</text><text x='215' y='130' text-anchor='start' font-size='10' fill='#c0392b'>摩擦 f=30N</text><rect x='96' y='134' width='88' height='160' fill='#e8f0fe' stroke='#0055B8' stroke-dasharray='2,2'/><text x='140' y='185' text-anchor='middle' font-size='11' fill='#0055B8' font-weight='600'>气体</text><text x='140' y='205' text-anchor='middle' font-size='10' fill='#0055B8'>L₁=20 cm</text><text x='140' y='220' text-anchor='middle' font-size='10' fill='#0055B8'>T₁=300 K</text><text x='140' y='236' text-anchor='middle' font-size='10' fill='#0055B8'>S=2×10⁻³ m²</text><text x='140' y='44' text-anchor='middle' font-size='10' fill='#7f8c8d'>大气 p₀=1×10⁵ Pa</text><line x1='140' y1='50' x2='140' y2='75' stroke='#7f8c8d' stroke-width='1.5'/><line x1='140' y1='90' x2='140' y2='115' stroke='#c0392b' stroke-width='1.5'/><text x='148' y='105' font-size='10' fill='#c0392b'>mg ↓</text><text x='220' y='185' font-size='9' fill='#c0392b'><tspan x='220' y='185'>恰好上滑</tspan><tspan x='220' y='200'>p₁·S = p₀·S</tspan><tspan x='220' y='215'>+ mg + f</tspan></text></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 摩擦影响压强方程 · 上滑时 f 向下/下滑时 f 向上</p></div>",
+      keywords:["1.5","375","1.2","15"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 摩擦活塞的迟滞性 — 上滑与下滑的临界压强不同(摩擦力方向反转):p上 = p₀ + mg/S + f/S, p下 = p₀ + mg/S − f/S; ② 冷却时活塞先不动(等容降压), 压强降到 p下 前活塞纹丝不动; ③ 始末同温 → ΔU = 0 → 全程净吸热 = 全程对外做功(内能是状态量)。',
+        approach:'<strong>解题思路</strong>:<br>(1) "恰好要上滑" → 摩擦力达最大且向下, 受力平衡求 p₁;<br>(2) 上滑过程摩擦力恒为滑动摩擦(方向向下), 压强恒定 → 等压, 盖-吕萨克求 T₂;<br>(3) 冷却时活塞先静止(等容降压), 算出压强降到 300 K 时的值, 与下滑临界压强比较 → 判断是否下滑;全程用"始末同温 ΔU = 0"收口求 Q。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 上滑临界压强</strong>:<br>恰好要上滑 → 摩擦力达最大、方向向下:p₁S = p₀S + mg + f<br>p₁ = 1.0×10⁵ + (70 + 30)/(2×10⁻³) = 1.0×10⁵ + 0.5×10⁵ = <strong>1.5×10⁵ Pa</strong><br><br><strong>(2) 等压上移段</strong>:<br>缓慢上滑时滑动摩擦力仍向下、大小不变 → 压强恒为 p₁, 等压(盖-吕萨克):<br>T₂ = T₁ × L₂/L₁ = 300 × 25/20 = <strong>375 K</strong><br><br><strong>(3) 冷却判断 + 全程热量</strong>:<br>冷却开始后气体降压, 活塞有下滑趋势前先经历"静止不动"阶段(摩擦力方向逐渐反转), 此段<strong>等容</strong>. 活塞下滑的临界压强:p下 = p₀ + (mg − f)/S = 1.0×10⁵ + (70 − 30)/(2×10⁻³) = 1.2×10⁵ Pa<br>等容降温到环境温度 300 K 时:p₃ = p₁ × 300/375 = 1.5×10⁵ × 0.8 = <strong>1.2×10⁵ Pa</strong> — 恰好等于下滑临界值, 活塞<strong>恰好不下滑</strong>, 气柱保持 25 cm。<br>全过程:始态(300 K, 20 cm)→ 末态(300 K, 25 cm), <strong>始末同温 → ΔU = 0</strong>(内能是状态量, 只看温度)。<br>全程对外做功只发生在等压段:W = p₁S(L₂ − L₁) = 1.5×10⁵ × 2×10⁻³ × 0.05 = 15 J<br>由 0 = ΔU = Q − W → Q = W = <strong>15 J</strong>(净吸热)<br><br><strong>关键字命中</strong>:① 1.5 / ② 375 / ③ 1.2 / ④ 15<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '摩擦活塞"上滑 / 下滑临界压强差 2f/S"的迟滞图像我建立了吗?摩擦力方向反转这一步我能独立想到吗?',
+        '"冷却时活塞先不动(等容), 压强降到下滑临界才可能动"的分段逻辑我能自己推出来吗?',
+        '"始末同温 → ΔU = 0 → Q = W"这个状态量思想的收口技巧我掌握了吗?(不必逐段算 Q 再相加)',
+        '本题若继续冷却到低于 300 K, 活塞将下滑变成等压压缩 — 我能续写出那一段的分析吗?'
+      ]
+    },
+    { id:"T5-3", type:"short", score:30, difficulty:"中等", exportIds:["GAY-LUSSAC-LAW","WORK-PV-FORMULA","FIRST-LAW-EQUATION"],
+      stem:"<strong>综合大题(生活情境, 150-300 字 + 计算)</strong>:乒乓球被踩<strong>凹陷</strong>后(球壳未破裂漏气), 常用“热水烫球”法恢复:把球放入热水中, 凹陷处逐渐鼓起恢复原状. 设凹陷时球内气体体积为 V₁ = 100 mL, 温度为室温 T₁ = 300 K;恢复原状后球内气体体积为 V₂ = 120 mL. 恢复过程中凹陷处球壳较软, 球内气体压强<strong>始终与大气压近似相等</strong>, p₀ = 1.0×10<sup>5</sup> Pa. 该气体内能变化满足 ΔU = CΔT, C = 0.06 J/K.<br><br><strong>(1)</strong> 求球恰好恢复原状时球内气体的温度 T₂;<br><strong>(2)</strong> 求恢复过程中气体对外做的功 W;<br><strong>(3)</strong> 求恢复过程中气体吸收的热量 Q。<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 460 220' style='width:100%;max-width:440px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='230' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>乒乓球凹陷 → 热水烫复原 · 等压加热</text><g transform='translate(40,40)'><text x='70' y='-4' text-anchor='middle' font-size='11' font-weight='600' fill='#c0392b'>凹陷态 (初)</text><path d='M 70,30 A 50,50 0 1,0 70,130 A 50,50 0 1,0 70,30 Z' fill='#fdebd0' stroke='#5a6c7d' stroke-width='2'/><path d='M 35,55 Q 60,80 70,75 Q 80,80 105,55' fill='#fdebd0' stroke='#c0392b' stroke-width='2'/><text x='70' y='100' text-anchor='middle' font-size='10' fill='#7d2820'>V₁=100 mL</text><text x='70' y='118' text-anchor='middle' font-size='10' fill='#7d2820'>T₁=300 K</text></g><g transform='translate(200,60)'><text x='30' y='-4' text-anchor='middle' font-size='10' fill='#c0392b'>热水加热</text><line x1='0' y1='20' x2='60' y2='20' stroke='#c0392b' stroke-width='2.5' marker-end='url(#aT53)'/><defs><marker id='aT53' markerWidth='8' markerHeight='8' refX='6' refY='4' orient='auto'><polygon points='0 0, 8 4, 0 8' fill='#c0392b'/></marker></defs><path d='M 5,40 Q 12,32 19,40 Q 26,48 33,40 Q 40,32 47,40 Q 54,48 60,40' fill='none' stroke='#0055B8' stroke-width='1.5'/><text x='30' y='60' text-anchor='middle' font-size='10' fill='#0055B8'>p ≈ p₀ 不变</text></g><g transform='translate(290,40)'><text x='75' y='-4' text-anchor='middle' font-size='11' font-weight='600' fill='#B8924A'>恢复态 (末)</text><circle cx='75' cy='80' r='55' fill='#d4efdf' stroke='#B8924A' stroke-width='2'/><text x='75' y='80' text-anchor='middle' font-size='10' fill='#B8924A'>V₂=120 mL</text><text x='75' y='98' text-anchor='middle' font-size='10' fill='#B8924A'>T₂=?</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等压膨胀: V₁/T₁ = V₂/T₂ ⇒ T₂ · W=p₀ΔV · Q=ΔU+W</p></div>",
+      keywords:["360","3.6","5.6","等压"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① "压强始终与大气压近似相等" = <strong>等压过程</strong>的题面表述(高考爱用这种"翻译前"的说法); ② 盖-吕萨克定律 V/T = 常数; ③ W = p₀ΔV(注意 mL → m³ 换算:1 mL = 10⁻⁶ m³); ④ Q = ΔU + W。',
+        approach:'<strong>解题思路</strong>:先把题面条件翻译成"等压", 然后三步走:盖-吕萨克求 T₂ → W = p₀ΔV → 第一定律求 Q。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 等压升温</strong>(关键字 等压):<br>压强恒等于大气压 → <strong>等压</strong>过程, 盖-吕萨克定律:<br>V₁/T₁ = V₂/T₂ → T₂ = 300 × 120/100 = <strong>360 K</strong>(87 ℃, 与"热水烫球"的水温相符, 数值合理)<br><br><strong>(2) 等压做功</strong>:<br>ΔV = 120 − 100 = 20 mL = 2×10⁻⁵ m³<br>W = p₀ΔV = 1.0×10⁵ × 2×10⁻⁵ = <strong>2 J</strong>(气体鼓起凹陷、推开大气, 对外做正功)<br><br><strong>(3) 第一定律</strong>:<br>ΔU = CΔT = 0.06 × (360 − 300) = <strong>3.6 J</strong><br>Q = ΔU + W = 3.6 + 2 = <strong>5.6 J</strong><br>能量去向:从热水吸收的 5.6 J 中, 3.6 J 存为气体内能(升温), 2 J 用于对外做功(鼓起球壳) ✓<br><br><strong>关键字命中</strong>:① 360 / ② 3.6 / ③ 5.6 / ④ 等压<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '"压强始终与大气压近似相等"→"等压过程"这种题面翻译我反应快吗?高考常不直说过程名。',
+        'mL → m³ 的 10⁻⁶ 换算我做对了吗?(W = pΔV 必须用国际单位制)',
+        '算出的 T₂ = 360 K(87 ℃)与"热水"情境自洽 — 我有算完回头核验数值合理性的习惯吗?',
+        '若球壳恢复后继续留在热水中(体积不再变), 后续是什么过程?Q 与 ΔU 关系如何?我能续答吗?'
+      ]
+    },
+    { id:"T5-4", type:"short", score:30, difficulty:"中等", exportIds:["CHARLES-LAW","KELVIN-CELSIUS-RELATION","FIRST-LAW-EQUATION"],
+      stem:"<strong>综合大题(生活情境, 150-300 字 + 计算)</strong>:中医<strong>拔火罐</strong>:点燃罐内酒精棉使罐内空气升温到 t₁ = 127 ℃, 迅速将罐口扣在皮肤上密封. 随后罐内气体逐渐冷却到 t₂ = 47 ℃, 罐内气体体积近似不变. 已知大气压 p₀ = 1.0×10<sup>5</sup> Pa, 罐口横截面积 S = 2×10<sup>−3</sup> m<sup>2</sup>.<br><br><strong>(1)</strong> 求冷却后罐内气体的压强 p₂;<br><strong>(2)</strong> 忽略罐的重力, 求沿垂直皮肤方向把罐拉离皮肤至少需要的拉力 F;<br><strong>(3)</strong> 冷却过程中罐内气体是吸收热量还是放出热量?用热力学第一定律说明理由。<div style='margin-top:10px;background:#fafbfc;border:1px solid #ecf0f1;border-radius:6px;padding:8px;text-align:center;'><svg viewBox='0 0 460 240' style='width:100%;max-width:440px;height:auto;' xmlns='http://www.w3.org/2000/svg'><text x='230' y='14' text-anchor='middle' font-size='11' font-weight='600' fill='#0055B8'>拔火罐 · 点燃升温 → 扣皮肤 → 冷却 → 拉力</text><g transform='translate(20,40)'><text x='55' y='-4' text-anchor='middle' font-size='10' font-weight='600' fill='#c0392b'>① 点燃升温 t₁=127°C</text><rect x='30' y='10' width='70' height='90' rx='6' fill='#fdebd0' stroke='#5a6c7d' stroke-width='2'/><path d='M 50,60 Q 55,40 65,55 Q 70,35 80,55 Q 75,75 65,75 Q 55,75 50,60' fill='#e74c3c' opacity='0.7'/><text x='65' y='90' text-anchor='middle' font-size='9' fill='#7d2820'>火焰</text></g><g transform='translate(160,40)'><text x='55' y='-4' text-anchor='middle' font-size='10' font-weight='600' fill='#0055B8'>② 扣皮肤密封</text><rect x='30' y='10' width='70' height='90' rx='6' fill='#e8f0fe' stroke='#5a6c7d' stroke-width='2'/><text x='65' y='55' text-anchor='middle' font-size='10' fill='#0055B8'>密封</text><text x='65' y='68' text-anchor='middle' font-size='10' fill='#0055B8'>V 不变</text><rect x='20' y='100' width='90' height='30' fill='#fadbd8'/><text x='65' y='118' text-anchor='middle' font-size='10' fill='#7d2820'>皮肤</text></g><g transform='translate(300,40)'><text x='55' y='-4' text-anchor='middle' font-size='10' font-weight='600' fill='#0055B8'>③ 冷却 t₂=47°C</text><rect x='30' y='10' width='70' height='90' rx='6' fill='#d6eaf8' stroke='#5a6c7d' stroke-width='2'/><text x='65' y='55' text-anchor='middle' font-size='10' fill='#0055B8'>p₂ &lt; p₀</text><text x='65' y='70' text-anchor='middle' font-size='10' fill='#0055B8'>S=2×10⁻³ m²</text><rect x='20' y='100' width='90' height='30' fill='#fadbd8'/><text x='65' y='118' text-anchor='middle' font-size='10' fill='#7d2820'>皮肤</text><line x1='65' y1='10' x2='65' y2='-22' stroke='#c0392b' stroke-width='2.5' marker-end='url(#aT54)'/><defs><marker id='aT54' markerWidth='8' markerHeight='8' refX='5' refY='1' orient='auto'><polygon points='0 10, 10 10, 5 0' fill='#c0392b'/></marker></defs><text x='75' y='-12' font-size='11' font-weight='600' fill='#c0392b'>拉力 F</text></g></svg><p style='font-size:11px;color:#7f8c8d;margin:6px 0 0;'>🔧 等容降温: p₁/T₁ = p₂/T₂ ⇒ p₂ · 平衡: F = (p₀ − p₂)·S</p></div>",
+      keywords:["0.8","40","放热","等容"],
+      answer:null,
+      explanation:{
+        knowledge:'<strong>核心知识点</strong>:① 摄氏 → 开尔文换算 T = t + 273(127 ℃ = 400 K, 47 ℃ = 320 K); ② 体积不变 → 等容, 查理定律; ③ 罐被"吸"在皮肤上的本质 — 内外压差, F = (p₀ − p₂)S; ④ 等容过程 W = 0 → Q = ΔU。',
+        approach:'<strong>解题思路</strong>:<br>(1) 先换算温度到开尔文, 等容用查理定律;<br>(2) 对罐整体受力分析:外面大气压着罐、里面低压气体顶不住 → 拉离的临界条件是拉力 + 内压支持 = 大气压力;<br>(3) 等容 → W = 0, 降温 → ΔU 减小 → 由第一定律定热量方向。',
+        solution:'<strong>详细解题</strong>:<br><strong>(1) 等容降温</strong>(关键字 等容):<br>T₁ = 127 + 273 = 400 K, T₂ = 47 + 273 = 320 K. 体积不变 → <strong>等容</strong>, 查理定律:<br>p₂ = p₀ × T₂/T₁ = 1.0×10⁵ × 320/400 = <strong>0.8×10⁵ Pa</strong><br><br><strong>(2) 压差吸附力</strong>:<br>拉离临界时, 对罐受力平衡(忽略罐重):F + p₂S = p₀S<br>F = (p₀ − p₂)S = (1.0×10⁵ − 0.8×10⁵) × 2×10⁻³ = <strong>40 N</strong><br>(相当于提起 4 kg 重物 — 这就是拔火罐"吸力"惊人的原因, 本质不是"吸", 而是外面的大气在压)<br><br><strong>(3) 热量方向判断</strong>(关键字 放热):<br>等容 → 气体不做功, W = 0;降温 → 理想气体内能减小, ΔU &lt; 0;<br>由第一定律 ΔU = Q − W = Q → Q = ΔU &lt; 0, 即气体<strong>放热</strong> — 内能的减少全部以热传递方式释放给皮肤和罐壁。<br><br><strong>关键字命中</strong>:① 0.8 / ② 40 / ③ 放热 / ④ 等容<br>命中 ≥ 4 个 → 满分 30;命中 2-3 个 → 半分 15;命中 ≤ 1 → 0 分。'
+      },
+      reflectionPrompts: [
+        '℃ → K 的换算我每次都先做吗?(直接拿 127/47 进定律是高考典型失分点)',
+        '"吸附力 = 压差 × 面积"的受力分析我能独立画出来吗?(大气压在外、低压在内)',
+        '等容过程"W = 0 → Q = ΔU"这条捷径我用熟了吗?',
+        '同类情境迁移:吸盘挂钩、真空保鲜盒、高原瓶装零食鼓包 — 我能用同一套压差分析吗?'
+      ]
+    }
+  ]
+};
+
+const SLUG = "thermodynamics-application-physics";
+const KEY_STATE = `fluencytest_${SLUG}_state`;
+const KEY_REFLECTIONS = `fluencytest_${SLUG}_reflections`;
+
+function loadState() { try { return JSON.parse(localStorage.getItem(KEY_STATE) || "{}"); } catch(e) { return {}; } }
+function saveState(s) { try { localStorage.setItem(KEY_STATE, JSON.stringify(s)); } catch(e) {} }
+function loadReflections() { try { return JSON.parse(localStorage.getItem(KEY_REFLECTIONS) || "{}"); } catch(e) { return {}; } }
+function saveReflection(qid, text) { const refs = loadReflections(); refs[qid] = text; try { localStorage.setItem(KEY_REFLECTIONS, JSON.stringify(refs)); } catch(e) {} }
+
+function pickQuestions() {
+  selectedQuestions = [];
+  ["T1","T2","T3","T4","T5"].forEach(t => {
+    const pool = QUESTION_BANK[t];
+    selectedQuestions.push(pool[Math.floor(Math.random() * pool.length)]);
+  });
+}
+
+function renderExamReview() {
+  const body = document.getElementById("kp-body");
+  let html = `<div class="kp-intro">${EXAM_REVIEW.intro}</div>`;
+  EXAM_REVIEW.topics.forEach(t => {
+    const _freqText = String(t.examFreq || "");
+    const _freqClass = (_freqText.indexOf("压轴") >= 0 || _freqText.indexOf("高频") >= 0 || _freqText.indexOf("主战场") >= 0) ? "freq-high"
+                     : (_freqText.indexOf("常考") >= 0 || _freqText.indexOf("中频") >= 0) ? "freq-mid"
+                     : "freq-low";
+    html += `<div class="kp-item ${_freqClass}">
+      <div class="kp-head">
+        <div class="kp-no">${t.no}</div>
+        <div class="kp-title">${t.title}</div>
+        <div class="kp-freq">${t.examFreq}</div>
+      </div>
+      <div class="kp-note">${t.examNote}</div>
+      <div class="kp-section-label">▸ 高考考法</div>
+      <ul class="kp-list">${t.examMethods.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 必须掌握</div>
+      <ul class="kp-list">${t.mustMaster.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-section-label">▸ 备考要点</div>
+      <ul class="kp-list">${t.prepNotes.map(m => `<li>${m}</li>`).join("")}</ul>
+      <div class="kp-revisit">📖 ${t.revisit}</div>
+    </div>`;
+  });
+  html += `<div class="kp-footer">${EXAM_REVIEW.footer}</div>`;
+  body.innerHTML = html;
+}
+
+function startTest() {
+  studentName = document.getElementById("student-name").value.trim() || "student";
+  pickQuestions();
+  document.getElementById("entry-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("student-display").textContent = studentName;
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  setTimeout(renderMath, 100);
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderQuestions() {
+  const list = document.getElementById("question-list");
+  list.innerHTML = "";
+  selectedQuestions.forEach((q, idx) => {
+    const n = idx + 1;
+    const typeTag = { choice:"单选", multi:"多选", short:"综合大题" }[q.type] || q.type;
+    const inputHtml = renderInput(q, n);
+    const compositeTag = q.type === "short" ? '<span class="q-meta composite">综合大题</span>' : '';
+    const div = document.createElement("div");
+    div.className = "question";
+    div.setAttribute("data-q-id", `q${n}`);
+    div.setAttribute("data-q-type", q.type);
+    div.innerHTML = `
+      <div class="q-header">
+        <div class="q-header-circle">
+          <div class="q-line-no">第 ${n} 题</div>
+          <div class="q-line-type">${typeTag}</div>
+          <div class="q-line-diff">难度 · ${q.difficulty}</div>
+          <div class="q-line-id">${q.id}</div>
+        </div>
+      </div>
+      <div class="q-score">${q.score} 分</div>
+      <div class="q-prompt">${q.stem}</div>
+      ${inputHtml}
+      <div class="q-feedback" hidden></div>
+    `;
+    list.appendChild(div);
+  });
+}
+
+function renderInput(q, n) {
+  if (q.type === "choice") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="radio" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "multi") {
+    return `<ul class="q-options">` + Object.entries(q.options).map(([k,v]) =>
+      `<li><label><input type="checkbox" name="q${n}" value="${k}"> ${k}. ${v}</label></li>`
+    ).join("") + `</ul>`;
+  }
+  if (q.type === "short") {
+    return `<textarea class="q-short-input" rows="10" data-q-id="q${n}" placeholder="请分小问作答(150-400 字, 可分段, 含计算 + 解释)"></textarea>`;
+  }
+  return "";
+}
+
+function attachListeners() {
+  selectedQuestions.forEach((q, idx) => {
+    const qid = `q${idx+1}`;
+    if (q.type === "choice" || q.type === "multi") {
+      document.querySelectorAll(`input[name="${qid}"]`).forEach(el => {
+        el.addEventListener("change", () => {
+          document.querySelectorAll(`[data-q-id="${qid}"] .q-options li`).forEach(li => li.classList.toggle("selected", li.querySelector("input")?.checked));
+          updateAnsweredCount();
+        });
+      });
+    }
+    if (q.type === "short") {
+      const el = document.querySelector(`textarea[data-q-id="${qid}"]`);
+      if (el) el.addEventListener("input", updateAnsweredCount);
+    }
+  });
+}
+
+function collectAnswer(idx) {
+  const q = selectedQuestions[idx];
+  const qid = `q${idx+1}`;
+  if (q.type === "choice") return document.querySelector(`input[name="${qid}"]:checked`)?.value || null;
+  if (q.type === "multi") return Array.from(document.querySelectorAll(`input[name="${qid}"]:checked`)).map(e => e.value);
+  if (q.type === "short") return document.querySelector(`textarea[data-q-id="${qid}"]`).value;
+}
+
+function updateAnsweredCount() {
+  let n = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) n++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) n++;
+    else if (q.type === "short" && a && a.length > 0) n++;
+  });
+  document.querySelector(".answered-count").textContent = n;
+}
+
+function gradeQuestion(q, ua) {
+  if (q.type === "choice") return { score: ua === q.answer ? q.score : 0, isCorrect: ua === q.answer };
+  if (q.type === "multi") {
+    ua = Array.isArray(ua) ? ua : [];
+    const us = new Set(ua), as = new Set(q.answer);
+    const ok = us.size === as.size && [...us].every(x => as.has(x));
+    return { score: ok ? q.score : 0, isCorrect: ok };
+  }
+  if (q.type === "short") {
+    const text = (ua || "").toLowerCase().replace(/\s+/g, "");
+    const hits = q.keywords.filter(kw => text.includes(kw.toLowerCase().replace(/\s+/g, "")));
+    const ratio = hits.length / q.keywords.length;
+    let score = 0;
+    if (ratio >= 0.8) score = q.score;
+    else if (ratio >= 0.4) score = Math.round(q.score * 0.5);
+    return { score, isCorrect: ratio >= 0.8, hits, partial: ratio >= 0.4 && ratio < 0.8 };
+  }
+}
+
+function submitTest() {
+  let answered = 0;
+  selectedQuestions.forEach((q, idx) => {
+    const a = collectAnswer(idx);
+    if (a === null || a === undefined) return;
+    if (q.type === "choice" && a) answered++;
+    else if (q.type === "multi" && Array.isArray(a) && a.length > 0) answered++;
+    else if (q.type === "short" && a && a.length > 0) answered++;
+  });
+  if (answered < 4) { if (!confirm(`已答 ${answered} / 5 题(< 80%), 确认提交?`)) return; }
+
+  const results = selectedQuestions.map((q, idx) => ({ q, ua: collectAnswer(idx), ...gradeQuestion(q, collectAnswer(idx)), idx }));
+  const totalScore = results.reduce((s, r) => s + r.score, 0);
+  const passed = totalScore >= 70;
+  const honored = totalScore >= 90;
+  const percentile = (totalScore / 100 * 100).toFixed(1);
+
+  saveState({ studentName, submittedAt: Date.now(), totalScore, passed, honored, pickedIds: selectedQuestions.map(q => q.id) });
+
+  results.forEach(r => renderFeedback(r));
+  document.getElementById("result-screen").classList.remove("hidden");
+
+  const bigEl = document.getElementById("score-big");
+  bigEl.textContent = `${totalScore} / 100`;
+  bigEl.className = "score-big " + (honored ? "honored" : (passed ? "passed" : "failed"));
+
+  let status = `(${percentile}%) `;
+  if (honored) status += "⭐ 纸笔熟练度检测通过可能性高(90%+) — 推荐申请真实纸笔检测";
+  else if (passed) status += "✓ 已具备纸笔熟练度检测备考水平(70%+) — 可申请纸笔检测";
+  else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回相关基础板块复习再练`;
+  const statEl = document.getElementById("status-msg");
+  statEl.textContent = status;
+  statEl.style.color = honored ? "var(--gold-700)" : (passed ? "var(--blue-700)" : "var(--silver-700)");
+
+  const wrong = results.filter(r => !r.isCorrect);
+  const wrongEl = document.getElementById("wrong-list");
+  if (wrong.length === 0) wrongEl.innerHTML = `<strong>本次全部答对!</strong>`;
+  else {
+    const list = wrong.map(r => `第${r.idx+1}题(${r.q.id})`).join(", ");
+    wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}`;
+  }
+
+  renderMasteryMap(results);
+
+  document.querySelectorAll(".question input, .question .q-short-input").forEach(el => el.disabled = true);
+  document.getElementById("btn-submit").disabled = true;
+  setTimeout(renderMath, 100);
+  document.getElementById("result-screen").scrollIntoView({ behavior: "smooth" });
+}
+
+function renderMasteryMap(results) {
+  const map = document.getElementById("mastery-map");
+  const body = document.getElementById("mastery-body");
+  let html = "";
+  results.forEach(r => {
+    const q = r.q;
+    const tid = q.id.split("-")[0];
+    const meta = TOPIC_TITLES[tid] || { title: tid, revisit: "" };
+    let status, statusCls;
+    if (r.isCorrect) { status = "✓"; statusCls = "correct"; }
+    else if (r.partial) { status = "⚠"; statusCls = "partial"; }
+    else { status = "✗"; statusCls = "wrong"; }
+    const pct = Math.round((r.score / q.score) * 100);
+    html += `<div class="mastery-row ${statusCls}">
+      <div class="m-tid">${tid}</div>
+      <div class="m-title">${meta.title}</div>
+      <div class="m-status ${statusCls}">${status}</div>
+      <div class="m-pct">${r.score} / ${q.score} (${pct}%)</div>
+      ${pct < 100 ? `<div class="m-revisit">💡 ${meta.revisit}</div>` : ""}
+    </div>`;
+  });
+  body.innerHTML = html;
+  map.hidden = false;
+  setTimeout(renderMath, 50);
+}
+
+function renderFeedback(r) {
+  const q = r.q;
+  const qid = `q${r.idx+1}`;
+  const fbEl = document.querySelector(`[data-q-id="${qid}"] .q-feedback`);
+  if (!fbEl) return;
+  let stdAns = "";
+  if (q.type === "choice") stdAns = q.answer;
+  else if (q.type === "multi") stdAns = q.answer.join(", ");
+  else if (q.type === "short") stdAns = `关键字: ${q.keywords.join(" / ")}(命中 ${r.hits?.length||0}/${q.keywords.length})`;
+
+  let explanationHtml;
+  if (typeof q.explanation === 'object' && q.explanation !== null) {
+    explanationHtml =
+      `<div class="q-fb-row q-fb-knowledge"><strong>📚 考查的知识点</strong><div>${q.explanation.knowledge}</div></div>` +
+      `<div class="q-fb-row q-fb-approach"><strong>🧭 解题思路</strong><div>${q.explanation.approach}</div></div>` +
+      `<div class="q-fb-row q-fb-solution"><strong>📝 详细解题过程</strong><div>${q.explanation.solution}</div></div>`;
+  } else {
+    explanationHtml = `<div class="q-fb-row"><strong>💡 解析</strong>: ${q.explanation}</div>`;
+  }
+  const exportLabels = q.exportIds.map(id => {
+    const cn = EXPORT_NAMES[id];
+    return cn ? `<span class="q-export-label">${cn}</span>` : `<code>${id}</code>`;
+  }).join(" · ");
+
+  let reflectionHtml = "";
+  if (!r.isCorrect) {
+    const refs = loadReflections();
+    const savedReflection = refs[q.id] || "";
+    const prompts = q.reflectionPrompts || REFLECTION_DEFAULT;
+    reflectionHtml = `
+      <div class="q-reflection">
+        <div class="q-reflection-title">🤔 反思引导(本地保存, 不判分)</div>
+        <ol>${prompts.map(p => `<li>${p}</li>`).join("")}</ol>
+        <textarea class="q-reflection-input" data-q-vid="${q.id}" placeholder="可以分段回答上述问题, 或自由写反思...">${savedReflection}</textarea>
+        <div class="q-reflection-hint">反思按变体 ID 自动保存到本地浏览器。</div>
+      </div>`;
+  }
+
+  let resultText, resultClass;
+  if (r.isCorrect) { resultText = '✓ 答对'; resultClass = 'correct'; }
+  else if (r.partial) { resultText = '⚠ 部分正确'; resultClass = 'partial'; }
+  else { resultText = '✗ 答错'; resultClass = 'wrong'; }
+
+  fbEl.innerHTML = `
+    <div class="q-result ${resultClass}">${resultText} · 得 ${r.score} / ${q.score} 分</div>
+    <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
+    ${explanationHtml}
+    <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="thermodynamics-application-physics-example-cards.html">融合模块例题</a> · 相关基础板块 task-cards 复习。</div>
+    ${reflectionHtml}
+  `;
+  fbEl.classList.add(resultClass);
+  fbEl.hidden = false;
+
+  const refTextarea = fbEl.querySelector('.q-reflection-input');
+  if (refTextarea) {
+    refTextarea.addEventListener('input', () => saveReflection(refTextarea.dataset.qVid, refTextarea.value));
+  }
+}
+
+function scrollToFirstWrong() {
+  const wrongQ = document.querySelector(".q-feedback.wrong, .q-feedback.partial");
+  if (wrongQ) wrongQ.scrollIntoView({ behavior: "smooth" });
+}
+
+function reshuffleAndStart() {
+  if (!confirm("重新抽题? 当前答题清空(反思保留)。")) return;
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("mastery-map").hidden = true;
+  pickQuestions();
+  document.getElementById("test-screen").classList.remove("hidden");
+  document.getElementById("picked-ids").textContent = selectedQuestions.map(q => q.id).join(" / ");
+  renderQuestions();
+  attachListeners();
+  document.getElementById("btn-submit").disabled = false;
+  document.querySelector(".answered-count").textContent = "0";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  setTimeout(renderMath, 100);
+}
+
+function backToEntry() {
+  document.getElementById("result-screen").classList.add("hidden");
+  document.getElementById("test-screen").classList.add("hidden");
+  document.getElementById("entry-screen").classList.remove("hidden");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function renderMath() {
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(document.body, {
+      delimiters: [{ left: "\\[", right: "\\]", display: true }, { left: "\\(", right: "\\)", display: false }],
+      throwOnError: false
+    });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  renderExamReview();
+  const last = loadState();
+  if (last.submittedAt) {
+    const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题(反思保留)</small>`;
+    if (last.studentName) document.getElementById("student-name").value = last.studentName;
+  }
+  setTimeout(renderMath, 100);
+});
+</script>
+
+<script>
+(function() {
+  const SLUG = "thermodynamics-application-physics";
+  const MODULE_NAME = "热力学应用 · 物理";
+  const PRODUCT_TYPE = "fluency-test";
+  const PRODUCT_LABEL = "熟练度检测";
+  const GLOBAL_KEY = "bn-all-tasks";
+  const USER_KEY = "bn-current-user";
+
+  const STUDENT_ACCOUNTS = {
+    "stu001": { name: "演示账号 01", password: "123456" },
+    "stu002": { name: "演示账号 02", password: "123456" },
+    "stu003": { name: "演示账号 03", password: "123456" },
+    "stu004": { name: "演示账号 04", password: "123456" },
+    "stu005": { name: "演示账号 05", password: "123456" }
+  };
+
+  function escapeHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function genId(prefix) { return prefix + "-" + Date.now() + "-" + Math.floor(Math.random()*10000); }
+  function getUser() { const raw = localStorage.getItem(USER_KEY); return raw ? JSON.parse(raw) : null; }
+  function setUser(u) { localStorage.setItem(USER_KEY, JSON.stringify(u)); }
+
+  window.loginStudent = function() {
+    const account = prompt("请输入学生账号（demo: stu001 / stu002 / stu003 / stu004 / stu005）：");
+    if (!account) return;
+    const acc = STUDENT_ACCOUNTS[account.trim()];
+    if (!acc) { alert("❌ 账号不存在"); return; }
+    const password = prompt("请输入密码（demo: 123456）：");
+    if (!password) return;
+    if (acc.password !== password) { alert("❌ 密码错误"); return; }
+    setUser({ account: account.trim(), name: acc.name, role: "student", loginAt: new Date().toISOString() });
+    renderUserBar();
+    alert("✓ 登录成功：" + acc.name);
+  };
+
+  window.logoutStudent = function() {
+    if (!confirm("退出登录？")) return;
+    localStorage.removeItem(USER_KEY);
+    renderUserBar();
+  };
+
+  function renderUserBar() {
+    const region = document.getElementById("user-bar");
+    if (!region) return;
+    const u = getUser();
+    if (u && u.role === "student") {
+      region.innerHTML = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#00409A;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius: 16px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+    } else { region.innerHTML = ''; }
+    [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (u) {
+        el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
+        el.style.color = "#00409A"; el.style.background = "#F3F6FC";
+      } else {
+        el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
+        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+      }
+    });
+    // (按钮不禁用 · 提交时按需弹登录)
+    if (typeof renderMyCheckResults === "function") renderMyCheckResults();
+  }
+
+  function saveTask(task) {
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    list.push(task);
+    localStorage.setItem(GLOBAL_KEY, JSON.stringify(list));
+  }
+
+  function loadMyTasks(type) {
+    const u = getUser();
+    if (!u) return [];
+    const list = JSON.parse(localStorage.getItem(GLOBAL_KEY) || "[]");
+    return list.filter(t => t.slug === SLUG && t.type === type && t.account === u.account);
+  }
+
+  window.submitFluency_testApply = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const _day = document.getElementById(PRODUCT_TYPE + "-apply-time-day").value;
+    const _hm = document.getElementById(PRODUCT_TYPE + "-apply-time-hm").value;
+    const _t_other = document.getElementById(PRODUCT_TYPE + "-apply-time").value.trim();
+    if (!_day || !_hm) { alert("请选择周几和具体时间"); return; }
+    const _timeWindow = _day + " " + _hm + (_t_other ? " · " + _t_other : "");
+    const apply = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APP"),
+      type: PRODUCT_TYPE + "-apply",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      contact: document.getElementById(PRODUCT_TYPE + "-apply-contact").value.trim(),
+            timeWindow: _timeWindow,
+      note: document.getElementById(PRODUCT_TYPE + "-apply-note").value.trim(),
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(apply);
+    alert("✓ 申请已提交\nID: " + apply.id + "\n申请人: " + u.name);
+    document.getElementById(PRODUCT_TYPE + "-apply-form").reset();
+    renderMyApplies();
+  };
+
+  window.submitFluency_testAppeal = function() {
+    let u = getUser();
+    if (!u) {
+      if (!confirm("提交前需登录账号。点确定开始登录（demo: stu001 / 123456）")) return;
+      loginStudent();
+      u = getUser();
+      if (!u) return;
+    }
+    const appeal = {
+      id: genId(PRODUCT_TYPE.toUpperCase().replace(/-/g,"") + "-APL"),
+      type: PRODUCT_TYPE + "-appeal",
+      slug: SLUG,
+      moduleName: MODULE_NAME,
+      account: u.account,
+      studentName: u.name,
+      receiptId: document.getElementById(PRODUCT_TYPE + "-appeal-receipt").value.trim(),
+      setNum: document.getElementById(PRODUCT_TYPE + "-appeal-set").value.trim(),
+      qnum: document.getElementById(PRODUCT_TYPE + "-appeal-qnum").value.trim(),
+      reason: document.getElementById(PRODUCT_TYPE + "-appeal-reason").value.trim(),
+      want: document.getElementById(PRODUCT_TYPE + "-appeal-want").value,
+      submittedAt: new Date().toISOString(),
+      status: "pending"
+    };
+    saveTask(appeal);
+    alert("✓ 申诉已提交\nID: " + appeal.id);
+    document.getElementById(PRODUCT_TYPE + "-appeal-form").reset();
+    renderMyAppeals();
+  };
+
+  function renderMyApplies() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-apply");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#00409A;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  function renderMyAppeals() {
+    const list = loadMyTasks(PRODUCT_TYPE + "-appeal");
+    const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
+    if (!region) return;
+    if (list.length === 0) { region.innerHTML = ""; return; }
+    let html = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#002F73;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    list.forEach(a => {
+      const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+    });
+    html += '</ul></div>';
+    region.innerHTML = html;
+  }
+
+  
+  function renderMyCheckResults() {
+    const u = getUser();
+    const region = document.getElementById("my-check-results-region");
+    if (!region) return;
+    if (!u) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      return;
+    }
+    const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
+    const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
+    if (mine.length === 0) {
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      return;
+    }
+    mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
+    let html = '';
+    mine.forEach(r => {
+      const passed = r.score >= 70;
+      const honored = r.score >= 90;
+      const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
+      const verdictColor = honored ? '#d4af37' : passed ? '#00409A' : '#c0392b';
+      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
+      html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
+      html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
+      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '</div>';
+      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
+      if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '</div></div>';
+    });
+    region.innerHTML = html;
+  }
+
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderUserBar();
+    renderMyApplies();
+    renderMyAppeals();
+    renderMyCheckResults();
+  });
+})();
+</script>
+</body>
+</html>

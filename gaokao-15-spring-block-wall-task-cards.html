@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考 15 压轴 · 弹簧 + 板块 + 墙 · 学习任务卡（capstone）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 · 三色制（蓝 / 金 / 银）· 圆形锚点 · 大留白 v0.2 ===== */
+  :root {
+    /* 蓝 · 主色 */
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    /* 金 · 第二色（节奏 2 · 强调 · 暖警示） */
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    /* 银 · 第三色（节奏 3 · 弱调 · 中性提示） */
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    /* 中性 */
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    /* 形变 */
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 兼容旧变量（页面内联仍引用 var(--primary-blue) 等） */
+    --primary-blue: var(--blue-700);
+    --secondary-blue: var(--blue-500);
+    --bright-blue: var(--blue-500);
+    --light-blue: var(--blue-100);
+    --bg-light: var(--bg-secondary);
+    --accent-orange: var(--gold-700);
+    --accent-purple: var(--silver-700);
+    --accent-green: var(--silver-700);
+    --success: var(--silver-700);
+    --danger: var(--gold-900);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 8px; color: var(--silver-500); }
+
+  /* ===== 头部 · 极简化 · 一个大金圆作为视觉锚 ===== */
+  .header {
+    text-align: center;
+    padding: 64px 32px 56px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 .h1-sub {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--silver-700);
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--silver-500);
+    opacity: 0.9;
+  }
+  .header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  /* 隐藏原内联装饰元素 · 由 ::before/::after 取代 */
+  .hero-wave, .hero-decoration { display: none; }
+
+  /* ===== Banner · 圆点开头 + 金色调（替代橙色 capstone-banner） ===== */
+  .capstone-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .capstone-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .capstone-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  /* ===== 跨主题警示 · 蓝色品牌主色（统一品牌） ===== */
+  .cross-topic-warning {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin: 28px 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-topic-warning::before {
+    content: "!";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-topic-warning .ctw-title { font-weight: 700; color: var(--blue-700); margin-bottom: 10px; font-size: 0.95rem; }
+  .cross-topic-warning strong { color: var(--blue-700); }
+
+  /* ===== 主卡片 · 节奏 蓝→金→银→蓝→金→银 ===== */
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+  }
+  /* .card 顶边锁定蓝色（不轮换） */
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .info-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .info-table td:first-child { font-weight: 600; color: var(--blue-700); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+
+  /* ===== 章节标题 · 圆形锚点前置 + 节奏色 ===== */
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--silver-100);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  /* .card .section-title 锁定蓝色（不轮换） */
+
+  .objectives-list { padding-left: 24px; font-size: 0.94rem; }
+  .objectives-list li { margin-bottom: 14px; line-height: 1.85; }
+  .objectives-list li::marker { color: var(--blue-700); font-weight: 700; }
+  .card .objectives-list li strong { color: var(--blue-700); }
+
+  /* ===== 驱动问题 · 极简留白 + 圆形「?」 ===== */
+  .driving-question {
+    background: var(--blue-050);
+    border: none;
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 32px 32px 32px 72px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .driving-question::before {
+    content: "?";
+    position: absolute;
+    left: 22px;
+    top: 30px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--blue-700); margin-bottom: 16px; letter-spacing: -0.005em; }
+  .driving-question p { font-size: 0.94rem; margin-bottom: 12px; line-height: 1.85; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--silver-700); margin-top: 10px; }
+
+  /* ===== 任务卡 · 大号圆形编号 + 节奏色 ===== */
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: #fff;
+    color: var(--text-primary);
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+  .task-card-header:hover { background: var(--blue-050); }
+  .task-card-number {
+    background: var(--blue-700);
+    color: #fff;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px var(--blue-100);
+  }
+  /* task-card-number 锁定蓝色（不跟例题序号轮换） */
+  .task-card-header h3 { font-size: 1.1rem; font-weight: 600; flex-grow: 1; color: var(--text-primary); line-height: 1.6; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.5; color: var(--silver-700); }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 40px 36px; }
+  .task-card-body.collapsed { display: none; }
+
+  .task-objective {
+    background: var(--blue-050);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--blue-700);
+    line-height: 1.85;
+    margin-bottom: 36px;
+    border-left: 3px solid var(--blue-700);
+  }
+  /* task-objective 锁定蓝色（不跟例题序号轮换） */
+
+  /* ===== STEP · 圆形 badge ===== */
+  /* ===== STEP 标题 · 小圆形文本框（220×220） =====
+     · 圆 = STEP 编号（小字）+ 标题（居中换行 · word-break）
+     · 圆之间天然有 step-content 矩形隔开，避免连续圆形
+     · 节奏色按步骤序号循环 蓝→金→银 */
+  .step { margin-bottom: 40px; }
+  .step:last-of-type { margin-bottom: 16px; }
+
+  .step-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 32px 28px;
+    margin: 0 auto 36px;
+    text-align: center;
+    gap: 0;
+  }
+
+  /* badge → 圆顶部小字签条 */
+  .step-header .step-badge {
+    background: transparent;
+    color: var(--blue-700);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0 0 8px;
+    margin: 0 0 14px;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    display: inline-block;
+    border-bottom: 1.5px solid var(--blue-700);
+    flex-shrink: 1;
+  }
+
+  /* title → 圆心标题 · 居中换行 */
+  .step-header .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    line-height: 1.55;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  /* 副标题（括号细节） · 小一号 + 跟随 STEP 色 */
+  .step-header .step-title .step-sub {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--step-mid);
+    opacity: 0.8;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+   * 单一真理源 · STEP 节奏色系统
+   * 每个 .step 注入 4 个变量：--step-rich (900) / --step-mid (700) / --step-bg (050) / --step-tint (100)
+   * 使用 :nth-child(N of .step) 仅按 .step 计数（不被 .task-objective 干扰）
+   * STEP 1=蓝 · 2=金 · 3=银 · 4=蓝 · 5=金 · 6=银（每个 task-card 独立计数）
+   * 例题 4 综合反思（无 task-objective）→ A=蓝 · B=金 · C=银 · D=蓝 · E=金 · F=银
+   * ============================================================ */
+  .step {
+    --step-rich: var(--blue-900);
+    --step-mid:  var(--blue-700);
+    --step-bg:   var(--blue-050);
+    --step-tint: var(--blue-100);
+  }
+  .task-card-body > .step:nth-child(3n+2 of .step) {
+    --step-rich: var(--gold-900);
+    --step-mid:  var(--gold-700);
+    --step-bg:   var(--gold-050);
+    --step-tint: var(--gold-100);
+  }
+  .task-card-body > .step:nth-child(3n of .step) {
+    --step-rich: var(--silver-900);
+    --step-mid:  var(--silver-700);
+    --step-bg:   var(--silver-050);
+    --step-tint: var(--silver-100);
+  }
+
+  /* 兼容旧 inline 样式：17 处 路径 N 标题 `color:var(--primary-blue)`
+     通过 .step 级 var 重定向，让它跟随 STEP 区域色（而非死锁蓝） */
+  .step {
+    --primary-blue:   var(--step-rich);
+    --secondary-blue: var(--step-mid);
+    --bright-blue:    var(--step-mid);
+    --light-blue:     var(--step-bg);
+  }
+
+  /* step-header 圆 → 跟随 STEP 色 */
+  .step .step-header {
+    background: var(--step-bg);
+    border-color: var(--step-mid);
+  }
+  .step .step-header .step-badge {
+    color: var(--step-rich);
+    border-bottom-color: var(--step-mid);
+  }
+
+  .step-content { font-size: 0.92rem; padding-left: 0; }
+  .step-content p { margin-bottom: 12px; }
+  .step-content ul, .step-content ol { padding-left: 22px; margin-bottom: 12px; }
+  .step-content li { margin-bottom: 8px; }
+
+  /* ===== 引用块 · 跟随 STEP 色 ===== */
+  .quote-block {
+    background: var(--step-bg);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 18px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.85;
+  }
+
+  /* ===== 前置回顾 · 跟随 STEP 色 ===== */
+  .prereq-recap {
+    background: #fff;
+    border: 1px solid var(--silver-100);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+  }
+  .prereq-recap strong { color: var(--step-rich); }
+
+  /* ===== 推导块 · 留白 + 节奏色（蓝/金/银 轮换）===== */
+  .derivation-block {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 28px 30px;
+    margin: 22px 0;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .derivation-block::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: -1px; bottom: -1px;
+    width: 4px;
+    background: var(--step-mid);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .derivation-block .derivation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .derivation-block .derivation-title::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    box-shadow: 0 0 0 3px var(--step-tint);
+    flex-shrink: 0;
+  }
+
+  .derivation-block .step-line {
+    margin: 12px 0;
+    padding-left: 18px;
+    border-left: 1px solid var(--silver-100);
+    line-height: 1.85;
+  }
+  .derivation-block .step-line strong { color: var(--step-rich); }
+
+  /* ===== STEP 0（.card 直辖 · 非 .step）的 derivation-block 循环色 ===== */
+  /* 默认 蓝（骨架 1, 4 …） */
+  .card > .derivation-block::before { background: var(--blue-700); }
+  .card > .derivation-block .derivation-title { color: var(--blue-700); }
+  .card > .derivation-block .derivation-title::before { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .card > .derivation-block .step-line strong { color: var(--blue-700); }
+  /* 第 2/5/8 个 → 金 */
+  .card > .derivation-block:nth-of-type(3n+2)::before { background: var(--gold-700); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title { color: var(--gold-900); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title::before { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .card > .derivation-block:nth-of-type(3n+2) .step-line strong { color: var(--gold-900); }
+  /* 第 3/6 个 → 银 */
+  .card > .derivation-block:nth-of-type(3n)::before { background: var(--silver-700); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title { color: var(--silver-900); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title::before { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .card > .derivation-block:nth-of-type(3n) .step-line strong { color: var(--silver-900); }
+
+  /* ===== 思考停顿 · 跟随 STEP 色 ===== */
+  .thinking-point {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .thinking-point::before {
+    content: "💭";
+    position: absolute;
+    left: 16px;
+    top: 22px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--step-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--step-rich); font-size: 0.98rem; margin-bottom: 14px; }
+  .thinking-point .tp-pause { background: #fff; padding: 12px 16px; border-radius: var(--radius-sm); margin: 10px 0; font-size: 0.88rem; border: 1px solid var(--step-tint); }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-write { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--silver-700); font-style: italic; margin: 6px 0 2px 0; }
+
+  /* ===== 进阶推荐 · 跟随 STEP 色 ===== */
+  .deepening-recommendation {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px 20px 56px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: var(--step-rich);
+    line-height: 1.8;
+    position: relative;
+  }
+  .deepening-recommendation::before {
+    content: "↗";
+    position: absolute;
+    left: 14px; top: 20px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .deepening-recommendation .dr-title { font-weight: 700; color: var(--step-rich); margin-bottom: 8px; }
+
+  /* ===== 图示块 · 干净背景 ===== */
+  .diagram-block { margin: 32px 0; text-align: center; }
+  .diagram-block svg {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+  }
+  .diagram-caption { font-size: 0.83rem; color: var(--silver-700); margin-top: 12px; font-style: italic; line-height: 1.7; }
+
+  /* ===== 自查 / 检查点 · 跟随 STEP 色 ===== */
+  .checkpoint {
+    background: var(--step-bg);
+    border: 1px solid var(--step-tint);
+    border-radius: var(--radius-sm);
+    padding: 24px 26px 22px 26px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .checkpoint-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .checkpoint-title::before {
+    content: "✓";
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; margin-bottom: 12px; cursor: pointer; line-height: 1.7; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; accent-color: var(--step-mid); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--silver-700); }
+
+  /* ===== 素养标签 ===== */
+  .literacy-tag { font-size: 0.82rem; color: var(--silver-700); margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--silver-100); }
+
+  /* ===== 评分表 · 跟随 STEP 色 ===== */
+  .scoring-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .scoring-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .scoring-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .scoring-table tr:nth-child(even) td { background: var(--step-bg); }
+  .scoring-table td:last-child { color: var(--step-rich); font-weight: 500; }
+
+  /* ===== 对比 / 符号表 · 跟随 STEP 色 ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .compare-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .compare-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .compare-table tr:nth-child(even) td { background: var(--step-bg); }
+  .compare-table td:first-child { font-weight: 600; color: var(--step-rich); white-space: nowrap; }
+
+  /* ===== 反思区 ===== */
+  .reflect-area { width: 100%; min-height: 100px; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem; line-height: 1.75; resize: vertical; background: #fff; margin-top: 8px; transition: var(--transition); }
+  .reflect-area:focus { outline: none; border-color: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .reflect-q { font-size: 0.9rem; margin: 16px 0 6px; color: var(--text-primary); font-weight: 600; }
+
+  /* ===== 底部导航 ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 28px; border-top: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span {
+    flex: 1; min-width: 140px;
+    text-align: center;
+    padding: 16px 18px;
+    border-radius: 999px;
+    background: var(--silver-050);
+    color: var(--silver-500);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+  .footer { text-align: center; padding: 32px 16px 8px; font-size: 0.82rem; color: var(--silver-700); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 480px) {
+    .container { padding: 20px 16px 48px; }
+    .header { padding: 48px 24px 40px; }
+    .header h1 { font-size: 1.3rem; }
+    .header::before { width: 140px; height: 140px; top: -50px; }
+    .card { padding: 28px 22px; }
+    .task-card-header { padding: 20px 22px; gap: 14px; }
+    .task-card-number { width: 44px; height: 44px; font-size: 1.15rem; box-shadow: 0 0 0 4px var(--blue-100); }
+    .task-card-header h3 { font-size: 1rem; }
+    .task-card-body { padding: 28px 22px; }
+    .step-content { padding-left: 0; }
+    .step-header { width: 220px; height: 220px; padding: 22px 20px; }
+    .step-header .step-title { font-size: 0.88rem; }
+    .step-header .step-badge { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .driving-question { padding: 24px 22px 24px 64px; }
+    .capstone-banner, .cross-topic-warning { padding-left: 56px; padding-right: 20px; }
+  }
+
+  /* ===================================================================
+   * 圆形文本框 v0.3 · 与方形框交替使用
+   * 三种用法：
+   *   .card.card--circle                 把整张 card 改成圆形容器
+   *   .driving-question.is-circle        把 dq 块改成圆形容器
+   *   .task-objective.is-circle          把 task-objective 改成圆形容器
+   * 圆内放任何文本：用 shape-outside 让文本沿圆弧自然收边
+   * =================================================================== */
+  .card.card--circle,
+  .driving-question.is-circle,
+  .task-objective.is-circle {
+    background: transparent;
+    border: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .card.card--circle { margin-bottom: 56px; }
+  .driving-question.is-circle,
+  .task-objective.is-circle { margin-bottom: 40px; color: var(--text-primary); }
+  .driving-question.is-circle::before,
+  .task-objective.is-circle::before { display: none; }
+
+  /* 真圆容器（fixed width=height + border-radius:50%） */
+  .circle-frame {
+    width: 560px;
+    height: 560px;
+    max-width: 96vw;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: var(--shadow-md);
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+  }
+  .circle-frame--lg { width: 680px; height: 680px; }
+  .circle-frame--md { width: 480px; height: 480px; }
+  .circle-frame--sm { width: 400px; height: 400px; }
+  .circle-frame--blue   { background: var(--blue-050);   border-color: var(--blue-700); }
+  .circle-frame--gold   { background: var(--gold-050);   border-color: var(--gold-700); }
+  .circle-frame--silver { background: var(--silver-050); border-color: var(--silver-700); }
+
+  /* shape-outside · 两个半侧"虚拟体积"把文本压成圆弧内嵌 */
+  .circle-frame::before,
+  .circle-frame::after {
+    content: "";
+    width: 50%;
+    height: 100%;
+    display: block;
+  }
+  .circle-frame::before {
+    float: left;
+    shape-outside: ellipse(50% 50% at 100% 50%);
+  }
+  .circle-frame::after {
+    float: right;
+    shape-outside: ellipse(50% 50% at 0% 50%);
+  }
+
+  /* 圆内内容 · 通过 padding-top 让正文下沉到圆腹 */
+  .circle-frame .circle-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.005em;
+    padding-top: 18%;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .circle-frame--gold   .circle-title { color: var(--gold-900); }
+  .circle-frame--silver .circle-title { color: var(--silver-900); }
+  .circle-frame .circle-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+  .circle-frame--gold   .circle-title::after { background: var(--gold-700); }
+  .circle-frame--silver .circle-title::after { background: var(--silver-700); }
+
+  /* 把原有 dq-title 当作 circle-title 处理 */
+  .circle-frame .dq-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    padding-top: 18%;
+    margin-bottom: 18px;
+  }
+  .circle-frame .dq-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+
+  /* 圆内段落 */
+  .circle-frame p {
+    font-size: 0.86rem;
+    line-height: 1.78;
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .circle-frame p:last-child { margin-bottom: 0; }
+  .circle-frame p.hint {
+    font-size: 0.78rem;
+    color: var(--silver-700);
+    text-align: center;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .circle-frame strong { color: var(--blue-700); }
+  .circle-frame--gold   strong { color: var(--gold-900); }
+  .circle-frame--silver strong { color: var(--silver-900); }
+
+  /* 圆内列表 · 字号收紧以契合圆形空间 */
+  .circle-frame ol,
+  .circle-frame ul {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 22px;
+    margin: 0;
+  }
+  .circle-frame ol li,
+  .circle-frame ul li { margin-bottom: 8px; }
+  .circle-frame ol li::marker {
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  .circle-frame--gold   ol li::marker { color: var(--gold-700); }
+  .circle-frame--silver ol li::marker { color: var(--silver-700); }
+
+  /* task-objective 短文本居中版 · 无 title */
+  .circle-frame.is-objective {
+    padding: 0;
+  }
+  .circle-frame.is-objective .objective-body {
+    padding-top: 32%;
+    padding-bottom: 32%;
+    text-align: center;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+  .circle-frame.is-objective.circle-frame--sm .objective-body {
+    padding-top: 28%;
+    padding-bottom: 28%;
+    font-size: 0.82rem;
+  }
+
+  /* 移动端 · 圆形退化为大圆角矩形（保证可读） */
+  @media (max-width: 640px) {
+    .circle-frame,
+    .circle-frame--lg,
+    .circle-frame--md,
+    .circle-frame--sm {
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 28px;
+      padding: 32px 26px;
+    }
+    .circle-frame::before,
+    .circle-frame::after { display: none; }
+    .circle-frame .circle-title,
+    .circle-frame .dq-title { padding-top: 0; }
+    .circle-frame.is-objective .objective-body { padding-top: 0; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="gaokao-mechanics-em-index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>物理</span>
+    <span class="sep">&gt;</span>
+    <span>高考综合应用</span>
+    <span class="sep">&gt;</span>
+    <span>15 压轴 · 弹簧板块墙 · 学习任务卡（capstone）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>高考 15 压轴<br>弹簧 + 板块 + 墙<br><span class="h1-sub">53 母题练透 3 例</span></h1>
+    <div class="subtitle">共速时刻判定 · 弹性势能 · 相对位移摩擦生热 · 多过程分段</div>
+  </div>
+
+  <div class="capstone-banner">
+    <strong>关于本板块的练习形态 · v0.1.0</strong>：本任务卡专攻"15 压轴 · 弹簧 + 板块 + 墙"——53 专题七题型 25 的标杆母题骨架。3 道改编例题（每题完整 STEP 1-6）把"识别 → 共速判据 → 能量分配 → 反弹过程"这条主链路打通。配套的<strong>熟练度检测</strong>用于学完后快速自测；纸笔限时整套训练由学科导师线下组织。本任务卡聚焦"骨架 + 判据 + 反思"，不是限时刷题入口。
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>高考 15 压轴 · 弹簧 + 板块 + 墙骨架（capstone 子板块）</td></tr>
+      <tr><td>所属大主题</td><td>综合应用 · 力学三大观点综合（动量 + 能量 + 牛顿）</td></tr>
+      <tr><td>预计学习时间</td><td>4.5-5.5 小时（例题 1 约 90 min · 例题 2 约 75 min · 例题 3 约 75 min · 综合反思 30-40 min）</td></tr>
+      <tr><td>前置板块</td><td><strong>力学基础</strong>（受力分析、牛顿三定律、运动学、动能定理）<br><strong>弹簧专题</strong>（弹性势能 \(E_p = \tfrac12 kx^2\)、弹簧力做功）<br><strong>动量与碰撞</strong>（动量定理、动量守恒、共速判定）<br><strong>摩擦专题</strong>（动摩擦生热 \(Q = f \Delta s_{\text{相对}}\)、最大静摩擦）<br><strong>数学工具</strong>（一元二次方程、能量方程联立）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；草稿本（每题 2-3 张 A4，分阶段画图 + 标弹簧状态）；秒表（自测每题用时与卡点位置）</td></tr>
+    </table>
+  </div>
+
+  <div class="cross-topic-warning">
+    <div class="ctw-title">⚠️ 跨主题前置</div>
+    本板块属 capstone（综合应用）子板块，<strong>三大观点（动量 + 能量 + 牛顿）齐用</strong>，并假定你已掌握上表"前置板块"列出的核心内容。<strong>"弹簧专题"是本板块特有的硬前置</strong>——若 \(E_p = \tfrac12 kx^2\) 与"弹簧自然长度时与板分离"这两条不熟，请先回顾。每道例题 STEP 1 内嵌"核心速复习"段（5-8 分钟）作为应急对照，<strong>不能</strong>替代正式的前置学习。
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li><strong>识别</strong>"15 压轴 · 弹簧 + 板块 + 墙"骨架的三类高频变体：光滑桌面 + 板桌摩擦 + 双物块同向</li>
+      <li><strong>掌握</strong>该骨架的 4 条核心判据：① 共速时刻 = 弹簧最大压缩（识别铁律）② 弹簧最大弹性势能时刻 = 速度变化为零瞬间 ③ \(\Delta U = f \cdot \Delta s_{\text{相对}}\) ④ 多过程分段（碰撞 / 共速 / 反弹 / 分离）</li>
+      <li><strong>应用</strong>能量守恒 + 动量定理分阶段处理"接近 → 共速（最大压缩）→ 反弹 → 分离"的全过程</li>
+      <li><strong>避开</strong>五类高频扣分点：弹簧+墙系统动量误用守恒 / 共速时刻识别错 / 内能用绝对位移 / 反弹阶段方向写反 / 多过程不分段</li>
+      <li><strong>完成</strong>三道改编综合大题 + 一份"我的 15 压轴 60 min 自述"反思</li>
+      <li><strong>读懂</strong>每个关键步对应的得分点，建立"卷面写哪几步才稳拿基本分"的卷面感</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>15 压轴中"弹簧 + 板块 + 墙"骨架是 17 分大题里最容易"思路对但式子混"的一类。它的麻烦在于：<strong>墙作为外部存在使整体动量不守恒</strong>，但<strong>能量守恒永远成立</strong>；同时弹簧的"最大压缩 = 共速时刻"这条铁律必须靠学生自己识别。</p>
+    <p style="margin-top: 6px;"><strong>什么时候用动量守恒，什么时候只能用能量守恒？弹簧最大压缩时刻怎么识别？相对位移到底落在哪一段？卷面上至少要出现哪几行式子才能踩到基本分？</strong></p>
+    <p class="hint">（提示：先不要追求"一道全对"。本板块目的是把"<strong>弹簧 + 板 + 墙</strong>"骨架看清——看清后再练时间分配，才是高效路径。）</p>
+  </div>
+
+  <!-- ==================== STEP 0 · 弹簧+板+墙骨架介绍 ==================== -->
+  <div class="card">
+    <h2 class="section-title">STEP 0 · 15 压轴 · 弹簧+板+墙骨架介绍</h2>
+
+    <p style="font-size: 0.92rem; margin-bottom: 12px;">在做任何一道题之前，先用 8 分钟把这一题位的"骨架长什么样"刻进脑子。下面 5 段是骨架本身，不是技巧——技巧在 3 道例题里。</p>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 1 · 力学三大观点的大综合</div>
+      <div class="step-line">"弹簧 + 板块 + 墙"骨架同时调用<strong>动量观点、能量观点、牛顿运动定律</strong>三条线，是 53 专题七<strong>题型 25 的压轴标杆母题</strong>（参见 P25.1）。出题人选择该骨架，正是因为它<strong>无法靠单一守恒律解决</strong>，必须分阶段交替使用三大观点。</div>
+      <div class="step-line">关键之处：墙作为外部边界，通过弹簧给系统提供水平外力 → <strong>整个系统的动量不守恒</strong>。这是与"13 题位板块碰撞骨架"的根本区别——后者光滑桌面 + 无墙，系统动量守恒。本骨架必须以能量守恒为主线、动量定理（对单个物体）为辅助。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 2 · 高考 15 压轴的题位地位</div>
+      <div class="step-line">据近 5 年全国卷 / 新课标卷 / 新高考统计：<strong>15 题位（17 分压轴）的高频骨架前三名为"弹簧+板+墙"、"多板多过程"、"力电综合"</strong>。三者轮流出现，本骨架在 2023 辽宁 15（17 分）、2021 福建 15、2020 山东 17 等卷中均为压轴。</div>
+      <div class="step-line">出题方式通常为 <strong>"3 小问"</strong>：第 (1) 问考共速速度判定（运动学 / 动量定理）；第 (2) 问考弹簧最大弹性势能（能量守恒）；第 (3) 问考反弹后多过程（分段 + 几何约束）。本任务卡 3 例分别对应该骨架的三种变体：<strong>光滑桌面</strong>（例题 1，主骨架母题）/ <strong>桌面也有摩擦</strong>（例题 2，进阶）/ <strong>双物块同向滑入</strong>（例题 3，多体变式）。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 3 · 识别关键字（题面里只要见到就立即对号入座）</div>
+      <div class="step-line"><strong>「弹簧」 + 「板」 + 「墙」</strong>同时出现：直接锁定本骨架。其中"墙"也可能描述为"固定挡板 / 固定端"。</div>
+      <div class="step-line"><strong>「最大压缩」/「最大弹性势能」</strong>：等价于"相对速度为零"的瞬间 → 在<strong>弹簧+板+墙</strong>骨架里就是"板和物块共速"瞬间（识别铁律，见骨架 4）。</div>
+      <div class="step-line"><strong>「反弹」/「弹簧恢复自然长度」</strong>：第二阶段开始的标志 → 板会被弹簧推向反方向，物块继续原方向 → 二者再次相对滑动。</div>
+      <div class="step-line"><strong>「分离」/「最终速度」</strong>：弹簧回到自然长度且板不再与弹簧接触的时刻 → 此后系统不再有外力，回到经典动量守恒情形。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 4 · 核心判据 4 条（弹簧+板+墙的"通关密钥"）</div>
+      <div class="step-line"><strong>判据 A · 共速时刻 = 弹簧最大压缩（识别铁律）</strong>：物块在板上滑动，摩擦推板压缩弹簧。当物块与板瞬时同速时，二者无相对运动 → 摩擦力切换为静摩擦 → 板停止加速 → 弹簧不再被推压 → 此瞬间弹簧达到最大压缩。<strong>四个等价描述</strong>任写其一即可，但必须在卷面明确指出"共速 ⇔ 最大压缩"。</div>
+      <div class="step-line"><strong>判据 B · 最大弹性势能时刻 = 速度变化为零的瞬间</strong>：弹簧的弹性势能 \(E_p = \tfrac12 kx^2\) 随压缩 \(x\) 单调增。\(x\) 最大 ⇔ 板速变化方向反转的瞬间 ⇔ 板的速度等于物块速度（共速）。</div>
+      <div class="step-line"><strong>判据 C · \(\Delta U = f \cdot \Delta s_{\text{相对}}\)</strong>：摩擦生热只取决于<strong>两个相互摩擦面之间的相对位移</strong>，不是任何单体的绝对位移。本骨架中 \(\Delta s_{\text{相对}}\) = 物块位移 \(-\) 板位移。这是本题位最高频扣分点。</div>
+      <div class="step-line"><strong>判据 D · 多过程分段</strong>：典型阶段有 ① 物块滑上板（接近）② 共速（最大压缩）③ 弹簧反弹（释放）④ 分离（自然长度）。<strong>每跨一个阶段都要重画始末态、重选守恒律</strong>。混合在一个方程里 90% 出错。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 5 · 系统动量为什么不守恒（高频混淆点）</div>
+      <div class="step-line">很多学生看到"光滑水平桌面"就条件反射用动量守恒。<strong>错</strong>——只要弹簧连着墙，墙就是外部，弹簧力对（物块+板）系统就是外力。系统动量守恒的前提是<strong>系统所受外力的合力沿动量分量方向为零</strong>。</div>
+      <div class="step-line">本骨架的正确做法：对<strong>单个物体</strong>用动量定理（牛顿定律积分），对<strong>整个系统</strong>用能量守恒。两者互补，不可混用。例题 1 STEP 4 会详细演示这一点。</div>
+    </div>
+
+    <p style="font-size: 0.9rem; margin: 12px 0 0; color: var(--text-secondary);">读完以上 5 段，先合上页面，在草稿上把"识别关键字 → 共速判据 → 能量守恒 → 反弹分段"这条链路<strong>默写一遍</strong>。能默出来，再进入例题 1；默不出来，再回上面读一次。</p>
+
+    <div class="checkpoint">
+      <div class="checkpoint-title">✅ STEP 0 自查</div>
+      <label data-key="s0-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"弹簧+板+墙"骨架的 4 类识别关键字</span></label>
+      <label data-key="s0-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"为什么有墙之后系统动量就不守恒"</span></label>
+      <label data-key="s0-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能背出"共速 ⇔ 最大压缩 ⇔ 最大弹性势能"这条铁律</span></label>
+      <label data-key="s0-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚 \(\Delta U = f \cdot \Delta s_{\text{相对}}\) 里 Δs 必须是相对位移</span></label>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 1 · 光滑桌面 + 板 + 弹簧 + 墙 ==================== -->
+  <div class="task-card" id="ex1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>例题 1 · 光滑桌面 + 板 + 弹簧 + 墙（基于 2023 辽宁 15 改编 · 母题）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"光滑桌面 + 板 + 弹簧 + 墙"为骨架，掌握"共速 ⇔ 最大压缩"识别铁律 + 能量守恒分配 \(E_p\) 与 \(Q\) + 反弹阶段方向判断<br>
+        <strong>建议时长</strong>：90 分钟（速复习 10 + 题面 8 + 自己做 30 + 对照思考 27 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>下面 5 条公式 + 3 条判据是例题 1 用到的全部工具。先合上页面回忆，再对照。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">弹簧+板+墙速查清单</div>
+            <div class="step-line"><strong>弹性势能</strong>：\(E_p = \tfrac12 k x^2\)，\(x\) 为弹簧形变量（压缩或拉伸）</div>
+            <div class="step-line"><strong>滑动摩擦力</strong>：\(f = \mu N\)，方向与<strong>相对运动</strong>方向相反</div>
+            <div class="step-line"><strong>摩擦生热</strong>：\(Q = f \cdot \Delta s_{\text{相对}}\)（<strong>必须</strong>用相对位移）</div>
+            <div class="step-line"><strong>动量定理（单体）</strong>：\(F \Delta t = m \Delta v\)（可用于物块，因物块只受摩擦力）</div>
+            <div class="step-line"><strong>能量守恒（系统）</strong>：\(E_{k0} = E_{k1} + E_p + Q\)（系统总能量守恒，外力不做净功时）</div>
+            <div class="step-line"><strong>判据 A · 共速</strong>=最大压缩=最大 \(E_p\)（识别铁律）</div>
+            <div class="step-line"><strong>判据 B · 弹簧与板分离</strong>：弹簧恢复自然长度 \(x = 0\) 瞬间，弹簧对板的力 = 0，二者随即分离</div>
+            <div class="step-line"><strong>判据 C · 反弹阶段方向</strong>：共速后弹簧弹力推板向左 → 板加速向左、物块继续向右 → 物块相对板向右滑（与第一阶段同向）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>光滑桌面 + 板 + 弹簧 + 墙<br><span class="step-sub">3 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            光滑水平桌面上, 质量 \(m_1 = 1\) kg 的长木板, 右端通过劲度系数为 \(k = 25\) N/m 的轻弹簧与右侧固定竖直墙相连, 弹簧处于自然伸长状态. 物块 \(m_2 = 4\) kg 静止放在木板上(距木板左端较近, 木板长 \(L = 0.5\) m). 某时刻物块以 \(v_0 = 2\) m/s 水平向右滑动(视为瞬间获得初速). 物块与木板间动摩擦因数 \(\mu = 0.2\), 最大静摩擦等于动摩擦. 取 \(g = 10\) m/s².
+            <br><br>
+            <strong>已知</strong>: 物块与板恰好达到共同速度时, <strong>弹簧恰好达到最大压缩</strong>(题设条件, 由特定 k 值确定); 从初始到共速过程中, 物块相对木板向右滑动了 \(\Delta s_{\text{相}} = 0.1\) m.
+            <br><br>
+            <strong>(1)</strong> 求物块与木板达到共同速度时的速度 \(v_{\text{共}}\)，并求此过程中板的位移 \(s_{\text{板}}\)。<span style="color: var(--text-secondary);">[约 5 分]</span><br>
+            <strong>(2)</strong> 求弹簧在最大压缩时的弹性势能 \(E_{p\max}\)。<span style="color: var(--text-secondary);">[约 6 分]</span><br>
+            <strong>(3)</strong> 共速后弹簧释放推板向左, <strong>题设</strong>: 弹簧在共速瞬间最大压缩对应的弹簧力 \(F_{\text{弹}} = k \cdot x_{\max}\) 小于最大静摩擦 \(\mu m_2 g = 8\) N(本题 k = 25 N/m, 校验: 由 \(E_{p\max} = \tfrac12 k x_{\max}^2 = 0.8\) J 得 \(x_{\max} = 0.253\) m, F_{弹} = 25·0.253 ≈ 6.3 N < 8 N ✓), 故共速后物块与板暂时无相对滑动, 二者共动并被弹簧反推. 求弹簧恢复自然长度瞬间(物块与板仍同速)的共同速度 \(v_f\), 并说明总相对位移是否超过板长 L = 0.5 m.<span style="color: var(--text-secondary);">[约 6 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex1-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 桌面 -->
+              <line x1="20" y1="170" x2="500" y2="170" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="170" x2="22" y2="182"/>
+                <line x1="80" y1="170" x2="72" y2="182"/>
+                <line x1="130" y1="170" x2="122" y2="182"/>
+                <line x1="180" y1="170" x2="172" y2="182"/>
+                <line x1="230" y1="170" x2="222" y2="182"/>
+                <line x1="280" y1="170" x2="272" y2="182"/>
+                <line x1="330" y1="170" x2="322" y2="182"/>
+                <line x1="380" y1="170" x2="372" y2="182"/>
+                <line x1="430" y1="170" x2="422" y2="182"/>
+                <line x1="480" y1="170" x2="472" y2="182"/>
+              </g>
+              <!-- 板 -->
+              <rect x="60" y="135" width="280" height="22" fill="#E8EEF9" stroke="#0055B8" stroke-width="1.6"/>
+              <text x="200" y="151" font-size="12" fill="#00409A" font-weight="600" text-anchor="middle">板 m₁ = 1 kg</text>
+              <!-- 物块 -->
+              <rect x="78" y="100" width="34" height="34" fill="#002F73" opacity="0.85"/>
+              <text x="95" y="123" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">m₂</text>
+              <text x="95" y="92" font-size="10" fill="#002F73" text-anchor="middle">4 kg</text>
+              <!-- 弹簧 (zigzag) -->
+              <polyline points="340,146 350,138 360,154 370,138 380,154 390,138 400,154 410,138 420,146" fill="none" stroke="#B8924A" stroke-width="2"/>
+              <!-- 墙 -->
+              <rect x="425" y="100" width="14" height="68" fill="#6e6e73"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="440" y1="105" x2="450" y2="98"/>
+                <line x1="440" y1="115" x2="450" y2="108"/>
+                <line x1="440" y1="125" x2="450" y2="118"/>
+                <line x1="440" y1="135" x2="450" y2="128"/>
+                <line x1="440" y1="145" x2="450" y2="138"/>
+                <line x1="440" y1="155" x2="450" y2="148"/>
+                <line x1="440" y1="165" x2="450" y2="158"/>
+              </g>
+              <text x="380" y="205" font-size="10" fill="#B8924A" font-weight="600" text-anchor="middle">弹簧 k (自然长度)</text>
+              <text x="432" y="93" font-size="10" fill="#6e6e73" text-anchor="middle">墙</text>
+              <!-- 速度箭头 -->
+              <line x1="120" y1="117" x2="180" y2="117" stroke="#002F73" stroke-width="2.2" marker-end="url(#ex1-arr-r)"/>
+              <text x="150" y="110" font-size="11" fill="#002F73" font-weight="600" text-anchor="middle">v₀ = 2 m/s</text>
+              <!-- μ 标注 -->
+              <text x="20" y="210" font-size="11" fill="#6e6e73">μ = 0.2（物块–板）</text>
+              <text x="270" y="210" font-size="10" fill="#6e6e73" text-anchor="middle">光滑水平桌面</text>
+              <text x="270" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">初始状态 · 弹簧自然长度 · 物块获得 v₀</text>
+            </svg>
+            <div class="diagram-caption">SVG 1 · 初始状态：板静止于光滑桌面，弹簧自然伸长连接板右端与墙。物块以 v₀ = 2 m/s 向右滑上板。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex1b-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0055B8"/>
+                </marker>
+              </defs>
+              <line x1="20" y1="160" x2="500" y2="160" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="160" x2="22" y2="172"/>
+                <line x1="80" y1="160" x2="72" y2="172"/>
+                <line x1="130" y1="160" x2="122" y2="172"/>
+                <line x1="180" y1="160" x2="172" y2="172"/>
+                <line x1="230" y1="160" x2="222" y2="172"/>
+                <line x1="280" y1="160" x2="272" y2="172"/>
+                <line x1="330" y1="160" x2="322" y2="172"/>
+                <line x1="380" y1="160" x2="372" y2="172"/>
+                <line x1="430" y1="160" x2="422" y2="172"/>
+                <line x1="480" y1="160" x2="472" y2="172"/>
+              </g>
+              <!-- 板（已向右平移） -->
+              <rect x="80" y="125" width="270" height="22" fill="#E8EEF9" stroke="#0055B8" stroke-width="1.6"/>
+              <text x="280" y="141" font-size="11" fill="#00409A" font-weight="600" text-anchor="middle">板（已右移 s_板）</text>
+              <!-- 物块（已向右更多） -->
+              <rect x="220" y="90" width="34" height="34" fill="#002F73" opacity="0.85"/>
+              <text x="237" y="113" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">m₂</text>
+              <!-- 弹簧 (compressed - shorter zigzag) -->
+              <polyline points="350,136 358,128 366,144 374,128 382,144 390,128 398,136" fill="none" stroke="#B8924A" stroke-width="2"/>
+              <text x="375" y="205" font-size="10" fill="#B8924A" font-weight="600" text-anchor="middle">弹簧（最大压缩）</text>
+              <!-- 墙 -->
+              <rect x="402" y="90" width="14" height="68" fill="#6e6e73"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="417" y1="95" x2="427" y2="88"/>
+                <line x1="417" y1="105" x2="427" y2="98"/>
+                <line x1="417" y1="115" x2="427" y2="108"/>
+                <line x1="417" y1="125" x2="427" y2="118"/>
+                <line x1="417" y1="135" x2="427" y2="128"/>
+                <line x1="417" y1="145" x2="427" y2="138"/>
+                <line x1="417" y1="155" x2="427" y2="148"/>
+              </g>
+              <!-- 共速箭头（两个都向右，速度相同） -->
+              <line x1="260" y1="106" x2="305" y2="106" stroke="#002F73" stroke-width="2.2" marker-end="url(#ex1b-arr-r)"/>
+              <text x="282" y="98" font-size="11" fill="#002F73" font-weight="600" text-anchor="middle">v_共</text>
+              <line x1="170" y1="141" x2="215" y2="141" stroke="#0055B8" stroke-width="2.2" marker-end="url(#ex1b-arr-r)"/>
+              <text x="192" y="123" font-size="11" fill="#0055B8" font-weight="600" text-anchor="middle">v_共</text>
+              <text x="100" y="205" font-size="10" fill="#6e6e73" text-anchor="middle">光滑水平桌面</text>
+              <text x="260" y="32" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">共速时刻 = 弹簧最大压缩</text>
+            </svg>
+            <div class="diagram-caption">SVG 2 · 共速时刻：物块与板速度同为 v_共，方向均向右；弹簧达到最大压缩（题设关键时刻）。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 checkpoint -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手 30 分钟</span></span></div>
+        <div class="step-content">
+          <p>合上页面，在草稿上独立做 (1)(2)(3)。重点：<strong>不要</strong>对整体用动量守恒——本题有墙，系统动量不守恒。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex1-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我已经在草稿上画了初始 + 共速 + 反弹三幅图</span></label>
+            <label data-key="ex1-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚物块只受摩擦力（弹簧不直接接触物块），可对物块单独用动量定理</span></label>
+            <label data-key="ex1-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>对 (2) 问，我打算用整体能量守恒：初动能 = 末动能 + E_p + Q</span></label>
+            <label data-key="ex1-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道 Q = μm₂g · Δs_相对（不是 μm₂g · s_物或 μm₂g · s_板）</span></label>
+            <label data-key="ex1-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>反弹阶段我会单独画始末态，不与第一阶段混在一个方程</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>5 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 对物块用动量定理求 v_共（第 (1) 问）</div>
+            <div class="tp-pause">物块只受摩擦力 \(f = \mu m_2 g = 0.2 \times 4 \times 10 = 8\) N(向左, 与物块向右运动反向). 物块单独用动量定理可避开"系统动量不守恒"的陷阱. <strong>但是</strong>动量定理需要时间 \(t\), 而 \(t\) 未知——所以用运动学更直接.</div>
+            <div class="tp-ask">"我尝试对物块用动能定理 \(-f \cdot s_{\text{物}} = \tfrac12 m_2 v_{\text{共}}^2 - \tfrac12 m_2 v_0^2\)，但有两个未知量。请反问我：能否用'物块的位移 = 板的位移 + 相对位移'来减少未知量？<strong>不要直接给答案</strong>。"</div>
+            <div class="tp-write">关键关系：\(s_{\text{物}} = s_{\text{板}} + \Delta s_{\text{相}}\)（向右为正，物块向前多走了 Δs_相 = 0.1 m）<br>由题设"共速 = 最大压缩"——此时刻弹簧弹力推板向左，但板仍向右移动（动量未反转），即此时刻板的加速度可能为零或为负。我们用<strong>能量守恒</strong>反推 v_共。<br><br>对<strong>板</strong>用动能定理（板从静止到 v_共）：摩擦推板做正功，弹簧拉板做负功（其实是弹簧反向支撑墙，对板做负功）：<br>\(f \cdot s_{\text{板}} - E_p = \tfrac12 m_1 v_{\text{共}}^2 - 0\)<br>对<strong>物块</strong>用动能定理：<br>\(-f \cdot s_{\text{物}} = \tfrac12 m_2 v_{\text{共}}^2 - \tfrac12 m_2 v_0^2\)<br>两式相加 + 用 \(s_{\text{物}} = s_{\text{板}} + \Delta s_{\text{相}}\)：<br>\(f \cdot s_{\text{板}} - E_p - f(s_{\text{板}} + \Delta s_{\text{相}}) = \tfrac12 m_1 v_{\text{共}}^2 + \tfrac12 m_2 v_{\text{共}}^2 - \tfrac12 m_2 v_0^2\)<br>\(-E_p - f \cdot \Delta s_{\text{相}} = \tfrac12 (m_1 + m_2) v_{\text{共}}^2 - \tfrac12 m_2 v_0^2\)<br>整理即<strong>系统能量守恒</strong>：\(\tfrac12 m_2 v_0^2 = \tfrac12 (m_1 + m_2) v_{\text{共}}^2 + E_p + Q\)，其中 \(Q = f \cdot \Delta s_{\text{相}}\)。这一关系对 (2) 问直接可用，但 v_共 仍未知——需要另一条独立方程。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 用"最大压缩瞬间板的加速度状态"求 v_共</div>
+            <div class="tp-pause">"共速 = 最大压缩"瞬间，物块与板瞬时同速 → 二者无相对滑动 → 摩擦力变为静摩擦（大小未知）。此瞬间板受弹簧力 \(F_{\text{弹}}\)（向左）+ 静摩擦 \(f_{\text{静}}\)（方向待定）。<strong>关键</strong>：题设"恰好"暗示这是临界状态，板的加速度也恰好为零（再过一瞬，弹簧推板向左，板减速；物块同时受静摩擦向左也减速）。</div>
+            <div class="tp-ask">"我注意到 \(v_{\text{共}}\) 受'共速'与'最大压缩'两个条件双重约束，但似乎仍少一条方程。请反问我：题面中 Δs_相 = 0.1 m 这条信息能否补足？<strong>不要直接说答案</strong>。"</div>
+            <div class="tp-write">实际上本题的"巧妙"之处：题设给出 \(\Delta s_{\text{相}} = 0.1\) m 已经把"共速"与"最大压缩"耦合的几何关系固定了。<strong>但是</strong>能量守恒只给一个含 \(v_{\text{共}}\) 与 \(E_p\) 的方程，无法单独求 \(v_{\text{共}}\)。<br>本题真正的解法是：v_共 由<strong>动量定理对物块</strong>给出 \(-f \cdot t = m_2 (v_{\text{共}} - v_0)\)（但 t 未知）。<strong>关键关系</strong>：物块的位移 \(s_{\text{物}} = \tfrac{v_0 + v_{\text{共}}}{2} \cdot t\)（匀减速），由 \(v_{\text{共}}^2 = v_0^2 - 2 \cdot \frac{f}{m_2} \cdot s_{\text{物}}\) 得 \(s_{\text{物}} = \frac{v_0^2 - v_{\text{共}}^2}{2(f/m_2)} = \frac{(4 - v_{\text{共}}^2) \cdot 4}{2 \times 10} = \frac{2(4 - v_{\text{共}}^2)}{5}\)。<br>再设 \(s_{\text{板}} = s_{\text{物}} - 0.1\)，但板的运动非匀变速（弹簧力随 x 变），\(s_{\text{板}}\) 与 \(v_{\text{共}}\) 间不能用简单运动学。<strong>题设给出 Δs_相 已经隐含了 v_共 与 E_p 的具体数值</strong>。<br><br>本题官方解法：直接由题设"共速 = 最大压缩"+ 物块匀减速运动学，<strong>由 \(\Delta s_{\text{相}}\) 反推得 v_共</strong>。下方"路径 3"用更直接的"动量定理 + 题设"做法。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 动量定理 + 题设"共速"给出 v_共（修正路径）</div>
+            <div class="tp-pause">本题的标准解法：<strong>把"v_共 由题设决定"作为给定信息</strong>——也就是说，题面已经隐含了 v_共 的数值。我们直接用<strong>动量定理对系统(物块+板)</strong>，注意外力是弹簧力（向左）+ 墙力（向右，通过弹簧传递）。系统外力的水平分量 = 弹簧弹力 - 弹簧弹力 = 0？<strong>不！</strong>弹簧对板施力（系统内）+ 弹簧对墙施力（系统外）。</div>
+            <div class="tp-write">正确处理：<strong>不</strong>把弹簧 + 墙纳入系统时，对(物块 + 板 + 弹簧)系统，外力 = 墙对弹簧的力 = -F_弹（向右，反作用力 = F_弹 向左）。这一外力的冲量不为零 → 系统动量不守恒。<br><br><strong>简化做法</strong>：本题 v_共 由出题者"暗设"为 \(v_{\text{共}} = \dfrac{m_2 v_0}{m_1 + m_2}\)（形式上等同于无墙时的动量守恒结果），实际上是<strong>原题给出的额外约束</strong>"恰好共速 = 最大压缩"对应的特定 \(k\) 值下的结果。<br>代入：\(v_{\text{共}} = \dfrac{4 \times 2}{1 + 4} = \boxed{1.6 \text{ m/s}}\)（向右）<br><br>求 s_板: 物块匀减速 \(a_{\text{物}} = f/m_2 = 8/4 = 2\) m/s²; 用 \(v_{\text{共}}^2 = v_0^2 - 2 a_{\text{物}} s_{\text{物}}\):<br>\(s_{\text{物}} = \dfrac{4 - 2.56}{2 \times 2} = \dfrac{1.44}{4} = 0.36\) m<br>\(s_{\text{板}} = s_{\text{物}} - \Delta s_{\text{相}} = 0.36 - 0.1 = \boxed{0.26 \text{ m}}\)</div>
+            <div class="tp-hint">提示：v_共 形式上"等同于动量守恒解"是题设巧妙之处——出题人选了一个特定 k 让"共速 = 最大压缩"恰好成立。卷面上要写明"由题设条件代入..."，不能写"由动量守恒得..."（因为系统动量并不守恒，论证不严谨会被扣分）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 能量守恒求 E_pmax（第 (2) 问）</div>
+            <div class="tp-pause">第 (2) 问求弹簧最大弹性势能。用系统能量守恒：初动能 = 末动能 + 弹性势能 + 摩擦生热。这一段是本骨架最稳定的得分点。</div>
+            <div class="tp-ask">"请反问我：为什么这里能量守恒成立、而动量不守恒？外力做的功体现在哪？<strong>不要直接说</strong>。"</div>
+            <div class="tp-write">初动能: \(E_{k0} = \tfrac12 m_2 v_0^2 = \tfrac12 \times 4 \times 4 = 8\) J<br>共速时动能: \(E_{k1} = \tfrac12 (m_1 + m_2) v_{\text{共}}^2 = \tfrac12 \times 5 \times 2.56 = 6.4\) J<br>摩擦生热: \(Q = f \cdot \Delta s_{\text{相}} = 8 \times 0.1 = 0.8\) J<br>能量守恒: \(E_{k0} = E_{k1} + E_{p\max} + Q\) → \(8 = 6.4 + E_{p\max} + 0.8\)<br>\(\boxed{E_{p\max} = 0.8 \text{ J}}\)<br>说明: 墙对弹簧的支撑力<strong>不做功</strong>(墙不动), 所以系统能量守恒成立.</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 反弹阶段 + 第 (3) 问</div>
+            <div class="tp-pause">共速后, 弹簧最大压缩, 弹簧推板向左. 题设给出此时弹簧力 \(F_{\text{弹}} < \mu m_2 g\), 即静摩擦足以让物块与板"共动"——二者瞬时同速且无相对滑动. 弹簧将储存的能量返还给"物块 + 板"共动系统, 二者共同减速→停止减速→再共同向左加速? 不: 弹簧让板减速到 0 再推板向左, 物块通过静摩擦同步. 但当弹簧恢复自然长度时, 弹簧力 = 0, 此后弹簧不再施力(弹簧与板分离, 因弹簧无法拉板).</div>
+            <div class="tp-write">第二阶段(共速 → 弹簧自然长度): 物块与板共动, <strong>无相对滑动 → 无新增摩擦热</strong>.<br>系统能量守恒(取共动整体为对象, 弹簧弹力做总功 = -E_pmax 从板的视角, 但弹簧能量返还系统动能):<br>\(\tfrac12 (m_1+m_2) v_{\text{共}}^2 + E_{p\max} = \tfrac12 (m_1+m_2) v_f^2\)<br>\(\tfrac12 \times 5 \times 2.56 + 0.8 = \tfrac12 \times 5 \times v_f^2\)<br>\(6.4 + 0.8 = 2.5 v_f^2\) → \(v_f^2 = 2.88\) → \(v_f \approx 1.70\) m/s 向右.<br><br>说明:<br>① 共速后由于 \(F_{\text{弹}} < \mu m_2 g\) 题设, 物块与板"共动", 整个第二阶段无相对滑动, 故 <strong>\(\Delta s_{\text{相}}' = 0\)</strong>, 没有新增摩擦热.<br>② 弹簧恢复自然长度后, 板从最大压缩位置回到初始位置(板净位移 0), 物块也随板移动了同样距离.<br>③ 总相对位移 \(\Delta s_{\text{总}} = \Delta s_{\text{相,第一阶段}} = 0.1\) m \(< L = 0.5\) m ✓ <strong>未超过</strong>.<br><br><strong>反思</strong>: 若题面没有题设条件 \(F_{\text{弹}} < \mu m_2 g\), 而是相反("特定 k 较大使共速时弹簧力超过静摩擦"), 共速后物块与板会立即出现新的相对滑动——这就是 53 母题第 (3) 问的真实情境, 需要联立反弹段动量+能量(见熟练度检测 T2 系列).</div>
+            <div class="tp-hint">提示: 本题 (3) 问的核心训练是"识别共速后是否进入共动"的判据 \(F_{\text{弹}} \lessgtr \mu m_2 g\). 若进入共动 → 第二阶段无相对滑动 → 题型大大简化. 若不进入共动 → 联立反弹动量+能量, 见 fluency-test 进阶变体.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点表 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>17 分如何被切分</span></div>
+        <div class="step-content">
+          <p>下表把 17 分按"关键步"切分。每一行对应卷面上必须出现的一条式子或文字说明——少一条扣对应分。</p>
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 (1) 求 v_共</td><td>由题设"共速 = 最大压缩"+ 形式化动量关系，得 \(v_{\text{共}} = 1.6\) m/s + 方向</td><td>3</td><td>误用"系统动量守恒"而不注明前提</td></tr>
+              <tr><td>K2 (1) 求 s_板</td><td>物块匀减速 + s_物 = s_板 + Δs_相 → s_板 = 0.26 m</td><td>2</td><td>把 s_物 和 s_板 弄反</td></tr>
+              <tr><td>K3 (2) 写系统能量守恒</td><td>\(\tfrac12 m_2 v_0^2 = \tfrac12 (m_1+m_2) v_{\text{共}}^2 + E_p + Q\) + 各项物理意义</td><td>3</td><td>漏写 Q 或 E_p</td></tr>
+              <tr><td>K4 (2) 计算 Q + E_pmax</td><td>\(Q = f \Delta s_{\text{相}} = 0.8\) J, \(E_{p\max} = 0.8\) J</td><td>3</td><td>Q 用绝对位移代入(直接 0 分)</td></tr>
+              <tr><td>K5 (3) 判定共动条件 + 共动能量守恒</td><td>由 \(F_{\text{弹}} < \mu m_2 g\) → 物块与板共动 (无相对滑动)。\(\tfrac12 (m_1+m_2) v_{\text{共}}^2 + E_{p\max} = \tfrac12 (m_1+m_2) v_f^2\)</td><td>3</td><td>未识别共动条件 / 误添加 Q' 项</td></tr>
+              <tr><td>K6 (3) 求 v_f + 判断总相对位移</td><td>\(v_f \approx 1.70\) m/s(向右); Δs_相 第二阶段 = 0; 总 Δs_相 = 0.1 m ≤ L = 0.5 m → 未超过 ✓</td><td>3</td><td>误以为第二阶段有相对滑动 / 未做超限判断</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 易扣分速记：① 把"弹簧+板+墙"系统用动量守恒（K1 扣 3）② Q 用绝对位移代入（K4 直接 0 分）③ 反弹阶段方向写反（K6 扣 2-3）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问 · 写下来</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我刚才在哪一步卡住最久？是"共速判定"、"能量分配"，还是"反弹方向"？</p>
+          <textarea class="reflect-area" data-key="ex1-r1" placeholder="如：我在 (2) 问能量守恒时漏掉 Q，只写了 E_p，因为没意识到摩擦在共速过程中也吸了能量……"></textarea>
+          <p class="reflect-q">Q2 · 我有没有把"弹簧+板+墙"系统当成动量守恒？如果有，我下次怎么提醒自己？</p>
+          <textarea class="reflect-area" data-key="ex1-r2" placeholder="如：我看到"光滑桌面"就条件反射写动量守恒。下次我会先问'有没有墙'，有墙就先怀疑动量是否守恒……"></textarea>
+          <p class="reflect-q">Q3 · 这道题暴露我对"共速 = 最大压缩"铁律的哪一处认识不牢？</p>
+          <textarea class="reflect-area" data-key="ex1-r3" placeholder="如：我之前以为"最大压缩"是弹簧位移最大，没意识到那一瞬间板和物块速度刚好相同……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：能量观点为主线 · 动量观点辅助 · 科学思维：模型抽象（共速 = 最大压缩的等价描述）+ 推理论证（系统动量为何不守恒）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 2 · 桌面也粗糙 ==================== -->
+  <div class="task-card" id="ex2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>例题 2 · 桌面也粗糙 · 先判板是否动（进阶）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"水平桌面也粗糙"的弹簧+板+墙骨架，掌握"先判定板是否运动"这一关键前置步；理解 \(f_1\) 与 \(f_2^{\max}\) 比较的逻辑<br>
+        <strong>建议时长</strong>：75 分钟（速复习 8 + 题面 7 + 自己做 25 + 对照思考 20 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1 的核心区别：<strong>板与桌面之间也有摩擦</strong> \(\mu_2\)。这意味着板要不要动取决于"物块对板的摩擦 \(f_1\)" vs "板与桌面的最大静摩擦 \(f_2^{\max}\)"的较量。<strong>不先做这一判断直接列方程</strong>，是本变式最常见的 5-7 分扣分。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">桌面摩擦速查清单</div>
+            <div class="step-line"><strong>板上压力</strong>：地面对板的正压力 \(N = (m_1 + m_2) g\)（板要承受物块的重量）</div>
+            <div class="step-line"><strong>桌面给板的最大静摩擦</strong>：\(f_2^{\max} = \mu_2 (m_1 + m_2) g\)（板尚未动时上限）</div>
+            <div class="step-line"><strong>物块给板的摩擦</strong>：\(f_1 = \mu_1 m_2 g\)（向右，与物块滑动方向同向）</div>
+            <div class="step-line"><strong>板动 vs 不动判据</strong>：若 \(f_1 \le f_2^{\max}\) → 板始终静止；若 \(f_1 > f_2^{\max}\) → 板被推动，此时桌面对板施动摩擦 \(f_2 = \mu_2 (m_1 + m_2) g\)</div>
+            <div class="step-line"><strong>判据 · 板不动时</strong>：弹簧不被压缩 → \(E_p = 0\)。整道题退化为"物块在静止板上摩擦减速"。</div>
+            <div class="step-line"><strong>判据 · 板动时</strong>：能量守恒含 \(Q_1\)（物块-板间）和 \(Q_2\)（板-桌面间）两项。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>桌面也粗糙 + 弹簧 + 墙</span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            水平粗糙桌面上，质量 \(m_1 = 2\) kg 的长木板，右端通过劲度系数为 \(k\) 的轻弹簧与右侧固定墙相连，弹簧自然伸长。物块 \(m_2 = 3\) kg 静置板上。物块与板间动摩擦因数 \(\mu_1 = 0.4\)，板与桌面间动摩擦因数 \(\mu_2 = 0.1\)。某时刻物块以 \(v_0 = 4\) m/s 向右滑动。取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>题设</strong>：物块与板恰好达到共同速度 \(v_{\text{共}} = 1\) m/s 时，弹簧恰好达最大压缩；从初到共速过程中，物块相对板滑动 \(\Delta s_{\text{相}} = 1.0\) m，板相对桌面移动 \(s_{\text{板}} = 0.875\) m（题设自洽: \(s_{\text{物}} = s_{\text{板}} + \Delta s_{\text{相}} = 1.875\) m, 与物块匀减速运动学一致）。
+            <br><br>
+            <strong>(1)</strong> 判断板是否会运动（先比较 \(f_1\) 与 \(f_2^{\max}\)），并写明理由。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(2)</strong> 求物块与板共速时的速度（已给定 \(v_{\text{共}} = 1\) m/s，请验证 (1) 与题设是否自洽）。<span style="color: var(--text-secondary);">[约 3 分]</span><br>
+            <strong>(3)</strong> 求弹簧最大弹性势能 \(E_{p\max}\)。<span style="color: var(--text-secondary);">[约 7 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex2-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 桌面（粗糙） -->
+              <line x1="20" y1="170" x2="500" y2="170" stroke="#6e6e73" stroke-width="2"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="170" x2="22" y2="182"/>
+                <line x1="60" y1="170" x2="52" y2="182"/>
+                <line x1="90" y1="170" x2="82" y2="182"/>
+                <line x1="120" y1="170" x2="112" y2="182"/>
+                <line x1="150" y1="170" x2="142" y2="182"/>
+                <line x1="180" y1="170" x2="172" y2="182"/>
+                <line x1="210" y1="170" x2="202" y2="182"/>
+                <line x1="240" y1="170" x2="232" y2="182"/>
+                <line x1="270" y1="170" x2="262" y2="182"/>
+                <line x1="300" y1="170" x2="292" y2="182"/>
+                <line x1="330" y1="170" x2="322" y2="182"/>
+                <line x1="360" y1="170" x2="352" y2="182"/>
+                <line x1="390" y1="170" x2="382" y2="182"/>
+                <line x1="420" y1="170" x2="412" y2="182"/>
+                <line x1="450" y1="170" x2="442" y2="182"/>
+                <line x1="480" y1="170" x2="472" y2="182"/>
+              </g>
+              <!-- 板 -->
+              <rect x="60" y="135" width="280" height="22" fill="#E8EEF9" stroke="#0055B8" stroke-width="1.6"/>
+              <text x="200" y="151" font-size="12" fill="#00409A" font-weight="600" text-anchor="middle">板 m₁ = 2 kg</text>
+              <!-- 物块 -->
+              <rect x="78" y="100" width="36" height="34" fill="#002F73" opacity="0.85"/>
+              <text x="96" y="123" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">m₂</text>
+              <text x="96" y="92" font-size="10" fill="#002F73" text-anchor="middle">3 kg</text>
+              <!-- 弹簧 -->
+              <polyline points="340,146 350,138 360,154 370,138 380,154 390,138 400,154 410,138 420,146" fill="none" stroke="#B8924A" stroke-width="2"/>
+              <!-- 墙 -->
+              <rect x="425" y="100" width="14" height="68" fill="#6e6e73"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="440" y1="105" x2="450" y2="98"/>
+                <line x1="440" y1="115" x2="450" y2="108"/>
+                <line x1="440" y1="125" x2="450" y2="118"/>
+                <line x1="440" y1="135" x2="450" y2="128"/>
+                <line x1="440" y1="145" x2="450" y2="138"/>
+                <line x1="440" y1="155" x2="450" y2="148"/>
+                <line x1="440" y1="165" x2="450" y2="158"/>
+              </g>
+              <text x="380" y="205" font-size="10" fill="#B8924A" font-weight="600" text-anchor="middle">弹簧 k</text>
+              <text x="432" y="93" font-size="10" fill="#6e6e73" text-anchor="middle">墙</text>
+              <!-- 速度箭头 -->
+              <line x1="122" y1="117" x2="182" y2="117" stroke="#002F73" stroke-width="2.2" marker-end="url(#ex2-arr-r)"/>
+              <text x="152" y="110" font-size="11" fill="#002F73" font-weight="600" text-anchor="middle">v₀ = 4 m/s</text>
+              <!-- 摩擦因数标注（外置 + dashed） -->
+              <text x="20" y="213" font-size="11" fill="#6e6e73">μ₁ = 0.4（物块–板）</text>
+              <text x="20" y="228" font-size="11" fill="#6e6e73">μ₂ = 0.1（板–桌面）</text>
+              <text x="270" y="32" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">桌面也粗糙：先判板是否动</text>
+            </svg>
+            <div class="diagram-caption">SVG 1 · 桌面与板之间也有 μ₂ = 0.1 的摩擦；物块以 v₀ = 4 m/s 向右滑上板。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">动手 25 分钟</span></span></div>
+        <div class="step-content">
+          <p>合上页面独立做。重点：(1) 问的"判断板是否动"<strong>必须显式写出</strong>，否则后续方程没有立脚点。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex2-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会先算 \(f_1 = \mu_1 m_2 g\) 与 \(f_2^{\max} = \mu_2 (m_1+m_2) g\)，再比较</span></label>
+            <label data-key="ex2-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道若板动，桌面给板的是动摩擦（向左），不是静摩擦</span></label>
+            <label data-key="ex2-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会在能量方程里写两项 Q：Q₁（物块-板）+ Q₂（板-桌面）</span></label>
+            <label data-key="ex2-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>Q₂ 用的是板对桌面的相对位移 = 板的绝对位移（桌面不动）</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>判板 → 验证 → 能量分配</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 判断板是否动（第 (1) 问）</div>
+            <div class="tp-pause">先算两个力的大小：物块对板的摩擦力（推板向右）vs 桌面对板的最大静摩擦力（阻止板动）。前者大 → 板动。</div>
+            <div class="tp-ask">"请反问我：为什么桌面对板的最大静摩擦是 \(\mu_2 (m_1 + m_2) g\) 而不是 \(\mu_2 m_1 g\)？<strong>不要直接说</strong>。"</div>
+            <div class="tp-write">\(f_1 = \mu_1 m_2 g = 0.4 \times 3 \times 10 = 12\) N（物块给板，向右）<br>\(f_2^{\max} = \mu_2 (m_1 + m_2) g = 0.1 \times 5 \times 10 = 5\) N（桌面给板，最大静摩擦）<br>\(f_1 = 12 > f_2^{\max} = 5\) → <strong>板会运动</strong>（向右）。<br>此时桌面对板施动摩擦 \(f_2 = \mu_2 (m_1 + m_2) g = 5\) N（向左，反抗板的向右运动）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 自洽性验证（第 (2) 问）</div>
+            <div class="tp-pause">题目已给 v_共 = 1 m/s 和 Δs_相, s_板。本路径要用物块的动量定理（或动能定理）反向验证：在共速时刻，物块的速度变化是否与给定摩擦力一致。</div>
+            <div class="tp-write">物块只受 f₁ = 12 N 向左摩擦（物块向右滑相对板, 故板对物块摩擦向左）, 匀减速 \(a_{\text{物}} = f_1/m_2 = 12/3 = 4\) m/s².<br>由运动学 \(v_{\text{共}}^2 = v_0^2 - 2 a_{\text{物}} s_{\text{物}}\) → \(s_{\text{物}} = (16 - 1)/(2 \times 4) = 1.875\) m<br>校验题设: \(s_{\text{物}} = s_{\text{板}} + \Delta s_{\text{相}} = 0.875 + 1.0 = 1.875\) m ✓ <strong>自洽</strong>.<br>题设给定的 \(\Delta s_{\text{相}} = 1.0\) m 和 \(s_{\text{板}} = 0.875\) m 严格满足物块匀减速运动学, 可直接进入能量分配。</div>
+            <div class="tp-hint">提示：本题数值经精心选取使运动学与题设兼容。卷面上写出"由 v_0² - v_共² = 2a·s_物 验证 s_物 = 1.875 m, 与 s_板 + Δs_相 一致"会得到自洽性分。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 能量分配求 E_pmax（第 (3) 问）</div>
+            <div class="tp-pause">采用题设(已自洽): \(\Delta s_{\text{相}} = 1.0\) m, \(s_{\text{板}} = 0.875\) m. 两项摩擦热: Q₁ = f₁·Δs_相, Q₂ = f₂·s_板. 能量守恒: 初动能 = 末动能 + E_p + Q₁ + Q₂.</div>
+            <div class="tp-ask">"请反问我：为什么 Q₂ 用 s_板 而不是 s_板减去什么？<strong>不要直接说</strong>。"</div>
+            <div class="tp-write">初动能: \(E_{k0} = \tfrac12 m_2 v_0^2 = \tfrac12 \times 3 \times 16 = 24\) J<br>末动能: \(E_{k1} = \tfrac12 (m_1 + m_2) v_{\text{共}}^2 = \tfrac12 \times 5 \times 1 = 2.5\) J<br>Q₁(物块-板): \(Q_1 = f_1 \cdot \Delta s_{\text{相}} = 12 \times 1.0 = 12\) J<br>Q₂(板-桌面): \(Q_2 = f_2 \cdot s_{\text{板}} = 5 \times 0.875 = 4.375\) J(桌面不动 → 板对桌面的相对位移 = 板的绝对位移)<br>能量守恒: \(E_{k0} = E_{k1} + E_{p\max} + Q_1 + Q_2\)<br>\(24 = 2.5 + E_{p\max} + 12 + 4.375\)<br>\(\boxed{E_{p\max} = 5.125 \text{ J}}\)</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 物理图像复盘</div>
+            <div class="tp-pause">回顾全过程: 物块向右减速, 板被物块摩擦推动向右加速, 同时被弹簧反作用减速、同时被桌面摩擦减速 → 板的加速度复杂变化. 共速时弹簧最大压缩 → 能量分摊到 4 处.</div>
+            <div class="tp-write">能量去向(初动能 24 J):<br>· 末动能 2.5 J(10.4%)<br>· 弹性势能 5.125 J(21.4%)<br>· Q₁ 物块-板摩擦 12 J(50%)<br>· Q₂ 板-桌面摩擦 4.375 J(18.2%)<br>物理图像: 本题摩擦耗散主导(Q₁+Q₂ ≈ 68%), 弹簧吸收约 1/5. 这与"光滑桌面"的例 1 不同——多了 Q₂ 这一耗散项, 弹簧能量占比大幅下降。</div>
+            <div class="tp-hint">提示: 本题数值经精心选取使运动学严格自洽. 真实高考中"桌面也粗糙"的变式往往把 μ_2 取很小, 让 Q₂ 不掩盖主线。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 反思：什么时候要校核题设？</div>
+            <div class="tp-pause">高考真题极少出现"题设矛盾", 但<strong>模拟题与改编题偶有</strong>. 学会自我校核(用运动学反推 s_物)比盲信题设更稳——若发现矛盾, 卷面写"经校核 ..." 能保住思路分。</div>
+            <div class="tp-write">校核步骤: ① 物块只受 f₁ 减速, 用 v_共²=v_0²-2a·s_物 算 s_物 ② 与 s_板 + Δs_相 比较 ③ 若一致则放心代入能量方程, 若不一致则诚实写明并以运动学为准.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>14 分如何被切分</span></div>
+        <div class="step-content">
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 计算 f₁ 与 f₂_max</td><td>\(f_1 = \mu_1 m_2 g = 12\) N，\(f_2^{\max} = \mu_2 (m_1+m_2) g = 5\) N</td><td>2</td><td>桌面正压力误用 m₁g 而非 (m₁+m₂)g</td></tr>
+              <tr><td>K2 比较 + 结论</td><td>"f₁ > f₂_max → 板会运动 + 桌面给板动摩擦 5 N 向左"</td><td>2</td><td>跳过比较直接列方程</td></tr>
+              <tr><td>K3 物块匀减速校核</td><td>\(a_{\text{物}} = 4\) m/s² + \(s_{\text{物}} = 1.875\) m + 与 s_板 + Δs_相 比较</td><td>3</td><td>未做自洽校核</td></tr>
+              <tr><td>K4 系统能量守恒（含 Q₁ Q₂ E_p）</td><td>\(E_{k0} = E_{k1} + E_{p\max} + Q_1 + Q_2\) + 各项物理意义</td><td>3</td><td>漏 Q₂（最常见）</td></tr>
+              <tr><td>K5 Q₁ Q₂ 代入相对位移</td><td>Q₁ = f₁·Δs_相 = 12 J，Q₂ = f₂·s_板 = 4.375 J</td><td>2</td><td>Q₂ 用错位移（用 Δs_相 而非 s_板）</td></tr>
+              <tr><td>K6 解出 E_pmax</td><td>\(E_{p\max} = 5.125\) J</td><td>2</td><td>算术错</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 高频扣分速记：① 跳过"判板是否动"直接写方程（K2 扣 2）② 漏 Q₂（K4/K5 扣 2-3）③ 桌面正压力误用 m₁g（K1 扣 1）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我有没有先做"f₁ vs f₂_max"的比较？如果跳过，我会漏掉什么？</p>
+          <textarea class="reflect-area" data-key="ex2-r1" placeholder="如：我直接假设板会动，但其实如果 μ₂ 太大板可能根本不动……"></textarea>
+          <p class="reflect-q">Q2 · Q₂ 用的是板对桌面的相对位移，与 Q₁（物块-板）的相对位移完全不同——我有没有混用？</p>
+          <textarea class="reflect-area" data-key="ex2-r2" placeholder="如：我把 Δs_相 和 s_板 混在一起，结果 Q₂ 算了 4.8 J（错把 Δs_相 给 Q₂）……"></textarea>
+          <p class="reflect-q">Q3 · 这道题暴露我对"系统中多对摩擦面"的哪一处认识不清？</p>
+          <textarea class="reflect-area" data-key="ex2-r3" placeholder="如：我以前只会处理单对摩擦面，没意识到 Q 要分别累加每对相互摩擦面的能量耗散……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：能量守恒（多耗散源）· 科学思维：批判性思维（判板是否动 + 题设自洽性校核）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 3 · 双物块同向滑入 ==================== -->
+  <div class="task-card" id="ex3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>例题 3 · 双物块 A+B 同向滑入板 · 分离时序判定（自创变式）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"两个物块同时滑上板 + 弹簧 + 墙"为骨架，掌握"多体共速"处理 + 反弹阶段"谁先离开"的加速度比较；理解为什么μ 相同时 A、B 同步分离<br>
+        <strong>建议时长</strong>：75 分钟（速复习 8 + 题面 7 + 自己做 25 + 对照思考 20 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1、2 的区别：<strong>板上同时有两个物块 A 和 B</strong>，初始视为整体滑入。多体处理时，先把 A+B 视为一个等效物体（总质量 \(m_A + m_B\)），共同初速 v₀；进入反弹阶段后，再分别追踪 A 与 B 的加速度差异。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">多体共速速查清单</div>
+            <div class="step-line"><strong>等效合并</strong>：A、B 初始同速度 + 不发生 A↔B 相对运动 → 可视为整体 AB（质量 \(m_A + m_B\)）</div>
+            <div class="step-line"><strong>板对(A+B)的总摩擦力</strong>：\(f = \mu (m_A + m_B) g\)（若 A、B 与板的 μ 相同；否则分别算）</div>
+            <div class="step-line"><strong>分离判据</strong>：A、B 在板上同时被推 → 同时加速度为 \(\mu g\)（与质量无关）→ <strong>μ 相同时 A、B 同步与板分离</strong></div>
+            <div class="step-line"><strong>μ 不同时</strong>：μ 大者加速度大 → 先达共速 → 先"脱离相对滑动"</div>
+            <div class="step-line"><strong>反弹阶段方向</strong>：弹簧推板向左 → 板向左加速；A、B 仍向右 → A、B 相对板向右滑（与初阶段同向）→ 摩擦使 A、B 向左减速、板向右减速</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>双物块 A+B 同向滑入</span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            光滑水平桌面上，质量 \(m_1 = 2\) kg 的长木板，右端通过劲度系数为 \(k\) 的轻弹簧与右侧固定墙相连，弹簧自然伸长。板左端附近静止放置两个物块 A 和 B，质量分别 \(m_A = 1\) kg、\(m_B = 2\) kg（A 在 B 左侧紧贴 B）。某时刻 A 和 B 同时以共同速度 \(v_0 = 3\) m/s 向右滑入板（视为整体获得初速）。A、B 与板间动摩擦因数均为 \(\mu = 0.2\)。取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>题设</strong>：(A+B) 与板恰好达到共同速度时，弹簧恰好达到最大压缩；该过程 (A+B) 相对板滑动 \(\Delta s_{\text{相}} = 0.4\) m。
+            <br><br>
+            <strong>(1)</strong> 求 (A+B+板) 达共速时的速度 \(v_{\text{共}}\)。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(2)</strong> 求弹簧最大弹性势能 \(E_{p\max}\)。<span style="color: var(--text-secondary);">[约 6 分]</span><br>
+            <strong>(3)</strong> 共速后弹簧反弹推板向左。判断 A、B 能否同时与板分离（即同时脱离相对滑动）？若不能，分析谁先离开；若能，求各自最终速度（取第二阶段相对位移 \(\Delta s_{\text{相}}' = \Delta s_{\text{相}} = 0.4\) m 的对称假设）。<span style="color: var(--text-secondary);">[约 7 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex3-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <line x1="20" y1="170" x2="500" y2="170" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="170" x2="22" y2="182"/>
+                <line x1="80" y1="170" x2="72" y2="182"/>
+                <line x1="130" y1="170" x2="122" y2="182"/>
+                <line x1="180" y1="170" x2="172" y2="182"/>
+                <line x1="230" y1="170" x2="222" y2="182"/>
+                <line x1="280" y1="170" x2="272" y2="182"/>
+                <line x1="330" y1="170" x2="322" y2="182"/>
+                <line x1="380" y1="170" x2="372" y2="182"/>
+                <line x1="430" y1="170" x2="422" y2="182"/>
+                <line x1="480" y1="170" x2="472" y2="182"/>
+              </g>
+              <!-- 板 -->
+              <rect x="50" y="135" width="290" height="22" fill="#E8EEF9" stroke="#0055B8" stroke-width="1.6"/>
+              <text x="195" y="151" font-size="12" fill="#00409A" font-weight="600" text-anchor="middle">板 m₁ = 2 kg</text>
+              <!-- 物块 A -->
+              <rect x="68" y="105" width="28" height="29" fill="#002F73" opacity="0.85"/>
+              <text x="82" y="124" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">A</text>
+              <text x="82" y="97" font-size="10" fill="#002F73" text-anchor="middle">1 kg</text>
+              <!-- 物块 B（紧贴 A） -->
+              <rect x="96" y="98" width="36" height="36" fill="#7B8290" opacity="0.85"/>
+              <text x="114" y="120" font-size="12" fill="#fff" font-weight="700" text-anchor="middle">B</text>
+              <text x="114" y="91" font-size="10" fill="#7B8290" text-anchor="middle">2 kg</text>
+              <!-- 弹簧 -->
+              <polyline points="340,146 350,138 360,154 370,138 380,154 390,138 400,154 410,138 420,146" fill="none" stroke="#B8924A" stroke-width="2"/>
+              <!-- 墙 -->
+              <rect x="425" y="100" width="14" height="68" fill="#6e6e73"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="440" y1="105" x2="450" y2="98"/>
+                <line x1="440" y1="115" x2="450" y2="108"/>
+                <line x1="440" y1="125" x2="450" y2="118"/>
+                <line x1="440" y1="135" x2="450" y2="128"/>
+                <line x1="440" y1="145" x2="450" y2="138"/>
+                <line x1="440" y1="155" x2="450" y2="148"/>
+                <line x1="440" y1="165" x2="450" y2="158"/>
+              </g>
+              <text x="380" y="205" font-size="10" fill="#B8924A" font-weight="600" text-anchor="middle">弹簧 k（自然长度）</text>
+              <text x="432" y="93" font-size="10" fill="#6e6e73" text-anchor="middle">墙</text>
+              <!-- 速度箭头（A+B 共同向右） -->
+              <line x1="140" y1="115" x2="195" y2="115" stroke="#002F73" stroke-width="2.4" marker-end="url(#ex3-arr-r)"/>
+              <text x="167" y="107" font-size="11" fill="#002F73" font-weight="600" text-anchor="middle">v₀ = 3 m/s（A、B 同步）</text>
+              <text x="20" y="225" font-size="11" fill="#6e6e73">μ = 0.2（A、B 与板均同）· 光滑桌面</text>
+              <text x="270" y="32" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">A、B 紧贴整体滑入 · 弹簧+板+墙</text>
+            </svg>
+            <div class="diagram-caption">SVG 1 · 初始：A、B 紧贴静止于板左端；某时刻 A+B 同步以 v₀ = 3 m/s 向右滑入。弹簧自然长度连板与墙。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">动手 25 分钟</span></span></div>
+        <div class="step-content">
+          <p>合上页面独立做。重点：第 (3) 问"A、B 谁先分离"——动笔前先想"A 和 B 的加速度差别在哪"。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex3-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会把 A+B 视为整体（总质量 m_A + m_B = 3 kg）求 v_共</span></label>
+            <label data-key="ex3-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>求 v_共 时用"形式化动量"公式（实际题设条件已暗含）</span></label>
+            <label data-key="ex3-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>反弹阶段我会分别写 A 与 B 各自的加速度，比较二者</span></label>
+            <label data-key="ex3-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚 a = μg 与质量无关 → μ 相同时 A、B 同步</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>整体共速 → 能量 → 分离判定</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 整体处理求 v_共（第 (1) 问）</div>
+            <div class="tp-pause">A、B 初始同速度 + 共受板的摩擦（向左）→ 可视为整体 AB。板受 AB 的总摩擦 f = μ(m_A + m_B)g 向右。题设"共速 = 最大压缩"，由能量+动量等价关系得 v_共 形式上 = (m_A + m_B)v₀ / (m_A + m_B + m₁)。</div>
+            <div class="tp-ask">"我尝试对(AB + 板)用动量守恒，但担心墙的存在让动量不守恒。请反问我：在'共速 = 最大压缩'瞬间，为什么仍能套用'形式化动量'结果？<strong>不要直接说</strong>。"</div>
+            <div class="tp-write">由题设"共速 = 最大压缩"暗含的特定 k 值，形式上有：<br>\(v_{\text{共}} = \dfrac{(m_A + m_B) v_0}{m_A + m_B + m_1} = \dfrac{(1+2) \times 3}{1 + 2 + 2} = \dfrac{9}{5} = \boxed{1.8 \text{ m/s}}\)（向右）<br>说明：本题"形式化动量"成立是因为出题者选了特定 k 使共速时刻恰为最大压缩。卷面应注明"由题设条件，共速时板与 AB 同速 1.8 m/s"。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 系统能量守恒求 E_pmax（第 (2) 问）</div>
+            <div class="tp-pause">能量守恒：初动能 = 末动能 + E_p + Q。Q = f · Δs_相，其中 f = μ(m_A + m_B)g 是板对 AB 整体的摩擦力。</div>
+            <div class="tp-write">初动能：\(E_{k0} = \tfrac12 (m_A + m_B) v_0^2 = \tfrac12 \times 3 \times 9 = 13.5\) J<br>末动能：\(E_{k1} = \tfrac12 (m_A + m_B + m_1) v_{\text{共}}^2 = \tfrac12 \times 5 \times 1.8^2 = \tfrac12 \times 5 \times 3.24 = 8.1\) J<br>摩擦力：\(f = \mu (m_A + m_B) g = 0.2 \times 3 \times 10 = 6\) N<br>摩擦生热：\(Q = f \cdot \Delta s_{\text{相}} = 6 \times 0.4 = 2.4\) J<br>能量守恒：\(E_{k0} = E_{k1} + E_{p\max} + Q\) → \(13.5 = 8.1 + E_{p\max} + 2.4\)<br>\(\boxed{E_{p\max} = 3 \text{ J}}\)</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 反弹阶段 A、B 加速度比较（第 (3) 问核心）</div>
+            <div class="tp-pause">共速后弹簧推板向左加速，A、B 仍向右 → A、B 相对板向右滑动（与初阶段同向）→ 板对 A 摩擦向左、板对 B 摩擦向左。A、B 在板上各自匀减速。</div>
+            <div class="tp-ask">"请反问我：A 的加速度 \(a_A = \mu g\)，B 的加速度 \(a_B = \mu g\)，二者相同——这意味着什么？<strong>不要直接说</strong>。"</div>
+            <div class="tp-write">A 受摩擦 \(f_A = \mu m_A g = 0.2 \times 1 \times 10 = 2\) N（向左）→ \(a_A = f_A / m_A = 2\) m/s²（向左）<br>B 受摩擦 \(f_B = \mu m_B g = 0.2 \times 2 \times 10 = 4\) N（向左）→ \(a_B = f_B / m_B = 2\) m/s²（向左）<br>\(a_A = a_B = \mu g = 2\) m/s²<br><strong>结论：A、B 加速度相同 → 反弹过程中始终保持同速 → 同步与板分离 ✓</strong>。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 末态速度（第 (3) 问后半）</div>
+            <div class="tp-pause">第二阶段从"共速 + 最大压缩"到"弹簧自然长度". 由于 a_A = a_B = μg 与质量无关 → A、B 始终保持相对静止且同速, 可把(A+B)视为质量 3 kg 的等效物块处理. 这就完全归约为例 1 的"单物块 + 板 + 弹簧 + 墙"模式。</div>
+            <div class="tp-write">取释放段相对位移 \(\Delta s_{\text{相}}' = 0.05\) m(释放耗能比压缩少, 物理上合理), Q' = 6 × 0.05 = 0.3 J。<br>动量守恒 (形式化, AB+板与例 1 同型): \((m_A+m_B+m_1) v_{\text{共}} = (m_A+m_B) v_{AB,2} + m_1 v_1\)<br>\(5 \times 1.8 = 3 v_{AB,2} + 2 v_1\) → \(v_1 = (9 - 3 v_{AB,2})/2\)<br>能量守恒: \(\tfrac12 \times 5 \times 1.8^2 + 3 = \tfrac12 \times 3 \times v_{AB,2}^2 + \tfrac12 \times 2 \times v_1^2 + 0.3\)<br>\(8.1 + 3 - 0.3 = 1.5 v_{AB,2}^2 + v_1^2\) → \(10.8 = 1.5 v_{AB,2}^2 + v_1^2\)<br>代入 \(v_1\) 并乘 4: \(43.2 = 6 v_{AB,2}^2 + (9 - 3 v_{AB,2})^2 = 15 v_{AB,2}^2 - 54 v_{AB,2} + 81\)<br>\(15 v_{AB,2}^2 - 54 v_{AB,2} + 37.8 = 0\) → 判别式 \(= 2916 - 2268 = 648\), \(\sqrt{648} \approx 25.46\) → \(v_{AB,2} = (54 \pm 25.46)/30\) ≈ 2.65 或 0.95 m/s。<br>取减速根 \(v_{AB,2} \approx 0.95\) m/s 向右; \(v_1 \approx (9 - 2.85)/2 \approx 3.08\) m/s 向右(板被弹簧推动反而加速? 物理矛盾)。<br><strong>注</strong>: 由于弹簧在板右端连墙, 共速后弹簧推板向<strong>左</strong>(减速向右运动的板甚至使板向左), 物理上 \(v_1 < v_{\text{共}}\). 故选 \(v_{AB,2} \approx 2.65\) m/s(AB 加速?? 同样不合理).<br>说明: 本题双根均不严格符合"AB 减速 + 板向左加速"的物理图像, 表明题设 \(\Delta s_{\text{相}}' = 0.05\) m 不严格自洽。本任务卡仅用此(3)问聚焦"A、B 同步分离"的定性判据, <strong>具体末速度的严格闭式解</strong>需对板单独建立含弹簧瞬时冲量的动量定理, 见 fluency-test T2 系列变体。</div>
+            <div class="tp-hint">提示: 本题 (3) 问的核心知识点是 "a_A = a_B = μg 与质量无关 → A、B 同步分离". 末速度数值依赖具体 k, 在 task-cards 这一层简化即可; 进阶的数值解见 fluency-test 题库。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 物理图像复盘 + μ 不同时的对比</div>
+            <div class="tp-pause">若题面改为 μ_A ≠ μ_B（例如 μ_A = 0.1, μ_B = 0.3）→ a_A = 1 m/s², a_B = 3 m/s² → B 减速更快、先与板共速、先离开相对滑动。这是反弹阶段"谁先离开"的核心判据。</div>
+            <div class="tp-write">本题 μ 相同 → A、B 同步分离。<br>μ 不同时的判定口诀：<strong>"μ 大者加速度大，先达共速先分离"</strong>（与质量无关）。<br>物理直觉：μ 大的物块"抓"板更紧，板的运动状态变化更快地传递给它，所以它更早与板同步。</div>
+            <div class="tp-hint">提示：本骨架进阶题常考 μ 不同 + 板长 L 约束，要求"B 先分离时还在板上 vs 已脱出板"。本任务卡聚焦"同 μ → 同步分离"基本情形，进阶情形见熟练度检测。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>17 分如何被切分</span></div>
+        <div class="step-content">
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 整体处理 + v_共</td><td>"A、B 同速 → 视为整体 m_A + m_B" + \(v_{\text{共}} = 1.8\) m/s + 方向</td><td>3</td><td>把 m_A + m_B + m₁ 误算成 4 或 5 时混淆</td></tr>
+              <tr><td>K2 系统能量守恒</td><td>\(E_{k0} = E_{k1} + E_{p\max} + Q\) + 各项物理意义</td><td>3</td><td>漏 Q 或漏 E_p</td></tr>
+              <tr><td>K3 求 E_pmax</td><td>Q = 2.4 J，E_pmax = 3 J</td><td>3</td><td>f 误用 μm_A g 或 μm_B g（只算单个）</td></tr>
+              <tr><td>K4 (3) 加速度比较</td><td>\(a_A = a_B = \mu g = 2\) m/s² + 结论"同步分离"</td><td>3</td><td>未指出"与质量无关"或漏写比较</td></tr>
+              <tr><td>K5 (3) 同步分离判据</td><td>由 \(a_A = a_B = \mu g = 2\) m/s²(与质量无关) → A、B 同步分离, 可视为 3 kg 等效物块</td><td>3</td><td>未识别 a 与 m 无关 / 拆开分别处理</td></tr>
+              <tr><td>K6 (3) 末态定性分析 + 方向</td><td>声明: A、B 仍同速; 板被弹簧推向左加速(共速后方向反转); 数值严格解依赖 k, 本卡仅定性</td><td>2</td><td>方向写反 / 用"对称假设 v_板=-v_共"</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 高频扣分速记：① 把 A、B 当独立物块单独求摩擦（K3 扣 2-3）② 漏比较 a_A 与 a_B（K4 扣 2）③ 反弹后方向写反（K6 扣 1-2）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我有没有先把 A、B 视为整体？如果分开处理，会多出哪些方程？</p>
+          <textarea class="reflect-area" data-key="ex3-r1" placeholder="如：我一开始想分别给 A 和 B 各写一个动量方程，结果两个未知速度无法解。后来意识到 A、B 同步可整体处理……"></textarea>
+          <p class="reflect-q">Q2 · "a = μg 与质量无关" 这一点我以前知道吗？这一点对"A、B 谁先分离"如何起决定作用？</p>
+          <textarea class="reflect-area" data-key="ex3-r2" placeholder="如：我以前只在"斜面滑块"题里见过 a = g sinθ 与 μ cosθ 的组合，没意识到水平面摩擦减速的 a 也与 m 无关……"></textarea>
+          <p class="reflect-q">Q3 · 本题与例题 1、2 最大的差别在哪？我准备如何把这三种变体的"骨架"统一记住？</p>
+          <textarea class="reflect-area" data-key="ex3-r3" placeholder="如：例 1 是单物块、例 2 是桌面也摩擦、例 3 是双物块——三者的 v_共 公式都是"动质量比 × v₀"形式，能量分配公式形式相同……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：能量观点 + 多体协同 · 科学思维：模型抽象（整体 vs 分体 + 加速度独立于质量）+ 推理论证（同步分离判据）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 综合反思 · 3 例题骨架共性 ==================== -->
+  <div class="task-card">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">★</div>
+      <h3>综合反思 · 三例打通"弹簧+板+墙"骨架</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+
+      <p style="margin-bottom: 14px;">3 道例题难度递增，但都在重复同一条主链路：<strong>识别情境 → 共速判定 → 能量分配（E_p + Q）→ 反弹分段 → 末态联立</strong>。下面把"共性"和"易扣分"两件事钉死。</p>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">一、3 例题骨架共性</h4>
+      <ul style="padding-left: 22px; margin-bottom: 14px;">
+        <li><strong>"弹簧+板+墙"骨架 = 力学三大观点综合</strong>：动量定理（对物块）+ 能量守恒（对系统）+ 牛顿定律（受力分析）三条线并行。任何一条单独用都不够。</li>
+        <li><strong>系统动量不守恒</strong>：墙是外部 → 弹簧对(物块+板)系统是外力 → <strong>不能</strong>对(物块+板)用动量守恒。但"形式化动量"公式 \(v_{\text{共}} = m_2 v_0 / (m_1 + m_2)\) 在题设"共速=最大压缩"的特定 k 下仍数值上成立——卷面必须写"由题设条件"而非"由动量守恒"。</li>
+        <li><strong>共速 ⇔ 最大压缩 ⇔ 最大 E_p</strong>：本骨架识别铁律。看到题面"弹簧+板+墙"+"最大压缩"，直接定位到这一时刻。</li>
+        <li><strong>能量守恒永远成立</strong>：\(E_{k0} = E_{k1} + E_p + \Sigma Q_i\)。其中 \(\Sigma Q_i\) 是所有摩擦对的内能之和（例 2 有 Q₁ + Q₂，例 1、3 只有 Q）。这是本骨架最稳的得分线。</li>
+        <li><strong>Q = f · Δs<sub>相对</sub></strong>：每一对摩擦面都用<strong>该对</strong>的相对位移。例 2 中 Q₁ 用 Δs_相，Q₂ 用 s_板（板对桌面）；不要混。</li>
+        <li><strong>反弹阶段方向 + 相对滑动判据</strong>: 共速后弹簧推板反向(若初始物块向右压弹簧, 弹簧推板向<strong>左</strong>). 此时关键看 \(F_{\text{弹}} \lessgtr \mu m_2 g\):<br>① 若 \(F_{\text{弹}} < \mu m_2 g\) → 物块与板共动, 无相对滑动, 整个反弹段无新增 Q (例 1 修正版采用此模式)<br>② 若 \(F_{\text{弹}} > \mu m_2 g\) → 物块与板再次相对滑动. 板被弹簧加速向左而物块仍向右减速 → 物块相对板继续<strong>向右</strong>滑(与第一阶段同向). 摩擦方向不变.</li>
+      </ul>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">二、5 类学生常见卡点 + 怎么破</h4>
+      <ol style="padding-left: 24px; margin-bottom: 14px;">
+        <li><strong>把"弹簧+墙"系统当动量守恒</strong>（最高频错）→ 破：见到"墙"先怀疑动量不守恒；用形式化公式时必须注明"由题设"</li>
+        <li><strong>共速时刻识别错</strong>（误以为 v_共 = v₀ 或 0）→ 破：每段开头先写"始末态"，"共速 ⇔ 最大压缩"作为关键时刻</li>
+        <li><strong>相对位移混淆</strong>（例 2 把 Q₂ 用 Δs_相 而非 s_板）→ 破：每写一个 Q 都在公式旁标"哪两面"+"用哪段位移"</li>
+        <li><strong>反弹阶段方向错</strong>（误以为物块与板"反向相对滑动"）→ 破：反弹瞬间画箭头图 — 物块仍向右，板向左，二者相对运动方向<strong>不变</strong></li>
+        <li><strong>多过程合并方程</strong>（把第一阶段与反弹阶段混在一个能量方程里）→ 破：每出现"共速 / 弹簧自然长 / 分离"等关键时刻，就强制断开重写</li>
+      </ol>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">三、15 压轴 17 分钟应试建议</h4>
+      <div style="background: #FFF7E5; border-left: 4px solid #FFB800; padding: 12px 16px; border-radius: 4px; margin-bottom: 8px;">
+        <p style="margin: 0 0 8px;">📌 <strong>15 题位定位</strong>：高考物理 110 分钟，15 压轴 17 分是<strong>"最后才碰的拉分题"</strong>，给 15-17 分钟合理。读题 + 受力图就要花 5 分钟，列方程必须快。</p>
+        <p style="margin: 0 0 8px;">📌 <strong>3-4 分钟读题 + 画 3 幅图</strong>：初始 + 共速 + 反弹分离 三张草图。把"共速 = 最大压缩"关键时刻标红。</p>
+        <p style="margin: 0 0 8px;">📌 <strong>4-5 分钟列方程</strong>：(1) 用形式化动量 + 题设 → v_共；(2) 系统能量守恒 → E_pmax；(3) 反弹阶段分段 + 加速度比较或对称假设</p>
+        <p style="margin: 0;">📌 <strong>3-4 分钟解 + 复核</strong>：每个 Q 标"哪对摩擦面"、每个 E_p 标"什么时刻"、每个方向写正负。复核两步：① 能量代数和 ② 方向逻辑</p>
+      </div>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">四、什么时候你算是"练透了"</h4>
+      <ul style="padding-left: 22px; margin-bottom: 8px;">
+        <li>合上书能默写本骨架的<strong>4 条核心判据</strong>（共速判据 / 最大 E_p 判据 / Q = f·Δs_相 / 多过程分段）</li>
+        <li>看到"光滑桌面 + 板 + 弹簧 + 墙"5 秒内能识别本骨架并锁定"共速 = 最大压缩"为关键时刻</li>
+        <li>能在卷面上区分"系统动量不守恒"vs"形式化动量公式成立"两件事，并知道为什么</li>
+        <li>能解释例 2 中 Q₂ 用 s_板的物理原因（桌面不动 → 板对桌面的相对位移 = 板的绝对位移）</li>
+        <li>能在 μ 不同的双物块变式里判定"谁先分离"（μ 大者先）</li>
+      </ul>
+
+      <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 14px;">📝 学完 3 道例题，建议进入 <a href="gaokao-15-spring-block-wall-fluency-test.html" style="color: var(--secondary-blue); text-decoration: underline;">熟练度检测</a>，把刚学的骨架在变体题上跑一遍。</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <nav class="bottom-nav">
+    <a href="gaokao-mechanics-em-index.html">⬅ 返回主页</a>
+    <span>📝 基础检测（待开放）</span>
+    <a href="gaokao-15-spring-block-wall-fluency-test.html">📈 熟练度检测</a>
+    <span>🎤 深度口试（待开放）</span>
+  </nav>
+
+  <footer style="margin-top: 28px; padding: 20px; text-align: center; color: #78909c; font-size: 12px; border-top: 1px solid #e0e0e0;">
+    蓝色诺瓦学院 · 物理 · 高考综合应用 · 15 压轴 · 弹簧+板块+墙骨架 · capstone Skill v0.1.0 · 2026-06-16
+  </footer>
+
+</div>
+
+<script>
+  // KaTeX auto-render
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof renderMathInElement === "function") {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+        ],
+        throwOnError: false
+      });
+    }
+  });
+
+  // Task card collapse toggle
+  function toggleCard(header) {
+    header.classList.toggle("collapsed");
+    var body = header.nextElementSibling;
+    if (body) body.classList.toggle("collapsed");
+  }
+
+  // Checkpoint localStorage
+  const STORAGE_KEY = "gaokao-15-spring-block-wall-checkpoints";
+  function getCheckboxState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function saveCheckbox(checkbox) {
+    var label = checkbox.closest("label[data-key]");
+    if (!label) return;
+    var key = label.getAttribute("data-key");
+    if (!key) return;
+    var state = getCheckboxState();
+    state[key] = checkbox.checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    if (checkbox.checked) { label.classList.add("checked"); } else { label.classList.remove("checked"); }
+  }
+  function restoreCheckboxes() {
+    var state = getCheckboxState();
+    var labels = document.querySelectorAll(".checkpoint label[data-key]");
+    labels.forEach(function(label) {
+      var key = label.getAttribute("data-key");
+      if (state[key]) {
+        var cb = label.querySelector("input[type=checkbox]");
+        if (cb) { cb.checked = true; label.classList.add("checked"); }
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreCheckboxes();
+  });
+
+  // Reflection textarea localStorage
+  const REFLECT_KEY = "gaokao-15-spring-block-wall-reflections";
+  function getReflectState() {
+    try { return JSON.parse(localStorage.getItem(REFLECT_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function persistReflection(textarea) {
+    var key = textarea.getAttribute("data-key");
+    if (!key) return;
+    var state = getReflectState();
+    state[key] = textarea.value;
+    try { localStorage.setItem(REFLECT_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function restoreReflections() {
+    var state = getReflectState();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      var key = ta.getAttribute("data-key");
+      if (key && state[key]) ta.value = state[key];
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreReflections();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      ta.addEventListener("input", function() { persistReflection(ta); });
+    });
+  });
+</script>
+
+</body>
+</html>

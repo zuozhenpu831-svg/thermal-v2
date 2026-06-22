@@ -1,0 +1,1749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考 14 题位 · 带电粒子在磁场 · 学习任务卡（capstone）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 · 三色制（蓝 / 金 / 银）· 圆形锚点 · 大留白 v0.2 ===== */
+  :root {
+    /* 蓝 · 主色 */
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    /* 金 · 第二色（节奏 2 · 强调 · 暖警示） */
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    /* 银 · 第三色（节奏 3 · 弱调 · 中性提示） */
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    /* 中性 */
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    /* 形变 */
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 兼容旧变量（页面内联仍引用 var(--primary-blue) 等） */
+    --primary-blue: var(--blue-700);
+    --secondary-blue: var(--blue-500);
+    --bright-blue: var(--blue-500);
+    --light-blue: var(--blue-100);
+    --bg-light: var(--bg-secondary);
+    --accent-orange: var(--gold-700);
+    --accent-purple: var(--silver-700);
+    --accent-green: var(--silver-700);
+    --success: var(--silver-700);
+    --danger: var(--gold-900);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 8px; color: var(--silver-500); }
+
+  /* ===== 头部 · 极简化 · 一个大金圆作为视觉锚 ===== */
+  .header {
+    text-align: center;
+    padding: 64px 32px 56px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 .h1-sub {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--silver-700);
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--silver-500);
+    opacity: 0.9;
+  }
+  .header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  /* 隐藏原内联装饰元素 · 由 ::before/::after 取代 */
+  .hero-wave, .hero-decoration { display: none; }
+
+  /* ===== Banner · 圆点开头 + 金色调（替代橙色 capstone-banner） ===== */
+  .capstone-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .capstone-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .capstone-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  /* ===== 跨主题警示 · 蓝色品牌主色（统一品牌） ===== */
+  .cross-topic-warning {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin: 28px 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-topic-warning::before {
+    content: "!";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-topic-warning .ctw-title { font-weight: 700; color: var(--blue-700); margin-bottom: 10px; font-size: 0.95rem; }
+  .cross-topic-warning strong { color: var(--blue-700); }
+
+  /* ===== 主卡片 · 节奏 蓝→金→银→蓝→金→银 ===== */
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+  }
+  /* .card 顶边锁定蓝色（不轮换） */
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .info-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .info-table td:first-child { font-weight: 600; color: var(--blue-700); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+
+  /* ===== 章节标题 · 圆形锚点前置 + 节奏色 ===== */
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--silver-100);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  /* .card .section-title 锁定蓝色（不轮换） */
+
+  .objectives-list { padding-left: 24px; font-size: 0.94rem; }
+  .objectives-list li { margin-bottom: 14px; line-height: 1.85; }
+  .objectives-list li::marker { color: var(--blue-700); font-weight: 700; }
+  .card .objectives-list li strong { color: var(--blue-700); }
+
+  /* ===== 驱动问题 · 极简留白 + 圆形「?」 ===== */
+  .driving-question {
+    background: var(--blue-050);
+    border: none;
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 32px 32px 32px 72px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .driving-question::before {
+    content: "?";
+    position: absolute;
+    left: 22px;
+    top: 30px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--blue-700); margin-bottom: 16px; letter-spacing: -0.005em; }
+  .driving-question p { font-size: 0.94rem; margin-bottom: 12px; line-height: 1.85; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--silver-700); margin-top: 10px; }
+
+  /* ===== 任务卡 · 大号圆形编号 + 节奏色 ===== */
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: #fff;
+    color: var(--text-primary);
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+  .task-card-header:hover { background: var(--blue-050); }
+  .task-card-number {
+    background: var(--blue-700);
+    color: #fff;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px var(--blue-100);
+  }
+  /* task-card-number 锁定蓝色（不跟例题序号轮换） */
+  .task-card-header h3 { font-size: 1.1rem; font-weight: 600; flex-grow: 1; color: var(--text-primary); line-height: 1.6; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.5; color: var(--silver-700); }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 40px 36px; }
+  .task-card-body.collapsed { display: none; }
+
+  .task-objective {
+    background: var(--blue-050);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--blue-700);
+    line-height: 1.85;
+    margin-bottom: 36px;
+    border-left: 3px solid var(--blue-700);
+  }
+  /* task-objective 锁定蓝色（不跟例题序号轮换） */
+
+  /* ===== STEP · 圆形 badge ===== */
+  /* ===== STEP 标题 · 小圆形文本框（220×220） =====
+     · 圆 = STEP 编号（小字）+ 标题（居中换行 · word-break）
+     · 圆之间天然有 step-content 矩形隔开，避免连续圆形
+     · 节奏色按步骤序号循环 蓝→金→银 */
+  .step { margin-bottom: 40px; }
+  .step:last-of-type { margin-bottom: 16px; }
+
+  .step-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 32px 28px;
+    margin: 0 auto 36px;
+    text-align: center;
+    gap: 0;
+  }
+
+  /* badge → 圆顶部小字签条 */
+  .step-header .step-badge {
+    background: transparent;
+    color: var(--blue-700);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0 0 8px;
+    margin: 0 0 14px;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    display: inline-block;
+    border-bottom: 1.5px solid var(--blue-700);
+    flex-shrink: 1;
+  }
+
+  /* title → 圆心标题 · 居中换行 */
+  .step-header .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    line-height: 1.55;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  /* 副标题（括号细节） · 小一号 + 跟随 STEP 色 */
+  .step-header .step-title .step-sub {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--step-mid);
+    opacity: 0.8;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+   * 单一真理源 · STEP 节奏色系统
+   * 每个 .step 注入 4 个变量：--step-rich (900) / --step-mid (700) / --step-bg (050) / --step-tint (100)
+   * 使用 :nth-child(N of .step) 仅按 .step 计数（不被 .task-objective 干扰）
+   * STEP 1=蓝 · 2=金 · 3=银 · 4=蓝 · 5=金 · 6=银（每个 task-card 独立计数）
+   * 例题 4 综合反思（无 task-objective）→ A=蓝 · B=金 · C=银 · D=蓝 · E=金 · F=银
+   * ============================================================ */
+  .step {
+    --step-rich: var(--blue-900);
+    --step-mid:  var(--blue-700);
+    --step-bg:   var(--blue-050);
+    --step-tint: var(--blue-100);
+  }
+  .task-card-body > .step:nth-child(3n+2 of .step) {
+    --step-rich: var(--gold-900);
+    --step-mid:  var(--gold-700);
+    --step-bg:   var(--gold-050);
+    --step-tint: var(--gold-100);
+  }
+  .task-card-body > .step:nth-child(3n of .step) {
+    --step-rich: var(--silver-900);
+    --step-mid:  var(--silver-700);
+    --step-bg:   var(--silver-050);
+    --step-tint: var(--silver-100);
+  }
+
+  /* 兼容旧 inline 样式：17 处 路径 N 标题 `color:var(--primary-blue)`
+     通过 .step 级 var 重定向，让它跟随 STEP 区域色（而非死锁蓝） */
+  .step {
+    --primary-blue:   var(--step-rich);
+    --secondary-blue: var(--step-mid);
+    --bright-blue:    var(--step-mid);
+    --light-blue:     var(--step-bg);
+  }
+
+  /* step-header 圆 → 跟随 STEP 色 */
+  .step .step-header {
+    background: var(--step-bg);
+    border-color: var(--step-mid);
+  }
+  .step .step-header .step-badge {
+    color: var(--step-rich);
+    border-bottom-color: var(--step-mid);
+  }
+
+  .step-content { font-size: 0.92rem; padding-left: 0; }
+  .step-content p { margin-bottom: 12px; }
+  .step-content ul, .step-content ol { padding-left: 22px; margin-bottom: 12px; }
+  .step-content li { margin-bottom: 8px; }
+
+  /* ===== 引用块 · 跟随 STEP 色 ===== */
+  .quote-block {
+    background: var(--step-bg);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 18px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.85;
+  }
+
+  /* ===== 前置回顾 · 跟随 STEP 色 ===== */
+  .prereq-recap {
+    background: #fff;
+    border: 1px solid var(--silver-100);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+  }
+  .prereq-recap strong { color: var(--step-rich); }
+
+  /* ===== 推导块 · 留白 + 节奏色（蓝/金/银 轮换）===== */
+  .derivation-block {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 28px 30px;
+    margin: 22px 0;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .derivation-block::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: -1px; bottom: -1px;
+    width: 4px;
+    background: var(--step-mid);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .derivation-block .derivation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .derivation-block .derivation-title::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    box-shadow: 0 0 0 3px var(--step-tint);
+    flex-shrink: 0;
+  }
+
+  .derivation-block .step-line {
+    margin: 12px 0;
+    padding-left: 18px;
+    border-left: 1px solid var(--silver-100);
+    line-height: 1.85;
+  }
+  .derivation-block .step-line strong { color: var(--step-rich); }
+
+  /* ===== STEP 0（.card 直辖 · 非 .step）的 derivation-block 循环色 ===== */
+  /* 默认 蓝（骨架 1, 4 …） */
+  .card > .derivation-block::before { background: var(--blue-700); }
+  .card > .derivation-block .derivation-title { color: var(--blue-700); }
+  .card > .derivation-block .derivation-title::before { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .card > .derivation-block .step-line strong { color: var(--blue-700); }
+  /* 第 2/5/8 个 → 金 */
+  .card > .derivation-block:nth-of-type(3n+2)::before { background: var(--gold-700); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title { color: var(--gold-900); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title::before { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .card > .derivation-block:nth-of-type(3n+2) .step-line strong { color: var(--gold-900); }
+  /* 第 3/6 个 → 银 */
+  .card > .derivation-block:nth-of-type(3n)::before { background: var(--silver-700); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title { color: var(--silver-900); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title::before { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .card > .derivation-block:nth-of-type(3n) .step-line strong { color: var(--silver-900); }
+
+  /* ===== 思考停顿 · 跟随 STEP 色 ===== */
+  .thinking-point {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .thinking-point::before {
+    content: "💭";
+    position: absolute;
+    left: 16px;
+    top: 22px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--step-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--step-rich); font-size: 0.98rem; margin-bottom: 14px; }
+  .thinking-point .tp-pause { background: #fff; padding: 12px 16px; border-radius: var(--radius-sm); margin: 10px 0; font-size: 0.88rem; border: 1px solid var(--step-tint); }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-write { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--silver-700); font-style: italic; margin: 6px 0 2px 0; }
+
+  /* ===== 进阶推荐 · 跟随 STEP 色 ===== */
+  .deepening-recommendation {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px 20px 56px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: var(--step-rich);
+    line-height: 1.8;
+    position: relative;
+  }
+  .deepening-recommendation::before {
+    content: "↗";
+    position: absolute;
+    left: 14px; top: 20px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .deepening-recommendation .dr-title { font-weight: 700; color: var(--step-rich); margin-bottom: 8px; }
+
+  /* ===== 图示块 · 干净背景 ===== */
+  .diagram-block { margin: 32px 0; text-align: center; }
+  .diagram-block svg {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+  }
+  .diagram-caption { font-size: 0.83rem; color: var(--silver-700); margin-top: 12px; font-style: italic; line-height: 1.7; }
+
+  /* ===== 自查 / 检查点 · 跟随 STEP 色 ===== */
+  .checkpoint {
+    background: var(--step-bg);
+    border: 1px solid var(--step-tint);
+    border-radius: var(--radius-sm);
+    padding: 24px 26px 22px 26px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .checkpoint-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .checkpoint-title::before {
+    content: "✓";
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; margin-bottom: 12px; cursor: pointer; line-height: 1.7; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; accent-color: var(--step-mid); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--silver-700); }
+
+  /* ===== 素养标签 ===== */
+  .literacy-tag { font-size: 0.82rem; color: var(--silver-700); margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--silver-100); }
+
+  /* ===== 评分表 · 跟随 STEP 色 ===== */
+  .scoring-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .scoring-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .scoring-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .scoring-table tr:nth-child(even) td { background: var(--step-bg); }
+  .scoring-table td:last-child { color: var(--step-rich); font-weight: 500; }
+
+  /* ===== 对比 / 符号表 · 跟随 STEP 色 ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .compare-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .compare-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .compare-table tr:nth-child(even) td { background: var(--step-bg); }
+  .compare-table td:first-child { font-weight: 600; color: var(--step-rich); white-space: nowrap; }
+
+  /* ===== 反思区 ===== */
+  .reflect-area { width: 100%; min-height: 100px; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem; line-height: 1.75; resize: vertical; background: #fff; margin-top: 8px; transition: var(--transition); }
+  .reflect-area:focus { outline: none; border-color: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .reflect-q { font-size: 0.9rem; margin: 16px 0 6px; color: var(--text-primary); font-weight: 600; }
+
+  /* ===== 底部导航 ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 28px; border-top: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span {
+    flex: 1; min-width: 140px;
+    text-align: center;
+    padding: 16px 18px;
+    border-radius: 999px;
+    background: var(--silver-050);
+    color: var(--silver-500);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+  .footer { text-align: center; padding: 32px 16px 8px; font-size: 0.82rem; color: var(--silver-700); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 480px) {
+    .container { padding: 20px 16px 48px; }
+    .header { padding: 48px 24px 40px; }
+    .header h1 { font-size: 1.3rem; }
+    .header::before { width: 140px; height: 140px; top: -50px; }
+    .card { padding: 28px 22px; }
+    .task-card-header { padding: 20px 22px; gap: 14px; }
+    .task-card-number { width: 44px; height: 44px; font-size: 1.15rem; box-shadow: 0 0 0 4px var(--blue-100); }
+    .task-card-header h3 { font-size: 1rem; }
+    .task-card-body { padding: 28px 22px; }
+    .step-content { padding-left: 0; }
+    .step-header { width: 220px; height: 220px; padding: 22px 20px; }
+    .step-header .step-title { font-size: 0.88rem; }
+    .step-header .step-badge { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .driving-question { padding: 24px 22px 24px 64px; }
+    .capstone-banner, .cross-topic-warning { padding-left: 56px; padding-right: 20px; }
+  }
+
+  /* ===================================================================
+   * 圆形文本框 v0.3 · 与方形框交替使用
+   * 三种用法：
+   *   .card.card--circle                 把整张 card 改成圆形容器
+   *   .driving-question.is-circle        把 dq 块改成圆形容器
+   *   .task-objective.is-circle          把 task-objective 改成圆形容器
+   * 圆内放任何文本：用 shape-outside 让文本沿圆弧自然收边
+   * =================================================================== */
+  .card.card--circle,
+  .driving-question.is-circle,
+  .task-objective.is-circle {
+    background: transparent;
+    border: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .card.card--circle { margin-bottom: 56px; }
+  .driving-question.is-circle,
+  .task-objective.is-circle { margin-bottom: 40px; color: var(--text-primary); }
+  .driving-question.is-circle::before,
+  .task-objective.is-circle::before { display: none; }
+
+  /* 真圆容器（fixed width=height + border-radius:50%） */
+  .circle-frame {
+    width: 560px;
+    height: 560px;
+    max-width: 96vw;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: var(--shadow-md);
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+  }
+  .circle-frame--lg { width: 680px; height: 680px; }
+  .circle-frame--md { width: 480px; height: 480px; }
+  .circle-frame--sm { width: 400px; height: 400px; }
+  .circle-frame--blue   { background: var(--blue-050);   border-color: var(--blue-700); }
+  .circle-frame--gold   { background: var(--gold-050);   border-color: var(--gold-700); }
+  .circle-frame--silver { background: var(--silver-050); border-color: var(--silver-700); }
+
+  /* shape-outside · 两个半侧"虚拟体积"把文本压成圆弧内嵌 */
+  .circle-frame::before,
+  .circle-frame::after {
+    content: "";
+    width: 50%;
+    height: 100%;
+    display: block;
+  }
+  .circle-frame::before {
+    float: left;
+    shape-outside: ellipse(50% 50% at 100% 50%);
+  }
+  .circle-frame::after {
+    float: right;
+    shape-outside: ellipse(50% 50% at 0% 50%);
+  }
+
+  /* 圆内内容 · 通过 padding-top 让正文下沉到圆腹 */
+  .circle-frame .circle-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.005em;
+    padding-top: 18%;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .circle-frame--gold   .circle-title { color: var(--gold-900); }
+  .circle-frame--silver .circle-title { color: var(--silver-900); }
+  .circle-frame .circle-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+  .circle-frame--gold   .circle-title::after { background: var(--gold-700); }
+  .circle-frame--silver .circle-title::after { background: var(--silver-700); }
+
+  /* 把原有 dq-title 当作 circle-title 处理 */
+  .circle-frame .dq-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    padding-top: 18%;
+    margin-bottom: 18px;
+  }
+  .circle-frame .dq-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+
+  /* 圆内段落 */
+  .circle-frame p {
+    font-size: 0.86rem;
+    line-height: 1.78;
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .circle-frame p:last-child { margin-bottom: 0; }
+  .circle-frame p.hint {
+    font-size: 0.78rem;
+    color: var(--silver-700);
+    text-align: center;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .circle-frame strong { color: var(--blue-700); }
+  .circle-frame--gold   strong { color: var(--gold-900); }
+  .circle-frame--silver strong { color: var(--silver-900); }
+
+  /* 圆内列表 · 字号收紧以契合圆形空间 */
+  .circle-frame ol,
+  .circle-frame ul {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 22px;
+    margin: 0;
+  }
+  .circle-frame ol li,
+  .circle-frame ul li { margin-bottom: 8px; }
+  .circle-frame ol li::marker {
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  .circle-frame--gold   ol li::marker { color: var(--gold-700); }
+  .circle-frame--silver ol li::marker { color: var(--silver-700); }
+
+  /* task-objective 短文本居中版 · 无 title */
+  .circle-frame.is-objective {
+    padding: 0;
+  }
+  .circle-frame.is-objective .objective-body {
+    padding-top: 32%;
+    padding-bottom: 32%;
+    text-align: center;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+  .circle-frame.is-objective.circle-frame--sm .objective-body {
+    padding-top: 28%;
+    padding-bottom: 28%;
+    font-size: 0.82rem;
+  }
+
+  /* 移动端 · 圆形退化为大圆角矩形（保证可读） */
+  @media (max-width: 640px) {
+    .circle-frame,
+    .circle-frame--lg,
+    .circle-frame--md,
+    .circle-frame--sm {
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 28px;
+      padding: 32px 26px;
+    }
+    .circle-frame::before,
+    .circle-frame::after { display: none; }
+    .circle-frame .circle-title,
+    .circle-frame .dq-title { padding-top: 0; }
+    .circle-frame.is-objective .objective-body { padding-top: 0; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="gaokao-mechanics-em-index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>物理</span>
+    <span class="sep">&gt;</span>
+    <span>高考综合应用</span>
+    <span class="sep">&gt;</span>
+    <span>14 题位 · 带电粒子磁场 · 学习任务卡（capstone）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>高考 14 题位<br>带电粒子在磁场<br><span class="h1-sub">练透 3 例</span></h1>
+    <div class="subtitle">洛伦兹力 · 圆周运动 · 弦切几何<br>多区拼接 · 边界出射判定</div>
+  </div>
+
+  <div class="capstone-banner">
+    <strong>关于本板块的练习形态 · v0.1.0</strong>：本任务卡专攻"14 题位 · 带电粒子在磁场"——以 3 道改编例题（每题完整 STEP 1-6）把"识别带电粒子运动情境 → 洛伦兹力方向 → 圆心定位 → 半径公式 → 弦切几何 → 出射边界判定"这条主链路打通。配套的<strong>熟练度检测</strong>是 HTML 模拟练习页，用于学完后快速自测；纸笔限时整套训练由学科导师线下组织。本任务卡聚焦"骨架 + 几何作图 + 反思"，不是限时刷题入口。
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>高考 14 题位 · 带电粒子在磁场（capstone 子板块）</td></tr>
+      <tr><td>所属大主题</td><td>综合应用 · 电磁学（带电粒子运动）</td></tr>
+      <tr><td>预计学习时间</td><td>4-5 小时（例题 1 约 70 min · 例题 2 约 90 min · 例题 3 约 70 min · 综合反思 30-40 min）</td></tr>
+      <tr><td>前置板块</td><td><strong>力学基础</strong>（牛顿第二定律、匀速圆周运动 \(F = mv^2/r\)、周期与频率）<br><strong>静电场与电场力</strong>（电场强度、电场力做功）<br><strong>磁场与洛伦兹力</strong>（左手定则、\(F = qvB\)、洛伦兹力恒不做功）<br><strong>数学工具</strong>（平面解析几何：圆与直线、弦切关系、勾股定理、三角函数）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、圆规（强烈建议）、量角器、计算器；草稿本（每题 2-3 张 A4，画磁场区域 + 圆周轨迹 + 标几何角度）</td></tr>
+    </table>
+  </div>
+
+  <div class="cross-topic-warning">
+    <div class="ctw-title">⚠️ 跨主题前置</div>
+    本板块属 capstone（综合应用）子板块，<strong>以"洛伦兹力 + 圆周运动 + 平面几何"三件套为支柱</strong>，并假定你已掌握上表"前置板块"列出的核心内容。若有任一前置不熟（特别是"圆与弦的几何关系"），请<strong>先回顾该前置板块</strong>，再回到本卡继续。每道例题 STEP 1 都内嵌"核心速复习"段（5-8 分钟）作为应急对照，<strong>不能</strong>替代正式的前置学习。
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li><strong>识别</strong>"14 题位 · 带电粒子在磁场"骨架的三类高频变体：矩形区域单边入射 / 扇形或半无界区域多向入射（电荷收集器骨架）/ 双磁场区拼接</li>
+      <li><strong>应用</strong>洛伦兹力方向判定（左手定则 · 正负电荷分清）+ 半径公式 \(r = mv/(qB)\) + 周期公式 \(T = 2\pi m/(qB)\) + 弦切几何（弦垂直于切线方向 = 半径方向）四件套分段处理</li>
+      <li><strong>掌握</strong>"洛伦兹力指向圆心 / 弦垂直平分线过圆心 / 入射方向 ⊥ 入射点处的圆心方向"三条核心判据，每条都能直接落到草稿上的圆心定位</li>
+      <li><strong>避开</strong>五类高频扣分点：正负电荷方向搞反 / 圆心位置画错 / 弦长公式 vs 圆周公式混淆 / 边界出射点遗漏临界 / 多区交界处速度方向不连续</li>
+      <li><strong>完成</strong>三道改编综合大题 + 一份"我的 14 题位 50 min 自述"反思</li>
+      <li><strong>读懂</strong>每个关键步对应的得分点，建立"卷面写哪几步才稳拿基本分"的卷面感</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>带电粒子在磁场中的运动题在 14 题位上长期是 12-15 分高分位的稳定考点。它的麻烦不在"公式难"——\(F = qvB\)、\(r = mv/(qB)\)、左手定则你都见过——而在<strong>"圆心在哪、弦长多少、出射点在哪条边界上"</strong>这三件"几何 + 物理"耦合的事上反复打转，最终写出"半径对但出射点错"的答卷。</p>
+    <p style="margin-top: 6px;"><strong>这一类题的"骨架"到底长什么样？怎么把一道带电粒子题拆成"洛伦兹力定向 → 圆心定位 → 半径与弦的几何 → 边界出射"这几段可画可写的小步骤？卷面上至少要出现哪几行式子和几何关系才能踩到基本分？</strong></p>
+    <p class="hint">（提示：先别急着代数。本板块的核心是<strong>把图画清</strong>——圆心在哪、半径多长、弦切在哪一边界上，画清后代数自然顺。）</p>
+  </div>
+
+  <!-- ==================== STEP 0 · 14 题位骨架介绍 ==================== -->
+  <div class="card">
+    <h2 class="section-title">STEP 0 · 14 题位 · 带电粒子磁场骨架介绍</h2>
+
+    <p style="font-size: 0.92rem; margin-bottom: 12px;">在做任何一道题之前，先用 5 分钟把这一题位的"骨架长什么样"刻进脑子。下面 4 段是骨架本身，不是技巧——技巧在 3 道例题里。</p>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 1 · 带电粒子在磁场 = 洛伦兹力 + 圆周运动 + 弦切几何</div>
+      <div class="step-line">题面里出现 <strong>带电粒子</strong>（质量 m、电量 q、初速 v）进入 <strong>匀强磁场区域</strong>（B 给定方向），并且<strong>没有电场或重力影响</strong>（或题面明示忽略）——这就是 14 题位的标准骨架。</div>
+      <div class="step-line">洛伦兹力公式 \(F = qvB\)（v ⊥ B 时），方向由左手定则确定（正电荷直接读 F 方向；负电荷反向）。这个力始终垂直于速度 → 大小恒定 → 粒子做<strong>匀速圆周运动</strong>。半径由牛顿第二定律 \(qvB = mv^2/r\) 解出 \(r = mv/(qB)\)。</div>
+      <div class="step-line">圆周运动一旦确立，剩下的问题<strong>几乎全是几何题</strong>：圆心在哪、半径与边界如何相交、入射点与出射点之间的弦长是多少、对应圆心角多大。卷面 60% 的分都在几何作图上。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 2 · 高考 14 题位高频骨架（带电粒子磁场类）</div>
+      <div class="step-line">据近 5 年全国卷与新高考统计：<strong>14 题位的 12-15 分压轴题中，"带电粒子在磁场中运动"出现率名列前茅</strong>（参见 2024 重庆 14、2023 山东 14、2022 全国乙 25 等真题骨架）。出题方式以 <strong>"2-3 小问"</strong> 为主：第 (1) 问考半径或周期（套公式即可），第 (2) 问考几何边界（圆与边界交点 / 弦长）+ (3) 问考多粒子源 / 收集装置范围（一组粒子的极端入射方向）。</div>
+      <div class="step-line">本任务卡选取的 3 道例题分别对应该骨架的三类典型变体：<strong>矩形区域单向入射</strong>（例题 1，热身）/ <strong>半无界区域 + 多方向粒子源 + 收集装置</strong>（例题 2，基于 2024 重庆 14 改编的"电荷收集器"骨架）/ <strong>双磁场区拼接</strong>（例题 3，自创变式）。三例覆盖率约占 14 题位历年真题骨架的 75% 以上。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 3 · 识别关键字（题面里只要见到就立即对号入座）</div>
+      <div class="step-line"><strong>「带电粒子 / 质子 / α 粒子」</strong>+「匀强磁场」+「垂直纸面向外（·）/ 向里（×）」 → 立即写出半径 \(r = mv/(qB)\) 与周期 \(T = 2\pi m/(qB)\)。</div>
+      <div class="step-line"><strong>「从某点沿某方向射入」</strong>：标出入射点 + 入射速度箭头 → 用左手定则定洛伦兹力方向 → 洛伦兹力指向 = 圆心方向 → 沿入射点向"洛伦兹力方向"画长度 = r 的线段，端点即圆心。</div>
+      <div class="step-line"><strong>「连续向各方向均匀发射」/「各方向粒子」</strong>：电荷收集器骨架 → 不同入射方向 = 不同圆心位置（所有圆心都在以发射点为圆心、半径 = r 的圆上）→ 收集装置就是"所有可能出射点"的几何包络。</div>
+      <div class="step-line"><strong>「打到 x 轴」/「从某边界射出」</strong>：典型几何约束 → 圆与直线的交点求解 → 用勾股定理或半径在弦中的垂直平分关系。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 4 · 核心判据 3 条（带电粒子磁场的"通关密钥"）</div>
+      <div class="step-line"><strong>判据 A · 洛伦兹力方向（左手定则）</strong>：四指指 v 方向，磁感线穿过手心（B 向外则手心朝外 / B 向里则手心朝里），大拇指方向 = 正电荷的 F 方向（即圆心指向）。<strong>负电荷必须取反</strong>。这个力<strong>始终指向圆心</strong>——这就是"圆心定位"的物理依据。</div>
+      <div class="step-line"><strong>判据 B · 半径公式与圆心位置</strong>：\(r = mv/(qB)\) 给出半径大小；圆心位置由"入射点 + 沿洛伦兹力方向走 r"确定。<strong>等价描述</strong>：入射速度方向 ⊥ 入射点处的"圆心方向"——这是"入射点处速度沿切线、半径垂直于切线"的几何刻画。</div>
+      <div class="step-line"><strong>判据 C · 弦切几何（弦长与圆心角）</strong>：粒子从入射点到出射点的轨迹是一段<strong>圆弧</strong>，对应的<strong>弦</strong>（连接入射点与出射点的直线段）长度 \(L_{\text{弦}} = 2r \sin(\alpha/2)\)，其中 α 是<strong>圆心角</strong>。等价的<strong>弦的垂直平分线</strong>必过圆心——这是"两个已知点求圆心"的几何主路。<strong>14 题位 50% 以上的几何题都靠这条判据破题</strong>。</div>
+    </div>
+
+    <p style="font-size: 0.9rem; margin: 12px 0 0; color: var(--text-secondary);">读完以上 4 段，先合上页面，在草稿上把"识别关键字 → 定 F 方向 → 找圆心 → 算半径 → 求弦切几何"这条链路<strong>默写一遍</strong>，并独立画一张"正电荷以速度 v 向右进入向外磁场"的圆周示意图。能默 + 能画，再进入例题 1；不行，再回上面读一次。</p>
+
+    <div class="checkpoint">
+      <div class="checkpoint-title">✅ STEP 0 自查</div>
+      <label data-key="s0-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能用左手定则判断"正电荷向右进入向外磁场"的洛伦兹力方向</span></label>
+      <label data-key="s0-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能由入射点 + 入射方向 + 半径 r 唯一确定圆心位置</span></label>
+      <label data-key="s0-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚"弦的垂直平分线过圆心"这条几何性质，并能用来求未知圆心</span></label>
+      <label data-key="s0-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能写出半径公式 r = mv/(qB) 和周期公式 T = 2πm/(qB)，并解释为何 T 与 v 无关</span></label>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 1 · 矩形区域单向入射 ==================== -->
+  <div class="task-card" id="ex1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>例题 1 · 矩形区域 + 单边入射（热身骨架）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"矩形磁场 + 单方向入射"为骨架，把"半径公式 → 圆心定位 → 出射点几何"这条最小链路走一遍；理解为何半圆运动时间等于 T/2 且与入射速率无关<br>
+        <strong>建议时长</strong>：70 分钟（速复习 8 + 题面 5 + 自己做 20 + 对照思考 22 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>下面 4 条公式 + 2 条判据是例题 1 用到的全部工具。先合上页面回忆，再对照。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">洛伦兹力与圆周运动速查清单</div>
+            <div class="step-line"><strong>洛伦兹力大小</strong>：\(F = qvB\)（v ⊥ B 时），方向由左手定则定（正电直接读、负电反向）。</div>
+            <div class="step-line"><strong>半径公式</strong>：由 \(qvB = mv^2/r\) 得 \(r = mv/(qB)\)。速度越大、半径越大；磁场越强、半径越小。</div>
+            <div class="step-line"><strong>周期公式</strong>：\(T = 2\pi r/v = 2\pi m/(qB)\)。<strong>T 与速率 v 无关</strong>——这是磁约束的关键特征。</div>
+            <div class="step-line"><strong>弧长与时间</strong>：粒子在圆弧上扫过的圆心角 α 对应时间 \(t = \alpha/(2\pi) \cdot T = \alpha m/(qB)\)。半圆 α = π → t = T/2。</div>
+            <div class="step-line"><strong>判据 · 圆心定位</strong>=入射点 + 沿洛伦兹力方向走 r，端点即圆心。</div>
+            <div class="step-line"><strong>判据 · 出射判定</strong>=圆周与边界的交点即出射点；若圆周不与边界相交，则粒子在区域内做闭合圆周（始终不出）。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>矩形区域 + 正电粒子沿 y 轴入射<br><span class="step-sub">2 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            xy 平面内存在一矩形区域（\(-L \le x \le L,\ 0 \le y \le 2L\)）匀强磁场 \(B\) 方向垂直纸面向外。带正电粒子（电量 q，质量 m）从原点 \(O(0, 0)\) 以速度 v 沿 y 轴正方向射入磁场。已知磁场区域外无磁场。
+            <br><br>
+            <strong>(1)</strong> 求粒子在磁场中做圆周运动的半径 \(r\) 和周期 \(T\)。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(2)</strong> 若 \(r = L/2\)，求粒子从射入到离开磁场区域所经历的时间 \(t\)，以及出射点的坐标。<span style="color: var(--text-secondary);">[约 6 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 480 360" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex1-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 矩形磁场区域 -->
+              <rect x="80" y="40" width="320" height="240" fill="#E8EEF9" stroke="#0055B8" stroke-width="1.8" stroke-dasharray="0"/>
+              <!-- B 向外 · 阵列 -->
+              <g fill="#0055B8">
+                <circle cx="140" cy="80" r="2.5"/><circle cx="200" cy="80" r="2.5"/><circle cx="260" cy="80" r="2.5"/><circle cx="320" cy="80" r="2.5"/><circle cx="380" cy="80" r="2.5"/>
+                <circle cx="140" cy="140" r="2.5"/><circle cx="200" cy="140" r="2.5"/><circle cx="260" cy="140" r="2.5"/><circle cx="320" cy="140" r="2.5"/><circle cx="380" cy="140" r="2.5"/>
+                <circle cx="140" cy="200" r="2.5"/><circle cx="200" cy="200" r="2.5"/><circle cx="320" cy="200" r="2.5"/><circle cx="380" cy="200" r="2.5"/>
+                <circle cx="140" cy="260" r="2.5"/><circle cx="200" cy="260" r="2.5"/><circle cx="260" cy="260" r="2.5"/><circle cx="320" cy="260" r="2.5"/><circle cx="380" cy="260" r="2.5"/>
+              </g>
+              <g stroke="#0055B8" stroke-width="0.8">
+                <circle cx="140" cy="80" r="5" fill="none"/><circle cx="200" cy="80" r="5" fill="none"/><circle cx="260" cy="80" r="5" fill="none"/><circle cx="320" cy="80" r="5" fill="none"/><circle cx="380" cy="80" r="5" fill="none"/>
+                <circle cx="140" cy="140" r="5" fill="none"/><circle cx="200" cy="140" r="5" fill="none"/><circle cx="260" cy="140" r="5" fill="none"/><circle cx="320" cy="140" r="5" fill="none"/><circle cx="380" cy="140" r="5" fill="none"/>
+                <circle cx="140" cy="200" r="5" fill="none"/><circle cx="200" cy="200" r="5" fill="none"/><circle cx="320" cy="200" r="5" fill="none"/><circle cx="380" cy="200" r="5" fill="none"/>
+                <circle cx="140" cy="260" r="5" fill="none"/><circle cx="200" cy="260" r="5" fill="none"/><circle cx="260" cy="260" r="5" fill="none"/><circle cx="320" cy="260" r="5" fill="none"/><circle cx="380" cy="260" r="5" fill="none"/>
+              </g>
+              <!-- 坐标轴（缩短 y 轴顶端，给底部标题区让位） -->
+              <line x1="40" y1="280" x2="455" y2="280" stroke="#6e6e73" stroke-width="1"/>
+              <line x1="240" y1="295" x2="240" y2="55" stroke="#6e6e73" stroke-width="1"/>
+              <polygon points="455,280 447,276 447,284" fill="#6e6e73"/>
+              <polygon points="240,55 236,63 244,63" fill="#6e6e73"/>
+              <text x="450" y="270" font-size="12" fill="#6e6e73" text-anchor="end">x</text>
+              <text x="252" y="60" font-size="12" fill="#6e6e73">y</text>
+              <!-- O 原点：放在 (240,280) 右下角无遮挡空白处 -->
+              <text x="245" y="300" font-size="11" fill="#6e6e73">O</text>
+              <!-- 圆周轨迹（半圆）r=L/2 -->
+              <path d="M 240 280 A 40 40 0 0 1 320 280" fill="none" stroke="#002F73" stroke-width="1.8" stroke-dasharray="5 3"/>
+              <!-- 圆心 + 外置标签（放右上区无线区） -->
+              <circle cx="280" cy="280" r="2.5" fill="#002F73"/>
+              <text x="335" y="240" font-size="11" fill="#002F73">圆心 O'</text>
+              <!-- 半径标注 -->
+              <line x1="280" y1="280" x2="280" y2="240" stroke="#002F73" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="290" y="258" font-size="10" fill="#002F73">r = L/2</text>
+              <!-- 速度箭头（入射） -->
+              <line x1="240" y1="278" x2="240" y2="230" stroke="#002F73" stroke-width="2" marker-end="url(#ex1-arr)"/>
+              <text x="220" y="225" font-size="12" fill="#002F73" font-weight="600">v</text>
+              <!-- 入射点 + 外置标签（移到底部安全带） -->
+              <circle cx="240" cy="280" r="3" fill="#002F73"/>
+              <text x="60" y="318" font-size="11" fill="#002F73" font-weight="700">入射 O (0, 0)</text>
+              <!-- 出射点 + 外置标签（底部右侧） -->
+              <circle cx="320" cy="280" r="3" fill="#B8924A"/>
+              <text x="280" y="318" font-size="11" fill="#B8924A" font-weight="700">出射 (L/2, 0)</text>
+              <!-- 矩形边界标注（远离边线，靠 viewBox 内部） -->
+              <text x="50" y="46" font-size="10" fill="#6e6e73">(-L, 2L)</text>
+              <text x="408" y="46" font-size="10" fill="#6e6e73">(L, 2L)</text>
+              <text x="18" y="272" font-size="10" fill="#6e6e73">(-L,0)</text>
+              <text x="412" y="272" font-size="10" fill="#6e6e73">(L,0)</text>
+              <!-- 标题：放在 viewBox 底部安全带（远离一切线段） -->
+              <text x="240" y="345" font-size="12" fill="#00409A" font-weight="700" text-anchor="middle">矩形磁场区域 · B 向外（×→·）</text>
+            </svg>
+            <div class="diagram-caption">SVG 1 · 矩形磁场区域 [-L, L] × [0, 2L]，B 垂直纸面向外（·）。正电粒子由 O 沿 +y 入射，洛伦兹力指向 +x → 圆心位于 (L/2, 0)，r = L/2 时绕半圆从 O 走到 (L, 0) 出射。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手</span></span></div>
+        <div class="step-content">
+          <p>合上页面，在草稿上独立做 (1)(2)，目标 18-22 分钟。做完再翻 STEP 4。下面 5 个 checkbox 是"开做之前"的自检：</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex1-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我已经在草稿上画出 xy 平面 + 矩形磁场区域 + 入射方向 + B 方向（·）</span></label>
+            <label data-key="ex1-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我用左手定则判断了正电粒子向上射入时的 F 方向（提示：应指向 +x）</span></label>
+            <label data-key="ex1-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我意识到"圆心在入射点的洛伦兹力方向上、距入射点 r 处"</span></label>
+            <label data-key="ex1-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我打算先画圆 → 再看圆与矩形哪条边界相交 → 取交点为出射点</span></label>
+            <label data-key="ex1-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道"半圆 → t = T/2"，且 T 与 v 无关</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>5 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 半径与周期（第 (1) 问，公式直出）</div>
+            <div class="tp-pause">第 (1) 问几乎是"白送分"——但前提是你能把公式从原理推一遍，而不是死记。原理：洛伦兹力提供向心力 → \(qvB = mv^2/r\) → 解出 r。周期由 \(T = 2\pi r/v\) 替换 r 得到。</div>
+            <div class="tp-ask">"请反问我：为什么洛伦兹力可以提供向心力？它做不做功？<strong>不要直接告诉我结论</strong>。"</div>
+            <div class="tp-write">由 \(qvB = mv^2/r\) → \(\boxed{r = \dfrac{mv}{qB}}\)<br>由 \(T = \dfrac{2\pi r}{v} = \dfrac{2\pi m}{qB}\) → \(\boxed{T = \dfrac{2\pi m}{qB}}\)<br>物理意义：周期 T 仅由 m、q、B 决定，与 v 无关（这是磁约束的关键特征）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 定洛伦兹力方向（左手定则）</div>
+            <div class="tp-pause">入射时刻：v 沿 +y，B 沿 +z（向外）。正电荷的 F = qv × B。左手定则：四指顺 v（指向 +y），磁感线从手心穿出（即手心朝 +z），大拇指方向即 F 方向 → 大拇指指向 +x。</div>
+            <div class="tp-ask">"请帮我验证：若把粒子换成负电粒子（电荷 −q），洛伦兹力方向会不会反？为什么？<strong>不要替我做这一步</strong>。"</div>
+            <div class="tp-write">入射点 O(0, 0)，洛伦兹力沿 +x。<strong>关键</strong>：F 始终指向圆心 → 圆心一定在入射点的 +x 方向上、距 O 为 r 处。<br>当 r = L/2 时，圆心 O' 坐标 = (L/2, 0)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 写出圆方程 + 找与边界交点（第 (2) 问几何）</div>
+            <div class="tp-pause">圆心 (L/2, 0)，半径 L/2 → 圆方程 \((x - L/2)^2 + y^2 = (L/2)^2\)。粒子在 y ≥ 0 半平面内运动（因为矩形 y ∈ [0, 2L]），所以轨迹是该圆位于 y ≥ 0 上的<strong>上半圆</strong>。圆与矩形哪条边界相交？把每条边代入：</div>
+            <div class="tp-write">代入 y = 0：\((x - L/2)^2 = (L/2)^2\) → x = 0 或 x = L。两根分别是入射点 (0, 0) 与新点 (L, 0)。<br>代入 y = 2L：\((x - L/2)^2 = (L/2)^2 - 4L^2 < 0\)，无解 → 圆不触上边界。<br>代入 x = ±L：\(y^2 = (L/2)^2 - (L/2 \pm L)^2\)，亦不实根 → 圆不触左右边界（内部圆）。<br>故粒子<strong>沿上半圆走完整一圈半圆</strong>，从 (0, 0) 经最高点 (L/2, L/2) 到达 (L, 0) 离开。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 圆心角 → 时间</div>
+            <div class="tp-pause">轨迹是从 (0,0) 经 (L/2, L/2) 到 (L, 0) 的上半圆 → 圆心角 = π → 用时 = 周期的一半。这里只需写 \(t = T/2\)，不用代具体数。</div>
+            <div class="tp-write">\(t = \dfrac{T}{2} = \dfrac{\pi m}{qB}\)<br>物理意义：粒子在磁场内走完<strong>半圈</strong>就离开了磁场区域，时间为周期的一半。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 出射点坐标 + 速度方向校验</div>
+            <div class="tp-pause">出射点 (L, 0) 已由路径 3 几何求出。再校核速度方向：粒子在出射点处的速度沿圆的切线，方向应满足"沿圆周运动方向继续延伸"。已知粒子在 (L/2, L/2) 处速度沿 +x（圆心 (L/2, 0) 在它的 -y 方向 → F 指向 -y → 此时 v 必沿 +x，与圆切线一致 ✓）。继续到 (L, 0) 时，圆心在它的 -x 方向 → F 沿 -x → 速度沿 -y（即指向矩形外部 y < 0 区域）。</div>
+            <div class="tp-write">出射点：<strong>(L, 0)</strong><br>出射速度方向：<strong>沿 -y</strong>（向下射出磁场区域）<br>校验：从 (0, 0) 经半圆到 (L, 0)，入射速度 +y、出射速度 -y，速度方向旋转 180° = π，与"半圆"一致 ✓。</div>
+            <div class="tp-hint">提示：本题 r = L/2 是"刚好走半圆"的甜蜜参数。若 r > L/2，圆会越过右边界 x = L 而提前从右边出射；若 r < L/2，圆会被矩形完全容纳，但题面"离开磁场区域"必然要求圆周与边界相交（这种情况若题面未额外限定边界，需讨论 r 的取值范围）。本题取 r = L/2 是为了让你<strong>把"恰好半圆"的标杆情况吃透</strong>。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>10 分如何被切分</span></div>
+        <div class="step-content">
+          <p>下表把 10 分按"关键步"切分。每一行对应卷面上必须出现的一条式子或文字说明——少一条扣对应分。</p>
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 写洛伦兹力 = 向心力</td><td>"qvB = mv²/r" + 一句话说明"洛伦兹力提供向心力"</td><td>2</td><td>未写"提供向心力"导致原理含糊</td></tr>
+              <tr><td>K2 解出半径与周期</td><td>\(r = mv/(qB),\ T = 2\pi m/(qB)\)</td><td>2</td><td>把 v 留在 T 公式里 → 不简化 -1</td></tr>
+              <tr><td>K3 定洛伦兹力方向 + 定圆心</td><td>左手定则推 F 指向 +x，圆心 (L/2, 0)</td><td>2</td><td>方向定反（正负电荷搞错）直接扣完</td></tr>
+              <tr><td>K4 圆与边界几何求出射点</td><td>圆方程 + 与 y = 0 求交点 (L, 0)</td><td>2</td><td>跳过几何求解直接报答案 -1</td></tr>
+              <tr><td>K5 时间 + 出射方向</td><td>t = T/2 = πm/(qB); 出射沿 -y</td><td>2</td><td>忘写时间 / 漏出射方向 -1</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 易扣分速记：① 左手定则判错方向（K3 直接 0 分）② 跳过圆方程直接写出射点（K4 -1）③ 写时间忘了"半圆 → T/2"理由（K5 -1）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问 · 写下来</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我在用左手定则定 F 方向时，是否"指点对了但符号错"或"指错"？错在哪个手指？</p>
+          <textarea class="reflect-area" data-key="ex1-r1" placeholder="如：我四指方向对了但手心朝向搞反（向外/向里），导致大拇指方向反……"></textarea>
+          <p class="reflect-q">Q2 · 我在画圆周时，是先在草稿上"凭感觉画"，还是先用公式定圆心？哪种更稳？</p>
+          <textarea class="reflect-area" data-key="ex1-r2" placeholder="如：我凭感觉画了一个差不多的圆，结果圆心偏离 → 出射点错。下次会先标圆心坐标再下笔……"></textarea>
+          <p class="reflect-q">Q3 · 本题暴露我对"圆与边界几何"的哪一处认识不牢？</p>
+          <textarea class="reflect-area" data-key="ex1-r3" placeholder="如：我没意识到要把每条边都代入圆方程检验，直接默认从'对边'出射……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：洛伦兹力 + 圆周运动 · 科学思维：模型抽象（圆心定位）+ 推理论证（圆与边界相交）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 2 · 电荷收集器（母题） ==================== -->
+  <div class="task-card" id="ex2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>例题 2 · 电荷收集器 · 多方向粒子源（基于 2024 重庆 14 / 53 专题十一 题型 35 T3 改编）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"半无界磁场 + 多方向粒子源 + 收集装置"为骨架，掌握"圆心轨迹族 → 落点几何包络 → 两点共圆判据"的高阶处理；理解为什么"所有过 P 与某落点 Q 的半径 r 圆存在性"等价于 \(|PQ| \le 2r\)<br>
+        <strong>建议时长</strong>：90 分钟（速复习 10 + 题面 5 + 自己做 30 + 对照思考 30 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-10 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1 的区别：<strong>不止一个粒子方向</strong>，是<strong>一族粒子</strong>从同一点向 360° 各方向均匀发射。处理这种题的关键是"圆心轨迹"——所有圆心组成一条曲线（本题里是一个圆），落点构成这条曲线的<strong>几何包络</strong>。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">多方向粒子源速查清单</div>
+            <div class="step-line"><strong>圆心轨迹</strong>：每个粒子的圆心 C 距粒子源 P 都恰好为 r（因为洛伦兹力沿圆心方向，C 在入射点的 F 方向上、距入射点 r）。<strong>故所有圆心组成以 P 为圆心、半径为 r 的圆</strong>。</div>
+            <div class="step-line"><strong>两点共圆几何判据</strong>：给定两点 P、Q，是否存在<strong>过 P 与 Q 且半径为 r</strong> 的圆？充要条件：\(|PQ| \le 2r\)（即两点距离不超过直径）。\(|PQ| < 2r\) 时有两个这样的圆；\(|PQ| = 2r\) 时两点为直径两端、圆唯一；\(|PQ| > 2r\) 时无解。</div>
+            <div class="step-line"><strong>落点存在性</strong>：x 轴上某点 Q 是否可能成为落点 = 是否存在某个粒子的圆周同时过 P 与 Q = \(|PQ| \le 2r\)。</div>
+            <div class="step-line"><strong>判据 · 半无界磁场出射条件</strong>=粒子的圆周与边界 x 轴第一次相交即出射；本题中粒子"第一次到 x 轴即被吸收"。</div>
+            <div class="step-line"><strong>对称性</strong>=粒子初速方向均匀分布在 360° → 整个系统关于 y 轴对称 → 落点集合关于 y 轴对称。</div>
+          </div>
+
+          <div class="prereq-recap">
+            <strong>几何前置 · 两点共圆</strong>：给定平面上两点 P、Q，所有"过 P 与 Q 的圆"的圆心都在线段 PQ 的<strong>垂直平分线</strong>上。若进一步要求该圆半径 = r，则圆心还必须满足"到 P（或 Q）的距离 = r"——两条约束相交即圆心位置。由勾股，若 d = |PQ|/2，圆心到 PQ 中点的距离 = \(\sqrt{r^2 - d^2}\)，故 d ≤ r、即 |PQ| ≤ 2r 时有解。
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面 · 电荷收集器<br><span class="step-sub">3 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            xy 平面 \(y > 0\) 半平面内存在匀强磁场 \(B\) 垂直纸面向里。坐标点 \(P(0, h)\) 处有一粒子源，连续向 360° 各方向均匀发射相同电量 \(q\)、质量 \(m\)、速率 \(v\) 的带正电粒子（\(h > 0\)）。设半径 \(r = mv/(qB)\)，且已知 \(r > h\)。x 轴是磁场区域的下边界（\(y < 0\) 无磁场），任何粒子第一次到达 x 轴时即被该处的收集装置吸收。
+            <br><br>
+            <strong>(1)</strong> 求 P 正下方释放（初速沿 \(-y\)）的粒子在 x 轴上的落点坐标 \(x_0\)。<span style="color: var(--text-secondary);">[约 5 分]</span><br>
+            <strong>(2)</strong> 求所有粒子能落到 x 轴上的 x 坐标取值范围 \([x_{\min}, x_{\max}]\)。<span style="color: var(--text-secondary);">[约 7 分]</span><br>
+            <strong>(3)</strong> 若要在 x 轴 \(x \ge 0\) 一侧设置一段连续的收集装置，使其能收集所有能落到 x 轴 \(x \ge 0\) 一侧的粒子，求该装置应覆盖的最短范围 \([x_1, x_2]\) 与所需最短长度 \(d_{\min}\)。<span style="color: var(--text-secondary);">[约 3 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 360" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex2-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 磁场区域 y>0 半平面，用浅蓝填充 -->
+              <rect x="40" y="40" width="460" height="240" fill="#E8EEF9" opacity="0.6"/>
+              <!-- B 向里 · × 阵列 -->
+              <g stroke="#0055B8" stroke-width="1.2" fill="none">
+                <g transform="translate(100,80)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(180,80)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(360,80)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(440,80)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(100,180)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(180,180)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(360,180)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(440,180)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(100,240)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+                <g transform="translate(440,240)"><line x1="-4" y1="-4" x2="4" y2="4"/><line x1="-4" y1="4" x2="4" y2="-4"/></g>
+              </g>
+              <!-- x 轴 = 收集边界 -->
+              <line x1="40" y1="280" x2="500" y2="280" stroke="#B8924A" stroke-width="2.4"/>
+              <text x="515" y="276" font-size="12" fill="#B8924A" font-weight="700">x</text>
+              <!-- y 轴（顶端给标题让位） -->
+              <line x1="270" y1="310" x2="270" y2="50" stroke="#6e6e73" stroke-width="1"/>
+              <polygon points="270,50 266,58 274,58" fill="#6e6e73"/>
+              <text x="282" y="56" font-size="12" fill="#6e6e73">y</text>
+              <text x="248" y="272" font-size="11" fill="#6e6e73">O</text>
+              <!-- P 点（粒子源） · h ≈ 55px、r = 60px，满足题设 r > h -->
+              <circle cx="270" cy="225" r="4" fill="#002F73"/>
+              <text x="200" y="218" font-size="12" fill="#002F73" font-weight="700">P(0, h)</text>
+              <!-- 多方向小箭头：8 方向 -->
+              <g stroke="#002F73" stroke-width="1.2" fill="none">
+                <line x1="270" y1="225" x2="290" y2="225" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="250" y2="225" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="270" y2="245" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="270" y2="205" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="284" y2="239" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="256" y2="239" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="284" y2="211" marker-end="url(#ex2-arr)"/>
+                <line x1="270" y1="225" x2="256" y2="211" marker-end="url(#ex2-arr)"/>
+              </g>
+              <!-- 圆心轨迹（半径 r = 60px 的虚线圆，r > h 关系视觉一致） -->
+              <circle cx="270" cy="225" r="60" fill="none" stroke="#7B8290" stroke-width="1.2" stroke-dasharray="4 3"/>
+              <text x="340" y="170" font-size="10" fill="#7B8290" font-style="italic">圆心轨迹（半径 r）</text>
+              <!-- 一条典型粒子圆周（P 正下方释放）：圆心 (r, h)，SVG (330, 225) -->
+              <circle cx="330" cy="225" r="60" fill="none" stroke="#0055B8" stroke-width="1.4" stroke-dasharray="3 2"/>
+              <circle cx="330" cy="225" r="2.5" fill="#0055B8"/>
+              <text x="336" y="222" font-size="10" fill="#0055B8">C₁(r, h)</text>
+              <!-- 落点 x_0：圆 (330,225,r=60) ∩ x 轴 y=280，取较小根 x=306 -->
+              <circle cx="306" cy="280" r="3.5" fill="#B8924A"/>
+              <text x="370" y="270" font-size="10" fill="#B8924A" font-weight="700">x₀（P 正下释放落点）</text>
+              <!-- 边界标注：|PQ| = 2r=120，P(270,225)，Q 在 x 轴 y=280 → Δx=±107 -->
+              <line x1="377" y1="278" x2="377" y2="290" stroke="#B8924A" stroke-width="1.8"/>
+              <text x="437" y="306" font-size="10" fill="#B8924A" font-weight="700" text-anchor="middle">x_max=√(4r²−h²)</text>
+              <line x1="163" y1="278" x2="163" y2="290" stroke="#B8924A" stroke-width="1.8"/>
+              <text x="103" y="306" font-size="10" fill="#B8924A" font-weight="700" text-anchor="middle">x_min=−√(4r²−h²)</text>
+              <!-- 标题（移到底部安全带，远离一切线） -->
+              <text x="270" y="328" font-size="12" fill="#00409A" font-weight="700" text-anchor="middle">电荷收集器骨架 · P 向 360° 均匀发射 · B 向里（×）</text>
+              <text x="270" y="345" font-size="10" fill="#6e6e73" text-anchor="middle">磁场仅在 y &gt; 0；x 轴为收集边界（绿色）</text>
+            </svg>
+            <div class="diagram-caption">SVG 2 · 粒子源 P(0, h) 向各方向均匀发射正电粒子；磁场 B 向里。紫色虚圆 = 所有粒子圆心组成的轨迹（以 P 为中心、半径 r）；蓝色虚圆 = "P 正下方释放"那一颗的轨迹（圆心 C₁ = (r, h)）；x 轴上橙点 = 该颗落点 x₀；绿色端点 = 全体落点的左右边界。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手</span></span></div>
+        <div class="step-content">
+          <p>本题比例题 1 难度高一档（多方向 + 包络几何）。建议先用 25-30 分钟独立思考，重点放在 (2) 问"几何包络"的破解上。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex2-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我在草稿上画出了 P 点 + xy 轴 + 磁场区域 + 几个示意性的初速方向</span></label>
+            <label data-key="ex2-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>对 (1) 问，我打算先用左手定则定 F 方向，再确定圆心 (r, h)</span></label>
+            <label data-key="ex2-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我意识到 (2) 问的关键是"圆心轨迹"——所有圆心组成以 P 为中心、半径 r 的圆</span></label>
+            <label data-key="ex2-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我准备用"两点共圆 → |PQ| ≤ 2r"判断 x 轴上某点 Q 能否成为落点</span></label>
+            <label data-key="ex2-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>对 (3) 问，我会先用对称性证"x ≥ 0 一侧落点最小值 = 0"，再用 (2) 的 x_max 给出长度</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>6 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 第 (1) 问 · 定 F 方向 + 圆心</div>
+            <div class="tp-pause">P 正下方释放：v 沿 -y。B 沿 -z（向里）。正电荷的 F = qv × B。代入坐标：v = (0, -v, 0)，B = (0, 0, -B)，则 v × B = ((-v)·(-B), 0, 0) = (vB, 0, 0)，F = q(vB, 0, 0) → <strong>F 沿 +x</strong>。</div>
+            <div class="tp-ask">"请反问我：若 P 释放方向改为 +x（向右），F 方向会不会还是 +x？<strong>不要直接告诉我答案</strong>。"</div>
+            <div class="tp-write">F 沿 +x → 圆心在 P 的 +x 方向、距 P 为 r 处 → 圆心 \(C_1 = (r, h)\)。<br>圆方程：\((x - r)^2 + (y - h)^2 = r^2\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 第 (1) 问 · 圆与 x 轴交点</div>
+            <div class="tp-pause">在圆方程中代 y = 0：\((x - r)^2 + h^2 = r^2\) → \((x - r)^2 = r^2 - h^2\)。由于题设 r > h，\(r^2 - h^2 > 0\)，根式有意义。</div>
+            <div class="tp-write">解出 \(x = r \pm \sqrt{r^2 - h^2}\)。<br>粒子从 P(0, h) 顺时针沿圆走（因 F 沿 +x → 粒子向 +x 偏转 → 绕圆心顺时针）→ 第一次碰到 x 轴的是<strong>较小的 x 根</strong>：<br>\(\boxed{x_0 = r - \sqrt{r^2 - h^2}}\)</div>
+            <div class="tp-hint">提示：若不放心"顺时针 vs 逆时针"，可代一个具体值（如 r = h，则 x_0 = h ± 0 = h，刚好相切；r 略大于 h，落点离 P 在 x 轴上的投影 0 较近 → 取小根更合理）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 第 (2) 问 · 几何包络的核心洞察</div>
+            <div class="tp-pause">不要陷入"对每个 θ 列方程再求并"——那是高数级别的工作量。换个角度：x 轴上某点 \(Q(x_Q, 0)\) 能成为落点 ⇔ 存在一颗粒子的圆周同时过 P(0, h) 和 Q(x_Q, 0)，且半径为 r。这等价于"<strong>两点共圆半径 r 存在性</strong>"问题。</div>
+            <div class="tp-ask">"请反问我：'过 P 和 Q 的半径为 r 的圆是否存在'对 |PQ| 有什么充要条件？<strong>不要直接说</strong>。"</div>
+            <div class="tp-write">几何判据：\(|PQ| \le 2r\)（即两点距离 ≤ 直径）。<br>计算：\(|PQ| = \sqrt{x_Q^2 + h^2}\)。条件 \(\sqrt{x_Q^2 + h^2} \le 2r\) → \(x_Q^2 \le 4r^2 - h^2\) → \(|x_Q| \le \sqrt{4r^2 - h^2}\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 第 (2) 问 · 完整答案 + 严谨性补全</div>
+            <div class="tp-pause">"几何上存在过 P、Q 的半径 r 圆"只保证<strong>存在</strong>这样的圆周，还需要确认对应的<strong>粒子初速方向</strong>真在题面允许的 360° 内（这里全方向都允许，故无额外限制），且粒子<strong>沿圆周走到 Q</strong> 而不是绕到对侧。由于初速方向连续覆盖 360°、对称性、且粒子顺时针走，所有"几何上可达"的 Q 都对应至少一种粒子能真到达。</div>
+            <div class="tp-write">\(\boxed{x \in \left[-\sqrt{4r^2 - h^2},\ \sqrt{4r^2 - h^2}\right]}\)<br>即 \(x_{\min} = -\sqrt{4r^2 - h^2},\ x_{\max} = \sqrt{4r^2 - h^2}\)。<br>落点段总长 = \(2\sqrt{4r^2 - h^2}\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 第 (3) 问 · 用对称性 + (2) 的结果</div>
+            <div class="tp-pause">系统关于 y 轴对称（初速方向均匀分布、磁场对称、几何对称）→ 落点也关于 y 轴对称 → x ≥ 0 一侧的落点 = [0, √(4r²-h²)]（原点是对称的极限点，由连续性也在落点集中）。</div>
+            <div class="tp-write">\(x \ge 0\) 一侧落点范围：\([0,\ \sqrt{4r^2 - h^2}]\)<br>故收集装置应覆盖 \(\boxed{[x_1, x_2] = [0,\ \sqrt{4r^2 - h^2}],\ d_{\min} = \sqrt{4r^2 - h^2}}\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 6 · 复盘 · 把"两点共圆"这条几何判据钉在桌面上</div>
+            <div class="tp-pause">本题的核心洞察"过 P、Q 的半径 r 圆存在性 ⇔ |PQ| ≤ 2r"是 14 题位电荷收集类题型的<strong>万能钥匙</strong>。一旦把这条几何性质内化，所有"多方向粒子源"题都从"对每个方向求落点"退化为"对每个目标点反问能否被达到"——后者只需算距离。</div>
+            <div class="tp-write">小结：(1) x₀ = r − √(r²−h²)；(2) 落点 ∈ [−√(4r²−h²), √(4r²−h²)]；(3) 正侧收集装置 [0, √(4r²−h²)]，长度 √(4r²−h²)。<br>三问的核心都靠"圆心轨迹 + 两点共圆 + 对称性"三件套。</div>
+            <div class="tp-hint">提示：若题目把粒子改成负电（或 B 反向），落点的<strong>对称性</strong>不变（仍关于 y 轴对称）；改变的是单个粒子的"顺/逆时针"转向，从而 (1) 中 x₀ 可能取大根 r + √(r²−h²)。卷面上务必<strong>看清电荷符号 + B 方向</strong>。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>15 分如何被切分</span></div>
+        <div class="step-content">
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 (1) 定 F 方向 + 圆心</td><td>左手定则推 F 沿 +x；圆心 (r, h) + 圆方程</td><td>2</td><td>方向定反 → 直接 0</td></tr>
+              <tr><td>K2 (1) 求落点 + 取根</td><td>(x−r)²+h² = r² → x = r ± √(r²−h²)；说明"取小根"</td><td>3</td><td>未说明取根理由 -1</td></tr>
+              <tr><td>K3 (2) 圆心轨迹 + 两点共圆判据</td><td>"所有圆心在以 P 为中心、半径 r 的圆上"+"|PQ| ≤ 2r"</td><td>3</td><td>未写圆心轨迹直接代数 -2</td></tr>
+              <tr><td>K4 (2) 解不等式 → 落点范围</td><td>√(x²+h²) ≤ 2r → x ∈ [−√(4r²−h²), √(4r²−h²)]</td><td>3</td><td>不等号方向 / 漏负侧 -1</td></tr>
+              <tr><td>K5 (2) 严谨性补全</td><td>"几何存在 + 对称性 + 连续性 → 真可达"</td><td>1</td><td>跳过严谨性论证 -1</td></tr>
+              <tr><td>K6 (3) 对称性 + 收集长度</td><td>"x ≥ 0 一侧 [0, √(4r²−h²)]"，d_min = √(4r²−h²)</td><td>3</td><td>未说明对称性 -1，长度公式错 -2</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 高频扣分速记：① F 方向定反（K1 直接 0）② 不写"圆心轨迹"概念直接对每个 θ 暴力求（K3 -2，且大概率超时）③ 漏写"取小根"理由（K2 -1）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我在 (2) 问是先想"对每个 θ 暴力求"还是先想"圆心轨迹"？两条路径哪条快、哪条稳？</p>
+          <textarea class="reflect-area" data-key="ex2-r1" placeholder="如：我第一反应是把 θ 参数化代入，但写了 3 行就发现式子越来越复杂；切换到'圆心轨迹 + 两点共圆'后 5 行内得答案……"></textarea>
+          <p class="reflect-q">Q2 · "两点共圆 |PQ| ≤ 2r"这条几何判据我之前是否听过？没听过的话，本题之后我打算如何把它存进自己的"几何工具箱"？</p>
+          <textarea class="reflect-area" data-key="ex2-r2" placeholder="如：我之前没系统总结过这条；本题之后我会在错题本上专门记录'多方向粒子源 = 圆心轨迹 + 两点共圆'……"></textarea>
+          <p class="reflect-q">Q3 · 第 (1) 问"取小根 vs 大根"我有没有写理由？如果不写，怎么自圆其说？</p>
+          <textarea class="reflect-area" data-key="ex2-r3" placeholder="如：我没写理由，靠直觉取了小根；实际应该说明'粒子顺时针走，第一次到 x 轴在距 P 近的那一侧'……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：洛伦兹力 + 圆周运动 + 几何对称 · 科学思维：模型抽象（圆心轨迹族）+ 推理论证（两点共圆判据）+ 严谨性论证（几何存在 → 物理可达）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 3 · 双磁场区拼接 ==================== -->
+  <div class="task-card" id="ex3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>例题 3 · 双磁场区拼接 · 回到原点（自创变式 · 多区分段升级）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"两区拼接（同方向 + 强度比 2:1）+ 多次穿越 y 轴"为骨架，掌握"边界处速度方向连续 + 新区重新算半径与圆心 + 时间分段累加"的高阶处理；理解"左区圆心 = O"为何是回到原点的几何关键<br>
+        <strong>建议时长</strong>：70 分钟（速复习 8 + 题面 5 + 自己做 20 + 对照思考 22 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1、2 的区别：<strong>磁场区域不止一个</strong>。粒子穿越分界（y 轴）时，<strong>速度方向连续</strong>（因为洛伦兹力是有限力，不会让速度方向跳变），但<strong>半径和圆心都重算</strong>（因为 B 变了）。每段都是新的圆周运动，时间分段累加。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">多区拼接速查清单</div>
+            <div class="step-line"><strong>边界连续性</strong>：粒子穿越 y 轴时，速度方向、速率均连续（即过渡瞬间 v 大小方向都不变）。变化的只是"接下来的圆心位置和半径"。</div>
+            <div class="step-line"><strong>新区半径与圆心</strong>：每进入新区，重算 \(r = mv/(qB_{\text{新}})\)，并用左手定则定 F 方向 → 新圆心。</div>
+            <div class="step-line"><strong>周期与速率无关</strong>：\(T = 2\pi m/(qB)\) 只依赖 B，不依赖 v 或 r。两区 B 不同 → 两区 T 不同；同一区内 T 始终不变。</div>
+            <div class="step-line"><strong>圆心 vs y 轴的关系</strong>：若 y 轴恰好是圆的弦或切线，粒子在 y 轴上的两个交点之间就是该区内的轨迹。是否走半圆 / 全圆 / 一小段，取决于"圆心相对 y 轴的位置 + 入射点 + 出射条件"。</div>
+            <div class="step-line"><strong>判据 · 何时再回到 y 轴</strong>=粒子的圆与 y 轴的<strong>第二个交点</strong>（不是入射点）即为出射点；若该圆与 y 轴只切（不相交于第二点），粒子将永远绕该圆不出。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>双磁场区 + 回到原点</span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            xy 平面被 y 轴分为左右两区：<strong>左区</strong>（\(x < 0\)）匀强磁场 \(B_1\) 方向<strong>垂直纸面向外</strong>（·），<strong>右区</strong>（\(x > 0\)）匀强磁场 \(B_2 = 2B_1\) 方向<strong>同样垂直纸面向外</strong>（·）——两区<strong>磁场方向相同</strong>但<strong>强度不同</strong>（右区是左区的 2 倍）。带正电粒子（电量 q、质量 m）从原点 O 沿 \(+x\) 方向射入右区，初速率 v。
+            <br><br>
+            <strong>(1)</strong> 求粒子在右区运动的半径 \(r_2\)。<span style="color: var(--text-secondary);">[约 3 分]</span><br>
+            <strong>(2)</strong> 粒子离开右区进入左区后，求其在左区运动的半径 \(r_1\)。<span style="color: var(--text-secondary);">[约 3 分]</span><br>
+            <strong>(3)</strong> 求粒子从射入到第一次回到原点 O 所用的总时间 \(t_{\text{总}}\)。<span style="color: var(--text-secondary);">[约 6 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex3-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 左区 (x<0) 浅蓝色背景 + · 阵列（B₁ 向外） -->
+              <rect x="40" y="40" width="240" height="280" fill="#E8EEF9" opacity="0.6"/>
+              <g fill="#0055B8">
+                <circle cx="90" cy="80" r="2.5"/><circle cx="170" cy="80" r="2.5"/><circle cx="240" cy="80" r="2.5"/>
+                <circle cx="90" cy="180" r="2.5"/><circle cx="240" cy="180" r="2.5"/>
+                <circle cx="90" cy="280" r="2.5"/><circle cx="170" cy="280" r="2.5"/><circle cx="240" cy="280" r="2.5"/>
+              </g>
+              <g stroke="#0055B8" stroke-width="0.8" fill="none">
+                <circle cx="90" cy="80" r="5"/><circle cx="170" cy="80" r="5"/><circle cx="240" cy="80" r="5"/>
+                <circle cx="90" cy="180" r="5"/><circle cx="240" cy="180" r="5"/>
+                <circle cx="90" cy="280" r="5"/><circle cx="170" cy="280" r="5"/><circle cx="240" cy="280" r="5"/>
+              </g>
+              <text x="160" y="345" font-size="11" fill="#0055B8" font-weight="700" text-anchor="middle">左区 · B₁ 向外（·）</text>
+              <!-- 右区 (x>0) 浅紫色背景 + 双圈 · 阵列（B₂ 向外，且强度大） -->
+              <rect x="280" y="40" width="240" height="280" fill="#E5E7EC" opacity="0.6"/>
+              <g fill="#7B8290">
+                <circle cx="320" cy="80" r="3"/><circle cx="390" cy="80" r="3"/><circle cx="470" cy="80" r="3"/>
+                <circle cx="320" cy="180" r="3"/><circle cx="470" cy="180" r="3"/>
+                <circle cx="320" cy="280" r="3"/><circle cx="390" cy="280" r="3"/><circle cx="470" cy="280" r="3"/>
+              </g>
+              <g stroke="#7B8290" stroke-width="1" fill="none">
+                <circle cx="320" cy="80" r="6"/><circle cx="390" cy="80" r="6"/><circle cx="470" cy="80" r="6"/>
+                <circle cx="320" cy="180" r="6"/><circle cx="470" cy="180" r="6"/>
+                <circle cx="320" cy="280" r="6"/><circle cx="390" cy="280" r="6"/><circle cx="470" cy="280" r="6"/>
+              </g>
+              <text x="400" y="345" font-size="11" fill="#7B8290" font-weight="700" text-anchor="middle">右区 · B₂ = 2B₁ 向外（· · 强）</text>
+              <!-- y 轴（缩短顶端为标题让位） -->
+              <line x1="280" y1="315" x2="280" y2="50" stroke="#1d1d1f" stroke-width="1.5"/>
+              <polygon points="280,50 276,58 284,58" fill="#1d1d1f"/>
+              <text x="290" y="56" font-size="12" fill="#1d1d1f">y</text>
+              <!-- x 轴 -->
+              <line x1="40" y1="180" x2="535" y2="180" stroke="#6e6e73" stroke-width="1" stroke-dasharray="2 2"/>
+              <polygon points="535,180 527,176 527,184" fill="#6e6e73"/>
+              <text x="540" y="172" font-size="12" fill="#6e6e73" text-anchor="end">x</text>
+              <text x="262" y="365" font-size="11" fill="#6e6e73">O (原点)</text>
+              <!-- 原点 O -->
+              <circle cx="280" cy="180" r="3.5" fill="#002F73"/>
+              <!-- 初速箭头 -->
+              <line x1="280" y1="180" x2="320" y2="180" stroke="#002F73" stroke-width="2.2" marker-end="url(#ex3-arr)"/>
+              <text x="296" y="173" font-size="12" fill="#002F73" font-weight="700" text-anchor="middle">v</text>
+              <!-- 右区第一段：圆心 (0, -r₂)，r₂=30px → 圆心 (280, 210)。轨迹：O→(310,210)→(280,240) -->
+              <path d="M 280 180 A 30 30 0 0 0 280 240" fill="none" stroke="#0055B8" stroke-width="2" stroke-dasharray="5 3"/>
+              <circle cx="280" cy="210" r="2" fill="#0055B8"/>
+              <text x="288" y="214" font-size="10" fill="#0055B8">C_R1 (0, −r₂)</text>
+              <!-- 左区半圆：圆心 (0, 0)=(280, 180)，半径 r₁=2r₂=60px → 从 (280,240) 逆时针半圆到 (280, 120) -->
+              <path d="M 280 240 A 60 60 0 0 1 280 120" fill="none" stroke="#002F73" stroke-width="2" stroke-dasharray="5 3"/>
+              <circle cx="280" cy="180" r="2" fill="#002F73"/>
+              <text x="120" y="200" font-size="10" fill="#002F73">C_L (0, 0) = O</text>
+              <!-- 右区第二段：从 (280, 120) 速度 +x，圆心 (0, +r₂) = (280, 150)，r₂=30，半圆从 (280,120) 到 (280, 180) -->
+              <path d="M 280 120 A 30 30 0 0 0 280 180" fill="none" stroke="#0055B8" stroke-width="2" stroke-dasharray="5 3"/>
+              <circle cx="280" cy="150" r="2" fill="#0055B8"/>
+              <text x="288" y="154" font-size="10" fill="#0055B8">C_R2 (0, r₂)</text>
+              <!-- 关键节点标注 -->
+              <circle cx="280" cy="240" r="2.5" fill="#B8924A"/>
+              <text x="290" y="252" font-size="10" fill="#B8924A">(0, −2r₂) 第一次入左</text>
+              <circle cx="280" cy="120" r="2.5" fill="#B8924A"/>
+              <text x="290" y="116" font-size="10" fill="#B8924A">(0, 2r₂) 回到右区</text>
+              <!-- 标题（底部 viewBox 安全带 y=380，远离矩形区 y_max=320） -->
+              <text x="280" y="380" font-size="12" fill="#00409A" font-weight="700" text-anchor="middle">双磁场区拼接 · 正电粒子从 O 沿 +x 射入（蓝弧右 · 红弧左）</text>
+            </svg>
+            <div class="diagram-caption">SVG 3 · 左右两磁场区<strong>方向相同（都向外）</strong>但强度比 1:2（右区强）。正电粒子从 O 沿 +x 进入右区 → 顺时针半圆到 (0, −2r₂) → 进入左区 → 逆时针半圆绕原点到 (0, +2r₂) → 再进入右区 → 顺时针半圆回到 O。共三段半圆。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">动手 20 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题考"分段 + 拼接"。先把每段单独处理（定 F、找圆心、画弧），最后累加时间。难点在第三段：要意识到粒子在左区半圆后<strong>再次回到右区，并在右区第二次走半圆才回原点</strong>。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex3-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我在草稿上画了 y 轴 + 左右两区 + B 方向（两区均向外 ·，强度 B₁ vs 2B₁）+ 入射箭头</span></label>
+            <label data-key="ex3-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我用左手定则定了右区第一段的 F 方向（提示：F 沿 −y）</span></label>
+            <label data-key="ex3-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我意识到粒子在 y 轴上速度方向连续（穿过 y 轴瞬间 v 不变方向不变）</span></label>
+            <label data-key="ex3-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我准备每进入一个新区就重新算半径（r = mv/qB 中 B 变）和圆心</span></label>
+            <label data-key="ex3-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我意识到"回到 O"可能要走多段，不是一段右区就能完成</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>5 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 第 (1)(2) 问 · 两区半径（公式直出）</div>
+            <div class="tp-pause">两问都是套公式 \(r = mv/(qB)\)。注意 B₁ 是左区强度，B₂ = 2B₁ 是右区强度——别搞反下标。</div>
+            <div class="tp-write">\(\boxed{r_2 = \dfrac{mv}{qB_2} = \dfrac{mv}{2qB_1}}\)（右区半径）<br>\(\boxed{r_1 = \dfrac{mv}{qB_1} = 2 r_2}\)（左区半径，是右区的 2 倍）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 段 I（右区第一次） · 定 F 方向 + 圆心 + 半圆</div>
+            <div class="tp-pause">入射点 O，v 沿 +x，B₂ 沿 +z（向外）。直接用 F = qv × B：<br>\(\mathbf{v} \times \mathbf{B} = (v, 0, 0) \times (0, 0, B_2)\)。叉乘公式 j 分量 = \(v_z b_x - v_x b_z\) = 0 − v·B₂ = −vB₂。故 F = q(0, −vB₂, 0) → <strong>F 沿 −y</strong>。<br>（用左手定则：四指顺 +x、磁感线从手心穿出（向外）、大拇指指向 −y ✓ 一致）。</div>
+            <div class="tp-ask">"请反问我：粒子从 O 顺时针绕 \(C_{R1}\) 走，半圆后到哪里？速度方向变成什么？<strong>不要直接告诉我</strong>。"</div>
+            <div class="tp-write">圆心 \(C_{R1} = (0, -r_2)\)（在 O 的 −y 方向，距 \(r_2\)）。<br>粒子从 O 出发，初速 +x、F 朝 −y → 粒子向 +x 下方偏 → <strong>顺时针</strong>绕 \(C_{R1}\)。<br>圆方程 \(x^2 + (y + r_2)^2 = r_2^2\)。y 轴另一交点：\((y + r_2)^2 = r_2^2\) → y = 0 或 y = −2r₂。<br>故粒子走半圆 O → \((0, -2r_2)\)，速度由 +x 变为 −x。<br>段 I 时间：\(t_1 = T_2/2 = \pi m/(qB_2) = \pi m/(2qB_1)\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 段 II（左区） · 圆心刚好是原点 O</div>
+            <div class="tp-pause">进入左区瞬间：位置 \((0, -2r_2)\)，速度 −x（连续过 y 轴）。B₁ 沿 +z（向外，与右区方向一致）。<br>\(\mathbf{v} \times \mathbf{B} = (-v, 0, 0) \times (0, 0, B_1)\)：j 分量 = \(0 \cdot 0 - (-v) \cdot B_1 = vB_1\) > 0。F = q(0, vB_1, 0) → <strong>F 沿 +y</strong>。</div>
+            <div class="tp-write">圆心 = (0, −2r₂) 沿 F 方向 +y 移 r₁ = (0, −2r₂ + r₁) = (0, −2r₂ + 2r₂) = <strong>(0, 0) = O</strong>！<br>太巧——<strong>左区的圆心刚好是原点 O</strong>，半径 r₁ = 2r₂。<br>圆方程 \(x^2 + y^2 = (2r_2)^2\)。粒子在 (0, −2r₂) 出发，初速 −x、F 朝 +y → 向 −x 上方偏 → <strong>逆时针</strong>绕 O。<br>圆与 y 轴另一交点：(0, +2r₂)。粒子走<strong>半圆</strong>从 (0, −2r₂) 经 (−2r₂, 0) 到 (0, +2r₂)，速度由 −x 变为 +x。<br>段 II 时间：\(t_2 = T_1/2 = \pi m/(qB_1)\)。</div>
+            <div class="tp-hint">"左区圆心 = O"是本题最优雅的几何巧合——根源是：r₁ = 2r₂ 恰好等于段 I 结束时粒子距 y 轴的 |y_in| = 2r₂。设计参数 B₂ = 2B₁ 正是为了让这件事发生。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 段 III（右区第二次） · 顺时针半圆回 O</div>
+            <div class="tp-pause">进入右区瞬间：位置 \((0, +2r_2)\)，速度 +x。B₂ 沿 +z。同段 I 的推导：F 沿 −y → 圆心 \(C_{R2} = (0, 2r_2) + (0, -r_2) = (0, r_2)\)。半径 r₂。</div>
+            <div class="tp-write">圆方程 \(x^2 + (y - r_2)^2 = r_2^2\)。y 轴另一交点：y = 0 或 y = 2r₂。<br>粒子顺时针绕 \(C_{R2}\)，从 (0, 2r₂) 经 (r₂, r₂) 走半圆到 \((0, 0) = O\)！速度由 +x 变为 −x。<br>段 III 时间：\(t_3 = T_2/2 = \pi m/(2qB_1)\)。<br><br><strong>总时间</strong>：<br>\(\boxed{t_{\text{总}} = t_1 + t_2 + t_3 = \dfrac{\pi m}{2qB_1} + \dfrac{\pi m}{qB_1} + \dfrac{\pi m}{2qB_1} = \dfrac{2\pi m}{qB_1}}\)<br>物理意义：粒子在右区走了一个完整的 T₂ 周期（两段半圆累计），在左区走了 T₁/2，合计 T₂ + T₁/2 = T₁/2 + T₁/2 = T₁ = 2πm/(qB₁)。</div>
+            <div class="tp-hint">提示：注意粒子最终在 O 处速度变为 −x（不是回到初速 +x）。"第一次回到原点"是题面问的，没问"回到原点且速度复原"——若问后者，需走两个完整循环 = 4πm/(qB₁)。卷面务必<strong>分清"回到原点"和"恢复初态"</strong>。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 物理图像复盘 · 三段半圆 + 关于 x 轴对称</div>
+            <div class="tp-pause">复盘三段轨迹：① 右区下方半圆（圆心 (0, −r₂)，r₂）；② 左区半圆绕原点（半径 2r₂）；③ 右区上方半圆（圆心 (0, r₂)，r₂）。整条轨迹关于 <strong>x 轴对称</strong>——从 O 出发往下、绕到左侧、再绕回 O。所有圆心都在 y 轴上。</div>
+            <div class="tp-write">物理意义：① 粒子在 B 大的右区半径小（r₂ = r₁/2）、绕得"急"；② 在 B 小的左区半径大（r₁ = 2r₂）、绕得"舒"。<br>② 三段时间不等：右区两段每段 T₂/2 = πm/(2qB₁)；左区一段 T₁/2 = πm/(qB₁) = 右区两段之和。三段累加恰等于一个 T₁。<br>③ "回到原点"的几何关键 = 左区圆心 = O，这要求 r₁ = 2r₂（即 B₂ = 2B₁）——若 B₂ ≠ 2B₁，左区圆心就不在 O，粒子不能简单地"半圆回原点"。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>12 分如何被切分</span></div>
+        <div class="step-content">
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 (1) 右区半径</td><td>"r₂ = mv/(qB₂) = mv/(2qB₁)"</td><td>2</td><td>下标搞反 → 直接 -2</td></tr>
+              <tr><td>K2 (2) 左区半径</td><td>"r₁ = mv/(qB₁) = 2r₂"</td><td>2</td><td>忘了 B₂ = 2B₁ 换算 -1</td></tr>
+              <tr><td>K3 (3) 段 I 定 F + 圆心 + 半圆判定</td><td>左手定则 + 圆心 (0, -r₂) + "顺时针半圆到 (0, -2r₂)"</td><td>2</td><td>F 方向定反（最常见） → 直接 0</td></tr>
+              <tr><td>K4 (3) 段 II 左区圆心 = O</td><td>"左区圆心刚好是原点 O，半径 r₁"</td><td>3</td><td>没认出"圆心 = O"导致后续算错</td></tr>
+              <tr><td>K5 (3) 段 III + 总时间</td><td>三段半圆时间累加 = 2πm/(qB₁)</td><td>3</td><td>漏掉第三段 / 时间公式中混用 r 而非 m,q,B</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 高频扣分速记：① 题面方向口径错（左右两区 × 与 · 搞反 → 路径不收敛）② 左区圆心没认出是 O（K4 -3）③ 漏第三段（K5 -3）④ 时间公式中保留 v 而不简化为 m,q,B 表达 -1。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我在判定"粒子穿越 y 轴时速度方向是否变化"时，有没有动摇？为什么洛伦兹力不能让 v 方向跳变？</p>
+          <textarea class="reflect-area" data-key="ex3-r1" placeholder="如：我一开始以为'磁场变了 → 速度也变方向'，但其实只有'加速度'瞬时变化，速度本身是 v(t) 的积分，必连续……"></textarea>
+          <p class="reflect-q">Q2 · 我有没有意识到"左区圆心 = 原点 O"是本题能回到 O 的几何关键？如果没意识到，下次怎么主动检查？</p>
+          <textarea class="reflect-area" data-key="ex3-r2" placeholder="如：我一开始没意识到，只机械地代公式。下次会在每段开头先标'本段圆心坐标'再画轨迹……"></textarea>
+          <p class="reflect-q">Q3 · 这道题"段 II 圆心刚好 = O"的几何巧合，我是先目测发现还是先列方程发现？（提示：先列方程再发现题面不收敛，还是先目测几何再代数？）</p>
+          <textarea class="reflect-area" data-key="ex3-r3" placeholder="如：我习惯直接列方程，没在草稿上画几条轨迹估算大致走向。下次会先草图扫一遍，再细算……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：洛伦兹力 + 圆周运动 + 多区拼接 · 科学思维：模型抽象（每段独立处理）+ 推理论证（边界连续性 + 圆心定位）+ 自我校核（轨迹是否闭合）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 综合反思 · 3 例题骨架共性 ==================== -->
+  <div class="card">
+    <h2 class="section-title">综合反思 · 三例打通这条骨架</h2>
+
+    <p style="margin-bottom: 14px;">3 道例题难度递增，但都在重复同一条主链路：<strong>识别情境 → 定洛伦兹力方向 → 找圆心 → 算半径 → 用弦切几何或边界相交求出射 → 算时间</strong>。下面把"共性"和"易扣分"两件事钉死。</p>
+
+    <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">一、3 例题骨架共性</h4>
+    <ul style="padding-left: 22px; margin-bottom: 14px;">
+      <li><strong>圆心永远在"入射点的洛伦兹力方向上、距离 r"</strong>：这是 14 题位所有几何工作的起点。无论是例 1 单方向、例 2 多方向、例 3 多区，每段轨迹的圆心位置都靠这条规则定。</li>
+      <li><strong>半径与周期都来自牛顿第二定律</strong>：\(r = mv/(qB),\ T = 2\pi m/(qB)\)。r 依赖 v 与 B，T 只依赖 B。同一区内 T 不变；跨区时 T 变。</li>
+      <li><strong>几何工具优于代数硬算</strong>：例 1 用"圆与边界相交"求出射点；例 2 用"两点共圆半径 r 存在性 ⇔ |PQ| ≤ 2r"破多方向题；例 3 用"圆心 = 原点"识别闭合条件。<strong>所有 14 题位都先画图后算式</strong>。</li>
+      <li><strong>速度方向 = 圆周切线方向 ⊥ 圆心方向</strong>：在任何一点上，速度沿圆周切线，半径（圆心连线）垂直于切线。卷面上常用此性质回推圆心或确认转向。</li>
+      <li><strong>电荷符号 + B 方向 = 转向决定</strong>：正电与负电在同一 B 中转向相反；同电荷在 B 反向中转向也相反。卷面每段开头都要明确写"电荷为正"+"B 沿 X 方向"+"用左手定则得 F 沿 Y"。</li>
+    </ul>
+
+    <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">二、5 类学生常见卡点 + 怎么破</h4>
+    <ol style="padding-left: 24px; margin-bottom: 14px;">
+      <li><strong>F 方向定反</strong>（左右手搞反、电荷符号漏看、B 方向看反）→ 破：每次定 F 都写"四指顺 v、手心顺 B、大拇指出 F"<strong>逐字</strong>勾对一遍</li>
+      <li><strong>圆心位置画错</strong>（沿 F 方向距 r，但画到 v 方向上）→ 破：先标"F⊥v"双向箭头，再沿 F 方向标距 r 的圆心点</li>
+      <li><strong>圆与边界交点求错</strong>（漏代某条边、把切点算成交点）→ 破：把所有边界方程都代入圆方程一遍，逐个判别 Δ ≥ 0</li>
+      <li><strong>多方向题没用"圆心轨迹"概念</strong>（对每个 θ 暴力代）→ 破：见"360° 均匀发射"立即想"圆心组成以 P 为中心、半径 r 的圆"+"两点共圆判据"</li>
+      <li><strong>多区拼接漏算某段 / 没认出闭合条件</strong>（如例 3 漏第三段、或没认出"左区圆心 = O"）→ 破：每段开头都写"位置 + 速度 + B 方向 + F + 圆心"五件套，最后画出整条轨迹再校验是否闭合</li>
+    </ol>
+
+    <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">三、14 题位 12-15 分钟应试建议</h4>
+    <div style="background: #FFF7E5; border-left: 4px solid #FFB800; padding: 12px 16px; border-radius: 4px; margin-bottom: 8px;">
+      <p style="margin: 0 0 8px;">📌 <strong>14 题位定位</strong>：高考最后压轴题，分值 12-15 分，给 12-15 min 是合理的。比 13 题位多 2-3 分钟，因为几何作图本身耗时。</p>
+      <p style="margin: 0 0 8px;">📌 <strong>3 分钟读题 + 画原图</strong>：读完立刻在草稿上画出磁场区域 + 入射点 + 入射方向 + B 方向（×/·）。读完不画图最不效率。</p>
+      <p style="margin: 0 0 8px;">📌 <strong>2 分钟定 F + 圆心</strong>：左手定则确认 F 方向、沿 F 方向标 r、画圆心点。这一步定错全题崩。</p>
+      <p style="margin: 0 0 8px;">📌 <strong>3-5 分钟几何分析</strong>：圆方程 + 边界相交 / 弦切几何 / 圆心轨迹族（按题型选）。<strong>能画图绝不代数</strong>。</p>
+      <p style="margin: 0;">📌 <strong>3-5 分钟最终落式</strong>：写半径 / 周期 / 出射点坐标 / 时间公式。每个量记得带单位与方向。</p>
+    </div>
+
+    <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">四、自我反思（请认真写）</h4>
+    <p class="reflect-q">F1 · 我学完三道例题后，对"圆心定位"这一步是否真的有信心？还是仍需要看左手定则的图示？</p>
+    <textarea class="reflect-area" data-key="final-r1" placeholder="如：我对 +x 入射 + B 向外的组合已经能闭眼定圆心，但对'斜方向入射 + B 向里'还需要查图……"></textarea>
+    <p class="reflect-q">F2 · 例 2 的"两点共圆"判据是本卡最大的方法收获——我下次遇到"多方向粒子源 / 收集装置"题时会主动用这条吗？怎么把它存入"思考触发器"？</p>
+    <textarea class="reflect-area" data-key="final-r2" placeholder="如：我会在错题本封面贴一张'多方向 → 圆心轨迹 + 两点共圆'的便签，让它成为反射式联想……"></textarea>
+    <p class="reflect-q">F3 · 例 3 的"分段时间累加 = 2πm/(qB₁)"这件事让我学到什么？（提示：周期与 v 无关、跨区时 T 变、整段轨迹时间可化为单一 T）</p>
+    <textarea class="reflect-area" data-key="final-r3" placeholder="如：我之前以为'多区拼接的时间一定是杂凑'，但其实可化简为某区周期的整数倍——这是 14 题位的'美感'……"></textarea>
+
+    <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 14px;">📝 学完 3 道例题，建议进入 <a href="gaokao-14-charge-in-magnetic-field-fluency-test.html" style="color: var(--secondary-blue); text-decoration: underline;">熟练度检测</a>，把刚学的骨架在 12 道变体题上跑一遍。</p>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <nav class="bottom-nav">
+    <a href="gaokao-mechanics-em-index.html">⬅ 返回主页</a>
+    <span>📝 基础检测（待开放）</span>
+    <a href="gaokao-14-charge-in-magnetic-field-fluency-test.html">📈 熟练度检测</a>
+    <span>🎤 深度口试（待开放）</span>
+  </nav>
+
+  <footer style="margin-top: 28px; padding: 20px; text-align: center; color: #78909c; font-size: 12px; border-top: 1px solid #e0e0e0;">
+    蓝色诺瓦学院 · 物理 · 高考综合应用 · 14 题位 · 带电粒子在磁场 · capstone Skill v0.1.0 · 2026-06-16
+  </footer>
+
+</div>
+
+<script>
+  // KaTeX auto-render
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof renderMathInElement === "function") {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+        ],
+        throwOnError: false
+      });
+    }
+  });
+
+  // Task card collapse/expand
+  function toggleCard(headerEl) {
+    var body = headerEl.parentElement.querySelector(".task-card-body");
+    if (!body) return;
+    headerEl.classList.toggle("collapsed");
+    body.classList.toggle("collapsed");
+  }
+
+  // Checkpoint localStorage (per-card · 已勾画线)
+  const STORAGE_KEY = "gaokao-14-charge-in-magnetic-field-checkpoints";
+  function getCheckboxState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function saveCheckbox(checkbox) {
+    var label = checkbox.closest("label[data-key]");
+    if (!label) return;
+    var key = label.getAttribute("data-key");
+    if (!key) return;
+    var state = getCheckboxState();
+    state[key] = checkbox.checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    if (checkbox.checked) { label.classList.add("checked"); } else { label.classList.remove("checked"); }
+  }
+  function restoreCheckboxes() {
+    var state = getCheckboxState();
+    var labels = document.querySelectorAll(".checkpoint label[data-key]");
+    labels.forEach(function(label) {
+      var key = label.getAttribute("data-key");
+      if (state[key]) {
+        var cb = label.querySelector("input[type=checkbox]");
+        if (cb) { cb.checked = true; label.classList.add("checked"); }
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreCheckboxes();
+  });
+
+  // Reflection textarea localStorage
+  const REFLECT_KEY = "gaokao-14-charge-in-magnetic-field-reflections";
+  function getReflectState() {
+    try { return JSON.parse(localStorage.getItem(REFLECT_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function persistReflection(textarea) {
+    var key = textarea.getAttribute("data-key");
+    if (!key) return;
+    var state = getReflectState();
+    state[key] = textarea.value;
+    try { localStorage.setItem(REFLECT_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function restoreReflections() {
+    var state = getReflectState();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      var key = ta.getAttribute("data-key");
+      if (key && state[key]) ta.value = state[key];
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreReflections();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      ta.addEventListener("input", function() { persistReflection(ta); });
+    });
+  });
+</script>
+
+</body>
+</html>

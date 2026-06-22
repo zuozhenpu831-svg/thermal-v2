@@ -8,87 +8,591 @@
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.7; }
-  .container { max-width: 900px; margin: 0 auto; padding: 20px; }
-  .breadcrumb { font-size: 13px; color: #7f8c8d; margin-bottom: 16px; }
-  .breadcrumb a { color: #0055B8; text-decoration: none; }
-  .v021-banner { background: linear-gradient(90deg, #fff3e0, #ffe7c7); border-left: 4px solid #e67e22; border-radius: 8px; padding: 12px 16px; margin-bottom: 16px; font-size: 14px; color: #5a3a1a; }
-  .v021-banner strong { color: #b66100; }
-  header.page-header { background: linear-gradient(135deg, #5A4BD1 0%, #6C5CE7 50%, #8B7CF0 100%); color: white; padding: 36px 32px; border-radius: 12px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(108,92,231,0.15); }
-  header.page-header h1 { margin: 0 0 8px 0; font-size: 28px; font-weight: 600; }
-  header.page-header .subtitle { font-size: 14px; opacity: 0.92; }
-  .entry-card { background: white; border-radius: 12px; padding: 36px 32px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; }
-  .entry-card h2 { color: #00409A; margin-bottom: 18px; font-size: 20px; }
-  .entry-card p { color: #5a6c7d; margin-bottom: 18px; font-size: 14px; }
-  .entry-card input[type="text"] { padding: 12px 18px; border: 2px solid #ecf0f1; border-radius: 8px; font-size: 16px; width: 100%; max-width: 280px; text-align: center; font-family: inherit; }
-  .entry-card input[type="text"]:focus { outline: none; border-color: #0055B8; }
-  .entry-card .info-list { background: #f8f9fb; border-radius: 8px; padding: 16px 20px; max-width: 560px; margin: 18px auto; text-align: left; font-size: 13px; color: #5a6c7d; }
+  /* ===== 蓝色诺瓦 · mock-check 视觉系统 v0.1.7 ·
+     基于 task-cards v3 三色制（蓝 / 金 / 银）· 题号循环色 · 大圆题头 · 大留白
+     ===================================================================== */
+  :root {
+    /* 蓝 · 主色 */
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    /* 金 · 中等难度 / 强调 */
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    /* 银 · 基础难度 / 中性 */
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    /* 中性 */
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #7B8290;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    /* 形变 */
+    --radius: 24px;
+    --radius-sm: 14px;
+    --radius-btn: 16px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 兼容旧变量 */
+    --primary-blue: var(--blue-700);
+    --secondary-blue: var(--blue-500);
+    --bright-blue: var(--blue-500);
+    --light-blue: var(--blue-100);
+    --bg-light: var(--bg-secondary);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb strong { color: var(--text-primary); }
+
+  /* ===== v021 banner · 金色调 ===== */
+  .v021-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px 20px 60px;
+    margin-bottom: 28px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .v021-banner::before {
+    content: "i";
+    position: absolute;
+    left: 16px;
+    top: 18px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .v021-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  /* ===== 页面 header ===== */
+  header.page-header {
+    text-align: center;
+    padding: 56px 32px 48px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  header.page-header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  header.page-header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  header.page-header h1 {
+    font-size: 1.65rem;
+    margin: 0 0 14px 0;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+  }
+  header.page-header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    opacity: 1;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== entry card ===== */
+  .entry-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 48px 36px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+    text-align: center;
+  }
+  .entry-card h2 {
+    color: var(--blue-700);
+    margin-bottom: 22px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .entry-card h2::before {
+    content: "";
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  .entry-card p { color: var(--text-secondary); margin-bottom: 18px; font-size: 0.92rem; }
+  .entry-card input[type="text"] {
+    padding: 14px 22px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-btn);
+    font-size: 1rem;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    font-family: inherit;
+    transition: var(--transition);
+    background: var(--bg-secondary);
+  }
+  .entry-card input[type="text"]:focus { outline: none; border-color: var(--blue-700); background: #fff; box-shadow: 0 0 0 4px var(--blue-100); }
+  .entry-card .info-list {
+    background: var(--blue-050);
+    border-radius: var(--radius-sm);
+    padding: 22px 26px;
+    max-width: 640px;
+    margin: 24px auto;
+    text-align: left;
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    list-style-position: inside;
+  }
   .entry-card .info-list li { margin: 5px 0; }
-  .btn-primary { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
-  .btn-primary:hover { opacity: 0.92; }
-  .progress-bar-wrap { position: sticky; top: 0; background: white; border-radius: 8px; padding: 12px 20px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 100; font-size: 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
-  .progress-bar-wrap .student { color: #0055B8; font-weight: 600; }
-  .progress-bar-wrap .answered-count { color: #0055B8; font-weight: 600; }
-  .question { background: white; border-radius: 10px; padding: 24px 28px; margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-  .q-header { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px dashed #ecf0f1; flex-wrap: wrap; }
-  .q-num { font-weight: 600; color: #00409A; font-size: 15px; }
-  .q-meta { background: #e8f0fe; color: #0055B8; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 500; }
-  .q-meta.diff-基础 { background: #e8f5e9; color: #2e7d32; }
-  .q-meta.diff-中等 { background: #fff3e0; color: #e67e22; }
-  .q-meta.diff-较难 { background: #fce4ec; color: #c0392b; }
-  .q-meta.diagram { background: #f3e7fb; color: #6a1b9a; }
-  .q-score { margin-left: auto; color: #7f8c8d; font-size: 13px; }
-  .q-prompt { font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
-  .q-figure { margin: 14px 0; text-align: center; }
+  .entry-card .info-list strong { color: var(--blue-700); }
+
+  /* ===== 主 CTA · 普通圆角按钮（v0.1.7：不再是 999 圆形）===== */
+  .btn-primary {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 14px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px rgba(0,64,154,0.18);
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { background: var(--blue-900); box-shadow: 0 6px 20px rgba(0,64,154,0.28); transform: translateY(-1px); }
+
+  /* ===== 进度条 ===== */
+  .progress-bar-wrap {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 14px 22px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    z-index: 100;
+    font-size: 0.88rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    align-items: center;
+  }
+  .progress-bar-wrap .student { color: var(--blue-700); font-weight: 600; }
+  .progress-bar-wrap .answered-count { color: var(--blue-700); font-weight: 600; }
+
+  /* ===== 题目卡 · v0.1.7 题号循环色 ===== */
+  .question {
+    --q-rich: var(--blue-900);
+    --q-mid:  var(--blue-700);
+    --q-bg:   var(--blue-050);
+    --q-tint: var(--blue-100);
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 32px 34px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--q-mid);
+  }
+  /* 题号循环：第 1/4/7 蓝（默认）· 第 2/5 金 · 第 3/6 银 */
+  #question-list .question:nth-of-type(3n+2) {
+    --q-rich: var(--gold-900);
+    --q-mid:  var(--gold-700);
+    --q-bg:   var(--gold-050);
+    --q-tint: var(--gold-100);
+  }
+  #question-list .question:nth-of-type(3n) {
+    --q-rich: var(--silver-900);
+    --q-mid:  var(--silver-700);
+    --q-bg:   var(--silver-050);
+    --q-tint: var(--silver-100);
+  }
+
+  /* ===== 题号大圆 · v0.1.7 替换原 q-header ===== */
+  .q-header-circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: var(--q-bg);
+    border: 2px solid var(--q-mid);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 28px 22px;
+    margin: 0 auto 28px;
+    text-align: center;
+    gap: 6px;
+  }
+  .q-h-num {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--q-rich);
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+  .q-h-type {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--q-mid);
+    letter-spacing: 0.12em;
+    line-height: 1.3;
+  }
+  .q-h-diff {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--q-rich);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+    opacity: 0.85;
+  }
+  .q-h-id {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--silver-700);
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  /* 旧 q-header / q-num / q-meta 兼容（不渲染时无害；如果旧 HTML 残留也能看） */
+  .q-header { display: none; }
+
+  .q-prompt { font-size: 0.96rem; line-height: 1.85; margin-bottom: 18px; color: var(--text-primary); }
+  .q-figure { margin: 18px 0; text-align: center; }
   .q-figure svg { max-width: 100%; height: auto; }
+
+  /* ===== 选项 ===== */
   .q-options { list-style: none; padding: 0; margin: 0; }
-  .q-options li { background: #fafbfc; border: 1px solid #ecf0f1; border-radius: 6px; padding: 10px 16px; margin-bottom: 8px; cursor: pointer; }
-  .q-options li:hover { background: #f0f4f8; border-color: #cbd5e0; }
-  .q-options label { display: block; cursor: pointer; font-size: 14px; }
-  .q-options input { margin-right: 10px; vertical-align: middle; }
-  .q-options li.selected { background: #e8f0fe; border-color: #0055B8; }
-  .q-blank { border: none; border-bottom: 2px solid #0055B8; background: transparent; padding: 2px 8px; margin: 0 4px; font-size: 15px; min-width: 80px; text-align: center; font-family: inherit; }
-  .q-blank:focus { outline: none; border-bottom-color: #006AD6; background: #f0f4f8; }
-  .q-short-input { width: 100%; border: 1px solid #ecf0f1; border-radius: 6px; padding: 12px 14px; font-family: inherit; font-size: 14px; resize: vertical; background: #fafbfc; }
-  .q-short-input:focus { outline: none; border-color: #0055B8; background: white; }
-  .q-feedback { margin-top: 18px; padding: 16px 18px; background: #f8f9fb; border-radius: 8px; border-left: 4px solid #bdc3c7; }
-  .q-feedback.correct { border-left-color: #27ae60; background: #f1f8f4; }
-  .q-feedback.wrong { border-left-color: #c0392b; background: #fdf2f0; }
-  .q-result { font-weight: 600; font-size: 14px; margin-bottom: 10px; }
-  .q-result.correct { color: #27ae60; }
-  .q-result.wrong { color: #c0392b; }
-  .q-fb-row { background: white; padding: 8px 12px; border-radius: 5px; margin: 8px 0; font-size: 14px; }
-  .q-fb-row strong { color: #00409A; }
-  .q-fb-row.q-fb-principle  { background: #e8f0fe; border-left: 3px solid #0055B8; padding: 10px 14px; }
-  .q-fb-row.q-fb-logic      { background: #f3e7fb; border-left: 3px solid #6a1b9a; padding: 10px 14px; }
-  .q-fb-row.q-fb-connection { background: #f5f7fa; border-left: 3px solid #2e7d32; padding: 12px 16px; }
+  .q-options li {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .q-options li:hover { background: var(--q-bg); border-color: var(--q-mid); }
+  .q-options label { display: block; cursor: pointer; font-size: 0.92rem; color: var(--text-primary); }
+  .q-options input { margin-right: 12px; vertical-align: middle; accent-color: var(--q-mid); }
+  .q-options li.selected { background: var(--q-bg); border-color: var(--q-mid); box-shadow: 0 0 0 3px var(--q-tint); }
+
+  /* ===== 填空 / 短答 ===== */
+  .q-blank {
+    border: none;
+    border-bottom: 2px solid var(--q-mid);
+    background: transparent;
+    padding: 4px 10px;
+    margin: 0 4px;
+    font-size: 0.95rem;
+    min-width: 90px;
+    text-align: center;
+    font-family: inherit;
+    transition: var(--transition);
+    color: var(--text-primary);
+  }
+  .q-blank:focus { outline: none; border-bottom-color: var(--q-rich); background: var(--q-bg); }
+  .q-short-input {
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+    background: var(--bg-secondary);
+    transition: var(--transition);
+    color: var(--text-primary);
+  }
+  .q-short-input:focus { outline: none; border-color: var(--q-mid); background: #fff; box-shadow: 0 0 0 3px var(--q-tint); }
+
+  /* ===== 反馈区 · v0.1.7 跟随题号循环色 · 去绿去紫 ===== */
+  .q-feedback {
+    margin-top: 20px;
+    padding: 20px 22px;
+    background: var(--q-bg);
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--q-mid);
+  }
+  .q-feedback.correct { border-left-color: var(--q-mid); background: var(--q-bg); }
+  .q-feedback.wrong   { border-left-color: var(--gold-700); background: var(--gold-050); }
+  .q-result { font-weight: 700; font-size: 0.92rem; margin-bottom: 12px; letter-spacing: 0.02em; }
+  .q-result.correct { color: var(--q-rich); }
+  .q-result.wrong   { color: var(--gold-900); }
+  .q-fb-row { background: #fff; padding: 10px 14px; border-radius: 8px; margin: 10px 0; font-size: 0.88rem; line-height: 1.8; color: var(--text-primary); }
+  .q-fb-row strong { color: var(--q-rich); }
+  .q-fb-row.q-fb-principle  { background: var(--q-bg); border-left: 3px solid var(--q-mid); padding: 12px 16px; }
+  .q-fb-row.q-fb-logic      { background: var(--q-bg); border-left: 3px solid var(--q-rich); padding: 12px 16px; }
+  .q-fb-row.q-fb-connection { background: #fff; border-left: 3px solid var(--q-mid); padding: 12px 16px; }
   .q-fb-row > div { margin-top: 6px; line-height: 1.85; }
-  .q-export-label { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 12px; margin: 0 2px; display: inline-block; }
-  .q-anchor { font-size: 13px; color: #5a6c7d; padding-top: 8px; border-top: 1px dashed #d5dde6; margin-top: 10px; }
-  .q-anchor code { background: #e8f0fe; color: #0055B8; padding: 1px 6px; border-radius: 3px; font-size: 12px; font-family: "SF Mono", Menlo, Consolas, monospace; }
-  .q-anchor a { color: #0055B8; }
-  .submit-area { background: white; border-radius: 10px; padding: 24px 28px; margin: 32px 0 16px 0; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
-  .btn-submit { background: linear-gradient(135deg, #00409A, #006AD6); color: white; border: none; padding: 14px 48px; font-size: 16px; font-weight: 500; border-radius: 8px; cursor: pointer; font-family: inherit; }
-  .btn-submit:hover { opacity: 0.92; }
-  .btn-secondary { background: white; color: #0055B8; border: 1.5px solid #0055B8; padding: 10px 24px; margin: 6px; font-size: 14px; border-radius: 6px; cursor: pointer; font-family: inherit; }
-  .btn-secondary:hover { background: #e8f0fe; }
-  .results-summary { background: white; border-radius: 12px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,64,154,0.1); text-align: center; }
-  .results-summary h2 { margin: 0 0 18px 0; color: #00409A; }
-  .score-big { font-size: 64px; font-weight: 700; margin: 12px 0; font-variant-numeric: tabular-nums; }
-  .score-big.passed { color: #0055B8; }
-  .score-big.failed { color: #7f8c8d; }
-  .score-big.honored { color: #d4af37; }
-  .status { font-size: 16px; margin: 8px 0 20px 0; }
-  .wrong-list { background: #fafbfc; border-radius: 6px; padding: 14px; margin: 18px 0; font-size: 14px; color: #5a6c7d; text-align: left; }
-  .wrong-list strong { color: #c0392b; }
-  .bottom-nav { display: flex; flex-wrap: wrap; gap: 12px; padding: 24px 28px; background: white; border-radius: 10px; margin-bottom: 16px; }
-  .bottom-nav a, .bottom-nav span { flex: 1; min-width: 140px; text-align: center; padding: 12px 16px; border-radius: 6px; background: #f5f7fa; color: #5a6c7d; text-decoration: none; font-size: 14px; }
-  .bottom-nav a { background: #e8f0fe; color: #0055B8; }
-  .bottom-nav span { color: #bdc3c7; }
-  .hidden { display: none !important; }
-  footer { text-align: center; color: #95a5a6; font-size: 12px; padding: 20px; }
+  .q-export-label { background: var(--q-tint); color: var(--q-rich); padding: 3px 10px; border-radius: 999px; font-size: 0.74rem; margin: 0 3px; display: inline-block; font-weight: 600; }
+  .q-anchor { font-size: 0.82rem; color: var(--text-secondary); padding-top: 10px; border-top: 1px dashed var(--silver-100); margin-top: 12px; }
+  .q-anchor code { background: var(--q-bg); color: var(--q-rich); padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; font-family: "SF Mono", Menlo, Consolas, monospace; }
+  .q-anchor a { color: var(--blue-700); }
+
+  /* ===== 提交区 · v0.1.7 普通圆角按钮 ===== */
+  .submit-area {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    margin: 36px 0 20px 0;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+  }
+  .btn-submit {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 14px 44px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px rgba(0,64,154,0.18);
+    letter-spacing: 0.02em;
+  }
+  .btn-submit:hover { background: var(--blue-900); box-shadow: 0 6px 20px rgba(0,64,154,0.28); transform: translateY(-1px); }
+  .btn-secondary {
+    background: #fff;
+    color: var(--blue-700);
+    border: 1.5px solid var(--blue-700);
+    padding: 12px 24px;
+    margin: 6px;
+    font-size: 0.9rem;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: var(--transition);
+  }
+  .btn-secondary:hover { background: var(--blue-050); }
+
+  /* ===== 结果 ===== */
+  .results-summary {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+    text-align: center;
+  }
+  .results-summary h2 { margin: 0 0 20px 0; color: var(--blue-700); font-size: 1.3rem; font-weight: 700; }
+  .score-big { font-size: 4rem; font-weight: 700; margin: 14px 0; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .score-big.passed { color: var(--blue-700); }
+  .score-big.failed { color: var(--silver-700); }
+  .score-big.honored { color: var(--gold-700); }
+  .status { font-size: 1rem; margin: 8px 0 22px 0; color: var(--text-secondary); }
+  .wrong-list { background: var(--bg-secondary); border-radius: var(--radius-sm); padding: 18px 22px; margin: 20px 0; font-size: 0.88rem; color: var(--text-secondary); text-align: left; line-height: 1.85; }
+  .wrong-list strong { color: var(--blue-700); }
+
+  /* ===== 底部导航 ===== */
+  .bottom-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 28px 30px;
+    background: #fff;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .bottom-nav a, .bottom-nav span {
+    flex: 1;
+    min-width: 150px;
+    text-align: center;
+    padding: 14px 18px;
+    border-radius: var(--radius-btn);
+    background: var(--silver-050);
+    color: var(--silver-500);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+  .hidden { display: none; }
+  footer { text-align: center; color: var(--silver-700); font-size: 0.78rem; padding: 28px 16px 8px; }
   .katex { font-size: 1em; }
+
+  /* ===== 申请 / 申诉 / 检测反馈 section-card · v0.1.7 全去紫去绿 ===== */
+  section.section-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 32px;
+    margin: 20px auto;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+    border-left: none;
+    max-width: 900px;
+  }
+  section.section-card h2 {
+    color: var(--blue-700);
+    font-size: 1.15rem;
+    margin-bottom: 16px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  section.section-card h2::before {
+    content: "";
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    box-shadow: 0 0 0 4px var(--blue-100);
+    flex-shrink: 0;
+  }
+  /* 申诉 section · 银色锚点（区分功能，不是紫） */
+  section.section-card.appeal-card { border-top-color: var(--silver-700); }
+  section.section-card.appeal-card h2 { color: var(--silver-900); }
+  section.section-card.appeal-card h2::before { background: var(--silver-700); box-shadow: 0 0 0 4px var(--silver-100); }
+
+  /* 检测反馈 section · 蓝色（去绿） */
+  section.section-card.results-card { border-top-color: var(--blue-700); }
+  section.section-card.results-card h2 { color: var(--blue-700); }
+  section.section-card.results-card h2::before { background: var(--blue-700); box-shadow: 0 0 0 4px var(--blue-100); }
+
+  section.section-card details {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-100);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  section.section-card.appeal-card details {
+    background: var(--silver-050);
+    border-color: var(--silver-100);
+  }
+  section.section-card details summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--blue-700);
+    font-size: 0.95rem;
+  }
+  section.section-card.appeal-card details summary { color: var(--silver-900); }
+
+  /* form 提交按钮 · v0.1.7 普通圆角 + 覆盖 inline gradient */
+  section.section-card form button[type="submit"] {
+    background: var(--blue-700);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    font-size: 0.92rem;
+    border-radius: var(--radius-btn);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0,64,154,0.18);
+    background-image: none;
+  }
+  section.section-card form button[type="submit"]:hover { background: var(--blue-900); }
+  section.section-card.appeal-card form button[type="submit"] {
+    background: var(--silver-700);
+    box-shadow: 0 4px 12px rgba(123,130,144,0.2);
+    background-image: none;
+  }
+  section.section-card.appeal-card form button[type="submit"]:hover { background: var(--silver-900); }
+
+  /* 响应式 */
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px 48px; }
+    header.page-header { padding: 40px 22px 32px; }
+    header.page-header h1 { font-size: 1.35rem; }
+    .question { padding: 24px 22px; }
+    .q-header-circle { width: 200px; height: 200px; padding: 22px 18px; }
+    .q-h-num { font-size: 1.15rem; }
+    .entry-card { padding: 32px 22px; }
+    .btn-primary, .btn-submit { padding: 12px 28px; }
+    section.section-card { padding: 24px 20px; }
+  }
+
 </style>
 </head>
 
@@ -142,7 +646,7 @@
   <main id="question-list"></main>
   <div class="submit-area">
     <button id="btn-submit" class="btn-submit" onclick="submitTest()">提交练习</button>
-    <div style="margin-top:12px;font-size:13px;color:#7f8c8d;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
+    <div style="margin-top:12px;font-size:13px;color:#7B8290;">提交后展示详细解析 · 已答 ≥ 6 题(85%)</div>
   </div>
 </div>
 
@@ -160,21 +664,21 @@
 
 
 
-<section class="section-card" style="border-left: 4px solid #00409A;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
+<section class="section-card">
   <h2 style="color: #00409A;font-size:19px;margin-bottom:14px;">📅 申请基础检测（纸笔形式）</h2>
   <p style="font-size: 14px; margin-bottom: 10px;">本页是 HTML 模拟练习。<strong>真正的基础检测由教师组织纸笔形式 + 多套题库随机抽用 + 批改 + 签字</strong>。完成模拟练习达到通过线后可申请。</p>
 
   <div id="my-mock-check-applies-region"></div>
 
-  <details open style="background:#f5f9ff;border:1px solid #c4daf5;border-radius:8px;padding:14px 18px;margin:14px 0;">
+  <details open style="background:#F3F6FC;border:1px solid #E8EEF9;border-radius:8px;padding:14px 18px;margin:14px 0;">
     <summary style="cursor:pointer;font-weight:600;color:#00409A;font-size:15px;">📝 在线申请（推荐 · 教师端待办收到）</summary>
-    <div id="mock-check-apply-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+    <div id="mock-check-apply-user-info" style="background:#FAFAFB;border-radius:4px;padding:8px 12px;font-size:13px;color:#7B8290;margin:10px 0;"></div>
     <form id="mock-check-apply-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkApply();">
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">联系方式（微信 / 手机 / 邮箱）<span style="color:#5C6370;">*</span></label><input type="text" id="mock-check-apply-contact" required style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></div>
       <div style="margin-bottom:10px;">
-        <label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:6px;">期望时间段 <span style="color:#c0392b;">*</span></label>
+        <label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:6px;">期望时间段 <span style="color:#5C6370;">*</span></label>
         <div style="display:flex;gap:8px;margin:6px 0;flex-wrap:wrap;">
-          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+          <select id="mock-check-apply-time-day" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
             <option value="">选择周几</option>
             <option value="周一">周一</option>
             <option value="周二">周二</option>
@@ -184,7 +688,7 @@
             <option value="周六">周六</option>
             <option value="周日">周日</option>
           </select>
-          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
+          <select id="mock-check-apply-time-hm" required style="flex:1;min-width:140px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;background:white;">
             <option value="">选择时间</option>
             <option value="08:30">08:30</option>
             <option value="09:00">09:00</option>
@@ -208,54 +712,56 @@
             <option value="18:00">18:00</option>
           </select>
         </div>
-        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;">
+        <input type="text" id="mock-check-apply-time" placeholder="补充说明（可选，如 备选时段 / 持续时长 / 寒假调休 等）" style="width:100%;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;">
       </div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #c4daf5;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
-      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#5a6c7d;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
-      <button type="submit" id="mock-check-apply-submit-btn" style="background:linear-gradient(135deg,#00409A,#006AD6);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申请</button>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">备注（可选 · 当前 HTML 模拟得分 / 想强调的内容）</label><textarea id="mock-check-apply-note" style="width:100%;min-height:50px;padding:8px 10px;border:1px solid #E8EEF9;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <label style="display:flex;gap:6px;align-items:flex-start;font-size:13.5px;color:#7B8290;margin:10px 0;"><input type="checkbox" id="mock-check-apply-confirm" required style="margin-top:3px;"><span>我已完成本板块学习任务卡和 HTML 模拟练习，准备好接受纸笔基础检测</span></label>
+      <button type="submit" id="mock-check-apply-submit-btn" style="color:white;border:none;padding:10px 24px;font-size:14px;border-radius: 16px;cursor:pointer;font-weight:500;">→ 提交申请</button>
     </form>
   </details>
 
-  <div style="font-size: 12.5px; color: #7d4e10; margin-top: 10px; padding: 8px 14px; background: #fdf6ec; border-radius: 6px;">
+  <div style="font-size: 12.5px; color: #8E6E2E; margin-top: 10px; padding: 8px 14px; background: #FBF7EC; border-radius: 6px;">
     🚧 <strong>待完善</strong>：教师收到申请后审核 → 排期 → 检测当天发 PDF 题库（4-5 套随机选 1 套）→ 评价时记录选用套号（二试自动避开）<br>
     （跨终端推送 + PDF 题库管理 + 套号记录 → 待 starmap 后端实现）
   </div>
 </section>
 
-<section class="section-card" style="border-left: 4px solid #8e44ad;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-  <h2 style="color: #6c3483;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
+<section class="section-card results-card">
+  <h2 style="color: #B8924A;">📋 我的检测反馈</h2>
+  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
+  <div id="my-check-results-region"></div>
+  <div style="font-size: 12px; color: #8E6E2E; margin-top: 10px; padding: 8px 12px; background: #FBF7EC; border-radius: 4px;">
+    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
+  </div>
+</section>
+
+<section class="section-card appeal-card">
+  <h2 style="color: #7B8290;font-size:19px;margin-bottom:14px;">📩 基础检测申诉通道</h2>
   <p style="font-size: 14px; margin-bottom: 10px;">如果你对教师在纸笔基础检测中的判分有异议（觉得某题写对了却被扣分 / 计算正确但被标错等），可以申诉。</p>
 
   <ul style="margin-left: 22px; font-size: 13.5px; margin-bottom: 14px;">
-    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#c0392b;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
+    <li><strong>前置条件</strong>：已完成纸笔基础检测 + 收到教师批改单（含单据 ID）<span style="color:#7B8290;">·未收到 = 还没考 → 请先「📅 申请基础检测」</span></li>
     <li><strong>时限</strong>：在收到批改单的 <strong>7 个工作日内</strong>提出</li>
     <li><strong>流程</strong>：教师收到申诉后<strong>① 重新评估当题 → 出新批改单</strong>，或 <strong>② 驳回（附理由）</strong>；原版本保留可追溯</li>
   </ul>
 
   <div id="my-mock-check-appeals-region"></div>
 
-  <details open style="background:#faf4fc;border:1px solid #d2b4de;border-radius:8px;padding:14px 18px;margin:14px 0;">
-    <summary style="cursor:pointer;font-weight:600;color:#6c3483;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
-    <div id="mock-check-appeal-user-info" style="background:#fafbfc;border-radius:4px;padding:8px 12px;font-size:13px;color:#5a6c7d;margin:10px 0;"></div>
+  <details open style="background:#F3F4F7;border:1px solid #E5E7EC;border-radius:8px;padding:14px 18px;margin:14px 0;">
+    <summary style="cursor:pointer;font-weight:600;color:#7B8290;font-size:15px;">📝 在线申诉（推荐 · 教师端待办收到）</summary>
+    <div id="mock-check-appeal-user-info" style="background:#FAFAFB;border-radius:4px;padding:8px 12px;font-size:13px;color:#7B8290;margin:10px 0;"></div>
     <form id="mock-check-appeal-form" style="margin-top:8px;" onsubmit="event.preventDefault();submitMock_checkAppeal();">
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">批改单 ID <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#c0392b;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#c0392b;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
-      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#2c3e50;display:block;margin-bottom:4px;">期望处理 <span style="color:#c0392b;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #d2b4de;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
-      <button type="submit" id="mock-check-appeal-submit-btn" style="background:linear-gradient(135deg,#6c3483,#8e44ad);color:white;border:none;padding:10px 24px;font-size:14px;border-radius:6px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">批改单 ID <span style="color:#7B8290;">*</span></label><input type="text" id="mock-check-appeal-receipt" required placeholder="如 PC-MC-20260613-..." style="width:100%;padding:8px 10px;border:1px solid #E5E7EC;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">使用的题库套号 <span style="color:#7B8290;">*</span></label><input type="text" id="mock-check-appeal-set" required placeholder="如 第 3 套 · 见批改单顶部" style="width:100%;padding:8px 10px;border:1px solid #E5E7EC;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">有异议的题号 <span style="color:#7B8290;">*</span></label><input type="text" id="mock-check-appeal-qnum" required placeholder="如 第 3 题 / 第 8 题(2)问" style="width:100%;padding:8px 10px;border:1px solid #E5E7EC;border-radius:4px;font-family:inherit;font-size:14px;"></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">申诉理由（讲清我答了什么 + 为什么应该得分）<span style="color:#7B8290;">*</span></label><textarea id="mock-check-appeal-reason" required style="width:100%;min-height:90px;padding:8px 10px;border:1px solid #E5E7EC;border-radius:4px;font-family:inherit;font-size:14px;"></textarea></div>
+      <div style="margin-bottom:10px;"><label style="font-size:13.5px;color:#5C6370;display:block;margin-bottom:4px;">期望处理 <span style="color:#7B8290;">*</span></label><select id="mock-check-appeal-want" required style="width:100%;padding:8px 10px;border:1px solid #E5E7EC;border-radius:4px;font-family:inherit;font-size:14px;"><option value="">请选择</option><option value="reassess">① 教师重新评估当题答案</option><option value="partial">② 申请部分分数</option></select></div>
+      <button type="submit" id="mock-check-appeal-submit-btn" style="color:white;border:none;padding:10px 24px;font-size:14px;border-radius: 16px;cursor:pointer;font-weight:500;">→ 提交申诉</button>
     </form>
   </details>
 </section>
 
-<section class="section-card" style="border-left: 4px solid #2e7d32;max-width:900px;margin:14px auto;background:white;border-radius:12px;padding:24px 28px;box-shadow:0 2px 8px rgba(0,0,0,0.06);">
-  <h2 style="color: #1e8449;font-size:19px;margin-bottom:14px;">📋 我的检测反馈</h2>
-  <p style="font-size: 14px; margin-bottom: 10px;">登录后这里展示<strong>本板块下你账号的所有教师批改反馈</strong>（教师纸笔检测批改后会推送到此处）。</p>
-  <div id="my-check-results-region"></div>
-  <div style="font-size: 12px; color: #7d4e10; margin-top: 10px; padding: 8px 12px; background: #fdf6ec; border-radius: 4px;">
-    🚧 当前 demo：跨终端推送待 starmap 后端。教师在 portal「🧪 注入检测反馈」处可生成 mock 数据查看 UI。
-  </div>
-</section>
+
 
 <nav class="bottom-nav">
   <a href="index.html">⬅ 返回主页</a>
@@ -263,7 +769,7 @@
   <a href="gibbs-free-energy-advanced-oral-exam.html">🎤 深度口试</a>
 </nav>
 
-<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 吉布斯自由能 · 进阶 · 基础检测 · mock-check Skill v0.1.5(题库版 + 三段式 + 锚结论中文化)</footer>
+<footer>蓝色诺瓦学院 · 物理 · 物化融合 · 热力学 · 吉布斯自由能 · 进阶 · 基础检测 · mock-check Skill v0.1.7(题库版 + 三段式 + 锚结论中文化)</footer>
 
 </div>
 
@@ -315,9 +821,9 @@ const DGO_T_SVG = `<div class="q-figure"><svg viewBox="0 0 540 300" xmlns="http:
   <text x="84" y="142" font-size="12" fill="#7f8c8d">0</text>
   <line x1="95" y1="228" x2="465" y2="72" stroke="#c0392b" stroke-width="2.5"/>
   <text x="380" y="92" font-size="12" fill="#c0392b">ΔG°(T) 直线</text>
-  <circle cx="280" cy="150" r="5" fill="#2e7d32"/>
-  <line x1="280" y1="150" x2="280" y2="260" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,4"/>
-  <text x="280" y="280" font-size="12" fill="#2e7d32" text-anchor="middle">T_转 = ?</text>
+  <circle cx="280" cy="150" r="5" fill="#00409A"/>
+  <line x1="280" y1="150" x2="280" y2="260" stroke="#00409A" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <text x="280" y="280" font-size="12" fill="#00409A" text-anchor="middle">T_转 = ?</text>
   <text x="190" y="52" font-size="12" fill="#7f8c8d">图中只画形状, 未标数值</text>
 </svg></div>`;
 
@@ -424,7 +930,7 @@ const QUESTION_BANK = {
   ],
   T3: [
     { id:"T3-1", type:"short", score:14, difficulty:"基础", exportIds:["G-AS-MAX-NON-EXPANSION-WORK","DG-EQUALS-NEGATIVE-W-USEFUL"],
-      stem:"等温等压条件下, 系统对外输出的「非膨胀有用功」(例如电池输出的电功)与 ΔG 之间有什么定量关系? 这一关系在什么样的过程中才能取到等号? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文与普通数字作答, 不必输入 Δ 等特殊符号。</em>",
+      stem:"等温等压条件下, 系统对外输出的「非膨胀有用功」(例如电池输出的电功)与 ΔG 之间有什么定量关系? 这一关系在什么样的过程中才能取到等号? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文与普通数字作答, 不必输入 Δ 等特殊符号。</em>",
       keywords:["最大|上限|最多|不超过","可逆"],
       explanation:{
         principle:'等温等压下, 从热力学第一定律 + 第二定律 + H、G 的定义出发可严格推出: \\(\\delta W_{\\text{非膨胀}} \\le -\\mathrm{d}G\\), 即系统能输出的非膨胀有用功<strong>不超过 G 的减少量</strong>: \\(W_{\\text{非膨胀}} \\le -\\Delta G = |\\Delta G|\\)(自发过程 ΔG < 0)。',
@@ -435,7 +941,7 @@ const QUESTION_BANK = {
       extension:'为什么膨胀功不算「有用」? 等压环境下系统胀大推开大气做的功无法收集利用, 是「必交的过路费」— 焓的定义 H = U + pV 已把这笔账内置, 于是 G 的减少量恰好对应「过路费之外」真正可支配的部分。',
       cardAnchor:"Card 2 STEP 2" },
     { id:"T3-2", type:"short", score:14, difficulty:"中等", exportIds:["FREE-ENERGY-NAMING-MEANING","G-AS-MAX-NON-EXPANSION-WORK"],
-      stem:"「吉布斯自由能」中「自由」二字的物理含义是什么? 等温等压的放热反应中, ΔH 里「不自由」的那部分能量是哪一项、它的去向是什么? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答, 不必输入 Δ 等特殊符号。</em>",
+      stem:"「吉布斯自由能」中「自由」二字的物理含义是什么? 等温等压的放热反应中, ΔH 里「不自由」的那部分能量是哪一项、它的去向是什么? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答, 不必输入 Δ 等特殊符号。</em>",
       keywords:["熵|TΔS|T·ΔS","功"],
       explanation:{
         principle:'\\(\\Delta G = \\Delta H - T\\Delta S\\) 把焓变拆成两份: <strong>「自由」= 可以被自由提取、用来做非膨胀有用功的那部分</strong>(份额为 ΔG); 另一份 <strong>TΔS 被「熵的账本」锁定</strong>, 必须以热的形式与环境交换, 不能转化为有用功。',
@@ -446,7 +952,7 @@ const QUESTION_BANK = {
       extension:'若反应恰好使系统熵<strong>增大</strong>(ΔS > 0), TΔS 项反而是「补贴」: 系统可以从环境吸热抵账, 有用功上限 |ΔG| 甚至能超过 |ΔH| — 这并不违反能量守恒, 多出的部分由环境的热买单。',
       cardAnchor:"Card 2 STEP 2" },
     { id:"T3-3", type:"short", score:14, difficulty:"较难", exportIds:["REVERSIBLE-EQUALS-MAX-WORK","REVERSIBLE-AS-IDEAL-LIMIT"],
-      stem:"实际(不可逆)放电的电池, 输出的电功总是小于理论值 |ΔG|。请用 Clausius 不等式 \\(\\delta Q \\le T\\mathrm{d}S\\) 的物理内涵解释: 少输出的那部分能量去了哪里? 为什么不可逆程度越大、损失越多? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答, 不必输入希腊字母或微分符号。</em>",
+      stem:"实际(不可逆)放电的电池, 输出的电功总是小于理论值 |ΔG|。请用 Clausius 不等式 \\(\\delta Q \\le T\\mathrm{d}S\\) 的物理内涵解释: 少输出的那部分能量去了哪里? 为什么不可逆程度越大、损失越多? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答, 不必输入希腊字母或微分符号。</em>",
       keywords:["熵产生|额外熵|额外的熵|多余的熵","耗散|消耗|浪费|散失|变成热|以热"],
       explanation:{
         principle:'Clausius 不等式 \\(\\delta Q \\le T\\mathrm{d}S\\) 的内涵: 系统熵的变化 dS = 热交换带来的 δQ/T + <strong>过程内部的熵产生 dS_产生 ≥ 0</strong>。可逆过程 dS_产生 = 0; 不可逆过程(内阻发热、浓度梯度扩散、副反应等)必有 dS_产生 > 0。',
@@ -457,7 +963,7 @@ const QUESTION_BANK = {
       extension:'「慢即是省」: 让过程尽量准静态(无限缓慢、每步几乎平衡)是逼近可逆的唯一通路, 但功率趋于零 — 实际工程永远在「效率(慢)」与「功率(快)」之间权衡, 这正是有限时间热力学研究的主题。',
       cardAnchor:"Card 2 思考点 3" },
     { id:"T3-4", type:"short", score:14, difficulty:"中等", exportIds:["REVERSIBLE-AS-IDEAL-LIMIT","REVERSIBLE-EQUALS-MAX-WORK","RIGOROUS-DERIVATION-VS-ENGINEERING"],
-      stem:"现实中没有任何电池能严格按「可逆」方式运行。既然如此, 工程师在设计新电池时, 为什么仍然要先计算可逆情形下的理论电压和理论最大电功? 这体现了物理化学中怎样的思维范式? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答。</em>",
+      stem:"现实中没有任何电池能严格按「可逆」方式运行。既然如此, 工程师在设计新电池时, 为什么仍然要先计算可逆情形下的理论电压和理论最大电功? 这体现了物理化学中怎样的思维范式? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答。</em>",
       keywords:["极限|上限|天花板|标杆|基准","效率|差距|改进|衡量|评价|评估"],
       explanation:{
         principle:'可逆过程是<strong>理想极限</strong>: 它现实中达不到, 却给出了任何实际装置都不可能逾越的性能<strong>上限</strong>(最大有用功 = |ΔG|, 理论电动势 = |ΔG|/nF)。「先算极限、再量差距」是物理化学处理现实问题的标准范式。',
@@ -470,7 +976,7 @@ const QUESTION_BANK = {
   ],
   T4: [
     { id:"T4-1", type:"fill", score:14, difficulty:"基础", exportIds:["ELECTROCHEMISTRY-BRIDGE-NFE","G-AS-MAX-NON-EXPANSION-WORK"],
-      stem:"氢氧燃料电池总反应 \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\), 25°C 标准条件下 \\(\\Delta G^\\circ = -237.1\\) kJ/mol, 反应转移电子 \\(n = 2\\) mol, 法拉第常数 \\(F = 96485\\) C/mol。由电化学桥 \\(\\Delta G^\\circ = -nFE^\\circ\\): <strong>第 1 空</strong> 理论电动势 \\(E^\\circ \\approx\\) ___ V(保留 2 位小数); <strong>第 2 空</strong> 标准条件下该电池放电过程是否自发? 填「自发」或「非自发」。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 kJ 与 J 的换算); 第 2 空填「自发」或「非自发」, 可从本提示复制。</em>",
+      stem:"氢氧燃料电池总反应 \\(\\mathrm{H_2(g) + \\tfrac{1}{2}O_2(g) \\to H_2O(l)}\\), 25°C 标准条件下 \\(\\Delta G^\\circ = -237.1\\) kJ/mol, 反应转移电子 \\(n = 2\\) mol, 法拉第常数 \\(F = 96485\\) C/mol。由电化学桥 \\(\\Delta G^\\circ = -nFE^\\circ\\): <strong>第 1 空</strong> 理论电动势 \\(E^\\circ \\approx\\) ___ V(保留 2 位小数); <strong>第 2 空</strong> 标准条件下该电池放电过程是否自发? 填「自发」或「非自发」。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 kJ 与 J 的换算); 第 2 空填「自发」或「非自发」, 可从本提示复制。</em>",
       blanks:[{ answers:["1.23","1.229","1.2287","1.22"], score:7 },{ answers:["自发"], score:7 }],
       explanation:{
         principle:'<strong>电化学桥 ΔG = −nFE</strong>: 电池输出的电功是典型的非膨胀有用功, 可逆放电时电功取最大值 |ΔG|; 而电功 = 电荷量 × 电压 = nF × E, 两边对接即得公式。',
@@ -481,7 +987,7 @@ const QUESTION_BANK = {
       extension:'拿到一个离谱的计算结果时, 先做<strong>量纲与量级直觉检查</strong>: 化学电池单体电压在 1-4 V 量级 — 若算出毫伏或千伏, 几乎可以肯定是单位换算或 n 取错了。',
       cardAnchor:"Card 2 STEP 3" },
     { id:"T4-2", type:"fill", score:14, difficulty:"中等", exportIds:["ELECTROCHEMISTRY-BRIDGE-NFE","REVERSIBLE-EQUALS-MAX-WORK","BOUNDARY-NO-NERNST-EQUATION"],
-      stem:"甲醇燃料电池总反应 \\(\\mathrm{CH_3OH(l) + \\tfrac{3}{2}O_2(g) \\to CO_2(g) + 2H_2O(l)}\\), 25°C 标准条件下 \\(\\Delta G^\\circ \\approx -702\\) kJ/mol, 转移电子 \\(n = 6\\) mol, \\(F = 96485\\) C/mol。<strong>第 1 空</strong> 理论电动势 \\(E^\\circ \\approx\\) ___ V(保留 2 位小数); <strong>第 2 空</strong> 实测工作电压只有 0.7-0.9 V, 低于理论值, 这说明实际放电过程是「可逆」还是「不可逆」? <em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 kJ 与 J 的换算); 第 2 空填「可逆」或「不可逆」, 可从本提示复制。</em>",
+      stem:"甲醇燃料电池总反应 \\(\\mathrm{CH_3OH(l) + \\tfrac{3}{2}O_2(g) \\to CO_2(g) + 2H_2O(l)}\\), 25°C 标准条件下 \\(\\Delta G^\\circ \\approx -702\\) kJ/mol, 转移电子 \\(n = 6\\) mol, \\(F = 96485\\) C/mol。<strong>第 1 空</strong> 理论电动势 \\(E^\\circ \\approx\\) ___ V(保留 2 位小数); <strong>第 2 空</strong> 实测工作电压只有 0.7-0.9 V, 低于理论值, 这说明实际放电过程是「可逆」还是「不可逆」? <em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 kJ 与 J 的换算); 第 2 空填「可逆」或「不可逆」, 可从本提示复制。</em>",
       blanks:[{ answers:["1.21","1.213","1.2126","1.2"], score:7 },{ answers:["不可逆"], score:7 }],
       explanation:{
         principle:'ΔG = −nFE 给出的 E° 是<strong>可逆放电</strong>(电流趋于零的理想极限)下的电动势; 实际电池有内阻发热、电极极化、燃料扩散等损耗, 都属于不可逆熵产生, 必然把输出电压压到理论值之下。',
@@ -492,7 +998,7 @@ const QUESTION_BANK = {
       extension:'工程上把「实际电压 / 理论电压」称为电压效率: 0.8 V / 1.21 V ≈ 66% — 剩下 34% 以热的形式耗散。燃料电池研发的主战场, 就是把各类不可逆损耗(活化极化、欧姆损耗、浓差极化)一项项压小。',
       cardAnchor:"Card 2 思考点 4" },
     { id:"T4-3", type:"fill", score:14, difficulty:"较难", exportIds:["ELECTROCHEMISTRY-BRIDGE-NFE","BRIDGE-PATTERN-ONE-QUANTITY-MANY-DISCIPLINES"],
-      stem:"某电池在 25°C 标准条件下的理论电动势 \\(E^\\circ = 1.10\\) V, 电池反应每进行 1 mol 转移电子 \\(n = 2\\) mol, \\(F = 96485\\) C/mol。反向使用电化学桥, 由电学测量反推热力学量: <strong>第 1 空</strong> \\(|\\Delta G^\\circ| \\approx\\) ___ kJ/mol(保留 3 位有效数字); <strong>第 2 空</strong> \\(\\Delta G^\\circ\\) 的符号为? 填「正」或「负」。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字, 单位已是 kJ/mol; 第 2 空填「正」或「负」, 可从本提示复制。</em>",
+      stem:"某电池在 25°C 标准条件下的理论电动势 \\(E^\\circ = 1.10\\) V, 电池反应每进行 1 mol 转移电子 \\(n = 2\\) mol, \\(F = 96485\\) C/mol。反向使用电化学桥, 由电学测量反推热力学量: <strong>第 1 空</strong> \\(|\\Delta G^\\circ| \\approx\\) ___ kJ/mol(保留 3 位有效数字); <strong>第 2 空</strong> \\(\\Delta G^\\circ\\) 的符号为? 填「正」或「负」。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字, 单位已是 kJ/mol; 第 2 空填「正」或「负」, 可从本提示复制。</em>",
       blanks:[{ answers:["212","212.3","212.27","212.267"], score:7 },{ answers:["负"], score:7 }],
       explanation:{
         principle:'电化学桥是<strong>双向</strong>的: 既能由热力学数据(ΔG°)预言电压, 也能由精密测得的电压反推 ΔG°。电压测量是物理学里精度最高的测量之一, 因此「测电动势 → 反推自由能」是获取热化学数据的重要实验路线。',
@@ -503,7 +1009,7 @@ const QUESTION_BANK = {
       extension:'历史上很多物质的标准生成自由能正是这样「用电压表量出来的」: 设计一个以目标反应为总反应的可逆电池, 精测 E°, 一乘 nF 就得到 ΔG° — 比量热法更精密, 这是吉布斯理论给实验化学的厚礼。',
       cardAnchor:"Card 2 STEP 3" },
     { id:"T4-4", type:"fill", score:14, difficulty:"中等", exportIds:["ELECTROCHEMISTRY-BRIDGE-NFE","HESS-LAW-FOR-G"],
-      stem:"把氢氧燃料电池的反应改写成 \\(\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(l)}\\)(即原方程 ×2), 此时 \\(\\Delta G^\\circ = -474.2\\) kJ/mol, \\(F = 96485\\) C/mol。<strong>第 1 空</strong> 与这种写法配套的转移电子数 \\(n =\\) ___ mol; <strong>第 2 空</strong> 由此算出的理论电动势 \\(E^\\circ \\approx\\) ___ V(保留 2 位小数)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数字; 注意 n 必须与方程式的写法相配套。</em>",
+      stem:"把氢氧燃料电池的反应改写成 \\(\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(l)}\\)(即原方程 ×2), 此时 \\(\\Delta G^\\circ = -474.2\\) kJ/mol, \\(F = 96485\\) C/mol。<strong>第 1 空</strong> 与这种写法配套的转移电子数 \\(n =\\) ___ mol; <strong>第 2 空</strong> 由此算出的理论电动势 \\(E^\\circ \\approx\\) ___ V(保留 2 位小数)。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数字; 注意 n 必须与方程式的写法相配套。</em>",
       blanks:[{ answers:["4","4mol"], score:7 },{ answers:["1.23","1.229","1.2287","1.22"], score:7 }],
       explanation:{
         principle:'盖斯定律 for G: 方程式 ×2, ΔG° 也 ×2(广延量); 同时电子转移数 n 也 ×2。<strong>E° = −ΔG°/(nF) 中分子分母同步翻倍, E° 不变</strong> — 电动势是强度量, 不依赖你把反应「记多大份」。',
@@ -566,7 +1072,7 @@ const QUESTION_BANK = {
   ],
   T6: [
     { id:"T6-1", type:"fill", score:16, difficulty:"基础", exportIds:["DGO-EQUALS-NEGATIVE-RTLNK","KEQ-VS-DGO-SIGN"],
-      stem:"25°C(298 K)下某反应 \\(\\Delta G^\\circ = -11.4\\) kJ/mol, \\(R = 8.314\\) J/(mol·K)。由平衡常数桥 \\(\\Delta G^\\circ = -RT\\ln K_{eq}\\): <strong>第 1 空</strong> \\(\\ln K_{eq} \\approx\\) ___(保留 1 位小数); <strong>第 2 空</strong> \\(K_{eq}\\) 与 1 的大小关系? 填「大于」或「小于」。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 kJ 与 J 的换算); 第 2 空填「大于」或「小于」, 可从本提示复制。</em>",
+      stem:"25°C(298 K)下某反应 \\(\\Delta G^\\circ = -11.4\\) kJ/mol, \\(R = 8.314\\) J/(mol·K)。由平衡常数桥 \\(\\Delta G^\\circ = -RT\\ln K_{eq}\\): <strong>第 1 空</strong> \\(\\ln K_{eq} \\approx\\) ___(保留 1 位小数); <strong>第 2 空</strong> \\(K_{eq}\\) 与 1 的大小关系? 填「大于」或「小于」。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 kJ 与 J 的换算); 第 2 空填「大于」或「小于」, 可从本提示复制。</em>",
       blanks:[{ answers:["4.6","4.60","4.601"], score:8 },{ answers:["大于"], score:8 }],
       explanation:{
         principle:'<strong>平衡常数桥</strong> \\(\\Delta G^\\circ = -RT\\ln K_{eq}\\): 它把「标准态下的热力学倾向」(ΔG°)与「平衡时产物 / 反应物的比例」(K_eq)焊在一起 — 热力学表格从此能直接预言化学平衡的位置。',
@@ -577,7 +1083,7 @@ const QUESTION_BANK = {
       extension:'感受一下指数的威力: ΔG° 每负 5.7 kJ/mol, K 就翻 10 倍(因为 \\(RT\\ln 10 \\approx 5.7\\) kJ/mol, 25°C)。热力学上看似不大的能量差, 经过 \\(e^{-\\Delta G^\\circ/RT}\\) 的放大, 在平衡比例上是数量级的鸿沟。',
       cardAnchor:"Card 3 STEP 2" },
     { id:"T6-2", type:"fill", score:16, difficulty:"中等", exportIds:["AMMONIA-SYNTHESIS-K-CALC","DGO-EQUALS-NEGATIVE-RTLNK","KEQ-VS-DGO-SIGN"],
-      stem:"合成氨 \\(\\mathrm{N_2(g) + 3H_2(g) \\rightleftharpoons 2NH_3(g)}\\) 在 25°C(298 K)标准条件下 \\(\\Delta G^\\circ \\approx -32.8\\) kJ/mol, \\(R = 8.314\\) J/(mol·K), \\(\\lg K_{eq} = \\ln K_{eq}/2.303\\)。<strong>第 1 空</strong> \\(\\ln K_{eq} \\approx\\) ___(保留 1 位小数); <strong>第 2 空</strong> \\(K_{eq}\\) 的数量级是 10 的 ___ 次方(填整数)。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数字(注意 kJ 与 J 的换算); 第 2 空填的是幂次, 例如数量级为 10 的 3 次方就填 3。</em>",
+      stem:"合成氨 \\(\\mathrm{N_2(g) + 3H_2(g) \\rightleftharpoons 2NH_3(g)}\\) 在 25°C(298 K)标准条件下 \\(\\Delta G^\\circ \\approx -32.8\\) kJ/mol, \\(R = 8.314\\) J/(mol·K), \\(\\lg K_{eq} = \\ln K_{eq}/2.303\\)。<strong>第 1 空</strong> \\(\\ln K_{eq} \\approx\\) ___(保留 1 位小数); <strong>第 2 空</strong> \\(K_{eq}\\) 的数量级是 10 的 ___ 次方(填整数)。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 两空都只填数字(注意 kJ 与 J 的换算); 第 2 空填的是幂次, 例如数量级为 10 的 3 次方就填 3。</em>",
       blanks:[{ answers:["13.2","13.24","13.23","13.239"], score:8 },{ answers:["5","10^5"], score:8 }],
       explanation:{
         principle:'平衡常数桥的标杆算例: 用 ΔHf° + S° 表算出 ΔG°, 再过桥得 K_eq — 三步把「查表数据」变成「平衡位置的定量预言」, 全程不做一次化学实验。',
@@ -588,7 +1094,7 @@ const QUESTION_BANK = {
       extension:'K ≈ 5.5 × 10⁵ 说明常温下合成氨「先天条件极好」, 可惜 N≡N 三键太顽固、常温速率近乎为零 — 热力学的「能不能」与动力学的「快不快」在这个反应上撕扯了一整个世纪, 也催生了催化科学。',
       cardAnchor:"Card 3 STEP 3" },
     { id:"T6-3", type:"fill", score:16, difficulty:"较难", hasDiagram:true, figureSvg:DGO_T_SVG, exportIds:["DGO-VS-T-LINE-INTERPRETATION","AMMONIA-SYNTHESIS-K-CALC","DGO-EQUALS-NEGATIVE-RTLNK","KEQ-VS-DGO-SIGN"],
-      stem:"合成氨 \\(\\Delta H^\\circ = -91.8\\) kJ/mol, \\(\\Delta S^\\circ = -198.1\\) J/(mol·K)(两者近似不随温度变化)。于是 \\(\\Delta G^\\circ(T) = \\Delta H^\\circ - T\\Delta S^\\circ\\) 是 T 的直线(见图, 图中只画形状、未标数值): <strong>第 1 空</strong> 直线与 0 轴交点 \\(T_{\\text{转}} \\approx\\) ___ K(取整数); <strong>第 2 空</strong> 当 \\(T < T_{\\text{转}}\\) 时, \\(K_{eq}\\) 与 1 的大小关系? 填「大于」或「小于」。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 ΔH° 是 kJ、ΔS° 是 J, 要先统一单位); 第 2 空填「大于」或「小于」, 可从本提示复制。图为模板示意, 具体数值需要自己计算, 不要照搬图形位置。</em>",
+      stem:"合成氨 \\(\\Delta H^\\circ = -91.8\\) kJ/mol, \\(\\Delta S^\\circ = -198.1\\) J/(mol·K)(两者近似不随温度变化)。于是 \\(\\Delta G^\\circ(T) = \\Delta H^\\circ - T\\Delta S^\\circ\\) 是 T 的直线(见图, 图中只画形状、未标数值): <strong>第 1 空</strong> 直线与 0 轴交点 \\(T_{\\text{转}} \\approx\\) ___ K(取整数); <strong>第 2 空</strong> 当 \\(T < T_{\\text{转}}\\) 时, \\(K_{eq}\\) 与 1 的大小关系? 填「大于」或「小于」。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字(注意 ΔH° 是 kJ、ΔS° 是 J, 要先统一单位); 第 2 空填「大于」或「小于」, 可从本提示复制。图为模板示意, 具体数值需要自己计算, 不要照搬图形位置。</em>",
       blanks:[{ answers:["463","463.4","464","463.40"], score:8 },{ answers:["大于"], score:8 }],
       explanation:{
         principle:'<strong>ΔG° vs T 直线的几何学</strong>: 截距 = ΔH°, 斜率 = −ΔS°, 与 0 轴的交点 = 转折温度 \\(T_{\\text{转}} = \\Delta H^\\circ/\\Delta S^\\circ\\)。一条直线把「温度怎么改写热力学倾向」全部画了出来。',
@@ -599,7 +1105,7 @@ const QUESTION_BANK = {
       extension:'对合成氨, 直线从 0 轴<strong>下方</strong>出发向上爬(ΔH° < 0 定截距为负, −ΔS° > 0 定斜率为正): 低温区 ΔG° < 0 有利, 高温区翻正失利。四种「ΔH°、ΔS° 符号组合」对应四种直线姿态 — 基础板块的四象限表, 在这张图上全部变成几何。',
       cardAnchor:"Card 3 STEP 4" },
     { id:"T6-4", type:"fill", score:16, difficulty:"中等", exportIds:["DGO-EQUALS-NEGATIVE-RTLNK","KEQ-VS-DGO-SIGN"],
-      stem:"25°C(298 K)下测得某反应的平衡常数 \\(K_{eq} = 1.0 \\times 10^{-4}\\), \\(R = 8.314\\) J/(mol·K), \\(\\ln 10 \\approx 2.303\\)。反向使用平衡常数桥: <strong>第 1 空</strong> \\(|\\Delta G^\\circ| \\approx\\) ___ kJ/mol(保留 1 位小数); <strong>第 2 空</strong> \\(\\Delta G^\\circ\\) 的符号? 填「正」或「负」。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字, 单位已是 kJ/mol(提示: ln 10⁻⁴ = −4 × 2.303); 第 2 空填「正」或「负」, 可从本提示复制。</em>",
+      stem:"25°C(298 K)下测得某反应的平衡常数 \\(K_{eq} = 1.0 \\times 10^{-4}\\), \\(R = 8.314\\) J/(mol·K), \\(\\ln 10 \\approx 2.303\\)。反向使用平衡常数桥: <strong>第 1 空</strong> \\(|\\Delta G^\\circ| \\approx\\) ___ kJ/mol(保留 1 位小数); <strong>第 2 空</strong> \\(\\Delta G^\\circ\\) 的符号? 填「正」或「负」。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 第 1 空只填数字, 单位已是 kJ/mol(提示: ln 10⁻⁴ = −4 × 2.303); 第 2 空填「正」或「负」, 可从本提示复制。</em>",
       blanks:[{ answers:["22.8","22.83","22.82","23"], score:8 },{ answers:["正"], score:8 }],
       explanation:{
         principle:'平衡常数桥同样<strong>双向通行</strong>: 由实验测得的 K_eq 反推 ΔG° — 这是实验化学家获取自由能数据的另一条大路(与电化学桥反推并列)。',
@@ -612,7 +1118,7 @@ const QUESTION_BANK = {
   ],
   T7: [
     { id:"T7-1", type:"short", score:16, difficulty:"基础", exportIds:["VANT-HOFF-EQUATION-SIMPLE","EXOTHERMIC-K-DECREASES-WITH-T"],
-      stem:"范特霍夫方程(微分形式)为 \\(\\dfrac{\\mathrm{d}\\ln K_{eq}}{\\mathrm{d}T} = \\dfrac{\\Delta H^\\circ}{RT^2}\\)。对一个<strong>放热</strong>反应, 用这个方程说明: 温度升高时 \\(K_{eq}\\) 如何变化? 推理的每一步依据是什么? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文与普通数字作答, 不必输入 Δ 等特殊符号。</em>",
+      stem:"范特霍夫方程(微分形式)为 \\(\\dfrac{\\mathrm{d}\\ln K_{eq}}{\\mathrm{d}T} = \\dfrac{\\Delta H^\\circ}{RT^2}\\)。对一个<strong>放热</strong>反应, 用这个方程说明: 温度升高时 \\(K_{eq}\\) 如何变化? 推理的每一步依据是什么? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文与普通数字作答, 不必输入 Δ 等特殊符号。</em>",
       keywords:["负|小于零|小于 0","减小|变小|下降|降低"],
       explanation:{
         principle:'范特霍夫方程把「K 随温度的变化率」与「反应的 ΔH°」直接挂钩: 等号右边 \\(\\Delta H^\\circ/(RT^2)\\) 中, 分母 \\(RT^2\\) 恒为正, 所以<strong>整个变化率的符号完全由 ΔH° 的符号决定</strong>。',
@@ -623,7 +1129,7 @@ const QUESTION_BANK = {
       extension:'同一个方程映出两面: 吸热反应(ΔH° > 0)右边为正, 升温 K 增大。一句话总结 — <strong>温度永远偏袒吸热方向</strong>: 升温给谁「输血」, 取决于谁在吸热。',
       cardAnchor:"Card 3 STEP 4" },
     { id:"T7-2", type:"short", score:16, difficulty:"中等", exportIds:["INDUSTRIAL-AMMONIA-COMPROMISE","EXOTHERMIC-K-DECREASES-WITH-T","RIGOROUS-DERIVATION-VS-ENGINEERING"],
-      stem:"合成氨是放热反应, 热力学上温度越低 \\(K_{eq}\\) 越大、越有利; 但工业合成氨却选择在约 400-500°C 的高温下进行。解释这个看似矛盾的选择: 工业上到底在用温度换什么? 最终的选温逻辑是什么? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答。</em>",
+      stem:"合成氨是放热反应, 热力学上温度越低 \\(K_{eq}\\) 越大、越有利; 但工业合成氨却选择在约 400-500°C 的高温下进行。解释这个看似矛盾的选择: 工业上到底在用温度换什么? 最终的选温逻辑是什么? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答。</em>",
       keywords:["速率|动力学|反应速度|太慢","折中|兼顾|权衡|妥协|平衡点"],
       explanation:{
         principle:'热力学与动力学是两本独立的账: <strong>热力学(K_eq)管「平衡时能到哪」, 动力学(速率)管「多快能到」</strong>。低温下合成氨 K 很大, 但 N≡N 三键极难活化, 反应<strong>速率</strong>低到工业上毫无意义 — 平衡位置再好, 一百年到不了也是零产量。',
@@ -634,7 +1140,7 @@ const QUESTION_BANK = {
       extension:'这套权衡里还有第三个隐形玩家 — <strong>经济</strong>: 更高的压强对平衡更有利, 但设备造价与能耗飙升; 哈伯与博施当年选定的工艺窗口, 本质上是「热力学 × 动力学 × 成本」三元函数的工程最优解。',
       cardAnchor:"Card 3 思考点 5" },
     { id:"T7-3", type:"short", score:16, difficulty:"中等", exportIds:["VANT-HOFF-EQUATION-SIMPLE","ENDOTHERMIC-K-INCREASES-WITH-T"],
-      stem:"石灰石煅烧反应 \\(\\mathrm{CaCO_3(s) \\to CaO(s) + CO_2(g)}\\) 是吸热反应。请用范特霍夫方程 \\(\\dfrac{\\mathrm{d}\\ln K_{eq}}{\\mathrm{d}T} = \\dfrac{\\Delta H^\\circ}{RT^2}\\) 分析: 升温对它的 \\(K_{eq}\\) 有什么影响? 这能否解释工业上用<strong>高温煅烧</strong>而不是常温存放来分解石灰石? 请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文与普通数字作答, 不必输入 Δ 等特殊符号。</em>",
+      stem:"石灰石煅烧反应 \\(\\mathrm{CaCO_3(s) \\to CaO(s) + CO_2(g)}\\) 是吸热反应。请用范特霍夫方程 \\(\\dfrac{\\mathrm{d}\\ln K_{eq}}{\\mathrm{d}T} = \\dfrac{\\Delta H^\\circ}{RT^2}\\) 分析: 升温对它的 \\(K_{eq}\\) 有什么影响? 这能否解释工业上用<strong>高温煅烧</strong>而不是常温存放来分解石灰石? 请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文与普通数字作答, 不必输入 Δ 等特殊符号。</em>",
       keywords:["正|大于零|大于 0","增大|变大|增加|升高"],
       explanation:{
         principle:'吸热反应 ΔH° > 0(为<strong>正</strong>), 范特霍夫方程右边 \\(\\Delta H^\\circ/(RT^2) > 0\\) → \\(\\ln K_{eq}\\) 随 T 单调上升 → <strong>升温使 K_eq 增大</strong>, 平衡向产物方向大幅倾斜。',
@@ -645,7 +1151,7 @@ const QUESTION_BANK = {
       extension:'敞开的石灰窑里 CO₂ 不断被带走, Q 被压在 K 之下 — 高温抬 K(热力学)与排气压 Q(工况)双管齐下, 这正是 T5 类「Q 与 K 比大小」和本题「K 随 T」两件武器的联合使用。',
       cardAnchor:"Card 3 STEP 4" },
     { id:"T7-4", type:"short", score:16, difficulty:"较难", exportIds:["BOUNDARY-NO-VANT-HOFF-INTEGRAL","VANT-HOFF-EQUATION-SIMPLE","RIGOROUS-DERIVATION-VS-ENGINEERING"],
-      stem:"本板块只用范特霍夫方程的<strong>微分形式</strong> \\(\\dfrac{\\mathrm{d}\\ln K_{eq}}{\\mathrm{d}T} = \\dfrac{\\Delta H^\\circ}{RT^2}\\) 做定性判断。若想<strong>定量</strong>算出「\\(K_{eq}\\)(500 K) 是 \\(K_{eq}\\)(298 K) 的多少倍」, 在数学上需要对方程做什么处理? 这个处理通常还要对 \\(\\Delta H^\\circ\\) 附加一个什么简化假定? (该定量工具在本板块边界之外, 你只需说出思路。)请分点作答。<em style='display:block;margin-top:10px;color:#7f8c8d;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答, 不必书写数学式。</em>",
+      stem:"本板块只用范特霍夫方程的<strong>微分形式</strong> \\(\\dfrac{\\mathrm{d}\\ln K_{eq}}{\\mathrm{d}T} = \\dfrac{\\Delta H^\\circ}{RT^2}\\) 做定性判断。若想<strong>定量</strong>算出「\\(K_{eq}\\)(500 K) 是 \\(K_{eq}\\)(298 K) 的多少倍」, 在数学上需要对方程做什么处理? 这个处理通常还要对 \\(\\Delta H^\\circ\\) 附加一个什么简化假定? (该定量工具在本板块边界之外, 你只需说出思路。)请分点作答。<em style='display:block;margin-top:10px;color:#7B8290;font-size:12.5px;font-style:normal;'>💡 输入提示: 可全部用中文作答, 不必书写数学式。</em>",
       keywords:["积分","不变|恒定|不随温度|视为常数|当作常数"],
       explanation:{
         principle:'微分形式只给出每一点的「变化率」; 要比较两个温度下 K 的具体取值, 必须把变化率<strong>从 298 K 到 500 K 积分</strong>累加起来 — 「由斜率求增量」正是积分的本职工作。',
@@ -707,16 +1213,14 @@ function renderQuestions() {
   let html = "";
   selectedQuestions.forEach((q, idx) => {
     const n = idx + 1;
-    const diagTag = q.hasDiagram ? '<span class="q-meta diagram">📊 配图</span>' : '';
     const typeLabel = q.type === "choice" ? "单选" : q.type === "multi" ? "多选" : q.type === "fill" ? "填空" : "简答";
+    const diagSuffix = q.hasDiagram ? " · 📊 配图" : "";
     html += `<div class="question" data-q-id="q${n}" data-q-type="${q.type}" data-q-original="${q.id}">
-      <div class="q-header">
-        <span class="q-num">第 ${n} 题</span>
-        <span class="q-meta">${typeLabel}</span>
-        <span class="q-meta diff-${q.difficulty}">${q.difficulty}</span>
-        ${diagTag}
-        <span class="q-meta" style="background:#f8e7cf;color:#a35511;">${q.id}</span>
-        <span class="q-score">${q.score} 分</span>
+      <div class="q-header-circle">
+        <div class="q-h-num">第 ${n} 题</div>
+        <div class="q-h-type">${typeLabel}${diagSuffix}</div>
+        <div class="q-h-diff">${q.difficulty}</div>
+        <div class="q-h-id">${q.id} · ${q.score} 分</div>
       </div>
       ${q.figureSvg || ""}
       <div class="q-prompt">${q.stem}</div>
@@ -846,7 +1350,7 @@ function submitTest() {
   else status += `✗ 距通过还差 ${70 - totalScore} 分 — 建议针对错题回学习任务卡复习再练`;
   const statEl = document.getElementById("status-msg");
   statEl.textContent = status;
-  statEl.style.color = honored ? "#d4af37" : (passed ? "#27ae60" : "#c0392b");
+  statEl.style.color = honored ? "#B8924A" : (passed ? "#00409A" : "#5C6370");
 
   const wrong = results.filter(r => !r.isCorrect);
   const wrongEl = document.getElementById("wrong-list");
@@ -856,7 +1360,7 @@ function submitTest() {
     const exportCounts = {};
     wrong.forEach(r => r.q.exportIds.forEach(eid => exportCounts[eid] = (exportCounts[eid] || 0) + 1));
     const sortedExports = Object.entries(exportCounts).sort((a,b) => b[1] - a[1]).slice(0, 3);
-    const hint = sortedExports.length > 0 ? `<br><small style="color:#7f8c8d;">主要薄弱点: ${sortedExports.map(([id,n]) => `<span class="q-export-label">${EXPORT_NAMES[id] || id}</span>(${n}题)`).join(" / ")}</small>` : "";
+    const hint = sortedExports.length > 0 ? `<br><small style="color:#7B8290;">主要薄弱点: ${sortedExports.map(([id,n]) => `<span class="q-export-label">${EXPORT_NAMES[id] || id}</span>(${n}题)`).join(" / ")}</small>` : "";
     wrongEl.innerHTML = `<strong>错题清单</strong>(${wrong.length} 题): ${list}${hint}`;
   }
 
@@ -894,8 +1398,8 @@ function renderFeedback(r) {
     <div class="q-result ${r.isCorrect ? 'correct' : 'wrong'}">${r.isCorrect ? '✓ 答对' : (r.score > 0 ? '✗ 部分正确' : '✗ 答错')} · 得 ${r.score} / ${q.score} 分</div>
     <div class="q-fb-row"><strong>📌 标准答案</strong>: ${stdAns}</div>
     ${explanationHtml}
-    <div class="q-fb-row" style="background:#fff7e8;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
-    <div class="q-fb-row" style="background:#eef7ed;"><strong>📚 扩展</strong>: ${q.extension}</div>
+    <div class="q-fb-row" style="background:#FBF7EC;"><strong>⚠️ 常见误区</strong>: ${q.mistakes}</div>
+    <div class="q-fb-row" style="background:#F4ECD6;"><strong>📚 扩展</strong>: ${q.extension}</div>
     <div class="q-anchor">📖 本题考查: ${exportLabels} · 回 <a href="./gibbs-free-energy-advanced-task-cards.html">学习任务卡 · ${q.cardAnchor}</a> 复习。</div>
   `;
   fbEl.classList.add(r.isCorrect ? "correct" : "wrong");
@@ -940,7 +1444,7 @@ window.addEventListener("DOMContentLoaded", () => {
   const last = loadState();
   if (last.submittedAt) {
     const dateStr = new Date(last.submittedAt).toLocaleString('zh-CN');
-    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7f8c8d;">本次将重新抽题</small>`;
+    document.querySelector("#entry-screen p").innerHTML = `上次提交 ${dateStr} · ${last.totalScore}/100 ${last.passed ? "✓已通过" : ""} ${last.honored ? "⭐荣誉" : ""}<br><small style="color:#7B8290;">本次将重新抽题</small>`;
     if (last.studentName) document.getElementById("student-name").value = last.studentName;
   }
 });
@@ -992,17 +1496,17 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!region) return;
     const u = getUser();
     if (u && u.role === "student") {
-      region.innerHTML = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#1e5a30;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#c0392b;border:1px solid #c0392b;padding:4px 10px;border-radius:4px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
+      region.innerHTML = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-size:13.5px;color:#002F73;max-width:900px;margin-left:auto;margin-right:auto;">👤 当前：<strong>' + escapeHtml(u.name) + '</strong> <code style="background:white;padding:1px 6px;border-radius:3px;font-size:12px;">' + escapeHtml(u.account) + '</code> · 已登录 <button onclick="logoutStudent()" style="margin-left:auto;background:white;color:#5C6370;border:1px solid #5C6370;padding:4px 10px;border-radius: 16px;cursor:pointer;font-size:12.5px;font-family:inherit;">退出登录</button></div>';
     } else { region.innerHTML = ''; }
     [PRODUCT_TYPE + "-apply-user-info", PRODUCT_TYPE + "-appeal-user-info"].forEach(id => {
       const el = document.getElementById(id);
       if (!el) return;
       if (u) {
         el.innerHTML = '👤 申请人：<strong>' + escapeHtml(u.name) + '</strong> · <code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(u.account) + '</code>（自动绑定登录账号）';
-        el.style.color = "#1e5a30"; el.style.background = "#e8f5e9";
+        el.style.color = "#002F73"; el.style.background = "#F3F6FC";
       } else {
         el.innerHTML = '💡 提交时会要求登录账号（demo: stu001 / 123456）';
-        el.style.color = "#7f8c8d"; el.style.background = "#fafbfc";
+        el.style.color = "#7B8290"; el.style.background = "#FAFAFB";
       }
     });
     // (按钮不禁用 · 提交时按需弹登录)
@@ -1088,10 +1592,10 @@ window.addEventListener("DOMContentLoaded", () => {
     const region = document.getElementById("my-" + PRODUCT_TYPE + "-applies-region");
     if (!region) return;
     if (list.length === 0) { region.innerHTML = ""; return; }
-    let html = '<div style="background:#e8f5e9;border-left:4px solid #27ae60;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#1e8449;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    let html = '<div style="background:#F3F6FC;border-left:4px solid #00409A;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#00409A;">📤 你提交的申请（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
     list.forEach(a => {
       const sl = { pending: "⏳ 等待教师审核", approved: "✅ 已通过 · 等候约时间", rejected: "❌ 已驳回" }[a.status] || a.status;
-      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+      html += '<li>' + new Date(a.submittedAt).toLocaleString("zh-CN") + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#F3F4F7;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
     });
     html += '</ul></div>';
     region.innerHTML = html;
@@ -1102,10 +1606,10 @@ window.addEventListener("DOMContentLoaded", () => {
     const region = document.getElementById("my-" + PRODUCT_TYPE + "-appeals-region");
     if (!region) return;
     if (list.length === 0) { region.innerHTML = ""; return; }
-    let html = '<div style="background:#faf4fc;border-left:4px solid #8e44ad;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#6c3483;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
+    let html = '<div style="background:#F3F4F7;border-left:4px solid #7B8290;border-radius:6px;padding:12px 16px;margin-bottom:14px;"><strong style="color:#5C6370;">📤 你提交的申诉（' + list.length + '）</strong><ul style="margin:6px 0 0 20px;font-size:13.5px;">';
     list.forEach(a => {
       const sl = { pending: "⏳ 等待教师评估", approved: "✅ 已重判", rejected: "❌ 已驳回" }[a.status] || a.status;
-      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#f0f3f5;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
+      html += '<li>第 ' + escapeHtml(a.setNum) + ' 套 · ' + escapeHtml(a.qnum) + ' · ' + sl + (a.rejectReason ? ' · 驳回理由：' + escapeHtml(a.rejectReason) : '') + ' · <code style="background:#F3F4F7;padding:1px 4px;border-radius:3px;font-size:12px;">' + a.id + '</code></li>';
     });
     html += '</ul></div>';
     region.innerHTML = html;
@@ -1117,13 +1621,13 @@ window.addEventListener("DOMContentLoaded", () => {
     const region = document.getElementById("my-check-results-region");
     if (!region) return;
     if (!u) {
-      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#7B8290;background:#FAFAFB;border-radius:8px;font-size:13.5px;">请先登录查看反馈</div>';
       return;
     }
     const all = JSON.parse(localStorage.getItem("bn-check-results") || "[]");
     const mine = all.filter(r => r.slug === SLUG && r.type === PRODUCT_TYPE + "-result" && r.account === u.account);
     if (mine.length === 0) {
-      region.innerHTML = '<div style="padding:20px;text-align:center;color:#95a5a6;background:#fafbfc;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
+      region.innerHTML = '<div style="padding:20px;text-align:center;color:#7B8290;background:#FAFAFB;border-radius:8px;font-size:13.5px;">' + escapeHtml(u.name) + '（' + escapeHtml(u.account) + '）暂无本板块 ' + PRODUCT_LABEL + ' 反馈<br><small>教师纸笔批改后会推送到此处</small></div>';
       return;
     }
     mine.sort((a, b) => new Date(b.batchedAt) - new Date(a.batchedAt));
@@ -1132,17 +1636,17 @@ window.addEventListener("DOMContentLoaded", () => {
       const passed = r.score >= 70;
       const honored = r.score >= 90;
       const verdictLabel = honored ? '⭐ 荣誉通过' : passed ? '✅ 通过' : '❌ 未通过';
-      const verdictColor = honored ? '#d4af37' : passed ? '#27ae60' : '#c0392b';
-      html += '<div style="background:white;border:1px solid #ecf0f1;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
+      const verdictColor = honored ? '#B8924A' : passed ? '#00409A' : '#5C6370';
+      html += '<div style="background:white;border:1px solid #F3F4F7;border-left:4px solid ' + verdictColor + ';border-radius:8px;padding:14px 18px;margin-bottom:10px;">';
       html += '<div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:8px;">';
       html += '<span style="background:rgba(0,0,0,0.05);color:' + verdictColor + ';padding:4px 12px;border-radius:4px;font-size:13px;font-weight:600;">' + verdictLabel + '</span>';
       html += '<span style="font-size:18px;font-weight:700;color:' + verdictColor + ';">' + r.score + ' 分</span>';
-      html += '<span style="font-size:13px;color:#5a6c7d;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
+      html += '<span style="font-size:13px;color:#7B8290;">第 ' + escapeHtml(r.setNum) + ' 套 · ' + new Date(r.batchedAt).toLocaleString("zh-CN") + ' · 教师 ' + escapeHtml(r.teacherName || "—") + '</span>';
       html += '</div>';
-      html += '<div style="font-size:13px;color:#2c3e50;background:#fafbfc;padding:10px 14px;border-radius:6px;">';
+      html += '<div style="font-size:13px;color:#5C6370;background:#FAFAFB;padding:10px 14px;border-radius:6px;">';
       if (r.feedback) html += '<div><strong>📝 教师反馈：</strong>' + escapeHtml(r.feedback) + '</div>';
       if (r.weakPoints) html += '<div style="margin-top:6px;"><strong>📌 薄弱点：</strong>' + escapeHtml(r.weakPoints) + '</div>';
-      html += '<div style="margin-top:6px;font-size:12.5px;color:#7f8c8d;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
+      html += '<div style="margin-top:6px;font-size:12.5px;color:#7B8290;">批改单 ID：<code style="background:white;padding:1px 5px;border-radius:3px;">' + escapeHtml(r.id) + '</code></div>';
       html += '</div></div>';
     });
     region.innerHTML = html;

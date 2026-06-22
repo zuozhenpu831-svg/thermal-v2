@@ -1,0 +1,1711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考 13 题位 · 传送带 + 动能定理 · 学习任务卡（capstone）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 · 三色制（蓝 / 金 / 银）· 圆形锚点 · 大留白 v0.2 ===== */
+  :root {
+    /* 蓝 · 主色 */
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    /* 金 · 第二色（节奏 2 · 强调 · 暖警示） */
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    /* 银 · 第三色（节奏 3 · 弱调 · 中性提示） */
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    /* 中性 */
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    /* 形变 */
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 兼容旧变量（页面内联仍引用 var(--primary-blue) 等） */
+    --primary-blue: var(--blue-700);
+    --secondary-blue: var(--blue-500);
+    --bright-blue: var(--blue-500);
+    --light-blue: var(--blue-100);
+    --bg-light: var(--bg-secondary);
+    --accent-orange: var(--gold-700);
+    --accent-purple: var(--silver-700);
+    --accent-green: var(--silver-700);
+    --success: var(--silver-700);
+    --danger: var(--gold-900);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 8px; color: var(--silver-500); }
+
+  /* ===== 头部 · 极简化 · 一个大金圆作为视觉锚 ===== */
+  .header {
+    text-align: center;
+    padding: 64px 32px 56px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 .h1-sub {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--silver-700);
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--silver-500);
+    opacity: 0.9;
+  }
+  .header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  /* 隐藏原内联装饰元素 · 由 ::before/::after 取代 */
+  .hero-wave, .hero-decoration { display: none; }
+
+  /* ===== Banner · 圆点开头 + 金色调（替代橙色 capstone-banner） ===== */
+  .capstone-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .capstone-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .capstone-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  /* ===== 跨主题警示 · 蓝色品牌主色（统一品牌） ===== */
+  .cross-topic-warning {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin: 28px 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-topic-warning::before {
+    content: "!";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-topic-warning .ctw-title { font-weight: 700; color: var(--blue-700); margin-bottom: 10px; font-size: 0.95rem; }
+  .cross-topic-warning strong { color: var(--blue-700); }
+
+  /* ===== 主卡片 · 节奏 蓝→金→银→蓝→金→银 ===== */
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+  }
+  /* .card 顶边锁定蓝色（不轮换） */
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .info-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .info-table td:first-child { font-weight: 600; color: var(--blue-700); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+
+  /* ===== 章节标题 · 圆形锚点前置 + 节奏色 ===== */
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--silver-100);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  /* .card .section-title 锁定蓝色（不轮换） */
+
+  .objectives-list { padding-left: 24px; font-size: 0.94rem; }
+  .objectives-list li { margin-bottom: 14px; line-height: 1.85; }
+  .objectives-list li::marker { color: var(--blue-700); font-weight: 700; }
+  .card .objectives-list li strong { color: var(--blue-700); }
+
+  /* ===== 驱动问题 · 极简留白 + 圆形「?」 ===== */
+  .driving-question {
+    background: var(--blue-050);
+    border: none;
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 32px 32px 32px 72px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .driving-question::before {
+    content: "?";
+    position: absolute;
+    left: 22px;
+    top: 30px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--blue-700); margin-bottom: 16px; letter-spacing: -0.005em; }
+  .driving-question p { font-size: 0.94rem; margin-bottom: 12px; line-height: 1.85; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--silver-700); margin-top: 10px; }
+
+  /* ===== 任务卡 · 大号圆形编号 + 节奏色 ===== */
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: #fff;
+    color: var(--text-primary);
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+  .task-card-header:hover { background: var(--blue-050); }
+  .task-card-number {
+    background: var(--blue-700);
+    color: #fff;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px var(--blue-100);
+  }
+  /* task-card-number 锁定蓝色（不跟例题序号轮换） */
+  .task-card-header h3 { font-size: 1.1rem; font-weight: 600; flex-grow: 1; color: var(--text-primary); line-height: 1.6; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.5; color: var(--silver-700); }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 40px 36px; }
+  .task-card-body.collapsed { display: none; }
+
+  .task-objective {
+    background: var(--blue-050);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--blue-700);
+    line-height: 1.85;
+    margin-bottom: 36px;
+    border-left: 3px solid var(--blue-700);
+  }
+  /* task-objective 锁定蓝色（不跟例题序号轮换） */
+
+  /* ===== STEP · 圆形 badge ===== */
+  /* ===== STEP 标题 · 小圆形文本框（220×220） =====
+     · 圆 = STEP 编号（小字）+ 标题（居中换行 · word-break）
+     · 圆之间天然有 step-content 矩形隔开，避免连续圆形
+     · 节奏色按步骤序号循环 蓝→金→银 */
+  .step { margin-bottom: 40px; }
+  .step:last-of-type { margin-bottom: 16px; }
+
+  .step-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 32px 28px;
+    margin: 0 auto 36px;
+    text-align: center;
+    gap: 0;
+  }
+
+  /* badge → 圆顶部小字签条 */
+  .step-header .step-badge {
+    background: transparent;
+    color: var(--blue-700);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0 0 8px;
+    margin: 0 0 14px;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    display: inline-block;
+    border-bottom: 1.5px solid var(--blue-700);
+    flex-shrink: 1;
+  }
+
+  /* title → 圆心标题 · 居中换行 */
+  .step-header .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    line-height: 1.55;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  /* 副标题（括号细节） · 小一号 + 跟随 STEP 色 */
+  .step-header .step-title .step-sub {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--step-mid);
+    opacity: 0.8;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+   * 单一真理源 · STEP 节奏色系统
+   * 每个 .step 注入 4 个变量：--step-rich (900) / --step-mid (700) / --step-bg (050) / --step-tint (100)
+   * 使用 :nth-child(N of .step) 仅按 .step 计数（不被 .task-objective 干扰）
+   * STEP 1=蓝 · 2=金 · 3=银 · 4=蓝 · 5=金 · 6=银（每个 task-card 独立计数）
+   * 例题 4 综合反思（无 task-objective）→ A=蓝 · B=金 · C=银 · D=蓝 · E=金 · F=银
+   * ============================================================ */
+  .step {
+    --step-rich: var(--blue-900);
+    --step-mid:  var(--blue-700);
+    --step-bg:   var(--blue-050);
+    --step-tint: var(--blue-100);
+  }
+  .task-card-body > .step:nth-child(3n+2 of .step) {
+    --step-rich: var(--gold-900);
+    --step-mid:  var(--gold-700);
+    --step-bg:   var(--gold-050);
+    --step-tint: var(--gold-100);
+  }
+  .task-card-body > .step:nth-child(3n of .step) {
+    --step-rich: var(--silver-900);
+    --step-mid:  var(--silver-700);
+    --step-bg:   var(--silver-050);
+    --step-tint: var(--silver-100);
+  }
+
+  /* 兼容旧 inline 样式：17 处 路径 N 标题 `color:var(--primary-blue)`
+     通过 .step 级 var 重定向，让它跟随 STEP 区域色（而非死锁蓝） */
+  .step {
+    --primary-blue:   var(--step-rich);
+    --secondary-blue: var(--step-mid);
+    --bright-blue:    var(--step-mid);
+    --light-blue:     var(--step-bg);
+  }
+
+  /* step-header 圆 → 跟随 STEP 色 */
+  .step .step-header {
+    background: var(--step-bg);
+    border-color: var(--step-mid);
+  }
+  .step .step-header .step-badge {
+    color: var(--step-rich);
+    border-bottom-color: var(--step-mid);
+  }
+
+  .step-content { font-size: 0.92rem; padding-left: 0; }
+  .step-content p { margin-bottom: 12px; }
+  .step-content ul, .step-content ol { padding-left: 22px; margin-bottom: 12px; }
+  .step-content li { margin-bottom: 8px; }
+
+  /* ===== 引用块 · 跟随 STEP 色 ===== */
+  .quote-block {
+    background: var(--step-bg);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 18px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.85;
+  }
+
+  /* ===== 前置回顾 · 跟随 STEP 色 ===== */
+  .prereq-recap {
+    background: #fff;
+    border: 1px solid var(--silver-100);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+  }
+  .prereq-recap strong { color: var(--step-rich); }
+
+  /* ===== 推导块 · 留白 + 节奏色（蓝/金/银 轮换）===== */
+  .derivation-block {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 28px 30px;
+    margin: 22px 0;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .derivation-block::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: -1px; bottom: -1px;
+    width: 4px;
+    background: var(--step-mid);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .derivation-block .derivation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .derivation-block .derivation-title::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    box-shadow: 0 0 0 3px var(--step-tint);
+    flex-shrink: 0;
+  }
+
+  .derivation-block .step-line {
+    margin: 12px 0;
+    padding-left: 18px;
+    border-left: 1px solid var(--silver-100);
+    line-height: 1.85;
+  }
+  .derivation-block .step-line strong { color: var(--step-rich); }
+
+  /* ===== STEP 0（.card 直辖 · 非 .step）的 derivation-block 循环色 ===== */
+  /* 默认 蓝（骨架 1, 4 …） */
+  .card > .derivation-block::before { background: var(--blue-700); }
+  .card > .derivation-block .derivation-title { color: var(--blue-700); }
+  .card > .derivation-block .derivation-title::before { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .card > .derivation-block .step-line strong { color: var(--blue-700); }
+  /* 第 2/5/8 个 → 金 */
+  .card > .derivation-block:nth-of-type(3n+2)::before { background: var(--gold-700); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title { color: var(--gold-900); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title::before { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .card > .derivation-block:nth-of-type(3n+2) .step-line strong { color: var(--gold-900); }
+  /* 第 3/6 个 → 银 */
+  .card > .derivation-block:nth-of-type(3n)::before { background: var(--silver-700); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title { color: var(--silver-900); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title::before { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .card > .derivation-block:nth-of-type(3n) .step-line strong { color: var(--silver-900); }
+
+  /* ===== 思考停顿 · 跟随 STEP 色 ===== */
+  .thinking-point {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .thinking-point::before {
+    content: "💭";
+    position: absolute;
+    left: 16px;
+    top: 22px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--step-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--step-rich); font-size: 0.98rem; margin-bottom: 14px; }
+  .thinking-point .tp-pause { background: #fff; padding: 12px 16px; border-radius: var(--radius-sm); margin: 10px 0; font-size: 0.88rem; border: 1px solid var(--step-tint); }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-write { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--silver-700); font-style: italic; margin: 6px 0 2px 0; }
+
+  /* ===== 进阶推荐 · 跟随 STEP 色 ===== */
+  .deepening-recommendation {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px 20px 56px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: var(--step-rich);
+    line-height: 1.8;
+    position: relative;
+  }
+  .deepening-recommendation::before {
+    content: "↗";
+    position: absolute;
+    left: 14px; top: 20px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .deepening-recommendation .dr-title { font-weight: 700; color: var(--step-rich); margin-bottom: 8px; }
+
+  /* ===== 图示块 · 干净背景 ===== */
+  .diagram-block { margin: 32px 0; text-align: center; }
+  .diagram-block svg {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+  }
+  .diagram-caption { font-size: 0.83rem; color: var(--silver-700); margin-top: 12px; font-style: italic; line-height: 1.7; }
+
+  /* ===== 自查 / 检查点 · 跟随 STEP 色 ===== */
+  .checkpoint {
+    background: var(--step-bg);
+    border: 1px solid var(--step-tint);
+    border-radius: var(--radius-sm);
+    padding: 24px 26px 22px 26px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .checkpoint-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .checkpoint-title::before {
+    content: "✓";
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; margin-bottom: 12px; cursor: pointer; line-height: 1.7; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; accent-color: var(--step-mid); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--silver-700); }
+
+  /* ===== 素养标签 ===== */
+  .literacy-tag { font-size: 0.82rem; color: var(--silver-700); margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--silver-100); }
+
+  /* ===== 评分表 · 跟随 STEP 色 ===== */
+  .scoring-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .scoring-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .scoring-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .scoring-table tr:nth-child(even) td { background: var(--step-bg); }
+  .scoring-table td:last-child { color: var(--step-rich); font-weight: 500; }
+
+  /* ===== 对比 / 符号表 · 跟随 STEP 色 ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .compare-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .compare-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .compare-table tr:nth-child(even) td { background: var(--step-bg); }
+  .compare-table td:first-child { font-weight: 600; color: var(--step-rich); white-space: nowrap; }
+
+  /* ===== 反思区 ===== */
+  .reflect-area { width: 100%; min-height: 100px; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem; line-height: 1.75; resize: vertical; background: #fff; margin-top: 8px; transition: var(--transition); }
+  .reflect-area:focus { outline: none; border-color: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .reflect-q { font-size: 0.9rem; margin: 16px 0 6px; color: var(--text-primary); font-weight: 600; }
+
+  /* ===== 底部导航 ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 28px; border-top: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span {
+    flex: 1; min-width: 140px;
+    text-align: center;
+    padding: 16px 18px;
+    border-radius: 999px;
+    background: var(--silver-050);
+    color: var(--silver-500);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+  .footer { text-align: center; padding: 32px 16px 8px; font-size: 0.82rem; color: var(--silver-700); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 480px) {
+    .container { padding: 20px 16px 48px; }
+    .header { padding: 48px 24px 40px; }
+    .header h1 { font-size: 1.3rem; }
+    .header::before { width: 140px; height: 140px; top: -50px; }
+    .card { padding: 28px 22px; }
+    .task-card-header { padding: 20px 22px; gap: 14px; }
+    .task-card-number { width: 44px; height: 44px; font-size: 1.15rem; box-shadow: 0 0 0 4px var(--blue-100); }
+    .task-card-header h3 { font-size: 1rem; }
+    .task-card-body { padding: 28px 22px; }
+    .step-content { padding-left: 0; }
+    .step-header { width: 220px; height: 220px; padding: 22px 20px; }
+    .step-header .step-title { font-size: 0.88rem; }
+    .step-header .step-badge { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .driving-question { padding: 24px 22px 24px 64px; }
+    .capstone-banner, .cross-topic-warning { padding-left: 56px; padding-right: 20px; }
+  }
+
+  /* ===================================================================
+   * 圆形文本框 v0.3 · 与方形框交替使用
+   * 三种用法：
+   *   .card.card--circle                 把整张 card 改成圆形容器
+   *   .driving-question.is-circle        把 dq 块改成圆形容器
+   *   .task-objective.is-circle          把 task-objective 改成圆形容器
+   * 圆内放任何文本：用 shape-outside 让文本沿圆弧自然收边
+   * =================================================================== */
+  .card.card--circle,
+  .driving-question.is-circle,
+  .task-objective.is-circle {
+    background: transparent;
+    border: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .card.card--circle { margin-bottom: 56px; }
+  .driving-question.is-circle,
+  .task-objective.is-circle { margin-bottom: 40px; color: var(--text-primary); }
+  .driving-question.is-circle::before,
+  .task-objective.is-circle::before { display: none; }
+
+  /* 真圆容器（fixed width=height + border-radius:50%） */
+  .circle-frame {
+    width: 560px;
+    height: 560px;
+    max-width: 96vw;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: var(--shadow-md);
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+  }
+  .circle-frame--lg { width: 680px; height: 680px; }
+  .circle-frame--md { width: 480px; height: 480px; }
+  .circle-frame--sm { width: 400px; height: 400px; }
+  .circle-frame--blue   { background: var(--blue-050);   border-color: var(--blue-700); }
+  .circle-frame--gold   { background: var(--gold-050);   border-color: var(--gold-700); }
+  .circle-frame--silver { background: var(--silver-050); border-color: var(--silver-700); }
+
+  /* shape-outside · 两个半侧"虚拟体积"把文本压成圆弧内嵌 */
+  .circle-frame::before,
+  .circle-frame::after {
+    content: "";
+    width: 50%;
+    height: 100%;
+    display: block;
+  }
+  .circle-frame::before {
+    float: left;
+    shape-outside: ellipse(50% 50% at 100% 50%);
+  }
+  .circle-frame::after {
+    float: right;
+    shape-outside: ellipse(50% 50% at 0% 50%);
+  }
+
+  /* 圆内内容 · 通过 padding-top 让正文下沉到圆腹 */
+  .circle-frame .circle-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.005em;
+    padding-top: 18%;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .circle-frame--gold   .circle-title { color: var(--gold-900); }
+  .circle-frame--silver .circle-title { color: var(--silver-900); }
+  .circle-frame .circle-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+  .circle-frame--gold   .circle-title::after { background: var(--gold-700); }
+  .circle-frame--silver .circle-title::after { background: var(--silver-700); }
+
+  /* 把原有 dq-title 当作 circle-title 处理 */
+  .circle-frame .dq-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    padding-top: 18%;
+    margin-bottom: 18px;
+  }
+  .circle-frame .dq-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+
+  /* 圆内段落 */
+  .circle-frame p {
+    font-size: 0.86rem;
+    line-height: 1.78;
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .circle-frame p:last-child { margin-bottom: 0; }
+  .circle-frame p.hint {
+    font-size: 0.78rem;
+    color: var(--silver-700);
+    text-align: center;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .circle-frame strong { color: var(--blue-700); }
+  .circle-frame--gold   strong { color: var(--gold-900); }
+  .circle-frame--silver strong { color: var(--silver-900); }
+
+  /* 圆内列表 · 字号收紧以契合圆形空间 */
+  .circle-frame ol,
+  .circle-frame ul {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 22px;
+    margin: 0;
+  }
+  .circle-frame ol li,
+  .circle-frame ul li { margin-bottom: 8px; }
+  .circle-frame ol li::marker {
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  .circle-frame--gold   ol li::marker { color: var(--gold-700); }
+  .circle-frame--silver ol li::marker { color: var(--silver-700); }
+
+  /* task-objective 短文本居中版 · 无 title */
+  .circle-frame.is-objective {
+    padding: 0;
+  }
+  .circle-frame.is-objective .objective-body {
+    padding-top: 32%;
+    padding-bottom: 32%;
+    text-align: center;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+  .circle-frame.is-objective.circle-frame--sm .objective-body {
+    padding-top: 28%;
+    padding-bottom: 28%;
+    font-size: 0.82rem;
+  }
+
+  /* 移动端 · 圆形退化为大圆角矩形（保证可读） */
+  @media (max-width: 640px) {
+    .circle-frame,
+    .circle-frame--lg,
+    .circle-frame--md,
+    .circle-frame--sm {
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 28px;
+      padding: 32px 26px;
+    }
+    .circle-frame::before,
+    .circle-frame::after { display: none; }
+    .circle-frame .circle-title,
+    .circle-frame .dq-title { padding-top: 0; }
+    .circle-frame.is-objective .objective-body { padding-top: 0; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="gaokao-mechanics-em-index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>物理</span>
+    <span class="sep">&gt;</span>
+    <span>高考综合应用</span>
+    <span class="sep">&gt;</span>
+    <span>13 题位 · 传送带 · 学习任务卡（capstone）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>高考 13 题位<br>传送带 + 动能定理<br><span class="h1-sub">练透 3 例</span></h1>
+    <div class="subtitle">摩擦驱动 · 共速判定 · μ vs tanθ 临界 · 多过程分段策略</div>
+  </div>
+
+  <div class="capstone-banner">
+    <strong>关于本板块的练习形态 · v0.1.0</strong>：本任务卡专攻"13 题位 · 传送带 + 动能定理"骨架——以 3 道改编例题（每题完整 STEP 1-6）把"识别物 vs 带速 → 判摩擦方向 → 分段列动能定理 → 共速判据 → 几何验证"这条主链路打通。配套的<strong>熟练度检测</strong>是 HTML 模拟练习页，用于学完后快速自测；纸笔限时整套训练由学科导师线下组织。本任务卡聚焦"骨架 + 策略 + 反思"，不是限时刷题入口。
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>高考 13 题位 · 传送带 + 动能定理骨架（capstone 子板块）</td></tr>
+      <tr><td>所属大主题</td><td>综合应用 · 力学摩擦与动能定理</td></tr>
+      <tr><td>预计学习时间</td><td>4-5 小时（例题 1 约 70 min · 例题 2 约 80 min · 例题 3 约 80 min · 综合反思 30-40 min）</td></tr>
+      <tr><td>前置板块</td><td><strong>力学基础</strong>（受力分析、牛顿三定律、运动学公式）<br><strong>摩擦专题</strong>（静 / 动摩擦、相对运动方向判定、μ 与 tanθ 比较）<br><strong>动能定理</strong>（合外力做功 = 动能变化）<br><strong>数学工具</strong>（一元二次方程、分段函数、不等式）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；草稿本（每题 2-3 张 A4，分段画速度对照图）；秒表（自测每题用时与"卡点出现的位置"）</td></tr>
+    </table>
+  </div>
+
+  <div class="cross-topic-warning">
+    <div class="ctw-title">⚠️ 跨主题前置</div>
+    本板块属 capstone（综合应用）子板块，<strong>以"摩擦 + 牛顿 + 动能定理"三大工具为支柱</strong>，并假定你已掌握上表"前置板块"列出的核心内容。若有任一前置不熟，请<strong>先回顾该前置板块</strong>，再回到本卡继续。每道例题 STEP 1 都内嵌"核心速复习"段（5-8 分钟）作为应急对照，<strong>不能</strong>替代正式的前置学习。
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li><strong>识别</strong>"13 题位 · 传送带"骨架的三类高频变体：水平带 + 同向慢于带 / 倾斜带 + μ vs tanθ 临界 / 水平带 + 反复运动（含共速后分离）</li>
+      <li><strong>应用</strong>"比较 v_物 与 v_带 → 定摩擦方向 → 列动能定理或牛顿第二定律 → 共速判定 → 分段"五步法处理多过程</li>
+      <li><strong>掌握</strong>"v_物 vs v_带 比较定方向 / 共速时刻 / μ 与 tanθ 比较"三条核心判据，每条都能写在卷面上</li>
+      <li><strong>避开</strong>五类高频扣分点：摩擦方向判错 / 共速误判终态 / 段内加速度未重新算 / 共速后未做"是否分离"分析 / 倾斜带 μ vs tanθ 关系遗漏</li>
+      <li><strong>完成</strong>三道改编综合大题 + 一份"我的 13 题位传送带 10-12 min 自述"反思</li>
+      <li><strong>读懂</strong>每个关键步对应的得分点，建立"卷面写哪几步才稳拿基本分"的卷面感</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>传送带题在 13 题位上长期是 10-12 分高分位的稳定考点，2021 全国乙卷 13 题（机场行李传送带）即为典型。它的麻烦不在"工具难"——动能定理、摩擦力公式你都见过——而在<strong>多阶段速度比较</strong>叠加之后，学生常常在"摩擦力到底向哪、共速之后还有没有摩擦、倾斜带 μ 够不够"上反复打转，最终写出"思路对但段分错"的答卷。</p>
+    <p style="margin-top: 6px;"><strong>这一类题的"骨架"到底长什么样？怎么把一道多过程题拆成"加速段 / 共速段 / 共速后分离段"几段可写的小步骤？卷面上至少要出现哪几行式子才能踩到基本分？</strong></p>
+    <p class="hint">（提示：先不要追求"做对一整题"。本板块的目的是把<strong>骨架</strong>看清楚——看清后再练时间分配，才是有效率的训练路径。）</p>
+  </div>
+
+  <!-- ==================== STEP 0 · 13 题位骨架介绍 ==================== -->
+  <div class="card">
+    <h2 class="section-title">STEP 0 · 13 题位 · 传送带骨架介绍</h2>
+
+    <p style="font-size: 0.92rem; margin-bottom: 12px;">在做任何一道题之前，先用 5 分钟把这一题位的"骨架长什么样"刻进脑子。下面 4 段是骨架本身，不是技巧——技巧在 3 道例题里。</p>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 1 · 传送带 = 摩擦驱动 + 多过程分段</div>
+      <div class="step-line">题面里出现 <strong>"传送带 / 履带 / 行李 / 物块滑上"</strong> 等字样，并且物体与带之间存在 <strong>相对滑动或趋于共速</strong>，整套问题最终在 <strong>"加速段 / 减速段 / 共速段"或"共速后分离段"</strong> 之间切换——这就是 13 题位的标准骨架。</div>
+      <div class="step-line">"水平带 / 倾斜带 + 物块（行李）"的组合是该骨架最常用的载体：摩擦力是 <strong>带对物的驱动力或阻力</strong>（方向取决于 v_物 与 v_带 的比较），重力沿斜面分量可能与摩擦同向也可能反向——这正是产生 4-6 种亚类的根源。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 2 · 高考 13 题位高频骨架（传送带 + 动能定理类）</div>
+      <div class="step-line">据近 5 年全国卷与新高考统计：<strong>13 题位的 10-13 分压轴题中，"传送带 + 动能定理"骨架约占动能定理类题目的 30%</strong>，2021 全国乙卷 13 题（机场行李传送带，11 分）是经典母题。出题方式以 <strong>"2 小问"</strong> 为主：第 (1) 问考"加速段位移 / 加速度"，第 (2) 问考"几何约束（带长够不够） / 共速后是否分离 / μ 取值范围"。</div>
+      <div class="step-line">本任务卡选取的 3 道例题分别对应该骨架的三类典型变体：<strong>水平带 + 物块同向滑上慢于带</strong>（例题 1）/ <strong>倾斜带 + μ vs tanθ 临界</strong>（例题 2，基于 2021 全国乙 13 改编）/ <strong>水平带 + 反向运动 + 反复</strong>（例题 3，自创变式）。三例覆盖率约占 13 题位历年真题骨架的 65% 以上。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 3 · 识别关键字（题面里只要见到就立即对号入座）</div>
+      <div class="step-line"><strong>「传送带 / 履带 / 行李」</strong>：标志性载体 → 立即写"取带运动方向为正"+ 标 v_带 在草稿上。</div>
+      <div class="step-line"><strong>「轻放上 / 静止放上」</strong>：物块初速 v_物 = 0 → 比 v_带 慢（无论带运动方向）→ 摩擦力沿带运动方向作用在物块上。</div>
+      <div class="step-line"><strong>「以 v₀ 同向 / 反向滑上」</strong>：先比 v_物 与 v_带 大小 + 方向 → 物块相对带的运动方向 → 摩擦力方向（与相对运动方向<strong>相反</strong>）。</div>
+      <div class="step-line"><strong>「共速 / 同速 / 不滑离」</strong>：物体与带达到同一速度 → 滑动摩擦力即将消失 → 转为静摩擦或脱离 → 必须独立分析"共速后是否继续被带"。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 4 · 核心判据 3 条（传送带题的"通关密钥"）</div>
+      <div class="step-line"><strong>判据 A · v_物 vs v_带 比较定方向</strong>：摩擦力的方向永远<strong>沿带表面、与物相对带的运动方向相反</strong>。具体：v_物 &lt; v_带（同向）→ 摩擦力沿带运动方向推物；v_物 &gt; v_带 → 摩擦力沿带反方向阻物；v_物 与 v_带 反向 → 摩擦力沿带方向（推 / 阻取决于哪个为正方向约定）。<strong>每一段都要重新比较一次</strong>，方向变了加速度就变。</div>
+      <div class="step-line"><strong>判据 B · 共速时刻</strong>：v_物 = v_带 的瞬间 = 滑动摩擦力即将消失的瞬间 = 一段过程的终点。<strong>共速 ≠ 终态</strong>——共速后必须独立判断"静摩擦是否足以维持共速"，若不能则进入新一段（例题 2 的核心陷阱）。</div>
+      <div class="step-line"><strong>判据 C · 倾斜带 μ 与 tanθ 比较</strong>：倾斜带共速后物块是否被带继续带走，取决于 μ 与 tanθ 的比较——① μ ≥ tanθ：静摩擦足以平衡重力分量 → 共速后随带匀速；② μ &lt; tanθ：静摩擦不足以平衡重力分量 → 共速后物块下滑（即使带继续向上）。<strong>这是 2021 全国乙 13 的核心判据，也是 13 题位最容易遗漏的一步</strong>（约占该题位扣分的 25%）。</div>
+    </div>
+
+    <p style="font-size: 0.9rem; margin: 12px 0 0; color: var(--text-secondary);">读完以上 4 段，先合上页面，在草稿上把"比 v_物 与 v_带 → 定摩擦方向 → 列方程 → 共速判定 → 几何 / μ 验证"这条链路<strong>默写一遍</strong>。能默出来，再进入例题 1；默不出来，再回上面读一次。</p>
+
+    <div class="checkpoint">
+      <div class="checkpoint-title">✅ STEP 0 自查</div>
+      <label data-key="s0-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"13 题位 · 传送带"骨架的 4 类识别关键字</span></label>
+      <label data-key="s0-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能根据 v_物 vs v_带 的比较，立即写出摩擦力方向</span></label>
+      <label data-key="s0-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚"共速 ≠ 终态"，并能解释倾斜带为什么要再比 μ 与 tanθ</span></label>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 1 · 水平传送带 + 物块同向滑上 ==================== -->
+  <div class="task-card" id="ex1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>例题 1 · 水平传送带 + 物块同向慢于带</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"水平带 + 物块同向慢于带"为骨架，掌握"v_物 与 v_带 比较 → 摩擦方向 → 动能定理求位移"的标准三步法<br>
+        <strong>建议时长</strong>：70 分钟（速复习 8 + 题面 5 + 自己做 20 + 对照思考 22 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>下面 4 条公式 + 2 条判据是例题 1 用到的全部工具。先合上页面回忆，再对照。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">摩擦 + 动能定理速查清单</div>
+            <div class="step-line"><strong>滑动摩擦力</strong>：\(f = \mu N\)（方向沿接触面，<strong>与"物相对带"的运动方向相反</strong>）</div>
+            <div class="step-line"><strong>水平带 N</strong>：\(N = mg\)（无其他竖直力）</div>
+            <div class="step-line"><strong>动能定理</strong>：\(W_{\text{合}} = \Delta E_k = \tfrac12 m v^2 - \tfrac12 m v_0^2\)</div>
+            <div class="step-line"><strong>匀变速运动学</strong>：\(v^2 - v_0^2 = 2as\)（同方向上）</div>
+            <div class="step-line"><strong>判据 · 共速时刻</strong>=v_物 = v_带 = 滑动摩擦力即将消失</div>
+            <div class="step-line"><strong>判据 · 共速后</strong>=水平带共速后无外力扰动 → 物块随带匀速（静摩擦为零，因为不需要力维持匀速）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>水平带 + 物块同向慢于带<br><span class="step-sub">2 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            水平传送带以恒定速度 \(v_{\text{带}} = 4\) m/s 向右匀速运动。某时刻，将一质量 \(m = 1\) kg 的物块以初速度 \(v_0 = 2\) m/s <strong>向右（与带同向）</strong> 轻放在传送带左端。物块与传送带之间的动摩擦因数 \(\mu = 0.3\)，取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>(1)</strong> 求物块从放上瞬间到与传送带共速时，物块相对地面的位移。<span style="color: var(--text-secondary);">[约 5 分]</span><br>
+            <strong>(2)</strong> 若传送带的有效长度 \(L = 5\) m，物块从最左端放上后，能否在带上加速到与传送带共速？若能，加速段结束时距左端多远？<span style="color: var(--text-secondary);">[约 6 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex1-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0055B8"/>
+                </marker>
+                <marker id="ex1-arr-f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 地面 -->
+              <line x1="20" y1="170" x2="500" y2="170" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="170" x2="22" y2="182"/>
+                <line x1="80" y1="170" x2="72" y2="182"/>
+                <line x1="130" y1="170" x2="122" y2="182"/>
+                <line x1="430" y1="170" x2="422" y2="182"/>
+                <line x1="480" y1="170" x2="472" y2="182"/>
+              </g>
+              <!-- 传送带轮 -->
+              <circle cx="60" cy="135" r="18" fill="none" stroke="#6e6e73" stroke-width="1.6"/>
+              <circle cx="460" cy="135" r="18" fill="none" stroke="#6e6e73" stroke-width="1.6"/>
+              <!-- 传送带表面 -->
+              <line x1="60" y1="117" x2="460" y2="117" stroke="#0055B8" stroke-width="2.2"/>
+              <line x1="60" y1="153" x2="460" y2="153" stroke="#0055B8" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <!-- 带速箭头 -->
+              <line x1="200" y1="100" x2="280" y2="100" stroke="#0055B8" stroke-width="2" marker-end="url(#ex1-arr-r)"/>
+              <text x="240" y="93" font-size="12" fill="#0055B8" font-weight="600" text-anchor="middle">v_带 = 4 m/s</text>
+              <!-- 物块 -->
+              <rect x="80" y="92" width="26" height="25" fill="#002F73" opacity="0.85"/>
+              <text x="93" y="110" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">m</text>
+              <!-- 物块初速 -->
+              <line x1="115" y1="78" x2="150" y2="78" stroke="#002F73" stroke-width="2" marker-end="url(#ex1-arr-f)"/>
+              <text x="155" y="74" font-size="11" fill="#002F73" font-weight="600" text-anchor="start">v₀ = 2 m/s</text>
+              <!-- 摩擦力示意（外置标签 + 引线） -->
+              <line x1="93" y1="125" x2="135" y2="125" stroke="#B8924A" stroke-width="1.6" stroke-dasharray="2 2" marker-end="url(#ex1-arr-f)"/>
+              <line x1="115" y1="125" x2="180" y2="143" stroke="#B8924A" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="185" y="146" font-size="10" fill="#B8924A" text-anchor="start">f（推物，沿带向右）</text>
+              <!-- 带长标注（下移并外置）-->
+              <line x1="60" y1="163" x2="460" y2="163" stroke="#6e6e73" stroke-width="1" stroke-dasharray="3 2"/>
+              <line x1="60" y1="158" x2="60" y2="168" stroke="#6e6e73" stroke-width="1"/>
+              <line x1="460" y1="158" x2="460" y2="168" stroke="#6e6e73" stroke-width="1"/>
+              <line x1="370" y1="163" x2="420" y2="63" stroke="#6e6e73" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="425" y="60" font-size="11" fill="#6e6e73" text-anchor="start">L = 5 m</text>
+              <text x="260" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">初始状态 · 物块同向慢于带</text>
+              <text x="260" y="48" font-size="11" fill="#6e6e73" text-anchor="middle">v_物 = 2 &lt; v_带 = 4 → 物相对带向左 → 摩擦力向右推物</text>
+            </svg>
+            <div class="diagram-caption">SVG 1 · 物块以 v₀ = 2 m/s 同向轻放在 v_带 = 4 m/s 的传送带上。比较 v_物 与 v_带 → 摩擦力沿带方向（向右）推物加速。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 checkpoint -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手</span></span></div>
+        <div class="step-content">
+          <p>合上页面，在草稿上独立做 (1)(2)，目标 18-22 分钟。做完再翻 STEP 4。下面 5 个 checkbox 是"开做之前"的自检：</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex1-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我已经在草稿上画了示意图，并标"取向右为正"+ 标 v_物、v_带 数值与方向</span></label>
+            <label data-key="ex1-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我比较了 v_物 与 v_带 大小（2 &lt; 4），并由此判断了摩擦力方向（沿带向右 = 推物加速）</span></label>
+            <label data-key="ex1-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我打算用 \(v^2 - v_0^2 = 2as\) 或动能定理求加速段位移</span></label>
+            <label data-key="ex1-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>对第 (2) 问，我意识到要把"算出的加速段位移"与"带长 L = 5 m"做比较</span></label>
+            <label data-key="ex1-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚"共速 = 摩擦力消失"，共速后物块若在带上则匀速继续走</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>4 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 比较 v_物 与 v_带（定摩擦方向）</div>
+            <div class="tp-pause">v_物 = 2 m/s 向右，v_带 = 4 m/s 向右。物块比带<strong>慢</strong> → 物块相对带向<strong>左</strong>滑动 → 滑动摩擦力作用在物块上、方向沿带表面向<strong>右</strong>（与相对运动方向反，即沿带运动方向推物）。</div>
+            <div class="tp-ask">"我判断摩擦力沿带向右推物加速。请反问我：如果我把'物块速度方向'和'物块相对带的速度方向'搞混了，会导致摩擦力方向写反吗？<strong>不要直接给我结论</strong>。"</div>
+            <div class="tp-write">取向右为正。<br>v_物 = 2 m/s &lt; v_带 = 4 m/s（同向）→ 物块相对带向左 → 摩擦力 f 沿带向右（推物加速）。<br>f = μmg = 0.3 × 1 × 10 = 3 N</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 求加速度 a（牛顿第二定律）</div>
+            <div class="tp-pause">水平方向只有一个力——摩擦力 f = 3 N。由 \(F_{\text{合}} = ma\) 直接得 a。注意：加速度方向 = 摩擦力方向 = 沿带向右。</div>
+            <div class="tp-ask">"请帮我把摩擦力代入牛顿第二定律。<strong>不要替我算数值</strong>，只验证方程的方向约定是否一致。"</div>
+            <div class="tp-write">水平方向：\(f = ma\) → \(a = f/m = 3/1 = 3\) m/s²（向右）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 求共速位移（运动学 / 动能定理）</div>
+            <div class="tp-pause">物块从 v₀ = 2 m/s 加速到 v_带 = 4 m/s，加速度 a = 3 m/s²。两种等价方法：① 运动学公式 \(v^2 - v_0^2 = 2as\)；② 动能定理 \(fs = \tfrac12 m v_{\text{带}}^2 - \tfrac12 m v_0^2\)。两种各算一遍互相验证。</div>
+            <div class="tp-ask">"请帮我用动能定理列方程，并与运动学公式得到的位移做对比。<strong>不要直接告诉我答案</strong>。"</div>
+            <div class="tp-write">方法 i（运动学）：\(v_{\text{带}}^2 - v_0^2 = 2as_1\) → \(16 - 4 = 2 \times 3 \times s_1\) → \(s_1 = 2\) m。<br>方法 ii（动能定理）：\(f \cdot s_1 = \tfrac12 m v_{\text{带}}^2 - \tfrac12 m v_0^2\) → \(3 s_1 = \tfrac12 \times 1 \times 16 - \tfrac12 \times 1 \times 4 = 6\) → \(s_1 = 2\) m。<br>两法一致，第 (1) 问答案：\(\boxed{s_1 = 2 \text{ m}}\)（方向向右）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 几何验证（第 (2) 问）</div>
+            <div class="tp-pause">第 (1) 问算出加速段位移 \(s_1 = 2\) m。带长 \(L = 5\) m。比较：\(s_1 = 2 &lt; L = 5\) → 物块在带上加速到共速的位移没有超出带长 → <strong>能</strong>在带上加速到共速。共速时物块距左端正好是 \(s_1 = 2\) m。<br>共速后物块速度等于带速 → 滑动摩擦力消失 → 物块以 4 m/s 匀速向右继续走，直到走完剩余 \(L - s_1 = 3\) m 滑离右端。</div>
+            <div class="tp-ask">"请反问我：如果带长 \(L\) 改为 1.5 m（即比 s₁ 还短），物块到达右端时的速度该怎么算？<strong>不要替我做这个变式</strong>。"</div>
+            <div class="tp-write">由 \(s_1 = 2\) m &lt; \(L = 5\) m → <strong>能在带上加速到共速</strong>，加速段结束时距左端 \(s_1 = 2\) m。<br>第 (2) 问答案：\(\boxed{\text{能；距左端 2 m}}\)。<br>（共速后物块匀速 4 m/s 走完剩余 3 m，但题目只问到加速段结束位置，不需要计算后续。）</div>
+            <div class="tp-hint">提示：本题"算出位移 &lt; 带长"是常见情形。若题面将 L 设为 1 m 这类"小于 s₁"的值，则物块未达共速就滑离右端——此时要用 \(v^2 = v_0^2 + 2aL\) 求出右端速度，不再有"共速"这一段。这是 13 题位最高频的变式陷阱之一。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点表 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>11 分如何被切分</span></div>
+        <div class="step-content">
+          <p>下表把 11 分按"关键步"切分。每一行对应卷面上必须出现的一条式子或文字说明——少一条扣对应分。</p>
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 比较 v_物 与 v_带 + 定方向</td><td>"v_物 = 2 &lt; v_带 = 4，物相对带向左，摩擦力沿带向右"</td><td>2</td><td>未写比较过程直接说方向</td></tr>
+              <tr><td>K2 求 f 与 a</td><td>\(f = \mu m g = 3\) N，\(a = f/m = 3\) m/s²</td><td>2</td><td>未写 N = mg 的依据</td></tr>
+              <tr><td>K3 (1) 求 s₁（动能定理或运动学）</td><td>\(v_{\text{带}}^2 - v_0^2 = 2as_1\) → \(s_1 = 2\) m，注方向</td><td>3</td><td>动能定理时把 f 当合力但漏写"水平方向"</td></tr>
+              <tr><td>K4 (2) 比较 s₁ 与 L</td><td>"\(s_1 = 2\) m &lt; \(L = 5\) m，能加速到共速"</td><td>2</td><td>不做比较直接给结论</td></tr>
+              <tr><td>K5 加速段终点距左端</td><td>"加速段结束时距左端 = \(s_1 = 2\) m"</td><td>2</td><td>把"加速段终点"误算成"右端"</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 易扣分速记：① 不比较 v_物 与 v_带 直接给摩擦方向（K1 扣 1）② 把"物速方向"当"相对带方向"（K1 直接 0 分）③ 共速后误算继续加速（K5 直接 0 分，但本题只问加速段）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问 · 写下来</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我刚才在判断摩擦力方向时，是先比较"v_物 与 v_带"还是先凭感觉判？哪一种更稳？</p>
+          <textarea class="reflect-area" data-key="ex1-r1" placeholder="如：我习惯凭感觉，结果发现"物速向右、摩擦力肯定向左"这种直觉只在 v_物 &gt; v_带 时成立……"></textarea>
+          <p class="reflect-q">Q2 · 如果让我重做一遍，我会先做什么改动？</p>
+          <textarea class="reflect-area" data-key="ex1-r2" placeholder="如：我会先在草稿上画"v_物"和"v_带"两个箭头并标数值，再判断相对运动方向……"></textarea>
+          <p class="reflect-q">Q3 · 这道题暴露我对"动能定理 vs 运动学公式"使用习惯上的什么偏好或盲点？</p>
+          <textarea class="reflect-area" data-key="ex1-r3" placeholder="如：我习惯用运动学公式，没意识到动能定理在多过程题里更省力……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：摩擦驱动 + 动能定理协同 · 科学思维：模型抽象（v_物 vs v_带 比较）+ 推理论证（加速段终点的几何验证）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 2 · 倾斜传送带 + μ vs tanθ 临界 ==================== -->
+  <div class="task-card" id="ex2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>例题 2 · 倾斜传送带 + μ vs tanθ 临界（基于 2021 全国乙 13 改编）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"倾斜带 + 行李轻放"为骨架，掌握"共速后判 μ vs tanθ → 决定是继续随带还是下滑"这一 13 题位最易遗漏的步骤<br>
+        <strong>建议时长</strong>：80 分钟（速复习 10 + 题面 5 + 自己做 25 + 对照思考 25 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1 的区别：<strong>倾斜带</strong>引入重力沿斜面分量 \(mg\sinθ\)，与摩擦力同沿斜面方向。两者大小关系决定加速度方向 + 共速后是否继续被带。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">倾斜带速查清单</div>
+            <div class="step-line"><strong>正压力</strong>：\(N = mg\cosθ\)（垂直斜面方向）</div>
+            <div class="step-line"><strong>最大滑动摩擦</strong>：\(f = \mu N = \mu m g \cosθ\)（沿斜面，方向由 v_物 vs v_带 决定）</div>
+            <div class="step-line"><strong>重力沿斜面分量</strong>：\(G_\parallel = mg\sinθ\)（永远指向斜面下方）</div>
+            <div class="step-line"><strong>沿斜面动力学方程</strong>：\(f \pm mg\sinθ = ma\)（符号取决于两者方向）</div>
+            <div class="step-line"><strong>判据 · 共速后随带条件</strong>：\(\mu \ge \tanθ\)（静摩擦足以平衡重力分量，物随带匀速向上）</div>
+            <div class="step-line"><strong>判据 · 共速后下滑条件</strong>：\(\mu &lt; \tanθ\)（静摩擦不足以平衡重力分量，物相对带向下滑 → 摩擦方向反转）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>倾斜带向上 + 行李轻放</span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            如图所示，机场的倾斜传送带与水平方向夹角 \(θ = 37°\)（取 \(\sinθ = 0.6, \cosθ = 0.8\)），传送带以恒定速率 \(v_{\text{带}} = 4\) m/s <strong>沿斜面向上</strong>匀速运动。在传送带的底端将一件质量 \(m = 2\) kg 的行李 <strong>轻轻放上</strong>（初速度为零）。行李与传送带之间的动摩擦因数 \(\mu = 0.8\)，传送带有效长度 \(L = 10\) m，取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>(1)</strong> 判断行李在到达带速之前的加速过程中所受摩擦力的方向，并求该阶段行李的加速度 \(a_1\)。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(2)</strong> 求行李从底端到顶端所需的总时间，并分析行李在到达带速后是否继续被带向上加速 / 匀速。<span style="color: var(--text-secondary);">[约 7 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex2-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#0055B8"/>
+                </marker>
+                <marker id="ex2-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+                <marker id="ex2-arr-g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#6e6e73"/>
+                </marker>
+              </defs>
+              <!-- 地面 -->
+              <line x1="20" y1="230" x2="500" y2="230" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="230" x2="22" y2="242"/>
+                <line x1="100" y1="230" x2="92" y2="242"/>
+                <line x1="170" y1="230" x2="162" y2="242"/>
+                <line x1="240" y1="230" x2="232" y2="242"/>
+                <line x1="310" y1="230" x2="302" y2="242"/>
+                <line x1="380" y1="230" x2="372" y2="242"/>
+                <line x1="450" y1="230" x2="442" y2="242"/>
+              </g>
+              <!-- 倾斜带（从左下到右上） -->
+              <!-- 带表面：从 (80, 220) 到 (440, 80)，斜率约 -0.39，37°夹角 -->
+              <circle cx="80" cy="220" r="14" fill="none" stroke="#6e6e73" stroke-width="1.6"/>
+              <circle cx="440" cy="80" r="14" fill="none" stroke="#6e6e73" stroke-width="1.6"/>
+              <line x1="80" y1="206" x2="440" y2="66" stroke="#0055B8" stroke-width="2.2"/>
+              <line x1="80" y1="234" x2="440" y2="94" stroke="#0055B8" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <!-- 带速箭头（沿斜面向上） -->
+              <line x1="200" y1="155" x2="270" y2="128" stroke="#0055B8" stroke-width="2" marker-end="url(#ex2-arr)"/>
+              <text x="195" y="148" font-size="12" fill="#0055B8" font-weight="600" text-anchor="end">v_带 = 4 m/s</text>
+              <!-- 行李（在底端附近，标签外置 + 引线） -->
+              <rect x="105" y="180" width="32" height="22" fill="#002F73" opacity="0.85" transform="rotate(-21.5 121 191)"/>
+              <line x1="125" y1="178" x2="60" y2="135" stroke="#002F73" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="58" y="132" font-size="11" fill="#002F73" font-weight="700" text-anchor="end">行李</text>
+              <!-- 摩擦力（沿斜面向上，红色，标签外置） -->
+              <line x1="140" y1="180" x2="180" y2="164" stroke="#B8924A" stroke-width="2" stroke-dasharray="3 2" marker-end="url(#ex2-arr-r)"/>
+              <line x1="170" y1="170" x2="320" y2="180" stroke="#B8924A" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="325" y="183" font-size="10" fill="#B8924A" text-anchor="start">f（沿斜面向上）</text>
+              <!-- 重力分量（沿斜面向下 = 左下方向；标签外置 + dashed 引线） -->
+              <line x1="140" y1="195" x2="108" y2="207" stroke="#6e6e73" stroke-width="1.6" stroke-dasharray="2 2" marker-end="url(#ex2-arr-g)"/>
+              <line x1="108" y1="207" x2="200" y2="218" stroke="#6e6e73" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="205" y="221" font-size="10" fill="#6e6e73" text-anchor="start">mg sinθ（沿斜面向下）</text>
+              <!-- 角度标注（外置） -->
+              <path d="M 105 220 L 130 220" stroke="#6e6e73" stroke-width="1" fill="none"/>
+              <path d="M 130 220 A 25 25 0 0 0 122 211" stroke="#6e6e73" stroke-width="1" fill="none"/>
+              <line x1="115" y1="220" x2="60" y2="170" stroke="#6e6e73" stroke-width="0.6" stroke-dasharray="2 2"/>
+              <text x="20" y="162" font-size="11" fill="#6e6e73" text-anchor="start">θ = 37°</text>
+              <!-- 带长标注 -->
+              <text x="370" y="55" font-size="11" fill="#6e6e73" text-anchor="middle">L = 10 m （沿斜面）</text>
+              <text x="500" y="248" font-size="11" fill="#6e6e73" text-anchor="end">水平地面</text>
+              <text x="260" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">初始状态 · 行李轻放在倾斜带底端</text>
+              <text x="260" y="40" font-size="11" fill="#6e6e73" text-anchor="middle">v_物 = 0 &lt; v_带 = 4↗ → 物相对带向下 → 摩擦力沿带向上</text>
+            </svg>
+            <div class="diagram-caption">SVG 2 · 倾斜带 θ = 37° 沿斜面向上以 4 m/s 匀速。行李轻放（v = 0）→ 物相对带向下 → 摩擦力沿带向上推物。重力沿斜面分量 mg sinθ 与摩擦力反向。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手</span></span></div>
+        <div class="step-content">
+          <p>合上页面，在草稿上独立做 (1)(2)，目标 22-28 分钟。做完再翻 STEP 4。下面 5 个 checkbox 是"开做之前"的自检：</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex2-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我已经在草稿上画了斜面 + 行李 + 取沿斜面向上为正方向</span></label>
+            <label data-key="ex2-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我比较了 v_物 = 0 与 v_带 = 4↗ → 物相对带向下 → 摩擦力沿带向上（推物）</span></label>
+            <label data-key="ex2-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我打算分两段：阶段 I 行李加速到 v_带、阶段 II 共速后随带匀速（或下滑）</span></label>
+            <label data-key="ex2-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我计算了 \(\mu\cosθ\) 与 \(\sinθ\) 的大小关系（判断共速后行为）</span></label>
+            <label data-key="ex2-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我意识到"共速 ≠ 终态"，必须独立判断共速后摩擦是否反转</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>5 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 阶段 I 摩擦方向 + 加速度 a₁</div>
+            <div class="tp-pause">v_物 = 0，v_带 = 4 m/s 沿斜面向上 → 物相对带向下（沿斜面） → 摩擦力作用在物上、沿斜面向<strong>上</strong>。沿斜面方向受力：摩擦力（向上）+ 重力分量（向下）。</div>
+            <div class="tp-ask">"我把摩擦力定为沿斜面向上。请反问我：如果带是向下运动而我把行李轻放上去，摩擦力方向会怎么变？<strong>不要直接给我答案</strong>，让我自己想。"</div>
+            <div class="tp-write">取沿斜面向上为正。<br>正压力 \(N = mg\cosθ = 2 \times 10 \times 0.8 = 16\) N<br>摩擦力 \(f = \mu N = 0.8 \times 16 = 12.8\) N（沿斜面向上）<br>重力沿斜面分量 \(G_\parallel = mg\sinθ = 2 \times 10 \times 0.6 = 12\) N（沿斜面向下）<br>合力（沿斜面）= \(f - G_\parallel = 12.8 - 12 = 0.8\) N（向上）<br>\(a_1 = F_{\text{合}}/m = 0.8/2 = 0.4\) m/s²（沿斜面向上）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 阶段 I 时间 + 位移</div>
+            <div class="tp-pause">行李从 0 加速到 v_带 = 4 m/s，加速度 a₁ = 0.4 m/s²。用运动学：\(t_1 = (v_{\text{带}} - 0)/a_1\)，\(s_1 = \tfrac12 a_1 t_1^2\) 或 \(s_1 = v_{\text{带}}^2/(2 a_1)\)。</div>
+            <div class="tp-ask">"请帮我列时间和位移方程。<strong>不要直接代入数字</strong>，先让我看清符号。"</div>
+            <div class="tp-write">时间 \(t_1 = v_{\text{带}}/a_1 = 4/0.4 = 10\) s<br>位移 \(s_1 = v_{\text{带}}^2/(2 a_1) = 16/0.8 = 20\) m<br><strong>等等：</strong>\(s_1 = 20\) m &gt; \(L = 10\) m → 行李在还没达到带速时就已经滑过带顶端！这是改编参数有意制造的小陷阱（也常出现在真题）：算出"理论加速距离"&gt;"带长" → 说明<strong>不能在带上完成加速</strong>。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 修正：行李到顶时尚未达带速</div>
+            <div class="tp-pause">由 \(s_1 = 20\) m &gt; L = 10 m → 行李在带顶前未达带速。求实际到顶时速度：\(v_{\text{顶}}^2 = 0 + 2 a_1 L\)。</div>
+            <div class="tp-ask">"请反问我：既然行李没有达到带速，那 STEP 4 路径 2 算出的 \(t_1 = 10\) s 还能用吗？<strong>不要直接给我新的时间</strong>。"</div>
+            <div class="tp-write">行李到带顶时速度：\(v_{\text{顶}}^2 = 2 a_1 L = 2 \times 0.4 \times 10 = 8\) → \(v_{\text{顶}} = 2\sqrt{2} \approx 2.83\) m/s<br>行李到带顶所用时间：\(L = \tfrac12 a_1 t^2\) → \(t = \sqrt{2L/a_1} = \sqrt{20/0.4} = \sqrt{50} = 5\sqrt{2} \approx 7.07\) s<br><strong>(2) 总时间 \(t_{\text{总}} = 5\sqrt{2}\) s ≈ 7.07 s</strong>（行李全程都在加速段，从未达带速）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 假设的"共速后行为"分析（μ vs tanθ）</div>
+            <div class="tp-pause">虽然本题参数下行李未达带速就到顶，但题目要求"分析共速后是否继续加速 / 匀速"——这是 13 题位最容易遗漏的步骤。<strong>即使本题没真的进入这一段，卷面上也要写出 μ vs tanθ 的比较</strong>，因为这是评分要点。</div>
+            <div class="tp-ask">"请帮我比较 μ 与 tanθ 的大小，并用'静摩擦能否平衡重力沿斜面分量'解释为什么这个比较决定共速后行为。<strong>不要替我做'本题不进入这一段'的结论</strong>。"</div>
+            <div class="tp-write">\(\tanθ = \sinθ/\cosθ = 0.6/0.8 = 0.75\)，\(\mu = 0.8\)<br>\(\mu = 0.8 &gt; \tanθ = 0.75\) → 共速时静摩擦足以平衡重力分量 → <strong>若行李能达到带速，则共速后随带匀速向上</strong>。<br>但本题 \(s_1 = 20\) m &gt; \(L = 10\) m → 行李实际未达带速 → 这一段"共速匀速"在本题不出现，但分析过程必须写在卷面（评分要点）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 反向变式 · μ &lt; tanθ 时会怎样？</div>
+            <div class="tp-pause">假设把 μ 改为 0.5（μ &lt; tanθ = 0.75），其他不变。此时阶段 I 加速度：\(a_1' = g(\mu\cosθ - \sinθ) = 10(0.5 × 0.8 - 0.6) = -2\) m/s² → <strong>负数</strong>！意味着行李轻放上去后受到的合力沿斜面向下 → 摩擦力 < 重力分量 → 行李根本无法被带向上 → <strong>行李在带上向下滑（即使带继续向上）</strong>。</div>
+            <div class="tp-ask">"请反问我：'摩擦力沿斜面向上' 和 '合力沿斜面向上' 是不是同一件事？为什么 μ &lt; tanθ 时摩擦方向没变但合力方向变了？<strong>不要直接给我答案</strong>。"</div>
+            <div class="tp-write">假设 μ' = 0.5 &lt; tanθ = 0.75：<br>摩擦力 \(f' = \mu' m g \cosθ = 0.5 × 2 × 10 × 0.8 = 8\) N（沿斜面向上，方向未变）<br>重力分量 \(G_\parallel = 12\) N（沿斜面向下）<br>合力 = 8 - 12 = -4 N（沿斜面向下）<br>行李虽放在向上的带上，但合力向下 → 行李向下加速 → 永远到不了带速，更不可能到带顶。<br>本题 μ = 0.8 &gt; 0.75 故能加速向上；若 μ &lt; tanθ 则<strong>"轻放行李"反而下滑</strong>——这正是 2021 全国乙 13 给出的临界值范围讨论的核心。</div>
+            <div class="tp-hint">提示：13 题位倾斜带题型的核心评分点不是"算对加速度"，而是<strong>"明确写出 μ vs tanθ 比较"</strong>。这一步不写，即使数值算对也只能拿一半分。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点表 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>11 分如何被切分</span></div>
+        <div class="step-content">
+          <p>下表把 11 分按"关键步"切分。每一行对应卷面上必须出现的一条式子或文字说明——少一条扣对应分。</p>
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 比较 v_物 与 v_带 + 定摩擦方向</td><td>"v_物 = 0 &lt; v_带↗，物相对带向下，摩擦力沿带向上"</td><td>2</td><td>未写比较过程直接定方向</td></tr>
+              <tr><td>K2 沿斜面列方程求 a₁</td><td>\(f - mg\sinθ = ma_1\) → a₁ = 0.4 m/s²，注方向</td><td>2</td><td>正方向未约定 / 重力分量符号错</td></tr>
+              <tr><td>K3 计算"理论加速位移" \(s_1\) 并与 \(L\) 比较</td><td>"\(s_1 = 20\) m &gt; \(L = 10\) m，行李未达带速就到顶"</td><td>2</td><td>不做比较直接套 t₁ = 10 s 答总时间</td></tr>
+              <tr><td>K4 用 \(L\) 求实际到顶时间</td><td>\(L = \tfrac12 a_1 t^2\) → \(t = 5\sqrt{2}\) s</td><td>2</td><td>用错公式（如 v = at + 0）</td></tr>
+              <tr><td>K5 共速后行为分析 · μ vs tanθ</td><td>"\(\mu = 0.8 &gt; \tanθ = 0.75\)，若能达带速则共速后随带匀速；本题未达带速故不进入"</td><td>3</td><td>遗漏 μ vs tanθ 比较（高频扣分点）</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 易扣分速记：① 沿斜面方向受力分析漏画重力分量（K2 扣 1）② 算出 \(s_1\) 不与 \(L\) 比较直接代 t₁（K3 直接 0 分）③ 遗漏 μ vs tanθ 比较（K5 直接 0 分，这是 13 题位倾斜带题的"必答步"）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问 · 写下来</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我有没有意识到"算出的 s₁ &gt; L"时不能直接用 t₁ = 10 s？这一步我是怎么发现的？</p>
+          <textarea class="reflect-area" data-key="ex2-r1" placeholder="如：我一开始直接代入 t₁ = 10 s 答总时间，老师指出 s₁ &gt; L 才意识到行李没达带速……"></textarea>
+          <p class="reflect-q">Q2 · "共速后行为"分析这一步，我是写在了卷面上还是省略了？为什么省略？</p>
+          <textarea class="reflect-area" data-key="ex2-r2" placeholder="如：我觉得本题没真的进入共速段就省略了，没想到这是评分要点……"></textarea>
+          <p class="reflect-q">Q3 · μ vs tanθ 这条判据，我能在其他没出现"倾斜带"字样的题里识别出来吗？</p>
+          <textarea class="reflect-area" data-key="ex2-r3" placeholder="如：我以前只在"传送带"题里用，没想过"物块在斜面上是否能静止"也是同一条判据……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：摩擦 + 重力分量协同 · 科学思维：模型抽象（μ vs tanθ 临界判据）+ 推理论证（共速后行为的二次分析）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 3 · 水平带反向 + 多过程分段 ==================== -->
+  <div class="task-card" id="ex3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>例题 3 · 水平带反向 + 物块"先减速 → 反向加速 → 共速分离"三段（自创变式）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"带反向于物块初速"为骨架，掌握"摩擦方向反转的判定时刻 + 多过程分段 + 共速后分离"组合策略<br>
+        <strong>建议时长</strong>：80 分钟（速复习 8 + 题面 5 + 自己做 25 + 对照思考 25 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1、2 的区别：物块初速与带速<strong>反向</strong>，且物块经历"先减速到 0 → 反向被带加速 → 与带共速 → 共速后离开"<strong>三个阶段</strong>。每段开头都要重新比较 v_物 与 v_带 并判摩擦方向。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">反向带 + 三段速查清单</div>
+            <div class="step-line"><strong>阶段 I · 物正向运动</strong>：v_物 &gt; 0，v_带 &lt; 0 → 物相对带向正方向 → 摩擦力沿负方向（阻物）</div>
+            <div class="step-line"><strong>阶段 II · 物速 = 0 后</strong>：v_物 = 0，v_带 &lt; 0 → 物相对带仍向正方向 → 摩擦力<strong>方向不变</strong>（仍沿负方向） → 物被加速向负方向</div>
+            <div class="step-line"><strong>阶段 III · 共速（v_物 = v_带）</strong>：滑动摩擦消失 → 物与带同速度匀速；水平带无外力推 → 静摩擦为 0 → 物随带匀速直到离开带</div>
+            <div class="step-line"><strong>关键观察</strong>：阶段 I → II 摩擦方向<strong>不变</strong>（因为 v_物 一直比 v_带 大，相对方向未变），但物块速度方向反转——加速度方向始终未变。这是反向带题最容易出错的地方。</div>
+            <div class="step-line"><strong>能量观察</strong>：物从带上滑过时，动能既有损失（阶段 I）也有增加（阶段 II），但内能（摩擦生热）一直在增加。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>反向带 + 物块从左端正向滑上</span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            水平传送带有效长度 \(L = 4\) m，以恒定速率 \(v_{\text{带}} = 2\) m/s <strong>向左</strong>匀速运动。某时刻，将一质量 \(m = 1\) kg 的物块以初速度 \(v_0 = 4\) m/s <strong>向右</strong>从传送带的左端放上。物块与传送带之间的动摩擦因数 \(\mu = 0.4\)，取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>(1)</strong> 求物块在带上速度第一次减为零时，距左端的距离。<span style="color: var(--text-secondary);">[约 5 分]</span><br>
+            <strong>(2)</strong> 分析物块此后的运动，判断物块最终能否停留在带上；若不能，求物块离开带时的速度（大小和方向）。<span style="color: var(--text-secondary);">[约 7 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex3-arr-l" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 10 0 L 0 5 L 10 10 z" fill="#0055B8"/>
+                </marker>
+                <marker id="ex3-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+                <marker id="ex3-arr-fl" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 10 0 L 0 5 L 10 10 z" fill="#B8924A"/>
+                </marker>
+              </defs>
+              <!-- 地面 -->
+              <line x1="20" y1="190" x2="500" y2="190" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="30" y1="190" x2="22" y2="202"/>
+                <line x1="80" y1="190" x2="72" y2="202"/>
+                <line x1="430" y1="190" x2="422" y2="202"/>
+                <line x1="480" y1="190" x2="472" y2="202"/>
+              </g>
+              <!-- 传送带轮 -->
+              <circle cx="60" cy="155" r="18" fill="none" stroke="#6e6e73" stroke-width="1.6"/>
+              <circle cx="460" cy="155" r="18" fill="none" stroke="#6e6e73" stroke-width="1.6"/>
+              <!-- 传送带表面 -->
+              <line x1="60" y1="137" x2="460" y2="137" stroke="#0055B8" stroke-width="2.2"/>
+              <line x1="60" y1="173" x2="460" y2="173" stroke="#0055B8" stroke-width="1.4" stroke-dasharray="3 3"/>
+              <!-- 带速箭头（向左） -->
+              <line x1="290" y1="118" x2="220" y2="118" stroke="#0055B8" stroke-width="2" marker-end="url(#ex3-arr-l)"/>
+              <text x="255" y="111" font-size="12" fill="#0055B8" font-weight="600" text-anchor="middle">v_带 = 2 m/s</text>
+              <!-- 物块（在左端附近） -->
+              <rect x="80" y="112" width="26" height="25" fill="#002F73" opacity="0.85"/>
+              <text x="93" y="130" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">m</text>
+              <!-- 物块初速（向右） -->
+              <line x1="115" y1="98" x2="160" y2="98" stroke="#002F73" stroke-width="2" marker-end="url(#ex3-arr-r)"/>
+              <text x="165" y="94" font-size="11" fill="#002F73" font-weight="600" text-anchor="start">v₀ = 4 m/s</text>
+              <!-- 摩擦力（向左阻物，标签外置 + 引线） -->
+              <line x1="105" y1="148" x2="68" y2="148" stroke="#B8924A" stroke-width="1.6" stroke-dasharray="2 2" marker-end="url(#ex3-arr-fl)"/>
+              <line x1="85" y1="148" x2="160" y2="162" stroke="#B8924A" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="165" y="165" font-size="10" fill="#B8924A" text-anchor="start">f（阻物，沿带向左）</text>
+              <!-- 带长标注（上移 + 外置） -->
+              <line x1="60" y1="183" x2="460" y2="183" stroke="#6e6e73" stroke-width="1" stroke-dasharray="3 2"/>
+              <line x1="60" y1="178" x2="60" y2="188" stroke="#6e6e73" stroke-width="1"/>
+              <line x1="460" y1="178" x2="460" y2="188" stroke="#6e6e73" stroke-width="1"/>
+              <line x1="260" y1="183" x2="340" y2="65" stroke="#6e6e73" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <text x="345" y="62" font-size="11" fill="#6e6e73" text-anchor="start">L = 4 m</text>
+              <text x="260" y="28" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">初始状态 · 物块正向滑上、带反向运动</text>
+              <text x="260" y="40" font-size="11" fill="#6e6e73" text-anchor="middle">v_物 = +4 &gt; v_带 = -2 → 物相对带向右 → 摩擦力向左阻物</text>
+            </svg>
+            <div class="diagram-caption">SVG 3 · 物块从左端以 v₀ = 4 m/s 向右滑上，传送带以 v_带 = 2 m/s 向左运动。物块相对带向右 → 摩擦力沿带向左阻物。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手</span></span></div>
+        <div class="step-content">
+          <p>合上页面，在草稿上独立做 (1)(2)，目标 22-28 分钟。做完再翻 STEP 4。下面 5 个 checkbox 是"开做之前"的自检：</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex3-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我已经在草稿上画了带 + 物块 + 取向右为正方向 + 标 v_物 = +4、v_带 = -2</span></label>
+            <label data-key="ex3-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我比较了 v_物 与 v_带（+4 &gt; -2）→ 物相对带向右 → 摩擦力向左阻物</span></label>
+            <label data-key="ex3-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我意识到物块速度先减到 0 是 (1) 问的目标，但 (2) 问还有"反向被带加速"段</span></label>
+            <label data-key="ex3-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>物块速度变零的瞬间，我会重新比较 v_物 = 0 与 v_带 = -2，再判摩擦方向是否变</span></label>
+            <label data-key="ex3-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道共速后物块匀速（水平带无外力推），并打算判断"匀速能否走出带"</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>5 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 阶段 I 摩擦方向 + 加速度</div>
+            <div class="tp-pause">取向右为正。v_物 = +4 m/s，v_带 = -2 m/s → 物相对带向右 → 摩擦力沿带向左 = -μmg。</div>
+            <div class="tp-ask">"我把摩擦力定为沿带向左。请反问我：如果我只看 v_物 是正，是不是会误认为'物体只受向左阻力'就够了？相对运动方向需要 v_物 - v_带 来定，对吗？<strong>不要直接给我结论</strong>。"</div>
+            <div class="tp-write">取向右为正。<br>v_物 = +4，v_带 = -2，v_物 - v_带 = +6 → 物相对带向右<br>摩擦力 f = -μmg = -0.4 × 1 × 10 = -4 N（沿带向左）<br>加速度 a₁ = f/m = -4 m/s²（向左）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 阶段 I 减速到 v = 0（解 (1)）</div>
+            <div class="tp-pause">物块从 +4 减速到 0，加速度 a₁ = -4 m/s²。求位移用 \(v^2 - v_0^2 = 2as\)。</div>
+            <div class="tp-ask">"请帮我列方程并解出位移。<strong>不要替我做运算</strong>，让我亲自算一遍。"</div>
+            <div class="tp-write">\(0 - v_0^2 = 2 a_1 s_1\) → \(0 - 16 = 2 \times (-4) \times s_1\) → \(s_1 = 2\) m<br><strong>第 (1) 问答案</strong>：物块速度第一次减为零时，距左端 \(\boxed{s_1 = 2 \text{ m}}\)（向右移动了 2 m）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 阶段 II 速度为零后再次比较 v_物 与 v_带</div>
+            <div class="tp-pause">物块 v = 0 时，v_带 = -2 m/s 仍向左。v_物 - v_带 = 0 - (-2) = +2 → 物仍相对带向右 → 摩擦力<strong>方向不变</strong>，仍沿带向左 → 加速度 a₂ = a₁ = -4 m/s² → 物块开始向左加速。</div>
+            <div class="tp-ask">"我发现 v_物 从 +4 减到 0 整个过程摩擦方向一直没变，对吗？请反问我：什么时候摩擦方向才会反转？是 v_物 = 0 时还是 v_物 = v_带 时？<strong>不要直接给我答案</strong>。"</div>
+            <div class="tp-write">阶段 II：v_物 从 0 加速到 v_带 = -2 m/s<br>由 \(v - v_0 = a \Delta t\)：\(-2 - 0 = -4 \cdot t_2\) → \(t_2 = 0.5\) s<br>阶段 II 位移 \(s_2 = \tfrac12 a_2 t_2^2 = \tfrac12 \times (-4) \times 0.25 = -0.5\) m（向左 0.5 m）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 阶段 III 共速后（关键判断）</div>
+            <div class="tp-pause">物块在阶段 II 末与带共速（v_物 = v_带 = -2 m/s）→ 滑动摩擦消失。水平带 → 物块无其他水平力 → 静摩擦不必维持任何加速度 → 物块以 -2 m/s 匀速向左运动。<br>此时物块位置：从左端起算 \(s_1 + s_2 = 2 + (-0.5) = 1.5\) m（距左端 1.5 m，仍在带上）。<br>物块匀速向左走 1.5 m 后到达<strong>左端</strong> → 滑下带。</div>
+            <div class="tp-ask">"请反问我：共速后为什么静摩擦是 0 而不是某个'维持匀速'的值？提示：物块如果离开带是不是仍然匀速？<strong>不要直接给我答案</strong>。"</div>
+            <div class="tp-write">共速后物块速度 = -2 m/s（向左），位置距左端 1.5 m。<br>共速后无摩擦，匀速向左 → 走 1.5 m 后到达左端 → <strong>从左端滑下带</strong>。<br>离带时速度大小 = 2 m/s，方向<strong>向左</strong>（与初始进带方向相反）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 答案整合 + 全程速度时间图（脑内）</div>
+            <div class="tp-pause">把三段连起来在脑内画 v-t 图：阶段 I 从 +4 直线降到 0（斜率 -4，1 s）；阶段 II 从 0 继续直线降到 -2（斜率 -4，0.5 s）；阶段 III 水平 -2 m/s 匀速（0.75 s 到左端）。v-t 图的"斜率不变"恰好对应"摩擦方向未变"。</div>
+            <div class="tp-ask">"请帮我把上述三段画成 v-t 图描述（只用文字描述斜率与转折点）。<strong>不要替我推广到'物块永远不停'的结论</strong>。"</div>
+            <div class="tp-write"><strong>(2) 问答案</strong>：物块最终<strong>不能</strong>停留在带上，从带的<strong>左端</strong>滑下，离带时速度大小为 \(\boxed{v = 2 \text{ m/s}}\)（方向向左）。<br>关键认识：物块虽然短时刻"停下"（v = 0），但带仍在运动 → 摩擦继续推动物块反向 → 物块最终被带反方向送出。<strong>"v 物 = 0" ≠ "物块停下不动"</strong>，这是反向带题的核心陷阱。</div>
+            <div class="tp-hint">提示：若把题面 L 改为 1.5 m（即比 s₁ 还短），物块在阶段 I 还没减到 0 就先滑出右端 → 整个剧本完全不同。带长 L 与 s₁、s₂ 的比较是反向带题的标准变式生成器。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点表 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>12 分如何被切分</span></div>
+        <div class="step-content">
+          <p>下表把 12 分按"关键步"切分。每一行对应卷面上必须出现的一条式子或文字说明——少一条扣对应分。</p>
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 取正方向 + 比 v_物 与 v_带 + 定摩擦</td><td>"取向右为正，v_物 = +4 &gt; v_带 = -2，摩擦力沿带向左"</td><td>2</td><td>未约定正方向 / 漏写比较</td></tr>
+              <tr><td>K2 (1) 求 s₁</td><td>\(v^2 - v_0^2 = 2 a_1 s_1\) → s₁ = 2 m</td><td>3</td><td>位移方向漏标</td></tr>
+              <tr><td>K3 v = 0 后再次比较 v_物 与 v_带</td><td>"v = 0 时 v_带 仍 = -2，物相对带仍向右，摩擦方向不变"</td><td>2</td><td>误认为 v = 0 后摩擦方向反转</td></tr>
+              <tr><td>K4 阶段 II 求 s₂ + 共速位置</td><td>s₂ = -0.5 m，共速时距左端 1.5 m</td><td>2</td><td>把"共速位置"误算到右端</td></tr>
+              <tr><td>K5 共速后匀速 + 几何判断离带</td><td>"共速后无摩擦匀速向左，1.5 m 后从左端滑下"</td><td>2</td><td>误以为共速后还有摩擦推动</td></tr>
+              <tr><td>K6 最终答案 + 方向</td><td>"离带速度 2 m/s 向左，不停留在带上"</td><td>1</td><td>漏写方向</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 易扣分速记：① 不区分"v_物 = 0"与"v_物 = v_带"（K3 直接 0 分，这是反向带最高频陷阱）② 共速后误算继续加速（K5 直接 0 分）③ 最终方向漏写或写错（K6 扣 1）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问 · 写下来</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我在物块速度第一次为零时，有没有重新比较 v_物 与 v_带 来判断摩擦方向？还是默认"v = 0 摩擦也消失"？</p>
+          <textarea class="reflect-area" data-key="ex3-r1" placeholder="如：我一开始以为 v = 0 摩擦就该消失，后来才意识到关键是相对速度 v_物 - v_带 是否为零……"></textarea>
+          <p class="reflect-q">Q2 · 这道题与例题 1、2 最大的难度差在哪？我准备如何在下一次遇到类似题时少走弯路？</p>
+          <textarea class="reflect-area" data-key="ex3-r2" placeholder="如：例题 1、2 只有一段摩擦方向，例题 3 多了"v = 0 后再判一次"——我下次会先写"每段开头比一次 v_物 vs v_带"……"></textarea>
+          <p class="reflect-q">Q3 · "共速后匀速 → 从左端离开"这条结论我有没有用 v-t 图验证？如果不验证，可能漏掉什么？</p>
+          <textarea class="reflect-area" data-key="ex3-r3" placeholder="如：我没画 v-t 图，万一带长比共速位置还短，物块根本到不了共速就会被滑下右端……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：摩擦驱动 + 多过程分段 · 科学思维：模型抽象（每段开头重比 v_物 vs v_带）+ 推理论证（v_物 = 0 ≠ 物块停下）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 综合反思 · 3 例题骨架共性 ==================== -->
+  <div class="task-card">
+    <div class="task-card-header" style="cursor: default;">
+      <div class="task-card-number">★</div>
+      <h3>综合反思 · 三例打通传送带骨架</h3>
+    </div>
+    <div class="task-card-body">
+
+      <p style="margin-bottom: 14px;">3 道例题难度递增，但都在重复同一条主链路：<strong>取正方向 → 比较 v_物 与 v_带 → 定摩擦方向 → 列动能定理或牛顿第二定律 → 共速判定 → 几何/μ 验证</strong>。下面把"共性"和"易扣分"两件事钉死。</p>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">一、3 例题骨架共性</h4>
+      <ul style="padding-left: 22px; margin-bottom: 14px;">
+        <li><strong>v_物 vs v_带 是一切起点</strong>：每段开头先比较两者的<strong>大小 + 方向</strong>，由此决定摩擦力方向。摩擦力方向不是"凭感觉"或"看物块速度方向"，而是<strong>看相对速度</strong>（v_物 - v_带）的符号。</li>
+        <li><strong>共速 = 一段过程的终点，但不一定是终态</strong>：水平带共速后无外力 → 物随带匀速（例题 1、3）；倾斜带共速后必须比 μ 与 tanθ（例题 2）。<strong>共速后必须独立分析下一段</strong>。</li>
+        <li><strong>"v_物 = 0" ≠ "物块停下不动"</strong>：当带仍在运动时，v_物 = 0 只是瞬时状态，摩擦仍存在并可能继续推物（例题 3）。判断停下要看"v_物 = v_带 = 0"或"物块离开带"。</li>
+        <li><strong>动能定理与运动学是双工具</strong>：水平带 + 单段过程用运动学最快（例题 1）；倾斜带 + 多力作用用动能定理或沿斜面牛二式（例题 2）；多段过程必须分段列式（例题 3），不能一气合并。</li>
+        <li><strong>几何约束（带长 L）的双重作用</strong>：① 检验"加速段能否完成"（例题 1、2 的 s₁ vs L）② 决定"共速后能走多远"（例题 3 的剩余 1.5 m）。所有传送带题都要至少做一次"位移与 L 的比较"。</li>
+      </ul>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">二、5 类学生常见卡点 + 怎么破</h4>
+      <ol style="padding-left: 24px; margin-bottom: 14px;">
+        <li><strong>摩擦方向判错</strong>（凭物速方向而非相对速度）→ 破：每段开头都先在草稿上写"v_物 - v_带 = ?"，由符号定方向</li>
+        <li><strong>共速误判终态</strong>（以为共速后题就结束）→ 破：每段结束后强制问自己"共速后还有什么力？能否维持共速？"</li>
+        <li><strong>v_物 = 0 误以为摩擦消失</strong>（例题 3 的核心陷阱）→ 破：写"摩擦消失的判据是 v_物 = v_带，不是 v_物 = 0"</li>
+        <li><strong>倾斜带遗漏 μ vs tanθ</strong>（例题 2 的核心评分点）→ 破：每道倾斜带题最后强制写一行"μ ___ tanθ → 共速后 ___ "</li>
+        <li><strong>多段过程不分段</strong>（例题 3 把三段合一）→ 破：每出现一次"速度变零 / 共速 / 离开带"，就强制断段重写</li>
+      </ol>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">三、13 题位 10-12 分钟应试建议</h4>
+      <div style="background: #FFF7E5; border-left: 4px solid #FFB800; padding: 12px 16px; border-radius: 4px; margin-bottom: 8px;">
+        <p style="margin: 0 0 8px;">📌 <strong>13 题位定位</strong>：前两道实验题约用 20 min；选择 + 多选约 25 min；13 题位是<strong>"必须稳拿"的中档大题</strong>，给 10-12 min 是合理的。</p>
+        <p style="margin: 0 0 8px;">📌 <strong>3 分钟读题</strong>：识别关键字（水平 / 倾斜 / 同向 / 反向 / 轻放）→ 决定走哪类骨架（例 1 / 例 2 / 例 3 还是其他变体）。读完题不动笔最高效。</p>
+        <p style="margin: 0 0 8px;">📌 <strong>2 分钟搭草稿</strong>：示意图 + 取正方向箭头 + 标 v_物、v_带 数值与方向 + 标 L。这 5 件事不画，后面必错。</p>
+        <p style="margin: 0;">📌 <strong>5-7 分钟列方程 + 求解</strong>：每段开头先写"v_物 - v_带 = ?"定摩擦方向；用动能定理或牛二式求加速度 + 位移；倾斜带必写 μ vs tanθ 一行；最终结果给单位 + 方向。</p>
+      </div>
+
+      <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 14px;">📝 学完 3 道例题，建议进入 <a href="gaokao-13-conveyor-belt-fluency-test.html" style="color: var(--secondary-blue); text-decoration: underline;">熟练度检测</a>，把刚学的骨架在 12 道变体题上跑一遍。</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <nav class="bottom-nav">
+    <a href="gaokao-mechanics-em-index.html">⬅ 返回主页</a>
+    <span>📝 基础检测（待开放）</span>
+    <a href="gaokao-13-conveyor-belt-fluency-test.html">📈 熟练度检测</a>
+    <span>🎤 深度口试（待开放）</span>
+  </nav>
+
+  <footer style="margin-top: 28px; padding: 20px; text-align: center; color: #78909c; font-size: 12px; border-top: 1px solid #e0e0e0;">
+    蓝色诺瓦学院 · 物理 · 高考综合应用 · 13 题位 · 传送带 + 动能定理 · capstone Skill v0.1.0 · 2026-06-16
+  </footer>
+
+</div>
+
+<script>
+  // KaTeX auto-render
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof renderMathInElement === "function") {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+        ],
+        throwOnError: false
+      });
+    }
+  });
+
+  // task-card 折叠 / 展开
+  function toggleCard(header) {
+    header.classList.toggle("collapsed");
+    var body = header.nextElementSibling;
+    if (body && body.classList.contains("task-card-body")) {
+      body.classList.toggle("collapsed");
+    }
+  }
+  // 暴露给 onclick
+  window.toggleCard = toggleCard;
+
+  // Checkpoint localStorage (per-card · 已勾画线)
+  const STORAGE_KEY = "gaokao-13-conveyor-belt-checkpoints";
+  function getCheckboxState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function persistCheckbox(checkbox) {
+    var label = checkbox.closest("label[data-key]");
+    if (!label) return;
+    var key = label.getAttribute("data-key");
+    if (!key) return;
+    var state = getCheckboxState();
+    state[key] = checkbox.checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    if (checkbox.checked) { label.classList.add("checked"); } else { label.classList.remove("checked"); }
+  }
+  function restoreCheckboxes() {
+    var state = getCheckboxState();
+    var labels = document.querySelectorAll(".checkpoint label[data-key]");
+    labels.forEach(function(label) {
+      var key = label.getAttribute("data-key");
+      if (state[key]) {
+        var cb = label.querySelector("input[type=checkbox]");
+        if (cb) { cb.checked = true; label.classList.add("checked"); }
+      }
+    });
+  }
+  // saveCheckbox 供 inline onchange 调用
+  function saveCheckbox(cb) { persistCheckbox(cb); }
+  window.saveCheckbox = saveCheckbox;
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreCheckboxes();
+    document.querySelectorAll(".checkpoint input[type=checkbox]").forEach(function(cb) {
+      cb.addEventListener("change", function() { persistCheckbox(cb); });
+    });
+  });
+
+  // Reflection textarea localStorage
+  const REFLECT_KEY = "gaokao-13-conveyor-belt-reflections";
+  function getReflectState() {
+    try { return JSON.parse(localStorage.getItem(REFLECT_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function persistReflection(textarea) {
+    var key = textarea.getAttribute("data-key");
+    if (!key) return;
+    var state = getReflectState();
+    state[key] = textarea.value;
+    try { localStorage.setItem(REFLECT_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function restoreReflections() {
+    var state = getReflectState();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      var key = ta.getAttribute("data-key");
+      if (key && state[key]) ta.value = state[key];
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreReflections();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      ta.addEventListener("input", function() { persistReflection(ta); });
+    });
+  });
+</script>
+
+</body>
+</html>

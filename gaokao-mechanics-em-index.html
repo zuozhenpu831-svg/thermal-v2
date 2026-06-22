@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考综合应用 · 力学电磁 13/14/15 题型库</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    color: #2c3e50;
+    background: #f5f7fa;
+    min-height: 100vh;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+  /* Header */
+  header.hero {
+    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+    color: #fff;
+    padding: 48px 32px 36px;
+    border-radius: 12px;
+    margin-bottom: 28px;
+    box-shadow: 0 4px 14px rgba(21,101,192,0.15);
+  }
+  header.hero h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+  header.hero .subtitle {
+    font-size: 15px;
+    opacity: 0.92;
+    margin-bottom: 18px;
+  }
+  header.hero .badges { display: flex; gap: 10px; flex-wrap: wrap; }
+  header.hero .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 5px 14px;
+    border-radius: 16px;
+    font-size: 13px;
+  }
+
+  /* Banner */
+  .v021-banner {
+    background: #fff3e0;
+    border-left: 4px solid #f57c00;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: #5d4037;
+    border-radius: 4px;
+  }
+  .v021-banner strong { color: #e65100; }
+
+  /* Intro */
+  .intro {
+    background: #fff;
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin-bottom: 28px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .intro h2 {
+    font-size: 17px;
+    color: #1565c0;
+    margin-bottom: 10px;
+  }
+  .intro p { font-size: 14px; color: #455a64; margin-bottom: 6px; }
+  .intro ul { margin-left: 22px; font-size: 14px; color: #455a64; }
+  .intro ul li { margin-bottom: 4px; }
+
+  /* Two modes */
+  .modes-section {
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-size: 18px;
+    color: #1565c0;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e3f2fd;
+  }
+  .modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 16px;
+  }
+  .mode-card {
+    background: #fff;
+    border: 2px solid #e3f2fd;
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: all 0.2s;
+  }
+  .mode-card.active:hover {
+    border-color: #1e88e5;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30,136,229,0.15);
+  }
+  .mode-card h3 {
+    font-size: 16px;
+    color: #1565c0;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mode-card .mode-tag {
+    background: #1e88e5;
+    color: #fff;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: normal;
+  }
+  .mode-card .mode-tag.capstone { background: #7b1fa2; }
+  .mode-card p { font-size: 13px; color: #607d8b; margin-bottom: 12px; }
+  .mode-card .mode-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .mode-card .mode-links a {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: background 0.15s;
+  }
+  .mode-card .mode-links a:hover { background: #bbdefb; }
+  .mode-card .mode-links a.capstone-link { background: #f3e5f5; color: #7b1fa2; }
+  .mode-card .mode-links a.capstone-link:hover { background: #e1bee7; }
+
+  /* Skeleton grid */
+  .skeleton-section {
+    margin-bottom: 32px;
+  }
+  .position-group {
+    margin-bottom: 22px;
+  }
+  .position-group h3 {
+    font-size: 16px;
+    color: #455a64;
+    margin-bottom: 12px;
+    padding: 8px 14px;
+    background: #eceff1;
+    border-left: 4px solid #1e88e5;
+    border-radius: 4px;
+  }
+  .position-group .position-meta {
+    color: #78909c;
+    font-size: 13px;
+    font-weight: normal;
+    margin-left: 10px;
+  }
+  .skeleton-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 14px;
+  }
+  .skeleton-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 18px;
+    position: relative;
+    transition: all 0.2s;
+  }
+  .skeleton-card.ready {
+    border-color: #66bb6a;
+    border-left-width: 4px;
+  }
+  .skeleton-card.ready:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(102,187,106,0.18);
+  }
+  .skeleton-card.wip {
+    background: #fafafa;
+    border-style: dashed;
+  }
+  .skeleton-card.planned {
+    background: #fafafa;
+    border-style: dashed;
+    opacity: 0.7;
+  }
+  .skeleton-card .status {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .skeleton-card.ready .status { background: #c8e6c9; color: #2e7d32; }
+  .skeleton-card.wip .status { background: #fff9c4; color: #f57f17; }
+  .skeleton-card.planned .status { background: #eceff1; color: #607d8b; }
+  .skeleton-card h4 {
+    font-size: 15px;
+    color: #263238;
+    margin-bottom: 6px;
+    padding-right: 70px;
+  }
+  .skeleton-card .anchor-info {
+    color: #78909c;
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .skeleton-card .skeleton-links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .skeleton-card .skeleton-links a {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 5px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 12px;
+    transition: background 0.15s;
+  }
+  .skeleton-card .skeleton-links a:hover { background: #c8e6c9; }
+  .skeleton-card .skeleton-links span.disabled {
+    background: #f5f5f5;
+    color: #9e9e9e;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 32px;
+    padding: 20px;
+    text-align: center;
+    color: #78909c;
+    font-size: 12px;
+    border-top: 1px solid #e0e0e0;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header class="hero">
+    <h1>高考综合应用 · 力学电磁 13/14/15 题型库</h1>
+    <div class="subtitle">面向预备高三 · 紧扣新高考 II 卷（陕西适用）后三题（38 分）</div>
+    <div class="badges">
+      <span class="badge">⚡ 力学 + 电磁双覆盖</span>
+      <span class="badge">📚 53《五年高考》骨架对照</span>
+      <span class="badge">🎯 13 / 14 / 15 题位专项</span>
+    </div>
+  </header>
+
+  <div class="v021-banner">
+    📝 <strong>HTML 模拟练习 / 备考工具</strong> · 此处自动判分仅供反馈，真正的 <strong>熟练度通关</strong> 由教师组织 <strong>纸笔形式 + 题型同高考 + 批改</strong>。本平台『通过 70 分』≈ 已具备纸笔熟练度检测备考水平。
+  </div>
+
+  <div class="intro">
+    <h2>💡 怎么用本平台</h2>
+    <p>每题位列出 6-8 种高考高频骨架，每骨架独立 task-card（3 例题厚版）+ 小型 fluency-test（3 T × 4 变体），按弱项点穴训练。</p>
+    <p style="margin-top:6px;">骨架后期逐步补全（标 <strong style="color:#2e7d32;">✅ 已建</strong> / <strong style="color:#f57f17;">🚧 建设中</strong> / <strong style="color:#607d8b;">📋 规划</strong>）。</p>
+    <p style="margin-top:10px;color:#78909c;font-size:13px;">⚠️ 本平台假定你已掌握高二力学/电磁基础。若基础不牢，每张 task-card 内嵌"核心知识速复习"段会帮你回顾。</p>
+  </div>
+
+  <!-- ============ Skeleton Grid ============ -->
+  <div class="skeleton-section" id="capstone-skeletons">
+    <div class="section-title">🗺️ 骨架地图（按题位 · 后期逐步补全）</div>
+
+    <!-- ====== 13 题位 ====== -->
+    <div class="position-group">
+      <h3>13 题位<span class="position-meta">10-11 分中档 · 通常 2 小问 · 推荐 10-12 min · 6 骨架</span></h3>
+      <div class="skeleton-grid">
+
+        <div class="skeleton-card ready">
+          <span class="status">✅ 已建</span>
+          <h4>板块碰撞</h4>
+          <div class="anchor-info">53 专题七 题型 25 P25.2 · 锚 2022 河北 13</div>
+          <div class="skeleton-links">
+            <a href="gaokao-13-block-collision-task-cards.html">📖 学习</a>
+            <a href="gaokao-13-block-collision-fluency-test.html">📈 检测</a>
+          </div>
+        </div>
+
+        <div class="skeleton-card ready">
+          <span class="status">✅ 已建</span>
+          <h4>传送带 + 动能定理</h4>
+          <div class="anchor-info">53 专题三 题型 10 · 锚 2021 全国乙 13</div>
+          <div class="skeleton-links">
+            <a href="gaokao-13-conveyor-belt-task-cards.html">📖 学习</a>
+            <a href="gaokao-13-conveyor-belt-fluency-test.html">📈 检测</a>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>斜面 + 弹簧 + 多体</h4>
+          <div class="anchor-info">53 专题二/六 · 力学综合中档</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>圆周运动（绳/杆/管）</h4>
+          <div class="anchor-info">53 专题四 题型 14 · 圆周运动综合</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>抛体 + 动能定理</h4>
+          <div class="anchor-info">53 专题四 题型 13 · 锚 2025 黑吉辽蒙 13</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>能量守恒综合</h4>
+          <div class="anchor-info">53 专题六 题型 18-21 · 机械能 + 弹簧</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ====== 14 题位 ====== -->
+    <div class="position-group">
+      <h3>14 题位<span class="position-meta">12-14 分中档偏上 · 通常 3 小问 · 推荐 12-15 min · 8 骨架</span></h3>
+      <div class="skeleton-grid">
+
+        <div class="skeleton-card ready">
+          <span class="status">✅ 已建</span>
+          <h4>平行导轨 + 滑轮 + 磁场</h4>
+          <div class="anchor-info">53 专题十二 题型 42 · 锚 2025 四川 14</div>
+          <div class="skeleton-links">
+            <a href="gaokao-14-rail-pulley-magnetic-task-cards.html">📖 学习</a>
+            <a href="gaokao-14-rail-pulley-magnetic-fluency-test.html">📈 检测</a>
+          </div>
+        </div>
+
+        <div class="skeleton-card ready">
+          <span class="status">✅ 已建</span>
+          <h4>带电粒子在磁场</h4>
+          <div class="anchor-info">53 专题十一 题型 35 · 锚 2024 重庆 14</div>
+          <div class="skeleton-links">
+            <a href="gaokao-14-charge-in-magnetic-field-task-cards.html">📖 学习</a>
+            <a href="gaokao-14-charge-in-magnetic-field-fluency-test.html">📈 检测</a>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>带电粒子在复合场</h4>
+          <div class="anchor-info">53 专题十一 题型 36 · 锚 2024 贵州 14</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>平行板电容 + 电源</h4>
+          <div class="anchor-info">53 专题十一 题型 36 · 锚 2025 湖南 14</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>圆形轨道弹性碰撞</h4>
+          <div class="anchor-info">53 专题七 题型 23 · 锚 2023 重庆 14</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>圆弧轨道碰撞</h4>
+          <div class="anchor-info">53 专题七 题型 24 · 锚 2024 安徽 14</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>真实情境冲量（汽车气囊等）</h4>
+          <div class="anchor-info">53 专题七 题型 22 · 锚 2024 广东 14</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>单杆模型 + 含电容</h4>
+          <div class="anchor-info">53 专题十二 题型 43 · 锚 2024 海南 13</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ====== 15 题位 ====== -->
+    <div class="position-group">
+      <h3>15 题位<span class="position-meta">16-18 分压轴 · 通常 3 小问 · 推荐 18-22 min · 区分度位 · 7 骨架</span></h3>
+      <div class="skeleton-grid">
+
+        <div class="skeleton-card ready">
+          <span class="status">✅ 已建</span>
+          <h4>弹簧 + 板块 + 墙（母题）</h4>
+          <div class="anchor-info">53 专题七 题型 25 P25.1 · 锚 2023 辽宁 15 · 53 压轴母题标杆</div>
+          <div class="skeleton-links">
+            <a href="gaokao-15-spring-block-wall-task-cards.html">📖 学习</a>
+            <a href="gaokao-15-spring-block-wall-fluency-test.html">📈 检测</a>
+          </div>
+        </div>
+
+        <div class="skeleton-card ready">
+          <span class="status">✅ 已建</span>
+          <h4>多板多过程</h4>
+          <div class="anchor-info">53 专题七 题型 25 P25.3 · 锚 2025 浙江 15</div>
+          <div class="skeleton-links">
+            <a href="gaokao-15-multi-board-process-task-cards.html">📖 学习</a>
+            <a href="gaokao-15-multi-board-process-fluency-test.html">📈 检测</a>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>椭圆轨道（类天体）</h4>
+          <div class="anchor-info">53 专题七 题型 24 · 锚 2023 湖南 15 / 2025 黑吉辽蒙 15</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>加速场 + 交变场 + 偏转</h4>
+          <div class="anchor-info">53 专题十一 题型 39/40 · 锚 2024 黑吉辽蒙 15</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>配速法 + 圆形区域磁场</h4>
+          <div class="anchor-info">53 专题十一 题型 38 · 锚 2024 海南 18</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>平行导轨 + 弹性绳 + 杆（电磁压轴）</h4>
+          <div class="anchor-info">53 专题十二 题型 42 · 锚 2025 安徽 15</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+        <div class="skeleton-card planned">
+          <span class="status">📋 规划</span>
+          <h4>圆周运动几何 + 撤场</h4>
+          <div class="anchor-info">53 专题十一 · 锚 2021 辽宁 15</div>
+          <div class="skeleton-links">
+            <span class="disabled">📖 学习</span>
+            <span class="disabled">📈 检测</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    蓝色诺瓦学院 · 物理 · 高考综合应用 · 力学电磁 13/14/15 题型库 · v0.1.0 (2026-06-16)
+    <br>
+    总骨架数：21（13 题位 6 + 14 题位 8 + 15 题位 7）· 当前已建 6：13 板块碰撞 / 13 传送带 / 14 平行导轨滑轮 / 14 带电粒子磁场 / 15 弹簧板块墙 / 15 多板多过程 · 其余 15 骨架按教师审核后逐步补全
+  </footer>
+
+</div>
+
+</body>
+</html>

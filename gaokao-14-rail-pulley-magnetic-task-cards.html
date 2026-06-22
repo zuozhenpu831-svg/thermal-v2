@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高考 14 题位 · 平行导轨 + 滑轮 + 磁场 · 学习任务卡（capstone）</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+<style>
+  /* ===== 蓝色诺瓦 · 三色制（蓝 / 金 / 银）· 圆形锚点 · 大留白 v0.2 ===== */
+  :root {
+    /* 蓝 · 主色 */
+    --blue-900: #002F73;
+    --blue-700: #00409A;
+    --blue-500: #0055B8;
+    --blue-100: #E8EEF9;
+    --blue-050: #F3F6FC;
+    /* 金 · 第二色（节奏 2 · 强调 · 暖警示） */
+    --gold-900: #8E6E2E;
+    --gold-700: #B8924A;
+    --gold-500: #C9A961;
+    --gold-100: #F4ECD6;
+    --gold-050: #FBF7EC;
+    /* 银 · 第三色（节奏 3 · 弱调 · 中性提示） */
+    --silver-900: #5C6370;
+    --silver-700: #7B8290;
+    --silver-500: #A8AEBC;
+    --silver-100: #E5E7EC;
+    --silver-050: #F3F4F7;
+    /* 中性 */
+    --text-primary: #1d1d1f;
+    --text-secondary: #6e6e73;
+    --text-light: #86868b;
+    --bg-primary: #ffffff;
+    --bg-secondary: #FAFAFB;
+    --border-color: #ECEDF0;
+    /* 形变 */
+    --radius: 24px;
+    --radius-sm: 14px;
+    --shadow-sm: 0 1px 2px rgba(20,30,60,0.04), 0 4px 16px rgba(20,30,60,0.04);
+    --shadow-md: 0 2px 8px rgba(20,30,60,0.06), 0 12px 32px rgba(20,30,60,0.06);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 兼容旧变量（页面内联仍引用 var(--primary-blue) 等） */
+    --primary-blue: var(--blue-700);
+    --secondary-blue: var(--blue-500);
+    --bright-blue: var(--blue-500);
+    --light-blue: var(--blue-100);
+    --bg-light: var(--bg-secondary);
+    --accent-orange: var(--gold-700);
+    --accent-purple: var(--silver-700);
+    --accent-green: var(--silver-700);
+    --success: var(--silver-700);
+    --danger: var(--gold-900);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    min-height: 100vh;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 760px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ===== 面包屑 ===== */
+  .breadcrumb { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 24px; letter-spacing: 0.02em; }
+  .breadcrumb a { color: var(--blue-700); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 8px; color: var(--silver-500); }
+
+  /* ===== 头部 · 极简化 · 一个大金圆作为视觉锚 ===== */
+  .header {
+    text-align: center;
+    padding: 64px 32px 56px;
+    background: #fff;
+    color: var(--text-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+  }
+  .header::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--gold-500), var(--gold-700));
+    opacity: 0.12;
+    z-index: 0;
+  }
+  .header::after {
+    content: "";
+    position: absolute;
+    bottom: -40px;
+    right: -40px;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid var(--silver-500);
+    opacity: 0.35;
+    z-index: 0;
+  }
+  .header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+    position: relative;
+    z-index: 1;
+  }
+  .header h1 .h1-sub {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--silver-700);
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--silver-500);
+    opacity: 0.9;
+  }
+  .header .subtitle {
+    font-size: 0.92rem;
+    color: var(--silver-700);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+  /* 隐藏原内联装饰元素 · 由 ::before/::after 取代 */
+  .hero-wave, .hero-decoration { display: none; }
+
+  /* ===== Banner · 圆点开头 + 金色调（替代橙色 capstone-banner） ===== */
+  .capstone-banner {
+    background: var(--gold-050);
+    border: none;
+    border-left: 3px solid var(--gold-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin-bottom: 36px;
+    font-size: 0.88rem;
+    color: var(--gold-900);
+    line-height: 1.8;
+    position: relative;
+  }
+  .capstone-banner::before {
+    content: "★";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--gold-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+  }
+  .capstone-banner strong { color: var(--gold-900); font-weight: 700; }
+
+  /* ===== 跨主题警示 · 蓝色品牌主色（统一品牌） ===== */
+  .cross-topic-warning {
+    background: var(--blue-050);
+    border: 1px solid var(--blue-700);
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 22px 26px 22px 64px;
+    margin: 28px 0;
+    font-size: 0.88rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+    position: relative;
+  }
+  .cross-topic-warning::before {
+    content: "!";
+    position: absolute;
+    left: 18px;
+    top: 22px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .cross-topic-warning .ctw-title { font-weight: 700; color: var(--blue-700); margin-bottom: 10px; font-size: 0.95rem; }
+  .cross-topic-warning strong { color: var(--blue-700); }
+
+  /* ===== 主卡片 · 节奏 蓝→金→银→蓝→金→银 ===== */
+  .card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    padding: 40px 36px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--blue-700);
+  }
+  /* .card 顶边锁定蓝色（不轮换） */
+
+  .info-table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+  .info-table td { padding: 14px 16px; border-bottom: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .info-table td:first-child { font-weight: 600; color: var(--blue-700); white-space: nowrap; width: 130px; }
+  .info-table tr:last-child td { border-bottom: none; }
+
+  /* ===== 章节标题 · 圆形锚点前置 + 节奏色 ===== */
+  .section-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--silver-100);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-title::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--blue-100);
+  }
+  /* .card .section-title 锁定蓝色（不轮换） */
+
+  .objectives-list { padding-left: 24px; font-size: 0.94rem; }
+  .objectives-list li { margin-bottom: 14px; line-height: 1.85; }
+  .objectives-list li::marker { color: var(--blue-700); font-weight: 700; }
+  .card .objectives-list li strong { color: var(--blue-700); }
+
+  /* ===== 驱动问题 · 极简留白 + 圆形「?」 ===== */
+  .driving-question {
+    background: var(--blue-050);
+    border: none;
+    border-left: 3px solid var(--blue-700);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 32px 32px 32px 72px;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .driving-question::before {
+    content: "?";
+    position: absolute;
+    left: 22px;
+    top: 30px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--blue-700);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: Georgia, serif;
+  }
+  .driving-question .dq-title { font-size: 1.1rem; font-weight: 700; color: var(--blue-700); margin-bottom: 16px; letter-spacing: -0.005em; }
+  .driving-question p { font-size: 0.94rem; margin-bottom: 12px; line-height: 1.85; }
+  .driving-question p:last-child { margin-bottom: 0; }
+  .driving-question .hint { font-size: 0.85rem; color: var(--silver-700); margin-top: 10px; }
+
+  /* ===== 任务卡 · 大号圆形编号 + 节奏色 ===== */
+  .task-card {
+    background: var(--bg-primary);
+    border-radius: var(--radius);
+    margin-bottom: 48px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+  .task-card-header {
+    background: #fff;
+    color: var(--text-primary);
+    padding: 28px 32px;
+    display: flex; align-items: center; gap: 20px;
+    cursor: pointer; user-select: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+  }
+  .task-card-header:hover { background: var(--blue-050); }
+  .task-card-number {
+    background: var(--blue-700);
+    color: #fff;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 700;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 6px var(--blue-100);
+  }
+  /* task-card-number 锁定蓝色（不跟例题序号轮换） */
+  .task-card-header h3 { font-size: 1.1rem; font-weight: 600; flex-grow: 1; color: var(--text-primary); line-height: 1.6; }
+  .task-card-chevron { font-size: 1.1rem; transition: transform 0.3s; opacity: 0.5; color: var(--silver-700); }
+  .task-card-header.collapsed .task-card-chevron { transform: rotate(-90deg); }
+  .task-card-body { padding: 40px 36px; }
+  .task-card-body.collapsed { display: none; }
+
+  .task-objective {
+    background: var(--blue-050);
+    border-radius: var(--radius-sm);
+    padding: 20px 24px;
+    font-size: 0.9rem;
+    color: var(--blue-700);
+    line-height: 1.85;
+    margin-bottom: 36px;
+    border-left: 3px solid var(--blue-700);
+  }
+  /* task-objective 锁定蓝色（不跟例题序号轮换） */
+
+  /* ===== STEP · 圆形 badge ===== */
+  /* ===== STEP 标题 · 小圆形文本框（220×220） =====
+     · 圆 = STEP 编号（小字）+ 标题（居中换行 · word-break）
+     · 圆之间天然有 step-content 矩形隔开，避免连续圆形
+     · 节奏色按步骤序号循环 蓝→金→银 */
+  .step { margin-bottom: 40px; }
+  .step:last-of-type { margin-bottom: 16px; }
+
+  .step-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: 0 4px 18px rgba(20,30,60,0.06);
+    box-sizing: border-box;
+    padding: 32px 28px;
+    margin: 0 auto 36px;
+    text-align: center;
+    gap: 0;
+  }
+
+  /* badge → 圆顶部小字签条 */
+  .step-header .step-badge {
+    background: transparent;
+    color: var(--blue-700);
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 0 0 8px;
+    margin: 0 0 14px;
+    letter-spacing: 0.22em;
+    line-height: 1.2;
+    display: inline-block;
+    border-bottom: 1.5px solid var(--blue-700);
+    flex-shrink: 1;
+  }
+
+  /* title → 圆心标题 · 居中换行 */
+  .step-header .step-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    line-height: 1.55;
+    max-width: 100%;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: center;
+  }
+  /* 副标题（括号细节） · 小一号 + 跟随 STEP 色 */
+  .step-header .step-title .step-sub {
+    display: inline-block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--step-mid);
+    opacity: 0.8;
+    margin-top: 6px;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+  }
+
+  /* ============================================================
+   * 单一真理源 · STEP 节奏色系统
+   * 每个 .step 注入 4 个变量：--step-rich (900) / --step-mid (700) / --step-bg (050) / --step-tint (100)
+   * 使用 :nth-child(N of .step) 仅按 .step 计数（不被 .task-objective 干扰）
+   * STEP 1=蓝 · 2=金 · 3=银 · 4=蓝 · 5=金 · 6=银（每个 task-card 独立计数）
+   * 例题 4 综合反思（无 task-objective）→ A=蓝 · B=金 · C=银 · D=蓝 · E=金 · F=银
+   * ============================================================ */
+  .step {
+    --step-rich: var(--blue-900);
+    --step-mid:  var(--blue-700);
+    --step-bg:   var(--blue-050);
+    --step-tint: var(--blue-100);
+  }
+  .task-card-body > .step:nth-child(3n+2 of .step) {
+    --step-rich: var(--gold-900);
+    --step-mid:  var(--gold-700);
+    --step-bg:   var(--gold-050);
+    --step-tint: var(--gold-100);
+  }
+  .task-card-body > .step:nth-child(3n of .step) {
+    --step-rich: var(--silver-900);
+    --step-mid:  var(--silver-700);
+    --step-bg:   var(--silver-050);
+    --step-tint: var(--silver-100);
+  }
+
+  /* 兼容旧 inline 样式：17 处 路径 N 标题 `color:var(--primary-blue)`
+     通过 .step 级 var 重定向，让它跟随 STEP 区域色（而非死锁蓝） */
+  .step {
+    --primary-blue:   var(--step-rich);
+    --secondary-blue: var(--step-mid);
+    --bright-blue:    var(--step-mid);
+    --light-blue:     var(--step-bg);
+  }
+
+  /* step-header 圆 → 跟随 STEP 色 */
+  .step .step-header {
+    background: var(--step-bg);
+    border-color: var(--step-mid);
+  }
+  .step .step-header .step-badge {
+    color: var(--step-rich);
+    border-bottom-color: var(--step-mid);
+  }
+
+  .step-content { font-size: 0.92rem; padding-left: 0; }
+  .step-content p { margin-bottom: 12px; }
+  .step-content ul, .step-content ol { padding-left: 22px; margin-bottom: 12px; }
+  .step-content li { margin-bottom: 8px; }
+
+  /* ===== 引用块 · 跟随 STEP 色 ===== */
+  .quote-block {
+    background: var(--step-bg);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 18px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.85;
+  }
+
+  /* ===== 前置回顾 · 跟随 STEP 色 ===== */
+  .prereq-recap {
+    background: #fff;
+    border: 1px solid var(--silver-100);
+    border-left: 3px solid var(--step-mid);
+    padding: 22px 26px;
+    margin: 20px 0;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    line-height: 1.8;
+  }
+  .prereq-recap strong { color: var(--step-rich); }
+
+  /* ===== 推导块 · 留白 + 节奏色（蓝/金/银 轮换）===== */
+  .derivation-block {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 28px 30px;
+    margin: 22px 0;
+    font-size: 0.92rem;
+    position: relative;
+  }
+  .derivation-block::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: -1px; bottom: -1px;
+    width: 4px;
+    background: var(--step-mid);
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .derivation-block .derivation-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 18px;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .derivation-block .derivation-title::before {
+    content: "";
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    box-shadow: 0 0 0 3px var(--step-tint);
+    flex-shrink: 0;
+  }
+
+  .derivation-block .step-line {
+    margin: 12px 0;
+    padding-left: 18px;
+    border-left: 1px solid var(--silver-100);
+    line-height: 1.85;
+  }
+  .derivation-block .step-line strong { color: var(--step-rich); }
+
+  /* ===== STEP 0（.card 直辖 · 非 .step）的 derivation-block 循环色 ===== */
+  /* 默认 蓝（骨架 1, 4 …） */
+  .card > .derivation-block::before { background: var(--blue-700); }
+  .card > .derivation-block .derivation-title { color: var(--blue-700); }
+  .card > .derivation-block .derivation-title::before { background: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .card > .derivation-block .step-line strong { color: var(--blue-700); }
+  /* 第 2/5/8 个 → 金 */
+  .card > .derivation-block:nth-of-type(3n+2)::before { background: var(--gold-700); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title { color: var(--gold-900); }
+  .card > .derivation-block:nth-of-type(3n+2) .derivation-title::before { background: var(--gold-700); box-shadow: 0 0 0 3px var(--gold-100); }
+  .card > .derivation-block:nth-of-type(3n+2) .step-line strong { color: var(--gold-900); }
+  /* 第 3/6 个 → 银 */
+  .card > .derivation-block:nth-of-type(3n)::before { background: var(--silver-700); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title { color: var(--silver-900); }
+  .card > .derivation-block:nth-of-type(3n) .derivation-title::before { background: var(--silver-700); box-shadow: 0 0 0 3px var(--silver-100); }
+  .card > .derivation-block:nth-of-type(3n) .step-line strong { color: var(--silver-900); }
+
+  /* ===== 思考停顿 · 跟随 STEP 色 ===== */
+  .thinking-point {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 24px 28px 24px 64px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .thinking-point::before {
+    content: "💭";
+    position: absolute;
+    left: 16px;
+    top: 22px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--step-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+  }
+  .thinking-point .tp-title { font-weight: 700; color: var(--step-rich); font-size: 0.98rem; margin-bottom: 14px; }
+  .thinking-point .tp-pause { background: #fff; padding: 12px 16px; border-radius: var(--radius-sm); margin: 10px 0; font-size: 0.88rem; border: 1px solid var(--step-tint); }
+  .thinking-point .tp-pause::before { content: '🤔 '; margin-right: 4px; }
+  .thinking-point .tp-ask { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-ask::before { content: '💬 问 AI：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-write { background: #fff; border-left: 3px solid var(--step-mid); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 10px 0; font-size: 0.88rem; color: var(--step-rich); }
+  .thinking-point .tp-write::before { content: '✍️ 自己写：'; font-weight: 700; color: var(--step-rich); margin-right: 4px; }
+  .thinking-point .tp-hint { font-size: 0.82rem; color: var(--silver-700); font-style: italic; margin: 6px 0 2px 0; }
+
+  /* ===== 进阶推荐 · 跟随 STEP 色 ===== */
+  .deepening-recommendation {
+    background: var(--step-bg);
+    border: none;
+    border-left: 3px solid var(--step-mid);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 20px 24px 20px 56px;
+    margin: 20px 0;
+    font-size: 0.88rem;
+    color: var(--step-rich);
+    line-height: 1.8;
+    position: relative;
+  }
+  .deepening-recommendation::before {
+    content: "↗";
+    position: absolute;
+    left: 14px; top: 20px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+  .deepening-recommendation .dr-title { font-weight: 700; color: var(--step-rich); margin-bottom: 8px; }
+
+  /* ===== 图示块 · 干净背景 ===== */
+  .diagram-block { margin: 32px 0; text-align: center; }
+  .diagram-block svg {
+    max-width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+  }
+  .diagram-caption { font-size: 0.83rem; color: var(--silver-700); margin-top: 12px; font-style: italic; line-height: 1.7; }
+
+  /* ===== 自查 / 检查点 · 跟随 STEP 色 ===== */
+  .checkpoint {
+    background: var(--step-bg);
+    border: 1px solid var(--step-tint);
+    border-radius: var(--radius-sm);
+    padding: 24px 26px 22px 26px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .checkpoint-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--step-rich);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .checkpoint-title::before {
+    content: "✓";
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--step-mid);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .checkpoint label { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; margin-bottom: 12px; cursor: pointer; line-height: 1.7; }
+  .checkpoint label:last-child { margin-bottom: 0; }
+  .checkpoint input[type="checkbox"] { margin-top: 5px; flex-shrink: 0; accent-color: var(--step-mid); width: 16px; height: 16px; }
+  .checkpoint label.checked span { text-decoration: line-through; color: var(--silver-700); }
+
+  /* ===== 素养标签 ===== */
+  .literacy-tag { font-size: 0.82rem; color: var(--silver-700); margin-top: 20px; padding-top: 14px; border-top: 1px dashed var(--silver-100); }
+
+  /* ===== 评分表 · 跟随 STEP 色 ===== */
+  .scoring-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .scoring-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .scoring-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .scoring-table tr:nth-child(even) td { background: var(--step-bg); }
+  .scoring-table td:last-child { color: var(--step-rich); font-weight: 500; }
+
+  /* ===== 对比 / 符号表 · 跟随 STEP 色 ===== */
+  .compare-table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.88rem; }
+  .compare-table th { background: var(--step-bg); color: var(--step-rich); padding: 14px 16px; text-align: left; border: 1px solid var(--border-color); font-weight: 600; }
+  .compare-table td { padding: 14px 16px; border: 1px solid var(--border-color); vertical-align: top; line-height: 1.75; }
+  .compare-table tr:nth-child(even) td { background: var(--step-bg); }
+  .compare-table td:first-child { font-weight: 600; color: var(--step-rich); white-space: nowrap; }
+
+  /* ===== 反思区 ===== */
+  .reflect-area { width: 100%; min-height: 100px; padding: 14px 16px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem; line-height: 1.75; resize: vertical; background: #fff; margin-top: 8px; transition: var(--transition); }
+  .reflect-area:focus { outline: none; border-color: var(--blue-700); box-shadow: 0 0 0 3px var(--blue-100); }
+  .reflect-q { font-size: 0.9rem; margin: 16px 0 6px; color: var(--text-primary); font-weight: 600; }
+
+  /* ===== 底部导航 ===== */
+  .bottom-nav { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; padding-top: 28px; border-top: 1px solid var(--border-color); }
+  .bottom-nav a, .bottom-nav span {
+    flex: 1; min-width: 140px;
+    text-align: center;
+    padding: 16px 18px;
+    border-radius: 999px;
+    background: var(--silver-050);
+    color: var(--silver-500);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .bottom-nav a { background: var(--blue-050); color: var(--blue-700); }
+  .bottom-nav a:hover { background: var(--blue-700); color: #fff; }
+
+  .footer { text-align: center; padding: 32px 16px 8px; font-size: 0.82rem; color: var(--silver-700); }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 480px) {
+    .container { padding: 20px 16px 48px; }
+    .header { padding: 48px 24px 40px; }
+    .header h1 { font-size: 1.3rem; }
+    .header::before { width: 140px; height: 140px; top: -50px; }
+    .card { padding: 28px 22px; }
+    .task-card-header { padding: 20px 22px; gap: 14px; }
+    .task-card-number { width: 44px; height: 44px; font-size: 1.15rem; box-shadow: 0 0 0 4px var(--blue-100); }
+    .task-card-header h3 { font-size: 1rem; }
+    .task-card-body { padding: 28px 22px; }
+    .step-content { padding-left: 0; }
+    .step-header { width: 220px; height: 220px; padding: 22px 20px; }
+    .step-header .step-title { font-size: 0.88rem; }
+    .step-header .step-badge { font-size: 0.65rem; letter-spacing: 0.18em; }
+    .driving-question { padding: 24px 22px 24px 64px; }
+    .capstone-banner, .cross-topic-warning { padding-left: 56px; padding-right: 20px; }
+  }
+
+  /* ===================================================================
+   * 圆形文本框 v0.3 · 与方形框交替使用
+   * 三种用法：
+   *   .card.card--circle                 把整张 card 改成圆形容器
+   *   .driving-question.is-circle        把 dq 块改成圆形容器
+   *   .task-objective.is-circle          把 task-objective 改成圆形容器
+   * 圆内放任何文本：用 shape-outside 让文本沿圆弧自然收边
+   * =================================================================== */
+  .card.card--circle,
+  .driving-question.is-circle,
+  .task-objective.is-circle {
+    background: transparent;
+    border: none;
+    border-left: none;
+    border-top: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+  }
+  .card.card--circle { margin-bottom: 56px; }
+  .driving-question.is-circle,
+  .task-objective.is-circle { margin-bottom: 40px; color: var(--text-primary); }
+  .driving-question.is-circle::before,
+  .task-objective.is-circle::before { display: none; }
+
+  /* 真圆容器（fixed width=height + border-radius:50%） */
+  .circle-frame {
+    width: 560px;
+    height: 560px;
+    max-width: 96vw;
+    border-radius: 50%;
+    background: var(--blue-050);
+    border: 2px solid var(--blue-700);
+    box-shadow: var(--shadow-md);
+    box-sizing: border-box;
+    margin: 0 auto;
+    position: relative;
+    overflow: visible;
+  }
+  .circle-frame--lg { width: 680px; height: 680px; }
+  .circle-frame--md { width: 480px; height: 480px; }
+  .circle-frame--sm { width: 400px; height: 400px; }
+  .circle-frame--blue   { background: var(--blue-050);   border-color: var(--blue-700); }
+  .circle-frame--gold   { background: var(--gold-050);   border-color: var(--gold-700); }
+  .circle-frame--silver { background: var(--silver-050); border-color: var(--silver-700); }
+
+  /* shape-outside · 两个半侧"虚拟体积"把文本压成圆弧内嵌 */
+  .circle-frame::before,
+  .circle-frame::after {
+    content: "";
+    width: 50%;
+    height: 100%;
+    display: block;
+  }
+  .circle-frame::before {
+    float: left;
+    shape-outside: ellipse(50% 50% at 100% 50%);
+  }
+  .circle-frame::after {
+    float: right;
+    shape-outside: ellipse(50% 50% at 0% 50%);
+  }
+
+  /* 圆内内容 · 通过 padding-top 让正文下沉到圆腹 */
+  .circle-frame .circle-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    letter-spacing: -0.005em;
+    padding-top: 18%;
+    margin-bottom: 18px;
+    position: relative;
+  }
+  .circle-frame--gold   .circle-title { color: var(--gold-900); }
+  .circle-frame--silver .circle-title { color: var(--silver-900); }
+  .circle-frame .circle-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+  .circle-frame--gold   .circle-title::after { background: var(--gold-700); }
+  .circle-frame--silver .circle-title::after { background: var(--silver-700); }
+
+  /* 把原有 dq-title 当作 circle-title 处理 */
+  .circle-frame .dq-title {
+    text-align: center;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--blue-700);
+    padding-top: 18%;
+    margin-bottom: 18px;
+  }
+  .circle-frame .dq-title::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--blue-700);
+    margin: 12px auto 0;
+    opacity: 0.7;
+  }
+
+  /* 圆内段落 */
+  .circle-frame p {
+    font-size: 0.86rem;
+    line-height: 1.78;
+    margin-bottom: 10px;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .circle-frame p:last-child { margin-bottom: 0; }
+  .circle-frame p.hint {
+    font-size: 0.78rem;
+    color: var(--silver-700);
+    text-align: center;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .circle-frame strong { color: var(--blue-700); }
+  .circle-frame--gold   strong { color: var(--gold-900); }
+  .circle-frame--silver strong { color: var(--silver-900); }
+
+  /* 圆内列表 · 字号收紧以契合圆形空间 */
+  .circle-frame ol,
+  .circle-frame ul {
+    font-size: 0.78rem;
+    line-height: 1.7;
+    text-align: left;
+    padding-left: 22px;
+    margin: 0;
+  }
+  .circle-frame ol li,
+  .circle-frame ul li { margin-bottom: 8px; }
+  .circle-frame ol li::marker {
+    color: var(--blue-700);
+    font-weight: 700;
+  }
+  .circle-frame--gold   ol li::marker { color: var(--gold-700); }
+  .circle-frame--silver ol li::marker { color: var(--silver-700); }
+
+  /* task-objective 短文本居中版 · 无 title */
+  .circle-frame.is-objective {
+    padding: 0;
+  }
+  .circle-frame.is-objective .objective-body {
+    padding-top: 32%;
+    padding-bottom: 32%;
+    text-align: center;
+    font-size: 0.86rem;
+    line-height: 1.85;
+  }
+  .circle-frame.is-objective.circle-frame--sm .objective-body {
+    padding-top: 28%;
+    padding-bottom: 28%;
+    font-size: 0.82rem;
+  }
+
+  /* 移动端 · 圆形退化为大圆角矩形（保证可读） */
+  @media (max-width: 640px) {
+    .circle-frame,
+    .circle-frame--lg,
+    .circle-frame--md,
+    .circle-frame--sm {
+      width: 100%;
+      height: auto;
+      aspect-ratio: auto;
+      border-radius: 28px;
+      padding: 32px 26px;
+    }
+    .circle-frame::before,
+    .circle-frame::after { display: none; }
+    .circle-frame .circle-title,
+    .circle-frame .dq-title { padding-top: 0; }
+    .circle-frame.is-objective .objective-body { padding-top: 0; padding-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <nav class="breadcrumb">
+    <a href="gaokao-mechanics-em-index.html">主页</a>
+    <span class="sep">&gt;</span>
+    <span>物理</span>
+    <span class="sep">&gt;</span>
+    <span>高考综合应用</span>
+    <span class="sep">&gt;</span>
+    <span>14 题位 · 平行导轨滑轮 · 学习任务卡（capstone）</span>
+  </nav>
+
+  <div class="header">
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <div class="hero-decoration"></div>
+    <svg class="hero-wave" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64 C200,100 400,20 600,64 C800,108 1000,20 1200,64 L1200,120 L0,120 Z" fill="rgba(255,255,255,0.95)"></path></svg>
+    <h1>高考 14 题位<br>平行导轨 + 滑轮 + 磁场<br><span class="h1-sub">练透 3 例</span></h1>
+    <div class="subtitle">动生电动势 ε=BLv · 安培力 F=BIL · 终速 a=0 平衡 · 电磁感应与力学耦合</div>
+  </div>
+
+  <div class="capstone-banner">
+    <strong>关于本板块的练习形态 · v0.1.0</strong>：本任务卡专攻"14 题位 · 平行导轨 + 滑轮 + 磁场骨架"——以 3 道改编例题（每题完整 STEP 1-6）把"识别情境 → 建立 ε=BLv → 安培力 F=BIL → 牛顿第二定律 → 终速 a=0 平衡"这条主链路打通。母题来源为 2025 四川 14 题（12 分）。配套的<strong>熟练度检测</strong>是 HTML 模拟练习页，用于学完后快速自测；纸笔限时整套训练由学科导师线下组织。本任务卡聚焦"骨架 + 策略 + 反思"，不是限时刷题入口。
+  </div>
+
+  <div class="card">
+    <table class="info-table">
+      <tr><td>模块名称</td><td>高考 14 题位 · 平行导轨 + 滑轮 + 磁场（capstone 子板块）</td></tr>
+      <tr><td>所属大主题</td><td>综合应用 · 电磁感应与力学耦合</td></tr>
+      <tr><td>预计学习时间</td><td>4-5 小时（例题 1 约 70 min · 例题 2 约 80 min · 例题 3 约 80 min · 综合反思 30-40 min）</td></tr>
+      <tr><td>前置板块</td><td><strong>电磁感应基础</strong>（磁通量、楞次定律、动生 / 感生电动势）<br><strong>电路基础</strong>（欧姆定律、串并联、内外电阻）<br><strong>力学基础</strong>（受力分析、牛顿第二定律、平衡条件）<br><strong>滑轮 + 绳约束</strong>（不可伸长轻绳两端速率相等）<br><strong>数学工具</strong>（一次方程、平衡式、可选微分方程）</td></tr>
+      <tr><td>所需工具</td><td>AI 工具、纸笔、计算器；草稿本（每题 2-3 张 A4，受力图 + 电路图 + 终速判定）；秒表（自测每题用时与卡点位置）</td></tr>
+    </table>
+  </div>
+
+  <div class="cross-topic-warning">
+    <div class="ctw-title">⚠️ 跨主题前置</div>
+    本板块属 capstone（综合应用）子板块，<strong>以"电磁感应 + 力学耦合"两大观点为支柱</strong>，并假定你已掌握上表"前置板块"列出的核心内容。若有任一前置不熟，请<strong>先回顾该前置板块</strong>，再回到本卡继续。每道例题 STEP 1 都内嵌"核心速复习"段（5-8 分钟）作为应急对照，<strong>不能</strong>替代正式的前置学习。
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">学习目标</h2>
+    <ol class="objectives-list">
+      <li><strong>识别</strong>"14 题位 · 平行导轨 + 磁场"骨架的三类高频变体：水平导轨外力推杆 / 水平导轨 + 滑轮 + 重物拉动 / 倾斜导轨杆释放下滑</li>
+      <li><strong>应用</strong>动生电动势 \(\varepsilon = BLv\) + 安培力 \(F = BIL\) + 牛顿第二定律 + 终速平衡条件（a=0 → 合外力为零）这条主链路分段处理</li>
+      <li><strong>掌握</strong>"L 取杆长（不是导轨总长）/ 终速时 a=0 力平衡 / 导轨电阻是否漏算"三条核心判据，每条都能写在卷面上</li>
+      <li><strong>避开</strong>五类高频扣分点：L 用错（导轨总长代杆长） / 漏算导轨自身电阻 / 安培力方向写反 / 终速条件未写"a=0" / 滑轮绳约束 v 杆≠v 球</li>
+      <li><strong>完成</strong>三道改编综合大题 + 一份"我的 14 题位 12-15 min 自述"反思</li>
+      <li><strong>读懂</strong>每个关键步对应的得分点，建立"卷面写哪几行式子才稳拿基本分"的卷面感</li>
+    </ol>
+  </div>
+
+  <div class="driving-question">
+    <div class="dq-title">驱动问题</div>
+    <p>"平行导轨 + 滑轮 + 磁场"在 14 题位上是新高考 II 卷电磁感应大题的标准载体。它的麻烦不在"工具难"——\(\varepsilon = BLv\)、\(F = BIL\)、欧姆定律你都见过——而在<strong>电路 + 力学耦合</strong>之后，学生常常在"L 到底取多长、导轨电阻算不算、终速条件什么时候写"上反复踩坑，最终写出"思路对但分丢一半"的答卷。</p>
+    <p style="margin-top: 6px;"><strong>这一类题的"骨架"到底长什么样？怎么把一道"杆切割磁场 + 受外力 + 通过电阻 / 滑轮 / 球"的多段题，拆成"求 ε → 求 I → 求安培力 → 牛顿第二定律 / 平衡式"这几段可写的小步骤？卷面上至少要出现哪几行式子才能踩到基本分？</strong></p>
+    <p class="hint">（提示：先不要追求"做对一整题"。本板块的目的是把<strong>骨架</strong>看清楚——看清后再练时间分配，才是有效率的训练路径。）</p>
+  </div>
+
+  <!-- ==================== STEP 0 · 14 题位骨架介绍 ==================== -->
+  <div class="card">
+    <h2 class="section-title">STEP 0 · 14 题位 · 平行导轨 + 磁场骨架介绍</h2>
+
+    <p style="font-size: 0.92rem; margin-bottom: 12px;">在做任何一道题之前，先用 5 分钟把这一题位的"骨架长什么样"刻进脑子。下面 4 段是骨架本身，不是技巧——技巧在 3 道例题里。</p>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 1 · 平行导轨 + 杆 = 动生电动势 + 安培力 + 力学耦合</div>
+      <div class="step-line">题面里出现 <strong>两根平行金属导轨 + 一根（或两根）垂直架在导轨上的导体杆</strong>，并且整套系统处于 <strong>匀强磁场</strong> 中，杆受外力 / 重力 / 绳拉力等沿导轨方向运动——这就是 14 题位电磁感应大题的标准骨架。</div>
+      <div class="step-line">"杆切割磁感线"产生 <strong>动生电动势 \(\varepsilon = BLv\)</strong>（L 是杆切割磁场的<strong>有效长度</strong> = 导轨间距 = 杆长 r，<strong>不是</strong>导轨总长）；电动势驱动电流 I 流过外电路；电流在磁场中受 <strong>安培力 \(F_{安} = BIL\)</strong> 反作用回杆——这就是"电磁感应 + 力学耦合"的闭环。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 2 · 高考 14 题位高频骨架（电磁感应类）</div>
+      <div class="step-line">据近 5 年新高考 II 卷与全国卷统计：<strong>14 题位的 10-12 分压轴题中，"平行导轨 + 磁场"类题型出现率高居电磁感应组榜首</strong>（参见 2025 四川 14、2023 全国乙 25、2021 新高考 II 14 等真题骨架）。出题方式以 <strong>"2-3 小问"</strong> 为主：第 (1) 问考动生电动势 ε 与电流 I；第 (2) 问考安培力 + 牛顿第二定律；第 (3) 问考终速 / 焦耳热 / μ 范围 / 加速度极值。</div>
+      <div class="step-line">本任务卡选取的 3 道例题分别对应该骨架的三类典型变体：<strong>水平导轨 + 外力推杆做匀加速</strong>（例题 1）/ <strong>水平导轨 + 滑轮 + 球拖动杆（2025 四川 14 母题）</strong>（例题 2）/ <strong>倾斜导轨 + 杆从顶端释放下滑求终速</strong>（例题 3）。三例覆盖率约占 14 题位历年真题骨架的 75% 以上。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 3 · 识别关键字（题面里只要见到就立即对号入座）</div>
+      <div class="step-line"><strong>「导轨」/「平行金属轨道」</strong>：电磁感应大题主战场 → 立刻想"杆切割 → ε=BLv → I=ε/R 总 → F 安=BIL"主链路。</div>
+      <div class="step-line"><strong>「杆 ab」/「金属棒」</strong>：切割磁感线的主体 → L 就取这根杆的长度（= 导轨间距 r），<strong>不要</strong>把整段导轨长当作 L。</div>
+      <div class="step-line"><strong>「终速」/「匀速」/「最大速度」</strong>：a=0 → 合外力 = 0 → 力平衡式（外力 / 重力分量 = 安培力）。这是 14 题位最高频的终态求解。</div>
+      <div class="step-line"><strong>「滑轮」/「绳」/「小球」</strong>：力学耦合 → 不可伸长轻绳约束 <strong>v 杆 = v 球</strong>（绳两端线速率相等）→ 同时列电磁方程与牛顿第二定律。</div>
+      <div class="step-line"><strong>「导轨电阻不计」</strong>：R 总 = 外电阻；<strong>若题面说"导轨电阻 r₀/m"或给出 MP 间阻值</strong>，则 R 总 = R 外 + R 导，<strong>漏算直接错</strong>。</div>
+    </div>
+
+    <div class="derivation-block">
+      <div class="derivation-title">骨架 4 · 核心判据 3 条（14 题位的"通关密钥"）</div>
+      <div class="step-line"><strong>判据 A · L 取杆长不是导轨长</strong>：动生电动势 \(\varepsilon = BLv\) 中 L 是<strong>切割磁感线的有效长度</strong>。在标准矩形回路里，L = 两根导轨之间的间距（也就是杆 ab 的长度 r），<strong>不是</strong>导轨从左端到右端的总长。这是 14 题位最高频的低级失分（占该题位扣分的 35% 以上）。</div>
+      <div class="step-line"><strong>判据 B · 终速 a=0 力平衡</strong>：题目问"终速 / 最大速度 / 匀速时"——必定意味着 a=0 → 合外力为零。卷面上必须出现一行"由 a=0，合外力为零，故 \(F_{外} = F_{安} = BIL\)"或类似平衡式，否则直接扣 2 分。</div>
+      <div class="step-line"><strong>判据 C · 导轨自身电阻</strong>：动手计算 I 之前必须先判断 R 总。规则：① 若题面明说"导轨电阻不计" → R 总 = R 外；② 若题面给"导轨电阻 r₀/m"或"MP 间阻值 R" → R 总 = R 外 + R 导轨段（注意是<strong>杆所在回路</strong>那一段导轨的电阻，不是导轨总长）；③ 杆本身若有电阻 R_杆，则也并入 R 总。<strong>分清这三项，答案才稳</strong>。</div>
+    </div>
+
+    <p style="font-size: 0.9rem; margin: 12px 0 0; color: var(--text-secondary);">读完以上 4 段，先合上页面，在草稿上把"识别 → ε=BLv → I=ε/R 总 → F 安=BIL → 牛顿/平衡"这条链路<strong>默写一遍</strong>。能默出来，再进入例题 1；默不出来，再回上面读一次。</p>
+
+    <div class="checkpoint">
+      <div class="checkpoint-title">✅ STEP 0 自查</div>
+      <label data-key="s0-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能说出"14 题位 · 平行导轨"骨架的 5 类识别关键字</span></label>
+      <label data-key="s0-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能解释"L 取杆长 r 不是导轨总长"，并知道这是最高频低级失分</span></label>
+      <label data-key="s0-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚"终速 = 匀速 = a=0 = 合外力为零"，并能列出平衡式</span></label>
+      <label data-key="s0-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能区分"导轨电阻不计 / 导轨给电阻率 / 杆有电阻"三种情形分别如何写 R 总</span></label>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 1 · 水平导轨 + 外力推杆匀加速 ==================== -->
+  <div class="task-card" id="ex1">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">1</div>
+      <h3>例题 1 · 水平导轨 + 外力推杆匀加速（入门 · 单回路）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"水平导轨 + 杆 + 外力推"为骨架，掌握"ε=BLv → I=ε/R → F 安=BIL → 牛顿第二定律 F-F 安=ma"主链路；建立"L 取杆长 r"的卷面感<br>
+        <strong>建议时长</strong>：70 分钟（速复习 8 + 题面 5 + 自己做 20 + 对照思考 22 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>下面 5 条公式 + 2 条判据是例题 1 用到的全部工具。先合上页面回忆，再对照。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">电磁感应 + 力学速查清单</div>
+            <div class="step-line"><strong>动生电动势</strong>：\(\varepsilon = BLv\)（L 是杆的有效切割长度 = 导轨间距 r，<strong>不是</strong>导轨总长）</div>
+            <div class="step-line"><strong>欧姆定律</strong>：\(I = \varepsilon / R_{总}\)（R 总 = 外电阻 + 导轨段电阻 + 杆电阻，按题面给定情况组合）</div>
+            <div class="step-line"><strong>安培力</strong>：\(F_{安} = BIL\)（方向用<strong>左手定则</strong>判：电流方向 + 磁场方向 → 力方向；常常与杆运动方向相反，起阻力作用）</div>
+            <div class="step-line"><strong>牛顿第二定律</strong>：\(F_{外} - F_{安} = ma\)（沿杆运动方向列；若 a=0 则为平衡式）</div>
+            <div class="step-line"><strong>感应电流方向</strong>：用<strong>右手定则</strong>判（伸开右手四指由 v 转向 B，拇指指 ε 由低到高方向，等价于楞次定律"阻碍磁通变化"）</div>
+            <div class="step-line"><strong>判据 · L 取杆长</strong>：标准矩形回路里 L = 杆长 r = 导轨间距，<strong>绝不</strong>是导轨总长</div>
+            <div class="step-line"><strong>判据 · 匀加速时 a≠0</strong>：本题杆做<strong>匀加速</strong>（a=1 m/s² 给定），故必须用 F-F 安=ma 而<strong>不是</strong>平衡式</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>水平导轨外力推杆匀加速<br><span class="step-sub">2 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            水平绝缘桌面上，两根光滑平行金属导轨沿东西方向放置，间距 \(r = 0.4\) m（即杆长 r=0.4 m）。导轨左端通过外接电阻短接，外电阻 \(R = 2\) Ω，导轨自身电阻不计。匀强磁场<strong>竖直向下</strong>，磁感应强度 \(B = 1\) T。垂直架在导轨上的导体杆 ab 质量 \(m = 0.1\) kg，杆与导轨间无摩擦，杆电阻并入 R（即视为外电阻包含杆阻）。某时刻起，外力 \(F\) 水平向东推杆 ab，使其从静止开始做<strong>匀加速</strong>直线运动，加速度 \(a = 1\) m/s²。取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>(1)</strong> 求 \(t = 2\) s 时刻，杆 ab 的速度 \(v\)、动生电动势 \(\varepsilon\) 和回路电流 \(I\)。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(2)</strong> 求 \(t = 2\) s 时刻，所需外力 \(F\) 的大小（注意 F 不仅要让杆加速，还要克服安培力）。<span style="color: var(--text-secondary);">[约 4 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 240" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex1-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+                <marker id="ex1-arr-l" viewBox="0 0 10 10" refX="1" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 10 0 L 0 5 L 10 10 z" fill="#0055B8"/>
+                </marker>
+              </defs>
+              <!-- 标题 -->
+              <text x="270" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">俯视图 · 水平导轨 + 杆 ab + 外力 F 推杆</text>
+              <!-- 上导轨 -->
+              <line x1="60" y1="80" x2="480" y2="80" stroke="#0055B8" stroke-width="2.5"/>
+              <!-- 下导轨 -->
+              <line x1="60" y1="180" x2="480" y2="180" stroke="#0055B8" stroke-width="2.5"/>
+              <!-- 左端电阻 R -->
+              <rect x="50" y="115" width="20" height="30" fill="#fff" stroke="#0055B8" stroke-width="2"/>
+              <line x1="60" y1="80" x2="60" y2="115"/>
+              <line x1="60" y1="145" x2="60" y2="180" stroke="#0055B8" stroke-width="2.5"/>
+              <text x="78" y="108" font-size="12" fill="#00409A" font-weight="600" text-anchor="start">R=2 Ω</text>
+              <!-- 杆 ab -->
+              <line x1="280" y1="78" x2="280" y2="182" stroke="#002F73" stroke-width="4"/>
+              <text x="280" y="72" font-size="12" fill="#002F73" font-weight="700" text-anchor="middle">a</text>
+              <text x="295" y="200" font-size="12" fill="#002F73" font-weight="700" text-anchor="start">b</text>
+              <!-- 磁场 × 阵列 (向下垂直纸面) -->
+              <g fill="#7B8290" font-size="14" font-weight="700" text-anchor="middle">
+                <text x="110" y="115">×</text><text x="160" y="115">×</text><text x="210" y="115">×</text>
+                <text x="330" y="115">×</text><text x="380" y="115">×</text><text x="430" y="115">×</text>
+                <text x="110" y="155">×</text><text x="160" y="155">×</text><text x="210" y="155">×</text>
+                <text x="330" y="155">×</text><text x="380" y="155">×</text><text x="430" y="155">×</text>
+              </g>
+              <text x="460" y="60" font-size="11" fill="#7B8290" text-anchor="end">⊗ B = 1 T（竖直向下）</text>
+              <!-- F 外力箭头 -->
+              <line x1="280" y1="220" x2="360" y2="220" stroke="#B8924A" stroke-width="2.5" marker-end="url(#ex1-arr-r)"/>
+              <text x="320" y="210" font-size="13" fill="#B8924A" font-weight="700" text-anchor="middle">F → 推杆</text>
+              <!-- 杆长 r 标注 (外置) -->
+              <line x1="486" y1="80" x2="486" y2="180" stroke="#6e6e73" stroke-width="1" stroke-dasharray="3 2"/>
+              <line x1="481" y1="80" x2="491" y2="80" stroke="#6e6e73"/>
+              <line x1="481" y1="180" x2="491" y2="180" stroke="#6e6e73"/>
+              <text x="525" y="128" font-size="10" fill="#6e6e73" font-weight="600" text-anchor="end">r=0.4</text>
+              <text x="525" y="144" font-size="9" fill="#002F73" text-anchor="end">⚠ L 此</text>
+            </svg>
+            <div class="diagram-caption">SVG 1.1 · 俯视图：杆 ab 长 r=0.4 m 垂直架在两根平行导轨上，匀强磁场垂直纸面向下（× 表示），外力 F 水平推杆向右。⚠ 动生电动势 ε=BLv 中 L = 杆长 r = 0.4 m，不是导轨总长（420 px）。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">不看答案，先动手</span></span></div>
+        <div class="step-content">
+          <p>合上页面，在草稿上独立做 (1)(2)，目标 18-22 分钟。做完再翻 STEP 4。下面 5 个 checkbox 是"开做之前"的自检：</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex1-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我已经在草稿上重新画了俯视示意图，并标好磁场方向（×）与外力 F 方向</span></label>
+            <label data-key="ex1-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚 L=0.4 m 取的是杆长 r，<strong>不是</strong>导轨总长（哪怕题面看上去导轨很长）</span></label>
+            <label data-key="ex1-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道 t=2 s 时 v=at=2 m/s 后才能代入 ε=BLv</span></label>
+            <label data-key="ex1-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>对第 (2) 问，我意识到杆<strong>匀加速</strong>（a≠0），必须用 F-F 安=ma 而不是平衡式</span></label>
+            <label data-key="ex1-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会用左手定则判断安培力方向（与杆运动方向相反 → 阻碍运动）</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>4 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 求 t=2 s 时的杆速度 v</div>
+            <div class="tp-pause">杆从静止开始做匀加速直线运动，a=1 m/s²，求 t=2 s 时的瞬时速度——这是纯运动学起手。注意：动生电动势 ε=BLv 里的 v 必须是<strong>瞬时</strong>速度而不是平均速度。</div>
+            <div class="tp-ask">"请反问我：如果我用平均速度 \(\bar{v}\) 代入 ε=BLv，结果会偏大还是偏小？为什么动生电动势必须用瞬时速度？<strong>不要直接告诉我结论</strong>。"</div>
+            <div class="tp-write">匀加速：\(v = v_0 + at = 0 + 1 \times 2 = 2\) m/s（方向水平向东，与外力 F 同向）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 求动生电动势 ε 与电流 I</div>
+            <div class="tp-pause">关键点：L 取杆长 r=0.4 m，<strong>不是</strong>导轨从左端到杆的距离（那是回路面积变化用的"宽度"）。R 总 = 2 Ω（导轨电阻不计，杆电阻并入 R）。</div>
+            <div class="tp-ask">"请反问我：如果我把 L 错写成'导轨从左端电阻到杆的距离'（比如 0.5 m），结果会怎样？为什么标准矩形回路里 L 永远等于杆长？<strong>不要替我重新读题</strong>。"</div>
+            <div class="tp-write">动生电动势：\(\varepsilon = BLv = 1 \times 0.4 \times 2 = 0.8\) V<br>回路电流：\(I = \dfrac{\varepsilon}{R_{总}} = \dfrac{0.8}{2} = 0.4\) A<br>电流方向：用右手定则——杆向东、B 向下 → 杆中感应电动势使 b → a 方向（即从下导轨经杆向上）→ 外电路电流由 a 经 R 流回 b。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 求安培力 F 安</div>
+            <div class="tp-pause">安培力大小 \(F_{安} = BIL\)（L 仍然取杆长 r=0.4 m）。方向用左手定则：四指由电流方向（杆中 b→a，即由下向上）转到磁场方向（向下），<strong>注意四指必须由 I 转到 B，不能反向</strong>——结论：力的方向向西（与杆运动方向相反，起阻碍作用，与楞次定律一致）。</div>
+            <div class="tp-ask">"请帮我用'楞次定律 → 阻碍相对运动 → 安培力必反向'的简化思路再验一遍。<strong>不要重新告诉我左手定则</strong>。"</div>
+            <div class="tp-write">\(F_{安} = BIL = 1 \times 0.4 \times 0.4 = 0.16\) N（方向水平向西，与杆运动方向相反）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 牛顿第二定律求外力 F</div>
+            <div class="tp-pause">⚠ 关键：本题杆<strong>匀加速</strong>（a=1 m/s² ≠ 0）→ <strong>不是</strong>力平衡，必须用 F-F 安=ma。常见低级失分：误把"求外力"读成"求终速时的外力"，直接套平衡式 F=F 安 → 漏掉 ma 项 → 扣 2-3 分。</div>
+            <div class="tp-ask">"请反问我：'匀加速'和'匀速（终速）'两种情形分别对应什么受力方程？为什么不能混用？<strong>不要直接代数</strong>。"</div>
+            <div class="tp-write">沿杆运动方向（水平向东为正）列牛顿第二定律：<br>\(F - F_{安} = ma\)<br>\(F = ma + F_{安} = 0.1 \times 1 + 0.16 = 0.26\) N（方向水平向东）。<br>物理意义：0.1 N 用来给杆提供加速度，0.16 N 用来克服安培力——两部分缺一不可。</div>
+            <div class="tp-hint">提示：F 随 v 增大而增大（因为 F 安 ∝ v）。若题目继续追问"杆速 v=10 m/s 时所需 F"，按同方法：\(F = ma + B^2L^2 v/R = 0.1\times 1 + 1^2\times 0.4^2\times 10/2 = 0.1 + 0.8 = 0.9\) N（自己练一遍）。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>8 分如何被切分</span></div>
+        <div class="step-content">
+          <p>下表把 8 分按"关键步"切分。每一行对应卷面上必须出现的一条式子或文字说明——少一条扣对应分。</p>
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 求 v=at</td><td>\(v = at = 1 \times 2 = 2\) m/s</td><td>1</td><td>用 v=v₀+at 但 v₀ 漏写"=0"</td></tr>
+              <tr><td>K2 ε=BLv + L=杆长</td><td>\(\varepsilon = BLv = 1 \times 0.4 \times 2 = 0.8\) V，明示"L 取杆长 r"</td><td>2</td><td>L 错用导轨总长 → 直接 0 分</td></tr>
+              <tr><td>K3 求 I</td><td>\(I = \varepsilon / R = 0.4\) A</td><td>1</td><td>R 漏算导轨电阻（本题不需要，但需写"导轨电阻不计"理由）</td></tr>
+              <tr><td>K4 F 安=BIL + 方向</td><td>\(F_{安} = BIL = 0.16\) N，方向向西（与 v 反向）</td><td>2</td><td>方向写反 / 漏写</td></tr>
+              <tr><td>K5 牛顿第二定律 F-F 安=ma</td><td>"杆匀加速 a≠0 → F-F 安=ma"+方程</td><td>1</td><td>误用平衡式 F=F 安 → 扣 1 分</td></tr>
+              <tr><td>K6 解出 F=0.26 N</td><td>F = ma + F 安 = 0.26 N（方向向东）</td><td>1</td><td>单位 / 方向漏写</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 易扣分速记：① L 错取导轨总长（K2 直接 0 分，本题最高频低级失分）② 安培力方向写反（K4 扣 1）③ 匀加速误套平衡式（K5+K6 共扣 2）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问 · 写下来</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我刚才在哪一步卡住最久？是"L 取多长"、"安培力方向"，还是"用牛顿还是用平衡"？</p>
+          <textarea class="reflect-area" data-key="ex1-r1" placeholder="如：我一开始把 L 写成 0.5 m（导轨从左端到杆的距离），后来才意识到 L 永远是杆长 r=0.4 m……"></textarea>
+          <p class="reflect-q">Q2 · 如果让我重做一遍，我会先做什么改动？</p>
+          <textarea class="reflect-area" data-key="ex1-r2" placeholder="如：我会先在草稿上把'L=杆长 r'写在受力图旁边，再代入 ε=BLv……"></textarea>
+          <p class="reflect-q">Q3 · 这道题暴露我对"动生电动势 ε=BLv 中 L 的物理意义"的哪一块认识不牢？</p>
+          <textarea class="reflect-area" data-key="ex1-r3" placeholder="如：我之前以为 L 是回路宽度（即从左端电阻到杆的距离），其实 L 是杆切割磁感线的有效长度=杆长 r……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：电磁感应 + 力学耦合 · 科学思维：模型抽象（动生 ε 与瞬时 v）+ 推理论证（匀加速 vs 终速的判别）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 2 · 水平导轨 + 滑轮 + 球（母题）==================== -->
+  <div class="task-card" id="ex2">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">2</div>
+      <h3>例题 2 · 水平导轨 + 滑轮 + 球（基于 2025 四川 14 / 12 分母题改编）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"水平导轨 + 滑轮 + 球拉动杆"为骨架，掌握"绳约束 v 杆=v 球 + 双体牛顿第二定律 + 终速 a=0 平衡"三段联动；理解为什么终速时 Mg=F 安<br>
+        <strong>建议时长</strong>：80 分钟（速复习 8 + 题面 5 + 自己做 25 + 对照思考 27 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1 的区别：<strong>多了滑轮 + 重物</strong>这一段力学耦合。一根不可伸长的绳约束<strong>杆速率 = 球速率</strong>（v 杆 = v 球，记作 v）；杆所受绳张力 T 与球所受绳张力 T 大小相等（绳与滑轮均轻、滑轮光滑）。终速条件 a=0 是本题最重要的物理结论：终速时 \(Mg = F_{安} = BIL = B^2L^2 v_{终} / R\) → v 终可解析求出。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">双体 + 绳约束速查清单</div>
+            <div class="step-line"><strong>绳约束</strong>：不可伸长轻绳两端线速率相等 → \(v_{杆} = v_{球} = v\)；加速度也相等 \(a_{杆} = a_{球} = a\)。</div>
+            <div class="step-line"><strong>对小球</strong>（向下为正）：\(Mg - T = Ma\)</div>
+            <div class="step-line"><strong>对杆 ab</strong>（沿绳拉方向为正）：\(T - F_{安} = ma\)，其中 \(F_{安} = BIL = B^2L^2 v / R\)</div>
+            <div class="step-line"><strong>消去 T</strong>：\(Mg - F_{安} = (M + m) a\) → \(a = (Mg - B^2L^2 v / R) / (M + m)\)</div>
+            <div class="step-line"><strong>终速条件</strong>：a=0 → \(Mg = B^2 L^2 v_{终} / R\) → \(\boxed{v_{终} = MgR / (B^2 L^2)}\)</div>
+            <div class="step-line"><strong>匀速段焦耳热</strong>：终速后 a=0，动能不变 → 重力对球做的功全部转化为电热 → \(Q = Mg \cdot v_{终} \cdot \Delta t\)（或用 \(Q = I^2 R t\) 校验）</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>水平导轨 + 滑轮 + 球<br><span class="step-sub">3 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            水平绝缘桌面上，两根光滑平行金属直导轨 MN 和 PQ 沿东西方向放置（M、P 在西端，N、Q 在东端），间距 \(r = 0.5\) m，导轨自身电阻不计。M、P 两端通过外接电阻 \(R = 2\) Ω 短接。垂直架在导轨上的导体杆 ab 质量 \(m = 0.1\) kg，电阻不计，可沿导轨无摩擦地滑动。整个空间存在匀强磁场，磁感应强度 \(B = 1\) T，方向竖直向下。在导轨东端 N、Q 上方高 \(h = 0.4\) m 处有一固定的光滑定滑轮，一根不可伸长的绝缘轻绳一端系在杆 ab 中点，向东水平延伸到滑轮上方后绕过滑轮竖直向下，另一端悬挂一质量 \(M = 0.2\) kg 的小球。系统由静止释放（初始时杆位于导轨中段），杆 ab 沿导轨向东滑动、小球竖直下落。取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>(1)</strong> 当杆 ab 的速度 \(v = 4\) m/s 时，求杆中动生电动势 \(\varepsilon\) 与回路电流 \(I\)。<span style="color: var(--text-secondary);">[约 3 分]</span><br>
+            <strong>(2)</strong> 求此瞬间杆 ab 所受安培力 \(F_{安}\)，并求<strong>此刻</strong>小球的加速度 \(a\)（含大小与方向）。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(3)</strong> 求小球的终速 \(v_{终}\)；并求小球以终速匀速下落 \(\Delta t = 1\) s 内电阻 \(R\) 上产生的焦耳热 \(Q\)。<span style="color: var(--text-secondary);">[约 5 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex2-arr-r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+                <marker id="ex2-arr-d" viewBox="0 0 10 10" refX="5" refY="9" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 5 10 L 10 0 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <!-- 标题 -->
+              <text x="280" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">俯视 + 侧视组合 · 水平导轨 + 滑轮 + 球</text>
+              <!-- 桌面 -->
+              <line x1="40" y1="170" x2="460" y2="170" stroke="#0055B8" stroke-width="2.5"/>
+              <line x1="40" y1="100" x2="460" y2="100" stroke="#0055B8" stroke-width="2.5"/>
+              <!-- 左端电阻 R -->
+              <rect x="30" y="120" width="20" height="30" fill="#fff" stroke="#0055B8" stroke-width="2"/>
+              <line x1="40" y1="100" x2="40" y2="120"/>
+              <line x1="40" y1="150" x2="40" y2="170" stroke="#0055B8" stroke-width="2.5"/>
+              <text x="55" y="118" font-size="11" fill="#00409A" font-weight="600" text-anchor="start">R=2 Ω</text>
+              <text x="50" y="92" font-size="11" fill="#00409A" text-anchor="start">M</text>
+              <text x="50" y="190" font-size="11" fill="#00409A" text-anchor="start">P</text>
+              <text x="455" y="92" font-size="11" fill="#00409A" text-anchor="end">N</text>
+              <text x="455" y="190" font-size="11" fill="#00409A" text-anchor="end">Q</text>
+              <!-- 杆 ab -->
+              <line x1="220" y1="98" x2="220" y2="172" stroke="#002F73" stroke-width="4"/>
+              <text x="220" y="90" font-size="11" fill="#002F73" font-weight="700" text-anchor="middle">a</text>
+              <text x="235" y="188" font-size="11" fill="#002F73" font-weight="700" text-anchor="start">b</text>
+              <!-- 杆长 r 外置标注 -->
+              <line x1="200" y1="98" x2="200" y2="172" stroke="#6e6e73" stroke-width="1" stroke-dasharray="3 2"/>
+              <line x1="195" y1="98" x2="205" y2="98" stroke="#6e6e73"/>
+              <line x1="195" y1="172" x2="205" y2="172" stroke="#6e6e73"/>
+              <text x="190" y="138" font-size="11" fill="#6e6e73" font-weight="600" text-anchor="end">r=0.5</text>
+              <text x="190" y="152" font-size="9" fill="#002F73" text-anchor="end">⚠ L=此</text>
+              <!-- 磁场 × 阵列 -->
+              <g fill="#7B8290" font-size="13" font-weight="700" text-anchor="middle">
+                <text x="90" y="125">×</text><text x="130" y="125">×</text><text x="170" y="125">×</text>
+                <text x="270" y="125">×</text><text x="310" y="125">×</text><text x="370" y="125">×</text><text x="420" y="125">×</text>
+                <text x="90" y="160">×</text><text x="130" y="160">×</text><text x="170" y="160">×</text>
+                <text x="270" y="160">×</text><text x="310" y="160">×</text><text x="370" y="160">×</text><text x="420" y="160">×</text>
+              </g>
+              <text x="450" y="58" font-size="11" fill="#7B8290" text-anchor="end">⊗ B=1 T（竖直向下）</text>
+              <!-- 绳：从杆中点向东到 N/Q 端，再绕过滑轮向下 -->
+              <line x1="220" y1="135" x2="475" y2="135" stroke="#5C6370" stroke-width="1.5"/>
+              <!-- 滑轮 -->
+              <circle cx="490" cy="135" r="12" fill="#fff" stroke="#5C6370" stroke-width="2"/>
+              <circle cx="490" cy="135" r="3" fill="#5C6370"/>
+              <text x="490" y="115" font-size="10" fill="#5C6370" text-anchor="middle">滑轮</text>
+              <text x="490" y="100" font-size="9" fill="#6e6e73" text-anchor="middle">h=0.4 m</text>
+              <!-- 滑轮向下绳 -->
+              <line x1="502" y1="135" x2="502" y2="225" stroke="#5C6370" stroke-width="1.5"/>
+              <!-- 小球 -->
+              <circle cx="502" cy="240" r="14" fill="#B8924A"/>
+              <text x="502" y="245" font-size="11" fill="#fff" font-weight="700" text-anchor="middle">M</text>
+              <text x="475" y="270" font-size="11" fill="#B8924A" font-weight="600" text-anchor="middle">0.2 kg</text>
+              <!-- 球速度箭头 (向下) -->
+              <line x1="520" y1="225" x2="520" y2="252" stroke="#002F73" stroke-width="2" marker-end="url(#ex2-arr-d)"/>
+              <text x="538" y="245" font-size="11" fill="#002F73" font-weight="600" text-anchor="middle">v↓</text>
+              <!-- 杆速度箭头 -->
+              <line x1="225" y1="215" x2="280" y2="215" stroke="#002F73" stroke-width="2.2" marker-end="url(#ex2-arr-r)"/>
+              <text x="252" y="232" font-size="11" fill="#002F73" font-weight="600" text-anchor="middle">v 杆 →</text>
+              <!-- 绳约束注释 -->
+              <text x="345" y="152" font-size="10" fill="#B8924A" font-weight="600" text-anchor="middle">绳约束 v 杆=v 球</text>
+            </svg>
+            <div class="diagram-caption">SVG 2.1 · 桌面俯视 + 滑轮侧视组合：杆 ab（r=0.5 m）在水平导轨上向东滑动，绳绕过桌面东端滑轮后竖直下挂质量 M 的球。绳不可伸长 → v 杆 = v 球。⚠ ε=BLv 中 L = 杆长 r = 0.5 m。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex2b-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <text x="270" y="28" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">受力分析 · 杆 ab（水平面）与 球 M（竖直方向）</text>
+              <!-- 左：杆受力 -->
+              <text x="120" y="50" font-size="12" fill="#00409A" font-weight="600" text-anchor="middle">杆 ab 受力</text>
+              <line x1="80" y1="120" x2="80" y2="60" stroke="#002F73" stroke-width="3"/>
+              <line x1="80" y1="90" x2="40" y2="90" stroke="#0055B8" stroke-width="2" marker-end="url(#ex2b-arr)"/>
+              <text x="20" y="78" font-size="11" fill="#0055B8" text-anchor="start" font-weight="600">F 安向西</text>
+              <line x1="80" y1="90" x2="160" y2="90" stroke="#B8924A" stroke-width="2" marker-end="url(#ex2b-arr)"/>
+              <text x="165" y="85" font-size="11" fill="#B8924A" text-anchor="start" font-weight="600">T（向东 · 绳拉）</text>
+              <text x="80" y="140" font-size="10" fill="#6e6e73" text-anchor="middle">水平方向 ↔</text>
+              <!-- 右：球受力 -->
+              <text x="340" y="50" font-size="12" fill="#00409A" font-weight="600" text-anchor="start">球 M 受力</text>
+              <circle cx="400" cy="95" r="14" fill="#B8924A"/>
+              <line x1="400" y1="78" x2="400" y2="35" stroke="#B8924A" stroke-width="2" marker-end="url(#ex2b-arr)"/>
+              <text x="410" y="50" font-size="11" fill="#B8924A" text-anchor="start" font-weight="600">T（向上 · 绳拉）</text>
+              <line x1="400" y1="112" x2="400" y2="170" stroke="#0055B8" stroke-width="2" marker-end="url(#ex2b-arr)"/>
+              <text x="410" y="145" font-size="11" fill="#0055B8" text-anchor="start" font-weight="600">Mg（向下 · 重力）</text>
+              <text x="400" y="190" font-size="10" fill="#6e6e73" text-anchor="middle">竖直方向 ↕</text>
+            </svg>
+            <div class="diagram-caption">SVG 2.2 · 受力分析：杆 ab 受水平方向 T（绳拉，向东）与 F 安（向西，阻碍运动）；球 M 受竖直方向 T（向上）与 Mg（向下）。绳约束使 T 大小相等、v 大小相等。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">动手 25 分钟</span></span></div>
+        <div class="step-content">
+          <p>合上页面独立做。重点：杆 + 球两体必须分别列牛顿第二定律，绳约束作为联立桥梁。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex2-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我能写出绳约束 v 杆 = v 球（不可伸长轻绳两端线速率相等）</span></label>
+            <label data-key="ex2-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会把杆和球<strong>分别</strong>取隔离体，分别列牛顿第二定律</span></label>
+            <label data-key="ex2-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚 L=0.5 m 取的是杆长 r，与"绳长 / 滑轮高 h"无关</span></label>
+            <label data-key="ex2-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会用"终速 a=0 → Mg=F 安"求 v 终</span></label>
+            <label data-key="ex2-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚匀速段焦耳热 Q = 重力做功 = Mg·v 终·Δt（动能不变）</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>5 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 第 (1) 问 · 求 ε 与 I</div>
+            <div class="tp-pause">杆速 v=4 m/s（绳约束 → 球速也是 4 m/s 向下）。注意 L=杆长 r=0.5 m。</div>
+            <div class="tp-ask">"请反问我：题面给的 h=0.4 m 是滑轮高度，与 ε=BLv 中的 L 有没有关系？为什么没有？<strong>不要直接告诉我</strong>。"</div>
+            <div class="tp-write">动生电动势：\(\varepsilon = BLv = 1 \times 0.5 \times 4 = 2\) V<br>回路电流：\(I = \dfrac{\varepsilon}{R} = \dfrac{2}{2} = 1\) A（导轨电阻不计、杆电阻不计 → R 总 = 2 Ω）<br>电流方向：右手定则 → 杆中 b → a（自下而上），外电路由 a 经 R 流回 b。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 第 (2) 问 · 求安培力 + 球的瞬时加速度</div>
+            <div class="tp-pause">安培力 \(F_{安} = BIL = 1 \times 1 \times 0.5 = 0.5\) N，方向向西（阻碍杆向东运动）。求<strong>此刻球的加速度</strong>需要双体联立。</div>
+            <div class="tp-ask">"请反问我：为什么不能只看球'\(a = g - T/M\)'而不考虑杆？绳约束在哪里发挥作用？<strong>不要替我列方程</strong>。"</div>
+            <div class="tp-write">对球（向下为正）：\(Mg - T = Ma\)<br>对杆（向东为正）：\(T - F_{安} = ma\)<br>消去 T，相加：\(Mg - F_{安} = (M + m) a\)<br>\(0.2 \times 10 - 0.5 = (0.2 + 0.1) a\) → \(1.5 = 0.3 a\) → \(a = 5\) m/s²<br>球的加速度：5 m/s²，方向<strong>向下</strong>（与重力同向，仍处加速阶段）。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 第 (3) 问 · 终速 v 终的物理意义</div>
+            <div class="tp-pause">"终速"= 球（与杆）不再加速 = 匀速下落 = a=0 → 合外力为零。对球：\(Mg = T\)；对杆：\(T = F_{安} = BIL = B^2L^2 v_{终} / R\)。两式联立消去 T → \(Mg = B^2L^2 v_{终}/R\)。这是 14 题位"终速类"的标准模板。</div>
+            <div class="tp-ask">"请反问我：终速时'a=0'与'v 不变'是同一回事吗？我应该在卷面上写哪一个理由更清楚？<strong>不要直接给我推导</strong>。"</div>
+            <div class="tp-write">终速条件：\(a=0\) → \(Mg = F_{安} = \dfrac{B^2 L^2 v_{终}}{R}\)<br>解出：\(v_{终} = \dfrac{MgR}{B^2 L^2} = \dfrac{0.2 \times 10 \times 2}{1^2 \times 0.5^2} = \dfrac{4}{0.25} = 16\) m/s</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 匀速段焦耳热 Q</div>
+            <div class="tp-pause">匀速段 a=0 → 动能不变 → 重力对球做的功全部转化为电阻 R 上的焦耳热（导轨与杆电阻不计 → R 是唯一耗能元件）。注意：是<strong>匀速段</strong>这一段（题面给 Δt=1 s），不是从静止开始。</div>
+            <div class="tp-ask">"请反问我：为什么动能不变还有功？这功去了哪？能不能用 \(Q = I^2 R \cdot \Delta t\) 校验？<strong>不要替我代数</strong>。"</div>
+            <div class="tp-write">方法一（能量守恒）：\(Q = W_{重} = M g \cdot v_{终} \cdot \Delta t = 0.2 \times 10 \times 16 \times 1 = 32\) J<br>方法二（电热公式校验）：\(I_{终} = \dfrac{B L v_{终}}{R} = \dfrac{1 \times 0.5 \times 16}{2} = 4\) A，\(Q = I_{终}^2 R \Delta t = 16 \times 2 \times 1 = 32\) J ✓<br>两法一致，答案稳定：\(\boxed{Q = 32 \text{ J}}\)。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 5 · 物理图像复盘</div>
+            <div class="tp-pause">整段过程：球静止释放 → 重力 &gt; 安培力 → 系统加速 → v 增大 → ε 增大 → I 增大 → F 安增大 → 合外力减小 → 加速度逐渐减小 → 直至 v=v 终时 a=0。终态校验：球 a=0 → T=Mg=2 N；杆 a=0 → T=F 安 → F 安=2 N → I=F 安/(BL)=2/0.5=4 A → 与"v 终=16 m/s 时 I=BLv 终/R=4 A"一致 ✓。整个过程是从 a=5 m/s²（v=4 时） → 0（v=16 时）的渐近过程。</div>
+            <div class="tp-write">检查：v=4 m/s 时 a=5 m/s²（在加速段）；v 增大到 16 m/s 时 a=0（终速达到）。中间 v 单调增加、a 单调减小，物理合理 ✓。<br>另一种校验：v=v 终时 F 安 = Mg=2 N，此时 I=F 安/(BL)=2/0.5=4 A，ε=IR=8 V，v=ε/(BL)=8/0.5=16 m/s ✓ 自洽。</div>
+            <div class="tp-hint">提示：14 题位的"终速"几乎都是这条思路——a=0 → 合外力为零 → 重力 / 外力 = 安培力 → 解出 v 终。把"a=0 平衡式"刻进脑子，半数 14 题位就稳了。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>12 分如何被切分</span></div>
+        <div class="step-content">
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 (1)问 ε=BLv + L=杆长</td><td>\(\varepsilon = BLv = 2\) V，明示"L 取杆长 r=0.5 m"</td><td>2</td><td>L 错用导轨总长或绳长 → 0 分</td></tr>
+              <tr><td>K2 求 I</td><td>\(I = \varepsilon / R = 1\) A，注明"导轨与杆电阻不计"</td><td>1</td><td>未注明 R 总组成</td></tr>
+              <tr><td>K3 (2)问 F 安+方向</td><td>\(F_{安} = BIL = 0.5\) N，向西（阻碍 v 方向）</td><td>2</td><td>方向写反</td></tr>
+              <tr><td>K4 双体牛顿 + 绳约束</td><td>对球 + 对杆<strong>分别</strong>列方程，写明 v 杆=v 球、T 杆=T 球</td><td>2</td><td>合体处理 → 漏掉绳约束理由 → 扣 1-2</td></tr>
+              <tr><td>K5 求 a=5 m/s²</td><td>消 T 得 \(Mg - F_{安} = (M+m)a\) → a=5 m/s²（向下）</td><td>1</td><td>方向漏写</td></tr>
+              <tr><td>K6 (3)问 终速条件 a=0</td><td>"a=0 → 合外力为零 → Mg=F 安"+解出 v 终=16 m/s</td><td>2</td><td>没写"a=0"理由直接代公式 → 扣 1</td></tr>
+              <tr><td>K7 匀速段 Q</td><td>"动能不变 → W 重=Q"+ Q=Mg·v 终·Δt=32 J</td><td>2</td><td>用从静止全程算 → 大错</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 高频扣分速记：① L 错取（K1 直接 0 分）② 双体合体（K4 扣 2 分）③ 终速不写 a=0 理由（K6 扣 1）④ 焦耳热用全程算（K7 扣 2）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我在"双体 + 绳约束"这一步是否把杆和球分开列了？还是混在一起？</p>
+          <textarea class="reflect-area" data-key="ex2-r1" placeholder="如：我一开始想直接对系统整体写 Mg-F 安=(M+m)a，但意识到这种'整体法'必须先证明绳约束 a 杆=a 球，否则不合法……"></textarea>
+          <p class="reflect-q">Q2 · 终速条件"a=0"在卷面上我写得够明确吗？还是直接套了公式？</p>
+          <textarea class="reflect-area" data-key="ex2-r2" placeholder="如：我直接套了 v 终=MgR/(B²L²)，但没写'a=0 → 合外力为零'这一行——下次会先写理由再代式子……"></textarea>
+          <p class="reflect-q">Q3 · 匀速段焦耳热为什么等于重力做功？这道题让我对"动能不变 + 能量转化"有什么新理解？</p>
+          <textarea class="reflect-area" data-key="ex2-r3" placeholder="如：我以前以为'匀速'就没能量变化，其实球的重力一直在做功，只是动能不变 → 这些功必然转化为电热……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：电磁感应 + 力学双体耦合 + 能量守恒 · 科学思维：模型抽象（绳约束 + 隔离体）+ 推理论证（终速 a=0 的物理解释）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 例题 3 · 倾斜导轨 + 杆释放（自创变式）==================== -->
+  <div class="task-card" id="ex3">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">3</div>
+      <h3>例题 3 · 倾斜导轨 + 杆从顶端释放（自创变式 · 终速 + 能量守恒）</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+      <div class="task-objective">
+        <strong>学习目标</strong>：以"倾斜导轨 + 杆释放下滑"为骨架，掌握"a(v) 函数关系 + 终速 a=0 + 动能定理 + 能量守恒求焦耳热"四段联动；理解为什么斜面方向重力分量替代外力<br>
+        <strong>建议时长</strong>：80 分钟（速复习 8 + 题面 5 + 自己做 25 + 对照思考 27 + 评分锚点 + 反思 15）
+      </div>
+
+      <!-- STEP 1 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 1</span><span class="step-title">核心知识速复习<br><span class="step-sub">5-8 分钟</span></span></div>
+        <div class="step-content">
+          <p>本题与例题 1、2 的区别：<strong>没有外力推杆，也没有滑轮 / 球</strong>——杆自由从倾斜导轨顶端释放，由<strong>重力沿斜面方向的分量</strong> \(mg\sin\theta\) 充当"驱动力"。终速由"重力分量 = 安培力"平衡决定；中间过程用<strong>能量守恒</strong>而非牛顿第二定律（积分困难）。</p>
+          <div class="derivation-block">
+            <div class="derivation-title">倾斜导轨速查清单</div>
+            <div class="step-line"><strong>磁场方向</strong>：垂直<strong>斜面</strong>（不是垂直水平面）→ 杆沿斜面方向滑动时，杆速 v 始终垂直 B → 仍可用 \(\varepsilon = BLv\)（L=杆长 r）。</div>
+            <div class="step-line"><strong>沿斜面方向</strong>受力：重力分量 \(mg\sin\theta\) 向下、安培力 \(F_{安}=BIL\) 向上（阻碍下滑）、支持力与重力分量 \(mg\cos\theta\) 法向抵消（光滑导轨）。</div>
+            <div class="step-line"><strong>瞬时 a(v) 关系</strong>：\(ma = mg\sin\theta - \dfrac{B^2L^2 v}{R}\) → \(a(v) = g\sin\theta - \dfrac{B^2L^2 v}{mR}\)（v 增 → a 减 → 终速）。</div>
+            <div class="step-line"><strong>终速</strong>：a=0 → \(v_{终} = \dfrac{mg\sin\theta \cdot R}{B^2 L^2}\)（与例题 2 同构）。</div>
+            <div class="step-line"><strong>过程能量守恒</strong>：\(W_{重} = \Delta E_k + Q\)，即 \(mg\sin\theta \cdot s = \dfrac12 m v^2 - 0 + Q\)（给定 v 与 s 可解 Q）。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2 题面 + SVG -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 2</span><span class="step-title">题面<br>倾斜导轨杆释放<br><span class="step-sub">3 小问</span></span></div>
+        <div class="step-content">
+          <div class="quote-block">
+            两根光滑平行金属导轨置于倾角 \(\theta = 37°\) 的斜面上（\(\sin\theta=0.6, \cos\theta=0.8\)），间距 \(r = 0.5\) m（即杆长 r=0.5 m）。导轨上端通过外接电阻 \(R = 1\) Ω 短接（导轨自身电阻不计）。整个空间存在匀强磁场，磁感应强度 \(B = 2\) T，方向<strong>垂直斜面向外</strong>（即与斜面法线同向）。一根质量 \(m = 0.2\) kg、电阻并入 R（即 R 包含杆电阻）的导体杆 ab 垂直架在导轨上，从导轨顶端由静止释放沿导轨光滑下滑。取 \(g = 10\) m/s²。
+            <br><br>
+            <strong>(1)</strong> 写出杆下滑过程中加速度 \(a\) 随速度 \(v\) 变化的关系式 \(a(v)\)，并指出 v 增大时 a 的变化趋势。<span style="color: var(--text-secondary);">[约 4 分]</span><br>
+            <strong>(2)</strong> 求杆的终速 \(v_{终}\)。<span style="color: var(--text-secondary);">[约 3 分]</span><br>
+            <strong>(3)</strong> 从静止释放到杆速 \(v = 0.6\) m/s（即 \(0.5\,v_{终}\)）时，杆沿斜面下滑了 \(s = 0.10\) m。求此过程中电阻 R 上产生的焦耳热 \(Q\)。<span style="color: var(--text-secondary);">[约 5 分]</span>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 560 280" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex3-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+                <marker id="ex3-arr-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#7B8290"/>
+                </marker>
+              </defs>
+              <text x="280" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">侧视图 · 倾斜导轨 + 杆 ab 自顶端释放下滑</text>
+              <!-- 地面 -->
+              <line x1="40" y1="240" x2="520" y2="240" stroke="#6e6e73" stroke-width="1.5"/>
+              <g stroke="#6e6e73" stroke-width="1">
+                <line x1="60" y1="240" x2="50" y2="255"/>
+                <line x1="120" y1="240" x2="110" y2="255"/>
+                <line x1="180" y1="240" x2="170" y2="255"/>
+                <line x1="240" y1="240" x2="230" y2="255"/>
+                <line x1="300" y1="240" x2="290" y2="255"/>
+                <line x1="360" y1="240" x2="350" y2="255"/>
+                <line x1="420" y1="240" x2="410" y2="255"/>
+                <line x1="480" y1="240" x2="470" y2="255"/>
+              </g>
+              <!-- 斜面三角形 -->
+              <polygon points="80,240 480,240 480,60" fill="rgba(0,64,154,0.05)" stroke="#0055B8" stroke-width="2"/>
+              <!-- θ 角标注 -->
+              <path d="M 130 240 A 50 50 0 0 0 110 215" fill="none" stroke="#00409A" stroke-width="1.5"/>
+              <text x="160" y="228" font-size="12" fill="#00409A" font-weight="700" text-anchor="start">θ=37°</text>
+              <!-- 导轨 (斜面上方两条线) -->
+              <line x1="480" y1="100" x2="220" y2="216" stroke="#0055B8" stroke-width="2.5"/>
+              <line x1="480" y1="130" x2="220" y2="246" stroke="#0055B8" stroke-width="2.5" stroke-dasharray="2 2"/>
+              <line x1="280" y1="200" x2="320" y2="80" stroke="#6e6e73" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <text x="322" y="76" font-size="10" fill="#6e6e73" text-anchor="start">导轨间距 r=0.5 m</text>
+              <!-- 顶端外接电阻 R -->
+              <rect x="465" y="80" width="20" height="30" fill="#fff" stroke="#0055B8" stroke-width="2"/>
+              <text x="495" y="100" font-size="11" fill="#00409A" font-weight="600" text-anchor="start">R=1 Ω</text>
+              <!-- 杆 ab 在中段 (垂直斜面表面线) -->
+              <line x1="340" y1="158" x2="356" y2="190" stroke="#002F73" stroke-width="4"/>
+              <text x="330" y="153" font-size="11" fill="#002F73" font-weight="700">a</text>
+              <text x="365" y="200" font-size="11" fill="#002F73" font-weight="700">b</text>
+              <!-- 重力分量 (沿斜面向下) -->
+              <line x1="348" y1="174" x2="295" y2="208" stroke="#002F73" stroke-width="2" marker-end="url(#ex3-arr)"/>
+              <line x1="298" y1="210" x2="200" y2="265" stroke="#002F73" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <text x="198" y="272" font-size="11" fill="#002F73" font-weight="600" text-anchor="end">mg sinθ ↘</text>
+              <!-- 安培力 (沿斜面向上) -->
+              <line x1="348" y1="174" x2="402" y2="146" stroke="#0055B8" stroke-width="2" marker-end="url(#ex3-arr)"/>
+              <line x1="404" y1="144" x2="435" y2="95" stroke="#0055B8" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <text x="437" y="92" font-size="11" fill="#0055B8" font-weight="600" text-anchor="start">F 安 ↖</text>
+              <!-- 磁场方向 (垂直斜面外) 用 ⊙ —— 移到斜面区域外的右下角空白处仅做图例 -->
+              <text x="200" y="60" font-size="13" fill="#7B8290" font-weight="700" text-anchor="start">⊙</text>
+              <text x="215" y="60" font-size="11" fill="#7B8290" text-anchor="start">B=2 T（垂直斜面外）</text>
+              <!-- 杆长标注 -->
+              <line x1="348" y1="172" x2="490" y2="215" stroke="#002F73" stroke-width="0.8" stroke-dasharray="3 2"/>
+              <text x="495" y="232" font-size="10" fill="#002F73" text-anchor="end">⚠ L=杆长 r=0.5</text>
+              <!-- 释放点 -->
+              <text x="475" y="75" font-size="11" fill="#B8924A" text-anchor="end" font-weight="600">↑ 静止释放</text>
+            </svg>
+            <div class="diagram-caption">SVG 3.1 · 侧视：斜面倾角 θ=37°，导轨沿斜面方向延伸，杆 ab 从顶端静止释放沿斜面下滑。磁场垂直斜面向外（⊙），沿斜面方向受力：重力分量 mg sinθ 向下、安培力 F 安 向上。⚠ ε=BLv 中 L=杆长 r=0.5 m。</div>
+          </div>
+
+          <div class="diagram-block">
+            <svg viewBox="0 0 540 200" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <marker id="ex3b-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#002F73"/>
+                </marker>
+              </defs>
+              <text x="270" y="30" font-size="13" fill="#00409A" font-weight="700" text-anchor="middle">a(v) 关系曲线 · v 增大 → a 减小 → 趋近终速</text>
+              <!-- 坐标轴 -->
+              <line x1="60" y1="170" x2="510" y2="170" stroke="#5C6370" stroke-width="1.5" marker-end="url(#ex3b-arr)"/>
+              <line x1="60" y1="170" x2="60" y2="50" stroke="#5C6370" stroke-width="1.5" marker-end="url(#ex3b-arr)"/>
+              <text x="470" y="190" font-size="10" fill="#5C6370" text-anchor="start">v (m/s)</text>
+              <text x="65" y="48" font-size="11" fill="#5C6370" text-anchor="start">a (m/s²)</text>
+              <!-- 初始 a₀ = g sinθ = 6 -->
+              <line x1="55" y1="60" x2="65" y2="60" stroke="#5C6370"/>
+              <text x="50" y="65" font-size="11" fill="#5C6370" text-anchor="end">a₀=6</text>
+              <!-- v 终 = 1.2 -->
+              <text x="395" y="188" font-size="10" fill="#002F73" font-weight="600" text-anchor="end">v 终=1.2</text>
+              <!-- a(v) = 6 - 5v 直线 -->
+              <line x1="60" y1="60" x2="420" y2="170" stroke="#0055B8" stroke-width="2.5"/>
+              <text x="240" y="100" font-size="13" fill="#0055B8" font-weight="600">a(v) = 6 - 5v</text>
+              <!-- v=0.6 标记 -->
+              <line x1="240" y1="115" x2="60" y2="115" stroke="#5C6370" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <line x1="240" y1="115" x2="240" y2="170" stroke="#5C6370" stroke-width="0.8" stroke-dasharray="2 2"/>
+              <circle cx="240" cy="115" r="3.5" fill="#002F73"/>
+              <text x="240" y="188" font-size="10" fill="#5C6370" text-anchor="middle">v=0.6</text>
+              <text x="65" y="108" font-size="11" fill="#002F73" text-anchor="start">a=3</text>
+              <!-- 水平虚线代表 v 终时 a=0 -->
+              <line x1="420" y1="170" x2="500" y2="170" stroke="#B8924A" stroke-width="2" stroke-dasharray="4 3"/>
+              <text x="460" y="160" font-size="10" fill="#B8924A" font-weight="600" text-anchor="middle">a=0 终速段</text>
+            </svg>
+            <div class="diagram-caption">SVG 3.2 · 加速度 a(v) 随杆速 v 线性递减；初始 a₀=g sinθ=6 m/s²；v=v 终=1.2 m/s 时 a=0（终速）。v=0.6 m/s（0.5 v 终）时 a=3 m/s²。物理意义：v 越大 → 安培力越大 → 净下滑力越小 → 加速度越小 → 渐近终速。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3 思考停顿 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 3</span><span class="step-title">思考停顿<br><span class="step-sub">动手 25 分钟</span></span></div>
+        <div class="step-content">
+          <p>合上页面独立做。重点：(3) 问<strong>不要</strong>用积分（高考不要求），用能量守恒 W 重=ΔE_k+Q 一步求出。</p>
+          <div class="checkpoint">
+            <div class="checkpoint-title">🤔 开做前自检</div>
+            <label data-key="ex3-s3-c1"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会沿斜面方向列牛顿第二定律：mg sinθ - F 安 = ma</span></label>
+            <label data-key="ex3-s3-c2"><input type="checkbox" onchange="saveCheckbox(this)"><span>我清楚磁场垂直斜面 → 杆沿斜面运动时 v⊥B → 仍可用 ε=BLv（L=杆长 r）</span></label>
+            <label data-key="ex3-s3-c3"><input type="checkbox" onchange="saveCheckbox(this)"><span>我知道终速 a=0 → v 终=mg sinθ·R/(B²L²)，与例题 2 同构</span></label>
+            <label data-key="ex3-s3-c4"><input type="checkbox" onchange="saveCheckbox(this)"><span>第 (3) 问<strong>不</strong>用积分，用能量守恒 W 重=ΔE_k+Q 一步搞定</span></label>
+            <label data-key="ex3-s3-c5"><input type="checkbox" onchange="saveCheckbox(this)"><span>我会校验 Q&gt;0 + 物理量纲一致（焦耳）</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4 方法路径 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 4</span><span class="step-title">方法路径<br>4 步串起整题</span></div>
+        <div class="step-content">
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 1 · 第 (1) 问 · 推导 a(v) 关系式</div>
+            <div class="tp-pause">沿斜面方向列牛顿第二定律。重力分量 mg sinθ 向下、安培力 F 安=BIL 向上（阻碍下滑）、法向重力分量 mg cosθ 与支持力 N 抵消（光滑导轨，不影响沿斜面运动）。</div>
+            <div class="tp-ask">"请反问我：为什么磁场垂直斜面时，杆沿斜面方向运动产生的 ε 仍是 BLv 而不带 cosθ 因子？这与磁场垂直水平面的情形有什么不同？<strong>不要直接告诉我</strong>。"</div>
+            <div class="tp-write">沿斜面方向（向下为正）列牛顿第二定律：<br>\(mg\sin\theta - F_{安} = ma\)，其中 \(F_{安} = BIL = B \cdot \dfrac{BLv}{R} \cdot L = \dfrac{B^2L^2 v}{R}\)<br>\(a(v) = g\sin\theta - \dfrac{B^2L^2 v}{mR} = 10 \times 0.6 - \dfrac{4 \times 0.25 \times v}{0.2 \times 1} = \boxed{6 - 5v}\) (m/s²)<br>趋势：v 增大 → a 减小（线性递减）；当 v=v 终 时 a=0；v=0 时 a₀=6 m/s²。</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 2 · 第 (2) 问 · 求终速 v 终</div>
+            <div class="tp-pause">终速条件 a=0 → 合外力为零 → mg sinθ=F 安=B²L²v 终/R → 解 v 终。注意必须在卷面写"a=0"理由。</div>
+            <div class="tp-write">由 \(a(v_{终})=0\)：\(6 - 5 v_{终} = 0\) → \(v_{终} = 1.2\) m/s<br>校验（用解析式）：\(v_{终} = \dfrac{mg\sin\theta \cdot R}{B^2 L^2} = \dfrac{0.2 \times 10 \times 0.6 \times 1}{4 \times 0.25} = \dfrac{1.2}{1} = 1.2\) m/s ✓</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 3 · 第 (3) 问 · 用能量守恒求 Q（不要积分）</div>
+            <div class="tp-pause">题目给"从静止 → v=0.6 m/s, s=0.10 m"——给定始末速与位移，正合<strong>能量守恒</strong>的胃口。如果你想用 ∫F 安 ds 算 Q，需要 v(t) 解析式（涉及微分方程），高考不要求且容易算错。<strong>能量守恒一步到位</strong>。</div>
+            <div class="tp-ask">"请反问我：为什么题目这样设问（给 v 和 s）天然提示用能量守恒？还有哪些'给 v + 给 s'的题型也适合能量法？<strong>不要替我做题</strong>。"</div>
+            <div class="tp-write">能量守恒（释放到 v=0.6 m/s 时）：\(W_{重} = \Delta E_k + Q\)<br>重力做功：\(W_{重} = mg\sin\theta \cdot s = 0.2 \times 10 \times 0.6 \times 0.10 = 0.12\) J<br>动能增量：\(\Delta E_k = \tfrac12 m v^2 - 0 = 0.5 \times 0.2 \times 0.36 = 0.036\) J<br>焦耳热：\(Q = W_{重} - \Delta E_k = 0.12 - 0.036 = \boxed{0.084 \text{ J}}\)<br>（由于本题"杆电阻并入 R"且导轨电阻不计，Q 全部产生在 R 上。）</div>
+          </div>
+
+          <div class="thinking-point">
+            <div class="tp-title">路径 4 · 物理图像复盘 + 校验</div>
+            <div class="tp-pause">把整个下滑过程描一遍：v=0 时 a₀=6 m/s²（最大加速度，仅重力分量驱动）→ v 增 → a 减 → v 终=1.2 m/s 时 a=0（匀速段）。能量上：重力做功一部分变动能、一部分变焦耳热。题给 v=0.6 m/s（终速一半）时，重力做功 0.12 J 中只有 30% 变成动能（0.036 J），70% 已转化为焦耳热（0.084 J）——这个比例本身就反映了"安培力做了大量负功"。</div>
+            <div class="tp-write">物理校验：① Q=0.084 J &gt; 0 ✓；② Q+ΔE_k=0.084+0.036=0.12=W 重 ✓；③ Q/W 重=70% 合理（v 越接近 v 终，焦耳热占比越大，因为安培力随 v 线性增大）。<br>结论稳定：从静止到 v=0.6 m/s 时，电阻 R 上累计产生焦耳热 Q=0.084 J。</div>
+            <div class="tp-hint">提示：若题目继续追问"从 v=0.6 m/s 加速到 v=1.0 m/s（接近终速）时再产生的 Q 是多少"——同法：再给一段 Δs（题目会另给），用 mg sinθ·Δs - ΔE_k = ΔQ 一步求。<strong>能量守恒永远是 14 题位求 Q 的首选</strong>。</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- STEP 5 评分锚点 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 5</span><span class="step-title">评分锚点表<br>12 分如何被切分</span></div>
+        <div class="step-content">
+          <table class="scoring-table">
+            <thead><tr><th>关键步</th><th>卷面应写出</th><th>分值</th><th>常见扣分</th></tr></thead>
+            <tbody>
+              <tr><td>K1 沿斜面列牛顿 II</td><td>"沿斜面方向 mg sinθ-F 安=ma"+ F 安=B²L²v/R</td><td>2</td><td>漏 sinθ / F 安代成 BIL 但 I 漏写 ε/R</td></tr>
+              <tr><td>K2 写出 a(v)=6-5v</td><td>代数化简 + 写明"v 增 → a 减"线性关系</td><td>2</td><td>系数算错（B²L²/(mR) 算错）</td></tr>
+              <tr><td>K3 (2)问 a=0 理由 + v 终</td><td>"a=0 → 合外力为零"+ v 终=1.2 m/s</td><td>3</td><td>没写"a=0"直接套公式 → 扣 1</td></tr>
+              <tr><td>K4 (3)问 W 重计算</td><td>\(W_{重} = mg\sin\theta \cdot s = 0.12\) J，注意有 sinθ</td><td>2</td><td>漏 sinθ → W 重错为 mgs=0.2 J</td></tr>
+              <tr><td>K5 ΔE_k 计算</td><td>\(\Delta E_k = \tfrac12 m v^2 = 0.036\) J</td><td>1</td><td>v 平方漏 / 1/2 漏</td></tr>
+              <tr><td>K6 能量守恒求 Q</td><td>"W 重=ΔE_k+Q → Q=W 重-ΔE_k=0.084 J"</td><td>2</td><td>用 Q=W 安=∫F 安 ds（积分法）→ 高考不会</td></tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 8px;">⚠️ 高频扣分速记：① 重力分量漏 sinθ（K4 扣 2，本题次高频）② 没写 a=0 理由（K3 扣 1）③ 第 (3) 问用积分 / 平均力法（K6 直接出错）④ a(v) 系数算错（K2 扣 1-2）。</p>
+        </div>
+      </div>
+
+      <!-- STEP 6 反思 -->
+      <div class="step">
+        <div class="step-header"><span class="step-badge">STEP 6</span><span class="step-title">反思引导<br><span class="step-sub">3 问</span></span></div>
+        <div class="step-content">
+          <p class="reflect-q">Q1 · 我推 a(v) 时是否记得"重力分量 = mg sinθ"而不是"mg"？如果漏了 sinθ，影响多大？</p>
+          <textarea class="reflect-area" data-key="ex3-r1" placeholder="如：我一开始写成 mg-F 安=ma，漏掉 sinθ → v 终算成 2 m/s 错了一半——下次先画斜面受力图，把 mg 分解再代入……"></textarea>
+          <p class="reflect-q">Q2 · 第 (3) 问我有没有第一时间想到能量守恒？还是试图列微分方程 / 积分？</p>
+          <textarea class="reflect-area" data-key="ex3-r2" placeholder="如：我第一反应是积分 ∫F 安 ds，发现需要 v(s) 关系才行，意识到高考不会让你做这种事，改用能量守恒 30 秒解决……"></textarea>
+          <p class="reflect-q">Q3 · 这道题与例题 2 都用了"终速 a=0"，但驱动力不同（外力 vs 重力分量）。我对"a=0 平衡式"的物理本质有什么新理解？</p>
+          <textarea class="reflect-area" data-key="ex3-r3" placeholder="如：例题 2 是 Mg=F 安（小球重力 = 杆上安培力），例题 3 是 mg sinθ=F 安（杆重力分量 = 杆上安培力）——本质都是'驱动力 = 阻力'，只是驱动力的来源不同……"></textarea>
+        </div>
+      </div>
+
+      <div class="literacy-tag">📚 物理观念：电磁感应 + 力学 + 能量观点协同 · 科学思维：模型抽象（斜面受力分解）+ 推理论证（积分困难时改用能量守恒的策略选择）</div>
+    </div>
+  </div>
+
+  <!-- ==================== 综合反思 · 3 例题骨架共性 ==================== -->
+  <div class="task-card">
+    <div class="task-card-header" onclick="toggleCard(this)">
+      <div class="task-card-number">★</div>
+      <h3>综合反思 · 三例打通这条骨架</h3>
+      <span class="task-card-chevron">&#9660;</span>
+    </div>
+    <div class="task-card-body">
+
+      <p style="margin-bottom: 14px;">3 道例题难度递增（外力推 → 滑轮 + 双体 → 斜面 + 能量法），但都在重复同一条主链路：<strong>识别情境 → ε=BLv → I=ε/R → F 安=BIL → 牛顿/平衡式 → （可选）能量守恒求 Q</strong>。下面把"共性"和"易扣分"两件事钉死。</p>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">一、3 例题骨架共性</h4>
+      <ul style="padding-left: 22px; margin-bottom: 14px;">
+        <li><strong>L 永远取杆长 r</strong>：不论导轨多长、不论磁场垂直水平还是垂直斜面、不论有没有滑轮——L 永远是杆切割磁感线的有效长度 = 杆长 r = 导轨间距。这是 14 题位最高频低级失分（约 35%）。</li>
+        <li><strong>电路只算"杆所在回路"那一段</strong>：导轨电阻不计 → R 总 = R 外 + R 杆；若导轨给电阻率 → R 总还要加导轨段电阻（注意只算杆当前位置以左 / 以右那一段，不是导轨总长）。</li>
+        <li><strong>"终速 = 匀速 = a=0 = 合外力为零"</strong>：14 题位的"终速类"题型都是这一条结论。例题 2 是 Mg=F 安、例题 3 是 mg sinθ=F 安——本质都是"驱动力 = 安培力"。卷面必须明写 a=0 的理由，少 1 分。</li>
+        <li><strong>滑轮 + 绳 → 双体 + 绳约束</strong>：v 杆=v 球、a 杆=a 球、T 杆=T 球——三对相等关系一个都不能漏。绝不要"整体法"略过绳约束推导。</li>
+        <li><strong>能量守恒永远优先于积分</strong>：14 题位求"焦耳热 Q / 累计电量 / 过程能量"——首选 W 重 - ΔE_k = Q（一步到位），不要尝试 ∫F 安 ds（积分高考不要求）。</li>
+      </ul>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">二、5 类学生常见卡点 + 怎么破</h4>
+      <ol style="padding-left: 24px; margin-bottom: 14px;">
+        <li><strong>L 错取导轨总长</strong>（最高频低级失分，例 1/2/3 都可能出错）→ 破：每写 ε=BLv 旁边都标注"L=杆长 r=__ m"</li>
+        <li><strong>终速不写 a=0 理由</strong>（例 2/3）→ 破：每次求 v 终前先写"由 a=0，合外力为零，故 ___ = ___"再代式</li>
+        <li><strong>双体合体（漏绳约束）</strong>（例 2）→ 破：杆和球必须分别画隔离体、分别列方程，再用 v 杆=v 球联立</li>
+        <li><strong>斜面漏 sinθ 分量</strong>（例 3）→ 破：动手前先画"斜面 + mg 分解为 mg sinθ 和 mg cosθ"两个分量箭头</li>
+        <li><strong>求 Q 时尝试积分</strong>（例 3 第 3 问）→ 破：见到"求焦耳热 / 求过程能量"立刻反应 W 外 - ΔE_k = Q，不要碰积分</li>
+      </ol>
+
+      <h4 style="color: var(--primary-blue); margin: 18px 0 10px;">三、14 题位 12-15 分钟应试建议</h4>
+      <div style="background: #FFF7E5; border-left: 4px solid #FFB800; padding: 12px 16px; border-radius: 4px; margin-bottom: 8px;">
+        <p style="margin: 0 0 8px;">📌 <strong>14 题位定位</strong>：新高考 II 卷 14 题位是<strong>"必须稳拿 8-10 分"的中高档电磁感应大题</strong>，给 12-15 min 是合理的。建议优先拿到第 (1)(2) 问基本分（8 分以上），第 (3) 问视时间深挖。</p>
+        <p style="margin: 0 0 8px;">📌 <strong>3 分钟读题 + 画图</strong>：识别情境（水平 / 斜面 / 含滑轮 / 含外力）→ 画俯视 + 受力图 → 标注 L=杆长 r。读完题不动笔最高效。</p>
+        <p style="margin: 0 0 8px;">📌 <strong>2 分钟搭框架</strong>：先在草稿上写出"ε=BLv → I=ε/R → F 安=BIL → 牛顿/平衡"主链路 4 个空格，把数字填进去——大半题就出来了。</p>
+        <p style="margin: 0;">📌 <strong>6-8 分钟列方程 + 求解</strong>：分小问递进；每个小问先写理由（"由 a=0"/"绳约束 v 杆=v 球"/"能量守恒"）再代式；每个量带单位、终态给方向。</p>
+      </div>
+
+      <p style="font-size: 0.92rem; color: var(--text-secondary); margin-top: 14px;">📝 学完 3 道例题，建议进入 <a href="gaokao-14-rail-pulley-magnetic-fluency-test.html" style="color: var(--secondary-blue); text-decoration: underline;">熟练度检测</a>，把刚学的骨架在 12 道变体题上跑一遍。</p>
+
+    </div>
+  </div>
+
+  <!-- ==================== Bottom Navigation ==================== -->
+  <nav class="bottom-nav">
+    <a href="gaokao-mechanics-em-index.html">⬅ 返回主页</a>
+    <span>📝 基础检测（待开放）</span>
+    <a href="gaokao-14-rail-pulley-magnetic-fluency-test.html">📈 熟练度检测</a>
+    <span>🎤 深度口试（待开放）</span>
+  </nav>
+
+  <footer style="margin-top: 28px; padding: 20px; text-align: center; color: #78909c; font-size: 12px; border-top: 1px solid #e0e0e0;">
+    蓝色诺瓦学院 · 物理 · 高考综合应用 · 14 题位 · 平行导轨 + 滑轮 + 磁场骨架 · capstone Skill v0.1.0 · 2026-06-16
+  </footer>
+
+</div>
+
+<script>
+  // KaTeX auto-render
+  document.addEventListener("DOMContentLoaded", function() {
+    if (typeof renderMathInElement === "function") {
+      renderMathInElement(document.body, {
+        delimiters: [
+          {left: "$$", right: "$$", display: true},
+          {left: "$", right: "$", display: false},
+          {left: "\\(", right: "\\)", display: false},
+          {left: "\\[", right: "\\]", display: true}
+        ],
+        throwOnError: false
+      });
+    }
+  });
+
+  // Card toggle
+  function toggleCard(h){
+    h.classList.toggle('collapsed');
+    var b = h.nextElementSibling;
+    if (b) b.classList.toggle('collapsed');
+  }
+
+  // Checkpoint localStorage (per-card · 已勾画线)
+  const STORAGE_KEY = "gaokao-14-rail-pulley-magnetic-checkpoints";
+  function getCheckboxState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function persistCheckbox(checkbox) {
+    var label = checkbox.closest("label[data-key]");
+    if (!label) return;
+    var key = label.getAttribute("data-key");
+    if (!key) return;
+    var state = getCheckboxState();
+    state[key] = checkbox.checked;
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    if (checkbox.checked) { label.classList.add("checked"); } else { label.classList.remove("checked"); }
+  }
+  function restoreCheckboxes() {
+    var state = getCheckboxState();
+    var labels = document.querySelectorAll(".checkpoint label[data-key]");
+    labels.forEach(function(label) {
+      var key = label.getAttribute("data-key");
+      if (state[key]) {
+        var cb = label.querySelector("input[type=checkbox]");
+        if (cb) { cb.checked = true; label.classList.add("checked"); }
+      }
+    });
+  }
+  // legacy global for inline onchange
+  function saveCheckbox(cb){
+    persistCheckbox(cb);
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreCheckboxes();
+    document.querySelectorAll(".checkpoint input[type=checkbox]").forEach(function(cb) {
+      cb.addEventListener("change", function() { persistCheckbox(cb); });
+    });
+  });
+
+  // Reflection textarea localStorage
+  const REFLECT_KEY = "gaokao-14-rail-pulley-magnetic-reflections";
+  function getReflectState() {
+    try { return JSON.parse(localStorage.getItem(REFLECT_KEY) || "{}"); } catch (e) { return {}; }
+  }
+  function persistReflection(textarea) {
+    var key = textarea.getAttribute("data-key");
+    if (!key) return;
+    var state = getReflectState();
+    state[key] = textarea.value;
+    try { localStorage.setItem(REFLECT_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function restoreReflections() {
+    var state = getReflectState();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      var key = ta.getAttribute("data-key");
+      if (key && state[key]) ta.value = state[key];
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function() {
+    restoreReflections();
+    document.querySelectorAll(".reflect-area").forEach(function(ta) {
+      ta.addEventListener("input", function() { persistReflection(ta); });
+    });
+  });
+</script>
+
+</body>
+</html>
